@@ -179,6 +179,8 @@ public class MavNavigationSuiteScaffold : MavContentView, IEnumerable<MavSuiteDe
     private MavNavigationSuiteMode _effectiveMode = MavNavigationSuiteMode.NavigationBar;
     private bool _syncingSelection;
     private bool _suppressDestinationCollectionSync;
+    private MavTopAppBar? _menuBar;
+    private bool _ownsMenuIcon;
 
     public event EventHandler<int>? SelectedIndexChanged;
     public event EventHandler<MavNavigationSuiteMode>? EffectiveModeChanged;
@@ -206,6 +208,7 @@ public class MavNavigationSuiteScaffold : MavContentView, IEnumerable<MavSuiteDe
             MavVisualTreeHelpers.DetachFromParent(bar);
             s._topBarHost.Child = bar;
             s._topBarHost.IsVisible = bar is not null;
+            s.SyncNavigationMenuButton();
         });
         BodyProperty.Changed.AddClassHandler<MavNavigationSuiteScaffold>((s, _) =>
             s.SyncBodyContent());
@@ -487,6 +490,69 @@ public class MavNavigationSuiteScaffold : MavContentView, IEnumerable<MavSuiteDe
         }
     }
 
+    /// <summary>
+    /// Opens the destinations as a modal navigation drawer. Compact and rail modes have no
+    /// permanent drawer, so this is how the menu is reached; the top bar button calls it too.
+    /// </summary>
+    public void OpenNavigationMenu()
+    {
+        var drawer = new MavModalNavigationDrawer(DrawerHeadline ?? "Navigation", 300);
+        for (var i = 0; i < _destinations.Count; i++)
+        {
+            var index = i;
+            var destination = _destinations[i];
+            drawer.AddItem(destination.Label, destination.Icon, destination.BadgeText, () =>
+            {
+                drawer.Close();
+                SelectedIndex = index;
+            });
+        }
+        drawer.Show(this);
+    }
+
+    /// <summary>
+    /// Shows a menu icon on the top bar in compact and rail modes so the drawer can be opened.
+    /// The icon is only taken when the bar has no navigation icon of its own; a page that sets
+    /// one (for example a back arrow) keeps it.
+    /// </summary>
+    private void SyncNavigationMenuButton()
+    {
+        var bar = TopAppBar as MavTopAppBar;
+        var wantsMenu = _effectiveMode != MavNavigationSuiteMode.NavigationDrawer;
+
+        if (!ReferenceEquals(bar, _menuBar))
+        {
+            ReleaseMenuIcon();
+            _menuBar = bar;
+        }
+
+        if (_menuBar is null)
+            return;
+
+        if (wantsMenu && !_ownsMenuIcon && _menuBar.NavigationIcon is null)
+        {
+            _menuBar.NavigationIcon = MavIcons.Menu;
+            _menuBar.NavigationClicked += OnMenuNavigationClicked;
+            _ownsMenuIcon = true;
+        }
+        else if (!wantsMenu)
+        {
+            ReleaseMenuIcon();
+        }
+    }
+
+    private void ReleaseMenuIcon()
+    {
+        if (_ownsMenuIcon && _menuBar is not null)
+        {
+            _menuBar.NavigationClicked -= OnMenuNavigationClicked;
+            _menuBar.NavigationIcon = null;
+        }
+        _ownsMenuIcon = false;
+    }
+
+    private void OnMenuNavigationClicked(object? sender, EventArgs e) => OpenNavigationMenu();
+
     private MavNavigationSuiteMode ResolveEffectiveMode()
     {
         if (Mode != MavNavigationSuiteMode.Auto)
@@ -508,6 +574,7 @@ public class MavNavigationSuiteScaffold : MavContentView, IEnumerable<MavSuiteDe
         var changed = resolved != _effectiveMode;
         _effectiveMode = resolved;
         RebuildArrangement();
+        SyncNavigationMenuButton();
         if (changed)
             EffectiveModeChanged?.Invoke(this, _effectiveMode);
     }
