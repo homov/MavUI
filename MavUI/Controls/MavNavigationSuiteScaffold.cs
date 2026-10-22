@@ -68,8 +68,8 @@ public class MavNavigationSuiteScaffold : MavContentView, IEnumerable<MavSuiteDe
 
     private readonly AvaloniaList<MavSuiteDestination> _destinations = new();
     private readonly MavItemEventWiring<MavSuiteDestination, EventHandler> _wiredDestinations = new(
-        static (destination, handler) => destination.DestinationChanged += handler,
-        static (destination, handler) => destination.DestinationChanged -= handler);
+        static (destination, handler) => destination.ItemChanged += handler,
+        static (destination, handler) => destination.ItemChanged -= handler);
     private readonly List<object> _rawItems = [];
     private readonly MavCollectionObserver _observer;
     private readonly Grid _root;

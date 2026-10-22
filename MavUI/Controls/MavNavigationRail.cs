@@ -31,8 +31,8 @@ public class MavNavigationRail : MavContentView, IEnumerable<MavNavigationDestin
     private readonly AvaloniaList<MavNavigationDestination> _destinations = new();
     private readonly List<object> _rawItems = [];
     private readonly MavItemEventWiring<MavNavigationDestination, EventHandler> _wiredDestinations = new(
-        static (destination, handler) => destination.DestinationChanged += handler,
-        static (destination, handler) => destination.DestinationChanged -= handler);
+        static (destination, handler) => destination.ItemChanged += handler,
+        static (destination, handler) => destination.ItemChanged -= handler);
     private readonly MavCollectionObserver _observer;
     private readonly List<RailCell> _cells = [];
     private readonly MavSurface _rail;

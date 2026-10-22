@@ -15,20 +15,8 @@ using Mav.Theming;
 namespace Mav.Controls;
 
 /// <summary>Entry of a <see cref="MavNavigationDrawer"/>: a destination, section header or divider.</summary>
-public sealed class MavDrawerItem : Control
+public sealed class MavDrawerItem : MavNavigationItemBase
 {
-    public static readonly StyledProperty<string> LabelProperty =
-        AvaloniaProperty.Register<MavDrawerItem, string>(nameof(Label), string.Empty);
-
-    public static readonly StyledProperty<string> IconProperty =
-        AvaloniaProperty.Register<MavDrawerItem, string>(nameof(Icon), MavIcons.Folder);
-
-    public static readonly StyledProperty<string?> SelectedIconProperty =
-        AvaloniaProperty.Register<MavDrawerItem, string?>(nameof(SelectedIcon));
-
-    public static readonly StyledProperty<string?> BadgeTextProperty =
-        AvaloniaProperty.Register<MavDrawerItem, string?>(nameof(BadgeText));
-
     public static readonly StyledProperty<string?> SectionHeaderProperty =
         AvaloniaProperty.Register<MavDrawerItem, string?>(nameof(SectionHeader));
 
@@ -41,39 +29,10 @@ public sealed class MavDrawerItem : Control
     public static readonly StyledProperty<object?> CommandParameterProperty =
         AvaloniaProperty.Register<MavDrawerItem, object?>(nameof(CommandParameter));
 
-    internal event EventHandler? ItemChanged;
-
     static MavDrawerItem()
     {
-        LabelProperty.Changed.AddClassHandler<MavDrawerItem>((i, _) => i.ItemChanged?.Invoke(i, EventArgs.Empty));
-        IconProperty.Changed.AddClassHandler<MavDrawerItem>((i, _) => i.ItemChanged?.Invoke(i, EventArgs.Empty));
-        BadgeTextProperty.Changed.AddClassHandler<MavDrawerItem>((i, _) => i.ItemChanged?.Invoke(i, EventArgs.Empty));
         SectionHeaderProperty.Changed.AddClassHandler<MavDrawerItem>((i, _) => i.ItemChanged?.Invoke(i, EventArgs.Empty));
         ShowDividerBeforeProperty.Changed.AddClassHandler<MavDrawerItem>((i, _) => i.ItemChanged?.Invoke(i, EventArgs.Empty));
-    }
-
-    public string Label
-    {
-        get => GetValue(LabelProperty);
-        set => SetValue(LabelProperty, value);
-    }
-
-    public string Icon
-    {
-        get => GetValue(IconProperty);
-        set => SetValue(IconProperty, value);
-    }
-
-    public string? SelectedIcon
-    {
-        get => GetValue(SelectedIconProperty);
-        set => SetValue(SelectedIconProperty, value);
-    }
-
-    public string? BadgeText
-    {
-        get => GetValue(BadgeTextProperty);
-        set => SetValue(BadgeTextProperty, value);
     }
 
     public string? SectionHeader
@@ -111,6 +70,7 @@ public sealed class MavDrawerItem : Control
     /// <summary>Creates an empty drawer entry.</summary>
     public MavDrawerItem()
     {
+        Icon = MavIcons.Folder;
     }
 
     /// <summary>Creates a drawer entry with label, icon, optional badge and click handler.</summary>

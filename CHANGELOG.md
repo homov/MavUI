@@ -17,6 +17,8 @@ All notable changes to **Mav**.
 
 ### Changed
 
+- `MavNavigationDestination`, `MavSuiteDestination` and `MavDrawerItem` share a base class `MavNavigationItemBase` with `Label`, `Icon`, `SelectedIcon` and `BadgeText`. Public names are unchanged. `MavDrawerItem` now also refreshes when `SelectedIcon` changes.
+
 - Incremental `CollectionChanged` handling in `MavList` and `MavDataTable`: `Add`, `Remove`,
   `Replace` and `Move` reuse unaffected controls, preserve selection and scroll offset;
   `Reset` keeps the full rebuild path.
