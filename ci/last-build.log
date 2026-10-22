@@ -1,19 +1,19 @@
 # Last build log
-commit: 8c5530a0cddebc72b31c25adcb2bb5275e7f4e8e
-run: https://github.com/homov/MavUI/actions/runs/39834401798
+commit: cefef04ba14b7d82ddfd933fff616861d0c970a5
+run: https://github.com/homov/MavUI/actions/runs/39834594344
 
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 725 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 258 ms).
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:07.90
+Time Elapsed 00:00:07.48
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.csproj (in 246 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 252 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.csproj (in 250 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 255 ms).
   1 of 3 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
@@ -25,7 +25,7 @@ Build succeeded.
 
 Time Elapsed 00:00:04.10
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 276 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 279 ms).
   2 of 3 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
@@ -35,14 +35,14 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.08
+Time Elapsed 00:00:02.07
 Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/MavUI.Tests.dll (.NETCoreApp,Version=v10.0)
 VSTest version 18.0.2 (x64)
 
 Starting test execution, please wait...
 A total of 1 test files matched the specified pattern.
 
-Passed!  - Failed:     0, Passed:   244, Skipped:     0, Total:   244, Duration: 15 s - MavUI.Tests.dll (net10.0)
+Passed!  - Failed:     0, Passed:   244, Skipped:     0, Total:   244, Duration: 14 s - MavUI.Tests.dll (net10.0)
 
 Checking for updated workload version.
 Skipping NuGet package signature verification.
@@ -133,16 +133,16 @@ Garbage collecting for SDK feature band(s) 10.0.100...
 Successfully installed workload(s) .
 
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Android/ControlsGallery.Android.csproj (in 394 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Android/ControlsGallery.Android.csproj (in 336 ms).
   2 of 3 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
-/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Android/MainActivity.cs(41,36): error CS0308: The non-generic type 'AvaloniaMainActivity' cannot be used with type arguments [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Android/ControlsGallery.Android.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Android/MainActivity.cs(55,9): error CS0103: The name 'MavSystemBars' does not exist in the current context [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Android/ControlsGallery.Android.csproj]
 
 Build FAILED.
 
-/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Android/MainActivity.cs(41,36): error CS0308: The non-generic type 'AvaloniaMainActivity' cannot be used with type arguments [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Android/ControlsGallery.Android.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Android/MainActivity.cs(55,9): error CS0103: The name 'MavSystemBars' does not exist in the current context [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Android/ControlsGallery.Android.csproj]
     0 Warning(s)
     1 Error(s)
 
-Time Elapsed 00:00:02.90
+Time Elapsed 00:00:02.93
