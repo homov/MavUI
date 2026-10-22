@@ -261,6 +261,9 @@ public class MavSplitView : MavContentView, IMavDraggableControl
         base.OnSizeChanged(e);
         ApplyInitialRatio(e.NewSize.Width);
         UpdateCompactState(e.NewSize.Width);
+        // The pane width depends on the available width too, so re-fit it on every resize.
+        if (!_isCompact)
+            SyncLayout();
     }
 
     /// <summary>
@@ -336,10 +339,28 @@ public class MavSplitView : MavContentView, IMavDraggableControl
         {
             _compactDrawerHost.IsVisible = false;
             _compactScrim.IsVisible = false;
-            _inlinePaneHost.Width = w;
+            _inlinePaneHost.Width = FitPaneWidth(w);
             _inlinePaneHost.IsVisible = IsPaneOpen;
             _splitterHit.IsVisible = IsPaneOpen && IsResizable;
         }
+    }
+
+    /// <summary>Smallest width kept for the detail area; the pane gives way before it.</summary>
+    private const double MinDetailWidth = 160;
+    private const double SplitterHitWidth = 12;
+
+    /// <summary>
+    /// Limits the inline pane so the detail area keeps <see cref="MinDetailWidth"/>. Without this the pane
+    /// could take the whole row and the detail content would be pushed under it.
+    /// </summary>
+    private double FitPaneWidth(double desired)
+    {
+        var available = Bounds.Width;
+        if (available <= 0 || double.IsNaN(available))
+            return desired;
+
+        var room = available - SplitterHitWidth - MinDetailWidth;
+        return Math.Max(0, Math.Min(desired, room));
     }
 
     private void ApplyTheme(MavTheme t)
