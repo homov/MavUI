@@ -176,9 +176,9 @@ public partial class FeedbackPage : UserControl
             RefreshHandler = async () => await Task.Delay(900),
         };
 
-        var row = new WrapPanel();
-        row.Children.Add(new MavCard(MavCardVariant.Outlined, skeleton) { Width = 320, Margin = new Thickness(0, 0, 8, 8) });
-        row.Children.Add(new MavCard(MavCardVariant.Outlined, refresh) { Width = 420, Margin = new Thickness(0, 0, 8, 8) });
+        var row = new AdaptiveWrap { MinItemWidth = 300 };
+        row.Children.Add(new MavCard(MavCardVariant.Outlined, skeleton) { Margin = new Thickness(0, 0, 8, 8) });
+        row.Children.Add(new MavCard(MavCardVariant.Outlined, refresh) { Margin = new Thickness(0, 0, 8, 8) });
         return row;
     }
 
@@ -199,9 +199,9 @@ public partial class FeedbackPage : UserControl
         var bar = new MavSparkline { Kind = MavSparklineKind.Bar, ValuesText = "5,9,3,12,7,10" };
         var donut = new MavSparkline { Kind = MavSparklineKind.Donut, ValuesText = "70", CenterLabel = "70%" };
 
-        var row = new WrapPanel();
-        row.Children.Add(new MavCard(MavCardVariant.Outlined, gauge) { Width = 260, Margin = new Thickness(0, 0, 8, 8) });
-        row.Children.Add(new MavCard(MavCardVariant.Outlined, Column(line, bar, donut)) { Width = 360, Margin = new Thickness(0, 0, 8, 8) });
+        var row = new AdaptiveWrap { MinItemWidth = 300 };
+        row.Children.Add(new MavCard(MavCardVariant.Outlined, gauge) { Margin = new Thickness(0, 0, 8, 8) });
+        row.Children.Add(new MavCard(MavCardVariant.Outlined, Column(line, bar, donut)) { Margin = new Thickness(0, 0, 8, 8) });
         return row;
     }
 }

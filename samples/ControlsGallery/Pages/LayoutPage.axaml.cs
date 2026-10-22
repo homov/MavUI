@@ -225,8 +225,9 @@ public partial class LayoutPage : UserControl
             Background = MavTheme.BrushOf(MavTheme.ColorOf(MavColorRole.SurfaceContainerLow)),
         };
 
-        return Row(
-            new Border { Width = 360, Child = safe },
-            new Border { Width = 360, Child = keyboard });
+        var wrap = new AdaptiveWrap { MinItemWidth = 300 };
+        wrap.Children.Add(new Border { Child = safe });
+        wrap.Children.Add(new Border { Child = keyboard });
+        return wrap;
     }
 }

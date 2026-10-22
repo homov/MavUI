@@ -1,6 +1,7 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mav="https://where.it/mav"
+             xmlns:pages="clr-namespace:Mav.ControlsGallery.Pages"
              x:Class="Mav.ControlsGallery.Pages.InputsPage">
   <mav:MavScrollViewer>
     <Border Padding="20,16,20,40">
@@ -42,28 +43,28 @@
               <mav:MavLabel Role="TitleMedium" Text="MavTextArea, MavPinInput, MavNumberBox, MavTagInput and MavSearchBar" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap"
                             Text="{mav:Loc Inputs.Other.Card.Body, Fallback=Multiline editor\, OTP cells\, numeric stepper\, tag entry and a search bar with a search view.}" />
-              <WrapPanel>
-                <mav:MavCard Variant="Outlined" Width="320" Margin="0,0,8,8">
+              <pages:AdaptiveWrap MinItemWidth="300">
+                <mav:MavCard Variant="Outlined" Margin="0,0,8,8">
                   <mav:MavTextArea Label="{mav:Loc Inputs.Area.Label, Fallback=Notes}"
                                    Text="The gallery shows every control."
                                    Placeholder="{mav:Loc Inputs.Area.Placeholder, Fallback=Write a release note…}"
                                    SupportingText="{mav:Loc Inputs.Area.Support, Fallback=Markdown is supported by the host app}"
                                    MinBoxHeight="96" />
                 </mav:MavCard>
-                <mav:MavCard Variant="Outlined" Width="320" Margin="0,0,8,8">
+                <mav:MavCard Variant="Outlined" Margin="0,0,8,8">
                   <StackPanel Spacing="8">
                     <mav:MavPinInput Length="6" Code="1234" />
                     <mav:MavNumberBox Label="{mav:Loc Inputs.Number.Label, Fallback=Seats}" Minimum="1" Maximum="20"
                                       Value="4" Suffix="{mav:Loc Inputs.Number.Suffix, Fallback=people}" />
                   </StackPanel>
                 </mav:MavCard>
-                <mav:MavCard Variant="Outlined" Width="320" Margin="0,0,8,8">
+                <mav:MavCard Variant="Outlined" Margin="0,0,8,8">
                   <StackPanel Spacing="8">
                     <mav:MavTagInput x:Name="TagInput" Label="{mav:Loc Inputs.Tags.Label, Fallback=Tags}" />
                     <mav:MavSearchBar x:Name="SearchBar" Placeholder="{mav:Loc Inputs.Search.Placeholder, Fallback=Search the gallery}" />
                   </StackPanel>
                 </mav:MavCard>
-              </WrapPanel>
+              </pages:AdaptiveWrap>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap"
                             Text="MavTextArea · MavPinInput · MavNumberBox · MavTagInput · MavSearchBar.AttachSearchView" />
             </StackPanel>
@@ -79,7 +80,7 @@
               <mav:MavLabel Role="TitleMedium" Text="MavFormValidator" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap"
                             Text="{mav:Loc Inputs.Validation.Card.Body, Fallback=Fluent rules: Required\, MinLength\, MaxLength\, Email\, Numeric\, Pattern\, Matches and Must.}" />
-              <mav:MavCard Variant="Outlined" MaxWidth="320" HorizontalAlignment="Left" CardPadding="16">
+              <mav:MavCard Variant="Outlined" CardPadding="16">
                 <StackPanel Spacing="10">
                   <mav:MavTextField x:Name="NameField" Label="{mav:Loc Inputs.Form.Name, Fallback=Full name}" Variant="Outlined" />
                   <mav:MavTextField x:Name="EmailField" Label="{mav:Loc Inputs.Field.Email, Fallback=Email}" Variant="Outlined" />

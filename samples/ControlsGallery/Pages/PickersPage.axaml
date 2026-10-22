@@ -1,6 +1,7 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mav="https://where.it/mav"
+             xmlns:pages="clr-namespace:Mav.ControlsGallery.Pages"
              x:Class="Mav.ControlsGallery.Pages.PickersPage">
   <mav:MavScrollViewer>
     <Border Padding="20,16,20,40">
@@ -33,17 +34,17 @@
               <mav:MavLabel Role="TitleMedium" Text="MavCalendarGrid, MavTimeDial and MavColorPicker" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap"
                             Text="{mav:Loc Pickers.Embedded.Card.Body, Fallback=Embed the picker surface directly when a dialog or sheet is not the right fit.}" />
-              <WrapPanel>
-                <mav:MavCard Variant="Outlined" Width="340" Margin="0,0,8,8">
+              <pages:AdaptiveWrap MinItemWidth="300">
+                <mav:MavCard Variant="Outlined" Margin="0,0,8,8">
                   <mav:MavCalendarGrid x:Name="Calendar" />
                 </mav:MavCard>
-                <mav:MavCard Variant="Outlined" Width="300" Margin="0,0,8,8">
+                <mav:MavCard Variant="Outlined" Margin="0,0,8,8">
                   <mav:MavTimeDial x:Name="Dial" />
                 </mav:MavCard>
-                <mav:MavCard Variant="Outlined" Width="360" Margin="0,0,8,8">
+                <mav:MavCard Variant="Outlined" Margin="0,0,8,8">
                   <mav:MavColorPicker x:Name="ColorPicker" Width="320" />
                 </mav:MavCard>
-              </WrapPanel>
+              </pages:AdaptiveWrap>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap"
                             Text="MavCalendarGrid.SelectedDate · MavTimeDial.Hour/Minute · MavColorPicker.SelectedColor" />
             </StackPanel>

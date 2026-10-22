@@ -107,9 +107,9 @@ public partial class CollectionsPage : UserControl
         timeline.Add(new MavTimelineItem("Shipped", "NuGet package", "14:00", MavIcons.Publish, MavTimelineStatus.Active));
         timeline.Add(new MavTimelineItem("Next", "Write more tests", "—", MavIcons.Pending, MavTimelineStatus.Pending));
 
-        var row = new WrapPanel();
-        row.Children.Add(new MavCard(MavCardVariant.Outlined, tree) { Width = 320, Margin = new Thickness(0, 0, 8, 8) });
-        row.Children.Add(new MavCard(MavCardVariant.Outlined, timeline) { Width = 420, Margin = new Thickness(0, 0, 8, 8) });
+        var row = new AdaptiveWrap { MinItemWidth = 300 };
+        row.Children.Add(new MavCard(MavCardVariant.Outlined, tree) { Margin = new Thickness(0, 0, 8, 8) });
+        row.Children.Add(new MavCard(MavCardVariant.Outlined, timeline) { Margin = new Thickness(0, 0, 8, 8) });
         return row;
     }
 }

@@ -1,6 +1,7 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mav="https://where.it/mav"
+             xmlns:pages="clr-namespace:Mav.ControlsGallery.Pages"
              x:Class="Mav.ControlsGallery.Pages.SelectionPage">
   <mav:MavScrollViewer>
     <Border Padding="20,16,20,40">
@@ -15,8 +16,8 @@
               <mav:MavLabel Role="TitleMedium" Text="MavSwitch, MavCheckBox, MavRadioButton and MavRadioGroup" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap"
                             Text="{mav:Loc Selection.Toggles.Card.Body, Fallback=Selection controls expose IsToggled/IsChecked and raise Toggled/CheckedChanged; all support keyboard Space/Enter.}" />
-              <WrapPanel>
-                <mav:MavCard Variant="Outlined" Width="280" Margin="0,0,8,8">
+              <pages:AdaptiveWrap MinItemWidth="260">
+                <mav:MavCard Variant="Outlined" Margin="0,0,8,8">
                   <StackPanel Spacing="10">
                     <mav:MavSwitch IsToggled="True" ShowIcons="True"
                                    OnIcon="{x:Static mav:MavIcons.Notifications}"
@@ -26,13 +27,13 @@
                                      IsIndeterminate="True" IsThreeState="True" />
                   </StackPanel>
                 </mav:MavCard>
-                <mav:MavCard Variant="Outlined" Width="280" Margin="0,0,8,8">
+                <mav:MavCard Variant="Outlined" Margin="0,0,8,8">
                   <StackPanel Spacing="10">
                     <mav:MavRadioGroup x:Name="RoleRadios" />
                     <mav:MavRadioButton Label="{mav:Loc Selection.Radio.Standalone, Fallback=Standalone radio}" IsChecked="True" />
                   </StackPanel>
                 </mav:MavCard>
-              </WrapPanel>
+              </pages:AdaptiveWrap>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap"
                             Text="MavSwitch.IsToggled · MavCheckBox.IsThreeState · MavRadioButton.Label · MavRadioGroup.AddOption" />
             </StackPanel>
