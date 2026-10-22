@@ -1,5 +1,32 @@
 pgrep: /usr/bin/pgrep
 Tool 'dotnet-trace' is already installed.
 dotnet-trace: /home/homo/.dotnet/tools/dotnet-trace
-testhost pid: 89921
-[ERROR] The specified profile 'cpu-sampling' does not apply to `dotnet-trace collect`.
+testhost pid: 91074
+
+Provider Name                           Keywords            Level               Enabled By
+Microsoft-DotNETCore-SampleProfiler     0x0000F00000000000  Informational(4)    --profile
+
+Process        : /usr/lib/dotnet/dotnet
+Output File    : /home/homo/github/actions-runner/_work/_temp/theme.speedscope.json
+Trace Duration : 00:00:01:00
+
+
+Trace completed.
+Processing trace data file '/home/homo/github/actions-runner/_work/_temp/theme.speedscope.json' to create a new Speedscope file '/home/homo/github/actions-runner/_work/_temp/theme.speedscope.speedscope.json'.
+Conversion complete
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: 10 s - Md3.Avalonia.Tests.dll (net10.0)
+Traceback (most recent call last):
+  File "/home/homo/github/actions-runner/_work/MavUI/MavUI/tools/summarize_speedscope.py", line 60, in <module>
+    main()
+  File "/home/homo/github/actions-runner/_work/MavUI/MavUI/tools/summarize_speedscope.py", line 22, in main
+    data = json.load(open(path, encoding="utf-8"))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+                 ^^^^^^^^^
+  File "<frozen codecs>", line 322, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xea in position 53: invalid continuation byte
