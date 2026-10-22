@@ -68,8 +68,10 @@ public class ControlsGalleryShellTests
 
             MavSnackbar.Show("Saved", anchor: page);
 
-            Assert.True(OverlayHostOf(view).Children.Count > 0,
-                "Snackbar anchored to the Feedback page did not reach the shell overlay host.");
+            // The snackbar goes to the nearest overlay host (the navigation page's, above the app bar),
+            // so check that its text is rendered somewhere in the shell.
+            Assert.True(view.GetVisualDescendants().OfType<TextBlock>().Any(t => t.Text == "Saved"),
+                "Snackbar anchored to the Feedback page was not rendered inside the shell.");
         }
         finally
         {
