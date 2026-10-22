@@ -1,20 +1,20 @@
 # Last build log
-commit: 5c2007890f4ba8fbe0690c8cc536eac8fb2f8d65
-run: https://github.com/homov/MavUI/actions/runs/39867261306
+commit: 1a308926d5bf9678ed239bb272e847bd6ac2c0d4
+run: https://github.com/homov/MavUI/actions/runs/39867368692
 
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 665 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 260 ms).
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:05.21
+Time Elapsed 00:00:04.69
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 228 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 236 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 228 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 221 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 221 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 225 ms).
   1 of 4 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
@@ -25,9 +25,9 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:04.68
+Time Elapsed 00:00:04.59
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 277 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 280 ms).
   2 of 3 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
@@ -37,7 +37,7 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.09
+Time Elapsed 00:00:02.13
   Determining projects to restore...
   All projects are up-to-date for restore.
   MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0-windows/MavUI.Essentials.dll
@@ -47,21 +47,21 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:01.03
+Time Elapsed 00:00:01.02
 Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/MavUI.Tests.dll (.NETCoreApp,Version=v10.0)
 VSTest version 18.0.2 (x64)
 
 Starting test execution, please wait...
 A total of 1 test files matched the specified pattern.
-[xUnit.net 00:00:04.11]     Mav.Tests.WindowTests.MavWindow_paints_the_theme_surface_by_default [FAIL]
-  Failed Mav.Tests.WindowTests.MavWindow_paints_the_theme_surface_by_default [2 ms]
+[xUnit.net 00:00:04.22]     Mav.Tests.WindowTests.MavWindow_paints_the_theme_surface_by_default [FAIL]
+  Failed Mav.Tests.WindowTests.MavWindow_paints_the_theme_surface_by_default [4 ms]
   Error Message:
-   Assert.IsType() Failure: Value is not the exact type
-Expected: typeof(Avalonia.Media.SolidColorBrush)
-Actual:   typeof(Avalonia.Media.Immutable.ImmutableSolidColorBrush)
+   Assert.Equal() Failure: Values differ
+Expected: #fffdf8fd
+Actual:   White
   Stack Trace:
-     at Mav.Tests.WindowTests.MavWindow_paints_the_theme_surface_by_default() in /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/WindowTests.cs:line 16
+     at Mav.Tests.WindowTests.MavWindow_paints_the_theme_surface_by_default() in /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/WindowTests.cs:line 17
    at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
    at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
 
-Failed!  - Failed:     1, Passed:   273, Skipped:     0, Total:   274, Duration: 14 s - MavUI.Tests.dll (net10.0)
+Failed!  - Failed:     1, Passed:   273, Skipped:     0, Total:   274, Duration: 16 s - MavUI.Tests.dll (net10.0)
