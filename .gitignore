@@ -22,3 +22,7 @@ artifacts/
 # OS
 .DS_Store
 Thumbs.db
+
+# Raw profiler traces (large)
+ci/profile/*.nettrace
+ci/profile/*.speedscope.json
