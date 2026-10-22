@@ -44,6 +44,27 @@ jobs:
           set -o pipefail
           dotnet test Tests/Md3.Avalonia.Tests.csproj -c Release --no-build 2>&1 | tee -a build.log
 
+      - name: Profile theme switch (only when commit message has [profile])
+        if: contains(github.event.head_commit.message, '[profile]')
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          export PATH="$HOME/.dotnet/tools:$PATH"
+          dotnet tool update -g dotnet-trace || dotnet tool install -g dotnet-trace
+          mkdir -p ci/profile
+          # EventPipe CPU sampling for the testhost process (inherited by the child process).
+          export DOTNET_EnableEventPipe=1
+          export DOTNET_EventPipeConfig="Microsoft-DotNETCore-SampleProfiler:0:5,Microsoft-Windows-DotNETRuntime:0x10:5"
+          export DOTNET_EventPipeOutputPath="$PWD/ci/profile/theme.nettrace"
+          dotnet test Tests/Md3.Avalonia.Tests.csproj -c Release --no-build \
+            --filter "FullyQualifiedName~Theme_switch_phases" 2>&1 | tee -a build.log
+          unset DOTNET_EnableEventPipe DOTNET_EventPipeConfig DOTNET_EventPipeOutputPath
+          dotnet-trace convert --format speedscope ci/profile/theme.nettrace 2>&1 | tee -a build.log
+          python3 tools/summarize_speedscope.py ci/profile/theme.speedscope.json 40 > ci/profile/theme-summary.txt
+          # Keep only the summary in git; raw traces are large.
+          rm -f ci/profile/theme.nettrace ci/profile/theme.speedscope.json
+
       - name: Upload build log artifact
         if: always()
         uses: actions/upload-artifact@v4
