@@ -83,7 +83,7 @@ public class LifecycleBenchmarks
         for (int i = 0; i < ControlsPerKind; i++)
         {
             var button = new MdButton { Text = $"B{i}" };
-            var card = new MdCard { Body = new Avalonia.Controls.TextBlock { Text = $"C{i}" } };
+            var card = new MdCard { Body = new global::Avalonia.Controls.TextBlock { Text = $"C{i}" } };
             var field = new MdTextField { Label = $"F{i}" };
             var slider = new MdSlider(0, 100, i % 100, 0);
 
