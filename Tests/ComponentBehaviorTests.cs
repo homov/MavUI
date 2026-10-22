@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Avalonia.Headless.XUnit;
 using Mav.Controls;
 using Xunit;
