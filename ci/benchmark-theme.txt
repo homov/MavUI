@@ -1,1 +1,1 @@
-500 attached controls, switch ms: 25.4, 52.1, 25.4, 24.2, 24.7, 39.8; median=25.4 ms
+500 attached controls, switch ms: 23.6, 23.2, 53.4, 39.8, 22.9, 33.9; median=28.7 ms
