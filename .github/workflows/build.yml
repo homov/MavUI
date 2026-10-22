@@ -35,7 +35,7 @@ jobs:
         run: |
           set -o pipefail
           dotnet build Tests/MavUI.Tests.csproj -c Release 2>&1 | tee -a build.log
-          dotnet build samples/ControlsGallery/Desktop/ControlsGallery.Desktop.csproj -c Release 2>&1 | tee -a build.log
+          dotnet build samples/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj -c Release 2>&1 | tee -a build.log
           
 
       - name: Run tests

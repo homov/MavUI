@@ -2,7 +2,7 @@
 
   <!--
     Shared multi-platform UI (AXAML pages, shell and localization).
-    The platform heads live in Desktop/, Android/ and Browser/ and reference this project.
+    The platform heads are sibling projects (samples/ControlsGallery.Desktop, .Android, .Browser) and reference this project.
   -->
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -11,7 +11,7 @@
     <LangVersion>latest</LangVersion>
     <RootNamespace>Mav.ControlsGallery</RootNamespace>
     <AssemblyName>Mav.ControlsGallery</AssemblyName>
-    <DefaultItemExcludes>$(DefaultItemExcludes);Desktop/**;Android/**;Browser/**</DefaultItemExcludes>
+    <DefaultItemExcludes>$(DefaultItemExcludes)</DefaultItemExcludes>
   </PropertyGroup>
 
   <ItemGroup>

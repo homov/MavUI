@@ -13,11 +13,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{5D20
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlsGallery", "samples\ControlsGallery\ControlsGallery.csproj", "{73F9D30F-58F9-4C3B-B6B0-21375F722136}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlsGallery.Desktop", "samples\ControlsGallery\Desktop\ControlsGallery.Desktop.csproj", "{3F076882-88F3-48D6-9851-6F3908AE6208}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlsGallery.Desktop", "samples\ControlsGallery.Desktop\ControlsGallery.Desktop.csproj", "{3F076882-88F3-48D6-9851-6F3908AE6208}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlsGallery.Android", "samples\ControlsGallery\Android\ControlsGallery.Android.csproj", "{379D3127-F72F-4AA9-ABE0-9C929B48A18A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlsGallery.Android", "samples\ControlsGallery.Android\ControlsGallery.Android.csproj", "{379D3127-F72F-4AA9-ABE0-9C929B48A18A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlsGallery.Browser", "samples\ControlsGallery\Browser\ControlsGallery.Browser.csproj", "{36BD3DA4-8776-4CCC-ACB2-170A2B3A8CEB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlsGallery.Browser", "samples\ControlsGallery.Browser\ControlsGallery.Browser.csproj", "{36BD3DA4-8776-4CCC-ACB2-170A2B3A8CEB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

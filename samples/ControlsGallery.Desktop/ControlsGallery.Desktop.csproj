@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ControlsGallery.csproj" />
+    <ProjectReference Include="..\ControlsGallery\ControlsGallery.csproj" />
   </ItemGroup>
 
 </Project>
