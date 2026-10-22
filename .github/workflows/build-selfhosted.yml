@@ -32,10 +32,16 @@ jobs:
         run: dotnet restore ref/Md3.Avalonia/Md3.Avalonia.csproj
 
       - name: Build
-        run: dotnet build ref/Md3.Avalonia/Md3.Avalonia.csproj --no-restore -c Release 2>&1 | tee build.log
+        shell: bash
+        run: |
+          set -o pipefail
+          dotnet build ref/Md3.Avalonia/Md3.Avalonia.csproj --no-restore -c Release 2>&1 | tee build.log
 
       - name: Headless render tests (screenshots)
-        run: dotnet test tests/Md3.Avalonia.Headless.Tests/Md3.Avalonia.Headless.Tests.csproj -c Release 2>&1 | tee -a build.log
+        shell: bash
+        run: |
+          set -o pipefail
+          dotnet test tests/Md3.Avalonia.Headless.Tests/Md3.Avalonia.Headless.Tests.csproj -c Release 2>&1 | tee -a build.log
 
       - name: Upload build log artifact
         if: always()
@@ -56,7 +62,6 @@ jobs:
           {
             echo "# Last build log"
             echo "commit: ${GITHUB_SHA}"
-            echo "job status: ${{ job.status }}"
             echo "run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
             echo
             cat build.log
