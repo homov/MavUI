@@ -143,6 +143,8 @@ public class ControlsGalleryShellTests
             Assert.Equal("Отмена", MavLocalization.Cancel);
             Assert.Equal("ОК", MavLocalization.Ok);
             Assert.Equal("Выберите дату", MavLocalization.SelectDate);
+            Assert.Equal("Недавние запросы", MavLocalization.Get("SearchView.RecentSearches", "Recent searches"));
+            Assert.Equal("Смена языка", MavLocalization.Get("Theming.Language.Title", "Language switch"));
             // The hint is parsed as ISO, so it must not be translated.
             Assert.Equal("yyyy-mm-dd", MavLocalization.DateFieldHint);
         }

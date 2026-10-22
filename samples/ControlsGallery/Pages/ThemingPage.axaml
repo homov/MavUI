@@ -11,7 +11,7 @@
           <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Config.Body, Fallback=All theme changes are global and rebuild the palette immediately.}" />
           <mav:MavCard Variant="Outlined" CardPadding="16">
             <StackPanel Spacing="10">
-              <mav:MavLabel Role="TitleMedium" Text="Theme controls" />
+              <mav:MavLabel Role="TitleMedium" Text="{mav:Loc Theming.Controls.Title, Fallback=Theme controls}" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Controls.CardBody, Fallback=Seed color\, mode\, contrast\, density\, motion and shape scale.}" />
               <StackPanel x:Name="ConfigHost" Spacing="10" />
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavTheme.Configure(seed, mode, contrast, density, motion, shapeScale)" />
@@ -76,7 +76,7 @@
           <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Localization.Body, Fallback=Switch language with one call; no event subscriptions and no manual text reassignment.}" />
           <mav:MavCard Variant="Outlined" CardPadding="16">
             <StackPanel Spacing="10">
-              <mav:MavLabel Role="TitleMedium" Text="Language switch" />
+              <mav:MavLabel Role="TitleMedium" Text="{mav:Loc Theming.Language.Title, Fallback=Language switch}" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Language.CardBody, Fallback=The greeting and dialog labels use the same provider. The language buttons call SetCulture; attached texts update automatically\, without event handlers.}" />
               <StackPanel x:Name="LocalizationHost" Spacing="10" />
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavLocalization.SetCulture(new CultureInfo(&quot;ru-RU&quot;)) · {mav:Loc Key, Fallback=...}" />

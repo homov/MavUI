@@ -85,7 +85,7 @@ public class MavSearchBar : MavContentView
         AvaloniaProperty.Register<MavSearchBar, string>(nameof(Text), string.Empty, defaultBindingMode: BindingMode.TwoWay);
 
     public static readonly StyledProperty<string> PlaceholderProperty =
-        AvaloniaProperty.Register<MavSearchBar, string>(nameof(Placeholder), "Search");
+        AvaloniaProperty.Register<MavSearchBar, string>(nameof(Placeholder), MavLocalization.Search);
 
     public static readonly StyledProperty<string?> LeadingIconProperty =
         AvaloniaProperty.Register<MavSearchBar, string?>(nameof(LeadingIcon), MavIcons.Search);
@@ -434,7 +434,7 @@ public class MavSearchView : Control
         AvaloniaProperty.Register<MavSearchView, string>(nameof(Query), string.Empty, defaultBindingMode: BindingMode.TwoWay);
 
     public static readonly StyledProperty<string> PlaceholderProperty =
-        AvaloniaProperty.Register<MavSearchView, string>(nameof(Placeholder), "Search");
+        AvaloniaProperty.Register<MavSearchView, string>(nameof(Placeholder), MavLocalization.Search);
 
     public static readonly StyledProperty<bool> IsFullScreenProperty =
         AvaloniaProperty.Register<MavSearchView, bool>(nameof(IsFullScreen));
@@ -643,7 +643,7 @@ public class MavSearchView : Control
 
             if (string.IsNullOrEmpty(trimmed) && _recentQueries.Count > 0)
             {
-                resultsStack.Children.Add(new MavListSubheader("Recent searches"));
+                resultsStack.Children.Add(new MavListSubheader(MavLocalization.Get("SearchView.RecentSearches", "Recent searches")));
                 foreach (var rec in _recentQueries.Take(5))
                 {
                     var captured = rec;
@@ -667,7 +667,9 @@ public class MavSearchView : Control
 
             if (filtered.Count > 0)
             {
-                resultsStack.Children.Add(new MavListSubheader(string.IsNullOrEmpty(trimmed) ? "Suggestions" : "Results"));
+                resultsStack.Children.Add(new MavListSubheader(string.IsNullOrEmpty(trimmed)
+                    ? MavLocalization.Get("SearchView.Suggestions", "Suggestions")
+                    : MavLocalization.Get("SearchView.Results", "Results")));
                 foreach (var (text, sub, icon) in filtered)
                 {
                     var captured = text;
@@ -698,7 +700,7 @@ public class MavSearchView : Control
             }
             else if (!string.IsNullOrEmpty(trimmed))
             {
-                var emptyLbl = new MavLabel($"No results for \"{trimmed}\"", MavTypeRole.BodyMedium)
+                var emptyLbl = new MavLabel(MavLocalization.Format("SearchView.NoResults", "No results for \"{0}\"", trimmed), MavTypeRole.BodyMedium)
                 {
                     Secondary = true,
                     Margin = new Thickness(20, 16),
