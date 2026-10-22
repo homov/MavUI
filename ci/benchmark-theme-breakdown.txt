@@ -1,7 +1,7 @@
-Build() alone (scheme generation): median 0.08 ms
-switch, 0 controls: median 0.14 ms
-switch, 500 x MdButton: median 22.03 ms (net of empty: 21.89 ms, per control 43.8 us)
-switch, 500 x MdCard: median 4.02 ms (net of empty: 3.88 ms, per control 7.8 us)
-switch, 500 x MdTextField: median 111.79 ms (net of empty: 111.65 ms, per control 223.3 us)
-switch, 500 x MdSlider: median 0.60 ms (net of empty: 0.46 ms, per control 0.9 us)
+Build() alone (scheme generation): median 0.07 ms
+switch, 0 controls: median 0.19 ms
+switch, 500 x MdButton: median 73.07 ms (net of empty: 72.88 ms, per control 145.8 us)
+switch, 500 x MdCard: median 13.72 ms (net of empty: 13.53 ms, per control 27.1 us)
+switch, 500 x MdTextField: median 103.14 ms (net of empty: 102.95 ms, per control 205.9 us)
+switch, 500 x MdSlider: median 0.69 ms (net of empty: 0.51 ms, per control 1.0 us)
 switch, 500 x MdButton detached (not in visual tree): median 0.16 ms

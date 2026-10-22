@@ -1,16 +1,16 @@
 # Last build log
-commit: f0ad704666acf1a518b21fc19c43eafcebbb6252
-run: https://github.com/homov/MavUI/actions/runs/39812220980
+commit: 0e2e171ab838fc496592d89e094e87e097748989
+run: https://github.com/homov/MavUI/actions/runs/39813536470
 
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Md3.Avalonia/Md3.Avalonia.csproj (in 260 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Md3.Avalonia/Md3.Avalonia.csproj (in 257 ms).
   Md3.Avalonia -> /home/homo/github/actions-runner/_work/MavUI/MavUI/Md3.Avalonia/bin/Release/net10.0/Md3.Avalonia.dll
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:07.46
+Time Elapsed 00:00:07.54
   Determining projects to restore...
   Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/Md3.Avalonia.Tests.csproj (in 259 ms).
   1 of 2 projects are up-to-date for restore.
@@ -21,9 +21,9 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:01.98
+Time Elapsed 00:00:02.01
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/Demo/Md3.Demo.csproj (in 260 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/Demo/Md3.Demo.csproj (in 268 ms).
   1 of 2 projects are up-to-date for restore.
   Md3.Avalonia -> /home/homo/github/actions-runner/_work/MavUI/MavUI/Md3.Avalonia/bin/Release/net10.0/Md3.Avalonia.dll
   Md3.Demo -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/Demo/bin/Release/net10.0/Md3.Demo.dll
@@ -32,9 +32,9 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:01.96
+Time Elapsed 00:00:02.06
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/Gallery/Md3.Gallery.csproj (in 259 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/Gallery/Md3.Gallery.csproj (in 260 ms).
   1 of 2 projects are up-to-date for restore.
   Md3.Avalonia -> /home/homo/github/actions-runner/_work/MavUI/MavUI/Md3.Avalonia/bin/Release/net10.0/Md3.Avalonia.dll
   Md3.Gallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/Gallery/bin/Release/net10.0/Md3.Gallery.dll
@@ -43,11 +43,41 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:01.99
+Time Elapsed 00:00:01.96
 Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/Md3.Avalonia.Tests.dll (.NETCoreApp,Version=v10.0)
 VSTest version 18.0.2 (x64)
 
 Starting test execution, please wait...
 A total of 1 test files matched the specified pattern.
 
-Passed!  - Failed:     0, Passed:   240, Skipped:     0, Total:   240, Duration: 13 s - Md3.Avalonia.Tests.dll (net10.0)
+Passed!  - Failed:     0, Passed:   240, Skipped:     0, Total:   240, Duration: 14 s - Md3.Avalonia.Tests.dll (net10.0)
+Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/Md3.Avalonia.Tests.dll (.NETCoreApp,Version=v10.0)
+VSTest version 18.0.2 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: 1 s - Md3.Avalonia.Tests.dll (net10.0)
+Processing trace data file '/home/homo/github/actions-runner/_work/MavUI/MavUI/ci/profile/theme.nettrace' to create a new Speedscope file '/home/homo/github/actions-runner/_work/MavUI/MavUI/ci/profile/theme.speedscope.json'.
+System.FormatException: Failed to read byte[82745] at stream offset 0xbe9ea
+   at Microsoft.Diagnostics.Tracing.EventPipe.SpanReader.ThrowFormatException(Int32 spanLength, String typeName)
+   at Microsoft.Diagnostics.Tracing.EventPipe.SpanReader.ReadBytes(Int32 length)
+   at Microsoft.Diagnostics.Tracing.EventPipe.EventCache.ProcessEventBlock(Block block)
+   at Microsoft.Diagnostics.Tracing.EventPipeEventSource.ReadEventBlockV4OrGreater(Block block)
+   at Microsoft.Diagnostics.Tracing.FastSerializationObjectParser.ParseBlock(Block block)
+   at Microsoft.Diagnostics.Tracing.BlockParser.ParseRemainder()
+   at Microsoft.Diagnostics.Tracing.EventPipeEventSource.Process()
+   at Microsoft.Diagnostics.Tracing.Etlx.TraceLog.CopyRawEvents(TraceEventDispatcher rawEvents, IStreamWriter writer)
+   at Microsoft.Diagnostics.Tracing.Etlx.TraceLog.<>c__DisplayClass134_0.<FastSerialization.IFastSerializable.ToStream>b__0()
+   at FastSerialization.DeferedRegion.Write(Serializer serializer, Action toStream)
+   at Microsoft.Diagnostics.Tracing.Etlx.TraceLog.FastSerialization.IFastSerializable.ToStream(Serializer serializer)
+   at FastSerialization.Serializer.WriteObjectData(IFastSerializable obj, Tags beginTag)
+   at FastSerialization.Serializer.WriteObjectRef(IFastSerializable obj, Boolean defered)
+   at FastSerialization.Serializer.Write(IFastSerializable obj)
+   at FastSerialization.Serializer..ctor(IStreamWriter writer, IFastSerializable entryObject)
+   at Microsoft.Diagnostics.Tracing.Etlx.TraceLog.CreateFromEventPipeEventSources(TraceEventDispatcher source, IOStreamStreamWriter streamWriter, TraceLogOptions options)
+   at Microsoft.Diagnostics.Tracing.Etlx.TraceLog.CreateFromEventPipeEventSources(TraceEventDispatcher source, String etlxFilePath, TraceLogOptions options)
+   at Microsoft.Diagnostics.Tracing.Etlx.TraceLog.CreateFromEventPipeDataFile(String filePath, String etlxFilePath, TraceLogOptions options)
+   at Microsoft.Diagnostics.Tools.Trace.TraceFileFormatConverter.Convert(TraceFileFormat format, String fileToConvert, String outputFilename, Boolean continueOnError) in /_/src/Tools/dotnet-trace/TraceFileFormatConverter.cs:line 72
+   at Microsoft.Diagnostics.Tools.Trace.TraceFileFormatConverter.ConvertToFormat(TextWriter stdOut, TextWriter stdError, TraceFileFormat format, String fileToConvert, String outputFilename) in /_/src/Tools/dotnet-trace/TraceFileFormatConverter.cs:line 46
+Conversion complete
