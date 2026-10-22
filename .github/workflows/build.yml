@@ -62,7 +62,7 @@ jobs:
           TEST_PID=$!
           PID=""
           for i in $(seq 1 300); do
-            PID=$(pgrep -f 'testhost' | head -n1)
+            PID=$(pgrep -f 'testhost\.dll' | head -n1 || true)
             [ -n "$PID" ] && break
             sleep 0.2
           done
