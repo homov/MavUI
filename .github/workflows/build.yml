@@ -52,7 +52,7 @@ jobs:
           export PATH="$HOME/.dotnet/tools:$PATH"
           dotnet tool update -g dotnet-trace || dotnet tool install -g dotnet-trace
           mkdir -p ci/profile
-          TRACE="$PWD/ci/profile/theme.nettrace"
+          TRACE="$RUNNER_TEMP/theme.nettrace"
           # EventPipe settings go ONLY into the test host (via runsettings), not into the
           # dotnet CLI/MSBuild/vstest processes, which would all write the same trace file.
           cat > ci/profile/profile.runsettings <<RS
@@ -60,7 +60,8 @@ jobs:
             <RunConfiguration>
               <EnvironmentVariables>
                 <DOTNET_EnableEventPipe>1</DOTNET_EnableEventPipe>
-                <DOTNET_EventPipeConfig>Microsoft-DotNETCore-SampleProfiler:0:5,Microsoft-Windows-DotNETRuntime:0x10:5</DOTNET_EventPipeConfig>
+                <DOTNET_EventPipeOutputStreaming>1</DOTNET_EventPipeOutputStreaming>
+                <DOTNET_EventPipeConfig>Microsoft-DotNETCore-SampleProfiler:0:5</DOTNET_EventPipeConfig>
                 <DOTNET_EventPipeOutputPath>$TRACE</DOTNET_EventPipeOutputPath>
               </EnvironmentVariables>
             </RunConfiguration>
@@ -73,7 +74,16 @@ jobs:
           dotnet-trace convert --format speedscope "$TRACE" 2>&1 | tee -a build.log
           python3 tools/summarize_speedscope.py ci/profile/theme.speedscope.json 40 > ci/profile/theme-summary.txt
           # Keep only the summary in git; raw traces are large.
-          rm -f ci/profile/theme.nettrace ci/profile/theme.speedscope.json ci/profile/profile.runsettings
+          rm -f ci/profile/profile.runsettings
+          cp "$TRACE" "$RUNNER_TEMP/theme-trace-copy.nettrace" 2>/dev/null || true
+
+      - name: Upload raw profiler trace (artifact only, not committed)
+        if: contains(github.event.head_commit.message, '[profile]') && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: profile-trace
+          path: ${{ runner.temp }}/theme*.nettrace
+          if-no-files-found: ignore
 
       - name: Upload build log artifact
         if: always()
