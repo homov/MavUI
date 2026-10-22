@@ -37,6 +37,7 @@ public sealed class GalleryStrings : IMavLocalizationProvider
     private static IEnumerable<(string Key, string Value)[]> Parts =>
     [
         RuShell.Items,
+        RuMavControls.Items,
         RuOverview.Items,
         RuActions.Items,
         RuInputs.Items,

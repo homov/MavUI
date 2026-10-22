@@ -4,6 +4,9 @@ using Avalonia.Headless.XUnit;
 using System.Linq;
 using Avalonia.Controls.Primitives;
 using Avalonia.VisualTree;
+using System.Globalization;
+using Mav;
+using Mav.ControlsGallery.Localization;
 using Mav.ControlsGallery.Pages;
 using Mav.ControlsGallery.Shell;
 using Mav.Controls;
@@ -124,6 +127,29 @@ public class ControlsGalleryShellTests
         finally
         {
             window.Close();
+        }
+    }
+
+    [AvaloniaFact]
+    public void Library_controls_strings_are_translated_to_russian()
+    {
+        var previousProvider = MavLocalization.Current;
+        var previousCulture = MavLocalization.Culture;
+        try
+        {
+            MavLocalization.Current = GalleryStrings.Instance;
+            MavLocalization.SetCulture(new CultureInfo("ru-RU"));
+
+            Assert.Equal("Отмена", MavLocalization.Cancel);
+            Assert.Equal("ОК", MavLocalization.Ok);
+            Assert.Equal("Выберите дату", MavLocalization.SelectDate);
+            // The hint is parsed as ISO, so it must not be translated.
+            Assert.Equal("yyyy-mm-dd", MavLocalization.DateFieldHint);
+        }
+        finally
+        {
+            MavLocalization.Current = previousProvider;
+            MavLocalization.SetCulture(previousCulture);
         }
     }
 
