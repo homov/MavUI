@@ -46,8 +46,8 @@ jobs:
           set -o pipefail
           dotnet test Tests/MavUI.Tests.csproj -c Release --no-build 2>&1 | tee -a build.log
 
-      - name: Build Android and Browser heads (manual runs only)
-        if: github.event_name == 'workflow_dispatch'
+      - name: Build Android and Browser targets (manual runs or commit message contains [heads])
+        if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[heads]')
         shell: bash
         run: |
           set -o pipefail
