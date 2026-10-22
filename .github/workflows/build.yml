@@ -74,17 +74,18 @@ jobs:
           fi
           wait "$TEST_PID" || true
           tail -5 "$RUNNER_TEMP/test.log"
+          cp "$RUNNER_TEMP/test.log" ci/profile/test-run.txt || true
           if [ -s "$TRACE" ]; then
             # Text report straight from the trace: top methods by exclusive (self) and inclusive time.
             dotnet-trace report "$TRACE" topN -n 5000 > "$RUNNER_TEMP/theme-top-full.txt" 2>&1 || true
             # Top of the report (mostly idle/waiting threads) plus every line that touches our code.
             { head -60 "$RUNNER_TEMP/theme-top-full.txt"; echo; echo "== Md3 / Avalonia-controls / theme frames:";
               grep -E "Md3|MdTheme|MdButton|MdTextField|MdCard|MdSlider|Observe|ApplyTheme|ApplySizeTokens|ApplyShape|Rebuild|SyncAppResources|Avalonia\.(Controls|Layout|Rendering|Media)" "$RUNNER_TEMP/theme-top-full.txt" | head -150 || true; } > ci/profile/theme-top.txt
-            { echo "full report lines: $(wc -l < "$RUNNER_TEMP/theme-top-full.txt")"; echo "--- test/theme/avalonia frames (count):"; grep -cE "ThemeSwitch|Theme_switch|Benchmark" "$RUNNER_TEMP/theme-top-full.txt" || true; grep -cE "Avalonia" "$RUNNER_TEMP/theme-top-full.txt" || true; echo "--- sample lines:"; grep -E "ThemeSwitch|Theme_switch|MdTheme|Avalonia\.Controls\.|Avalonia\.Threading|Dispatcher" "$RUNNER_TEMP/theme-top-full.txt" | head -40 || true; } >> ci/profile/profile-log.txt
+            { echo "full report lines: $(wc -l < "$RUNNER_TEMP/theme-top-full.txt")"; echo "--- test/theme/avalonia frames (count):"; grep -cE "ThemeSwitch|Theme_switch|Benchmark" "$RUNNER_TEMP/theme-top-full.txt" || true; grep -cE "Avalonia" "$RUNNER_TEMP/theme-top-full.txt" || true; echo "--- sample lines:"; grep -E "ThemeSwitch|Theme_switch|MdTheme|Avalonia\.Controls\.|Avalonia\.Threading|Dispatcher" "$RUNNER_TEMP/theme-top-full.txt" | head -40 || true; } > ci/profile/report-diag.txt
             dotnet-trace convert --format speedscope "$TRACE" || true
             if [ -s "$TRACE_JSON" ]; then
               python3 tools/summarize_speedscope.py "$TRACE_JSON" 40 > ci/profile/theme-summary.txt || true
-              python3 -c "import json;d=json.load(open('$TRACE_JSON'));print('speedscope profiles:',[(p.get('type'),len(p.get('samples',[]))) for p in d.get('profiles',[])])" >> ci/profile/profile-log.txt || true
+              python3 -c "import json;d=json.load(open('$TRACE_JSON'));print('speedscope profiles:',[(p.get('type'),len(p.get('samples',[]))) for p in d.get('profiles',[])])" > ci/profile/speedscope-diag.txt || true
             fi
           else
             echo "no trace produced" > ci/profile/theme-top.txt
