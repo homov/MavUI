@@ -79,7 +79,7 @@
               <mav:MavLabel Role="TitleMedium" Text="MavFormValidator" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap"
                             Text="{mav:Loc Inputs.Validation.Card.Body, Fallback=Fluent rules: Required\, MinLength\, MaxLength\, Email\, Numeric\, Pattern\, Matches and Must.}" />
-              <mav:MavCard Variant="Outlined" Width="460" CardPadding="16">
+              <mav:MavCard Variant="Outlined" MaxWidth="320" HorizontalAlignment="Left" CardPadding="16">
                 <StackPanel Spacing="10">
                   <mav:MavTextField x:Name="NameField" Label="{mav:Loc Inputs.Form.Name, Fallback=Full name}" Variant="Outlined" />
                   <mav:MavTextField x:Name="EmailField" Label="{mav:Loc Inputs.Field.Email, Fallback=Email}" Variant="Outlined" />

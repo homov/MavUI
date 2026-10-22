@@ -17,21 +17,21 @@ public partial class NavigationGroupPage : UserControl
     {
         InitializeComponent();
 
-        AppBarsHost.Children.Add(new Border { Width = 420, Child = BuildSmallBar() });
-        AppBarsHost.Children.Add(new Border { Width = 420, Child = BuildCenteredBar() });
-        AppBarsHost.Children.Add(new Border { Width = 420, Child = BuildLargeBar() });
-        AppBarsHost.Children.Add(new Border { Width = 420, Child = BuildBottomBar() });
+        AppBarsHost.Children.Add(new Border { MaxWidth = 420, Child = BuildSmallBar() });
+        AppBarsHost.Children.Add(new Border { MaxWidth = 420, Child = BuildCenteredBar() });
+        AppBarsHost.Children.Add(new Border { MaxWidth = 420, Child = BuildLargeBar() });
+        AppBarsHost.Children.Add(new Border { MaxWidth = 420, Child = BuildBottomBar() });
 
-        StructuresHost.Children.Add(new Border { Width = 420, Child = BuildBottomNavigation() });
+        StructuresHost.Children.Add(new Border { MaxWidth = 420, Child = BuildBottomNavigation() });
         StructuresHost.Children.Add(BuildRailAndDrawer());
 
-        TabsHost.Children.Add(BuildTabs());
-        TabsHost.Children.Add(BuildBreadcrumbs());
-        TabsHost.Children.Add(BuildPagination());
-        TabsHost.Children.Add(new Border { Height = 260, Child = BuildStepper() });
+        TabsHost.Children.Add(Framed(BuildTabs()));
+        TabsHost.Children.Add(Framed(BuildBreadcrumbs()));
+        TabsHost.Children.Add(Framed(BuildPagination()));
+        TabsHost.Children.Add(Framed(new Border { Height = 260, Child = BuildStepper() }));
 
-        ToolbarsHost.Children.Add(new Border { Width = 420, Child = BuildToolbar() });
-        ToolbarsHost.Children.Add(new Border { Width = 480, Child = BuildContextualBar() });
+        ToolbarsHost.Children.Add(new Border { MaxWidth = 420, Child = BuildToolbar() });
+        ToolbarsHost.Children.Add(new Border { MaxWidth = 480, Child = BuildContextualBar() });
 
         ScaffoldHost.Children.Add(new Border { Height = 380, Child = BuildScaffold() });
         ScaffoldHost.Children.Add(new Border { Height = 320, Child = BuildPageStack() });
@@ -131,6 +131,9 @@ public partial class NavigationGroupPage : UserControl
             content: new MavLabel { Text = MavLocalization.Get("Nav.Demo.SettingsTab", "Settings tab content") });
         return tabs;
     }
+
+    /// <summary>Each demo gets its own outlined card, like the other sections; the card is as wide as the page.</summary>
+    private static Control Framed(Control content) => new MavCard(MavCardVariant.Outlined, content);
 
     private static MavBreadcrumbBar BuildBreadcrumbs()
     {

@@ -88,7 +88,14 @@ public class MavPinInput : MavContentView
 
         var root = new Grid { Background = Brushes.Transparent };
         root.Children.Add(_entry);
-        root.Children.Add(_boxesRow);
+        // Shrink the row when the host is narrower than six boxes plus spacing (cards, phones).
+        root.Children.Add(new Viewbox
+        {
+            Stretch = Stretch.Uniform,
+            StretchDirection = StretchDirection.DownOnly,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            Child = _boxesRow,
+        });
         root.PointerPressed += (_, e) =>
         {
             e.Handled = true;

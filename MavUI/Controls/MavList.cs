@@ -484,6 +484,7 @@ public class MavListItem : MavContentView, IMavDraggableControl
             IsVisible = false,
             Child = _swipeContent,
         };
+        _swipeBg.PointerReleased += OnSwipeBackgroundReleased;
 
         var itemLayer = new Grid { ClipToBounds = true };
         itemLayer.Children.Add(_swipeBg);
@@ -767,26 +768,49 @@ public class MavListItem : MavContentView, IMavDraggableControl
         if (!_swipeTracking) return;
         _swipeTracking = false;
 
-        if (!_swiping) return;
+        if (!_swiping)
+        {
+            // A tap on the row itself closes a revealed action.
+            if (_swipeOffset != 0) SettleSwipe(0);
+            return;
+        }
         e.Pointer.Capture(null);
         e.Handled = true;
 
-        var triggeredAction = _swipeOffset >= 72
-            ? LeadingSwipeAction
-            : (_swipeOffset <= -72 ? TrailingSwipeAction : null);
+        // Past the threshold the row stays open at the reveal width, so the action can be pressed.
+        // Below it, the row springs back.
+        var target = _swipeOffset >= SwipeThreshold && LeadingSwipeAction is not null ? SwipeRevealWidth
+            : _swipeOffset <= -SwipeThreshold && TrailingSwipeAction is not null ? -SwipeRevealWidth
+            : 0;
+        SettleSwipe(target);
+    }
 
+    private void SettleSwipe(double target)
+    {
         var start = _swipeOffset;
-        MavMotion.Animate(this, "li_swipe", start, 0, MavMotion.Short4, MavMotion.CubicOut, v =>
+        MavMotion.Cancel(this, "li_swipe");
+        MavMotion.Animate(this, "li_swipe", start, target, MavMotion.Short4, MavMotion.CubicOut, v =>
         {
             _swipeOffset = v;
             UpdateSwipeVisual();
         }, () =>
         {
             _swiping = false;
-            _swipeBg.IsVisible = false;
-            triggeredAction?.Invoke();
+            if (target == 0) _swipeBg.IsVisible = false;
         });
     }
+
+    private void OnSwipeBackgroundReleased(object? sender, PointerReleasedEventArgs e)
+    {
+        if (_swipeOffset == 0) return;
+        var action = _swipeOffset > 0 ? LeadingSwipeAction : TrailingSwipeAction;
+        e.Handled = true;
+        SettleSwipe(0);
+        action?.Invoke();
+    }
+
+    private const double SwipeThreshold = 72;
+    private const double SwipeRevealWidth = 96;
 
     private void UpdateSwipeVisual()
     {

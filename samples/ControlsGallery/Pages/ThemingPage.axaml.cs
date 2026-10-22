@@ -105,6 +105,10 @@ public partial class ThemingPage : UserControl
                 ActionButton(MavLocalization.Get("Theming.Shape.Expressive", "Expressive"), MavButtonVariant.Tonal, null, () => MavTheme.Configure(shapeScale: MavShapeScale.Expressive))));
     }
 
+    /// <summary>"SurfaceContainerHigh" becomes "Surface Container High", so long role names wrap inside their swatch.</summary>
+    private static string SplitWords(string name) =>
+        System.Text.RegularExpressions.Regex.Replace(name, "(?<=[a-z])(?=[A-Z])", " ");
+
     private static Control BuildColors()
     {
         var panel = new WrapPanel();
@@ -122,7 +126,7 @@ public partial class ThemingPage : UserControl
                 Background = MavTheme.BrushOf(color),
                 Child = new global::Avalonia.Controls.TextBlock
                 {
-                    Text = role.ToString(),
+                    Text = SplitWords(role.ToString()),
                     FontSize = 11,
                     TextWrapping = TextWrapping.Wrap,
                     Foreground = MavTheme.BrushOf(on),

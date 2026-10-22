@@ -593,6 +593,9 @@ public class MavCarousel : Control, IMavDraggableControl, IEnumerable<MavCarouse
 
         context.DrawRectangle(Brushes.Transparent, null, new Rect(0, 0, w, h));
 
+        // Neighbouring cards are drawn past the edges while the carousel moves; keep them inside the control.
+        using var clip = context.PushClip(new Rect(0, 0, w, h));
+
         var t = MavTheme.Current;
         var c = t.Color;
         var showDots = ShowIndicators;

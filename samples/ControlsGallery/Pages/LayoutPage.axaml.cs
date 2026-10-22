@@ -154,7 +154,7 @@ public partial class LayoutPage : UserControl
 
         return Column(
             Row(avatar, group),
-            new Border { Width = 460, Child = drop },
+            new Border { MaxWidth = 460, Child = drop },
             new MavChatBubble("The gallery builds on desktop, web and Android.", false, "Ada", "10:24", "AL"),
             new MavChatBubble("I can see every control in one place.", true, "You", "10:26", "YO", isRead: true));
     }

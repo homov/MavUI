@@ -518,6 +518,7 @@ public class MavModalNavigationDrawer : Control
         _drawer.PointerPressed += OnDragPressed;
         _drawer.PointerMoved += OnDragMoved;
         _drawer.PointerReleased += OnDragReleased;
+        _drawer.PointerCaptureLost += (_, _) => _dragging = false;
     }
 
     protected override Size MeasureOverride(Size availableSize) => default;
@@ -619,6 +620,14 @@ public class MavModalNavigationDrawer : Control
     private void OnDragMoved(object? sender, PointerEventArgs e)
     {
         if (!_dragging) return;
+
+        // Drag only while the button is really held. A release outside the drawer (for example on the
+        // scrim) is never seen by it, so the drag must not survive into plain mouse movement.
+        if (!e.GetCurrentPoint(_drawer).Properties.IsLeftButtonPressed)
+        {
+            _dragging = false;
+            return;
+        }
         var curX = e.GetPosition(_drawer.Parent as Visual).X;
         var dx = Math.Min(0, curX - _dragStartX);
         if (dx < -6)
