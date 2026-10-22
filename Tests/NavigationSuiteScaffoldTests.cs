@@ -3,6 +3,7 @@ using Avalonia.Headless.XUnit;
 using Avalonia.Threading;
 using Mav;
 using Mav.Controls;
+using Mav.Platform;
 using Xunit;
 
 namespace Mav.Tests;
@@ -68,6 +69,12 @@ public class NavigationSuiteScaffoldTests
 
         scaffold.OpenNavigationMenu();
         Dispatcher.UIThread.RunJobs();
+        Assert.True(MavOverlay.HasActiveOverlay);
+
+        // The drawer is an overlay in static lists; close it so later tests start clean.
+        while (MavOverlay.TryDismissTop()) { }
+        Dispatcher.UIThread.RunJobs();
+        Assert.False(MavOverlay.HasActiveOverlay);
 
         window.Close();
     }
