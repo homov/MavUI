@@ -295,6 +295,9 @@ public class MavSplitView : MavContentView, IMavDraggableControl
         var compact = width < CompactBreakpoint;
         if (compact == _isCompact) return;
         _isCompact = compact;
+        // An open drawer would cover the detail content with its scrim as soon as the window gets narrow.
+        // Closed on entry to compact mode, open again when the inline pane returns.
+        IsPaneOpen = !compact;
         SyncContent();
         SyncLayout();
         CompactModeChanged?.Invoke(this, _isCompact);
