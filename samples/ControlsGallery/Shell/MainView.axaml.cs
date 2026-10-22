@@ -2,8 +2,10 @@ using System.Globalization;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.VisualTree;
 using Mav;
 using Mav.Controls;
+using Mav.Platform;
 using Mav.Theming;
 
 namespace Mav.ControlsGallery.Shell;
@@ -29,6 +31,10 @@ public partial class MainView : UserControl
     {
         InitializeComponent();
 
+        // Without a window template (browser, mobile) the top level has no overlay layer, so the
+        // overlays (snackbars, dialogs, menus) would silently not show. This host takes them instead.
+        MavOverlay.RegisterHost(this, OverlayHost);
+
         Page.AddAction(MavIcons.DarkMode, () => MavTheme.ToggleDark(), "Toggle dark mode");
         Page.AddAction(MavIcons.Globe, ToggleLanguage, "Change language");
         Page.AddAction(MavIcons.Info, ShowAbout, "About this gallery");
@@ -39,6 +45,12 @@ public partial class MainView : UserControl
         // Navigation labels are plain strings, so the navigation is rebuilt on language changes.
         MavLocalization.Observe(this, view => view.RebuildNavigation());
         Select(DefaultDestination);
+    }
+
+    protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        base.OnDetachedFromVisualTree(e);
+        MavOverlay.UnregisterHost(this);
     }
 
     private void RebuildNavigation()

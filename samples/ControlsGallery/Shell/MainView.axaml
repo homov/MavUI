@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mav="https://where.it/mav"
              x:Class="Mav.ControlsGallery.Shell.MainView">
+  <Grid>
   <mav:MavContentPage x:Name="Page"
                       Title="{mav:Loc Shell.Title, Fallback=Control Gallery}"
                       Subtitle="{mav:Loc Shell.Subtitle, Fallback=Every Mav control\, grouped by purpose}">
@@ -20,4 +21,7 @@
                       VerticalContentAlignment="Stretch" />
     </Grid>
   </mav:MavContentPage>
+  <!-- Overlay host: snackbars, dialogs and menus are added here when the top level has no overlay layer (browser, mobile). -->
+  <Panel x:Name="OverlayHost" />
+  </Grid>
 </UserControl>
