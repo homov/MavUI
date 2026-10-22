@@ -1,2 +1,2 @@
-500 x MdButton, background change (render only): median 0.26 ms
-500 x MdButton, padding change (layout): median 4.84 ms
+500 x MdButton, background change (render only): median 0.18 ms
+500 x MdButton, padding change (layout): median 1.92 ms
