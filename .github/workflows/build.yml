@@ -52,7 +52,7 @@ jobs:
         run: |
           set -o pipefail
           dotnet workload install android wasm-tools 2>&1 | tee -a build.log
-          dotnet build MavUI.Essentials/MavUI.Essentials.csproj -c Release -p:IncludeAndroid=true 2>&1 | tee -a build.log
+          dotnet build MavUI.Essentials/MavUI.Essentials.csproj -c Release -p:IncludeAndroid=true -p:IncludeBrowser=true 2>&1 | tee -a build.log
           dotnet build samples/ControlsGallery/ControlsGallery.Android/ControlsGallery.Android.csproj -c Release 2>&1 | tee -a build.log
           dotnet build samples/ControlsGallery/ControlsGallery.Browser/ControlsGallery.Browser.csproj -c Release 2>&1 | tee -a build.log
 

@@ -20,6 +20,15 @@ public static class MavEssentials
         MavPreferences.SetDefault(new Mav.Essentials.Droid.AndroidSharedPreferences(app));
         MavSecureStorage.SetDefault(new Mav.Essentials.Droid.AndroidKeystoreSecureStorage(app));
     }
+#elif BROWSER
+    /// <summary>
+    /// Registers localStorage-backed Preferences. SecureStorage has no protected browser store, so it stays
+    /// unregistered and fails closed; see the library notes before storing credentials in a browser app.
+    /// </summary>
+    public static void Initialize()
+    {
+        MavPreferences.SetDefault(new Mav.Essentials.Browser.BrowserLocalStoragePreferences());
+    }
 #else
     /// <summary>Registers the SecureStorage backend for the current desktop platform.</summary>
     public static void Initialize()
