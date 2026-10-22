@@ -54,18 +54,22 @@ public class ControlsGalleryShellTests
     }
 
     [AvaloniaFact]
-    public void Feedback_page_snackbar_appears_when_anchored_to_the_page()
+    public void Feedback_page_snackbar_appears_in_the_shell_overlay()
     {
-        var page = new FeedbackPage();
-        var window = new Window { Width = 1200, Height = 900, Content = page };
+        // The page runs inside the shell, as in the app: the shell registers the overlay host.
+        var view = new MainView();
+        var window = new Window { Width = 1200, Height = 900, Content = view };
         window.Show();
 
         try
         {
+            var page = new FeedbackPage();
+            view.GetVisualDescendants().OfType<ContentControl>().Single(c => c.Name == "Host").Content = page;
+
             MavSnackbar.Show("Saved", anchor: page);
 
-            Assert.True(OverlayLayer.GetOverlayLayer(window) is { Children.Count: > 0 },
-                "Snackbar anchored to the Feedback page was not added to the window overlay.");
+            Assert.True(OverlayHostOf(view).Children.Count > 0,
+                "Snackbar anchored to the Feedback page did not reach the shell overlay host.");
         }
         finally
         {
