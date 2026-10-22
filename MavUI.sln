@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MavUI.Essentials.Android", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MavUI.Essentials.Windows", "MavUI.Essentials.Windows\MavUI.Essentials.Windows.csproj", "{0222D2D9-CD8B-4A90-B3DA-58F682EAEB21}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MavUI.Essentials.Linux", "MavUI.Essentials.Linux\MavUI.Essentials.Linux.csproj", "{323C2644-8A2A-4BEB-B5E3-C35938AC9FED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{0222D2D9-CD8B-4A90-B3DA-58F682EAEB21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0222D2D9-CD8B-4A90-B3DA-58F682EAEB21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0222D2D9-CD8B-4A90-B3DA-58F682EAEB21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{323C2644-8A2A-4BEB-B5E3-C35938AC9FED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{323C2644-8A2A-4BEB-B5E3-C35938AC9FED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{323C2644-8A2A-4BEB-B5E3-C35938AC9FED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{323C2644-8A2A-4BEB-B5E3-C35938AC9FED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

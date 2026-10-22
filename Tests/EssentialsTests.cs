@@ -159,3 +159,32 @@ public sealed class SecureStorageFacadeTests
         public void RemoveAll() => _values.Clear();
     }
 }
+
+public sealed class LibsecretOutputTests
+{
+    [Fact]
+    public void Parses_account_names_from_search_output()
+    {
+        const string output =
+            "[/org/freedesktop/secrets/collection/login/1]\n" +
+            "label = MavUI.Essentials secret\n" +
+            "secret = \n" +
+            "created = 2026-10-22 10:00:00\n" +
+            "attribute.service = MavUI.Essentials\n" +
+            "attribute.account = refresh-token\n" +
+            "\n" +
+            "[/org/freedesktop/secrets/collection/login/2]\n" +
+            "attribute.service = MavUI.Essentials\r\n" +
+            "attribute.account = api-key\r\n";
+
+        var accounts = LibsecretOutput.ParseAccounts(output);
+
+        Assert.Equal(new[] { "refresh-token", "api-key" }, accounts);
+    }
+
+    [Fact]
+    public void Empty_output_yields_no_accounts()
+    {
+        Assert.Empty(LibsecretOutput.ParseAccounts(""));
+    }
+}
