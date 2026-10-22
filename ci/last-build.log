@@ -1,21 +1,21 @@
 # Last build log
-commit: 6f287fb99020504552d7ef78c6a7190c235eda31
-run: https://github.com/homov/MavUI/actions/runs/39847651505
+commit: d751c0d9192255cb68f4c26acf7c5b84c30d16cd
+run: https://github.com/homov/MavUI/actions/runs/39848298010
 
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 261 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 260 ms).
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:04.75
+Time Elapsed 00:00:04.81
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 80 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials.Linux/MavUI.Essentials.Linux.csproj (in 89 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 82 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials.Linux/MavUI.Essentials.Linux.csproj (in 90 ms).
   Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.csproj (in 190 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 206 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 207 ms).
   1 of 5 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
@@ -27,9 +27,9 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:04.07
+Time Elapsed 00:00:03.98
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 278 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 282 ms).
   2 of 3 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
@@ -39,7 +39,7 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.24
+Time Elapsed 00:00:02.22
   Determining projects to restore...
   Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials.Windows/MavUI.Essentials.Windows.csproj (in 221 ms).
   1 of 2 projects are up-to-date for restore.
@@ -50,7 +50,7 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:01.40
+Time Elapsed 00:00:01.39
   Determining projects to restore...
   All projects are up-to-date for restore.
   MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
@@ -60,11 +60,19 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:01.05
+Time Elapsed 00:00:01.04
 Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/MavUI.Tests.dll (.NETCoreApp,Version=v10.0)
 VSTest version 18.0.2 (x64)
 
 Starting test execution, please wait...
 A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:03.06]     Mav.Tests.ControlsGalleryShellTests.Feedback_page_snackbar_appears_in_the_shell_overlay [FAIL]
+  Failed Mav.Tests.ControlsGalleryShellTests.Feedback_page_snackbar_appears_in_the_shell_overlay [80 ms]
+  Error Message:
+   Snackbar anchored to the Feedback page did not reach the shell overlay host.
+  Stack Trace:
+     at Mav.Tests.ControlsGalleryShellTests.Feedback_page_snackbar_appears_in_the_shell_overlay() in /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/ControlsGalleryShellTests.cs:line 71
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
 
-Passed!  - Failed:     0, Passed:   264, Skipped:     0, Total:   264, Duration: 16 s - MavUI.Tests.dll (net10.0)
+Failed!  - Failed:     1, Passed:   264, Skipped:     0, Total:   265, Duration: 16 s - MavUI.Tests.dll (net10.0)
