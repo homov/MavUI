@@ -118,6 +118,8 @@ public static class MavMotion
         Action<double> callback,
         Action? finished = null)
     {
+        // Linear easing marks endless loops (e.g. an indeterminate indicator). Those keep their
+        // full duration: reduced or disabled motion would stop the loop for no benefit.
         var isContinuousLoop = ReferenceEquals(easing, Linear);
         var scheme = MavTheme.Motion;
         double effectiveLength = length;
@@ -141,6 +143,8 @@ public static class MavMotion
             }
         }
 
+        // Nothing to animate (motion disabled, or the value is already there): apply the final
+        // value immediately, so callers still get the callback and the finished notification.
         if (effectiveLength <= 1.0 || Math.Abs(to - from) < 1e-6)
         {
             Cancel(owner, name);
@@ -162,6 +166,8 @@ public static class MavMotion
             StartTimestamp = Stopwatch.GetTimestamp(),
         };
 
+        // A new animation replaces any running one with the same owner and name. The tick list
+        // is guarded by a lock because the frame callback reads it as well.
         lock (TickList)
         {
             RemoveLocked(owner, name);

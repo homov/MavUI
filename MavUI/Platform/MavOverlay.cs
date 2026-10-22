@@ -243,8 +243,11 @@ public static class MavOverlay
         Action? onViewportChanged = null,
         Action? onClosed = null)
     {
+        // Hide the on-screen keyboard first so the overlay is positioned without it.
         MavKeyboard.Hide(anchor);
 
+        // Without an overlay layer (no top-level window known yet) the call does nothing and
+        // returns a no-op handle, so callers can always dispose the result.
         var overlayRoot = EnsureOverlayRoot(anchor);
         if (overlayRoot is null) return NoopDisposable.Instance;
 
@@ -254,6 +257,8 @@ public static class MavOverlay
             VerticalAlignment = VerticalAlignment.Stretch,
         };
 
+        // The owning page lets the handle detach the overlay when the page is removed, so the
+        // overlay cannot outlive the screen it was opened from.
         var owner = anchor as MavContentPage ?? anchor?.FindAncestorOfType<MavContentPage>();
         var handle = new OverlayHandle(
             overlayRoot,
@@ -264,6 +269,8 @@ public static class MavOverlay
             onClosed: onClosed);
         OverlayHandles.Add(handle);
 
+        // The scrim takes pointer presses so they do not reach the page underneath. With
+        // passThroughScrim the layer does not block input and only the content is interactive.
         if (!passThroughScrim)
         {
             var scrim = new Border
@@ -284,6 +291,8 @@ public static class MavOverlay
         layer.Children.Add(content);
         overlayRoot.Children.Add(layer);
 
+        // Only overlays with a tap handler can be dismissed; they join the dismiss stack, where the
+        // topmost one is closed first.
         if (onScrimTap is not null)
             DismissStack.Add(handle);
 

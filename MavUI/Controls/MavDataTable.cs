@@ -1103,6 +1103,8 @@ public class MavDataTable : MavContentView, IEnumerable<MavDataColumn>
         var page = ShowPagination
             ? Math.Clamp(CurrentPage, 0, Math.Max(0, TotalPages - 1))
             : 0;
+        // The clamped page differs from the requested one (e.g. the item count shrank),
+        // so the incremental path cannot reproduce the state; the caller rebuilds fully.
         if (page != CurrentPage && ShowPagination)
             return false;
 
@@ -1148,6 +1150,8 @@ public class MavDataTable : MavContentView, IEnumerable<MavDataColumn>
         }
 
         var keep = new HashSet<RowVisual>(desired);
+        // Rows that are no longer desired are removed from the tree. Their selection
+        // callbacks are collected first so the matching entries can be dropped in one pass.
         var staleCallbacks = new HashSet<Action<bool>>();
         foreach (var stale in _rowVisuals)
         {

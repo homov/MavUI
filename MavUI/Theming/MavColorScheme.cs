@@ -200,6 +200,9 @@ public sealed record MavColorScheme
         TonalPalette nv = core.NeutralVariant;
         TonalPalette e = core.Error;
 
+        // Contrast moves the key tones away from the default ones: a larger delta makes the
+        // light-mode tones darker and the dark-mode tones lighter, which increases the distance
+        // between each color and its on-color text.
         double delta = contrast switch
         {
             MavContrast.Medium => 6.0,
@@ -207,6 +210,8 @@ public sealed record MavColorScheme
             _ => 0.0
         };
 
+        // Tones are on the 0-100 HCT scale and the palette lookup takes whole numbers, so the
+        // fractional results of the contrast delta are rounded and clamped here.
         Color Tone(TonalPalette pal, double tone) =>
             FromArgb(pal.Tone((uint)Math.Clamp((int)Math.Round(tone), 0, 100)));
 

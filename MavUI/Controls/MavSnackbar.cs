@@ -128,6 +128,8 @@ public static class MavSnackbar
             };
             actBtn.Clicked += (_, _) =>
             {
+                // Dismiss first, then run the callback, so the callback can show a new snackbar
+                // without the old one still occupying the slot.
                 Dismiss();
                 onAction?.Invoke();
             };
