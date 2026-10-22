@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
+using System.IO;
 using System.Reflection;
 using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
@@ -40,8 +41,9 @@ public class LifecycleBenchmarks
         var after = CountThemeSubscribers();
         var alive = CollectAndCountAlive(refs);
 
-        _output.WriteLine(
-            $"[lifecycle] controls={refs.Count}, theme subscribers: baseline={baseline}, " +
+        Report(
+            "lifecycle",
+            $"controls={refs.Count}, theme subscribers: baseline={baseline}, " +
             $"while shown={peak}, after close={after}; controls still alive after GC={alive}");
 
         Assert.Equal(baseline, after);
@@ -67,13 +69,39 @@ public class LifecycleBenchmarks
         MdTheme.UseLight();
         Dispatcher.UIThread.RunJobs();
 
-        _output.WriteLine(
-            $"[theme] {refs.Count} attached controls, switch ms: " +
+        Report(
+            "theme",
+            $"{refs.Count} attached controls, switch ms: " +
             string.Join(", ", times.Select(t => t.ToString("F1"))) +
             $"; median={Median(times):F1} ms");
 
         window.Content = null;
         window.Close();
+    }
+
+    /// <summary>
+    /// VSTest does not show xUnit v3 test output in the console log, so results are
+    /// written to ci/benchmark-&lt;name&gt;.txt (published to the branch by the CI workflow).
+    /// </summary>
+    private void Report(string name, string line)
+    {
+        _output.WriteLine(line);
+        var dir = Path.Combine(FindRepoRoot(), "ci");
+        Directory.CreateDirectory(dir);
+        File.WriteAllText(Path.Combine(dir, $"benchmark-{name}.txt"), line + Environment.NewLine);
+    }
+
+    private static string FindRepoRoot()
+    {
+        var env = Environment.GetEnvironmentVariable("MD3_REPO_ROOT");
+        if (!string.IsNullOrEmpty(env))
+            return env;
+
+        var dir = new DirectoryInfo(AppContext.BaseDirectory);
+        while (dir is not null && !Directory.Exists(Path.Combine(dir.FullName, ".git")))
+            dir = dir.Parent;
+
+        return dir?.FullName ?? Directory.GetCurrentDirectory();
     }
 
     private static List<WeakReference> BuildAndShow(out Window window)
