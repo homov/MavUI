@@ -78,6 +78,35 @@ public class ControlsGalleryShellTests
         }
     }
 
+    [AvaloniaFact]
+    public void Theming_seed_colors_are_a_single_choice_group()
+    {
+        var page = new ThemingPage();
+        var window = new Window { Width = 1200, Height = 900, Content = page };
+        window.Show();
+
+        try
+        {
+            var group = page.GetVisualDescendants().OfType<MavRadioGroup>().Single();
+            var options = page.GetVisualDescendants().OfType<MavRadioButton>()
+                .Where(rb => group.GetVisualDescendants().Contains(rb))
+                .ToList();
+
+            Assert.Equal(8, options.Count);
+            Assert.Equal(1, options.Count(rb => rb.IsChecked));
+
+            group.SelectedIndex = 2;
+
+            Assert.Equal(2, group.SelectedIndex);
+            Assert.Equal(1, options.Count(rb => rb.IsChecked));
+            Assert.True(options[2].IsChecked);
+        }
+        finally
+        {
+            window.Close();
+        }
+    }
+
     private static Panel OverlayHostOf(MainView view) =>
         view.GetVisualDescendants().OfType<Panel>().Single(p => p.Name == "OverlayHost");
 }

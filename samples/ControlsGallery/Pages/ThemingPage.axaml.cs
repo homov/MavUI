@@ -59,14 +59,26 @@ public partial class ThemingPage : UserControl
             ("Rose", MavColors.Rose), ("Slate", MavColors.Slate),
         };
 
-        var seedRow = new WrapPanel();
-        foreach (var (name, color) in seeds)
+        // One seed at a time: a radio group, not independent toggles.
+        var seedGroup = new MavRadioGroup(Orientation.Horizontal);
+        for (var i = 0; i < seeds.Length; i++)
         {
-            var chip = new MavChip(MavLocalization.Get("Overview.Seed." + name, name), MavChipKind.Filter) { Icon = MavIcons.Circle };
-            chip.Clicked += (_, _) => MavTheme.Configure(seed: color);
-            chip.Margin = new Thickness(0, 0, 8, 8);
-            seedRow.Children.Add(chip);
+            var (name, color) = seeds[i];
+            seedGroup.AddOption(MavLocalization.Get("Overview.Seed." + name, name), color, selected: i == 0);
         }
+
+        seedGroup.SelectedIndexChanged += (_, index) =>
+        {
+            if (index >= 0 && index < seeds.Length)
+                MavTheme.Configure(seed: seeds[index].Color);
+        };
+
+        var seedRow = new ScrollViewer
+        {
+            HorizontalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Auto,
+            VerticalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Disabled,
+            Content = seedGroup,
+        };
 
         return Column(
             Row(
