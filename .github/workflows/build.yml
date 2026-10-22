@@ -74,11 +74,16 @@ jobs:
           fi
           wait "$TEST_PID" || true
           tail -5 "$RUNNER_TEMP/test.log"
-          if [ -s "$TRACE" ] && dotnet-trace convert --format speedscope "$TRACE"; then
-            cp "$TRACE_JSON" ci/profile/theme.speedscope.json
-            python3 tools/summarize_speedscope.py "$TRACE_JSON" 40 > ci/profile/theme-summary.txt || echo "summary failed"
+          if [ -s "$TRACE" ]; then
+            # Text report straight from the trace: top methods by exclusive (self) and inclusive time.
+            dotnet-trace report "$TRACE" topN -n 60 > ci/profile/theme-top.txt 2>&1 || true
+            dotnet-trace convert --format speedscope "$TRACE" || true
+            if [ -s "$TRACE_JSON" ]; then
+              python3 tools/summarize_speedscope.py "$TRACE_JSON" 40 > ci/profile/theme-summary.txt || true
+              python3 -c "import json;d=json.load(open('$TRACE_JSON'));print('speedscope profiles:',[(p.get('type'),len(p.get('samples',[]))) for p in d.get('profiles',[])])" >> ci/profile/profile-log.txt || true
+            fi
           else
-            echo "no trace produced or conversion failed" > ci/profile/theme-summary.txt
+            echo "no trace produced" > ci/profile/theme-top.txt
           fi
 
       - name: Upload raw profiler output (artifact only)
