@@ -2,25 +2,25 @@ using System;
 using System.Reflection;
 using Avalonia.Headless.XUnit;
 using Avalonia.Media;
-using Md3.Avalonia.Platform;
+using Mav.Platform;
 using Xunit;
 
-namespace Md3.Avalonia.Tests;
+namespace Mav.Tests;
 
 public class TextLayoutCacheTests
 {
     [AvaloniaFact]
     public void Identical_text_layout_requests_reuse_the_same_formatted_text()
     {
-        var first = MdTextMetrics.GetFormattedText(
+        var first = MavTextMetrics.GetFormattedText(
             "Label",
             14,
-            MdFonts.RobotoRegularTypeface,
+            MavFonts.RobotoRegularTypeface,
             Colors.Black);
-        var second = MdTextMetrics.GetFormattedText(
+        var second = MavTextMetrics.GetFormattedText(
             "Label",
             14,
-            MdFonts.RobotoRegularTypeface,
+            MavFonts.RobotoRegularTypeface,
             Colors.Black);
 
         Assert.Same(first, second);
@@ -29,22 +29,22 @@ public class TextLayoutCacheTests
     [AvaloniaFact]
     public void Text_layout_cache_separates_color_wrapping_and_trimming()
     {
-        var plain = MdTextMetrics.GetFormattedText(
+        var plain = MavTextMetrics.GetFormattedText(
             "Label",
             14,
-            MdFonts.RobotoRegularTypeface,
+            MavFonts.RobotoRegularTypeface,
             Colors.Black);
 
-        var colored = MdTextMetrics.GetFormattedText(
+        var colored = MavTextMetrics.GetFormattedText(
             "Label",
             14,
-            MdFonts.RobotoRegularTypeface,
+            MavFonts.RobotoRegularTypeface,
             Colors.Red);
 
-        var wrapped = MdTextMetrics.GetFormattedText(
+        var wrapped = MavTextMetrics.GetFormattedText(
             "Label",
             14,
-            MdFonts.RobotoRegularTypeface,
+            MavFonts.RobotoRegularTypeface,
             Colors.Black,
             maxTextWidth: 40,
             maxLineCount: 1,
@@ -58,9 +58,9 @@ public class TextLayoutCacheTests
     public void Wrap_widths_within_one_step_share_the_same_layout()
     {
         // Resizing or animating a width by a fraction of a step must not create a new layout.
-        var a = MdTextMetrics.GetFormattedText("Wrapped label", 14, MdFonts.RobotoRegularTypeface,
+        var a = MavTextMetrics.GetFormattedText("Wrapped label", 14, MavFonts.RobotoRegularTypeface,
             Colors.Black, maxTextWidth: 101.0, maxLineCount: 2);
-        var b = MdTextMetrics.GetFormattedText("Wrapped label", 14, MdFonts.RobotoRegularTypeface,
+        var b = MavTextMetrics.GetFormattedText("Wrapped label", 14, MavFonts.RobotoRegularTypeface,
             Colors.Black, maxTextWidth: 102.5, maxLineCount: 2);
 
         Assert.Same(a, b);
@@ -70,9 +70,9 @@ public class TextLayoutCacheTests
     [AvaloniaFact]
     public void Width_cache_is_cleared_when_the_font_manager_changes()
     {
-        MdTextMetrics.MeasureWidth("Measured", 14);
+        MavTextMetrics.MeasureWidth("Measured", 14);
 
-        var cacheField = typeof(MdTextMetrics).GetField(
+        var cacheField = typeof(MavTextMetrics).GetField(
             "WidthCache", BindingFlags.Static | BindingFlags.NonPublic);
         Assert.NotNull(cacheField);
         var cache = cacheField.GetValue(null)!;
@@ -80,12 +80,12 @@ public class TextLayoutCacheTests
         Assert.True((int)countProperty.GetValue(cache)! > 0);
 
         // Simulate a host replacing (or losing) the FontManager whose widths were cached.
-        var fontManagerField = typeof(MdTextMetrics).GetField(
+        var fontManagerField = typeof(MavTextMetrics).GetField(
             "_fontManager", BindingFlags.Static | BindingFlags.NonPublic);
         Assert.NotNull(fontManagerField);
         fontManagerField.SetValue(null, new WeakReference<FontManager>(null!));
 
-        var width = MdTextMetrics.MeasureWidth("Measured", 14);
+        var width = MavTextMetrics.MeasureWidth("Measured", 14);
         Assert.True(width > 0);
         var count = (int)countProperty.GetValue(cache)!;
         Assert.True(count == 1, $"width cache was not invalidated (count {count})");

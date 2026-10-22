@@ -1,9 +1,9 @@
 using Avalonia;
 using Avalonia.Browser;
-using Md3.Avalonia;
-using Md3.Avalonia.Theming;
+using Mav;
+using Mav.Theming;
 
-namespace Md3.Gallery.Browser;
+namespace Mav.Gallery.Browser;
 
 internal static class Program
 {
@@ -11,12 +11,12 @@ internal static class Program
         BuildAvaloniaApp().StartBrowserAppAsync("out");
 
     public static AppBuilder BuildAvaloniaApp() =>
-        AppBuilder.Configure<Md3.Gallery.GalleryApp>()
+        AppBuilder.Configure<Mav.Gallery.GalleryApp>()
             .UseBrowser()
-            .UseMd3(options =>
+            .UseMav(options =>
             {
-                options.SeedColor = MdColors.Indigo;
-                options.Mode = MdThemeMode.System;
+                options.SeedColor = MavColors.Indigo;
+                options.Mode = MavThemeMode.System;
             })
             .LogToTrace();
 }

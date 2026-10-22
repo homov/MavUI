@@ -2,12 +2,12 @@ using Avalonia.Controls;
 using Avalonia;
 using Avalonia.Layout;
 using Avalonia.Media;
-using Md3.Avalonia;
-using Md3.Avalonia.Controls;
-using Md3.Avalonia.Primitives;
-using Md3.Avalonia.Theming;
+using Mav;
+using Mav.Controls;
+using Mav.Primitives;
+using Mav.Theming;
 
-namespace Md3.Gallery;
+namespace Mav.Gallery;
 
 internal static class OverviewPage
 {
@@ -25,51 +25,51 @@ internal static class OverviewPage
     private static Control Hero()
     {
         var stack = new StackPanel { Spacing = 10 };
-        stack.Children.Add(new MdLabel
+        stack.Children.Add(new MavLabel
         {
             Text = "Material Design 3 for Avalonia",
-            Role = MdTypeRole.DisplaySmall,
+            Role = MavTypeRole.DisplaySmall,
             TextWrapping = TextWrapping.Wrap,
         });
-        stack.Children.Add(new MdLabel
+        stack.Children.Add(new MavLabel
         {
             Text = "A pure C# control library: no AXAML templates, no Avalonia control theme and no " +
                    "resource dictionaries. The same controls run on desktop, in the browser and on Android.",
-            Role = MdTypeRole.BodyLarge,
+            Role = MavTypeRole.BodyLarge,
             Secondary = true,
             TextWrapping = TextWrapping.Wrap,
         });
 
         stack.Children.Add(GalleryUi.Row(
-            new MdChip("Desktop", MdChipKind.Assist, MdIcons.DesktopWindows),
-            new MdChip("WebAssembly", MdChipKind.Assist, MdIcons.Language),
-            new MdChip("Android phone", MdChipKind.Assist, MdIcons.Smartphone),
-            new MdChip("Tablet", MdChipKind.Assist, MdIcons.Tablet)));
+            new MavChip("Desktop", MavChipKind.Assist, MavIcons.DesktopWindows),
+            new MavChip("WebAssembly", MavChipKind.Assist, MavIcons.Language),
+            new MavChip("Android phone", MavChipKind.Assist, MavIcons.Smartphone),
+            new MavChip("Tablet", MavChipKind.Assist, MavIcons.Tablet)));
 
-        return new MdCard(MdCardVariant.Filled, stack) { CardPadding = new Thickness(24) };
+        return new MavCard(MavCardVariant.Filled, stack) { CardPadding = new Thickness(24) };
     }
 
     private static Control ThemeControls()
     {
         var seedColors = new (string Name, Color Color)[]
         {
-            ("Indigo", MdColors.Indigo),
-            ("Purple", MdColors.Purple),
-            ("Blue", MdColors.Blue),
-            ("Teal", MdColors.Teal),
-            ("Green", MdColors.Green),
-            ("Orange", MdColors.Orange),
-            ("Rose", MdColors.Rose),
+            ("Indigo", MavColors.Indigo),
+            ("Purple", MavColors.Purple),
+            ("Blue", MavColors.Blue),
+            ("Teal", MavColors.Teal),
+            ("Green", MavColors.Green),
+            ("Orange", MavColors.Orange),
+            ("Rose", MavColors.Rose),
         };
 
         var seeds = GalleryUi.Row();
         foreach (var (name, color) in seedColors)
         {
-            var chip = new MdChip(name, MdChipKind.Filter)
+            var chip = new MavChip(name, MavChipKind.Filter)
             {
-                Icon = MdIcons.Circle,
+                Icon = MavIcons.Circle,
             };
-            chip.Clicked += (_, _) => MdTheme.Configure(seed: color);
+            chip.Clicked += (_, _) => MavTheme.Configure(seed: color);
             ((WrapPanel)seeds).Children.Add(chip);
         }
 
@@ -77,39 +77,39 @@ internal static class OverviewPage
             "Theme",
             "Mode, seed color, contrast, density, motion and shape scale are global; change them and every control updates.",
             GalleryUi.Row(
-                GalleryUi.Button("Light", MdButtonVariant.Outlined, MdIcons.LightMode, MdTheme.UseLight),
-                GalleryUi.Button("Dark", MdButtonVariant.Outlined, MdIcons.DarkMode, MdTheme.UseDark),
-                GalleryUi.Button("System", MdButtonVariant.Outlined, MdIcons.SettingsBrightness, MdTheme.UseSystemMode)),
+                GalleryUi.Button("Light", MavButtonVariant.Outlined, MavIcons.LightMode, MavTheme.UseLight),
+                GalleryUi.Button("Dark", MavButtonVariant.Outlined, MavIcons.DarkMode, MavTheme.UseDark),
+                GalleryUi.Button("System", MavButtonVariant.Outlined, MavIcons.SettingsBrightness, MavTheme.UseSystemMode)),
             seeds,
             GalleryUi.Row(
-                GalleryUi.Button("Standard contrast", MdButtonVariant.Tonal, null,
-                    () => MdTheme.Configure(contrast: MdContrast.Standard)),
-                GalleryUi.Button("Medium", MdButtonVariant.Tonal, null,
-                    () => MdTheme.Configure(contrast: MdContrast.Medium)),
-                GalleryUi.Button("High", MdButtonVariant.Tonal, null,
-                    () => MdTheme.Configure(contrast: MdContrast.High))),
+                GalleryUi.Button("Standard contrast", MavButtonVariant.Tonal, null,
+                    () => MavTheme.Configure(contrast: MavContrast.Standard)),
+                GalleryUi.Button("Medium", MavButtonVariant.Tonal, null,
+                    () => MavTheme.Configure(contrast: MavContrast.Medium)),
+                GalleryUi.Button("High", MavButtonVariant.Tonal, null,
+                    () => MavTheme.Configure(contrast: MavContrast.High))),
             GalleryUi.Row(
-                GalleryUi.Button("Comfortable", MdButtonVariant.Text, null,
-                    () => MdTheme.Configure(density: MdDensity.Comfortable)),
-                GalleryUi.Button("Compact", MdButtonVariant.Text, null,
-                    () => MdTheme.Configure(density: MdDensity.Compact)),
-                GalleryUi.Button("Dense", MdButtonVariant.Text, null,
-                    () => MdTheme.Configure(density: MdDensity.Dense))),
+                GalleryUi.Button("Comfortable", MavButtonVariant.Text, null,
+                    () => MavTheme.Configure(density: MavDensity.Comfortable)),
+                GalleryUi.Button("Compact", MavButtonVariant.Text, null,
+                    () => MavTheme.Configure(density: MavDensity.Compact)),
+                GalleryUi.Button("Dense", MavButtonVariant.Text, null,
+                    () => MavTheme.Configure(density: MavDensity.Dense))),
             GalleryUi.Row(
-                GalleryUi.Button("Expressive motion", MdButtonVariant.Outlined, null,
-                    () => MdTheme.Configure(motion: MdMotionScheme.Expressive)),
-                GalleryUi.Button("Standard", MdButtonVariant.Outlined, null,
-                    () => MdTheme.Configure(motion: MdMotionScheme.Standard)),
-                GalleryUi.Button("Reduced", MdButtonVariant.Outlined, null,
-                    () => MdTheme.Configure(motion: MdMotionScheme.Reduced))));
+                GalleryUi.Button("Expressive motion", MavButtonVariant.Outlined, null,
+                    () => MavTheme.Configure(motion: MavMotionScheme.Expressive)),
+                GalleryUi.Button("Standard", MavButtonVariant.Outlined, null,
+                    () => MavTheme.Configure(motion: MavMotionScheme.Standard)),
+                GalleryUi.Button("Reduced", MavButtonVariant.Outlined, null,
+                    () => MavTheme.Configure(motion: MavMotionScheme.Reduced))));
     }
 
     private static Control Typography()
     {
         var stack = new StackPanel { Spacing = 4 };
-        foreach (var role in Enum.GetValues<MdTypeRole>())
+        foreach (var role in Enum.GetValues<MavTypeRole>())
         {
-            stack.Children.Add(new MdLabel
+            stack.Children.Add(new MavLabel
             {
                 Text = $"{role} — The quick brown fox",
                 Role = role,
@@ -122,15 +122,15 @@ internal static class OverviewPage
 
     private static Control ColorRoles()
     {
-        var roles = new MdColorRole[]
+        var roles = new MavColorRole[]
         {
-            MdColorRole.Primary, MdColorRole.Secondary, MdColorRole.Tertiary,
-            MdColorRole.Error, MdColorRole.Surface, MdColorRole.SurfaceVariant,
-            MdColorRole.SurfaceContainerLow, MdColorRole.SurfaceContainer,
-            MdColorRole.SurfaceContainerHigh, MdColorRole.SurfaceContainerHighest,
-            MdColorRole.Outline, MdColorRole.InverseSurface,
-            MdColorRole.PrimaryContainer, MdColorRole.SecondaryContainer,
-            MdColorRole.TertiaryContainer, MdColorRole.ErrorContainer,
+            MavColorRole.Primary, MavColorRole.Secondary, MavColorRole.Tertiary,
+            MavColorRole.Error, MavColorRole.Surface, MavColorRole.SurfaceVariant,
+            MavColorRole.SurfaceContainerLow, MavColorRole.SurfaceContainer,
+            MavColorRole.SurfaceContainerHigh, MavColorRole.SurfaceContainerHighest,
+            MavColorRole.Outline, MavColorRole.InverseSurface,
+            MavColorRole.PrimaryContainer, MavColorRole.SecondaryContainer,
+            MavColorRole.TertiaryContainer, MavColorRole.ErrorContainer,
         };
 
         var panel = new WrapPanel();
@@ -142,13 +142,13 @@ internal static class OverviewPage
 
         return GalleryUi.Section(
             "Color roles",
-            "Role-based colors from MdTheme.ColorOf / MdTheme.BrushOf; they follow the current scheme.",
+            "Role-based colors from MavTheme.ColorOf / MavTheme.BrushOf; they follow the current scheme.",
             panel);
     }
 
     private static Control ShapeAndElevation()
     {
-        var shape = MdTheme.Current.Shape;
+        var shape = MavTheme.Current.Shape;
         var radii = new (string Name, double Value)[]
         {
             ("ExtraSmall", shape.ExtraSmall),
@@ -168,11 +168,11 @@ internal static class OverviewPage
                 Height = 64,
                 Margin = new Thickness(0, 0, 8, 8),
                 CornerRadius = new CornerRadius(radius),
-                Background = MdTheme.BrushOf(MdTheme.ColorOf(MdColorRole.PrimaryContainer)),
-                Child = new MdLabel
+                Background = MavTheme.BrushOf(MavTheme.ColorOf(MavColorRole.PrimaryContainer)),
+                Child = new MavLabel
                 {
                     Text = name,
-                    Role = MdTypeRole.LabelSmall,
+                    Role = MavTypeRole.LabelSmall,
                     HorizontalAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
                 },
@@ -182,18 +182,18 @@ internal static class OverviewPage
         var elevations = new WrapPanel();
         for (var level = 0; level <= 5; level++)
         {
-            var surface = new MdSurface
+            var surface = new MavSurface
             {
                 Width = 120,
                 Height = 72,
                 Margin = new Thickness(0, 0, 8, 8),
                 Radius = 12,
                 Elevation = level,
-                FillColor = MdTheme.ColorOf(MdColorRole.SurfaceContainerLow),
-                Content = new MdLabel
+                FillColor = MavTheme.ColorOf(MavColorRole.SurfaceContainerLow),
+                Content = new MavLabel
                 {
                     Text = $"Level {level}",
-                    Role = MdTypeRole.LabelSmall,
+                    Role = MavTypeRole.LabelSmall,
                     HorizontalAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
                 },
@@ -203,7 +203,7 @@ internal static class OverviewPage
 
         return GalleryUi.Section(
             "Shape and elevation",
-            "Shape tokens scale with MdShapeScale; elevation uses two-layer MD3 shadows.",
+            "Shape tokens scale with MavShapeScale; elevation uses two-layer MD3 shadows.",
             shapes,
             elevations);
     }
@@ -212,11 +212,11 @@ internal static class OverviewPage
     {
         return GalleryUi.Section(
             "Motion",
-            "Durations and easings from MdMotion; MdMotionScheme can be Standard, Expressive, Reduced or None.",
+            "Durations and easings from MavMotion; MavMotionScheme can be Standard, Expressive, Reduced or None.",
             GalleryUi.Row(
-                new MdChip("Short 50–200 ms", MdChipKind.Assist),
-                new MdChip("Medium 250–400 ms", MdChipKind.Assist),
-                new MdChip("Long 450–600 ms", MdChipKind.Assist),
-                new MdChip("ExtraLong 700–1000 ms", MdChipKind.Assist)));
+                new MavChip("Short 50–200 ms", MavChipKind.Assist),
+                new MavChip("Medium 250–400 ms", MavChipKind.Assist),
+                new MavChip("Long 450–600 ms", MavChipKind.Assist),
+                new MavChip("ExtraLong 700–1000 ms", MavChipKind.Assist)));
     }
 }

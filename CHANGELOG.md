@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to **Md3.Avalonia**.
+All notable changes to **Mav**.
 
 ## Versioning policy
 
@@ -17,38 +17,38 @@ All notable changes to **Md3.Avalonia**.
 
 ### Changed
 
-- Incremental `CollectionChanged` handling in `MdList` and `MdDataTable`: `Add`, `Remove`,
+- Incremental `CollectionChanged` handling in `MavList` and `MavDataTable`: `Add`, `Remove`,
   `Replace` and `Move` reuse unaffected controls, preserve selection and scroll offset;
   `Reset` keeps the full rebuild path.
 - Arc, donut and outlined text-field geometry is cached per control instead of being rebuilt
   on every render pass.
-- `MdOverlay` prunes dead host registrations and releases dismissables bound to a closed
+- `MavOverlay` prunes dead host registrations and releases dismissables bound to a closed
   top-level; `PushDismissable` accepts an optional top-level.
-- `IMdThemeService` now implements `IDisposable`. `MdTextMetrics` invalidates both text caches
+- `IMavThemeService` now implements `IDisposable`. `MavTextMetrics` invalidates both text caches
   when the `FontManager` changes.
-- `MdOverlay.Show`/`ShowAnchoredPopup` accept an optional `onClosed` callback that fires once
-  after the handle releases its layer and callbacks; `MdSnackbar`/`MdTooltip` use it to clear
+- `MavOverlay.Show`/`ShowAnchoredPopup` accept an optional `onClosed` callback that fires once
+  after the handle releases its layer and callbacks; `MavSnackbar`/`MavTooltip` use it to clear
   static state when an overlay is closed externally.
 - Added the round-2 optimization plan in `docs/OPTIMIZATION_PLAN_2.md` (lifecycle, `_wired*`
   cleanup, app-bar/keyboard detach, bulk list/table/tree, text-field hot path).
-- Collection controls now use internal `MdItemEventWiring` for item change events; removed
+- Collection controls now use internal `MavItemEventWiring` for item change events; removed
   and replaced items are unsubscribed and detached from their logical/visual parent.
-- `MdList` keeps its Fenwick height index in a growable list: appends and tail removals are
+- `MavList` keeps its Fenwick height index in a growable list: appends and tail removals are
   amortized O(log n), middle edits rebuild once, and realization no longer scans children by
   index. Single append/tail-remove on a non-virtualized list updates only the affected rows;
   divider sync is skipped during realization and changes properties only when needed.
-- `MdTopAppBar` subscribes to an external `ScrollViewer` only while attached.
-  `MdKeyboardAvoidingHost` keeps its last focused field weakly, and `MdTheme.Observe`
+- `MavTopAppBar` subscribes to an external `ScrollViewer` only while attached.
+  `MavKeyboardAvoidingHost` keeps its last focused field weakly, and `MavTheme.Observe`
   no longer roots views from its static `Changed` subscription.
-- `MdDataTable` indexes rendered rows by source item, takes a direct append/tail-remove/
+- `MavDataTable` indexes rendered rows by source item, takes a direct append/tail-remove/
   replace path for unsorted, unfiltered, non-paginated tables, prunes selection in O(S+N),
   and updates only the affected row when an `INotifyPropertyChanged` item changes.
   Item property subscriptions are attached only while the table is in the visual tree.
-- `MdTreeView` caches one row per `MdTreeNode`, reuses the common child prefix on
+- `MavTreeView` caches one row per `MavTreeNode`, reuses the common child prefix on
   expansion/collapse/filter changes, invalidates only changed nodes, and computes filter
   visibility in a single memoized pass. Selection, scroll offset and expanded state are
   preserved.
-- `MdTextField`/`MdTextArea` consolidate state updates into one `ApplyTheme` call and skip
+- `MavTextField`/`MavTextArea` consolidate state updates into one `ApplyTheme` call and skip
   it when the theme, error/focus/enabled state and floating-label state are unchanged.
   Text width and outlined-notch geometry remain cached.
 
@@ -73,23 +73,23 @@ Android (API 37 emulator and a real Android 15 device) and WebAssembly (gallery)
 - Material 3 theming: HCT color engine, seed colors, light/dark/dynamic schemes, contrast
   levels, 15-role typography scale, shape/elevation/state/motion tokens, live theme changes.
 - Embedded fonts: Roboto, Material Symbols Rounded, classic Material Icons and
-  Material Design Icons in three presets (`all`, `no-mdi`, `minimal`); `MdIcons` exposes
+  Material Design Icons in three presets (`all`, `no-mdi`, `minimal`); `MavIcons` exposes
   ~10,800 glyph constants with automatic font selection.
-- Overlay system (`MdOverlay`): dialogs, menus, popovers, rich tooltips, bottom/side
+- Overlay system (`MavOverlay`): dialogs, menus, popovers, rich tooltips, bottom/side
   sheets and snackbars with a dismissal stack, owner-page awareness and a fallback host
   for navigation pages.
-- Navigation: `MdNavigationPage` with its own page stack, chrome refresh, back gestures,
+- Navigation: `MavNavigationPage` with its own page stack, chrome refresh, back gestures,
   safe-area handling and keyboard-aware layout.
 - Localization 2.0: providers (`ResourceManager`, `Chained`, `Delegate`), `SetCulture`,
   `Observe`/`Localize`, `Keys`/`Format`, AXAML `{md:Loc}` markup extension and attached
   properties.
-- Performance: virtualized `MdList` sources in a `ScrollViewer`, chunked `MdDataTable`
+- Performance: virtualized `MavList` sources in a `ScrollViewer`, chunked `MavDataTable`
   rows with responsive compact/card mode, trimming and AOT compatibility.
 - Adaptive Control Gallery for desktop, browser and Android, plus the desktop/Android demo
   hosts.
-- `MdCarousel.Layout`: four distinct layouts — `Hero`, `CenterAligned`, `MultiBrowse` and
+- `MavCarousel.Layout`: four distinct layouts — `Hero`, `CenterAligned`, `MultiBrowse` and
   `Uncontained` (previously the property was a no-op).
-- `MdSplitView.InitialRatio`: initial pane width as a fraction of the control width; it is
+- `MavSplitView.InitialRatio`: initial pane width as a fraction of the control width; it is
   applied once on the first layout, clamped to `MinPaneWidth`/`MaxPaneWidth`, and an
   explicit `PaneWidth` takes priority (previously the property was unused).
 - Accessibility helpers (contrast utilities, automation properties) and edge-zone back
@@ -98,7 +98,7 @@ Android (API 37 emulator and a real Android 15 device) and WebAssembly (gallery)
 
 ### Changed
 
-- Keyboard insets from `MdKeyboardAvoidingHost.SimulatedKeyboardHeight` are contributed
+- Keyboard insets from `MavKeyboardAvoidingHost.SimulatedKeyboardHeight` are contributed
   only while the host is attached to the visual tree; the effective overlay inset is the
   maximum across attached hosts.
 - Overlay root size follows the `TopLevel` client size, so the scrim covers the whole

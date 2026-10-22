@@ -1,4 +1,4 @@
-# Md3.Avalonia documentation
+# Mav documentation
 
 Project documentation and verification screenshots live here.
 
@@ -17,20 +17,20 @@ Project documentation and verification screenshots live here.
 
 ## Repository layout
 
-- `Md3.Avalonia/` — the library.
+- `MavUI/` — the library.
 - `Tests/` — headless xUnit tests.
 - `CHANGELOG.md` — versions and notable changes.
 - `samples/` — runnable hosts:
   - `Demo/` and `Demo.Android/`
   - `Gallery/`, `Gallery.Browser/` and `Gallery.Android/`
-- `Md3.sln` — solution with the library, tests and all sample hosts.
+- `MavUI.sln` — solution with the library, tests and all sample hosts.
 - `tools/` — Linux/Windows GUI automation helpers.
 - `ref/` — external Avalonia source/reference checkout.
 
 ## Quick start
 
 ```bash
-dotnet build Md3.sln
-dotnet test Tests/Md3.Avalonia.Tests.csproj
-dotnet run --project samples/Gallery/Md3.Gallery.csproj
+dotnet build MavUI.sln
+dotnet test Tests/MavUI.Tests.csproj
+dotnet run --project samples/Gallery/Mav.Gallery.csproj
 ```

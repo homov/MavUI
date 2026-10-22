@@ -4,10 +4,10 @@ using Android.OS;
 using Android.Runtime;
 using Avalonia;
 using Avalonia.Android;
-using Md3.Avalonia;
-using Md3.Avalonia.Theming;
+using Mav;
+using Mav.Theming;
 
-namespace Md3.Demo.Android;
+namespace Mav.Demo.Android;
 
 [Application]
 public sealed class MainApplication : AvaloniaAndroidApplication<MobileApp>
@@ -19,18 +19,18 @@ public sealed class MainApplication : AvaloniaAndroidApplication<MobileApp>
 
     protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
         => base.CustomizeAppBuilder(builder)
-            .UseMd3(options =>
+            .UseMav(options =>
             {
-                options.SeedColor = MdColors.Blue;
-                options.Mode = MdThemeMode.System;
-                options.SchemeVariant = MdSchemeVariant.TonalSpot;
+                options.SeedColor = MavColors.Blue;
+                options.Mode = MavThemeMode.System;
+                options.SchemeVariant = MavSchemeVariant.TonalSpot;
             })
             .LogToTrace();
 }
 
 [Activity(
-    Label = "Md3 Demo",
-    Theme = "@style/Md3Demo.NoActionBar",
+    Label = "Mav Demo",
+    Theme = "@style/MavDemo.NoActionBar",
     MainLauncher = true,
     Exported = true,
     ConfigurationChanges = ConfigChanges.Orientation |
@@ -38,7 +38,7 @@ public sealed class MainApplication : AvaloniaAndroidApplication<MobileApp>
         ConfigChanges.UiMode |
         ConfigChanges.Density |
         // Keep the activity alive when the locale or layout direction changes;
-        // Md3 text and templates are rebuilt from the current culture on redraw.
+        // Mav text and templates are rebuilt from the current culture on redraw.
         ConfigChanges.Locale |
         ConfigChanges.LayoutDirection)]
 public sealed class MainActivity : AvaloniaMainActivity

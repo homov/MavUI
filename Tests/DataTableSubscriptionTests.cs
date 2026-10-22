@@ -4,13 +4,13 @@ using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
 using Avalonia.Threading;
-using Md3.Avalonia.Controls;
+using Mav.Controls;
 using Xunit;
 
-namespace Md3.Avalonia.Tests;
+namespace Mav.Tests;
 
 /// <summary>
-/// Item-level PropertyChanged subscriptions in <see cref="MdDataTable"/> are reference-counted by hand
+/// Item-level PropertyChanged subscriptions in <see cref="MavDataTable"/> are reference-counted by hand
 /// (item 1.3). These tests check that repeated add/remove cycles leave no subscriptions behind.
 /// </summary>
 public class DataTableSubscriptionTests
@@ -37,7 +37,7 @@ public class DataTableSubscriptionTests
     public void Add_and_remove_cycles_leave_no_item_subscriptions()
     {
         var rows = new ObservableCollection<CountingRow>(Enumerable.Range(0, 20).Select(i => new CountingRow(i)));
-        var table = new MdDataTable { ItemsSource = rows, Layout = MdDataTableLayout.Table };
+        var table = new MavDataTable { ItemsSource = rows, Layout = MavDataTableLayout.Table };
         table.AddColumn("Index", r => ((CountingRow)r).Index, isNumeric: true);
 
         var window = new Window { Width = 500, Height = 400, Content = table };
@@ -78,7 +78,7 @@ public class DataTableSubscriptionTests
     public void Detaching_the_table_removes_every_item_subscription()
     {
         var rows = new ObservableCollection<CountingRow>(Enumerable.Range(0, 15).Select(i => new CountingRow(i)));
-        var table = new MdDataTable { ItemsSource = rows, Layout = MdDataTableLayout.Table };
+        var table = new MavDataTable { ItemsSource = rows, Layout = MavDataTableLayout.Table };
         table.AddColumn("Index", r => ((CountingRow)r).Index, isNumeric: true);
 
         var window = new Window { Width = 500, Height = 400, Content = table };

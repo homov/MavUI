@@ -4,10 +4,10 @@ using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
-using Md3.Avalonia.Controls;
+using Mav.Controls;
 using Xunit;
 
-namespace Md3.Avalonia.Tests;
+namespace Mav.Tests;
 
 public class DataTableCompactTests
 {
@@ -23,15 +23,15 @@ public class DataTableCompactTests
         public string Name { get; }
     }
 
-    private static (Window Window, MdDataTable Table) CreateHost(
+    private static (Window Window, MavDataTable Table) CreateHost(
         int count,
         double width,
-        MdDataTableLayout layout = MdDataTableLayout.Auto)
+        MavDataTableLayout layout = MavDataTableLayout.Auto)
     {
         var rows = Enumerable.Range(0, count)
             .Select(i => new Row(i, $"Row {i}"))
             .ToList();
-        var table = new MdDataTable
+        var table = new MavDataTable
         {
             ItemsSource = rows,
             Layout = layout,
@@ -45,8 +45,8 @@ public class DataTableCompactTests
         return (window, table);
     }
 
-    private static int CardCount(MdDataTable table) =>
-        table.GetVisualDescendants().OfType<MdCard>().Count();
+    private static int CardCount(MavDataTable table) =>
+        table.GetVisualDescendants().OfType<MavCard>().Count();
 
     [AvaloniaFact]
     public void Auto_uses_cards_on_a_phone_width()
@@ -54,7 +54,7 @@ public class DataTableCompactTests
         var (window, table) = CreateHost(20, width: 360);
 
         Assert.True(table.IsCompact);
-        Assert.Equal(MdDataTableLayout.Cards, table.EffectiveLayout);
+        Assert.Equal(MavDataTableLayout.Cards, table.EffectiveLayout);
         Assert.Equal(5, CardCount(table)); // default page size
 
         window.Close();
@@ -66,7 +66,7 @@ public class DataTableCompactTests
         var (window, table) = CreateHost(20, width: 900);
 
         Assert.False(table.IsCompact);
-        Assert.Equal(MdDataTableLayout.Table, table.EffectiveLayout);
+        Assert.Equal(MavDataTableLayout.Table, table.EffectiveLayout);
         Assert.Equal(0, CardCount(table));
 
         window.Close();
@@ -75,12 +75,12 @@ public class DataTableCompactTests
     [AvaloniaFact]
     public void Layout_overrides_the_breakpoint()
     {
-        var (wideWindow, wideTable) = CreateHost(10, width: 900, MdDataTableLayout.Cards);
+        var (wideWindow, wideTable) = CreateHost(10, width: 900, MavDataTableLayout.Cards);
         Assert.True(wideTable.IsCompact);
         Assert.Equal(5, CardCount(wideTable));
         wideWindow.Close();
 
-        var (narrowWindow, narrowTable) = CreateHost(10, width: 360, MdDataTableLayout.Table);
+        var (narrowWindow, narrowTable) = CreateHost(10, width: 360, MavDataTableLayout.Table);
         Assert.False(narrowTable.IsCompact);
         Assert.Equal(0, CardCount(narrowTable));
         narrowWindow.Close();
@@ -90,12 +90,12 @@ public class DataTableCompactTests
     public void Resizing_across_the_breakpoint_switches_layout()
     {
         var (window, table) = CreateHost(10, width: 900);
-        Assert.Equal(MdDataTableLayout.Table, table.EffectiveLayout);
+        Assert.Equal(MavDataTableLayout.Table, table.EffectiveLayout);
 
         window.Width = 400;
         Dispatcher.UIThread.RunJobs();
 
-        Assert.Equal(MdDataTableLayout.Cards, table.EffectiveLayout);
+        Assert.Equal(MavDataTableLayout.Cards, table.EffectiveLayout);
         Assert.True(CardCount(table) > 0);
 
         window.Close();
@@ -106,7 +106,7 @@ public class DataTableCompactTests
     {
         var (window, table) = CreateHost(10, width: 360);
 
-        var chips = table.GetVisualDescendants().OfType<MdChip>().ToList();
+        var chips = table.GetVisualDescendants().OfType<MavChip>().ToList();
         Assert.Equal(2, chips.Count);
         Assert.Contains(chips, c => c.Text == "Name");
         Assert.Contains(chips, c => c.Text == "Score");
@@ -138,7 +138,7 @@ public class DataTableCompactTests
         var rows = Enumerable.Range(0, 20)
             .Select(i => new Row(i, $"Row {i}"))
             .ToList();
-        var table = new MdDataTable
+        var table = new MavDataTable
         {
             ItemsSource = rows,
             IsSelectable = true,
@@ -150,7 +150,7 @@ public class DataTableCompactTests
         window.Show();
         Dispatcher.UIThread.RunJobs();
 
-        Assert.Equal(5, table.GetVisualDescendants().OfType<MdCheckBox>().Count());
+        Assert.Equal(5, table.GetVisualDescendants().OfType<MavCheckBox>().Count());
 
         window.Close();
     }

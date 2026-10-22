@@ -1,6 +1,6 @@
 using Avalonia.Controls.ApplicationLifetimes;
 
-namespace Md3.Gallery;
+namespace Mav.Gallery;
 
 public sealed class DesktopGalleryApp : GalleryApp
 {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <!-- Startup window color while Avalonia initializes; MdTheme takes over afterwards. -->
-  <color name="md3_demo_window_background">#F9F9FF</color>
+  <!-- Startup window color while Avalonia initializes; MavTheme takes over afterwards. -->
+  <color name="mav_demo_window_background">#F9F9FF</color>
 </resources>

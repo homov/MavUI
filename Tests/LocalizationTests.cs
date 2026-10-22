@@ -8,45 +8,45 @@ using Avalonia.Headless.XUnit;
 using Avalonia.Markup.Xaml;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
-using Md3.Avalonia;
-using Md3.Avalonia.Controls;
+using Mav;
+using Mav.Controls;
 using Xunit;
 
-namespace Md3.Avalonia.Tests;
+namespace Mav.Tests;
 
 public class LocalizationTests
 {
     [Fact]
     public void Default_provider_returns_builtins_and_null_for_unknown_keys()
     {
-        var provider = new MdLocalization.DefaultProvider();
+        var provider = new MavLocalization.DefaultProvider();
 
-        Assert.Equal("OK", provider.GetString(MdLocalization.Keys.Ok));
-        Assert.Equal("Cancel", provider.GetString(MdLocalization.Keys.Cancel));
+        Assert.Equal("OK", provider.GetString(MavLocalization.Keys.Ok));
+        Assert.Equal("Cancel", provider.GetString(MavLocalization.Keys.Cancel));
         Assert.Null(provider.GetString("NoSuchKey"));
     }
 
     [Fact]
     public void Dictionary_provider_falls_back_to_builtins()
     {
-        var provider = new MdLocalization.DictionaryProvider(
+        var provider = new MavLocalization.DictionaryProvider(
             new Dictionary<string, string>
             {
-                [MdLocalization.Keys.Ok] = "Хорошо",
+                [MavLocalization.Keys.Ok] = "Хорошо",
             });
 
-        Assert.Equal("Хорошо", provider.GetString(MdLocalization.Keys.Ok));
-        Assert.Equal("Cancel", provider.GetString(MdLocalization.Keys.Cancel));
+        Assert.Equal("Хорошо", provider.GetString(MavLocalization.Keys.Ok));
+        Assert.Equal("Cancel", provider.GetString(MavLocalization.Keys.Cancel));
         Assert.Null(provider.GetString("NoSuchKey"));
     }
 
     [Fact]
     public void Chained_provider_returns_first_non_empty_value()
     {
-        var provider = new MdLocalization.ChainedProvider(
-            new MdLocalization.DelegateProvider((key, _) =>
+        var provider = new MavLocalization.ChainedProvider(
+            new MavLocalization.DelegateProvider((key, _) =>
                 key == "First" ? "first" : null),
-            new MdLocalization.DelegateProvider((key, _) =>
+            new MavLocalization.DelegateProvider((key, _) =>
                 key == "Greeting" ? "Hello" : null));
 
         Assert.Equal("Hello", provider.GetString("Greeting"));
@@ -57,42 +57,42 @@ public class LocalizationTests
     [Fact]
     public void Get_uses_fallback_and_key_when_provider_has_no_value()
     {
-        var previous = MdLocalization.Current;
+        var previous = MavLocalization.Current;
         try
         {
-            MdLocalization.Current = new MdLocalization.DelegateProvider(
+            MavLocalization.Current = new MavLocalization.DelegateProvider(
                 (key, _) => key == "Greeting" ? "Hello" : null);
 
-            Assert.Equal("Hello", MdLocalization.Get("Greeting", "Hi"));
-            Assert.Equal("Fallback", MdLocalization.Get("Missing", "Fallback"));
-            Assert.Equal("Missing", MdLocalization.Get("Missing"));
+            Assert.Equal("Hello", MavLocalization.Get("Greeting", "Hi"));
+            Assert.Equal("Fallback", MavLocalization.Get("Missing", "Fallback"));
+            Assert.Equal("Missing", MavLocalization.Get("Missing"));
         }
         finally
         {
-            MdLocalization.Current = previous;
+            MavLocalization.Current = previous;
         }
     }
 
     [Fact]
     public void Format_uses_the_current_formatting_culture()
     {
-        var previousProvider = MdLocalization.Current;
+        var previousProvider = MavLocalization.Current;
         var previousCulture = CultureInfo.CurrentCulture;
         try
         {
-            MdLocalization.Current = new MdLocalization.DictionaryProvider(
+            MavLocalization.Current = new MavLocalization.DictionaryProvider(
                 new Dictionary<string, string>
                 {
                     ["Greeting"] = "Привет, {0}!",
                 });
-            MdLocalization.SetCulture(new CultureInfo("ru-RU"));
+            MavLocalization.SetCulture(new CultureInfo("ru-RU"));
 
-            Assert.Equal("Привет, Анна!", MdLocalization.Format("Greeting", "Hello, {0}!", "Анна"));
+            Assert.Equal("Привет, Анна!", MavLocalization.Format("Greeting", "Hello, {0}!", "Анна"));
         }
         finally
         {
-            MdLocalization.Current = previousProvider;
-            MdLocalization.SetCulture(previousCulture);
+            MavLocalization.Current = previousProvider;
+            MavLocalization.SetCulture(previousCulture);
         }
     }
 
@@ -104,9 +104,9 @@ public class LocalizationTests
         EventHandler handler = (_, _) => raised++;
         try
         {
-            MdLocalization.Changed += handler;
+            MavLocalization.Changed += handler;
 
-            MdLocalization.SetCulture(new CultureInfo("ru-RU"));
+            MavLocalization.SetCulture(new CultureInfo("ru-RU"));
 
             Assert.Equal("ru-RU", CultureInfo.CurrentUICulture.Name);
             Assert.Equal("ru-RU", CultureInfo.CurrentCulture.Name);
@@ -114,18 +114,18 @@ public class LocalizationTests
         }
         finally
         {
-            MdLocalization.Changed -= handler;
-            MdLocalization.SetCulture(previousCulture);
+            MavLocalization.Changed -= handler;
+            MavLocalization.SetCulture(previousCulture);
         }
     }
 
     [AvaloniaFact]
     public void Localize_updates_text_after_provider_change_without_event_subscription()
     {
-        var previous = MdLocalization.Current;
+        var previous = MavLocalization.Current;
         try
         {
-            MdLocalization.Current = new MdLocalization.DictionaryProvider(
+            MavLocalization.Current = new MavLocalization.DictionaryProvider(
                 new Dictionary<string, string>
                 {
                     ["Greeting"] = "Hello",
@@ -138,7 +138,7 @@ public class LocalizationTests
             window.Show();
             Dispatcher.UIThread.RunJobs();
 
-            MdLocalization.Current = new MdLocalization.DictionaryProvider(
+            MavLocalization.Current = new MavLocalization.DictionaryProvider(
                 new Dictionary<string, string>
                 {
                     ["Greeting"] = "Привет",
@@ -150,18 +150,18 @@ public class LocalizationTests
         }
         finally
         {
-            MdLocalization.Current = previous;
+            MavLocalization.Current = previous;
         }
     }
 
     [AvaloniaFact]
     public void SetCulture_refreshes_localized_text_without_event_subscription()
     {
-        var previousProvider = MdLocalization.Current;
+        var previousProvider = MavLocalization.Current;
         var previousCulture = CultureInfo.CurrentUICulture;
         try
         {
-            MdLocalization.Current = new MdLocalization.DelegateProvider(
+            MavLocalization.Current = new MavLocalization.DelegateProvider(
                 (key, culture) => key == "Greeting"
                     ? (culture?.TwoLetterISOLanguageName == "ru" ? "Привет" : "Hello")
                     : null);
@@ -173,7 +173,7 @@ public class LocalizationTests
 
             Assert.Equal("Hello", text.Text);
 
-            MdLocalization.SetCulture(new CultureInfo("ru-RU"));
+            MavLocalization.SetCulture(new CultureInfo("ru-RU"));
             Dispatcher.UIThread.RunJobs();
 
             Assert.Equal("Привет", text.Text);
@@ -181,38 +181,38 @@ public class LocalizationTests
         }
         finally
         {
-            MdLocalization.Current = previousProvider;
-            MdLocalization.SetCulture(previousCulture);
+            MavLocalization.Current = previousProvider;
+            MavLocalization.SetCulture(previousCulture);
         }
     }
 
     [AvaloniaFact]
     public void Attached_localization_key_updates_text_and_fallback()
     {
-        var previous = MdLocalization.Current;
+        var previous = MavLocalization.Current;
         try
         {
-            MdLocalization.Current = new MdLocalization.DictionaryProvider(
+            MavLocalization.Current = new MavLocalization.DictionaryProvider(
                 new Dictionary<string, string>
                 {
                     ["Greeting"] = "Hello",
                 });
 
             var text = new TextBlock();
-            MdLocalization.SetKey(text, "Greeting");
-            MdLocalization.SetFallback(text, "Hi");
+            MavLocalization.SetKey(text, "Greeting");
+            MavLocalization.SetFallback(text, "Hi");
             Assert.Equal("Hello", text.Text);
 
             var missing = new TextBlock();
-            MdLocalization.SetKey(missing, "Missing");
-            MdLocalization.SetFallback(missing, "Fallback");
+            MavLocalization.SetKey(missing, "Missing");
+            MavLocalization.SetFallback(missing, "Fallback");
             Assert.Equal("Fallback", missing.Text);
 
             var window = new Window { Width = 300, Height = 200, Content = text };
             window.Show();
             Dispatcher.UIThread.RunJobs();
 
-            MdLocalization.Current = new MdLocalization.DictionaryProvider(
+            MavLocalization.Current = new MavLocalization.DictionaryProvider(
                 new Dictionary<string, string>
                 {
                     ["Greeting"] = "Привет",
@@ -224,41 +224,41 @@ public class LocalizationTests
         }
         finally
         {
-            MdLocalization.Current = previous;
+            MavLocalization.Current = previous;
         }
     }
 
     [AvaloniaFact]
     public void Attached_localization_target_updates_a_text_field_label()
     {
-        var previous = MdLocalization.Current;
+        var previous = MavLocalization.Current;
         try
         {
-            MdLocalization.Current = new MdLocalization.DictionaryProvider(
+            MavLocalization.Current = new MavLocalization.DictionaryProvider(
                 new Dictionary<string, string>
                 {
                     ["Name"] = "Имя",
                 });
 
-            var field = new MdTextField();
-            MdLocalization.SetKey(field, "Name");
-            MdLocalization.SetTarget(field, MdLocalizationTarget.Label);
+            var field = new MavTextField();
+            MavLocalization.SetKey(field, "Name");
+            MavLocalization.SetTarget(field, MavLocalizationTarget.Label);
 
             Assert.Equal("Имя", field.Label);
         }
         finally
         {
-            MdLocalization.Current = previous;
+            MavLocalization.Current = previous;
         }
     }
 
     [AvaloniaFact]
     public void Loc_markup_extension_updates_target_property_without_event_subscription()
     {
-        var previous = MdLocalization.Current;
+        var previous = MavLocalization.Current;
         try
         {
-            MdLocalization.Current = new MdLocalization.DictionaryProvider(
+            MavLocalization.Current = new MavLocalization.DictionaryProvider(
                 new Dictionary<string, string>
                 {
                     ["Greeting"] = "Hello",
@@ -275,7 +275,7 @@ public class LocalizationTests
             window.Show();
             Dispatcher.UIThread.RunJobs();
 
-            MdLocalization.Current = new MdLocalization.DictionaryProvider(
+            MavLocalization.Current = new MavLocalization.DictionaryProvider(
                 new Dictionary<string, string>
                 {
                     ["Greeting"] = "Привет",
@@ -287,7 +287,7 @@ public class LocalizationTests
         }
         finally
         {
-            MdLocalization.Current = previous;
+            MavLocalization.Current = previous;
         }
     }
 
@@ -303,17 +303,17 @@ public class LocalizationTests
     [AvaloniaFact]
     public void LocalizeLabel_and_LocalizePlaceholder_update_fields()
     {
-        var previous = MdLocalization.Current;
+        var previous = MavLocalization.Current;
         try
         {
-            MdLocalization.Current = new MdLocalization.DictionaryProvider(
+            MavLocalization.Current = new MavLocalization.DictionaryProvider(
                 new Dictionary<string, string>
                 {
                     ["Name"] = "Имя",
                     ["Hint"] = "Введите имя",
                 });
 
-            var field = new MdTextField()
+            var field = new MavTextField()
                 .LocalizeLabel("Name")
                 .LocalizePlaceholder("Hint");
 
@@ -322,30 +322,30 @@ public class LocalizationTests
         }
         finally
         {
-            MdLocalization.Current = previous;
+            MavLocalization.Current = previous;
         }
     }
 
     [AvaloniaFact]
-    public void MdDialog_uses_current_localization_for_default_confirm_text()
+    public void MavDialog_uses_current_localization_for_default_confirm_text()
     {
-        var previous = MdLocalization.Current;
+        var previous = MavLocalization.Current;
         try
         {
-            MdLocalization.Current = new MdLocalization.DictionaryProvider(
+            MavLocalization.Current = new MavLocalization.DictionaryProvider(
                 new Dictionary<string, string>
                 {
-                    [MdLocalization.Keys.Ok] = "Хорошо",
+                    [MavLocalization.Keys.Ok] = "Хорошо",
                 });
 
-            var anchor = new MdButton("Anchor");
-            var page = new MdContentPage("Root") { Content = anchor };
-            var navigation = new MdNavigationPage(page);
+            var anchor = new MavButton("Anchor");
+            var page = new MavContentPage("Root") { Content = anchor };
+            var navigation = new MavNavigationPage(page);
             var window = new Window { Width = 400, Height = 600, Content = navigation };
             window.Show();
             Dispatcher.UIThread.RunJobs();
 
-            var dialog = new MdDialog
+            var dialog = new MavDialog
             {
                 Title = "Delete project?",
                 Message = "This cannot be undone.",
@@ -353,7 +353,7 @@ public class LocalizationTests
             dialog.Show(anchor);
             Dispatcher.UIThread.RunJobs();
 
-            var buttons = window.GetVisualDescendants().OfType<MdButton>().ToList();
+            var buttons = window.GetVisualDescendants().OfType<MavButton>().ToList();
             Assert.Contains(buttons, button => button.Text == "Хорошо");
 
             dialog.Close();
@@ -361,7 +361,7 @@ public class LocalizationTests
         }
         finally
         {
-            MdLocalization.Current = previous;
+            MavLocalization.Current = previous;
         }
     }
 }

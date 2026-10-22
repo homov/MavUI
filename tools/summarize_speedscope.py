@@ -45,10 +45,10 @@ def main():
     for name, w in self_w.most_common(top_n):
         out.append(f"{pct(w):6.2f}%  {name}")
     out.append("")
-    out.append(f"== Top {top_n} by INCLUSIVE time (Md3/Avalonia frames only)")
+    out.append(f"== Top {top_n} by INCLUSIVE time (Mav/Avalonia frames only)")
     shown = 0
     for name, w in incl_w.most_common():
-        if "Md3" in name or "Avalonia" in name:
+        if "Mav" in name or "Avalonia" in name:
             out.append(f"{pct(w):6.2f}%  {name}")
             shown += 1
             if shown >= top_n:

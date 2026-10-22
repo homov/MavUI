@@ -4,28 +4,28 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
 using Avalonia.Threading;
-using Md3.Avalonia.Controls;
+using Mav.Controls;
 using Xunit;
 
-namespace Md3.Avalonia.Tests;
+namespace Mav.Tests;
 
 public class VirtualizationTests
 {
-    private static (Window Window, MdScrollViewer Scroll, MdList List) CreateHost(
+    private static (Window Window, MavScrollViewer Scroll, MavList List) CreateHost(
         int count,
         double viewportHeight = 300)
     {
         var items = Enumerable.Range(0, count).Select(i => $"Item {i}").ToList();
-        var list = new MdList { ItemsSource = items, ShowDividers = true };
-        var scroll = new MdScrollViewer { Height = viewportHeight, Content = list };
+        var list = new MavList { ItemsSource = items, ShowDividers = true };
+        var scroll = new MavScrollViewer { Height = viewportHeight, Content = list };
         var window = new Window { Width = 400, Height = viewportHeight, Content = scroll };
         window.Show();
         Dispatcher.UIThread.RunJobs();
         return (window, scroll, list);
     }
 
-    private static int LogicalCount(MdList list) =>
-        list.Children.OfType<MdListItem>().Count();
+    private static int LogicalCount(MavList list) =>
+        list.Children.OfType<MavListItem>().Count();
 
     [AvaloniaFact]
     public void Large_items_source_realizes_only_a_window()
@@ -43,12 +43,12 @@ public class VirtualizationTests
     public void Scrolling_realizes_the_later_items()
     {
         var (window, scroll, list) = CreateHost(1000);
-        var before = list.Children.OfType<MdListItem>().Select(i => i.Headline).ToHashSet();
+        var before = list.Children.OfType<MavListItem>().Select(i => i.Headline).ToHashSet();
 
         scroll.Offset = new Vector(0, 20000);
         Dispatcher.UIThread.RunJobs();
 
-        var after = list.Children.OfType<MdListItem>().Select(i => i.Headline).ToHashSet();
+        var after = list.Children.OfType<MavListItem>().Select(i => i.Headline).ToHashSet();
         Assert.True(after.Count > 0);
         Assert.NotEqual(before, after);
 
@@ -67,9 +67,9 @@ public class VirtualizationTests
     [AvaloniaFact]
     public void Manual_items_are_all_realized()
     {
-        var list = new MdList();
+        var list = new MavList();
         for (var i = 0; i < 100; i++)
-            list.AddItem(new MdListItem($"Row {i}"));
+            list.AddItem(new MavListItem($"Row {i}"));
 
         Assert.Equal(100, list.Children.Count);
     }
@@ -78,7 +78,7 @@ public class VirtualizationTests
     public void Virtualized_dividers_follow_logical_indices()
     {
         var (window, _, list) = CreateHost(10, viewportHeight: 2000);
-        var items = list.Children.OfType<MdListItem>().ToList();
+        var items = list.Children.OfType<MavListItem>().ToList();
 
         Assert.Equal(10, items.Count);
         for (var i = 0; i < items.Count - 1; i++)
@@ -97,7 +97,7 @@ public class VirtualizationTests
         list.ItemsSource = Enumerable.Range(0, 30).Select(i => $"New {i}").ToList();
         Dispatcher.UIThread.RunJobs();
 
-        var headlines = list.Children.OfType<MdListItem>().Select(i => i.Headline).ToList();
+        var headlines = list.Children.OfType<MavListItem>().Select(i => i.Headline).ToList();
         Assert.Contains("New 0", headlines);
         Assert.DoesNotContain(headlines, h => h is not null && h.StartsWith("Item "));
 
@@ -107,25 +107,25 @@ public class VirtualizationTests
     [AvaloniaFact]
     public void Small_items_source_is_realized_eagerly_without_a_scroll_host()
     {
-        var list = new MdList
+        var list = new MavList
         {
             ItemsSource = new[] { "One", "Two", "Three" },
         };
 
         Assert.Equal(3, list.Children.Count);
-        Assert.Contains(list.Children.OfType<MdListItem>(), i => i.Headline == "Two");
+        Assert.Contains(list.Children.OfType<MavListItem>(), i => i.Headline == "Two");
     }
 
-    private static (Window Window, MdScrollViewer Scroll, MdList List, ObservableCollection<string> Items)
+    private static (Window Window, MavScrollViewer Scroll, MavList List, ObservableCollection<string> Items)
         CreateMutableHost(int count, double viewportHeight = 2000)
     {
         var items = new ObservableCollection<string>(
             Enumerable.Range(0, count).Select(i => $"Row {i}"));
-        var list = new MdList
+        var list = new MavList
         {
-            ItemFactory = item => new MdListItem((string)item),
+            ItemFactory = item => new MavListItem((string)item),
         };
-        var scroll = new MdScrollViewer { Height = viewportHeight, Content = list };
+        var scroll = new MavScrollViewer { Height = viewportHeight, Content = list };
         var window = new Window { Width = 400, Height = viewportHeight, Content = scroll };
         window.Show();
         list.ItemsSource = items;
@@ -137,12 +137,12 @@ public class VirtualizationTests
     public void Adding_an_item_keeps_unaffected_controls()
     {
         var (window, _, list, items) = CreateMutableHost(6);
-        var before = list.Children.OfType<MdListItem>().ToList();
+        var before = list.Children.OfType<MavListItem>().ToList();
 
         items.Add("Row 6");
         Dispatcher.UIThread.RunJobs();
 
-        var after = list.Children.OfType<MdListItem>().ToList();
+        var after = list.Children.OfType<MavListItem>().ToList();
         Assert.Equal(7, after.Count);
         for (var i = 0; i < before.Count; i++)
             Assert.Same(before[i], after[i]);
@@ -155,12 +155,12 @@ public class VirtualizationTests
     public void Removing_an_item_keeps_neighbours_and_reindexes_them()
     {
         var (window, _, list, items) = CreateMutableHost(6);
-        var before = list.Children.OfType<MdListItem>().ToList();
+        var before = list.Children.OfType<MavListItem>().ToList();
 
         items.RemoveAt(2);
         Dispatcher.UIThread.RunJobs();
 
-        var after = list.Children.OfType<MdListItem>().ToList();
+        var after = list.Children.OfType<MavListItem>().ToList();
         Assert.Equal(5, after.Count);
         Assert.Same(before[0], after[0]);
         Assert.Same(before[1], after[1]);
@@ -175,12 +175,12 @@ public class VirtualizationTests
     public void Replacing_an_item_rebuilds_only_that_control()
     {
         var (window, _, list, items) = CreateMutableHost(6);
-        var before = list.Children.OfType<MdListItem>().ToList();
+        var before = list.Children.OfType<MavListItem>().ToList();
 
         items[1] = "Replaced";
         Dispatcher.UIThread.RunJobs();
 
-        var after = list.Children.OfType<MdListItem>().ToList();
+        var after = list.Children.OfType<MavListItem>().ToList();
         Assert.Equal(6, after.Count);
         Assert.NotSame(before[1], after[1]);
         Assert.Equal("Replaced", after[1].Headline);
@@ -195,12 +195,12 @@ public class VirtualizationTests
     public void Moving_an_item_moves_its_control_and_keeps_others()
     {
         var (window, _, list, items) = CreateMutableHost(6);
-        var before = list.Children.OfType<MdListItem>().ToList();
+        var before = list.Children.OfType<MavListItem>().ToList();
 
         items.Move(1, 3);
         Dispatcher.UIThread.RunJobs();
 
-        var after = list.Children.OfType<MdListItem>().ToList();
+        var after = list.Children.OfType<MavListItem>().ToList();
         Assert.Equal(6, after.Count);
         Assert.Equal("Row 0", after[0].Headline);
         Assert.Equal("Row 2", after[1].Headline);
@@ -217,12 +217,12 @@ public class VirtualizationTests
     public void Bulk_appends_and_tail_removals_keep_the_height_index_in_sync()
     {
         var items = new ObservableCollection<string>();
-        var list = new MdList
+        var list = new MavList
         {
-            ItemFactory = item => new MdListItem((string)item),
+            ItemFactory = item => new MavListItem((string)item),
             ShowDividers = true,
         };
-        var scroll = new MdScrollViewer { Height = 300, Content = list };
+        var scroll = new MavScrollViewer { Height = 300, Content = list };
         var window = new Window { Width = 400, Height = 300, Content = scroll };
         window.Show();
         list.ItemsSource = items;
@@ -235,12 +235,12 @@ public class VirtualizationTests
         scroll.Offset = new Vector(0, 500 * 64);
         Dispatcher.UIThread.RunJobs();
 
-        var headlines = list.Children.OfType<MdListItem>()
+        var headlines = list.Children.OfType<MavListItem>()
             .Select(i => i.Headline)
             .ToHashSet();
         Assert.Contains("Row 499", headlines);
 
-        var realized = list.Children.OfType<MdListItem>().ToList();
+        var realized = list.Children.OfType<MavListItem>().ToList();
         Assert.False(realized[^1].ShowDivider);
         Assert.True(realized[^2].ShowDivider);
 
@@ -251,7 +251,7 @@ public class VirtualizationTests
         scroll.Offset = new Vector(0, 400 * 64);
         Dispatcher.UIThread.RunJobs();
 
-        headlines = list.Children.OfType<MdListItem>()
+        headlines = list.Children.OfType<MavListItem>()
             .Select(i => i.Headline)
             .ToHashSet();
         Assert.Contains("Row 399", headlines);

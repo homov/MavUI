@@ -8,13 +8,13 @@ using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
-using Md3.Avalonia.Controls;
-using Md3.Avalonia.Platform;
-using Md3.Avalonia.Primitives;
-using Md3.Avalonia.Theming;
+using Mav.Controls;
+using Mav.Platform;
+using Mav.Primitives;
+using Mav.Theming;
 using Xunit;
 
-namespace Md3.Avalonia.Tests;
+namespace Mav.Tests;
 
 public class LifetimeTests
 {
@@ -45,7 +45,7 @@ public class LifetimeTests
 
         CollectGarbage();
 
-        Assert.False(weak.IsAlive, "a disposed MdThemeService was kept alive by MdTheme.Changed");
+        Assert.False(weak.IsAlive, "a disposed MavThemeService was kept alive by MavTheme.Changed");
     }
 
     [AvaloniaFact]
@@ -54,14 +54,14 @@ public class LifetimeTests
         var handlesBefore = StaticListCount("OverlayHandles");
         var rootsBefore = StaticListCount("OverlayRoots");
 
-        var anchor = new MdButton("Anchor");
-        var page = new MdContentPage("Root") { Content = anchor };
-        var navigation = new MdNavigationPage(page);
+        var anchor = new MavButton("Anchor");
+        var page = new MavContentPage("Root") { Content = anchor };
+        var navigation = new MavNavigationPage(page);
         var window = new Window { Width = 480, Height = 640, Content = navigation };
         window.Show();
         Dispatcher.UIThread.RunJobs();
 
-        MdOverlay.Show(anchor, new Border { Width = 100, Height = 100 }, onScrimTap: () => { });
+        MavOverlay.Show(anchor, new Border { Width = 100, Height = 100 }, onScrimTap: () => { });
         Dispatcher.UIThread.RunJobs();
 
         Assert.Equal(handlesBefore + 1, StaticListCount("OverlayHandles"));
@@ -70,7 +70,7 @@ public class LifetimeTests
         window.Close();
         Dispatcher.UIThread.RunJobs();
 
-        Assert.False(MdOverlay.HasActiveOverlay);
+        Assert.False(MavOverlay.HasActiveOverlay);
         Assert.Equal(handlesBefore, StaticListCount("OverlayHandles"));
         Assert.Equal(rootsBefore, StaticListCount("OverlayRoots"));
     }
@@ -78,20 +78,20 @@ public class LifetimeTests
     [AvaloniaFact]
     public void Closing_an_overlay_releases_content_and_invokes_onClosed_once()
     {
-        var anchor = new MdButton("Anchor");
-        var page = new MdContentPage("Root") { Content = anchor };
+        var anchor = new MavButton("Anchor");
+        var page = new MavContentPage("Root") { Content = anchor };
         var window = new Window
         {
             Width = 480,
             Height = 640,
-            Content = new MdNavigationPage(page),
+            Content = new MavNavigationPage(page),
         };
         window.Show();
         Dispatcher.UIThread.RunJobs();
 
         var content = new Border();
         var closed = 0;
-        var handle = MdOverlay.Show(
+        var handle = MavOverlay.Show(
             anchor,
             content,
             onScrimTap: () => { },
@@ -111,40 +111,40 @@ public class LifetimeTests
     [AvaloniaFact]
     public void Externally_closed_indefinite_snackbar_clears_static_state_and_queue()
     {
-        var anchor = new MdButton("Anchor");
-        var page = new MdContentPage("Root") { Content = anchor };
+        var anchor = new MavButton("Anchor");
+        var page = new MavContentPage("Root") { Content = anchor };
         var window = new Window
         {
             Width = 480,
             Height = 640,
-            Content = new MdNavigationPage(page),
+            Content = new MavNavigationPage(page),
         };
         window.Show();
         Dispatcher.UIThread.RunJobs();
 
         try
         {
-            MdSnackbar.ClearQueue();
-            MdSnackbar.Show("pending", duration: MdSnackbarDuration.Indefinite, anchor: anchor);
+            MavSnackbar.ClearQueue();
+            MavSnackbar.Show("pending", duration: MavSnackbarDuration.Indefinite, anchor: anchor);
             Dispatcher.UIThread.RunJobs();
 
-            var active = GetStaticField<IDisposable>(typeof(MdSnackbar), "_activeHandle");
+            var active = GetStaticField<IDisposable>(typeof(MavSnackbar), "_activeHandle");
             Assert.NotNull(active);
 
             // Simulate a top-level/page teardown that disposes the overlay handle
-            // without going through MdSnackbar.Dismiss().
+            // without going through MavSnackbar.Dismiss().
             active.Dispose();
 
-            Assert.Null(GetStaticField<IDisposable>(typeof(MdSnackbar), "_activeHandle"));
-            Assert.Equal(0, MdSnackbar.QueueCount);
+            Assert.Null(GetStaticField<IDisposable>(typeof(MavSnackbar), "_activeHandle"));
+            Assert.Equal(0, MavSnackbar.QueueCount);
 
-            MdSnackbar.Show("next", duration: MdSnackbarDuration.Indefinite, anchor: anchor);
-            Assert.Equal(0, MdSnackbar.QueueCount);
-            MdSnackbar.Dismiss();
+            MavSnackbar.Show("next", duration: MavSnackbarDuration.Indefinite, anchor: anchor);
+            Assert.Equal(0, MavSnackbar.QueueCount);
+            MavSnackbar.Dismiss();
         }
         finally
         {
-            MdSnackbar.Dismiss();
+            MavSnackbar.Dismiss();
             window.Close();
         }
     }
@@ -152,59 +152,59 @@ public class LifetimeTests
     [AvaloniaFact]
     public void Closing_a_window_clears_an_active_snackbar()
     {
-        var anchor = new MdButton("Anchor");
-        var page = new MdContentPage("Root") { Content = anchor };
+        var anchor = new MavButton("Anchor");
+        var page = new MavContentPage("Root") { Content = anchor };
         var window = new Window
         {
             Width = 480,
             Height = 640,
-            Content = new MdNavigationPage(page),
+            Content = new MavNavigationPage(page),
         };
         window.Show();
         Dispatcher.UIThread.RunJobs();
 
-        MdSnackbar.ClearQueue();
-        MdSnackbar.Show("indefinite", duration: MdSnackbarDuration.Indefinite, anchor: anchor);
+        MavSnackbar.ClearQueue();
+        MavSnackbar.Show("indefinite", duration: MavSnackbarDuration.Indefinite, anchor: anchor);
         Dispatcher.UIThread.RunJobs();
-        Assert.NotNull(GetStaticField<IDisposable>(typeof(MdSnackbar), "_activeHandle"));
+        Assert.NotNull(GetStaticField<IDisposable>(typeof(MavSnackbar), "_activeHandle"));
 
         window.Close();
         Dispatcher.UIThread.RunJobs();
 
-        Assert.Null(GetStaticField<IDisposable>(typeof(MdSnackbar), "_activeHandle"));
-        Assert.Equal(0, MdSnackbar.QueueCount);
+        Assert.Null(GetStaticField<IDisposable>(typeof(MavSnackbar), "_activeHandle"));
+        Assert.Equal(0, MavSnackbar.QueueCount);
     }
 
     [AvaloniaFact]
     public void Externally_closed_tooltip_clears_static_handle()
     {
-        var anchor = new MdButton("Anchor");
-        var page = new MdContentPage("Root") { Content = anchor };
+        var anchor = new MavButton("Anchor");
+        var page = new MavContentPage("Root") { Content = anchor };
         var window = new Window
         {
             Width = 480,
             Height = 640,
-            Content = new MdNavigationPage(page),
+            Content = new MavNavigationPage(page),
         };
         window.Show();
         Dispatcher.UIThread.RunJobs();
 
         try
         {
-            MdTooltip.Show(anchor, "tip", durationMs: 0);
+            MavTooltip.Show(anchor, "tip", durationMs: 0);
             Dispatcher.UIThread.RunJobs();
 
-            var handle = GetStaticField<IDisposable>(typeof(MdTooltip), "_handle");
+            var handle = GetStaticField<IDisposable>(typeof(MavTooltip), "_handle");
             Assert.NotNull(handle);
 
             handle.Dispose();
 
-            Assert.Null(GetStaticField<IDisposable>(typeof(MdTooltip), "_handle"));
-            Assert.Null(GetStaticField<DispatcherTimer>(typeof(MdTooltip), "_timer"));
+            Assert.Null(GetStaticField<IDisposable>(typeof(MavTooltip), "_handle"));
+            Assert.Null(GetStaticField<DispatcherTimer>(typeof(MavTooltip), "_timer"));
         }
         finally
         {
-            MdTooltip.Dismiss();
+            MavTooltip.Dismiss();
             window.Close();
         }
     }
@@ -217,7 +217,7 @@ public class LifetimeTests
         CollectGarbage();
         GC.KeepAlive(scroll);
 
-        Assert.False(weak.IsAlive, "a detached MdTopAppBar was kept alive by ScrollViewer.ScrollChanged");
+        Assert.False(weak.IsAlive, "a detached MavTopAppBar was kept alive by ScrollViewer.ScrollChanged");
     }
 
     [AvaloniaFact]
@@ -227,14 +227,14 @@ public class LifetimeTests
 
         CollectGarbage();
 
-        Assert.False(weak.IsAlive, "a detached MdTopAppBar was kept alive by theme state");
+        Assert.False(weak.IsAlive, "a detached MavTopAppBar was kept alive by theme state");
     }
 
     [AvaloniaFact]
     public void Keyboard_host_tracks_the_last_focused_field_weakly()
     {
         var field = new TextBox();
-        var host = new MdKeyboardAvoidingHost(field);
+        var host = new MavKeyboardAvoidingHost(field);
         var window = new Window { Width = 480, Height = 640, Content = host };
         window.Show();
         Dispatcher.UIThread.RunJobs();
@@ -242,7 +242,7 @@ public class LifetimeTests
         Assert.True(field.Focus());
         Dispatcher.UIThread.RunJobs();
 
-        var fieldInfo = typeof(MdKeyboardAvoidingHost).GetField(
+        var fieldInfo = typeof(MavKeyboardAvoidingHost).GetField(
             "_lastFocused",
             BindingFlags.Instance | BindingFlags.NonPublic);
         Assert.NotNull(fieldInfo);
@@ -262,7 +262,7 @@ public class LifetimeTests
         CollectGarbage();
         GC.KeepAlive(tabs);
 
-        Assert.False(weak.IsAlive, "MdTabs retained a removed MdTabItem through its event wiring");
+        Assert.False(weak.IsAlive, "MavTabs retained a removed MavTabItem through its event wiring");
     }
 
     [AvaloniaFact]
@@ -273,7 +273,7 @@ public class LifetimeTests
         CollectGarbage();
         GC.KeepAlive(group);
 
-        Assert.False(weak.IsAlive, "MdButtonGroup retained a removed MdButton through its event wiring");
+        Assert.False(weak.IsAlive, "MavButtonGroup retained a removed MavButton through its event wiring");
     }
 
     [AvaloniaFact]
@@ -284,7 +284,7 @@ public class LifetimeTests
         CollectGarbage();
         GC.KeepAlive(group);
 
-        Assert.False(weak.IsAlive, "MdRadioGroup retained a removed MdRadioButton through its event wiring");
+        Assert.False(weak.IsAlive, "MavRadioGroup retained a removed MavRadioButton through its event wiring");
     }
 
     [AvaloniaFact]
@@ -295,7 +295,7 @@ public class LifetimeTests
         CollectGarbage();
         GC.KeepAlive(group);
 
-        Assert.False(weak.IsAlive, "MdChipGroup retained a removed MdChip through its event wiring");
+        Assert.False(weak.IsAlive, "MavChipGroup retained a removed MavChip through its event wiring");
     }
 
     [AvaloniaFact]
@@ -306,36 +306,36 @@ public class LifetimeTests
         CollectGarbage();
         GC.KeepAlive(tabs);
 
-        Assert.False(weak.IsAlive, "MdTabs retained items after Items.Clear()");
+        Assert.False(weak.IsAlive, "MavTabs retained items after Items.Clear()");
     }
 
     [AvaloniaFact]
     public void List_unsubscribes_from_ItemsSource_when_detached_and_resubscribes_on_return()
     {
         var source = new ObservableCollection<int>();
-        var list = new MdList { ItemsSource = source };
+        var list = new MavList { ItemsSource = source };
         var window = new Window { Content = list };
         window.Show();
         Dispatcher.UIThread.RunJobs();
 
         source.Add(1);
         Dispatcher.UIThread.RunJobs();
-        Assert.Single(list.Children.OfType<MdListItem>());
+        Assert.Single(list.Children.OfType<MavListItem>());
 
         window.Content = null;
         Dispatcher.UIThread.RunJobs();
 
         source.Add(2);
         Dispatcher.UIThread.RunJobs();
-        Assert.Single(list.Children.OfType<MdListItem>());
+        Assert.Single(list.Children.OfType<MavListItem>());
 
         window.Content = list;
         Dispatcher.UIThread.RunJobs();
-        Assert.Equal(2, list.Children.OfType<MdListItem>().Count());
+        Assert.Equal(2, list.Children.OfType<MavListItem>().Count());
 
         source.Add(3);
         Dispatcher.UIThread.RunJobs();
-        Assert.Equal(3, list.Children.OfType<MdListItem>().Count());
+        Assert.Equal(3, list.Children.OfType<MavListItem>().Count());
 
         window.Close();
     }
@@ -344,7 +344,7 @@ public class LifetimeTests
     public void DataTable_unsubscribes_from_ItemsSource_when_detached_and_resubscribes_on_return()
     {
         var source = new ObservableCollection<int>();
-        var table = new MdDataTable { ItemsSource = source };
+        var table = new MavDataTable { ItemsSource = source };
         table.AddColumn("Value", value => value, isNumeric: true);
 
         var window = new Window { Content = table };
@@ -379,16 +379,16 @@ public class LifetimeTests
         var window = new Window { Width = 320, Height = 240 };
         window.Show();
         Dispatcher.UIThread.RunJobs();
-        MdOverlay.TrackTopLevel(window);
+        MavOverlay.TrackTopLevel(window);
 
         var dismissed = false;
-        var handle = MdOverlay.PushDismissable(() => dismissed = true);
-        Assert.True(MdOverlay.HasActiveOverlay);
+        var handle = MavOverlay.PushDismissable(() => dismissed = true);
+        Assert.True(MavOverlay.HasActiveOverlay);
 
         window.Close();
         Dispatcher.UIThread.RunJobs();
 
-        Assert.False(MdOverlay.HasActiveOverlay, "dismiss stack retained a handle after top-level close");
+        Assert.False(MavOverlay.HasActiveOverlay, "dismiss stack retained a handle after top-level close");
         Assert.False(dismissed, "closing the top level must not invoke the dismiss callback");
         handle.Dispose();
     }
@@ -398,7 +398,7 @@ public class LifetimeTests
     {
         var liveOwner = new Border();
         var liveHost = new Panel();
-        MdOverlay.RegisterHost(liveOwner, liveHost);
+        MavOverlay.RegisterHost(liveOwner, liveHost);
         var baseline = StaticListCount("Hosts");
 
         RegisterDeadHost();
@@ -406,37 +406,37 @@ public class LifetimeTests
 
         var nextOwner = new Border();
         var nextHost = new Panel();
-        MdOverlay.RegisterHost(nextOwner, nextHost);
+        MavOverlay.RegisterHost(nextOwner, nextHost);
 
         Assert.Equal(baseline + 1, StaticListCount("Hosts"));
-        MdOverlay.UnregisterHost(liveOwner);
-        MdOverlay.UnregisterHost(nextOwner);
+        MavOverlay.UnregisterHost(liveOwner);
+        MavOverlay.UnregisterHost(nextOwner);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static void RegisterDeadHost()
     {
-        MdOverlay.RegisterHost(new Border(), new Panel());
+        MavOverlay.RegisterHost(new Border(), new Panel());
     }
 
     [AvaloniaFact]
     public void Theme_service_can_be_disposed_through_its_interface()
     {
-        IMdThemeService service = new MdThemeService();
+        IMavThemeService service = new MavThemeService();
         service.Dispose();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static WeakReference CreateDisposedThemeService()
     {
-        var service = new MdThemeService();
+        var service = new MavThemeService();
         service.Dispose();
         return new WeakReference(service);
     }
 
     private static int StaticListCount(string fieldName)
     {
-        var field = typeof(MdOverlay).GetField(fieldName, BindingFlags.Static | BindingFlags.NonPublic);
+        var field = typeof(MavOverlay).GetField(fieldName, BindingFlags.Static | BindingFlags.NonPublic);
         Assert.NotNull(field);
         var list = Assert.IsAssignableFrom<IList>(field.GetValue(null));
         return list.Count;
@@ -453,7 +453,7 @@ public class LifetimeTests
     private static (ScrollViewer Scroll, WeakReference AppBar) CreateDetachedAppBar()
     {
         var scroll = new ScrollViewer();
-        var appBar = new MdTopAppBar("Title") { ScrollViewer = scroll };
+        var appBar = new MavTopAppBar("Title") { ScrollViewer = scroll };
         var window = new Window { Width = 480, Height = 640, Content = appBar };
         window.Show();
         Dispatcher.UIThread.RunJobs();
@@ -471,7 +471,7 @@ public class LifetimeTests
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static WeakReference CreateDetachedPlainAppBar()
     {
-        var appBar = new MdTopAppBar("Title");
+        var appBar = new MavTopAppBar("Title");
         var window = new Window { Width = 480, Height = 640, Content = appBar };
         window.Show();
         Dispatcher.UIThread.RunJobs();
@@ -487,50 +487,50 @@ public class LifetimeTests
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static (MdTabs Tabs, WeakReference Item) CreateRemovedTabItem()
+    private static (MavTabs Tabs, WeakReference Item) CreateRemovedTabItem()
     {
-        var tabs = new MdTabs();
-        var item = new MdTabItem("Removed");
+        var tabs = new MavTabs();
+        var item = new MavTabItem("Removed");
         tabs.Tabs.Add(item);
         tabs.Tabs.Remove(item);
         return (tabs, new WeakReference(item));
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static (MdButtonGroup Group, WeakReference Item) CreateRemovedGroupButton()
+    private static (MavButtonGroup Group, WeakReference Item) CreateRemovedGroupButton()
     {
-        var group = new MdButtonGroup();
-        var button = new MdButton("Removed");
+        var group = new MavButtonGroup();
+        var button = new MavButton("Removed");
         group.Children.Add(button);
         group.Children.Remove(button);
         return (group, new WeakReference(button));
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static (MdRadioGroup Group, WeakReference Item) CreateRemovedRadio()
+    private static (MavRadioGroup Group, WeakReference Item) CreateRemovedRadio()
     {
-        var group = new MdRadioGroup();
-        var radio = new MdRadioButton("Removed");
+        var group = new MavRadioGroup();
+        var radio = new MavRadioButton("Removed");
         group.Children.Add(radio);
         group.Children.Remove(radio);
         return (group, new WeakReference(radio));
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static (MdChipGroup Group, WeakReference Item) CreateRemovedChip()
+    private static (MavChipGroup Group, WeakReference Item) CreateRemovedChip()
     {
-        var group = new MdChipGroup();
-        var chip = new MdChip("Removed");
+        var group = new MavChipGroup();
+        var chip = new MavChip("Removed");
         group.Chips.Add(chip);
         group.Chips.Remove(chip);
         return (group, new WeakReference(chip));
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static (MdTabs Tabs, WeakReference Item) CreateClearedTabs()
+    private static (MavTabs Tabs, WeakReference Item) CreateClearedTabs()
     {
-        var tabs = new MdTabs();
-        var item = new MdTabItem("Cleared");
+        var tabs = new MavTabs();
+        var item = new MavTabItem("Cleared");
         tabs.Tabs.Add(item);
         tabs.Tabs.Clear();
         return (tabs, new WeakReference(item));
@@ -540,7 +540,7 @@ public class LifetimeTests
     private static WeakReference CreateTooltipOwner()
     {
         var owner = new Border();
-        MdTooltip.SetText(owner, "Tooltip");
+        MavTooltip.SetText(owner, "Tooltip");
         return new WeakReference(owner);
     }
 
@@ -548,13 +548,13 @@ public class LifetimeTests
     private static WeakReference CreateFlyoutTrigger()
     {
         var trigger = new Border();
-        MdFlyout.SetMenu(trigger, new MdMenu());
+        MavFlyout.SetMenu(trigger, new MavMenu());
         return new WeakReference(trigger);
     }
 
-    private static int RowCount(MdDataTable table) =>
+    private static int RowCount(MavDataTable table) =>
         table.GetVisualDescendants()
-            .OfType<MdInkSurface>()
+            .OfType<MavInkSurface>()
             .Count(surface => surface.Content is Grid);
 
     private static void CollectGarbage()

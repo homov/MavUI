@@ -1,10 +1,10 @@
 using Avalonia.Controls;
 using Avalonia.Media;
-using Md3.Avalonia;
-using Md3.Avalonia.Controls;
-using Md3.Avalonia.Theming;
+using Mav;
+using Mav.Controls;
+using Mav.Theming;
 
-namespace Md3.Gallery;
+namespace Mav.Gallery;
 
 internal static class PickersPage
 {
@@ -18,19 +18,19 @@ internal static class PickersPage
 
     private static Control Fields()
     {
-        var date = new MdDatePickerField
+        var date = new MavDatePickerField
         {
             Label = "Due date",
             IsClearable = true,
             SelectedDate = DateTime.Today.AddDays(3),
         };
-        var range = new MdDateRangePickerField
+        var range = new MavDateRangePickerField
         {
             Label = "Sprint",
             StartDate = DateTime.Today,
             EndDate = DateTime.Today.AddDays(14),
         };
-        var time = new MdTimePickerField
+        var time = new MavTimePickerField
         {
             Label = "Reminder",
             Is24Hour = true,
@@ -38,78 +38,78 @@ internal static class PickersPage
         };
 
         return GalleryUi.Showcase(
-            "MdDatePickerField, MdDateRangePickerField and MdTimePickerField",
-            "Inline fields keep the form compact and remain clearable and validatable with MdFormValidator.",
+            "MavDatePickerField, MavDateRangePickerField and MavTimePickerField",
+            "Inline fields keep the form compact and remain clearable and validatable with MavFormValidator.",
             GalleryUi.Column(date, range, time),
             "SelectedDate · StartDate/EndDate · SelectedTime · IsClearable");
     }
 
     private static Control Embedded()
     {
-        var calendar = new MdCalendarGrid
+        var calendar = new MavCalendarGrid
         {
             SelectedDate = DateTime.Today,
         };
 
-        var dial = new MdTimeDial
+        var dial = new MavTimeDial
         {
             Is24Hour = false,
             Hour = 10,
             Minute = 15,
         };
 
-        var color = new MdColorPicker
+        var color = new MavColorPicker
         {
             SelectedColor = Colors.Teal,
             Width = 320,
         };
 
         return GalleryUi.Showcase(
-            "MdCalendarGrid, MdTimeDial and MdColorPicker",
+            "MavCalendarGrid, MavTimeDial and MavColorPicker",
             "Embed the picker surface directly when a dialog or sheet is not the right fit.",
             GalleryUi.Row(
-                new MdCard(MdCardVariant.Outlined, calendar) { Width = 340 },
-                new MdCard(MdCardVariant.Outlined, dial) { Width = 300 },
-                new MdCard(MdCardVariant.Outlined, color) { Width = 360 }),
-            "MdCalendarGrid.SelectedDate · MdTimeDial.Hour/Minute · MdColorPicker.SelectedColor");
+                new MavCard(MavCardVariant.Outlined, calendar) { Width = 340 },
+                new MavCard(MavCardVariant.Outlined, dial) { Width = 300 },
+                new MavCard(MavCardVariant.Outlined, color) { Width = 360 }),
+            "MavCalendarGrid.SelectedDate · MavTimeDial.Hour/Minute · MavColorPicker.SelectedColor");
     }
 
     private static Control Modal()
     {
-        var result = new MdLabel
+        var result = new MavLabel
         {
             Text = "No selection yet",
-            Role = MdTypeRole.BodySmall,
+            Role = MavTypeRole.BodySmall,
             Secondary = true,
         };
 
-        var date = new MdButton("Pick date", MdButtonVariant.Outlined, MdIcons.Event);
+        var date = new MavButton("Pick date", MavButtonVariant.Outlined, MavIcons.Event);
         date.Clicked += async (_, _) =>
         {
-            var picked = await MdDatePicker.PickDateAsync(DateTime.Today);
+            var picked = await MavDatePicker.PickDateAsync(DateTime.Today);
             result.Text = picked is null ? "Date dismissed" : $"Date: {picked:dd MMM yyyy}";
         };
 
-        var range = new MdButton("Pick range", MdButtonVariant.Outlined, MdIcons.DateRange);
+        var range = new MavButton("Pick range", MavButtonVariant.Outlined, MavIcons.DateRange);
         range.Clicked += async (_, _) =>
         {
-            var picked = await MdDatePicker.PickDateRangeAsync(start: DateTime.Today);
+            var picked = await MavDatePicker.PickDateRangeAsync(start: DateTime.Today);
             result.Text = picked is null
                 ? "Range dismissed"
                 : $"Range: {picked.Value.Start:dd MMM} – {picked.Value.End:dd MMM}";
         };
 
-        var time = new MdButton("Pick time", MdButtonVariant.Outlined, MdIcons.Schedule);
+        var time = new MavButton("Pick time", MavButtonVariant.Outlined, MavIcons.Schedule);
         time.Clicked += async (_, _) =>
         {
-            var picked = await MdTimePicker.PickTimeAsync(new TimeSpan(9, 0, 0), is24Hour: true);
+            var picked = await MavTimePicker.PickTimeAsync(new TimeSpan(9, 0, 0), is24Hour: true);
             result.Text = picked is null ? "Time dismissed" : $"Time: {picked:hh\\:mm}";
         };
 
-        var color = new MdButton("Pick color", MdButtonVariant.Outlined, MdIcons.Palette);
+        var color = new MavButton("Pick color", MavButtonVariant.Outlined, MavIcons.Palette);
         color.Clicked += async (_, _) =>
         {
-            var picked = await MdColorPicker.PickAsync(color, Colors.Teal, "Accent color");
+            var picked = await MavColorPicker.PickAsync(color, Colors.Teal, "Accent color");
             result.Text = picked is null ? "Color dismissed" : $"Color: {picked}";
         };
 
@@ -117,6 +117,6 @@ internal static class PickersPage
             "Modal date, time and color pickers",
             "Static helpers use the current top level and return null when the user dismisses the overlay.",
             GalleryUi.Column(GalleryUi.Row(date, range, time, color), result),
-            "await MdDatePicker.PickDateAsync(...) · MdDatePicker.PickDateRangeAsync(...) · MdTimePicker.PickTimeAsync(...) · MdColorPicker.PickAsync(...)");
+            "await MavDatePicker.PickDateAsync(...) · MavDatePicker.PickDateRangeAsync(...) · MavTimePicker.PickTimeAsync(...) · MavColorPicker.PickAsync(...)");
     }
 }

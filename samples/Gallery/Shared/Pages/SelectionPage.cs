@@ -1,10 +1,10 @@
 using Avalonia.Controls;
 using Avalonia.Layout;
-using Md3.Avalonia;
-using Md3.Avalonia.Controls;
-using Md3.Avalonia.Theming;
+using Mav;
+using Mav.Controls;
+using Mav.Theming;
 
-namespace Md3.Gallery;
+namespace Mav.Gallery;
 
 internal static class SelectionPage
 {
@@ -18,41 +18,41 @@ internal static class SelectionPage
 
     private static Control Toggles()
     {
-        var toggle = new MdSwitch(true, showIcons: true)
+        var toggle = new MavSwitch(true, showIcons: true)
         {
-            OnIcon = MdIcons.Notifications,
-            OffIcon = MdIcons.NotificationsOff,
+            OnIcon = MavIcons.Notifications,
+            OffIcon = MavIcons.NotificationsOff,
         };
-        var check = new MdCheckBox("Accept terms", isChecked: true);
-        var three = new MdCheckBox("Three-state", isIndeterminate: true)
+        var check = new MavCheckBox("Accept terms", isChecked: true);
+        var three = new MavCheckBox("Three-state", isIndeterminate: true)
         {
             IsThreeState = true,
         };
-        var radios = new MdRadioGroup();
+        var radios = new MavRadioGroup();
         radios.AddOption("Admin", "admin", selected: true);
         radios.AddOption("Editor", "editor");
         radios.AddOption("Viewer", "viewer");
-        var standaloneRadio = new MdRadioButton { Label = "Standalone radio", IsChecked = true };
+        var standaloneRadio = new MavRadioButton { Label = "Standalone radio", IsChecked = true };
 
         return GalleryUi.Showcase(
-            "MdSwitch, MdCheckBox, MdRadioButton and MdRadioGroup",
+            "MavSwitch, MavCheckBox, MavRadioButton and MavRadioGroup",
             "Selection controls expose IsToggled/IsChecked and raise Toggled/CheckedChanged; all support keyboard Space/Enter.",
             GalleryUi.Row(
-                new MdCard(MdCardVariant.Outlined, GalleryUi.Column(toggle, check, three)) { Width = 280 },
-                new MdCard(MdCardVariant.Outlined, GalleryUi.Column(radios, standaloneRadio)) { Width = 280 }),
-            "MdSwitch.IsToggled · MdCheckBox.IsThreeState · MdRadioButton.Label · MdRadioGroup.AddOption");
+                new MavCard(MavCardVariant.Outlined, GalleryUi.Column(toggle, check, three)) { Width = 280 },
+                new MavCard(MavCardVariant.Outlined, GalleryUi.Column(radios, standaloneRadio)) { Width = 280 }),
+            "MavSwitch.IsToggled · MavCheckBox.IsThreeState · MavRadioButton.Label · MavRadioGroup.AddOption");
     }
 
     private static Control Sliders()
     {
-        var slider = new MdSlider
+        var slider = new MavSlider
         {
             Minimum = 0,
             Maximum = 100,
             Value = 64,
             ShowValueIndicator = true,
         };
-        var range = new MdRangeSlider
+        var range = new MavRangeSlider
         {
             Minimum = 0,
             Maximum = 100,
@@ -60,50 +60,50 @@ internal static class SelectionPage
             EndValue = 80,
         };
 
-        var single = new MdSegmentedButton();
+        var single = new MavSegmentedButton();
         single.AddSegment("Day", selected: true);
         single.AddSegment("Week");
         single.AddSegment("Month");
 
-        var multi = new MdSegmentedButton { MultiSelect = true };
-        multi.AddSegment("Bold", MdIcons.FormatBold, selected: true);
-        multi.AddSegment("Italic", MdIcons.FormatItalic);
-        multi.AddSegment("Underline", MdIcons.FormatUnderlined);
+        var multi = new MavSegmentedButton { MultiSelect = true };
+        multi.AddSegment("Bold", MavIcons.FormatBold, selected: true);
+        multi.AddSegment("Italic", MavIcons.FormatItalic);
+        multi.AddSegment("Underline", MavIcons.FormatUnderlined);
 
         return GalleryUi.Showcase(
-            "MdSlider, MdRangeSlider and MdSegmentedButton",
+            "MavSlider, MavRangeSlider and MavSegmentedButton",
             "Sliders support steps, divisions, value indicators and keyboard arrows; segmented buttons can be single or multi-select.",
             GalleryUi.Column(
                 slider,
                 range,
                 GalleryUi.Row(single, multi)),
-            "MdSlider.Value · MdRangeSlider.StartValue/EndValue · MdSegmentedButton.MultiSelect");
+            "MavSlider.Value · MavRangeSlider.StartValue/EndValue · MavSegmentedButton.MultiSelect");
     }
 
     private static Control ChipsAndSelects()
     {
         var chips = GalleryUi.Row(
-            new MdChip("Assist", MdChipKind.Assist, MdIcons.TipsAndUpdates),
-            new MdChip("Filter", MdChipKind.Filter, selected: true),
-            new MdChip("Input", MdChipKind.Input, MdIcons.Close),
-            new MdChip("Suggestion", MdChipKind.Suggestion));
+            new MavChip("Assist", MavChipKind.Assist, MavIcons.TipsAndUpdates),
+            new MavChip("Filter", MavChipKind.Filter, selected: true),
+            new MavChip("Input", MavChipKind.Input, MavIcons.Close),
+            new MavChip("Suggestion", MavChipKind.Suggestion));
 
-        var chipGroup = new MdChipGroup { SingleSelection = true };
-        chipGroup.AddChip("Design", MdChipKind.Filter, MdIcons.Palette, selected: true);
-        chipGroup.AddChip("Engineering", MdChipKind.Filter, MdIcons.Code);
-        chipGroup.AddChip("Research", MdChipKind.Filter, MdIcons.Science);
+        var chipGroup = new MavChipGroup { SingleSelection = true };
+        chipGroup.AddChip("Design", MavChipKind.Filter, MavIcons.Palette, selected: true);
+        chipGroup.AddChip("Engineering", MavChipKind.Filter, MavIcons.Code);
+        chipGroup.AddChip("Research", MavChipKind.Filter, MavIcons.Science);
 
-        var select = new MdSelect("Role", new[] { "Admin", "Editor", "Viewer" }) { SelectedIndex = 1 };
-        var combo = new MdComboBox("City", new[] { "Berlin", "London", "Tokyo" }) { Text = "Berlin" };
-        var rating = new MdRatingBar { MaxRating = 5, AllowHalf = true, Value = 4.5 };
+        var select = new MavSelect("Role", new[] { "Admin", "Editor", "Viewer" }) { SelectedIndex = 1 };
+        var combo = new MavComboBox("City", new[] { "Berlin", "London", "Tokyo" }) { Text = "Berlin" };
+        var rating = new MavRatingBar { MaxRating = 5, AllowHalf = true, Value = 4.5 };
 
         return GalleryUi.Showcase(
-            "MdChip, MdChipGroup, MdSelect, MdComboBox and MdRatingBar",
+            "MavChip, MavChipGroup, MavSelect, MavComboBox and MavRatingBar",
             "Chips cover assist/filter/input/suggestion; select and combo box provide options; rating supports half stars.",
             GalleryUi.Column(
                 chips,
                 chipGroup,
                 GalleryUi.Row(select, combo, rating)),
-            "MdChip.Kind · MdChipGroup.SingleSelection · MdSelect.Options · MdComboBox.Items · MdRatingBar.AllowHalf");
+            "MavChip.Kind · MavChipGroup.SingleSelection · MavSelect.Options · MavComboBox.Items · MavRatingBar.AllowHalf");
     }
 }

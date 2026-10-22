@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <style name="Md3Demo.NoActionBar" parent="Theme.AppCompat.DayNight.NoActionBar">
+  <style name="MavDemo.NoActionBar" parent="Theme.AppCompat.DayNight.NoActionBar">
     <item name="android:windowActionBar">false</item>
     <item name="android:windowNoTitle">true</item>
-    <item name="android:windowBackground">@color/md3_demo_window_background</item>
+    <item name="android:windowBackground">@color/mav_demo_window_background</item>
     <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     <item name="android:statusBarColor">@android:color/transparent</item>
     <item name="android:navigationBarColor">@android:color/transparent</item>
-    <item name="android:windowLightStatusBar">@bool/md3_demo_light_system_bars</item>
-    <item name="android:windowLightNavigationBar">@bool/md3_demo_light_system_bars</item>
+    <item name="android:windowLightStatusBar">@bool/mav_demo_light_system_bars</item>
+    <item name="android:windowLightNavigationBar">@bool/mav_demo_light_system_bars</item>
     <item name="android:enforceStatusBarContrast">false</item>
     <item name="android:enforceNavigationBarContrast">false</item>
   </style>

@@ -7,8 +7,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>latest</LangVersion>
-    <RootNamespace>Md3.Gallery.Browser</RootNamespace>
-    <AssemblyName>Md3.Gallery.Browser</AssemblyName>
+    <RootNamespace>Mav.Gallery.Browser</RootNamespace>
+    <AssemblyName>Mav.Gallery.Browser</AssemblyName>
     <OverrideHtmlAssetPlaceholders>true</OverrideHtmlAssetPlaceholders>
   </PropertyGroup>
 
@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Md3.Avalonia\Md3.Avalonia.csproj" />
+    <ProjectReference Include="..\..\MavUI\MavUI.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,63 +1,63 @@
 using Avalonia.Headless.XUnit;
-using Md3.Avalonia;
-using Md3.Avalonia.Controls;
-using Md3.Avalonia.Theming;
+using Mav;
+using Mav.Controls;
+using Mav.Theming;
 using Xunit;
 
-namespace Md3.Avalonia.Tests;
+namespace Mav.Tests;
 
 public class ChromeTests
 {
     [AvaloniaFact]
-    public void MdTopAppBar_title_and_icon()
+    public void MavTopAppBar_title_and_icon()
     {
-        var bar = new MdTopAppBar("Mail") { NavigationIcon = MdIcons.Menu };
+        var bar = new MavTopAppBar("Mail") { NavigationIcon = MavIcons.Menu };
         Assert.Equal("Mail", bar.Title);
     }
 
     [AvaloniaFact]
-    public void MdBottomAppBar_fab()
+    public void MavBottomAppBar_fab()
     {
-        var fab = new MdFab(MdIcons.Add);
-        var bottom = new MdBottomAppBar { Fab = fab, FabIcon = MdIcons.Add };
+        var fab = new MavFab(MavIcons.Add);
+        var bottom = new MavBottomAppBar { Fab = fab, FabIcon = MavIcons.Add };
         Assert.NotNull(bottom);
     }
 
     [AvaloniaFact]
-    public void MdNavigationDrawer_items()
+    public void MavNavigationDrawer_items()
     {
-        var drawer = new MdNavigationDrawer();
-        drawer.AddItem("Inbox", MdIcons.Inbox);
+        var drawer = new MavNavigationDrawer();
+        drawer.AddItem("Inbox", MavIcons.Inbox);
         Assert.True(drawer.Items.Count > 0 || drawer.Items.Count == 0); // no crash
     }
 
     [AvaloniaFact]
-    public void MdTabs_add()
+    public void MavTabs_add()
     {
-        var tabs = new MdTabs();
-        tabs.AddTab("One", icon: MdIcons.Home);
+        var tabs = new MavTabs();
+        tabs.AddTab("One", icon: MavIcons.Home);
         Assert.NotNull(tabs);
     }
 
     [AvaloniaFact]
-    public void MdStepper_step()
+    public void MavStepper_step()
     {
-        var stepper = new MdStepper();
-        stepper.AddStep("Name", content: new MdLabel { Text = "x" });
+        var stepper = new MavStepper();
+        stepper.AddStep("Name", content: new MavLabel { Text = "x" });
         Assert.NotNull(stepper);
     }
 
     [AvaloniaFact]
-    public void MdPagination_current()
+    public void MavPagination_current()
     {
-        var pag = new MdPagination { TotalPages = 5, CurrentPage = 1 };
+        var pag = new MavPagination { TotalPages = 5, CurrentPage = 1 };
         Assert.Equal(1, pag.CurrentPage);
     }
 
     [AvaloniaFact]
-    public void MdModalNavigationDrawer_open()
+    public void MavModalNavigationDrawer_open()
     {
-        var drawer = new MdModalNavigationDrawer();
+        var drawer = new MavModalNavigationDrawer();
         Assert.NotNull(drawer);
     }
 }

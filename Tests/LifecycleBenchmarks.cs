@@ -7,11 +7,11 @@ using System.Reflection;
 using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
 using Avalonia.Threading;
-using Md3.Avalonia.Controls;
-using Md3.Avalonia.Theming;
+using Mav.Controls;
+using Mav.Theming;
 using Xunit;
 
-namespace Md3.Avalonia.Tests;
+namespace Mav.Tests;
 
 /// <summary>
 /// Baseline measurements for the analysis in docs/ANALYSIS.md (item 1: leaks, theme subscriptions).
@@ -60,13 +60,13 @@ public class LifecycleBenchmarks
         for (int i = 0; i < rounds; i++)
         {
             var sw = Stopwatch.StartNew();
-            if (i % 2 == 0) MdTheme.UseDark(); else MdTheme.UseLight();
+            if (i % 2 == 0) MavTheme.UseDark(); else MavTheme.UseLight();
             Dispatcher.UIThread.RunJobs();
             sw.Stop();
             times.Add(sw.Elapsed.TotalMilliseconds);
         }
 
-        MdTheme.UseLight();
+        MavTheme.UseLight();
         Dispatcher.UIThread.RunJobs();
 
         Report(
@@ -93,7 +93,7 @@ public class LifecycleBenchmarks
 
     private static string FindRepoRoot()
     {
-        var env = Environment.GetEnvironmentVariable("MD3_REPO_ROOT");
+        var env = Environment.GetEnvironmentVariable("MAV_REPO_ROOT");
         if (!string.IsNullOrEmpty(env))
             return env;
 
@@ -110,10 +110,10 @@ public class LifecycleBenchmarks
         var panel = new StackPanel();
         for (int i = 0; i < ControlsPerKind; i++)
         {
-            var button = new MdButton { Text = $"B{i}" };
-            var card = new MdCard { Body = new global::Avalonia.Controls.TextBlock { Text = $"C{i}" } };
-            var field = new MdTextField { Label = $"F{i}" };
-            var slider = new MdSlider(0, 100, i % 100, 0);
+            var button = new MavButton { Text = $"B{i}" };
+            var card = new MavCard { Body = new global::Avalonia.Controls.TextBlock { Text = $"C{i}" } };
+            var field = new MavTextField { Label = $"F{i}" };
+            var slider = new MavSlider(0, 100, i % 100, 0);
 
             refs.Add(new WeakReference(button));
             refs.Add(new WeakReference(card));
@@ -143,12 +143,12 @@ public class LifecycleBenchmarks
     }
 
     /// <summary>
-    /// Number of delegates attached to the static <see cref="MdTheme.Changed"/> event.
+    /// Number of delegates attached to the static <see cref="MavTheme.Changed"/> event.
     /// Reads the compiler-generated backing field via reflection (test-only).
     /// </summary>
     private static int CountThemeSubscribers()
     {
-        var field = typeof(MdTheme).GetField("Changed", BindingFlags.NonPublic | BindingFlags.Static);
+        var field = typeof(MavTheme).GetField("Changed", BindingFlags.NonPublic | BindingFlags.Static);
         var handler = field?.GetValue(null) as Delegate;
         return handler?.GetInvocationList().Length ?? 0;
     }

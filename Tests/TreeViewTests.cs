@@ -5,35 +5,35 @@ using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
-using Md3.Avalonia.Controls;
+using Mav.Controls;
 using Xunit;
 
-namespace Md3.Avalonia.Tests;
+namespace Mav.Tests;
 
 public class TreeViewTests
 {
-    private static (Window Window, MdTreeView Tree) CreateHost(MdTreeView tree)
+    private static (Window Window, MavTreeView Tree) CreateHost(MavTreeView tree)
     {
-        var scroll = new MdScrollViewer { Height = 260, Content = tree };
+        var scroll = new MavScrollViewer { Height = 260, Content = tree };
         var window = new Window { Width = 420, Height = 300, Content = scroll };
         window.Show();
         Dispatcher.UIThread.RunJobs();
         return (window, tree);
     }
 
-    private static HashSet<Md3.Avalonia.Primitives.MdInkSurface> Pills(MdTreeView tree) =>
+    private static HashSet<Mav.Primitives.MavInkSurface> Pills(MavTreeView tree) =>
         tree.GetVisualDescendants()
-            .OfType<Md3.Avalonia.Primitives.MdInkSurface>()
+            .OfType<Mav.Primitives.MavInkSurface>()
             .Where(surface => surface.Content is Grid)
             .ToHashSet();
 
-    private static Md3.Avalonia.Primitives.MdInkSurface PillFor(MdTreeView tree, string text) =>
+    private static Mav.Primitives.MavInkSurface PillFor(MavTreeView tree, string text) =>
         Pills(tree).Single(surface => surface
             .GetVisualDescendants()
             .OfType<TextBlock>()
             .Any(block => block.Text == text));
 
-    private static string[] Labels(MdTreeView tree) =>
+    private static string[] Labels(MavTreeView tree) =>
         tree.GetVisualDescendants()
             .OfType<TextBlock>()
             .Select(block => block.Text)
@@ -44,12 +44,12 @@ public class TreeViewTests
     [AvaloniaFact]
     public void Expanding_a_node_reuses_unaffected_rows_and_adds_children()
     {
-        var root = new MdTreeNode("Root");
-        var child = new MdTreeNode("Child", isExpanded: false);
+        var root = new MavTreeNode("Root");
+        var child = new MavTreeNode("Child", isExpanded: false);
         child.Add("Grand");
         root.Add(child);
 
-        var tree = new MdTreeView();
+        var tree = new MavTreeView();
         tree.Add(root);
         var (window, _) = CreateHost(tree);
 
@@ -72,12 +72,12 @@ public class TreeViewTests
     [AvaloniaFact]
     public void Collapsing_a_node_only_removes_its_descendant_rows()
     {
-        var root = new MdTreeNode("Root");
-        var child = new MdTreeNode("Child", isExpanded: true);
+        var root = new MavTreeNode("Root");
+        var child = new MavTreeNode("Child", isExpanded: true);
         child.Add("Grand");
         root.Add(child);
 
-        var tree = new MdTreeView();
+        var tree = new MavTreeView();
         tree.Add(root);
         var (window, _) = CreateHost(tree);
         var rootPill = PillFor(tree, "Root");
@@ -98,13 +98,13 @@ public class TreeViewTests
         var roots = Enumerable.Range(0, 20)
             .Select(i =>
             {
-                var root = new MdTreeNode($"Folder {i}");
-                root.Add(new MdTreeNode($"Leaf {i}"));
+                var root = new MavTreeNode($"Folder {i}");
+                root.Add(new MavTreeNode($"Leaf {i}"));
                 return root;
             })
             .ToList();
 
-        var tree = new MdTreeView();
+        var tree = new MavTreeView();
         foreach (var root in roots)
             tree.Add(root);
         var (window, _) = CreateHost(tree);
@@ -130,8 +130,8 @@ public class TreeViewTests
     [AvaloniaFact]
     public void Selection_and_text_updates_rebuild_only_affected_rows()
     {
-        var roots = Enumerable.Range(0, 10).Select(i => new MdTreeNode($"Node {i}")).ToList();
-        var tree = new MdTreeView();
+        var roots = Enumerable.Range(0, 10).Select(i => new MavTreeNode($"Node {i}")).ToList();
+        var tree = new MavTreeView();
         foreach (var root in roots)
             tree.Add(root);
         var (window, _) = CreateHost(tree);
@@ -163,8 +163,8 @@ public class TreeViewTests
     [AvaloniaFact]
     public void Adding_a_child_after_load_subscribes_to_the_new_subtree()
     {
-        var root = new MdTreeNode("Root");
-        var tree = new MdTreeView();
+        var root = new MavTreeNode("Root");
+        var tree = new MavTreeView();
         tree.Add(root);
         var (window, _) = CreateHost(tree);
 
@@ -185,11 +185,11 @@ public class TreeViewTests
     [AvaloniaFact]
     public void Selecting_a_node_preserves_the_tree_scroll_offset()
     {
-        var tree = new MdTreeView();
+        var tree = new MavTreeView();
         for (var i = 0; i < 200; i++)
             tree.Add($"Node {i}");
 
-        var scroll = new MdScrollViewer { Height = 260, Content = tree };
+        var scroll = new MavScrollViewer { Height = 260, Content = tree };
         var window = new Window { Width = 420, Height = 300, Content = scroll };
         window.Show();
         Dispatcher.UIThread.RunJobs();

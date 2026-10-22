@@ -1,18 +1,18 @@
 using Avalonia.Headless.XUnit;
-using Md3.Avalonia.Controls;
+using Mav.Controls;
 using Xunit;
 
-namespace Md3.Avalonia.Tests;
+namespace Mav.Tests;
 
 public class ListTests
 {
     [AvaloniaFact]
     public void ShowDividers_applies_to_items_added_after_the_property_was_set()
     {
-        var list = new MdList { ShowDividers = true };
-        var first = new MdListItem("First");
-        var second = new MdListItem("Second");
-        var third = new MdListItem("Third");
+        var list = new MavList { ShowDividers = true };
+        var first = new MavListItem("First");
+        var second = new MavListItem("Second");
+        var third = new MavListItem("Third");
 
         list.AddItem(first);
         list.AddItem(second);
@@ -26,9 +26,9 @@ public class ListTests
     [AvaloniaFact]
     public void Disabling_ShowDividers_clears_managed_dividers()
     {
-        var list = new MdList { ShowDividers = true };
-        var first = new MdListItem("First");
-        var second = new MdListItem("Second");
+        var list = new MavList { ShowDividers = true };
+        var first = new MavListItem("First");
+        var second = new MavListItem("Second");
         list.AddItem(first);
         list.AddItem(second);
 
@@ -41,8 +41,8 @@ public class ListTests
     [AvaloniaFact]
     public void Explicit_item_dividers_are_kept_when_the_list_does_not_manage_them()
     {
-        var list = new MdList();
-        var item = new MdListItem("Row") { ShowDivider = true };
+        var list = new MavList();
+        var item = new MavListItem("Row") { ShowDivider = true };
 
         list.AddItem(item);
 

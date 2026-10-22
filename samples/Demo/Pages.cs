@@ -2,12 +2,12 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Layout;
 using Avalonia.Media;
-using Md3.Avalonia;
-using Md3.Avalonia.Controls;
-using Md3.Avalonia.Primitives;
-using Md3.Avalonia.Theming;
+using Mav;
+using Mav.Controls;
+using Mav.Primitives;
+using Mav.Theming;
 
-namespace Md3.Demo;
+namespace Mav.Demo;
 
 internal static class PageLayout
 {
@@ -23,7 +23,7 @@ internal static class PageLayout
         foreach (var child in children)
             stack.Children.Add(child);
 
-        return new MdScrollViewer
+        return new MavScrollViewer
         {
             Padding = new Thickness(24),
             HorizontalScrollBarVisibility = global::Avalonia.Controls.Primitives.ScrollBarVisibility.Disabled,
@@ -32,79 +32,79 @@ internal static class PageLayout
         };
     }
 
-    public static MdLabel Headline(string text) => new()
+    public static MavLabel Headline(string text) => new()
     {
         Text = text,
-        Role = MdTypeRole.HeadlineMedium,
+        Role = MavTypeRole.HeadlineMedium,
         TextWrapping = TextWrapping.Wrap,
     };
 
-    public static MdLabel Body(string text) => new()
+    public static MavLabel Body(string text) => new()
     {
         Text = text,
-        Role = MdTypeRole.BodyLarge,
+        Role = MavTypeRole.BodyLarge,
         Secondary = true,
         TextWrapping = TextWrapping.Wrap,
     };
 }
 
-public sealed class HomePage : MdContentPage
+public sealed class HomePage : MavContentPage
 {
-    public HomePage() : base("Md3 Navigation")
+    public HomePage() : base("Mav Navigation")
     {
         Subtitle = "Custom stack built from Material controls";
-        AddAction(MdIcons.DarkMode, ToggleTheme);
+        AddAction(MavIcons.DarkMode, ToggleTheme);
 
-        var openControls = new MdButton(
+        var openControls = new MavButton(
             "Open controls",
-            MdButtonVariant.Filled,
-            MdIcons.Tune,
-            MdButtonSize.Medium);
+            MavButtonVariant.Filled,
+            MavIcons.Tune,
+            MavButtonSize.Medium);
         openControls.Clicked += (_, _) => Navigation?.Push(new ControlsPage());
 
-        var openList = new MdButton(
+        var openList = new MavButton(
             "Open list",
-            MdButtonVariant.Tonal,
-            MdIcons.Inbox,
-            MdButtonSize.Medium);
+            MavButtonVariant.Tonal,
+            MavIcons.Inbox,
+            MavButtonSize.Medium);
         openList.Clicked += (_, _) => Navigation?.Push(new InboxPage());
 
-        var openOverlays = new MdButton(
+        var openOverlays = new MavButton(
             "Overlays & pickers",
-            MdButtonVariant.Tonal,
-            MdIcons.Layers,
-            MdButtonSize.Medium);
+            MavButtonVariant.Tonal,
+            MavIcons.Layers,
+            MavButtonSize.Medium);
         openOverlays.Clicked += (_, _) => Navigation?.Push(new OverlaysPage());
 
-        var showDialog = new MdButton(
+        var showDialog = new MavButton(
             "Show dialog",
-            MdButtonVariant.Outlined,
-            MdIcons.Chat,
-            MdButtonSize.Medium);
+            MavButtonVariant.Outlined,
+            MavIcons.Chat,
+            MavButtonSize.Medium);
         showDialog.Clicked += (_, _) => ShowDialog();
 
-        var showSheet = new MdButton(
+        var showSheet = new MavButton(
             "Show sheet",
-            MdButtonVariant.Outlined,
-            MdIcons.MenuOpen,
-            MdButtonSize.Medium);
+            MavButtonVariant.Outlined,
+            MavIcons.MenuOpen,
+            MavButtonSize.Medium);
         showSheet.Clicked += (_, _) => ShowSheet();
 
-        var showSnackbar = new MdButton(
+        var showSnackbar = new MavButton(
             "Show snackbar",
-            MdButtonVariant.Text,
-            MdIcons.Notifications,
-            MdButtonSize.Medium);
+            MavButtonVariant.Text,
+            MavIcons.Notifications,
+            MavButtonSize.Medium);
         showSnackbar.Clicked += (_, _) =>
-            MdSnackbar.Show("Saved with MdSnackbar", "Undo", () => { }, anchor: this);
+            MavSnackbar.Show("Saved with MavSnackbar", "Undo", () => { }, anchor: this);
 
-        var darkMode = new MdSwitch(MdTheme.Current.IsDark, showIcons: true)
+        var darkMode = new MavSwitch(MavTheme.Current.IsDark, showIcons: true)
         {
-            OnIcon = MdIcons.DarkMode,
-            OffIcon = MdIcons.LightMode,
+            OnIcon = MavIcons.DarkMode,
+            OffIcon = MavIcons.LightMode,
         };
         darkMode.Toggled += (_, on) =>
-            MdTheme.Mode = on ? MdThemeMode.Dark : MdThemeMode.Light;
+            MavTheme.Mode = on ? MavThemeMode.Dark : MavThemeMode.Light;
 
         var actions = new WrapPanel
         {
@@ -131,18 +131,18 @@ public sealed class HomePage : MdContentPage
             {
                 PageLayout.Headline("Material navigation, not Avalonia pages"),
                 PageLayout.Body(
-                    "This demo uses MdNavigationPage. The stack, app bar, actions, " +
-                    "bottom bar and floating action button are all Md3 controls."),
+                    "This demo uses MavNavigationPage. The stack, app bar, actions, " +
+                    "bottom bar and floating action button are all Mav controls."),
             },
         };
 
-        var hero = new MdCard(MdCardVariant.Filled, heroText);
+        var hero = new MavCard(MavCardVariant.Filled, heroText);
 
         var themeGrid = new Grid
         {
             ColumnDefinitions = new ColumnDefinitions("Auto,*,Auto"),
         };
-        var themeIcon = new MdIcon(MdIcons.Palette, 24)
+        var themeIcon = new MavIcon(MavIcons.Palette, 24)
         {
             VerticalAlignment = VerticalAlignment.Center,
             Margin = new Thickness(0, 0, 16, 0),
@@ -153,11 +153,11 @@ public sealed class HomePage : MdContentPage
             VerticalAlignment = VerticalAlignment.Center,
             Children =
             {
-                new MdLabel { Text = "Dark theme", Role = MdTypeRole.TitleMedium },
-                new MdLabel
+                new MavLabel { Text = "Dark theme", Role = MavTypeRole.TitleMedium },
+                new MavLabel
                 {
-                    Text = "Toggle the global MdTheme palette",
-                    Role = MdTypeRole.BodyMedium,
+                    Text = "Toggle the global MavTheme palette",
+                    Role = MavTypeRole.BodyMedium,
                     Secondary = true,
                     TextWrapping = TextWrapping.Wrap,
                 },
@@ -169,18 +169,18 @@ public sealed class HomePage : MdContentPage
         themeGrid.Add(themeText, 1);
         themeGrid.Add(darkMode, 2);
 
-        var themeCard = new MdCard(MdCardVariant.Outlined, themeGrid);
+        var themeCard = new MavCard(MavCardVariant.Outlined, themeGrid);
 
         Content = PageLayout.Scroll(
             hero,
-            new MdLabel { Text = "Try the stack", Role = MdTypeRole.TitleLarge },
+            new MavLabel { Text = "Try the stack", Role = MavTypeRole.TitleLarge },
             actions,
             themeCard,
-            new MdLabel
+            new MavLabel
             {
-                Text = "The app bar back arrow is supplied by MdNavigationPage. " +
+                Text = "The app bar back arrow is supplied by MavNavigationPage. " +
                        "The page below keeps its own scroll position and state.",
-                Role = MdTypeRole.BodyMedium,
+                Role = MavTypeRole.BodyMedium,
                 Secondary = true,
                 TextWrapping = TextWrapping.Wrap,
             });
@@ -190,29 +190,29 @@ public sealed class HomePage : MdContentPage
 
     private void ToggleTheme()
     {
-        MdTheme.ToggleDark();
-        MdSnackbar.Show(
-            MdTheme.Current.IsDark ? "Dark theme enabled" : "Light theme enabled",
+        MavTheme.ToggleDark();
+        MavSnackbar.Show(
+            MavTheme.Current.IsDark ? "Dark theme enabled" : "Light theme enabled",
             anchor: this);
     }
 
     private void ShowDialog()
     {
-        var dialog = new MdDialog
+        var dialog = new MavDialog
         {
-            Icon = MdIcons.Info,
+            Icon = MavIcons.Info,
             Title = "Material dialog",
-            Message = "MdDialog is displayed in the overlay, above the custom navigation stack.",
+            Message = "MavDialog is displayed in the overlay, above the custom navigation stack.",
             ConfirmText = "Continue",
             DismissText = "Cancel",
         };
-        dialog.Confirmed += (_, _) => MdSnackbar.Show("Dialog confirmed", anchor: this);
+        dialog.Confirmed += (_, _) => MavSnackbar.Show("Dialog confirmed", anchor: this);
         dialog.Show(this);
     }
 
     private void ShowSheet()
     {
-        var sheet = new MdBottomSheet
+        var sheet = new MavBottomSheet
         {
             Title = "Quick actions",
             Body = new StackPanel
@@ -220,51 +220,51 @@ public sealed class HomePage : MdContentPage
                 Spacing = 8,
                 Children =
                 {
-                    new MdButton("Create item", MdButtonVariant.Filled, MdIcons.Add),
-                    new MdButton("Archive", MdButtonVariant.Text, MdIcons.Archive),
-                    new MdButton("Delete", MdButtonVariant.Text, MdIcons.Delete),
+                    new MavButton("Create item", MavButtonVariant.Filled, MavIcons.Add),
+                    new MavButton("Archive", MavButtonVariant.Text, MavIcons.Archive),
+                    new MavButton("Delete", MavButtonVariant.Text, MavIcons.Delete),
                 },
             },
         };
         sheet.Show(this);
     }
 
-    private static MdBottomAppBar BuildBottomBar()
+    private static MavBottomAppBar BuildBottomBar()
     {
-        var bar = new MdBottomAppBar(MdIcons.Add, () =>
-            MdSnackbar.Show("Bottom app bar FAB clicked"));
-        bar.AddAction(MdIcons.Search, () => MdSnackbar.Show("Search action"));
-        bar.AddAction(MdIcons.Settings, () => MdSnackbar.Show("Settings action"));
+        var bar = new MavBottomAppBar(MavIcons.Add, () =>
+            MavSnackbar.Show("Bottom app bar FAB clicked"));
+        bar.AddAction(MavIcons.Search, () => MavSnackbar.Show("Search action"));
+        bar.AddAction(MavIcons.Settings, () => MavSnackbar.Show("Settings action"));
         return bar;
     }
 }
 
-public sealed class OverlaysPage : MdContentPage
+public sealed class OverlaysPage : MavContentPage
 {
     public OverlaysPage() : base("Overlays & pickers")
     {
         Subtitle = "Adaptive menus, popovers, search, time and color pickers";
 
-        var menuButton = new MdButton(
+        var menuButton = new MavButton(
             "Menu",
-            MdButtonVariant.Outlined,
-            MdIcons.Menu,
-            MdButtonSize.Medium);
+            MavButtonVariant.Outlined,
+            MavIcons.Menu,
+            MavButtonSize.Medium);
         menuButton.Clicked += (_, _) =>
         {
-            var menu = new MdMenu()
-                .AddItem("Rename", MdIcons.Edit, onSelected: () => MdSnackbar.Show("Rename", anchor: this))
-                .AddItem("Duplicate", MdIcons.ContentCopy, onSelected: () => MdSnackbar.Show("Duplicate", anchor: this))
+            var menu = new MavMenu()
+                .AddItem("Rename", MavIcons.Edit, onSelected: () => MavSnackbar.Show("Rename", anchor: this))
+                .AddItem("Duplicate", MavIcons.ContentCopy, onSelected: () => MavSnackbar.Show("Duplicate", anchor: this))
                 .AddDivider()
-                .AddItem("Delete", MdIcons.Delete, onSelected: () => MdSnackbar.Show("Delete", anchor: this));
+                .AddItem("Delete", MavIcons.Delete, onSelected: () => MavSnackbar.Show("Delete", anchor: this));
             menu.Show(menuButton);
         };
 
-        var popoverButton = new MdButton(
+        var popoverButton = new MavButton(
             "Popover",
-            MdButtonVariant.Outlined,
-            MdIcons.FilterList,
-            MdButtonSize.Medium);
+            MavButtonVariant.Outlined,
+            MavIcons.FilterList,
+            MavButtonSize.Medium);
         popoverButton.Clicked += (_, _) =>
         {
             var body = new StackPanel
@@ -272,65 +272,65 @@ public sealed class OverlaysPage : MdContentPage
                 Spacing = 8,
                 Children =
                 {
-                    new MdCheckBox("Archived"),
-                    new MdCheckBox("Shared with me"),
-                    new MdCheckBox("Has attachments"),
+                    new MavCheckBox("Archived"),
+                    new MavCheckBox("Shared with me"),
+                    new MavCheckBox("Has attachments"),
                 },
             };
-            var popover = new MdPopover(body, "Filters");
+            var popover = new MavPopover(body, "Filters");
             popover.Show(popoverButton);
         };
 
-        var searchButton = new MdButton(
+        var searchButton = new MavButton(
             "Search view",
-            MdButtonVariant.Outlined,
-            MdIcons.Search,
-            MdButtonSize.Medium);
+            MavButtonVariant.Outlined,
+            MavIcons.Search,
+            MavButtonSize.Medium);
         searchButton.Clicked += (_, _) =>
         {
-            var search = new MdSearchView { Placeholder = "Search the demo" };
-            search.Suggestions.Add(new MdSearchSuggestion("Material menu", "Anchored overlay", MdIcons.Menu));
-            search.Suggestions.Add(new MdSearchSuggestion("Date picker", "Adaptive dialog", MdIcons.Event));
-            search.Suggestions.Add(new MdSearchSuggestion("Snackbar", "Global FIFO", MdIcons.Notifications));
+            var search = new MavSearchView { Placeholder = "Search the demo" };
+            search.Suggestions.Add(new MavSearchSuggestion("Material menu", "Anchored overlay", MavIcons.Menu));
+            search.Suggestions.Add(new MavSearchSuggestion("Date picker", "Adaptive dialog", MavIcons.Event));
+            search.Suggestions.Add(new MavSearchSuggestion("Snackbar", "Global FIFO", MavIcons.Notifications));
             search.Show(searchButton);
         };
 
-        var timeButton = new MdButton(
+        var timeButton = new MavButton(
             "Time picker",
-            MdButtonVariant.Outlined,
-            MdIcons.Schedule,
-            MdButtonSize.Medium);
+            MavButtonVariant.Outlined,
+            MavIcons.Schedule,
+            MavButtonSize.Medium);
         timeButton.Clicked += (_, _) =>
         {
-            var picker = new MdTimePicker { SelectedTime = new TimeSpan(9, 30, 0) };
+            var picker = new MavTimePicker { SelectedTime = new TimeSpan(9, 30, 0) };
             picker.TimeSelected += (_, time) =>
-                MdSnackbar.Show($"Selected {time:hh\\:mm}", anchor: this);
+                MavSnackbar.Show($"Selected {time:hh\\:mm}", anchor: this);
             picker.Show(this);
         };
 
-        var dateButton = new MdButton(
+        var dateButton = new MavButton(
             "Date picker",
-            MdButtonVariant.Outlined,
-            MdIcons.CalendarMonth,
-            MdButtonSize.Medium);
+            MavButtonVariant.Outlined,
+            MavIcons.CalendarMonth,
+            MavButtonSize.Medium);
         dateButton.Clicked += (_, _) =>
         {
-            var picker = new MdDatePicker { SelectedDate = DateTime.Today };
+            var picker = new MavDatePicker { SelectedDate = DateTime.Today };
             picker.DateSelected += (_, date) =>
-                MdSnackbar.Show($"Selected {date:dd MMM yyyy}", anchor: this);
+                MavSnackbar.Show($"Selected {date:dd MMM yyyy}", anchor: this);
             picker.Show(this);
         };
 
-        var colorButton = new MdButton(
+        var colorButton = new MavButton(
             "Color picker",
-            MdButtonVariant.Outlined,
-            MdIcons.Palette,
-            MdButtonSize.Medium);
+            MavButtonVariant.Outlined,
+            MavIcons.Palette,
+            MavButtonSize.Medium);
         colorButton.Clicked += async (_, _) =>
         {
-            var color = await MdColorPicker.PickAsync(colorButton, MdTheme.SeedColor, "Accent color");
+            var color = await MavColorPicker.PickAsync(colorButton, MavTheme.SeedColor, "Accent color");
             if (color is { } value)
-                MdSnackbar.Show($"Accent #{value.R:X2}{value.G:X2}{value.B:X2}", anchor: this);
+                MavSnackbar.Show($"Accent #{value.R:X2}{value.G:X2}{value.B:X2}", anchor: this);
         };
 
         var actions = new WrapPanel
@@ -347,63 +347,63 @@ public sealed class OverlaysPage : MdContentPage
         Content = PageLayout.Scroll(
             PageLayout.Headline("Transient UI on a phone"),
             PageLayout.Body(
-                "Every surface below is drawn by Md3.Avalonia and clamped to the current " +
+                "Every surface below is drawn by Mav and clamped to the current " +
                 "overlay, so it stays usable at 320 dp and in landscape."),
             actions,
-            new MdCard(MdCardVariant.Outlined, new MdLabel
+            new MavCard(MavCardVariant.Outlined, new MavLabel
             {
                 Text = "Use the system Back gesture while a menu or picker is open: " +
                        "the overlay closes first, then the page stack pops.",
-                Role = MdTypeRole.BodyMedium,
+                Role = MavTypeRole.BodyMedium,
                 TextWrapping = TextWrapping.Wrap,
             }));
     }
 }
 
-public sealed class ControlsPage : MdContentPage
+public sealed class ControlsPage : MavContentPage
 {
     private sealed record DemoRow(string Name, string Role, int Score);
 
     public ControlsPage() : base("Controls")
     {
-        Subtitle = "A few Md3 controls inside a page";
-        AddAction(MdIcons.Save, () => MdSnackbar.Show("Saved", anchor: this));
+        Subtitle = "A few Mav controls inside a page";
+        AddAction(MavIcons.Save, () => MavSnackbar.Show("Saved", anchor: this));
 
-        var name = new MdTextField(
+        var name = new MavTextField(
             "Name",
-            MdTextFieldVariant.Outlined,
+            MavTextFieldVariant.Outlined,
             placeholder: "Ada Lovelace",
-            leadingIcon: MdIcons.Person);
-        var email = new MdTextField(
+            leadingIcon: MavIcons.Person);
+        var email = new MavTextField(
             "Email",
-            MdTextFieldVariant.Filled,
+            MavTextFieldVariant.Filled,
             placeholder: "ada@example.com",
-            leadingIcon: MdIcons.Email);
-        var notes = new MdTextArea("Notes", placeholder: "Write something…");
+            leadingIcon: MavIcons.Email);
+        var notes = new MavTextArea("Notes", placeholder: "Write something…");
 
-        var role = new MdSelect("Role", new[] { "Admin", "Editor", "Viewer" })
+        var role = new MavSelect("Role", new[] { "Admin", "Editor", "Viewer" })
         {
             SelectedIndex = 0,
         };
 
-        var dueDate = new MdDatePickerField
+        var dueDate = new MavDatePickerField
         {
             Label = "Due date",
             IsClearable = true,
         };
 
-        var notify = new MdSwitch(true, showIcons: true)
+        var notify = new MavSwitch(true, showIcons: true)
         {
-            OnIcon = MdIcons.Notifications,
-            OffIcon = MdIcons.NotificationsOff,
+            OnIcon = MavIcons.Notifications,
+            OffIcon = MavIcons.NotificationsOff,
         };
 
-        var chips = new MdChipGroup(singleSelection: false);
-        chips.AddChip("Design", MdChipKind.Filter, MdIcons.Palette, selected: true);
-        chips.AddChip("Engineering", MdChipKind.Filter, MdIcons.Code);
-        chips.AddChip("Research", MdChipKind.Filter, MdIcons.Science);
+        var chips = new MavChipGroup(singleSelection: false);
+        chips.AddChip("Design", MavChipKind.Filter, MavIcons.Palette, selected: true);
+        chips.AddChip("Engineering", MavChipKind.Filter, MavIcons.Code);
+        chips.AddChip("Research", MavChipKind.Filter, MavIcons.Science);
 
-        var slider = new MdSlider
+        var slider = new MavSlider
         {
             Minimum = 0,
             Maximum = 100,
@@ -417,23 +417,23 @@ public sealed class ControlsPage : MdContentPage
             Spacing = 8,
             Children =
             {
-                new MdButton("Filled", MdButtonVariant.Filled),
-                new MdButton("Tonal", MdButtonVariant.Tonal),
-                new MdButton("Elevated", MdButtonVariant.Elevated),
-                new MdButton("Outlined", MdButtonVariant.Outlined),
-                new MdButton("Text", MdButtonVariant.Text),
+                new MavButton("Filled", MavButtonVariant.Filled),
+                new MavButton("Tonal", MavButtonVariant.Tonal),
+                new MavButton("Elevated", MavButtonVariant.Elevated),
+                new MavButton("Outlined", MavButtonVariant.Outlined),
+                new MavButton("Text", MavButtonVariant.Text),
             },
         };
 
-        var formCard = new MdCard(
-            MdCardVariant.Outlined,
+        var formCard = new MavCard(
+            MavCardVariant.Outlined,
             new StackPanel
             {
                 Spacing = 14,
                 Children = { name, email, notes, role, dueDate, notify },
             });
 
-        var table = new MdDataTable
+        var table = new MavDataTable
         {
             ItemsSource = new[]
             {
@@ -461,33 +461,33 @@ public sealed class ControlsPage : MdContentPage
             PageLayout.Headline("Data table"),
             table);
 
-        BottomBar = new MdBottomAppBar(MdIcons.Add, () =>
-            MdSnackbar.Show("Add from controls page", anchor: this));
+        BottomBar = new MavBottomAppBar(MavIcons.Add, () =>
+            MavSnackbar.Show("Add from controls page", anchor: this));
     }
 }
 
-public sealed class InboxPage : MdContentPage
+public sealed class InboxPage : MavContentPage
 {
     public InboxPage() : base("Inbox")
     {
         Subtitle = "12 messages";
-        AddAction(MdIcons.Search, () => MdSnackbar.Show("Search", anchor: this));
-        AddAction(MdIcons.MoreVert, () => MdSnackbar.Show("More", anchor: this));
+        AddAction(MavIcons.Search, () => MavSnackbar.Show("Search", anchor: this));
+        AddAction(MavIcons.MoreVert, () => MavSnackbar.Show("More", anchor: this));
 
-        var list = new MdList { ShowDividers = true };
+        var list = new MavList { ShowDividers = true };
         list.AddSubheader("Today");
 
         for (var i = 1; i <= 12; i++)
         {
             var index = i;
             var subject = $"Message {index}";
-            var item = new MdListItem(
+            var item = new MavListItem(
                 subject,
                 supportingText: index % 2 == 0
                     ? "A short supporting line for the list item"
                     : "Tap to open a detail page",
-                leadingIcon: index % 2 == 0 ? MdIcons.Mail : MdIcons.Chat,
-                trailingIcon: MdIcons.ChevronRight)
+                leadingIcon: index % 2 == 0 ? MavIcons.Mail : MavIcons.Chat,
+                trailingIcon: MavIcons.ChevronRight)
             {
                 IsInteractive = true,
             };
@@ -495,7 +495,7 @@ public sealed class InboxPage : MdContentPage
             list.AddItem(item);
         }
 
-        Content = new MdScrollViewer
+        Content = new MavScrollViewer
         {
             Padding = new Thickness(16, 8, 16, 24),
             Content = list,
@@ -503,42 +503,42 @@ public sealed class InboxPage : MdContentPage
     }
 }
 
-public sealed class DetailPage : MdContentPage
+public sealed class DetailPage : MavContentPage
 {
     public DetailPage(string subject, int index) : base(subject)
     {
         Subtitle = $"Message {index} of 12";
-        AddAction(MdIcons.Reply, () => MdSnackbar.Show("Reply", anchor: this));
-        AddAction(MdIcons.MoreVert, () => MdSnackbar.Show("More", anchor: this));
+        AddAction(MavIcons.Reply, () => MavSnackbar.Show("Reply", anchor: this));
+        AddAction(MavIcons.MoreVert, () => MavSnackbar.Show("More", anchor: this));
 
         Content = PageLayout.Scroll(
-            new MdCard(
-                MdCardVariant.Elevated,
+            new MavCard(
+                MavCardVariant.Elevated,
                 new StackPanel
                 {
                     Spacing = 12,
                     Children =
                     {
-                        new MdLabel { Text = "From: Ada Lovelace", Role = MdTypeRole.TitleMedium },
-                        new MdLabel
+                        new MavLabel { Text = "From: Ada Lovelace", Role = MavTypeRole.TitleMedium },
+                        new MavLabel
                         {
-                            Text = "This page was pushed onto the custom MdNavigationPage stack. " +
+                            Text = "This page was pushed onto the custom MavNavigationPage stack. " +
                                    "Press the back arrow in the app bar, or use the bottom bar action.",
-                            Role = MdTypeRole.BodyLarge,
+                            Role = MavTypeRole.BodyLarge,
                             TextWrapping = TextWrapping.Wrap,
                         },
-                        new MdDivider(),
-                        new MdLabel
+                        new MavDivider(),
+                        new MavLabel
                         {
                             Text = "The header, actions and page content are fully Material. " +
                                    "No Avalonia NavigationPage or ContentPage is involved.",
-                            Role = MdTypeRole.BodyMedium,
+                            Role = MavTypeRole.BodyMedium,
                             Secondary = true,
                             TextWrapping = TextWrapping.Wrap,
                         },
                     },
                 }));
 
-        BottomBar = new MdBottomAppBar(MdIcons.ArrowBack, () => Navigation?.Pop());
+        BottomBar = new MavBottomAppBar(MavIcons.ArrowBack, () => Navigation?.Pop());
     }
 }

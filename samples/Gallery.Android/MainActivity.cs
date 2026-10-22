@@ -3,10 +3,10 @@ using Android.Content.PM;
 using Android.Runtime;
 using Avalonia;
 using Avalonia.Android;
-using Md3.Avalonia;
-using Md3.Avalonia.Theming;
+using Mav;
+using Mav.Theming;
 
-namespace Md3.Gallery.Android;
+namespace Mav.Gallery.Android;
 
 [Application]
 public sealed class MainApplication : AvaloniaAndroidApplication<MobileApp>
@@ -18,17 +18,17 @@ public sealed class MainApplication : AvaloniaAndroidApplication<MobileApp>
 
     protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
         => base.CustomizeAppBuilder(builder)
-            .UseMd3(options =>
+            .UseMav(options =>
             {
-                options.SeedColor = MdColors.Indigo;
-                options.Mode = MdThemeMode.System;
+                options.SeedColor = MavColors.Indigo;
+                options.Mode = MavThemeMode.System;
             })
             .LogToTrace();
 }
 
 [Activity(
-    Label = "Md3 Gallery",
-    Theme = "@style/Md3Gallery.NoActionBar",
+    Label = "Mav Gallery",
+    Theme = "@style/MavGallery.NoActionBar",
     MainLauncher = true,
     Exported = true,
     ConfigurationChanges = ConfigChanges.Orientation |

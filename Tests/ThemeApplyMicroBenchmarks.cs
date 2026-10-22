@@ -7,11 +7,11 @@ using System.Reflection;
 using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
 using Avalonia.Threading;
-using Md3.Avalonia.Controls;
-using Md3.Avalonia.Theming;
+using Mav.Controls;
+using Mav.Theming;
 using Xunit;
 
-namespace Md3.Avalonia.Tests;
+namespace Mav.Tests;
 
 /// <summary>
 /// Step-by-step cost of the per-control theme apply (docs/ANALYSIS.md, item 4).
@@ -26,22 +26,22 @@ public class ThemeApplyMicroBenchmarks
     [AvaloniaFact]
     public void Apply_steps_per_control()
     {
-        var button = new MdButton { Text = "x", Variant = MdButtonVariant.Filled };
-        var field = new MdTextField { Label = "x" };
+        var button = new MavButton { Text = "x", Variant = MavButtonVariant.Filled };
+        var field = new MavTextField { Label = "x" };
         var panel = new StackPanel { Children = { button, field } };
         var window = new Window { Width = 400, Height = 300, Content = panel };
         window.Show();
         Dispatcher.UIThread.RunJobs();
 
-        var buildMethod = typeof(MdTheme).GetMethod("Build", BindingFlags.NonPublic | BindingFlags.Static)!;
-        var modeField = typeof(MdTheme).GetField("_mode", BindingFlags.NonPublic | BindingFlags.Static)!;
+        var buildMethod = typeof(MavTheme).GetMethod("Build", BindingFlags.NonPublic | BindingFlags.Static)!;
+        var modeField = typeof(MavTheme).GetField("_mode", BindingFlags.NonPublic | BindingFlags.Static)!;
         var originalMode = modeField.GetValue(null);
 
         const BindingFlags inst = BindingFlags.NonPublic | BindingFlags.Instance;
-        var sizeTokens = typeof(MdButton).GetMethod("ApplySizeTokens", inst)!;
-        var shape = typeof(MdButton).GetMethod("ApplyShape", inst)!;
-        var buttonTheme = typeof(MdButton).GetMethod("ApplyTheme", inst, [typeof(MdTheme)])!;
-        var fieldTheme = typeof(MdTextField).GetMethod("ApplyTheme", inst, [typeof(MdTheme)])!;
+        var sizeTokens = typeof(MavButton).GetMethod("ApplySizeTokens", inst)!;
+        var shape = typeof(MavButton).GetMethod("ApplyShape", inst)!;
+        var buttonTheme = typeof(MavButton).GetMethod("ApplyTheme", inst, [typeof(MavTheme)])!;
+        var fieldTheme = typeof(MavTextField).GetMethod("ApplyTheme", inst, [typeof(MavTheme)])!;
 
         var tSize = new List<double>();
         var tShape = new List<double>();
@@ -50,9 +50,9 @@ public class ThemeApplyMicroBenchmarks
 
         for (int i = 0; i < Iterations; i++)
         {
-            // Alternate schemes without raising MdTheme.Changed: Build() reads _mode directly.
-            modeField.SetValue(null, i % 2 == 0 ? MdThemeMode.Dark : MdThemeMode.Light);
-            var theme = (MdTheme)buildMethod.Invoke(null, null)!;
+            // Alternate schemes without raising MavTheme.Changed: Build() reads _mode directly.
+            modeField.SetValue(null, i % 2 == 0 ? MavThemeMode.Dark : MavThemeMode.Light);
+            var theme = (MavTheme)buildMethod.Invoke(null, null)!;
 
             tSize.Add(Time(() => sizeTokens.Invoke(button, [theme])));
             tShape.Add(Time(() => shape.Invoke(button, [theme])));
@@ -61,16 +61,16 @@ public class ThemeApplyMicroBenchmarks
         }
 
         modeField.SetValue(null, originalMode);
-        MdTheme.UseLight();
+        MavTheme.UseLight();
         window.Close();
         Dispatcher.UIThread.RunJobs();
 
         var lines = new List<string>
         {
-            $"MdButton.ApplySizeTokens: median {Median(tSize):F1} us",
-            $"MdButton.ApplyShape:      median {Median(tShape):F1} us",
-            $"MdButton.ApplyTheme (full): median {Median(tButton):F1} us",
-            $"MdTextField.ApplyTheme:   median {Median(tField):F1} us",
+            $"MavButton.ApplySizeTokens: median {Median(tSize):F1} us",
+            $"MavButton.ApplyShape:      median {Median(tShape):F1} us",
+            $"MavButton.ApplyTheme (full): median {Median(tButton):F1} us",
+            $"MavTextField.ApplyTheme:   median {Median(tField):F1} us",
             $"(iterations={Iterations}; ApplyTheme of button includes size tokens and shape)",
         };
         Report(lines);
@@ -102,7 +102,7 @@ public class ThemeApplyMicroBenchmarks
 
     private static string FindRepoRoot()
     {
-        var env = Environment.GetEnvironmentVariable("MD3_REPO_ROOT");
+        var env = Environment.GetEnvironmentVariable("MAV_REPO_ROOT");
         if (!string.IsNullOrEmpty(env))
             return env;
 

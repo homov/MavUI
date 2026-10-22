@@ -1,11 +1,11 @@
-# Md3 Desktop Demo
+# Mav Desktop Demo
 
-Small desktop harness for the custom Md3 navigation stack.
+Small desktop harness for the custom Mav navigation stack.
 
 ## Run
 
 ```bash
-dotnet run --project samples/Demo/Md3.Demo.csproj
+dotnet run --project samples/Demo/Mav.Demo.csproj
 ```
 
 ## Mobile preview
@@ -14,10 +14,10 @@ The demo can simulate phone chrome on the desktop:
 
 ```bash
 # 400 x 800 dp window, 24 dp status bar and 48 dp navigation bar
-MD3_WINDOW=400x800 MD3_SAFE_AREA=24,48 dotnet run --project samples/Demo/Md3.Demo.csproj
+MAV_WINDOW=400x800 MAV_SAFE_AREA=24,48 dotnet run --project samples/Demo/Mav.Demo.csproj
 
 # also simulate an open soft keyboard with a 300 dp inset
-MD3_WINDOW=400x800 MD3_SAFE_AREA=24,48 MD3_KEYBOARD=300 dotnet run --project samples/Demo/Md3.Demo.csproj
+MAV_WINDOW=400x800 MAV_SAFE_AREA=24,48 MAV_KEYBOARD=300 dotnet run --project samples/Demo/Mav.Demo.csproj
 ```
 
 ## Smoke test
@@ -25,7 +25,7 @@ MD3_WINDOW=400x800 MD3_SAFE_AREA=24,48 MD3_KEYBOARD=300 dotnet run --project sam
 Starts the app, pushes two pages, pops one, returns to the root and exits:
 
 ```bash
-MD3_SMOKE=1 dotnet run --project samples/Demo/Md3.Demo.csproj
+MAV_SMOKE=1 dotnet run --project samples/Demo/Mav.Demo.csproj
 ```
 
 Expected output:
@@ -37,8 +37,8 @@ back closes overlay: overlay=False, depth=2
 dialog for page leave: overlay=True
 push inbox: depth=3, title=Inbox, overlay=False
 pop: depth=2, title=Controls
-pop to root: depth=1, title=Md3 Navigation, command=False
-MD3_SMOKE_OK
+pop to root: depth=1, title=Mav Navigation, command=False
+MAV_SMOKE_OK
 ```
 
 ## What to check manually
@@ -54,24 +54,24 @@ MD3_SMOKE_OK
 
 ## Automated GUI checks (Linux/X11)
 
-`tools/linux/md3ui.py` starts the demo, takes client-area screenshots and sends
+`tools/linux/mavui.py` starts the demo, takes client-area screenshots and sends
 clicks, keys, typed text and wheel scrolling. Coordinates are client-area pixels, so
 they match the screenshot 1:1.
 
 ```bash
-python3 tools/linux/md3ui.py start --no-build
-python3 tools/linux/md3ui.py shot  --out /tmp/opencode/home.png
-python3 tools/linux/md3ui.py click --x 779 --y 285     # Show dialog
-python3 tools/linux/md3ui.py key   --keys Escape
-python3 tools/linux/md3ui.py wheel --x 400 --y 300 --delta -600
-python3 tools/linux/md3ui.py stop
+python3 tools/linux/mavui.py start --no-build
+python3 tools/linux/mavui.py shot  --out /tmp/opencode/home.png
+python3 tools/linux/mavui.py click --x 779 --y 285     # Show dialog
+python3 tools/linux/mavui.py key   --keys Escape
+python3 tools/linux/mavui.py wheel --x 400 --y 300 --delta -600
+python3 tools/linux/mavui.py stop
 ```
 
 Mobile preview works the same way:
 
 ```bash
-python3 tools/linux/md3ui.py start --window 400x800 --safe-area 24,48 --keyboard 300
-python3 tools/linux/md3ui.py start --window 640x360 --safe-area 48,0,0,24
+python3 tools/linux/mavui.py start --window 400x800 --safe-area 24,48 --keyboard 300
+python3 tools/linux/mavui.py start --window 640x360 --safe-area 48,0,0,24
 ```
 
-On Windows use `tools/win/md3ui.ps1` instead (`-Action start|stop|shot|click|key|wheel`).
+On Windows use `tools/win/mavui.ps1` instead (`-Action start|stop|shot|click|key|wheel`).

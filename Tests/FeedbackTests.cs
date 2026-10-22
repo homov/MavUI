@@ -4,70 +4,70 @@ using Avalonia.Headless.XUnit;
 using Avalonia.Layout;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
-using Md3.Avalonia;
-using Md3.Avalonia.Controls;
-using Md3.Avalonia.Theming;
+using Mav;
+using Mav.Controls;
+using Mav.Theming;
 using Xunit;
 
-namespace Md3.Avalonia.Tests;
+namespace Mav.Tests;
 
 public class FeedbackTests
 {
     [AvaloniaFact]
-    public void MdSnackbar_show_clears_pending_queue()
+    public void MavSnackbar_show_clears_pending_queue()
     {
         // No TopLevel is attached in this headless test, so Show only exercises the
         // global FIFO contract: Show() clears the queue, Enqueue() appends.
-        MdSnackbar.Enqueue("one", duration: MdSnackbarDuration.Indefinite);
-        MdSnackbar.Enqueue("two", duration: MdSnackbarDuration.Indefinite);
-        Assert.True(MdSnackbar.QueueCount >= 1);
+        MavSnackbar.Enqueue("one", duration: MavSnackbarDuration.Indefinite);
+        MavSnackbar.Enqueue("two", duration: MavSnackbarDuration.Indefinite);
+        Assert.True(MavSnackbar.QueueCount >= 1);
 
-        MdSnackbar.Show("Hello", duration: MdSnackbarDuration.Short);
-        Assert.Equal(0, MdSnackbar.QueueCount);
-        MdSnackbar.Dismiss();
+        MavSnackbar.Show("Hello", duration: MavSnackbarDuration.Short);
+        Assert.Equal(0, MavSnackbar.QueueCount);
+        MavSnackbar.Dismiss();
     }
 
     [AvaloniaFact]
     public void Indefinite_snackbar_has_a_close_button()
     {
-        var anchor = new MdButton("Anchor");
-        var page = new MdContentPage("Root") { Content = anchor };
-        var navigation = new MdNavigationPage(page);
+        var anchor = new MavButton("Anchor");
+        var page = new MavContentPage("Root") { Content = anchor };
+        var navigation = new MavNavigationPage(page);
         var window = new Window { Width = 400, Height = 600, Content = navigation };
         window.Show();
         Dispatcher.UIThread.RunJobs();
 
-        MdSnackbar.Show("Uploading…", duration: MdSnackbarDuration.Indefinite, anchor: anchor);
+        MavSnackbar.Show("Uploading…", duration: MavSnackbarDuration.Indefinite, anchor: anchor);
         Dispatcher.UIThread.RunJobs();
 
         var close = navigation.GetVisualDescendants()
-            .OfType<MdIconButton>()
-            .FirstOrDefault(button => button.Icon == MdIcons.Close);
+            .OfType<MavIconButton>()
+            .FirstOrDefault(button => button.Icon == MavIcons.Close);
 
         Assert.NotNull(close);
 
-        MdSnackbar.Dismiss();
+        MavSnackbar.Dismiss();
         window.Close();
     }
 
     [AvaloniaFact]
-    public void MdLinearProgress_indeterminate()
+    public void MavLinearProgress_indeterminate()
     {
-        var bar = new MdLinearProgress { IsIndeterminate = true };
+        var bar = new MavLinearProgress { IsIndeterminate = true };
         Assert.True(bar.IsIndeterminate);
     }
 
     [AvaloniaFact]
-    public void MdSkeleton_shape()
+    public void MavSkeleton_shape()
     {
-        var sk = new MdSkeleton { Shape = MdSkeletonShape.Rounded };
+        var sk = new MavSkeleton { Shape = MavSkeletonShape.Rounded };
         Assert.NotNull(sk);
     }
 
     [AvaloniaFact]
-    public void MdInfoBar_severity()
+    public void MavInfoBar_severity()
     {
-        var info = new MdInfoBar { Severity = MdInfoBarSeverity.Success, Title = "Done" };
-        Assert.Equal(MdInfoBarSeverity.Success, info.Severity);
+        var info = new MavInfoBar { Severity = MavInfoBarSeverity.Success, Title = "Done" };
+        Assert.Equal(MavInfoBarSeverity.Success, info.Severity);
     }
 }

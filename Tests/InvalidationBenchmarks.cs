@@ -9,10 +9,10 @@ using Avalonia.Headless.XUnit;
 using Avalonia.Media;
 using Avalonia.Styling;
 using Avalonia.Threading;
-using Md3.Avalonia.Controls;
+using Mav.Controls;
 using Xunit;
 
-namespace Md3.Avalonia.Tests;
+namespace Mav.Tests;
 
 /// <summary>
 /// Isolates the deferred cost of a theme switch (docs/ANALYSIS.md, item 4):
@@ -28,7 +28,7 @@ public class InvalidationBenchmarks
     [AvaloniaFact]
     public void Render_only_vs_layout_change_on_500_buttons()
     {
-        var buttons = Enumerable.Range(0, Count).Select(i => new MdButton { Text = $"B{i}" }).ToList();
+        var buttons = Enumerable.Range(0, Count).Select(i => new MavButton { Text = $"B{i}" }).ToList();
         var panel = new StackPanel();
         foreach (var b in buttons) panel.Children.Add(b);
         var window = new Window { Width = 800, Height = 900, Content = new ScrollViewer { Content = panel } };
@@ -63,15 +63,15 @@ public class InvalidationBenchmarks
 
         Report(new List<string>
         {
-            $"{Count} x MdButton, background change (render only): median {Median(renderOnly):F2} ms",
-            $"{Count} x MdButton, padding change (layout): median {Median(layout):F2} ms",
+            $"{Count} x MavButton, background change (render only): median {Median(renderOnly):F2} ms",
+            $"{Count} x MavButton, padding change (layout): median {Median(layout):F2} ms",
         });
     }
 
     [AvaloniaFact]
     public void App_resource_sync_cost_with_500_buttons()
     {
-        var buttons = Enumerable.Range(0, Count).Select(i => new MdButton { Text = $"B{i}" }).ToList();
+        var buttons = Enumerable.Range(0, Count).Select(i => new MavButton { Text = $"B{i}" }).ToList();
         var panel = new StackPanel();
         foreach (var b in buttons) panel.Children.Add(b);
         var window = new Window { Width = 800, Height = 900, Content = new ScrollViewer { Content = panel } };
@@ -79,9 +79,9 @@ public class InvalidationBenchmarks
         Dispatcher.UIThread.RunJobs();
 
         var app = Application.Current!;
-        var sync = typeof(Md3.Avalonia.Theming.MdTheme)
+        var sync = typeof(Mav.Theming.MavTheme)
             .GetMethod("SyncAppResources", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static)!;
-        var theme = Md3.Avalonia.Theming.MdTheme.Current;
+        var theme = Mav.Theming.MavTheme.Current;
 
         var resources = new List<double>();
         var variant = new List<double>();
@@ -109,8 +109,8 @@ public class InvalidationBenchmarks
 
         var lines = new List<string>
         {
-            $"{Count} x MdButton attached, SyncAppResources (app.Resources writes) + RunJobs: median {Median(resources):F2} ms",
-            $"{Count} x MdButton attached, RequestedThemeVariant flip + RunJobs: median {Median(variant):F2} ms",
+            $"{Count} x MavButton attached, SyncAppResources (app.Resources writes) + RunJobs: median {Median(resources):F2} ms",
+            $"{Count} x MavButton attached, RequestedThemeVariant flip + RunJobs: median {Median(variant):F2} ms",
         };
         var dir = Path.Combine(FindRepoRoot(), "ci");
         Directory.CreateDirectory(dir);
@@ -135,7 +135,7 @@ public class InvalidationBenchmarks
 
     private static string FindRepoRoot()
     {
-        var env = Environment.GetEnvironmentVariable("MD3_REPO_ROOT");
+        var env = Environment.GetEnvironmentVariable("MAV_REPO_ROOT");
         if (!string.IsNullOrEmpty(env))
             return env;
 

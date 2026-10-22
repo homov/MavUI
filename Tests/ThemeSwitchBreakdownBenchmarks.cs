@@ -7,11 +7,11 @@ using System.Reflection;
 using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
 using Avalonia.Threading;
-using Md3.Avalonia.Controls;
-using Md3.Avalonia.Theming;
+using Mav.Controls;
+using Mav.Theming;
 using Xunit;
 
-namespace Md3.Avalonia.Tests;
+namespace Mav.Tests;
 
 /// <summary>
 /// Breaks down the cost of a theme switch (docs/ANALYSIS.md, section 0 and item 4):
@@ -30,8 +30,8 @@ public class ThemeSwitchBreakdownBenchmarks
         var lines = new List<string>();
 
         // 1. Cost of building the theme alone (no visual tree, no subscribers).
-        var build = typeof(MdTheme).GetMethod("Build", BindingFlags.NonPublic | BindingFlags.Static)
-            ?? throw new InvalidOperationException("MdTheme.Build not found");
+        var build = typeof(MavTheme).GetMethod("Build", BindingFlags.NonPublic | BindingFlags.Static)
+            ?? throw new InvalidOperationException("MavTheme.Build not found");
         var buildTimes = Measure(() => build.Invoke(null, null), 3, 8);
         lines.Add($"Build() alone (scheme generation): median {Median(buildTimes):F2} ms");
 
@@ -42,10 +42,10 @@ public class ThemeSwitchBreakdownBenchmarks
         // 3. Switch cost per control type (500 attached controls of one type).
         var kinds = new (string Name, Func<Control> Create)[]
         {
-            ("MdButton", () => new MdButton { Text = "x" }),
-            ("MdCard", () => new MdCard { Body = new global::Avalonia.Controls.TextBlock { Text = "x" } }),
-            ("MdTextField", () => new MdTextField { Label = "x" }),
-            ("MdSlider", () => new MdSlider(0, 100, 50, 0)),
+            ("MavButton", () => new MavButton { Text = "x" }),
+            ("MavCard", () => new MavCard { Body = new global::Avalonia.Controls.TextBlock { Text = "x" } }),
+            ("MavTextField", () => new MavTextField { Label = "x" }),
+            ("MavSlider", () => new MavSlider(0, 100, 50, 0)),
         };
 
         foreach (var (name, create) in kinds)
@@ -55,8 +55,8 @@ public class ThemeSwitchBreakdownBenchmarks
         }
 
         // 4. Same type, but the controls are NOT attached (apply should be skipped).
-        var detached = MeasureSwitchDetached(() => new MdButton { Text = "x" }, Count);
-        lines.Add($"switch, {Count} x MdButton detached (not in visual tree): median {detached:F2} ms");
+        var detached = MeasureSwitchDetached(() => new MavButton { Text = "x" }, Count);
+        lines.Add($"switch, {Count} x MavButton detached (not in visual tree): median {detached:F2} ms");
 
         Report(lines);
     }
@@ -68,13 +68,13 @@ public class ThemeSwitchBreakdownBenchmarks
         // and deferred part (RunJobs: layout and render work queued by the property changes).
         var panel = new StackPanel();
         for (int i = 0; i < Count; i++)
-            panel.Children.Add(new MdButton { Text = "x" });
+            panel.Children.Add(new MavButton { Text = "x" });
         var window = new Window { Width = 800, Height = 900, Content = new ScrollViewer { Content = panel } };
         window.Show();
         Dispatcher.UIThread.RunJobs();
 
-        // MD3_PROFILE_ROUNDS lets the profiling job run the loop long enough to attach a tracer.
-        var rounds = int.TryParse(Environment.GetEnvironmentVariable("MD3_PROFILE_ROUNDS"), out var n) && n > 0
+        // MAV_PROFILE_ROUNDS lets the profiling job run the loop long enough to attach a tracer.
+        var rounds = int.TryParse(Environment.GetEnvironmentVariable("MAV_PROFILE_ROUNDS"), out var n) && n > 0
             ? n
             : Rounds;
 
@@ -83,7 +83,7 @@ public class ThemeSwitchBreakdownBenchmarks
         for (int i = 0; i < Warmup + rounds; i++)
         {
             var s = Stopwatch.StartNew();
-            if (i % 2 == 0) MdTheme.UseDark(); else MdTheme.UseLight();
+            if (i % 2 == 0) MavTheme.UseDark(); else MavTheme.UseLight();
             s.Stop();
             var d = Stopwatch.StartNew();
             Dispatcher.UIThread.RunJobs();
@@ -95,7 +95,7 @@ public class ThemeSwitchBreakdownBenchmarks
             }
         }
 
-        MdTheme.UseLight();
+        MavTheme.UseLight();
         Dispatcher.UIThread.RunJobs();
         window.Content = null;
         window.Close();
@@ -103,7 +103,7 @@ public class ThemeSwitchBreakdownBenchmarks
 
         Report(new List<string>
         {
-            $"phases, {Count} x MdButton attached: synchronous Mode set (apply of all controls) median {Median(sync):F2} ms; " +
+            $"phases, {Count} x MavButton attached: synchronous Mode set (apply of all controls) median {Median(sync):F2} ms; " +
             $"deferred RunJobs (layout/render) median {Median(deferred):F2} ms",
         }, "benchmark-theme-phases.txt");
     }
@@ -124,7 +124,7 @@ public class ThemeSwitchBreakdownBenchmarks
         window.Content = null;
         window.Close();
         Dispatcher.UIThread.RunJobs();
-        MdTheme.UseLight();
+        MavTheme.UseLight();
         Dispatcher.UIThread.RunJobs();
         return median;
     }
@@ -135,7 +135,7 @@ public class ThemeSwitchBreakdownBenchmarks
         for (int i = 0; i < count; i++)
             _ = create();
         var median = MedianSwitch();
-        MdTheme.UseLight();
+        MavTheme.UseLight();
         Dispatcher.UIThread.RunJobs();
         return median;
     }
@@ -146,7 +146,7 @@ public class ThemeSwitchBreakdownBenchmarks
         for (int i = 0; i < Warmup + Rounds; i++)
         {
             var sw = Stopwatch.StartNew();
-            if (i % 2 == 0) MdTheme.UseDark(); else MdTheme.UseLight();
+            if (i % 2 == 0) MavTheme.UseDark(); else MavTheme.UseLight();
             Dispatcher.UIThread.RunJobs();
             sw.Stop();
             if (i >= Warmup) times.Add(sw.Elapsed.TotalMilliseconds);
@@ -186,7 +186,7 @@ public class ThemeSwitchBreakdownBenchmarks
 
     private static string FindRepoRoot()
     {
-        var env = Environment.GetEnvironmentVariable("MD3_REPO_ROOT");
+        var env = Environment.GetEnvironmentVariable("MAV_REPO_ROOT");
         if (!string.IsNullOrEmpty(env))
             return env;
 

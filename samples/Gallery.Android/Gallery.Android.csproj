@@ -7,8 +7,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
-    <RootNamespace>Md3.Gallery.Android</RootNamespace>
-    <AssemblyName>Md3.Gallery.Android</AssemblyName>
+    <RootNamespace>Mav.Gallery.Android</RootNamespace>
+    <AssemblyName>Mav.Gallery.Android</AssemblyName>
     <ApplicationId>com.md3.gallery</ApplicationId>
     <ApplicationVersion>1</ApplicationVersion>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Md3.Avalonia\Md3.Avalonia.csproj" />
+    <ProjectReference Include="..\..\MavUI\MavUI.csproj" />
   </ItemGroup>
 
   <ItemGroup>

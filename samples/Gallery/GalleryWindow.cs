@@ -1,12 +1,12 @@
-using Md3.Avalonia.Controls;
+using Mav.Controls;
 
-namespace Md3.Gallery;
+namespace Mav.Gallery;
 
-public sealed class GalleryWindow : MdWindow
+public sealed class GalleryWindow : MavWindow
 {
     public GalleryWindow()
     {
-        Title = "Md3 Control Gallery";
+        Title = "Mav Control Gallery";
         Width = 1320;
         Height = 900;
         MinWidth = 360;

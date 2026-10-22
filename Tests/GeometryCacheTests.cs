@@ -1,17 +1,17 @@
 using Avalonia;
 using Avalonia.Headless.XUnit;
-using Md3.Avalonia.Controls;
-using Md3.Avalonia.Primitives;
+using Mav.Controls;
+using Mav.Primitives;
 using Xunit;
 
-namespace Md3.Avalonia.Tests;
+namespace Mav.Tests;
 
 public class GeometryCacheTests
 {
     [AvaloniaFact]
     public void Arc_cache_reuses_geometry_for_identical_parameters()
     {
-        var cache = new MdArcCache();
+        var cache = new MavArcCache();
 
         var first = cache.Get(new Point(40, 40), 30, -90, 270);
         var second = cache.Get(new Point(40, 40), 30, -90, 270);
@@ -22,7 +22,7 @@ public class GeometryCacheTests
     [AvaloniaFact]
     public void Arc_cache_rebuilds_geometry_when_parameters_change()
     {
-        var cache = new MdArcCache();
+        var cache = new MavArcCache();
 
         var first = cache.Get(new Point(40, 40), 30, -90, 270);
         var resized = cache.Get(new Point(50, 50), 40, -90, 270);
@@ -35,7 +35,7 @@ public class GeometryCacheTests
     [AvaloniaFact]
     public void Field_outline_cache_reuses_geometry_for_identical_parameters()
     {
-        var cache = new MdFieldChromeCache();
+        var cache = new MavFieldChromeCache();
 
         var first = cache.Get(320, 56, 1, 0);
         var second = cache.Get(320, 56, 1, 0);
@@ -46,7 +46,7 @@ public class GeometryCacheTests
     [AvaloniaFact]
     public void Field_outline_cache_rebuilds_geometry_when_key_changes()
     {
-        var cache = new MdFieldChromeCache();
+        var cache = new MavFieldChromeCache();
 
         var plain = cache.Get(320, 56, 1, 0);
         var resized = cache.Get(321, 56, 1, 0);

@@ -1,4 +1,4 @@
-# Handoff: Md3 navigation / UI testing
+# Handoff: Mav navigation / UI testing
 
 Обновлено: 22 октября 2026  
 Язык общения с пользователем: **русский**.  
@@ -25,86 +25,86 @@
 **Готово**
 - Этапы 0–12 закрыты. **Раунд 2 оптимизаций** (`docs/OPTIMIZATION_PLAN_2.md`)
   закрыт по этапам 1–7: overlay lifecycle, `_wired*`, app bar/keyboard/theme,
-  bulk `MdList`, reconciliation `MdDataTable`, инкрементальный `MdTreeView` и
+  bulk `MavList`, reconciliation `MavDataTable`, инкрементальный `MavTreeView` и
   text-field hot path; этап 8 (полный прогон, сборки и визуальная проверка)
   закрыт. NuGet-публикация сознательно исключена из плана.
 - **233/233 headless-тестов**, сборки библиотеки/демо/Android — `0 Warning(s) 0 Error(s)`.
 - Реальное устройство: Xiaomi Redmi Note 4, **Android 15 (SDK 35)** после обновления прошивки,
   1080x1920, 420 dpi. USB: в `/etc/udev/rules.d/51-android.rules` была опечатка `UBSYSTEM`
   → исправлено на `SUBSYSTEM`; после прошивки заново принят RSA-ключ ADB.
-- Stage 8 полностью: `MdList` virtualization, `MdDataTable` chunking + **compact/card mode**
+- Stage 8 полностью: `MavList` virtualization, `MavDataTable` chunking + **compact/card mode**
   (`Layout=Auto/Table/Cards`, `CompactBreakpoint=600`).
-- Stage 11: `Md3Fonts` (`all`/`no-mdi`/`minimal`), `IsTrimmable`/`IsAotCompatible`,
+- Stage 11: `MavFonts` (`all`/`no-mdi`/`minimal`), `IsTrimmable`/`IsAotCompatible`,
   Release APK 65.60 MB → **27.71 MB** (trimmed+AOT, no-mdi), проверен на телефоне.
 - **Control Gallery** (Desktop/Web/Android): новый проект, все контролы по 11 группам,
   адаптивная оболочка (drawer ≥1000 dp, rail 700–999 dp, modal drawer <700 dp).
   См. `docs/gallery/README.md`, скриншоты `docs/gallery/`.
 - **Структура (22 Oct)**: все sample-хосты перенесены в `samples/` (`Demo`,
   `Demo.Android`, `Gallery`, `Gallery.Browser`, `Gallery.Android`), документация — в
-  `docs/`, добавлен `Md3.sln` со всеми проектами.
+  `docs/`, добавлен `MavUI.sln` со всеми проектами.
 - **Overlay fix (22 Oct)**: scrim диалога/листа снова покрывает всё окно.
   `OverlayRootGrid` берёт размер из `TopLevel.ClientSize` и пересчитывает
   measure при изменении окна/контейнера; проверено в галерее (scrim на всё окно).
 - Исправлено на реальном устройстве: edge-to-edge только API 35+, пустой overlay-host
   не перехватывает ввод, системные бары применяются после attach.
-- **Snackbar fix (22 Oct)**: `Indefinite` всегда показывает close-иконку (`MdIconButton`),
+- **Snackbar fix (22 Oct)**: `Indefinite` всегда показывает close-иконку (`MavIconButton`),
   галерея ставит в очередь конечные сообщения; тест
   `Indefinite_snackbar_has_a_close_button`. Web: очередь/автозакрытие/Dismiss проверены.
 - **Android 15 re-check (22 Oct)**: установлен свежий APK; `Open dialog`, `Open bottom sheet`,
   `Open side sheet` (открытие, закрытие × и Back), очередь snackbar (Short → Long →
   автозакрытие) и `Indefinite` с × — всё работает. `adb shell input tap/swipe` на Android 15
   работает. Скриншоты: `docs/gallery/android15-*.png`.
-- **Localization 2.0 (22 Oct)**: `MdLocalization` больше не требует подписок на события.
+- **Localization 2.0 (22 Oct)**: `MavLocalization` больше не требует подписок на события.
   `Observe`/`Localize` сами обновляют текст при смене провайдера или `SetCulture`;
   добавлены `ResourceManagerProvider`, `ChainedProvider`, `DelegateProvider`, `Keys`,
   `Format`, `Refresh`. В AXAML самый короткий вариант — `{md:Loc Key}` /
-  `{md:Loc Key=..., Fallback=...}`; attached-свойства `MdLocalization.Key`,
+  `{md:Loc Key=..., Fallback=...}`; attached-свойства `MavLocalization.Key`,
   `.Fallback`, `.Target` (Text/Label/Placeholder/Title/Tooltip) остались для
   динамической смены ключа. Код приложения не подписывается на события.
   13 новых тестов (`LocalizationTests`), всего 171.
-- **Keyboard-preview leak fix (22 Oct)**: после страницы Layout (её `MdKeyboardAvoidingHost`
+- **Keyboard-preview leak fix (22 Oct)**: после страницы Layout (её `MavKeyboardAvoidingHost`
   с `SimulatedKeyboardHeight = 120`) глобальный overlay-root оставался с нижним отступом
   120 dp: scrim не доходил до низа, а диалог был смещён вверх. Теперь
-  `MdKeyboardAvoidingHost` передаёт высоту в `MdOverlay` только пока сам находится
+  `MavKeyboardAvoidingHost` передаёт высоту в `MavOverlay` только пока сам находится
   в визуальном дереве, а при отсоединении пересчитывает максимум по оставшимся хостам.
   Регрессии: `Leaving_a_keyboard_preview_page_restores_the_full_overlay_height`,
   `Dialog_opened_after_a_keyboard_preview_page_is_centered`.
 
 - **Оптимизации (22 Oct)**: `docs/OPTIMIZATION_PLAN.md` закрыт полностью (этапы 1–7):
-  кэш дуг/outline, инкрементальные `MdList`/`MdDataTable` без пересоздания строк,
-  lifecycle `MdOverlay`, `IMdThemeService : IDisposable`, инвалидация `WidthCache`.
+  кэш дуг/outline, инкрементальные `MavList`/`MavDataTable` без пересоздания строк,
+  lifecycle `MavOverlay`, `IMavThemeService : IDisposable`, инвалидация `WidthCache`.
   Добавлено 27 тестов (всего **209** на тот момент), поведение проверено в demo.
-- **Оптимизации, раунд 2 (22 Oct)**: `MdOverlay` освобождает content/callbacks и
+- **Оптимизации, раунд 2 (22 Oct)**: `MavOverlay` освобождает content/callbacks и
   сообщает владельцу через `onClosed`; stale handles snackbar/tooltip и
   `IsOpen`/`Closed` у search/dialog/popover синхронизируются при внешнем закрытии.
-  Все 13 `_wired*`-контролов используют `MdItemEventWiring` (отписка + отвязка
-  parent). `MdTopAppBar` отписывается от `ScrollViewer` при detach,
-  `MdKeyboardAvoidingHost` хранит последний focused-контрол слабо, `MdTheme.Observe`
+  Все 13 `_wired*`-контролов используют `MavItemEventWiring` (отписка + отвязка
+  parent). `MavTopAppBar` отписывается от `ScrollViewer` при detach,
+  `MavKeyboardAvoidingHost` хранит последний focused-контрол слабо, `MavTheme.Observe`
   больше не рутит view. Добавлено 12 регрессий.
-- **MdList bulk (22 Oct)**: `HeightIndex` на `List<double>` + Fenwick, O(log n)
+- **MavList bulk (22 Oct)**: `HeightIndex` на `List<double>` + Fenwick, O(log n)
   append/tail-remove, один rebuild на middle-изменение. `SyncChildrenToDesired`
   убрал `IndexOf`-скан, dividers не синхронизируются во время realization, а
   одиночные append/tail-remove обновляют только затронутые контролы. Добавлены
   Stopwatch-регрессии на 5000 элементов; итог — **224/224**.
-- **MdDataTable reconciliation (22 Oct)**: direct path для append/tail-remove/
+- **MavDataTable reconciliation (22 Oct)**: direct path для append/tail-remove/
   replace без фильтра/сортировки/пагинации, индекс `source item → row`, общий
   `SyncRenderedControls` без `IndexOf`-скана, O(S+N) pruning selection и
   property-подписки только на время attach. `INotifyPropertyChanged` обновляет
   одну строку; sort/filter сохраняются через общий reconciler. Итог — **226/226**.
-- **MdTreeView incremental (22 Oct)**: кэш строк по узлу, sync по общему префиксу,
+- **MavTreeView incremental (22 Oct)**: кэш строк по узлу, sync по общему префиксу,
   мемоизированный фильтр за один проход, точечная инвалидация `NodeChanged`/
   `ChildrenChanged`, снятие подписок при удалении поддерева. Selection/scroll/
   expanded state сохраняются; итог — **231/231**.
 - **Text field hot path (22 Oct)**: один `ApplyTheme` на обновление состояния и
   ранний выход по кэшу темы/error/focus/floating state; дубли
   `SyncTrailing`/`SyncFooter` удалены. Ширина текста и notch остаются в
-  `MdTextMetrics`/`MdFieldChromeCache`; Stopwatch-регрессия на 2000 вводов и
+  `MavTextMetrics`/`MavFieldChromeCache`; Stopwatch-регрессия на 2000 вводов и
   20 смен темы; итог — **232/232**.
 - **Stage 12 (22 Oct)**: каталог `docs/AGENTS.md` §5 сверен с публичным API (208 типов,
-  119 публичных Md-классов, 91 строка каталога): у `MdColorPicker` убраны непубличные
+  119 публичных Md-классов, 91 строка каталога): у `MavColorPicker` убраны непубличные
   `Hue`/`HueSelected`.
-  Реализованы `MdCarousel.Layout` (`Hero`/`CenterAligned`/`MultiBrowse`/`Uncontained`) и
-  `MdSplitView.InitialRatio` (применяется один раз при первой раскладке, явный `PaneWidth`
+  Реализованы `MavCarousel.Layout` (`Hero`/`CenterAligned`/`MultiBrowse`/`Uncontained`) и
+  `MavSplitView.InitialRatio` (применяется один раз при первой раскладке, явный `PaneWidth`
   приоритетнее); добавлены 9 тестов, всего **182** (на тот момент). Создан `CHANGELOG.md` с политикой
   версий; NuGet-публикация в план не входит. Раскладки карусели проверены нативно.
 
@@ -115,17 +115,17 @@
 **Полезные команды**
 
 ```bash
-dotnet build Md3.Avalonia/Md3.Avalonia.csproj -v q --nologo
-dotnet test Tests/Md3.Avalonia.Tests.csproj --nologo          # 233/233
-MD3_SMOKE=1 dotnet run --project samples/Demo/Md3.Demo.csproj --no-build
+dotnet build MavUI/MavUI.csproj -v q --nologo
+dotnet test Tests/MavUI.Tests.csproj --nologo          # 233/233
+MAV_SMOKE=1 dotnet run --project samples/Demo/Mav.Demo.csproj --no-build
 
-dotnet run --project samples/Gallery/Md3.Gallery.csproj                # desktop
+dotnet run --project samples/Gallery/Mav.Gallery.csproj                # desktop
 dotnet run --project samples/Gallery.Browser/Gallery.Browser.csproj    # WASM (wasm-tools installed)
 dotnet build samples/Gallery.Android/Gallery.Android.csproj            # com.md3.gallery
 ```
 
-GUI-проверки: `MD3_WINDOW_TITLE="Md3 Control Gallery" python3 tools/linux/md3ui.py ...`.
-Для галереи в background: `nohup dotnet run --project samples/Gallery/Md3.Gallery.csproj --no-build &`.
+GUI-проверки: `MAV_WINDOW_TITLE="Mav Control Gallery" python3 tools/linux/mavui.py ...`.
+Для галереи в background: `nohup dotnet run --project samples/Gallery/Mav.Gallery.csproj --no-build &`.
 Web-сервер печатает `App url: http://127.0.0.1:<port>/`.
 Фоновые процессы (desktop gallery, browser server) в конце сессии остановлены.
 
@@ -135,13 +135,13 @@ Web-сервер печатает `App url: http://127.0.0.1:<port>/`.
   столкнёшься — использовать Tab/Enter/Back или реальный палец.
 - Synthetic pointer events на Web-canvas ненадёжны для overlay-контента (snackbar close,
   dialog buttons); страничные кнопки работают. Для проверки overlay лучше desktop/X11
-  (`md3ui.py`) или реальный браузер.
-- `MdSnackbar` глобальный, FIFO; `Indefinite` теперь всегда с ×.
+  (`mavui.py`) или реальный браузер.
+- `MavSnackbar` глобальный, FIFO; `Indefinite` теперь всегда с ×.
 
 **Файлы, изменённые в этой сессии (кратко)**
-- Library: `MdDataTable` (cards), `MdList` (virtualization), `MdSnackbar` (close),
-  `MdAutomation`, `MdGestureZones`, `MdAccessibility`, `MdPropertyCache`, `MdSystemBars`,
-  `Md3.Avalonia.csproj` (fonts/trim/AOT).
+- Library: `MavDataTable` (cards), `MavList` (virtualization), `MavSnackbar` (close),
+  `MavAutomation`, `MavGestureZones`, `MavAccessibility`, `MavPropertyCache`, `MavSystemBars`,
+  `MavUI.csproj` (fonts/trim/AOT).
 - Gallery: `samples/Gallery/` (shared shell/pages), `samples/Gallery.Browser/`, `samples/Gallery.Android/`,
   `docs/gallery/README.md`, `docs/gallery/`.
 - Docs: `docs/PLAN.md` (stage 8/11), `docs/AGENTS.md` (gestures/a11y/fonts/trim/gallery),
@@ -151,7 +151,7 @@ Web-сервер печатает `App url: http://127.0.0.1:<port>/`.
 
 ## 2. Цель проекта
 
-Сделать мобильную навигационную оболочку для `Md3.Avalonia` на чистом C#/Avalonia,
+Сделать мобильную навигационную оболочку для `Mav` на чистом C#/Avalonia,
 не используя `Avalonia.Controls.NavigationPage` и `Avalonia.Controls.ContentPage`.
 
 Стек: **Avalonia 12.1.4**, **.NET 10** (`net10.0`).
@@ -160,10 +160,10 @@ Web-сервер печатает `App url: http://127.0.0.1:<port>/`.
 
 - Material Design 3 для всей оболочки;
 - мобильный телефон — основная цель, desktop — первая площадка для проверки;
-- все контролы Md3 должны оставаться доступными;
+- все контролы Mav должны оставаться доступными;
 - pure C#, без AXAML-шаблонов;
 - без `[Obsolete]`-слоя совместимости;
-- без зависимости от Avalonia control themes: `MdWindow`, `MdScrollViewer`,
+- без зависимости от Avalonia control themes: `MavWindow`, `MavScrollViewer`,
   fallback overlay-host;
 - библиотека, демо, Android-хост и тесты собираются без предупреждений и ошибок.
 
@@ -171,26 +171,26 @@ Web-сервер печатает `App url: http://127.0.0.1:<port>/`.
 
 ## 3. Принятая архитектура
 
-### `MdContentPage`
+### `MavContentPage`
 
-Файл: `Md3.Avalonia/Controls/MdContentPage.cs`
+Файл: `MavUI/Controls/MavContentPage.cs`
 
-Страница-модель, наследуется от `MdContentView` (тело — унаследованный `Content`).
+Страница-модель, наследуется от `MavContentView` (тело — унаследованный `Content`).
 
 Ключевые свойства:
 
 - `Title`, `Subtitle`;
 - `NavigationIcon`, `ShowAppBar`, `ShowBackButton`, `AppBarVariant`;
 - `AddAction(icon, onClick, tooltip)`;
-- `BottomBar` (`MdBottomAppBar`);
+- `BottomBar` (`MavBottomAppBar`);
 - `FloatingActionButton`;
 - `NavigationAction` — кастомное действие ведущей кнопки app bar;
-- `Navigation` — ссылка на `MdNavigationPage`;
+- `Navigation` — ссылка на `MavNavigationPage`;
 - `OnBackPressed()`, `Appearing`, `Disappearing`, `NavigationClicked`.
 
-### `MdNavigationPage`
+### `MavNavigationPage`
 
-Файл: `Md3.Avalonia/Controls/MdNavigationPage.cs`
+Файл: `MavUI/Controls/MavNavigationPage.cs`
 
 Собственный стек страниц и общая оболочка:
 
@@ -201,11 +201,11 @@ Web-сервер печатает `App url: http://127.0.0.1:<port>/`.
 - `RefreshChrome()`;
 - `PageChanged`, `CanGoBackChanged`;
 - `ApplySafeArea`, `SafeAreaOverride`, `SafeAreaInsets`;
-- `KeyboardHost` (`MdKeyboardAvoidingHost`).
+- `KeyboardHost` (`MavKeyboardAvoidingHost`).
 
 Поведение back:
 
-1. закрыть верхний overlay через `MdOverlay.TryDismissTop()`;
+1. закрыть верхний overlay через `MavOverlay.TryDismissTop()`;
 2. дать текущей странице обработать back через `OnBackPressed()`;
 3. сделать `Pop()`.
 
@@ -221,15 +221,15 @@ Web-сервер печатает `App url: http://127.0.0.1:<port>/`.
 Библиотека больше не требует `Avalonia.Themes.Fluent`/`Simple` и не содержит
 AXAML-шаблонов. Собственные шаблоны предоставляют:
 
-- `MdWindow` — desktop-окно с `ContentPresenter` и `VisualLayerManager`;
-- `MdScrollViewer` — прокрутка через `ScrollContentPresenter` и
+- `MavWindow` — desktop-окно с `ContentPresenter` и `VisualLayerManager`;
+- `MavScrollViewer` — прокрутка через `ScrollContentPresenter` и
   `ScrollGestureRecognizer` (touch/wheel/keyboard, без видимых scrollbar);
-- `MdOverlay` — обычный `OverlayLayer`, если он есть, иначе fallback-host
-  внутри `MdNavigationPage`.
+- `MavOverlay` — обычный `OverlayLayer`, если он есть, иначе fallback-host
+  внутри `MavNavigationPage`.
 
 Android `EmbeddableControlRoot` не имеет `VisualLayerManager` без Avalonia theme,
-поэтому `MdNavigationPage` регистрирует собственный overlay-host. На desktop
-с `MdWindow` используется штатный `OverlayLayer`.
+поэтому `MavNavigationPage` регистрирует собственный overlay-host. На desktop
+с `MavWindow` используется штатный `OverlayLayer`.
 
 ### Safe area и клавиатура
 
@@ -238,58 +238,58 @@ Android `EmbeddableControlRoot` не имеет `VisualLayerManager` без Aval
   Страница пересчитывает insets по `TopLevel.ScalingChanged` и после `DispatcherPriority.Loaded`,
   поэтому статус-бар/вырез не превращаются в двойной отступ.
 - `TopLevel.AutoSafeAreaPadding` отключён для страницы и для host-контейнера:
-  insets применяет сама `MdNavigationPage`.
-- Верхний inset уходит в `MdTopAppBar.SafeAreaPadding`.
-- Нижний inset уходит в `MdBottomAppBar.SafeAreaPadding`, если нижняя панель есть,
+  insets применяет сама `MavNavigationPage`.
+- Верхний inset уходит в `MavTopAppBar.SafeAreaPadding`.
+- Нижний inset уходит в `MavBottomAppBar.SafeAreaPadding`, если нижняя панель есть,
   иначе в нижний `Margin` области страницы.
 - Боковые insets — в `Margin` страницы.
 - FAB остаётся внутри страницы и не перекрывает системную навигацию.
-- Страница обёрнута в `MdKeyboardAvoidingHost`: при открытой клавиатуре контент
+- Страница обёрнута в `MavKeyboardAvoidingHost`: при открытой клавиатуре контент
   поднимается, а сфокусированное поле прокручивается в видимую область.
 - `KeyboardHost.SimulatedKeyboardHeight` позволяет проверить это на desktop.
 
 ### Snackbar
 
-`MdSnackbar.Show(...)` сам находит `MdNavigationPage` по anchor и поднимается над
+`MavSnackbar.Show(...)` сам находит `MavNavigationPage` по anchor и поднимается над
 нижней панелью/FAB/safe inset. Высота нижней панели уже включает safe-area padding,
 поэтому inset не прибавляется повторно.
 
 ### Пересчёт overlay при resize / повороте / клавиатуре
 
-Файл: `Md3.Avalonia/Platform/MdOverlay.cs`
+Файл: `MavUI/Platform/MavOverlay.cs`
 
-- `MdOverlay.Show(anchor, content, ..., onViewportChanged: Action?)` — каждый overlay
+- `MavOverlay.Show(anchor, content, ..., onViewportChanged: Action?)` — каждый overlay
   передаёт callback, который умеет пересчитать свою геометрию; callback хранится в
   `OverlayHandle` и живёт ровно столько же, сколько overlay.
-- `OverlayRootGrid` вызывает `MdOverlay.NotifyViewportChanged()` по `SizeChanged`
+- `OverlayRootGrid` вызывает `MavOverlay.NotifyViewportChanged()` по `SizeChanged`
   корневого грида, `TopLevel.ClientSize` (`PropertyChanged`), `ScalingChanged`,
   `InsetsManager.SafeAreaChanged` и `IInputPane.StateChanged`.
 - Уведомления коалесцируются: `Dispatcher.UIThread.Post(..., DispatcherPriority.Loaded)`
   и один проход по всем открытым overlay.
-- `MdOverlay.SafeAreaOf(visual)` / `SafeAreaBounds(visual)` дают `Thickness` insets и
+- `MavOverlay.SafeAreaOf(visual)` / `SafeAreaBounds(visual)` дают `Thickness` insets и
   прямоугольник вьюпорта без safe area; `BoundsInOverlay(visual, root)` — координаты якоря.
-- `MdOverlay.SetSimulatedKeyboardHeight(...)` дублирует
-  `MdKeyboardAvoidingHost.SimulatedKeyboardHeight`, поэтому `MD3_KEYBOARD=300`
+- `MavOverlay.SetSimulatedKeyboardHeight(...)` дублирует
+  `MavKeyboardAvoidingHost.SimulatedKeyboardHeight`, поэтому `MAV_KEYBOARD=300`
   поднимает и страницу, и overlay (используется в демо/скриншотах); на Android
   работает реальный `IInputPane`.
 - Пересчёт «тихий»: меняются только `Margin`/`MinWidth`/`MaxWidth`/`MaxHeight`/`Width`
-  и положение карточки. `MdMotion.ScaleIn` выполняется только при открытии, выбранные
+  и положение карточки. `MavMotion.ScaleIn` выполняется только при открытии, выбранные
   значения (время, дата, пункт меню) не сбрасываются.
-- Свой `Reflow()`/`PlaceCard()`/`PositionCard()` есть у `MdPopover`, `MdMenu` (+ сабменю),
-  `MdDialog`, `MdDatePicker`, `MdTimePicker`, `MdSearchView`, `MdBottomSheet`,
-  `MdSideSheet`, modal drawer, `MdComboBox` dropdown, `MdTooltip`, `MdRichTooltip`,
-  `MdSnackbar`.
-- `MdPopover` пересчитывает `Width`/`MaxHeight` при каждом изменении вьюпорта — это
+- Свой `Reflow()`/`PlaceCard()`/`PositionCard()` есть у `MavPopover`, `MavMenu` (+ сабменю),
+  `MavDialog`, `MavDatePicker`, `MavTimePicker`, `MavSearchView`, `MavBottomSheet`,
+  `MavSideSheet`, modal drawer, `MavComboBox` dropdown, `MavTooltip`, `MavRichTooltip`,
+  `MavSnackbar`.
+- `MavPopover` пересчитывает `Width`/`MaxHeight` при каждом изменении вьюпорта — это
   снимает «залипание» ширины после resize.
-- `MdMenu` пересчитывает `MaxWidth`/высоту, измеряет строки и заново клампит карточку
+- `MavMenu` пересчитывает `MaxWidth`/высоту, измеряет строки и заново клампит карточку
   по 8 dp; если открыто сабменю, оно тоже пересчитывается, а при откреплённом якоре
   закрывается.
 
 ### Overlay lifecycle
 
-- `MdOverlay` запоминает страницу-владельца overlay.
-- `MdOverlay.DismissForPage(page)` закрывает dialogs/sheets, открытые со страницы.
-- `MdContentPage.NotifyDisappearing()` вызывает `DismissForPage(this)`.
+- `MavOverlay` запоминает страницу-владельца overlay.
+- `MavOverlay.DismissForPage(page)` закрывает dialogs/sheets, открытые со страницы.
+- `MavContentPage.NotifyDisappearing()` вызывает `DismissForPage(this)`.
 
 ---
 
@@ -301,9 +301,9 @@ Android `EmbeddableControlRoot` не имеет `VisualLayerManager` без Aval
 Windows остаётся альтернативной площадкой и местом, где сняты старые скриншоты.
 
 ```bash
-dotnet build Md3.Avalonia/Md3.Avalonia.csproj -v q --nologo
-dotnet build samples/Demo/Md3.Demo.csproj -v q --nologo
-dotnet test Tests/Md3.Avalonia.Tests.csproj --nologo
+dotnet build MavUI/MavUI.csproj -v q --nologo
+dotnet build samples/Demo/Mav.Demo.csproj -v q --nologo
+dotnet test Tests/MavUI.Tests.csproj --nologo
 ```
 
 Android-хост собирается локально через Linux SDK (нужны workload `android` и
@@ -315,10 +315,10 @@ dotnet build samples/Demo.Android/Demo.Android.csproj -v q --nologo
 ```
 
 Результат на Linux: `0 Warning(s) 0 Error(s)` для библиотеки, демо и Android-хоста,
-**233 теста проходят**. `MD3_SMOKE=1 dotnet run --project samples/Demo/Md3.Demo.csproj`
-печатает `MD3_SMOKE_OK` на реальном X11-дисплее.
+**233 теста проходят**. `MAV_SMOKE=1 dotnet run --project samples/Demo/Mav.Demo.csproj`
+печатает `MAV_SMOKE_OK` на реальном X11-дисплее.
 
-Тестовый проект: `Tests/Md3.Avalonia.Tests.csproj`
+Тестовый проект: `Tests/MavUI.Tests.csproj`
 
 - `Avalonia.Headless.XUnit` 12.1.4 (xunit v3);
 - `Microsoft.NET.Test.Sdk`;
@@ -326,43 +326,43 @@ dotnet build samples/Demo.Android/Demo.Android.csproj -v q --nologo
 - `Tests/TestAppBuilder.cs` — headless `Application`;
 - `Tests/NavigationTests.cs` — стек, `Replace`, запрет повторного push,
   `OnBackPressed`, `GoBackCommand`, safe area, `TopLevel.BackRequested`,
-  fallback overlay-host, `MdScrollViewer`, date/time pickers, клэмп
-  `MdMenu`/`MdPopover`/`MdSearchView`/`MdColorPicker` на узком хосте и
+  fallback overlay-host, `MavScrollViewer`, date/time pickers, клэмп
+  `MavMenu`/`MavPopover`/`MavSearchView`/`MavColorPicker` на узком хосте и
   сохранение edge-margin при якоре у правого края; resize при открытом
-  `MdMenu`/`MdPopover`/`MdDialog` и pickers (карточка остаётся внутри вьюпорта,
+  `MavMenu`/`MavPopover`/`MavDialog` и pickers (карточка остаётся внутри вьюпорта,
   popover не «залипает» на первой ширине);
 - `Tests/ListTests.cs` — dividers;
 - `Tests/KeyboardTests.cs` — клавиатурный inset и возврат к полной высоте,
   popover над симулированной клавиатурой;
-- `Tests/ButtonTests.cs` — `MdButton`, `MdIconButton`, `MdFab`/`MdExtendedFab`,
-  `MdButtonGroup`, `MdSplitButton`;
-- `Tests/InputTests.cs` — `MdTextField`, `MdTextArea`, `MdPinInput`,
-  `MdNumberBox`, `MdTagInput`, `MdRatingBar`;
-- `Tests/SelectionTests.cs` — `MdSwitch`, `MdCheckBox`, `MdRadioGroup`, `MdSlider`,
-  `MdSegmentedButton`, `MdChip`, `MdChipGroup`, `MdSelect`, `MdComboBox`;
-- `Tests/PickerTests.cs` — `MdDatePicker`, `MdDatePickerField`, `MdTimePicker`,
-  `MdColorPicker`;
-- `Tests/FeedbackTests.cs` — snackbar FIFO, progress, skeleton, `MdInfoBar`;
+- `Tests/ButtonTests.cs` — `MavButton`, `MavIconButton`, `MavFab`/`MavExtendedFab`,
+  `MavButtonGroup`, `MavSplitButton`;
+- `Tests/InputTests.cs` — `MavTextField`, `MavTextArea`, `MavPinInput`,
+  `MavNumberBox`, `MavTagInput`, `MavRatingBar`;
+- `Tests/SelectionTests.cs` — `MavSwitch`, `MavCheckBox`, `MavRadioGroup`, `MavSlider`,
+  `MavSegmentedButton`, `MavChip`, `MavChipGroup`, `MavSelect`, `MavComboBox`;
+- `Tests/PickerTests.cs` — `MavDatePicker`, `MavDatePickerField`, `MavTimePicker`,
+  `MavColorPicker`;
+- `Tests/FeedbackTests.cs` — snackbar FIFO, progress, skeleton, `MavInfoBar`;
 - `Tests/ChromeTests.cs` — top/bottom app bar, drawer, tabs, stepper, pagination;
-- `Tests/ListTableTreeTests.cs` — `MdList`, `MdDataTable`, `MdTreeView`, `MdCarousel`;
-- `Tests/ContainerTests.cs` — `MdCard`, `MdAvatar`, `MdBadge`, `MdDivider`,
-  `MdLabel`, `MdSafeArea`;
-- `Tests/ValidatorTests.cs` — правила `MdFormValidator` (Required, MinLength/MaxLength,
-  Email, Numeric, Pattern, Matches, Must, ClearErrors) и attached `MdValidation` +
+- `Tests/ListTableTreeTests.cs` — `MavList`, `MavDataTable`, `MavTreeView`, `MavCarousel`;
+- `Tests/ContainerTests.cs` — `MavCard`, `MavAvatar`, `MavBadge`, `MavDivider`,
+  `MavLabel`, `MavSafeArea`;
+- `Tests/ValidatorTests.cs` — правила `MavFormValidator` (Required, MinLength/MaxLength,
+  Email, Numeric, Pattern, Matches, Must, ClearErrors) и attached `MavValidation` +
   `ValidateTree`;
 - `Tests/AccessibilityTests.cs` — автоматические имена/роли/`IsRequiredForForm`,
   сохранение явно заданных приложением значений;
 - `Tests/KeyboardAccessibilityTests.cs` — Space/Enter для кнопок/FAB/переключателей,
   стрелки для слайдеров;
 - `Tests/ContrastTests.cs` — WCAG-контраст пар ролей для
-  `MdContrast.Standard/Medium/High` в light/dark;
+  `MavContrast.Standard/Medium/High` в light/dark;
 - `Tests/OverlayHitTestTests.cs` — пустой fallback overlay-host не перехватывает
   hit-test (регрессия реального Android);
 - `Tests/GestureZoneTests.cs` — edge-зона системного back: slider и carousel
   игнорируют touch из первых 20 dp и работают вне её;
-- `Tests/VirtualizationTests.cs` — окно реализации `MdList`, скролл, dividers,
+- `Tests/VirtualizationTests.cs` — окно реализации `MavList`, скролл, dividers,
   смена `ItemsSource`;
-- `Tests/DataTableVirtualizationTests.cs` — чанковая отрисовка строк `MdDataTable`,
+- `Tests/DataTableVirtualizationTests.cs` — чанковая отрисовка строк `MavDataTable`,
   пагинация, отсутствие внутреннего viewport;
 - `Tests/DataTableCompactTests.cs` — Auto/Table/Cards, breakpoint 600 dp, переход при
   resize, sort-чипы, label/value карточки, чекбоксы выбора;
@@ -370,85 +370,85 @@ dotnet build samples/Demo.Android/Demo.Android.csproj -v q --nologo
   (вывод через `ITestOutputHelper`);
 - `Tests/ControlSmokeTests.cs` — создание и раскладка всех групп контролов из
   `docs/AGENTS.md` §5 (кнопки, поля, selection, pickers, feedback, chrome, containers);
-  `MdWindow` проверяется как отдельный TopLevel.
+  `MavWindow` проверяется как отдельный TopLevel.
 
-Headless-окно Avalonia не создаёт `OverlayLayer`, но `MdNavigationPage` теперь
+Headless-окно Avalonia не создаёт `OverlayLayer`, но `MavNavigationPage` теперь
 регистрирует fallback overlay-host, поэтому dialog/picker/sheet можно проверять
 и в xunit.
 
 ### Виртуализация (этап 8)
 
-- `MdList` (`ItemsSource` + `ScrollViewer`): окно видимых элементов считается по
+- `MavList` (`ItemsSource` + `ScrollViewer`): окно видимых элементов считается по
   `TranslatePoint`/`Viewport` с overscan 480 dp; сверху и снизу выставляются spacer-ы,
   чтобы extент соответствовал полной высоте; измеренные высоты кешируются после
-  `Arrange`. Невидимые `MdListItem` не создаются. Ручной режим (`AddItem`/`AddSubheader`)
+  `Arrange`. Невидимые `MavListItem` не создаются. Ручной режим (`AddItem`/`AddSubheader`)
   не менялся — все `Children` остаются на месте.
 - Малые источники (≤60) и списки без `ScrollViewer` реализуются целиком (headless-тесты
   и простые страницы ведут себя как раньше).
-- `MdDataTable`: строки добавляются чанками по 100 при прокрутке тела, пока
+- `MavDataTable`: строки добавляются чанками по 100 при прокрутке тела, пока
   `MaxBodyHeight` задан; пагинация работает как раньше, без внутреннего viewport
   страница строится целиком.
-- `MdDataTable` compact/card: `Layout` = `Auto` (default), `Table`, `Cards`;
-  `CompactBreakpoint` = 600 dp; на узком хосте строка рисуется как `MdCard`
+- `MavDataTable` compact/card: `Layout` = `Auto` (default), `Table`, `Cards`;
+  `CompactBreakpoint` = 600 dp; на узком хосте строка рисуется как `MavCard`
   (первая колонка — headline, остальные — label/value), сортировка — чипами,
   выбор — чекбоксом. Layout пересобирается при пересечении breakpoint.
   Проверено: 400x800 — карточки (`linux-table-cards-400.png`), 1180x800 — таблица
   (`linux-table-desktop.png`).
-- Замеры (headless, viewport 300 dp): `MdList` 1000 → 14 реализованных, ~29 мс;
-  `MdDataTable` 1000 → 100 реализованных, ~25 мс.
+- Замеры (headless, viewport 300 dp): `MavList` 1000 → 14 реализованных, ~29 мс;
+  `MavDataTable` 1000 → 100 реализованных, ~25 мс.
 
 ### Жестовые зоны (этап 7)
 
-- `Md3.Avalonia/Platform/MdGestureZones.cs` — `IsInSystemEdge`/`ShouldDeferToSystem`
+- `MavUI/Platform/MavGestureZones.cs` — `IsInSystemEdge`/`ShouldDeferToSystem`
   (20 dp от левого/правого края `TopLevel`).
-- При touch-press в этой зоне `MdListItem` swipe actions, `MdCarousel`, `MdSlider`/
-  `MdRangeSlider`, `MdSplitView`, `MdColorPicker`, `MdTimeDial`, `MdRadialGauge` не
+- При touch-press в этой зоне `MavListItem` swipe actions, `MavCarousel`, `MavSlider`/
+  `MavRangeSlider`, `MavSplitView`, `MavColorPicker`, `MavTimeDial`, `MavRadialGauge` не
   начинают горизонтальный drag и не захватывают pointer — жест уходит системе
   (`TopLevel.BackRequested` → overlay → страница). Mouse не ограничивается.
-- `MdRefreshIndicator` не конфликтует: вертикальный pull и проверка draggable-потомков.
+- `MavRefreshIndicator` не конфликтует: вертикальный pull и проверка draggable-потомков.
 - Проверено на реальном устройстве: системный Back закрывает overlay, затем страницу;
   тесты — `GestureZoneTests` (edge-детект, slider, carousel).
 
 ### Размер, trim и AOT (этап 11)
 
-- `Md3Fonts` (MSBuild): `all` (по умолчанию) / `no-mdi` (без Material Design Icons) /
-  `minimal` (Roboto + Material Symbols). Размер `Md3.Avalonia.dll`: 4.87 / 3.69 / 3.35 MB.
-  `minimal` не подходит для классических `MdIcons` (демо падает на отсутствующем
+- `MavFonts` (MSBuild): `all` (по умолчанию) / `no-mdi` (без Material Design Icons) /
+  `minimal` (Roboto + Material Symbols). Размер `MavUI.dll`: 4.87 / 3.69 / 3.35 MB.
+  `minimal` не подходит для классических `MavIcons` (демо падает на отсутствующем
   glyphTypeface) — для стандартных иконок используйте `no-mdi`.
-- Библиотека: `IsTrimmable=true`, `IsAotCompatible=true`. `MdPropertyCache` аннотирован
-  `DynamicallyAccessedMembers`; call sites и `MdSystemBars.ApplyIconTheme` имеют
+- Библиотека: `IsTrimmable=true`, `IsAotCompatible=true`. `MavPropertyCache` аннотирован
+  `DynamicallyAccessedMembers`; call sites и `MavSystemBars.ApplyIconTheme` имеют
   обоснованные `UnconditionalSuppressMessage`. `DisplayMemberPath`/`PropertyName`
   в trimmed-приложении требуют rooting свойств модели (или `ValueSelector`/`ItemTemplate`).
 - Release-сборка Android по умолчанию включает trimming и AOT:
   `dotnet publish samples/Demo.Android/Demo.Android.csproj -c Release -p:PublishTrimmed=true
-  -p:Md3Fonts=no-mdi -p:AndroidPackageFormats=apk -o <dir>`.
+  -p:MavFonts=no-mdi -p:AndroidPackageFormats=apk -o <dir>`.
   Размеры: baseline без trim/AOT 65.60 MB → trimmed+AOT 29.08 MB (all fonts) →
   27.71 MB (`no-mdi`), т.е. −58%.
 - Trimmed+AOT APK установлен на Redmi Note 4 (Android 11): главная страница и
-  `MdFabMenu` overlay работают, crash в logcat отсутствует (`android-trimmed-*.png`).
+  `MavFabMenu` overlay работают, crash в logcat отсутствует (`android-trimmed-*.png`).
 
 ### Accessibility (этап 10, без RTL)
 
-- `Md3.Avalonia/Platform/MdAutomation.cs` — `SetName`, `SetHelpText`, `SetRequired`,
+- `MavUI/Platform/MavAutomation.cs` — `SetName`, `SetHelpText`, `SetRequired`,
   `SetControlType`. Сгенерированные значения не перезаписывают явные значения приложения.
 - Автоматически заполняются: кнопки (`Text`, для icon-only — tooltip), текстовые поля
-  (label + footer/error), `MdSelect`/`MdComboBox` (label, роль `ComboBox`),
-  `MdNumberBox`/`MdPinInput` (роль `Edit`), `MdCheckBox`/`MdRadioButton`
-  (label + роли), `MdSwitch` (роль `CheckBox`), `MdSlider`/`MdRangeSlider` (роль `Slider`),
-  `MdChip`/`MdMenuItem` (текст/роль), `MdListItem` (headline + supporting text),
-  `MdDialog`/`MdBottomSheet` (title/message).
-- `MdValidation.IsRequired` → `AutomationProperties.IsRequiredForForm`.
-- Клавиатура: `MdInkSurface` обрабатывает Space/Enter (кнопки, чипы, пункты списка/меню),
-  `MdSwitch`/`MdCheckBox`/`MdRadioButton` — Space/Enter, слайдеры — стрелки; focus-ring
-  рисуется в `MdInkSurface` только при keyboard-focus.
-- `Md3.Avalonia/Theming/MdAccessibility.cs` — `RelativeLuminance`, `ContrastRatio`,
+  (label + footer/error), `MavSelect`/`MavComboBox` (label, роль `ComboBox`),
+  `MavNumberBox`/`MavPinInput` (роль `Edit`), `MavCheckBox`/`MavRadioButton`
+  (label + роли), `MavSwitch` (роль `CheckBox`), `MavSlider`/`MavRangeSlider` (роль `Slider`),
+  `MavChip`/`MavMenuItem` (текст/роль), `MavListItem` (headline + supporting text),
+  `MavDialog`/`MavBottomSheet` (title/message).
+- `MavValidation.IsRequired` → `AutomationProperties.IsRequiredForForm`.
+- Клавиатура: `MavInkSurface` обрабатывает Space/Enter (кнопки, чипы, пункты списка/меню),
+  `MavSwitch`/`MavCheckBox`/`MavRadioButton` — Space/Enter, слайдеры — стрелки; focus-ring
+  рисуется в `MavInkSurface` только при keyboard-focus.
+- `MavUI/Theming/MavAccessibility.cs` — `RelativeLuminance`, `ContrastRatio`,
   `MeetsContrast` (WCAG 2.1).
 - RTL намеренно не входит в этот этап.
 
 ### Smoke-тест
 
 ```bash
-MD3_SMOKE=1 dotnet run --project samples/Demo/Md3.Demo.csproj --no-build
+MAV_SMOKE=1 dotnet run --project samples/Demo/Mav.Demo.csproj --no-build
 ```
 
 Ожидаемый вывод:
@@ -460,38 +460,38 @@ back closes overlay: overlay=False, depth=2
 dialog for page leave: overlay=True
 push inbox: depth=3, title=Inbox, overlay=False
 pop: depth=2, title=Controls
-pop to root: depth=1, title=Md3 Navigation, command=False
-MD3_SMOKE_OK
+pop to root: depth=1, title=Mav Navigation, command=False
+MAV_SMOKE_OK
 ```
 
 ### Проверка на Linux Mint (X11, текущая площадка)
 
-Проверено через `tools/linux/md3ui.py` на дисплее `:0` (5120x1440):
+Проверено через `tools/linux/mavui.py` на дисплее `:0` (5120x1440):
 
 - сборка библиотеки, демо и Android-хоста — `0 Warning(s) 0 Error(s)`;
-- `MD3_SMOKE=1` — весь ожидаемый вывод, `MD3_SMOKE_OK`;
+- `MAV_SMOKE=1` — весь ожидаемый вывод, `MAV_SMOKE_OK`;
 - окно рисуется без Avalonia theme, шрифты и иконки на месте;
-- клик по «Show dialog» открывает `MdDialog`, `Escape` закрывает его;
-- клик по «Open list» + колесо мыши прокручивают `MdList`;
-- safe area `MD3_SAFE_AREA=24,48` на 400x800 и `48,0,0,24` на 640x360;
+- клик по «Show dialog» открывает `MavDialog`, `Escape` закрывает его;
+- клик по «Open list» + колесо мыши прокручивают `MavList`;
+- safe area `MAV_SAFE_AREA=24,48` на 400x800 и `48,0,0,24` на 640x360;
 - скролл страницы в landscape, контент полностью достижим;
 - **resize при открытом overlay**: окно 900x640 → `wmctrl -e` до 720x520,
-  открытый `MdPopover` пересчитал карточку и остался у своего якоря
+  открытый `MavPopover` пересчитал карточку и остался у своего якоря
   (`linux-popover-resized.png`);
 - 320x640: popover у правого края держит 12 dp edge-margin
   (`linux-phone-popover-clamped.png`);
-- `MD3_WINDOW=320x640 MD3_KEYBOARD=300`: `MdSearchView` пересчитал высоту и
+- `MAV_WINDOW=320x640 MAV_KEYBOARD=300`: `MavSearchView` пересчитал высоту и
   прокручивается над симулированной клавиатурой (`linux-phone-search-keyboard.png`);
-- 400x800 + safe area `24,48`: `MdDialog` учитывает top/bottom insets
+- 400x800 + safe area `24,48`: `MavDialog` учитывает top/bottom insets
   (`linux-safe-dialog.png`);
-- 640x360 + safe area `48,0,0,24`: `MdTimePicker` перешёл в горизонтальную
+- 640x360 + safe area `48,0,0,24`: `MavTimePicker` перешёл в горизонтальную
   раскладку и полностью помещается (`linux-land-timepicker.png`).
 
 | Файл | Что показывает |
 |---|---|
 | `linux-home-dark.png` | главная 1180x800, dark |
 | `linux-home-light.png` | главная 1180x800, light |
-| `linux-dialog.png` | `MdDialog` в overlay |
+| `linux-dialog.png` | `MavDialog` в overlay |
 | `linux-phone-home.png` | 400x800 + safe area `24,48` |
 | `linux-land-home.png` | 640x360 + inset слева 48 |
 | `linux-land-scrolled.png` | landscape после прокрутки колесом |
@@ -509,16 +509,16 @@ MD3_SMOKE_OK
 - push/pop/pop-to-root, сохранение состояния страницы;
 - `Escape`, `Alt+Left`, закрытие overlay перед pop;
 - actions нижней панели (search/settings) — мнимый баг WSLg не подтвердился;
-- FAB (docked в `MdBottomAppBar`) и snackbar;
+- FAB (docked в `MavBottomAppBar`) и snackbar;
 - dialog, bottom sheet, закрытие по `Escape` и кнопкам;
 - список Inbox, dividers, detail-страница с actions;
 - dark/light тема;
-- safe area `MD3_SAFE_AREA=24,48`;
-- клавиатурный inset `MD3_KEYBOARD=300`;
-- телефонное окно `MD3_WINDOW=400x800`: главная страница переносится в несколько
-  рядов, диалог занимает почти всю ширину (адаптивный `MdDialog`);
-- узкие экраны и landscape (`MD3_WINDOW=320x640`, `360x640`, `640x360` с
-  `MD3_SAFE_AREA=48,0,0,24`): меню, popover, search view, time/date picker,
+- safe area `MAV_SAFE_AREA=24,48`;
+- клавиатурный inset `MAV_KEYBOARD=300`;
+- телефонное окно `MAV_WINDOW=400x800`: главная страница переносится в несколько
+  рядов, диалог занимает почти всю ширину (адаптивный `MavDialog`);
+- узкие экраны и landscape (`MAV_WINDOW=320x640`, `360x640`, `640x360` с
+  `MAV_SAFE_AREA=48,0,0,24`): меню, popover, search view, time/date picker,
   color picker, dialog и bottom sheet;
 - 48 dp touch-цели: клик по прозрачному padding иконки срабатывает.
 
@@ -562,15 +562,15 @@ activity `com.md3.demo/crc64351746bbe631ada1.MainActivity`.
 
 Проверено:
 
-- приложение запускается и рисует `MdNavigationPage` без Avalonia theme;
+- приложение запускается и рисует `MavNavigationPage` без Avalonia theme;
 - safe area: статус-бар и вырез камеры, нижний gesture bar;
 - системный Back: overlay закрывается, затем страница; на root Activity
   завершается только по второму Back;
-- `MdDialog`, `MdBottomSheet`, snackbar, `MdDatePicker` через fallback overlay-host;
-  `MdTimePicker`, `MdMenu` и `MdPopover` используют тот же путь и покрыты headless-тестами/кодом;
-- `MdScrollViewer`: swipe-прокрутка формы, app bar остаётся на месте;
+- `MavDialog`, `MavBottomSheet`, snackbar, `MavDatePicker` через fallback overlay-host;
+  `MavTimePicker`, `MavMenu` и `MavPopover` используют тот же путь и покрыты headless-тестами/кодом;
+- `MavScrollViewer`: swipe-прокрутка формы, app bar остаётся на месте;
 - soft keyboard: `TextInputOptions`, Gboard открывается, поле остаётся доступным;
-- `MdDatePicker` на 411 dp и на симулированных 360x640 dp (адаптивная ширина,
+- `MavDatePicker` на 411 dp и на симулированных 360x640 dp (адаптивная ширина,
   вертикальный скролл при нехватке высоты);
 - 48 dp touch targets.
 
@@ -578,32 +578,32 @@ activity `com.md3.demo/crc64351746bbe631ada1.MainActivity`.
 
 Проверено на том же AVD `Medium_Phone_API_37.0` (Linux/KVM, Android 17):
 
-- **edge-to-edge**: `MdSystemBars.Attach(navigation, edgeToEdge: true)` +
+- **edge-to-edge**: `MavSystemBars.Attach(navigation, edgeToEdge: true)` +
   `styles.xml` (`windowDrawsSystemBarBackgrounds=true`, `statusBarColor`/
   `navigationBarColor=@android:color/transparent`,
   `enforceStatusBarContrast=false`/`enforceNavigationBarContrast=false`).
   Контент рисуется под статус-баром и gesture bar, двойных отступов нет:
-  верхний inset уходит в `MdTopAppBar.SafeAreaPadding`, нижний — в
-  `MdBottomAppBar.SafeAreaPadding`/`Margin` страницы.
-- **системные бары и тема**: `MdSystemBars.Apply()` ставит
-  `insets.SystemBarColor = MdTheme.Current.Color.Surface` и `SystemBarTheme`
-  (Light/Dark) по `MdTheme.Current.IsDark`; подписка на `MdTheme.Changed`
+  верхний inset уходит в `MavTopAppBar.SafeAreaPadding`, нижний — в
+  `MavBottomAppBar.SafeAreaPadding`/`Margin` страницы.
+- **системные бары и тема**: `MavSystemBars.Apply()` ставит
+  `insets.SystemBarColor = MavTheme.Current.Color.Surface` и `SystemBarTheme`
+  (Light/Dark) по `MavTheme.Current.IsDark`; подписка на `MavTheme.Changed`
   держит бары в синхроне при смене темы и seed-цвета. На старте — ресурсы
-  `@bool/md3_demo_light_system_bars` (light/night) и
-  `@color/md3_demo_window_background` (`#F9F9FF` / `#111318`).
+  `@bool/mav_demo_light_system_bars` (light/night) и
+  `@color/mav_demo_window_background` (`#F9F9FF` / `#111318`).
 - **поворот экрана** (`adb shell settings put system user_rotation 1`):
   `ConfigurationChanges` включает `Orientation | ScreenSize | UiMode | Density |
   Locale | LayoutDirection`, поэтому Activity не пересоздаётся. Открытый
-  `MdDialog` пересчитал геометрию и остался внутри вьюпорта: адаптивная ширина
+  `MavDialog` пересчитал геометрию и остался внутри вьюпорта: адаптивная ширина
   вместо «на всю ширину», центрирование, chrome (app bar/bottom bar/FAB)
   перестроился, safe area пересчитана.
 - **системный Back** в landscape: первое нажатие закрыло открытый overlay
-  (`MdDialog`), страница осталась на месте — Activity не завершилась.
+  (`MavDialog`), страница осталась на месте — Activity не завершилась.
 - **реальное устройство (22 октября 2026)**: Xiaomi Redmi Note 4 (`carbon_mido`),
   Android 11 (SDK 30), 1080x1920, density 420. Установлен тот же APK, проверены
   запуск, отрисовка без Avalonia theme, safe area, светлая/тёмная тема (клавиатурой
   Tab/Enter), системные бары, поворот, Back (overlay → страница → Activity), стек
-  страниц, `MdList` (Inbox), snackbar и overlay `MdFabMenu`. Скриншоты
+  страниц, `MavList` (Inbox), snackbar и overlay `MavFabMenu`. Скриншоты
   `android-real-*.png`.
 
   Исправлено по итогам проверки:
@@ -615,7 +615,7 @@ activity `com.md3.demo/crc64351746bbe631ada1.MainActivity`.
     `OverlayRootGrid` теперь `IsHitTestVisible=false` и включается только при
     наличии layer'а (иначе он съедал все тапы на Android).
   - **отложенное применение системных баров**: после attach окно ещё не имеет
-    финальных атрибутов; `MdSystemBars` повторяет `Apply` на
+    финальных атрибутов; `MavSystemBars` повторяет `Apply` на
     `DispatcherPriority.Loaded`.
 
   Ограничение автоматизации: `adb shell input` на этом ROM генерирует touch-события с
@@ -637,18 +637,18 @@ activity `com.md3.demo/crc64351746bbe631ada1.MainActivity`.
 | `android-real-dark.png` | реальное устройство, dark + snackbar |
 | `android-real-landscape.png` | реальное устройство, landscape 1920x1080 |
 | `android-real-controls-dark.png` | страница Overlays & pickers, dark |
-| `android-real-overlay.png` | `MdFabMenu` overlay на реальном устройстве |
+| `android-real-overlay.png` | `MavFabMenu` overlay на реальном устройстве |
 | `android-real-back.png` | Back закрыл overlay, страница осталась |
 | `android-home.png` | главная на Android (AVD API 37, Linux/KVM), safe area |
 | `android-home-avd.png` | главная, AVD API 37, этап 6 (edge-to-edge, прозрачные бары) |
-| `android-dialog-avd.png` | `MdDialog` в fallback overlay-host, AVD API 37 |
+| `android-dialog-avd.png` | `MavDialog` в fallback overlay-host, AVD API 37 |
 | `android-land-dialog.png` | landscape 2400x1080: открытый диалог пересчитан и внутри вьюпорта |
 | `android-back-portrait.png` | портрет после Back: overlay закрыт, страница на месте |
 | `android-controls.png` | форма Controls (Windows-эмулятор, этап 4) |
-| `android-dialog.png` | `MdDialog` (этап 4) |
+| `android-dialog.png` | `MavDialog` (этап 4) |
 | `android-datepicker.png` | date picker на 411 dp (этап 4) |
 | `android-datepicker-360dp.png` | date picker на 360x640 dp (этап 4) |
-| `android-sheet.png` | `MdBottomSheet` (этап 4) |
+| `android-sheet.png` | `MavBottomSheet` (этап 4) |
 
 ### Control Gallery (Desktop / Web / Android)
 
@@ -656,11 +656,11 @@ activity `com.md3.demo/crc64351746bbe631ada1.MainActivity`.
 (Overview, Actions, Inputs, Selection, Pickers, Navigation, Layout, Collections, Feedback,
 Overlays, Theming).
 
-- **Адаптивная оболочка**: постоянный `MdNavigationDrawer` при ширине ≥1000 dp,
-  `MdNavigationRail` при 700–999 dp, модальный drawer из app bar на телефоне (<700 dp).
-  Внутри используется `MdNavigationPage`/`MdContentPage`, поэтому safe area, Back,
+- **Адаптивная оболочка**: постоянный `MavNavigationDrawer` при ширине ≥1000 dp,
+  `MavNavigationRail` при 700–999 dp, модальный drawer из app bar на телефоне (<700 dp).
+  Внутри используется `MavNavigationPage`/`MavContentPage`, поэтому safe area, Back,
   Escape и overlay-хост работают как в обычном приложении.
-- **Desktop**: `dotnet run --project samples/Gallery/Md3.Gallery.csproj`.
+- **Desktop**: `dotnet run --project samples/Gallery/Mav.Gallery.csproj`.
 - **Web**: `dotnet run --project samples/Gallery.Browser/Gallery.Browser.csproj` (WebAssembly,
   нужен workload `wasm-tools`).
 - **Android**: `dotnet build samples/Gallery.Android/Gallery.Android.csproj`,
@@ -671,14 +671,14 @@ Overlays, Theming).
 
 ### Исправленные баги
 
-1. **`MdList.ShowDividers`** — элементы, добавленные после установки свойства,
+1. **`MavList.ShowDividers`** — элементы, добавленные после установки свойства,
    не получали dividers. Исправлено: подписка на `Children.CollectionChanged`
    и `SyncChildDividers()`; `ShowDividers=false` очищает управляемые dividers,
-   явный `MdListItem.ShowDivider=true` сохраняется.
+   явный `MavListItem.ShowDivider=true` сохраняется.
 2. **Demo detail subtitle** — `Message 13 of 12` из-за захвата переменной цикла
    в замыкании. Исправлено per-iteration `index`.
 3. **Filled text field на `Filled`-карточке** — сливался фон. Карточка формы
-   переведена на `MdCardVariant.Outlined`.
+   переведена на `MavCardVariant.Outlined`.
 4. **Snackbar + safe area** — нижний inset учитывался дважды (высота нижней панели
    уже включает padding). Исправлено.
 5. **Snackbar без anchor** — не поднимался над нижней панелью. Исправлено через
@@ -693,31 +693,31 @@ Overlays, Theming).
    `KeyDown`, всё идёт через `TopLevel.BackRequested`.
 8. **Overlay не работали на Android без Avalonia theme** — у
    `EmbeddableControlRoot` нет `VisualLayerManager`/`OverlayLayer`. Добавлен
-   fallback overlay-host внутри `MdNavigationPage` и регистрация в `MdOverlay`.
+   fallback overlay-host внутри `MavNavigationPage` и регистрация в `MavOverlay`.
 9. **Дата/время pickers вылезали на маленьком экране** — добавлены адаптивные
-   `MinWidth`/`MaxWidth`/`MaxHeight` и `MdScrollViewer` внутри карточки.
+   `MinWidth`/`MaxWidth`/`MaxHeight` и `MavScrollViewer` внутри карточки.
 10. **Библиотека зависела от Fluent theme** — удалены `FluentTheme`, `Window` и
-    `ScrollViewer`; добавлены `MdWindow` и `MdScrollViewer`.
-11. **`MdPopover` прижимался к правому краю на узком экране** — `MdSurface` содержит
-    `MdScrollViewer`, который просит всю доступную ширину, поэтому после layout карточка
+    `ScrollViewer`; добавлены `MavWindow` и `MavScrollViewer`.
+11. **`MavPopover` прижимался к правому краю на узком экране** — `MavSurface` содержит
+    `MavScrollViewer`, который просит всю доступную ширину, поэтому после layout карточка
     становилась шире измеренной и вылезала за край: `MaxWidth` не учитывал смещение `x`.
-    Исправлено: ширина считается по `bodyStack` (шаблон `MdScrollViewer` появляется только
+    Исправлено: ширина считается по `bodyStack` (шаблон `MavScrollViewer` появляется только
     после подключения к дереву, поэтому `card.Measure(...)` возвращал 0), затем
     `card.Width = desiredW` фиксируется, а высота ограничивается
     `overlaySize.Height - y - edgeMargin`. Регрессия закрыта тестами
     `Popover_keeps_its_edge_margin_when_anchored_to_the_right_edge` и
     `Menu_keeps_its_edge_margin_when_anchored_to_the_right_edge`.
-12. **Клавиатурный ресайз `MdSearchView` был не дописан** (не собиралась библиотека:
+12. **Клавиатурный ресайз `MavSearchView` был не дописан** (не собиралась библиотека:
     `CS0103 _refreshCardSize`). Исправлено: поле `_refreshCardSize`, вызов через него в
     `InputPane.StateChanged`, отписка и очистка в `DetachInputPane()` из `Close()`.
-13. **`MdMenu` вылезал на 8 dp за правый край после resize** — клэмп использовал
+13. **`MavMenu` вылезал на 8 dp за правый край после resize** — клэмп использовал
     `MinWidth` (ширину якоря), а реальная карточка шире из-за длинных подписей.
-    Исправлено: `PositionCard` измеряет строки через `MdScrollViewer.Content` и
+    Исправлено: `PositionCard` измеряет строки через `MavScrollViewer.Content` и
     клампит карточку по фактической ширине; после первого layout вызывается
     `Dispatcher.Post(Reflow)`, чтобы пересчитать позицию с уже измеренной карточкой.
-14. **`MD3_KEYBOARD` поднимал только страницу** — overlay-root не знал о
-    симулированной клавиатуре. Исправлено: `SetSimulatedKeyboardHeight` в `MdOverlay`
-    (вызывается из `MdKeyboardAvoidingHost`) и пересчёт всех overlay-root'ов.
+14. **`MAV_KEYBOARD` поднимал только страницу** — overlay-root не знал о
+    симулированной клавиатуре. Исправлено: `SetSimulatedKeyboardHeight` в `MavOverlay`
+    (вызывается из `MavKeyboardAvoidingHost`) и пересчёт всех overlay-root'ов.
 15. **Серый статус-бар на Android 11 (реальное устройство)** — `edgetoedge`-запрос
     оставлял прозрачные бары, за которыми был wallpaper. Исправлено: edge-to-edge
     включается только на Android 15+ (`Build.VERSION.SdkInt >= 35`), на старых
@@ -728,13 +728,13 @@ Overlays, Theming).
 17. **Системные бары не окрашивались при старте** — окно ещё не имело финальных
     атрибутов на `AttachedToVisualTree`. Исправлено: повторный `Apply` через
     `DispatcherPriority.Loaded`; regression-тест `OverlayHitTestTests`.
-18. **`MdSnackbar` с `Indefinite` не закрывался** — у него не было таймера и
+18. **`MavSnackbar` с `Indefinite` не закрывался** — у него не было таймера и
     close-иконки (в галерее «Queue snackbar» ставил в очередь вечный «Uploading…»).
     Исправлено: indefinite snackbar всегда показывает ×; галерея ставит в очередь
     конечные сообщения и получила кнопки Dismiss/Indefinite.
 19. **Диалог смещён и scrim не доходил до низа после обхода галереи** — страница
-    Layout создаёт `MdKeyboardAvoidingHost` с `SimulatedKeyboardHeight = 120`, и это
-    значение навсегда оставалось в глобальном `MdOverlay`: overlay-root получал
+    Layout создаёт `MavKeyboardAvoidingHost` с `SimulatedKeyboardHeight = 120`, и это
+    значение навсегда оставалось в глобальном `MavOverlay`: overlay-root получал
     `Margin.Bottom = 120`, из-за чего его высота была 780 вместо 900. Scrim закрывал
     только верхние 780 px, а диалог центрировался в укороченной области. Исправлено:
     хост сообщает высоту только пока прикреплён к визуальному дереву (слабые ссылки,
@@ -757,7 +757,7 @@ Overlays, Theming).
 | cmdline-tools | `~/Android/Sdk/cmdline-tools/latest/bin/sdkmanager` |
 | JDK | OpenJDK 21 (`JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64`) |
 | Эмулятор | AVD `Medium_Phone_API_37.0`, KVM доступен, запускается локально |
-| GUI-автоматизация | `tools/linux/md3ui.py` (python-xlib XTEST + gnome-screenshot + Pillow) |
+| GUI-автоматизация | `tools/linux/mavui.py` (python-xlib XTEST + gnome-screenshot + Pillow) |
 
 Запуск эмулятора и приложения:
 
@@ -781,7 +781,7 @@ WSLg-автоматизация была ненадёжной (`xdotool` счи�
 снимаются на Linux (`linux-*.png`) и Android.
 
 Важно при съёмке на Linux: `gnome-screenshot -w` включает titlebar, поэтому координаты
-и кадры расходятся. `tools/linux/md3ui.py` снимает весь экран и обрезает его по
+и кадры расходятся. `tools/linux/mavui.py` снимает весь экран и обрезает его по
 **клиентской** области окна (`XTranslateCoordinates`), поэтому координаты клика и
 пиксели скриншота совпадают 1:1.
 
@@ -805,32 +805,32 @@ WSLg-автоматизация была ненадёжной (`xdotool` счи�
 
 ## 6. GUI-автоматизация
 
-### 6.1 `tools/linux/md3ui.py` — основной инструмент
+### 6.1 `tools/linux/mavui.py` — основной инструмент
 
 Запуск, скриншоты, клики, клавиши, ввод текста, прокрутка и информация об окне.
 Координаты — **относительно клиентской области окна**, ровно те же пиксели, что и на
 скриншоте: помощник снимает весь экран и обрезает его по клиентской области.
 
 ```bash
-python3 tools/linux/md3ui.py start --no-build
-python3 tools/linux/md3ui.py shot  --out docs/handoff/linux-home.png
-python3 tools/linux/md3ui.py click --x 779 --y 285
-python3 tools/linux/md3ui.py key   --keys Escape
-python3 tools/linux/md3ui.py type  --text "hello"
-python3 tools/linux/md3ui.py wheel --x 400 --y 300 --delta -600
-python3 tools/linux/md3ui.py info
-python3 tools/linux/md3ui.py stop
+python3 tools/linux/mavui.py start --no-build
+python3 tools/linux/mavui.py shot  --out docs/handoff/linux-home.png
+python3 tools/linux/mavui.py click --x 779 --y 285
+python3 tools/linux/mavui.py key   --keys Escape
+python3 tools/linux/mavui.py type  --text "hello"
+python3 tools/linux/mavui.py wheel --x 400 --y 300 --delta -600
+python3 tools/linux/mavui.py info
+python3 tools/linux/mavui.py stop
 ```
 
 `--delta` отрицательный — вниз, положительный — вверх. `shot --frame` включает рамку
 окна. `click --repeat N` и `--settle` помогают попасть в анимацию.
 
 Resize открытого окна (проверка пересчёта overlay) делается через `wmctrl`, id окна —
-`wmctrl -l | grep "Md3 Navigation Demo"`:
+`wmctrl -l | grep "Mav Navigation Demo"`:
 
 ```bash
 wmctrl -i -r 0x0520000f -e 0,900,300,720,520   # x,y,w,h в пикселях экрана
-python3 tools/linux/md3ui.py shot --out /tmp/popover-after-resize.png
+python3 tools/linux/mavui.py shot --out /tmp/popover-after-resize.png
 ```
 
 Минимальный размер окна демо — 720x520, поэтому для более узкого вьюпорта запускайте
@@ -842,29 +842,29 @@ python3 tools/linux/md3ui.py shot --out /tmp/popover-after-resize.png
 Параметры мобильного превью:
 
 ```bash
-python3 tools/linux/md3ui.py start --window 400x800 --safe-area 24,48 --keyboard 300
-python3 tools/linux/md3ui.py start --window 640x360 --safe-area 48,0,0,24   # landscape
+python3 tools/linux/mavui.py start --window 400x800 --safe-area 24,48 --keyboard 300
+python3 tools/linux/mavui.py start --window 640x360 --safe-area 48,0,0,24   # landscape
 ```
 
-`--window` → `MD3_WINDOW` (dp, `ШxВ`, минимум `320x320`), `--safe-area` →
-`MD3_SAFE_AREA`, `--keyboard` → `MD3_KEYBOARD` (`0` отключает симуляцию IME).
+`--window` → `MAV_WINDOW` (dp, `ШxВ`, минимум `320x320`), `--safe-area` →
+`MAV_SAFE_AREA`, `--keyboard` → `MAV_KEYBOARD` (`0` отключает симуляцию IME).
 
 Перед пересборкой запущенное демо лучше остановить (`stop`): Linux не блокирует
-`Md3.Avalonia.dll`, но окно останется на экране и запутает скриншоты.
+`MavUI.dll`, но окно останется на экране и запутает скриншоты.
 
-### 6.2 `tools/win/md3ui.ps1` — legacy
+### 6.2 `tools/win/mavui.ps1` — legacy
 
 Windows-помощник с тем же набором действий, координаты — от клиентской области
 (физические пиксели). Нужен только при работе на Windows:
 
 ```powershell
-powershell -File tools\win\md3ui.ps1 -Action start -EnvWindow "400x800" -EnvSafeArea "24,48"
-powershell -File tools\win\md3ui.ps1 -Action click -X 335 -Y 393
-powershell -File tools\win\md3ui.ps1 -Action key   -Keys "{ESC}"
-powershell -File tools\win\md3ui.ps1 -Action stop
+powershell -File tools\win\mavui.ps1 -Action start -EnvWindow "400x800" -EnvSafeArea "24,48"
+powershell -File tools\win\mavui.ps1 -Action click -X 335 -Y 393
+powershell -File tools\win\mavui.ps1 -Action key   -Keys "{ESC}"
+powershell -File tools\win\mavui.ps1 -Action stop
 ```
 
-Важно: перед пересборкой остановить процесс, иначе Windows держит `Md3.Avalonia.dll`
+Важно: перед пересборкой остановить процесс, иначе Windows держит `MavUI.dll`
 и сборка падает с `MSB3021`.
 
 ---
@@ -884,7 +884,7 @@ powershell -File tools\win\md3ui.ps1 -Action stop
    ```
    Debug-сборка `Demo.Android` после оптимизаций уже проходит (`0/0`).
 2. **Нативная проверка новых оптимизаций** — Android (AVD/устройство) и WASM-галерея:
-   инкрементальные `MdList`/`MdDataTable` и закрытие top-level с открытым dismissable.
+   инкрементальные `MavList`/`MavDataTable` и закрытие top-level с открытым dismissable.
    Сейчас покрыто headless-тестами (233/233), desktop-demo и smoke-тестом.
 3. **RTL** — сознательно отложен владельцем (этап 10 закрыт без него); нужен отдельный
    продуктовый этап, если появится требование.
@@ -901,19 +901,19 @@ modal-поверхности и snackbar работают. Отдельных An
 - Отвечать пользователю на языке его последнего сообщения (последние сессии — **русский**;
   исторические заметки ниже тоже по-русски).
 - Не создавать ветку и не делать коммиты.
-- Рабочая среда — **Linux Mint, X11**; GUI-проверки через `tools/linux/md3ui.py`,
+- Рабочая среда — **Linux Mint, X11**; GUI-проверки через `tools/linux/mavui.py`,
   Android — на локальном AVD через `adb`.
-- Не использовать `Avalonia.Controls.NavigationPage`/`ContentPage` для Md3-экранов.
+- Не использовать `Avalonia.Controls.NavigationPage`/`ContentPage` для Mav-экранов.
 - Не добавлять `[Obsolete]`-совместимость.
-- Не заменять `MdNavigationPage.Content` снаружи: он сам строит внутренний layout.
+- Не заменять `MavNavigationPage.Content` снаружи: он сам строит внутренний layout.
 - После изменения `Title`, `Subtitle`, actions, `BottomBar` или
   `FloatingActionButton` у видимой страницы вызывать `RefreshChrome()`.
 - `ItemsSource` владеет дочерними элементами; не смешивать с ручными `Children`.
 - Overlay-контролы — handles, их не надо добавлять в `StackPanel`.
-- `MdSnackbar` и `MdTooltip` глобальные.
-- `MdSwitch` использует `IsToggled`, не `IsOn`.
-- `MdIconButton` по умолчанию имеет touch-цель 48 dp (`TouchTargetSize`).
-- `MdTextField` умеет `ContentType`, `ReturnKeyType`, `AutoCapitalize`.
+- `MavSnackbar` и `MavTooltip` глобальные.
+- `MavSwitch` использует `IsToggled`, не `IsOn`.
+- `MavIconButton` по умолчанию имеет touch-цель 48 dp (`TouchTargetSize`).
+- `MavTextField` умеет `ContentType`, `ReturnKeyType`, `AutoCapitalize`.
 - `ApplySafeArea=false` отключает авто-insets; `SafeAreaOverride=null` — реальные insets.
 
 ---
@@ -922,45 +922,45 @@ modal-поверхности и snackbar работают. Отдельных An
 
 | Путь | Назначение |
 |---|---|
-| `Md3.sln` | solution: библиотека, тесты и все sample-хосты |
-| `Md3.Avalonia/Controls/MdContentPage.cs` | модель страницы, actions, bottom bar, FAB, lifecycle |
-| `Md3.Avalonia/Controls/MdNavigationPage.cs` | стек, chrome, back, transitions, safe area, keyboard host, overlay host |
-| `Md3.Avalonia/Controls/MdWindow.cs` | окно с собственным шаблоном и `VisualLayerManager` |
-| `Md3.Avalonia/Controls/MdScrollViewer.cs` | scroll без Avalonia theme |
-| `Md3.Avalonia/Controls/MdKeyboardAvoidingHost.cs` | soft keyboard inset + auto-scroll |
-| `Md3.Avalonia/Controls/MdSnackbar.cs` | глобальный snackbar + bottom offset |
-| `Md3.Avalonia/Controls/MdList.cs` | список и синхронизация dividers |
-| `Md3.Avalonia/Controls/MdButton.cs` | buttons, icon buttons (touch target), FAB |
-| `Md3.Avalonia/Controls/MdTextField.cs` | поле + `TextInputOptions` |
-| `Md3.Avalonia/Controls/MdInputsExtra.cs` | `MdNumberBox`, `MdTagInput` и др. |
-| `Md3.Avalonia/Platform/MdOverlay.cs` | overlay host, dismiss stack, owner page |
-| `Md3.Avalonia/Theming/MdMotion.cs` | анимации и transitions |
-| `samples/Demo/MainWindow.cs` | окно, smoke-тест, `MD3_SAFE_AREA`, `MD3_KEYBOARD` |
+| `MavUI.sln` | solution: библиотека, тесты и все sample-хосты |
+| `MavUI/Controls/MavContentPage.cs` | модель страницы, actions, bottom bar, FAB, lifecycle |
+| `MavUI/Controls/MavNavigationPage.cs` | стек, chrome, back, transitions, safe area, keyboard host, overlay host |
+| `MavUI/Controls/MavWindow.cs` | окно с собственным шаблоном и `VisualLayerManager` |
+| `MavUI/Controls/MavScrollViewer.cs` | scroll без Avalonia theme |
+| `MavUI/Controls/MavKeyboardAvoidingHost.cs` | soft keyboard inset + auto-scroll |
+| `MavUI/Controls/MavSnackbar.cs` | глобальный snackbar + bottom offset |
+| `MavUI/Controls/MavList.cs` | список и синхронизация dividers |
+| `MavUI/Controls/MavButton.cs` | buttons, icon buttons (touch target), FAB |
+| `MavUI/Controls/MavTextField.cs` | поле + `TextInputOptions` |
+| `MavUI/Controls/MavInputsExtra.cs` | `MavNumberBox`, `MavTagInput` и др. |
+| `MavUI/Platform/MavOverlay.cs` | overlay host, dismiss stack, owner page |
+| `MavUI/Theming/MavMotion.cs` | анимации и transitions |
+| `samples/Demo/MainWindow.cs` | окно, smoke-тест, `MAV_SAFE_AREA`, `MAV_KEYBOARD` |
 | `samples/Demo/Pages.cs` | Home/Controls/Inbox/Detail |
 | `samples/Demo.Android/` | Android host, `MainActivity`, `MobileApp` |
 | `samples/Gallery/` | адаптивная галерея контролов (desktop + shared shell/pages) |
 | `samples/Gallery.Browser/` | WebAssembly host (`Avalonia.Browser`) |
 | `samples/Gallery.Android/` | Android host галереи, `com.md3.gallery` |
 | `docs/gallery/` | скриншоты галереи (desktop/tablet/phone/browser) |
-| `Md3.Avalonia/Platform/MdGestureZones.cs` | 20 dp edge-зона системного Back |
-| `Md3.Avalonia/Platform/MdAutomation.cs` | AutomationProperties helper |
-| `Md3.Avalonia/Platform/MdSystemBars.cs` | Android system bars + edge-to-edge |
-| `Md3.Avalonia/Platform/MdPropertyCache.cs` | кэш PropertyInfo (trim/AOT) |
-| `Md3.Avalonia/Theming/MdAccessibility.cs` | WCAG contrast helpers |
-| `Md3.Avalonia/Controls/MdDataTable.cs` | таблица + compact/card mode |
+| `MavUI/Platform/MavGestureZones.cs` | 20 dp edge-зона системного Back |
+| `MavUI/Platform/MavAutomation.cs` | AutomationProperties helper |
+| `MavUI/Platform/MavSystemBars.cs` | Android system bars + edge-to-edge |
+| `MavUI/Platform/MavPropertyCache.cs` | кэш PropertyInfo (trim/AOT) |
+| `MavUI/Theming/MavAccessibility.cs` | WCAG contrast helpers |
+| `MavUI/Controls/MavDataTable.cs` | таблица + compact/card mode |
 | `Tests/` | headless-тесты (233) |
 | `CHANGELOG.md` | версии и изменения (SemVer, не привязан к этапам плана) |
-| `tools/linux/md3ui.py` | Linux/X11 запуск/скриншоты/клики/клавиши/скролл (основной) |
-| `tools/win/md3ui.ps1` | то же для Windows (legacy) |
+| `tools/linux/mavui.py` | Linux/X11 запуск/скриншоты/клики/клавиши/скролл (основной) |
+| `tools/win/mavui.ps1` | то же для Windows (legacy) |
 | `docs/` | README, `AGENTS.md`, `HANDOFF.md`, `PLAN.md`, gallery/handoff screenshots |
 
 ---
 
 ## 10. Первое сообщение новой сессии
 
-> Продолжаем проект Md3.Avalonia. Прочитай `docs/HANDOFF.md` (особенно §1a), `docs/PLAN.md` и `docs/AGENTS.md`.
+> Продолжаем проект Mav. Прочитай `docs/HANDOFF.md` (особенно §1a), `docs/PLAN.md` и `docs/AGENTS.md`.
 > Работаем из `/home/homo/src/md3` на Linux Mint (X11), GUI-проверки — через
-> `tools/linux/md3ui.py`, Android — через `adb` (AVD или подключённый телефон). Сначала собери
+> `tools/linux/mavui.py`, Android — через `adb` (AVD или подключённый телефон). Сначала собери
 > библиотеку, демо и галерею, прогони тесты (сейчас 233/233). Все плановые этапы 0–12 закрыты;
 > NuGet в план не входит. Android 15 (SDK 35) уже проверен на реальном устройстве, включая
 > side sheet и snackbar.

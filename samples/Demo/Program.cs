@@ -1,8 +1,8 @@
 using Avalonia;
-using Md3.Avalonia;
-using Md3.Avalonia.Theming;
+using Mav;
+using Mav.Theming;
 
-namespace Md3.Demo;
+namespace Mav.Demo;
 
 internal static class Program
 {
@@ -13,11 +13,11 @@ internal static class Program
     public static AppBuilder BuildAvaloniaApp() =>
         AppBuilder.Configure<App>()
             .UsePlatformDetect()
-            .UseMd3(options =>
+            .UseMav(options =>
             {
-                options.SeedColor = MdColors.Blue;
-                options.Mode = MdThemeMode.System;
-                options.SchemeVariant = MdSchemeVariant.TonalSpot;
+                options.SeedColor = MavColors.Blue;
+                options.Mode = MavThemeMode.System;
+                options.SchemeVariant = MavSchemeVariant.TonalSpot;
             })
             .LogToTrace();
 }

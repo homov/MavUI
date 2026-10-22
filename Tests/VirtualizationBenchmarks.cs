@@ -6,11 +6,11 @@ using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
-using Md3.Avalonia.Controls;
-using Md3.Avalonia.Theming;
+using Mav.Controls;
+using Mav.Theming;
 using Xunit;
 
-namespace Md3.Avalonia.Tests;
+namespace Mav.Tests;
 
 public class VirtualizationBenchmarks
 {
@@ -22,8 +22,8 @@ public class VirtualizationBenchmarks
     public void Thousand_item_list_first_layout()
     {
         var items = Enumerable.Range(0, 1000).Select(i => $"Item {i}").ToList();
-        var list = new MdList { ItemsSource = items, ShowDividers = true };
-        var scroll = new MdScrollViewer { Height = 300, Content = list };
+        var list = new MavList { ItemsSource = items, ShowDividers = true };
+        var scroll = new MavScrollViewer { Height = 300, Content = list };
         var window = new Window { Width = 400, Height = 300, Content = scroll };
 
         var sw = Stopwatch.StartNew();
@@ -31,9 +31,9 @@ public class VirtualizationBenchmarks
         Dispatcher.UIThread.RunJobs();
         sw.Stop();
 
-        var realized = list.Children.OfType<MdListItem>().Count();
+        var realized = list.Children.OfType<MavListItem>().Count();
         _output.WriteLine(
-            $"MdList: 1000 items, viewport 300 -> {realized} realized, " +
+            $"MavList: 1000 items, viewport 300 -> {realized} realized, " +
             $"first layout {sw.Elapsed.TotalMilliseconds:F1} ms");
 
         Assert.True(realized < 100, $"expected virtualization, realized {realized}");
@@ -46,12 +46,12 @@ public class VirtualizationBenchmarks
     public void Thousand_row_table_first_layout()
     {
         var rows = Enumerable.Range(0, 1000).Select(i => new { Index = i, Name = $"Row {i}" }).ToList();
-        var table = new MdDataTable
+        var table = new MavDataTable
         {
             ItemsSource = rows,
             ShowPagination = false,
             MaxBodyHeight = 300,
-            Layout = MdDataTableLayout.Table,
+            Layout = MavDataTableLayout.Table,
         };
         table.AddColumn("Index", r => ((dynamic)r).Index, isNumeric: true);
         table.AddColumn("Name", r => ((dynamic)r).Name);
@@ -64,10 +64,10 @@ public class VirtualizationBenchmarks
         sw.Stop();
 
         var realized = table.GetVisualDescendants()
-            .OfType<Md3.Avalonia.Primitives.MdInkSurface>()
+            .OfType<Mav.Primitives.MavInkSurface>()
             .Count(s => s.Content is Grid);
         _output.WriteLine(
-            $"MdDataTable: 1000 rows, body 300 -> {realized} realized, " +
+            $"MavDataTable: 1000 rows, body 300 -> {realized} realized, " +
             $"first layout {sw.Elapsed.TotalMilliseconds:F1} ms");
 
         Assert.True(realized < 300, $"expected chunked rendering, realized {realized}");
@@ -80,11 +80,11 @@ public class VirtualizationBenchmarks
     public void Five_thousand_bulk_appends_to_a_virtualized_list()
     {
         var items = new ObservableCollection<string>();
-        var list = new MdList
+        var list = new MavList
         {
-            ItemFactory = item => new MdListItem((string)item),
+            ItemFactory = item => new MavListItem((string)item),
         };
-        var scroll = new MdScrollViewer { Height = 300, Content = list };
+        var scroll = new MavScrollViewer { Height = 300, Content = list };
         var window = new Window { Width = 400, Height = 300, Content = scroll };
         window.Show();
         list.ItemsSource = items;
@@ -96,9 +96,9 @@ public class VirtualizationBenchmarks
         Dispatcher.UIThread.RunJobs();
         sw.Stop();
 
-        var realized = list.Children.OfType<MdListItem>().Count();
+        var realized = list.Children.OfType<MavListItem>().Count();
         _output.WriteLine(
-            $"MdList: 5000 incremental appends, viewport 300 -> {realized} realized, " +
+            $"MavList: 5000 incremental appends, viewport 300 -> {realized} realized, " +
             $"{sw.Elapsed.TotalMilliseconds:F1} ms");
 
         Assert.True(realized < 200, $"expected virtualization, realized {realized}");
@@ -111,9 +111,9 @@ public class VirtualizationBenchmarks
     public void Five_thousand_bulk_appends_to_a_plain_list()
     {
         var items = new ObservableCollection<string>();
-        var list = new MdList
+        var list = new MavList
         {
-            ItemFactory = item => new MdListItem((string)item),
+            ItemFactory = item => new MavListItem((string)item),
         };
         var window = new Window { Width = 400, Height = 600, Content = list };
         window.Show();
@@ -127,7 +127,7 @@ public class VirtualizationBenchmarks
         sw.Stop();
 
         _output.WriteLine(
-            $"MdList: 5000 plain incremental appends -> {list.Children.Count} children, " +
+            $"MavList: 5000 plain incremental appends -> {list.Children.Count} children, " +
             $"{sw.Elapsed.TotalMilliseconds:F1} ms");
 
         Assert.Equal(5000, list.Children.Count);
@@ -139,12 +139,12 @@ public class VirtualizationBenchmarks
     [AvaloniaFact]
     public void Text_field_typing_and_theme_switch_stay_fast()
     {
-        var field = new MdTextField("Name")
+        var field = new MavTextField("Name")
         {
             MaxLength = 200,
             ShowCounter = true,
         };
-        var area = new MdTextArea("Notes")
+        var area = new MavTextArea("Notes")
         {
             MaxLength = 200,
             ShowCounter = true,
@@ -180,12 +180,12 @@ public class VirtualizationBenchmarks
             "5/200",
             area.GetVisualDescendants().OfType<TextBlock>().Select(t => t.Text));
 
-        var originalMode = MdTheme.Mode;
+        var originalMode = MavTheme.Mode;
         sw.Restart();
         for (var i = 0; i < 20; i++)
         {
-            MdTheme.Mode = i % 2 == 0
-                ? (originalMode == MdThemeMode.Dark ? MdThemeMode.Light : MdThemeMode.Dark)
+            MavTheme.Mode = i % 2 == 0
+                ? (originalMode == MavThemeMode.Dark ? MavThemeMode.Light : MavThemeMode.Dark)
                 : originalMode;
         }
         Dispatcher.UIThread.RunJobs();
@@ -194,7 +194,7 @@ public class VirtualizationBenchmarks
         _output.WriteLine($"Text fields: 20 theme switches -> {sw.Elapsed.TotalMilliseconds:F1} ms");
         Assert.True(sw.Elapsed.TotalSeconds < 8, "theme switches took too long");
 
-        MdTheme.Mode = originalMode;
+        MavTheme.Mode = originalMode;
         Dispatcher.UIThread.RunJobs();
         window.Close();
     }

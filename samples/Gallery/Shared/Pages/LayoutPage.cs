@@ -1,13 +1,13 @@
 using Avalonia;
 using Avalonia.Media;
-using Md3.Avalonia.Primitives;
+using Mav.Primitives;
 using Avalonia.Controls;
 using Avalonia.Layout;
-using Md3.Avalonia;
-using Md3.Avalonia.Controls;
-using Md3.Avalonia.Theming;
+using Mav;
+using Mav.Controls;
+using Mav.Theming;
 
-namespace Md3.Gallery;
+namespace Mav.Gallery;
 
 internal static class LayoutPage
 {
@@ -24,125 +24,125 @@ internal static class LayoutPage
 
     private static Control Surfaces()
     {
-        var elevated = new MdCard(MdCardVariant.Elevated, new MdLabel { Text = "Elevated card" });
-        var filled = new MdCard(MdCardVariant.Filled, new MdLabel { Text = "Filled card" });
-        var outlined = new MdCard(MdCardVariant.Outlined, new MdLabel { Text = "Outlined card" });
+        var elevated = new MavCard(MavCardVariant.Elevated, new MavLabel { Text = "Elevated card" });
+        var filled = new MavCard(MavCardVariant.Filled, new MavLabel { Text = "Filled card" });
+        var outlined = new MavCard(MavCardVariant.Outlined, new MavLabel { Text = "Outlined card" });
 
-        var surface = new MdSurface
+        var surface = new MavSurface
         {
             Width = 200,
             Height = 88,
             Radius = 16,
             Elevation = 2,
-            FillColor = MdTheme.ColorOf(MdColorRole.SurfaceContainerHigh),
-            Content = new MdLabel
+            FillColor = MavTheme.ColorOf(MavColorRole.SurfaceContainerHigh),
+            Content = new MavLabel
             {
-                Text = "MdSurface",
+                Text = "MavSurface",
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
             },
         };
 
         var labels = GalleryUi.Column(
-            new MdLabel { Text = "TitleLarge", Role = MdTypeRole.TitleLarge },
-            new MdLabel { Text = "BodyMedium secondary", Role = MdTypeRole.BodyMedium, Secondary = true },
-            new MdLabel { Text = "Label with primary color", Role = MdTypeRole.LabelLarge, ColorRole = MdColorRole.Primary });
+            new MavLabel { Text = "TitleLarge", Role = MavTypeRole.TitleLarge },
+            new MavLabel { Text = "BodyMedium secondary", Role = MavTypeRole.BodyMedium, Secondary = true },
+            new MavLabel { Text = "Label with primary color", Role = MavTypeRole.LabelLarge, ColorRole = MavColorRole.Primary });
 
-        var divider = new MdDivider();
-        var vertical = new MdDivider { IsVertical = true, Height = 32 };
+        var divider = new MavDivider();
+        var vertical = new MavDivider { IsVertical = true, Height = 32 };
 
-        var badge = new MdBadge("3");
-        var badged = new MdBadgedBox(new MdIconButton(MdIcons.Notifications), "5");
+        var badge = new MavBadge("3");
+        var badged = new MavBadgedBox(new MavIconButton(MavIcons.Notifications), "5");
 
         return GalleryUi.Showcase(
-            "MdCard, MdSurface, MdLabel, MdDivider, MdBadge and MdBadgedBox",
+            "MavCard, MavSurface, MavLabel, MavDivider, MavBadge and MavBadgedBox",
             "MD3 surfaces with two-layer elevation, typography-aware labels, dividers and notification badges.",
             GalleryUi.Column(
                 GalleryUi.Row(elevated, filled, outlined, surface),
                 labels,
                 divider,
                 GalleryUi.Row(vertical, badge, badged)),
-            "new MdCard(variant, body) · MdSurface.Elevation · MdLabel.Role · MdBadge.Count");
+            "new MavCard(variant, body) · MavSurface.Elevation · MavLabel.Role · MavBadge.Count");
     }
 
     private static Control Expandables()
     {
-        var panel = new MdExpansionPanel
+        var panel = new MavExpansionPanel
         {
             Header = "Release notes",
             IsExpanded = true,
-            Body = new MdLabel
+            Body = new MavLabel
             {
                 Text = "Expansion panels keep secondary content out of the way until it is needed.",
                 TextWrapping = TextWrapping.Wrap,
             },
         };
 
-        var list = new MdExpansionPanelList { SingleExpand = true };
-        list.AddPanel(new MdExpansionPanel { Header = "Install", Body = new MdLabel { Text = "dotnet add package Md3.Avalonia" } });
-        list.AddPanel(new MdExpansionPanel { Header = "Theme", Body = new MdLabel { Text = "MdTheme.Configure(seed: ...)" } });
+        var list = new MavExpansionPanelList { SingleExpand = true };
+        list.AddPanel(new MavExpansionPanel { Header = "Install", Body = new MavLabel { Text = "dotnet add package Mav" } });
+        list.AddPanel(new MavExpansionPanel { Header = "Theme", Body = new MavLabel { Text = "MavTheme.Configure(seed: ...)" } });
 
-        var settings = new MdSettingsCard
+        var settings = new MavSettingsCard
         {
             Header = "Appearance",
             Title = "Dark mode",
             Description = "Follow the system theme or force a mode",
-            Icon = MdIcons.DarkMode,
-            ActionContent = new MdSwitch(MdTheme.Current.IsDark, showIcons: true),
+            Icon = MavIcons.DarkMode,
+            ActionContent = new MavSwitch(MavTheme.Current.IsDark, showIcons: true),
         };
 
-        var expander = new MdSettingsExpander { Header = "Notifications", IsExpanded = true };
-        expander.AddItem("Email", "Daily digest", new MdSwitch(true), MdIcons.Email);
-        expander.AddItem("Push", "Mentions and replies", new MdSwitch(), MdIcons.Notifications);
+        var expander = new MavSettingsExpander { Header = "Notifications", IsExpanded = true };
+        expander.AddItem("Email", "Daily digest", new MavSwitch(true), MavIcons.Email);
+        expander.AddItem("Push", "Mentions and replies", new MavSwitch(), MavIcons.Notifications);
 
         return GalleryUi.Showcase(
-            "MdExpansionPanel, MdExpansionPanelList, MdSettingsCard and MdSettingsExpander",
+            "MavExpansionPanel, MavExpansionPanelList, MavSettingsCard and MavSettingsExpander",
             "Progressive disclosure for details, settings groups and compact forms.",
             GalleryUi.Column(panel, list, settings, expander),
-            "MdExpansionPanel.IsExpanded · MdExpansionPanelList.SingleExpand · MdSettingsCard.ActionContent");
+            "MavExpansionPanel.IsExpanded · MavExpansionPanelList.SingleExpand · MavSettingsCard.ActionContent");
     }
 
     private static Control Responsive()
     {
-        var split = new MdSplitView
+        var split = new MavSplitView
         {
             PaneWidth = 180,
             MinPaneWidth = 140,
             MaxPaneWidth = 320,
             IsResizable = true,
-            Pane = new MdCard(MdCardVariant.Filled, new MdLabel { Text = "Pane" }),
-            DetailContent = new MdCard(MdCardVariant.Outlined, new MdLabel { Text = "Detail content" }),
+            Pane = new MavCard(MavCardVariant.Filled, new MavLabel { Text = "Pane" }),
+            DetailContent = new MavCard(MavCardVariant.Outlined, new MavLabel { Text = "Detail content" }),
         };
 
-        var carousel = new MdCarousel { Height = 220 };
-        carousel.AddItem("Material 3", "Tonal palettes and shape", MdIcons.Palette);
-        carousel.AddItem("Adaptive", "Phone, tablet and desktop", MdIcons.Devices);
-        carousel.AddItem("Pure C#", "No AXAML templates", MdIcons.Code);
+        var carousel = new MavCarousel { Height = 220 };
+        carousel.AddItem("Material 3", "Tonal palettes and shape", MavIcons.Palette);
+        carousel.AddItem("Adaptive", "Phone, tablet and desktop", MavIcons.Devices);
+        carousel.AddItem("Pure C#", "No AXAML templates", MavIcons.Code);
 
         var longContent = new StackPanel { Spacing = 8 };
         for (var i = 1; i <= 12; i++)
-            longContent.Children.Add(new MdLabel { Text = $"Scrollable row {i}", Role = MdTypeRole.BodyMedium });
+            longContent.Children.Add(new MavLabel { Text = $"Scrollable row {i}", Role = MavTypeRole.BodyMedium });
 
-        var scroll = new MdScrollViewer
+        var scroll = new MavScrollViewer
         {
             Height = 180,
             Content = longContent,
         };
 
         return GalleryUi.Showcase(
-            "MdSplitView, MdCarousel and MdScrollViewer",
+            "MavSplitView, MavCarousel and MavScrollViewer",
             "Resizable master/detail, swipeable carousel and the theme-independent scroll host.",
             GalleryUi.Column(
                 new Border { Height = 260, Child = split },
                 carousel,
-                new MdCard(MdCardVariant.Outlined, scroll)),
-            "MdSplitView.Pane/DetailContent · MdCarousel.AddItem(...) · MdScrollViewer.Content");
+                new MavCard(MavCardVariant.Outlined, scroll)),
+            "MavSplitView.Pane/DetailContent · MavCarousel.AddItem(...) · MavScrollViewer.Content");
     }
 
     private static Control People()
     {
-        var avatar = new MdAvatar("AL", size: 48, status: MdAvatarStatus.Online);
-        var group = new MdAvatarGroup();
+        var avatar = new MavAvatar("AL", size: 48, status: MavAvatarStatus.Online);
+        var group = new MavAvatarGroup();
         group.AddAvatar("AL");
         group.AddAvatar("GH");
         group.AddAvatar("AT");
@@ -150,19 +150,19 @@ internal static class LayoutPage
         group.AddAvatar("LT");
         group.AddAvatar("MH");
 
-        var drop = new MdFileDropZone("Drop files here", "or browse from the device", allowMultiple: true);
+        var drop = new MavFileDropZone("Drop files here", "or browse from the device", allowMultiple: true);
         drop.AddFile("design-spec.pdf", 248_000);
         drop.AddFile("screenshot.png", 512_000);
 
         return GalleryUi.Showcase(
-            "MdAvatar, MdAvatarGroup, MdFileDropZone and MdChatBubble",
+            "MavAvatar, MavAvatarGroup, MavFileDropZone and MavChatBubble",
             "People and workspace widgets: avatars with presence, overlapping groups, file drops and chat bubbles.",
             GalleryUi.Column(
                 GalleryUi.Row(avatar, group),
                 new Border { Width = 460, Child = drop },
-                new MdChatBubble("The gallery builds on desktop, web and Android.", false, "Ada", "10:24", "AL"),
-                new MdChatBubble("I can see every control in one place.", true, "You", "10:26", "YO", isRead: true)),
-            "MdAvatar.Status · MdAvatarGroup.AddAvatar · MdFileDropZone.AddFile · MdChatBubble.IsOutgoing");
+                new MavChatBubble("The gallery builds on desktop, web and Android.", false, "Ada", "10:24", "AL"),
+                new MavChatBubble("I can see every control in one place.", true, "You", "10:26", "YO", isRead: true)),
+            "MavAvatar.Status · MavAvatarGroup.AddAvatar · MavFileDropZone.AddFile · MavChatBubble.IsOutgoing");
     }
 
     private static Control WindowSection()
@@ -170,23 +170,23 @@ internal static class LayoutPage
         if (OperatingSystem.IsBrowser() || OperatingSystem.IsAndroid())
         {
             return GalleryUi.Section(
-                "MdWindow",
-                "MdWindow is a desktop-only TopLevel: it provides a theme-free window template and a VisualLayerManager for overlays.");
+                "MavWindow",
+                "MavWindow is a desktop-only TopLevel: it provides a theme-free window template and a VisualLayerManager for overlays.");
         }
 
-        var button = new MdButton("Open a new window", MdButtonVariant.Filled, MdIcons.Window);
+        var button = new MavButton("Open a new window", MavButtonVariant.Filled, MavIcons.Window);
         button.Clicked += (_, _) =>
         {
-            var window = new MdWindow
+            var window = new MavWindow
             {
-                Title = "MdWindow demo",
+                Title = "MavWindow demo",
                 Width = 520,
                 Height = 360,
-                Content = new MdCard(
-                    MdCardVariant.Filled,
-                    new MdLabel
+                Content = new MavCard(
+                    MavCardVariant.Filled,
+                    new MavLabel
                     {
-                        Text = "This is a second MdWindow with its own overlay layer.",
+                        Text = "This is a second MavWindow with its own overlay layer.",
                         Margin = new Thickness(24),
                     }),
             };
@@ -195,50 +195,50 @@ internal static class LayoutPage
 
         return GalleryUi.Section(
             "Windows",
-            "MdWindow is a desktop-only TopLevel with a built-in theme-free template and overlay layer.",
+            "MavWindow is a desktop-only TopLevel with a built-in theme-free template and overlay layer.",
             GalleryUi.Showcase(
-                "MdWindow",
+                "MavWindow",
                 "Opens a secondary window; on web and Android it is not applicable.",
                 button,
-                "new MdWindow { Content = ... }.Show()"));
+                "new MavWindow { Content = ... }.Show()"));
     }
 
     private static Control Insets()
     {
-        var safe = new MdSafeArea
+        var safe = new MavSafeArea
         {
-            Edges = MdSafeAreaEdges.All,
+            Edges = MavSafeAreaEdges.All,
             SimulatedInset = new Thickness(16, 24, 16, 24),
             BasePadding = new Thickness(8),
-            Body = new MdLabel
+            Body = new MavLabel
             {
                 Text = "Content inside simulated safe-area insets",
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
             },
-            Background = MdTheme.BrushOf(MdTheme.ColorOf(MdColorRole.SurfaceContainerLow)),
+            Background = MavTheme.BrushOf(MavTheme.ColorOf(MavColorRole.SurfaceContainerLow)),
             Height = 140,
         };
 
-        var keyboard = new MdKeyboardAvoidingHost
+        var keyboard = new MavKeyboardAvoidingHost
         {
             SimulatedKeyboardHeight = 120,
-            Body = new MdLabel
+            Body = new MavLabel
             {
                 Text = "Content lifted above a simulated 120 dp keyboard",
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
             },
             Height = 220,
-            Background = MdTheme.BrushOf(MdTheme.ColorOf(MdColorRole.SurfaceContainerLow)),
+            Background = MavTheme.BrushOf(MavTheme.ColorOf(MavColorRole.SurfaceContainerLow)),
         };
 
         return GalleryUi.Showcase(
-            "MdSafeArea and MdKeyboardAvoidingHost",
-            "Insets and IME handling used by MdNavigationPage on mobile; SimulatedInset/SimulatedKeyboardHeight preview them on desktop.",
+            "MavSafeArea and MavKeyboardAvoidingHost",
+            "Insets and IME handling used by MavNavigationPage on mobile; SimulatedInset/SimulatedKeyboardHeight preview them on desktop.",
             GalleryUi.Row(
                 new Border { Width = 360, Child = safe },
                 new Border { Width = 360, Child = keyboard }),
-            "MdSafeArea.Edges/SimulatedInset · MdKeyboardAvoidingHost.SimulatedKeyboardHeight");
+            "MavSafeArea.Edges/SimulatedInset · MavKeyboardAvoidingHost.SimulatedKeyboardHeight");
     }
 }

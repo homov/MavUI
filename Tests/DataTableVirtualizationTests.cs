@@ -8,11 +8,11 @@ using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
-using Md3.Avalonia.Controls;
-using Md3.Avalonia.Primitives;
+using Mav.Controls;
+using Mav.Primitives;
 using Xunit;
 
-namespace Md3.Avalonia.Tests;
+namespace Mav.Tests;
 
 public class DataTableVirtualizationTests
 {
@@ -55,19 +55,19 @@ public class DataTableVirtualizationTests
         public event PropertyChangedEventHandler? PropertyChanged;
     }
 
-    private static (Window Window, MdDataTable Table, MdScrollViewer Scroll) CreateHost(
+    private static (Window Window, MavDataTable Table, MavScrollViewer Scroll) CreateHost(
         int count,
         bool pagination,
         double maxBodyHeight = 300,
         bool selectable = false)
     {
         var rows = Enumerable.Range(0, count).Select(i => new Row(i, $"Row {i}")).ToList();
-        var table = new MdDataTable
+        var table = new MavDataTable
         {
             ItemsSource = rows,
             ShowPagination = pagination,
             MaxBodyHeight = maxBodyHeight,
-            Layout = MdDataTableLayout.Table,
+            Layout = MavDataTableLayout.Table,
             IsSelectable = selectable,
         };
         table.AddColumn("Index", r => ((Row)r).Index, isNumeric: true);
@@ -77,14 +77,14 @@ public class DataTableVirtualizationTests
         window.Show();
         Dispatcher.UIThread.RunJobs();
 
-        var scroll = table.GetVisualDescendants().OfType<MdScrollViewer>().First();
+        var scroll = table.GetVisualDescendants().OfType<MavScrollViewer>().First();
         return (window, table, scroll);
     }
 
-    private static int RowCount(MdDataTable table) =>
+    private static int RowCount(MavDataTable table) =>
         table.GetVisualDescendants()
-            .OfType<MdInkSurface>()
-            .Count(s => s.Content is Grid); // rows host a Grid; icon buttons host an MdIcon
+            .OfType<MavInkSurface>()
+            .Count(s => s.Content is Grid); // rows host a Grid; icon buttons host an MavIcon
 
     [AvaloniaFact]
     public void Large_table_renders_a_chunk_instead_of_every_row()
@@ -121,7 +121,7 @@ public class DataTableVirtualizationTests
         var offset = scroll.Offset;
 
         var rowSurface = table.GetVisualDescendants()
-            .OfType<MdInkSurface>()
+            .OfType<MavInkSurface>()
             .First(surface => surface.Content is Grid);
 
         table.SelectedItem = ((System.Collections.IEnumerable)table.ItemsSource!).Cast<object>().ElementAt(300);
@@ -149,11 +149,11 @@ public class DataTableVirtualizationTests
     public void Table_without_inner_viewport_renders_all_page_rows()
     {
         var rows = Enumerable.Range(0, 40).Select(i => new Row(i, $"Row {i}")).ToList();
-        var table = new MdDataTable
+        var table = new MavDataTable
         {
             ItemsSource = rows,
             ShowPagination = false,
-            Layout = MdDataTableLayout.Table,
+            Layout = MavDataTableLayout.Table,
         };
         table.AddColumn("Name", r => ((Row)r).Name);
 
@@ -166,17 +166,17 @@ public class DataTableVirtualizationTests
         window.Close();
     }
 
-    private static (Window Window, MdDataTable Table, MdScrollViewer Scroll, ObservableCollection<Row> Rows)
+    private static (Window Window, MavDataTable Table, MavScrollViewer Scroll, ObservableCollection<Row> Rows)
         CreateMutableHost(int count)
     {
         var rows = new ObservableCollection<Row>(
             Enumerable.Range(0, count).Select(i => new Row(i, $"Row {i}")));
-        var table = new MdDataTable
+        var table = new MavDataTable
         {
             ItemsSource = rows,
             ShowPagination = false,
             MaxBodyHeight = 300,
-            Layout = MdDataTableLayout.Table,
+            Layout = MavDataTableLayout.Table,
         };
         table.AddColumn("Index", r => ((Row)r).Index, isNumeric: true);
         table.AddColumn("Name", r => ((Row)r).Name);
@@ -185,13 +185,13 @@ public class DataTableVirtualizationTests
         window.Show();
         Dispatcher.UIThread.RunJobs();
 
-        var scroll = table.GetVisualDescendants().OfType<MdScrollViewer>().First();
+        var scroll = table.GetVisualDescendants().OfType<MavScrollViewer>().First();
         return (window, table, scroll, rows);
     }
 
-    private static HashSet<MdInkSurface> RowSurfaces(MdDataTable table) =>
+    private static HashSet<MavInkSurface> RowSurfaces(MavDataTable table) =>
         table.GetVisualDescendants()
-            .OfType<MdInkSurface>()
+            .OfType<MavInkSurface>()
             .Where(s => s.Content is Grid)
             .ToHashSet();
 
@@ -264,12 +264,12 @@ public class DataTableVirtualizationTests
     {
         var rows = new ObservableCollection<ObservableRow>(
             Enumerable.Range(0, 100).Select(i => new ObservableRow(i, $"Row {i}")));
-        var table = new MdDataTable
+        var table = new MavDataTable
         {
             ItemsSource = rows,
             ShowPagination = false,
             MaxBodyHeight = 300,
-            Layout = MdDataTableLayout.Table,
+            Layout = MavDataTableLayout.Table,
         };
         table.AddColumn("Index", r => ((ObservableRow)r).Index, isNumeric: true);
         table.AddColumn("Name", r => ((ObservableRow)r).Name);
@@ -278,7 +278,7 @@ public class DataTableVirtualizationTests
         window.Show();
         Dispatcher.UIThread.RunJobs();
 
-        var scroll = table.GetVisualDescendants().OfType<MdScrollViewer>().First();
+        var scroll = table.GetVisualDescendants().OfType<MavScrollViewer>().First();
         scroll.Offset = new Vector(0, 1200);
         Dispatcher.UIThread.RunJobs();
         var offset = scroll.Offset;
@@ -304,11 +304,11 @@ public class DataTableVirtualizationTests
     {
         var rows = new ObservableCollection<Row>(
             Enumerable.Range(0, 20).Select(i => new Row(i, $"Row {i}")));
-        var table = new MdDataTable
+        var table = new MavDataTable
         {
             ItemsSource = rows,
             ShowPagination = false,
-            Layout = MdDataTableLayout.Table,
+            Layout = MavDataTableLayout.Table,
         };
         table.AddColumn("Name", r => ((Row)r).Name);
 

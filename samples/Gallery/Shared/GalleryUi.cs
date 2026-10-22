@@ -2,11 +2,11 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Layout;
 using Avalonia.Media;
-using Md3.Avalonia.Controls;
-using Md3.Avalonia.Primitives;
-using Md3.Avalonia.Theming;
+using Mav.Controls;
+using Mav.Primitives;
+using Mav.Theming;
 
-namespace Md3.Gallery;
+namespace Mav.Gallery;
 
 internal static class GalleryUi
 {
@@ -26,24 +26,24 @@ internal static class GalleryUi
             Child = stack,
         };
 
-        return new MdScrollViewer { Content = content };
+        return new MavScrollViewer { Content = content };
     }
 
     public static Control Section(string title, string? description = null, params Control[] children)
     {
         var stack = new StackPanel { Spacing = 12 };
-        stack.Children.Add(new MdLabel
+        stack.Children.Add(new MavLabel
         {
             Text = title,
-            Role = MdTypeRole.HeadlineSmall,
+            Role = MavTypeRole.HeadlineSmall,
         });
 
         if (!string.IsNullOrWhiteSpace(description))
         {
-            stack.Children.Add(new MdLabel
+            stack.Children.Add(new MavLabel
             {
                 Text = description,
-                Role = MdTypeRole.BodyMedium,
+                Role = MavTypeRole.BodyMedium,
                 Secondary = true,
                 TextWrapping = TextWrapping.Wrap,
             });
@@ -58,28 +58,28 @@ internal static class GalleryUi
     public static Control Showcase(string name, string description, Control demo, string api)
     {
         var stack = new StackPanel { Spacing = 10 };
-        stack.Children.Add(new MdLabel
+        stack.Children.Add(new MavLabel
         {
             Text = name,
-            Role = MdTypeRole.TitleMedium,
+            Role = MavTypeRole.TitleMedium,
         });
-        stack.Children.Add(new MdLabel
+        stack.Children.Add(new MavLabel
         {
             Text = description,
-            Role = MdTypeRole.BodySmall,
+            Role = MavTypeRole.BodySmall,
             Secondary = true,
             TextWrapping = TextWrapping.Wrap,
         });
         stack.Children.Add(demo);
-        stack.Children.Add(new MdLabel
+        stack.Children.Add(new MavLabel
         {
             Text = api,
-            Role = MdTypeRole.LabelSmall,
+            Role = MavTypeRole.LabelSmall,
             Secondary = true,
             TextWrapping = TextWrapping.Wrap,
         });
 
-        return new MdCard(MdCardVariant.Outlined, stack)
+        return new MavCard(MavCardVariant.Outlined, stack)
         {
             Margin = new Thickness(0),
             CardPadding = new Thickness(16),
@@ -102,14 +102,14 @@ internal static class GalleryUi
         return panel;
     }
 
-    public static MdButton Button(
+    public static MavButton Button(
         string text,
-        MdButtonVariant variant,
+        MavButtonVariant variant,
         string? icon,
         Action action,
         bool isToggle = false)
     {
-        var button = new MdButton(text, variant, icon) { IsToggle = isToggle };
+        var button = new MavButton(text, variant, icon) { IsToggle = isToggle };
         button.Clicked += (_, _) => action();
         return button;
     }
@@ -122,7 +122,7 @@ internal static class GalleryUi
         return stack;
     }
 
-    public static MdLabel Muted(string text, MdTypeRole role = MdTypeRole.BodySmall) => new()
+    public static MavLabel Muted(string text, MavTypeRole role = MavTypeRole.BodySmall) => new()
     {
         Text = text,
         Role = role,
@@ -130,10 +130,10 @@ internal static class GalleryUi
         TextWrapping = TextWrapping.Wrap,
     };
 
-    public static Control Swatch(string name, MdColorRole role)
+    public static Control Swatch(string name, MavColorRole role)
     {
-        var color = MdTheme.ColorOf(role);
-        var onColor = MdAccessibility.RelativeLuminance(color) >= 0.5
+        var color = MavTheme.ColorOf(role);
+        var onColor = MavAccessibility.RelativeLuminance(color) >= 0.5
             ? Colors.Black
             : Colors.White;
 
@@ -141,7 +141,7 @@ internal static class GalleryUi
         {
             Text = name,
             FontSize = 11,
-            Foreground = MdTheme.BrushOf(onColor),
+            Foreground = MavTheme.BrushOf(onColor),
         };
 
         return new Border
@@ -149,7 +149,7 @@ internal static class GalleryUi
             Width = 132,
             Height = 64,
             CornerRadius = new CornerRadius(12),
-            Background = MdTheme.BrushOf(color),
+            Background = MavTheme.BrushOf(color),
             Padding = new Thickness(10),
             Margin = new Thickness(0, 0, 8, 8),
             Child = label,

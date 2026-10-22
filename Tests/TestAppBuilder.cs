@@ -2,9 +2,9 @@ using Avalonia;
 using Avalonia.Headless;
 using Avalonia.Headless.XUnit;
 
-[assembly: AvaloniaTestApplication(typeof(Md3.Avalonia.Tests.TestAppBuilder))]
+[assembly: AvaloniaTestApplication(typeof(Mav.Tests.TestAppBuilder))]
 
-namespace Md3.Avalonia.Tests;
+namespace Mav.Tests;
 
 public static class TestAppBuilder
 {

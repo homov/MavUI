@@ -5,12 +5,12 @@ using Avalonia.Headless;
 using Avalonia.Headless.XUnit;
 using Avalonia.Input;
 using Avalonia.Threading;
-using Md3.Avalonia;
-using Md3.Avalonia.Controls;
-using Md3.Avalonia.Platform;
+using Mav;
+using Mav.Controls;
+using Mav.Platform;
 using Xunit;
 
-namespace Md3.Avalonia.Tests;
+namespace Mav.Tests;
 
 public class GestureZoneTests
 {
@@ -28,9 +28,9 @@ public class GestureZoneTests
         var host = new Border();
         var window = Show(host);
 
-        Assert.True(MdGestureZones.IsInSystemEdge(host, new Point(4, 100)));
-        Assert.False(MdGestureZones.IsInSystemEdge(host, new Point(200, 100)));
-        Assert.True(MdGestureZones.IsInSystemEdge(host, new Point(396, 100)));
+        Assert.True(MavGestureZones.IsInSystemEdge(host, new Point(4, 100)));
+        Assert.False(MavGestureZones.IsInSystemEdge(host, new Point(200, 100)));
+        Assert.True(MavGestureZones.IsInSystemEdge(host, new Point(396, 100)));
 
         window.Close();
     }
@@ -41,8 +41,8 @@ public class GestureZoneTests
         var host = new Border();
         var window = Show(host);
 
-        Assert.False(MdGestureZones.IsInSystemEdge(host, new Point(30, 100), 20));
-        Assert.True(MdGestureZones.IsInSystemEdge(host, new Point(30, 100), 40));
+        Assert.False(MavGestureZones.IsInSystemEdge(host, new Point(30, 100), 20));
+        Assert.True(MavGestureZones.IsInSystemEdge(host, new Point(30, 100), 40));
 
         window.Close();
     }
@@ -50,7 +50,7 @@ public class GestureZoneTests
     [AvaloniaFact]
     public void Slider_ignores_touch_starting_in_the_system_edge()
     {
-        var slider = new MdSlider(0, 100, 10);
+        var slider = new MavSlider(0, 100, 10);
         var window = Show(slider);
 
         var edge = slider.TranslatePoint(new Point(4, 24), window)!.Value;
@@ -65,7 +65,7 @@ public class GestureZoneTests
     [AvaloniaFact]
     public void Slider_accepts_touch_away_from_the_edge()
     {
-        var slider = new MdSlider(0, 100, 10);
+        var slider = new MavSlider(0, 100, 10);
         var window = Show(slider);
 
         var center = slider.TranslatePoint(new Point(200, 24), window)!.Value;
@@ -80,10 +80,10 @@ public class GestureZoneTests
     [AvaloniaFact]
     public void Carousel_ignores_a_drag_starting_in_the_system_edge()
     {
-        var carousel = new MdCarousel { Width = 400, Height = 210 };
-        carousel.AddItem("One", "1", MdIcons.Home);
-        carousel.AddItem("Two", "2", MdIcons.Search);
-        carousel.AddItem("Three", "3", MdIcons.Settings);
+        var carousel = new MavCarousel { Width = 400, Height = 210 };
+        carousel.AddItem("One", "1", MavIcons.Home);
+        carousel.AddItem("Two", "2", MavIcons.Search);
+        carousel.AddItem("Three", "3", MavIcons.Settings);
         var window = Show(carousel);
 
         var start = carousel.TranslatePoint(new Point(396, 100), window)!.Value;
@@ -102,10 +102,10 @@ public class GestureZoneTests
     [AvaloniaFact]
     public void Carousel_accepts_a_drag_away_from_the_edge()
     {
-        var carousel = new MdCarousel { Width = 400, Height = 210 };
-        carousel.AddItem("One", "1", MdIcons.Home);
-        carousel.AddItem("Two", "2", MdIcons.Search);
-        carousel.AddItem("Three", "3", MdIcons.Settings);
+        var carousel = new MavCarousel { Width = 400, Height = 210 };
+        carousel.AddItem("One", "1", MavIcons.Home);
+        carousel.AddItem("Two", "2", MavIcons.Search);
+        carousel.AddItem("Three", "3", MavIcons.Settings);
         var window = Show(carousel);
 
         var start = carousel.TranslatePoint(new Point(250, 100), window)!.Value;

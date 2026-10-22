@@ -8,17 +8,17 @@ using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
-using Md3.Avalonia;
-using Md3.Avalonia.Controls;
-using Md3.Avalonia.Platform;
-using Md3.Avalonia.Primitives;
+using Mav;
+using Mav.Controls;
+using Mav.Platform;
+using Mav.Primitives;
 using Xunit;
 
-namespace Md3.Avalonia.Tests;
+namespace Mav.Tests;
 
 public class NavigationTests
 {
-    private sealed class BackPage(string title) : MdContentPage(title)
+    private sealed class BackPage(string title) : MavContentPage(title)
     {
         public int BackCalls { get; private set; }
         public bool ConsumeBack { get; set; }
@@ -30,12 +30,12 @@ public class NavigationTests
         }
     }
 
-    private static (Window Window, MdNavigationPage Navigation) CreateHost(
-        MdContentPage root,
+    private static (Window Window, MavNavigationPage Navigation) CreateHost(
+        MavContentPage root,
         double width = 800,
         double height = 600)
     {
-        var navigation = new MdNavigationPage(root);
+        var navigation = new MavNavigationPage(root);
         var window = new Window
         {
             Width = width,
@@ -50,7 +50,7 @@ public class NavigationTests
     [AvaloniaFact]
     public void SetRoot_establishes_a_single_page_stack()
     {
-        var root = new MdContentPage("Root");
+        var root = new MavContentPage("Root");
         var (window, navigation) = CreateHost(root);
 
         Assert.Equal(1, navigation.StackDepth);
@@ -64,9 +64,9 @@ public class NavigationTests
     [AvaloniaFact]
     public void Push_and_pop_update_depth_and_current_page()
     {
-        var root = new MdContentPage("Root");
+        var root = new MavContentPage("Root");
         var (window, navigation) = CreateHost(root);
-        var page = new MdContentPage("Page");
+        var page = new MavContentPage("Page");
 
         navigation.Push(page, animated: false);
 
@@ -89,7 +89,7 @@ public class NavigationTests
     [AvaloniaFact]
     public void Pop_on_the_root_page_is_a_no_op()
     {
-        var root = new MdContentPage("Root");
+        var root = new MavContentPage("Root");
         var (window, navigation) = CreateHost(root);
 
         Assert.False(navigation.Pop(animated: false));
@@ -101,11 +101,11 @@ public class NavigationTests
     [AvaloniaFact]
     public void PopToRoot_removes_every_pushed_page()
     {
-        var root = new MdContentPage("Root");
+        var root = new MavContentPage("Root");
         var (window, navigation) = CreateHost(root);
-        var first = new MdContentPage("First");
-        var second = new MdContentPage("Second");
-        var third = new MdContentPage("Third");
+        var first = new MavContentPage("First");
+        var second = new MavContentPage("Second");
+        var third = new MavContentPage("Third");
 
         navigation.Push(first, animated: false);
         navigation.Push(second, animated: false);
@@ -124,10 +124,10 @@ public class NavigationTests
     [AvaloniaFact]
     public void Replace_swaps_the_top_page_without_growing_the_stack()
     {
-        var root = new MdContentPage("Root");
+        var root = new MavContentPage("Root");
         var (window, navigation) = CreateHost(root);
-        var first = new MdContentPage("First");
-        var replacement = new MdContentPage("Replacement");
+        var first = new MavContentPage("First");
+        var replacement = new MavContentPage("Replacement");
 
         navigation.Push(first, animated: false);
         navigation.Replace(replacement, animated: false);
@@ -143,9 +143,9 @@ public class NavigationTests
     [AvaloniaFact]
     public void Pushing_the_same_page_twice_throws()
     {
-        var root = new MdContentPage("Root");
+        var root = new MavContentPage("Root");
         var (window, navigation) = CreateHost(root);
-        var page = new MdContentPage("Page");
+        var page = new MavContentPage("Page");
 
         navigation.Push(page, animated: false);
 
@@ -157,7 +157,7 @@ public class NavigationTests
     [AvaloniaFact]
     public void Page_can_consume_back_before_the_stack_pops()
     {
-        var root = new MdContentPage("Root");
+        var root = new MavContentPage("Root");
         var (window, navigation) = CreateHost(root);
         var page = new BackPage("Page") { ConsumeBack = true };
         navigation.Push(page, animated: false);
@@ -177,8 +177,8 @@ public class NavigationTests
     [AvaloniaFact]
     public void Safe_area_override_is_applied_to_the_chrome()
     {
-        var bottomBar = new MdBottomAppBar();
-        var root = new MdContentPage("Root") { BottomBar = bottomBar };
+        var bottomBar = new MavBottomAppBar();
+        var root = new MavContentPage("Root") { BottomBar = bottomBar };
         var (window, navigation) = CreateHost(root);
 
         navigation.SafeAreaOverride = new Thickness(0, 24, 0, 48);
@@ -186,7 +186,7 @@ public class NavigationTests
         Assert.Equal(new Thickness(0, 24, 0, 48), navigation.SafeAreaInsets);
         Assert.Equal(new Thickness(0, 0, 0, 48), bottomBar.SafeAreaPadding);
 
-        var appBar = navigation.GetVisualDescendants().OfType<MdTopAppBar>().First();
+        var appBar = navigation.GetVisualDescendants().OfType<MavTopAppBar>().First();
         Assert.Equal(new Thickness(0, 24, 0, 0), appBar.SafeAreaPadding);
 
         navigation.ApplySafeArea = false;
@@ -200,9 +200,9 @@ public class NavigationTests
     [AvaloniaFact]
     public void System_back_request_pops_the_top_page()
     {
-        var root = new MdContentPage("Root");
+        var root = new MavContentPage("Root");
         var (window, navigation) = CreateHost(root);
-        navigation.Push(new MdContentPage("Page"), animated: false);
+        navigation.Push(new MavContentPage("Page"), animated: false);
 
         var args = new RoutedEventArgs(TopLevel.BackRequestedEvent);
         window.RaiseEvent(args);
@@ -217,7 +217,7 @@ public class NavigationTests
     [AvaloniaFact]
     public void Navigation_page_opts_out_of_automatic_safe_area_padding()
     {
-        var (window, navigation) = CreateHost(new MdContentPage("Root"));
+        var (window, navigation) = CreateHost(new MavContentPage("Root"));
 
         Assert.False(TopLevel.GetAutoSafeAreaPadding(navigation));
 
@@ -227,31 +227,31 @@ public class NavigationTests
     [AvaloniaFact]
     public void Overlay_falls_back_to_the_navigation_host_without_an_overlay_layer()
     {
-        var (window, navigation) = CreateHost(new MdContentPage("Root"));
+        var (window, navigation) = CreateHost(new MavContentPage("Root"));
         var dismissed = false;
 
-        using var handle = MdOverlay.Show(
+        using var handle = MavOverlay.Show(
             navigation,
             new Border { Width = 100, Height = 100 },
             onScrimTap: () => dismissed = true);
 
-        Assert.True(MdOverlay.HasActiveOverlay);
+        Assert.True(MavOverlay.HasActiveOverlay);
 
         var args = new RoutedEventArgs(TopLevel.BackRequestedEvent);
         window.RaiseEvent(args);
 
         Assert.True(args.Handled);
         Assert.True(dismissed);
-        Assert.False(MdOverlay.HasActiveOverlay);
+        Assert.False(MavOverlay.HasActiveOverlay);
         Assert.Equal(1, navigation.StackDepth);
 
         window.Close();
     }
 
     [AvaloniaFact]
-    public void MdScrollViewer_scrolls_without_an_avalonia_theme()
+    public void MavScrollViewer_scrolls_without_an_avalonia_theme()
     {
-        var scroll = new MdScrollViewer
+        var scroll = new MavScrollViewer
         {
             Width = 300,
             Height = 400,
@@ -281,19 +281,19 @@ public class NavigationTests
     [AvaloniaFact]
     public void Pickers_open_in_the_navigation_overlay_host()
     {
-        var (window, navigation) = CreateHost(new MdContentPage("Root"));
+        var (window, navigation) = CreateHost(new MavContentPage("Root"));
 
-        var datePicker = new MdDatePicker { SelectedDate = DateTime.Today };
+        var datePicker = new MavDatePicker { SelectedDate = DateTime.Today };
         datePicker.Show(navigation);
-        Assert.True(MdOverlay.HasActiveOverlay);
-        Assert.True(MdOverlay.TryDismissTop());
-        Assert.False(MdOverlay.HasActiveOverlay);
+        Assert.True(MavOverlay.HasActiveOverlay);
+        Assert.True(MavOverlay.TryDismissTop());
+        Assert.False(MavOverlay.HasActiveOverlay);
 
-        var timePicker = new MdTimePicker { SelectedTime = TimeSpan.FromHours(9) };
+        var timePicker = new MavTimePicker { SelectedTime = TimeSpan.FromHours(9) };
         timePicker.Show(navigation);
-        Assert.True(MdOverlay.HasActiveOverlay);
+        Assert.True(MavOverlay.HasActiveOverlay);
         timePicker.Close();
-        Assert.False(MdOverlay.HasActiveOverlay);
+        Assert.False(MavOverlay.HasActiveOverlay);
 
         window.Close();
     }
@@ -301,9 +301,9 @@ public class NavigationTests
     [AvaloniaFact]
     public void Menu_is_clamped_to_a_narrow_navigation_host()
     {
-        var root = new MdContentPage("Root");
+        var root = new MavContentPage("Root");
         var (window, navigation) = CreateHost(root, width: 320, height: 640);
-        var anchor = new MdButton("Filters")
+        var anchor = new MavButton("Filters")
         {
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
@@ -311,13 +311,13 @@ public class NavigationTests
         root.Content = anchor;
         Dispatcher.UIThread.RunJobs();
 
-        var menu = new MdMenu { MinWidth = 420 };
+        var menu = new MavMenu { MinWidth = 420 };
         menu.AddItem("A deliberately long menu item");
         menu.Show(anchor);
         Dispatcher.UIThread.RunJobs();
 
         var card = window.GetVisualDescendants()
-            .OfType<MdSurface>()
+            .OfType<MavSurface>()
             .First(surface => surface.Radius == 12);
 
         Assert.True(card.Bounds.Width <= 304.5);
@@ -330,9 +330,9 @@ public class NavigationTests
     [AvaloniaFact]
     public void Menu_reflows_when_the_host_is_resized()
     {
-        var root = new MdContentPage("Root");
+        var root = new MavContentPage("Root");
         var (window, navigation) = CreateHost(root, width: 900, height: 640);
-        var anchor = new MdButton("Filters")
+        var anchor = new MavButton("Filters")
         {
             Width = 120,
             HorizontalAlignment = HorizontalAlignment.Right,
@@ -341,14 +341,14 @@ public class NavigationTests
         root.Content = anchor;
         Dispatcher.UIThread.RunJobs();
 
-        var menu = new MdMenu();
+        var menu = new MavMenu();
         menu.AddItem("A deliberately long menu item");
         menu.AddItem("Another long menu item");
         menu.Show(anchor);
         Dispatcher.UIThread.RunJobs();
 
         var wide = window.GetVisualDescendants()
-            .OfType<MdSurface>()
+            .OfType<MavSurface>()
             .First(surface => surface.Radius == 12);
 
         window.Width = 320;
@@ -357,7 +357,7 @@ public class NavigationTests
             Dispatcher.UIThread.RunJobs();
 
         var card = window.GetVisualDescendants()
-            .OfType<MdSurface>()
+            .OfType<MavSurface>()
             .First(surface => surface.Radius == 12);
 
         Assert.Same(wide, card);
@@ -372,9 +372,9 @@ public class NavigationTests
     [AvaloniaFact]
     public void Popover_reflows_and_does_not_stick_to_its_first_width()
     {
-        var root = new MdContentPage("Root");
+        var root = new MavContentPage("Root");
         var (window, navigation) = CreateHost(root, width: 900, height: 640);
-        var anchor = new MdButton("Details")
+        var anchor = new MavButton("Details")
         {
             Width = 120,
             HorizontalAlignment = HorizontalAlignment.Left,
@@ -383,12 +383,12 @@ public class NavigationTests
         root.Content = anchor;
         Dispatcher.UIThread.RunJobs();
 
-        var popover = new MdPopover(new Border { Width = 800, Height = 40 }, "Details");
+        var popover = new MavPopover(new Border { Width = 800, Height = 40 }, "Details");
         popover.Show(anchor);
         Dispatcher.UIThread.RunJobs();
 
         var wide = window.GetVisualDescendants()
-            .OfType<MdSurface>()
+            .OfType<MavSurface>()
             .First(surface => surface.Radius == 16)
             .Bounds.Width;
 
@@ -398,7 +398,7 @@ public class NavigationTests
             Dispatcher.UIThread.RunJobs();
 
         var card = window.GetVisualDescendants()
-            .OfType<MdSurface>()
+            .OfType<MavSurface>()
             .First(surface => surface.Radius == 16);
 
         Assert.True(card.Bounds.Width < wide);
@@ -412,7 +412,7 @@ public class NavigationTests
             Dispatcher.UIThread.RunJobs();
 
         card = window.GetVisualDescendants()
-            .OfType<MdSurface>()
+            .OfType<MavSurface>()
             .First(surface => surface.Radius == 16);
 
         Assert.True(card.Bounds.Width > 300);
@@ -424,10 +424,10 @@ public class NavigationTests
     [AvaloniaFact]
     public void Dialog_reflows_when_the_host_is_resized()
     {
-        var root = new MdContentPage("Root");
+        var root = new MavContentPage("Root");
         var (window, navigation) = CreateHost(root, width: 900, height: 640);
 
-        var dialog = new MdDialog
+        var dialog = new MavDialog
         {
             Title = "Delete project?",
             Message = "This action cannot be undone.",
@@ -443,7 +443,7 @@ public class NavigationTests
             Dispatcher.UIThread.RunJobs();
 
         var card = window.GetVisualDescendants()
-            .OfType<MdSurface>()
+            .OfType<MavSurface>()
             .First(surface => surface.Radius == 28);
 
         Assert.True(card.Bounds.Width <= 272.5);
@@ -458,10 +458,10 @@ public class NavigationTests
     [AvaloniaFact]
     public void Time_picker_fits_after_shrinking_the_host()
     {
-        var root = new MdContentPage("Root");
+        var root = new MavContentPage("Root");
         var (window, navigation) = CreateHost(root, width: 900, height: 640);
 
-        var picker = new MdTimePicker { SelectedTime = TimeSpan.FromHours(9) };
+        var picker = new MavTimePicker { SelectedTime = TimeSpan.FromHours(9) };
         picker.Show(navigation);
         Dispatcher.UIThread.RunJobs();
 
@@ -471,7 +471,7 @@ public class NavigationTests
             Dispatcher.UIThread.RunJobs();
 
         var card = window.GetVisualDescendants()
-            .OfType<MdSurface>()
+            .OfType<MavSurface>()
             .First(surface => surface.Radius == 28);
 
         Assert.True(card.Bounds.Width <= 280.5);
@@ -486,10 +486,10 @@ public class NavigationTests
     [AvaloniaFact]
     public void Date_picker_fits_after_shrinking_the_host()
     {
-        var root = new MdContentPage("Root");
+        var root = new MavContentPage("Root");
         var (window, navigation) = CreateHost(root, width: 900, height: 640);
 
-        var picker = new MdDatePicker { SelectedDate = DateTime.Today };
+        var picker = new MavDatePicker { SelectedDate = DateTime.Today };
         picker.Show(navigation);
         Dispatcher.UIThread.RunJobs();
 
@@ -499,7 +499,7 @@ public class NavigationTests
             Dispatcher.UIThread.RunJobs();
 
         var card = window.GetVisualDescendants()
-            .OfType<MdSurface>()
+            .OfType<MavSurface>()
             .First(surface => surface.Radius == 28);
 
         Assert.True(card.Bounds.Width <= 288.5);
@@ -514,9 +514,9 @@ public class NavigationTests
     [AvaloniaFact]
     public void Popover_is_clamped_and_scrolls_on_a_narrow_navigation_host()
     {
-        var root = new MdContentPage("Root");
+        var root = new MavContentPage("Root");
         var (window, navigation) = CreateHost(root, width: 320, height: 320);
-        var anchor = new MdButton("Details")
+        var anchor = new MavButton("Details")
         {
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
@@ -529,12 +529,12 @@ public class NavigationTests
             Text = string.Join("\n", Enumerable.Repeat("A very wide line of popover text", 30)),
             TextWrapping = TextWrapping.NoWrap,
         };
-        var popover = new MdPopover(body, "Details");
+        var popover = new MavPopover(body, "Details");
         popover.Show(anchor);
         Dispatcher.UIThread.RunJobs();
 
         var card = window.GetVisualDescendants()
-            .OfType<MdSurface>()
+            .OfType<MavSurface>()
             .First(surface => surface.Radius == 16);
 
         Assert.True(card.Bounds.Width <= 297);
@@ -549,9 +549,9 @@ public class NavigationTests
     [AvaloniaFact]
     public void Popover_keeps_its_edge_margin_when_anchored_to_the_right_edge()
     {
-        var root = new MdContentPage("Root");
+        var root = new MavContentPage("Root");
         var (window, navigation) = CreateHost(root, width: 360, height: 640);
-        var anchor = new MdButton("Popover")
+        var anchor = new MavButton("Popover")
         {
             HorizontalAlignment = HorizontalAlignment.Right,
             VerticalAlignment = VerticalAlignment.Top,
@@ -563,17 +563,17 @@ public class NavigationTests
         {
             Children =
             {
-                new MdCheckBox("Archived"),
-                new MdCheckBox("Shared with me"),
-                new MdCheckBox("Has attachments"),
+                new MavCheckBox("Archived"),
+                new MavCheckBox("Shared with me"),
+                new MavCheckBox("Has attachments"),
             },
         };
-        var popover = new MdPopover(body, "Filters");
+        var popover = new MavPopover(body, "Filters");
         popover.Show(anchor);
         Dispatcher.UIThread.RunJobs();
 
         var card = window.GetVisualDescendants()
-            .OfType<MdSurface>()
+            .OfType<MavSurface>()
             .First(surface => surface.Radius == 16);
 
         // 360 dp viewport, 12 dp edge margin: the card must not touch the right edge.
@@ -587,9 +587,9 @@ public class NavigationTests
     [AvaloniaFact]
     public void Menu_keeps_its_edge_margin_when_anchored_to_the_right_edge()
     {
-        var root = new MdContentPage("Root");
+        var root = new MavContentPage("Root");
         var (window, navigation) = CreateHost(root, width: 360, height: 640);
-        var anchor = new MdButton("Menu")
+        var anchor = new MavButton("Menu")
         {
             HorizontalAlignment = HorizontalAlignment.Right,
             VerticalAlignment = VerticalAlignment.Top,
@@ -597,16 +597,16 @@ public class NavigationTests
         root.Content = anchor;
         Dispatcher.UIThread.RunJobs();
 
-        var menu = new MdMenu();
-        menu.AddItem("Rename", MdIcons.Edit);
-        menu.AddItem("Duplicate", MdIcons.ContentCopy);
+        var menu = new MavMenu();
+        menu.AddItem("Rename", MavIcons.Edit);
+        menu.AddItem("Duplicate", MavIcons.ContentCopy);
         menu.AddDivider();
-        menu.AddItem("Delete", MdIcons.Delete);
+        menu.AddItem("Delete", MavIcons.Delete);
         menu.Show(anchor);
         Dispatcher.UIThread.RunJobs();
 
         var card = window.GetVisualDescendants()
-            .OfType<MdSurface>()
+            .OfType<MavSurface>()
             .First(surface => surface.Radius == 12);
 
         // 360 dp viewport, 8 dp edge margin for menus.
@@ -620,9 +620,9 @@ public class NavigationTests
     [AvaloniaFact]
     public void Search_view_fits_a_narrow_navigation_host()
     {
-        var root = new MdContentPage("Root");
+        var root = new MavContentPage("Root");
         var (window, navigation) = CreateHost(root, width: 320, height: 640);
-        var anchor = new MdButton("Search")
+        var anchor = new MavButton("Search")
         {
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
@@ -630,7 +630,7 @@ public class NavigationTests
         root.Content = anchor;
         Dispatcher.UIThread.RunJobs();
 
-        var search = new MdSearchView
+        var search = new MavSearchView
         {
             SuggestionsSource = new[] { "Alpha", "Beta" },
         };
@@ -638,7 +638,7 @@ public class NavigationTests
         Dispatcher.UIThread.RunJobs();
 
         var card = window.GetVisualDescendants()
-            .OfType<MdSurface>()
+            .OfType<MavSurface>()
             .First(surface => surface.Radius == 28);
 
         Assert.True(card.Bounds.Width <= 320.5);
@@ -651,19 +651,19 @@ public class NavigationTests
     [AvaloniaFact]
     public void Time_and_date_pickers_fit_a_narrow_navigation_host()
     {
-        var root = new MdContentPage("Root");
+        var root = new MavContentPage("Root");
         var (window, navigation) = CreateHost(root, width: 320, height: 640);
 
-        var time = new MdTimePicker { SelectedTime = TimeSpan.FromHours(9) };
+        var time = new MavTimePicker { SelectedTime = TimeSpan.FromHours(9) };
         time.Show(navigation);
         Dispatcher.UIThread.RunJobs();
 
         var timeCard = window.GetVisualDescendants()
-            .OfType<MdSurface>()
+            .OfType<MavSurface>()
             .First(surface => surface.Radius == 28);
-        var dial = window.GetVisualDescendants().OfType<MdTimeDial>().First();
+        var dial = window.GetVisualDescendants().OfType<MavTimeDial>().First();
         var ok = window.GetVisualDescendants()
-            .OfType<MdButton>()
+            .OfType<MavButton>()
             .First(button => button.Text == "OK");
         var okTopLeft = ok.TranslatePoint(default, timeCard);
 
@@ -675,14 +675,14 @@ public class NavigationTests
 
         time.Close();
 
-        var date = new MdDatePicker { SelectedDate = DateTime.Today };
+        var date = new MavDatePicker { SelectedDate = DateTime.Today };
         date.Show(navigation);
         Dispatcher.UIThread.RunJobs();
 
         var dateCard = window.GetVisualDescendants()
-            .OfType<MdSurface>()
+            .OfType<MavSurface>()
             .First(surface => surface.Radius == 28);
-        var calendar = window.GetVisualDescendants().OfType<MdCalendarGrid>().First();
+        var calendar = window.GetVisualDescendants().OfType<MavCalendarGrid>().First();
 
         Assert.True(dateCard.Bounds.Width <= 288.5);
         Assert.True(calendar.Bounds.Width <= 240.5);
@@ -694,9 +694,9 @@ public class NavigationTests
     [AvaloniaFact]
     public void Color_picker_fits_a_narrow_dialog()
     {
-        var root = new MdContentPage("Root");
+        var root = new MavContentPage("Root");
         var (window, navigation) = CreateHost(root, width: 320, height: 640);
-        var anchor = new MdButton("Color")
+        var anchor = new MavButton("Color")
         {
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
@@ -704,24 +704,24 @@ public class NavigationTests
         root.Content = anchor;
         Dispatcher.UIThread.RunJobs();
 
-        _ = MdColorPicker.PickAsync(anchor);
+        _ = MavColorPicker.PickAsync(anchor);
         Dispatcher.UIThread.RunJobs();
 
-        var picker = window.GetVisualDescendants().OfType<MdColorPicker>().First();
+        var picker = window.GetVisualDescendants().OfType<MavColorPicker>().First();
         Assert.True(picker.Bounds.Width <= 225);
 
         var confirm = window.GetVisualDescendants()
-            .OfType<MdButton>()
+            .OfType<MavButton>()
             .First(button => button.Text == "Select");
         var card = window.GetVisualDescendants()
-            .OfType<MdSurface>()
+            .OfType<MavSurface>()
             .First(surface => surface.Radius == 28);
         var confirmTopLeft = confirm.TranslatePoint(default, card);
 
         Assert.True(confirmTopLeft.HasValue);
         Assert.True(confirmTopLeft.Value.Y + confirm.Bounds.Height <= card.Bounds.Height + 0.5);
 
-        MdOverlay.TryDismissTop();
+        MavOverlay.TryDismissTop();
         window.Close();
     }
 }

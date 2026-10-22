@@ -3,59 +3,59 @@ using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
 using Avalonia.Layout;
 using Avalonia.Threading;
-using Md3.Avalonia;
-using Md3.Avalonia.Controls;
-using Md3.Avalonia.Primitives;
-using Md3.Avalonia.Theming;
+using Mav;
+using Mav.Controls;
+using Mav.Primitives;
+using Mav.Theming;
 using Xunit;
 
-namespace Md3.Avalonia.Tests;
+namespace Mav.Tests;
 
 public class ContainerTests
 {
     [AvaloniaFact]
-    public void MdCard_filled()
+    public void MavCard_filled()
     {
-        var card = new MdCard(MdCardVariant.Filled, new MdLabel { Text = "Body" });
-        Assert.Equal(MdCardVariant.Filled, card.Variant);
+        var card = new MavCard(MavCardVariant.Filled, new MavLabel { Text = "Body" });
+        Assert.Equal(MavCardVariant.Filled, card.Variant);
     }
 
     [AvaloniaFact]
-    public void MdAvatar_initials()
+    public void MavAvatar_initials()
     {
-        var av = new MdAvatar { Initials = "AB" };
+        var av = new MavAvatar { Initials = "AB" };
         Assert.Equal("AB", av.Initials);
     }
 
     [AvaloniaFact]
-    public void MdBadge_count()
+    public void MavBadge_count()
     {
-        var badge = new MdBadge { Text = "3", Count = 3 };
+        var badge = new MavBadge { Text = "3", Count = 3 };
         Assert.Equal(3, badge.Count);
     }
 
     [AvaloniaFact]
-    public void MdDivider_horizontal()
+    public void MavDivider_horizontal()
     {
-        var d = new MdDivider();
+        var d = new MavDivider();
         Assert.False(d.IsVertical);
     }
 
     [AvaloniaFact]
-    public void MdLabel_role()
+    public void MavLabel_role()
     {
-        var l = new MdLabel { Text = "Title", Role = MdTypeRole.HeadlineMedium };
-        Assert.Equal(MdTypeRole.HeadlineMedium, l.Role);
+        var l = new MavLabel { Text = "Title", Role = MavTypeRole.HeadlineMedium };
+        Assert.Equal(MavTypeRole.HeadlineMedium, l.Role);
     }
 
     [AvaloniaFact]
-    public void MdSafeArea_edges()
+    public void MavSafeArea_edges()
     {
-        var safe = new MdSafeArea { Edges = MdSafeAreaEdges.Top, Body = new MdLabel { Text = "x" } };
-        Assert.Equal(MdSafeAreaEdges.Top, safe.Edges);
+        var safe = new MavSafeArea { Edges = MavSafeAreaEdges.Top, Body = new MavLabel { Text = "x" } };
+        Assert.Equal(MavSafeAreaEdges.Top, safe.Edges);
     }
 
-    private static (Window Window, MdSplitView Split) ShowSplit(MdSplitView split)
+    private static (Window Window, MavSplitView Split) ShowSplit(MavSplitView split)
     {
         var window = new Window
         {
@@ -69,13 +69,13 @@ public class ContainerTests
     }
 
     [AvaloniaFact]
-    public void MdSplitView_applies_initial_ratio_once()
+    public void MavSplitView_applies_initial_ratio_once()
     {
-        var split = new MdSplitView
+        var split = new MavSplitView
         {
             InitialRatio = 0.5,
-            Pane = new MdLabel { Text = "Pane" },
-            DetailContent = new MdLabel { Text = "Detail" },
+            Pane = new MavLabel { Text = "Pane" },
+            DetailContent = new MavLabel { Text = "Detail" },
         };
         var (window, _) = ShowSplit(split);
 
@@ -90,14 +90,14 @@ public class ContainerTests
     }
 
     [AvaloniaFact]
-    public void MdSplitView_keeps_explicit_pane_width_over_initial_ratio()
+    public void MavSplitView_keeps_explicit_pane_width_over_initial_ratio()
     {
-        var split = new MdSplitView
+        var split = new MavSplitView
         {
             PaneWidth = 180,
             InitialRatio = 0.5,
-            Pane = new MdLabel { Text = "Pane" },
-            DetailContent = new MdLabel { Text = "Detail" },
+            Pane = new MavLabel { Text = "Pane" },
+            DetailContent = new MavLabel { Text = "Detail" },
         };
         var (window, _) = ShowSplit(split);
 

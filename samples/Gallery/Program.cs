@@ -1,8 +1,8 @@
 using Avalonia;
-using Md3.Avalonia;
-using Md3.Avalonia.Theming;
+using Mav;
+using Mav.Theming;
 
-namespace Md3.Gallery;
+namespace Mav.Gallery;
 
 internal static class Program
 {
@@ -13,10 +13,10 @@ internal static class Program
     public static AppBuilder BuildAvaloniaApp() =>
         AppBuilder.Configure<DesktopGalleryApp>()
             .UsePlatformDetect()
-            .UseMd3(options =>
+            .UseMav(options =>
             {
-                options.SeedColor = MdColors.Indigo;
-                options.Mode = MdThemeMode.System;
+                options.SeedColor = MavColors.Indigo;
+                options.Mode = MavThemeMode.System;
             })
             .LogToTrace();
 }

@@ -4,12 +4,12 @@ using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
 using Avalonia.Input;
 using Avalonia.VisualTree;
-using Md3.Avalonia;
-using Md3.Avalonia.Controls;
-using Md3.Avalonia.Primitives;
+using Mav;
+using Mav.Controls;
+using Mav.Primitives;
 using Xunit;
 
-namespace Md3.Avalonia.Tests;
+namespace Mav.Tests;
 
 public class KeyboardAccessibilityTests
 {
@@ -29,15 +29,15 @@ public class KeyboardAccessibilityTests
         });
     }
 
-    private static MdInkSurface SurfaceOf(Control control) =>
-        control.GetVisualDescendants().OfType<MdInkSurface>().First();
+    private static MavInkSurface SurfaceOf(Control control) =>
+        control.GetVisualDescendants().OfType<MavInkSurface>().First();
 
     [AvaloniaTheory]
     [InlineData(Key.Space)]
     [InlineData(Key.Enter)]
-    public void MdButton_activates_from_the_keyboard(Key key)
+    public void MavButton_activates_from_the_keyboard(Key key)
     {
-        var button = new MdButton("Save");
+        var button = new MavButton("Save");
         var clicks = 0;
         button.Clicked += (_, _) => clicks++;
         var window = Show(button);
@@ -53,9 +53,9 @@ public class KeyboardAccessibilityTests
     [AvaloniaTheory]
     [InlineData(Key.Space)]
     [InlineData(Key.Enter)]
-    public void MdFab_activates_from_the_keyboard(Key key)
+    public void MavFab_activates_from_the_keyboard(Key key)
     {
-        var fab = new MdFab(MdIcons.Add);
+        var fab = new MavFab(MavIcons.Add);
         var clicks = 0;
         fab.Clicked += (_, _) => clicks++;
         var window = Show(fab);
@@ -71,9 +71,9 @@ public class KeyboardAccessibilityTests
     [AvaloniaTheory]
     [InlineData(Key.Space)]
     [InlineData(Key.Enter)]
-    public void MdCheckBox_toggles_from_the_keyboard(Key key)
+    public void MavCheckBox_toggles_from_the_keyboard(Key key)
     {
-        var check = new MdCheckBox("Remember me");
+        var check = new MavCheckBox("Remember me");
         var window = Show(check);
 
         check.Focus();
@@ -86,9 +86,9 @@ public class KeyboardAccessibilityTests
     [AvaloniaTheory]
     [InlineData(Key.Space)]
     [InlineData(Key.Enter)]
-    public void MdSwitch_toggles_from_the_keyboard(Key key)
+    public void MavSwitch_toggles_from_the_keyboard(Key key)
     {
-        var toggle = new MdSwitch();
+        var toggle = new MavSwitch();
         var window = Show(toggle);
 
         toggle.Focus();
@@ -101,9 +101,9 @@ public class KeyboardAccessibilityTests
     [AvaloniaTheory]
     [InlineData(Key.Space)]
     [InlineData(Key.Enter)]
-    public void MdRadioButton_selects_from_the_keyboard(Key key)
+    public void MavRadioButton_selects_from_the_keyboard(Key key)
     {
-        var radio = new MdRadioButton { Label = "Admin" };
+        var radio = new MavRadioButton { Label = "Admin" };
         var window = Show(radio);
 
         radio.Focus();
@@ -114,9 +114,9 @@ public class KeyboardAccessibilityTests
     }
 
     [AvaloniaFact]
-    public void MdSlider_steps_with_arrow_keys()
+    public void MavSlider_steps_with_arrow_keys()
     {
-        var slider = new MdSlider(0, 100, 50, divisions: 0) { Step = 10 };
+        var slider = new MavSlider(0, 100, 50, divisions: 0) { Step = 10 };
         var window = Show(slider);
 
         slider.Focus();

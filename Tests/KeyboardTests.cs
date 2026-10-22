@@ -5,24 +5,24 @@ using Avalonia.Headless.XUnit;
 using Avalonia.Layout;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
-using Md3.Avalonia;
-using Md3.Avalonia.Controls;
-using Md3.Avalonia.Platform;
+using Mav;
+using Mav.Controls;
+using Mav.Platform;
 using Xunit;
 
-namespace Md3.Avalonia.Tests;
+namespace Mav.Tests;
 
 public class KeyboardTests
 {
     [AvaloniaFact]
     public void Simulated_keyboard_inset_lifts_the_page_and_the_fab()
     {
-        var page = new MdContentPage("Root")
+        var page = new MavContentPage("Root")
         {
-            FloatingActionButton = new MdFab(MdIcons.Add),
+            FloatingActionButton = new MavFab(MavIcons.Add),
             Content = new Border { Height = 2000 },
         };
-        var navigation = new MdNavigationPage(page);
+        var navigation = new MavNavigationPage(page);
         var window = new Window
         {
             Width = 400,
@@ -34,7 +34,7 @@ public class KeyboardTests
 
         navigation.KeyboardHost.AnimateInset = false;
         var pageHeightBefore = page.Bounds.Height;
-        var fab = navigation.GetVisualDescendants().OfType<MdFab>().Single();
+        var fab = navigation.GetVisualDescendants().OfType<MavFab>().Single();
         var fabTopBefore = fab.TranslatePoint(default, navigation)!.Value.Y;
 
         navigation.KeyboardHost.SimulatedKeyboardHeight = 300;
@@ -54,11 +54,11 @@ public class KeyboardTests
     [AvaloniaFact]
     public void Clearing_the_simulated_keyboard_restores_the_full_page()
     {
-        var page = new MdContentPage("Root")
+        var page = new MavContentPage("Root")
         {
             Content = new Border { Height = 2000 },
         };
-        var navigation = new MdNavigationPage(page);
+        var navigation = new MavNavigationPage(page);
         var window = new Window
         {
             Width = 400,
@@ -86,8 +86,8 @@ public class KeyboardTests
     [AvaloniaFact]
     public void Leaving_a_keyboard_preview_page_restores_the_full_overlay_height()
     {
-        var page = new MdContentPage("Root");
-        var navigation = new MdNavigationPage(page);
+        var page = new MavContentPage("Root");
+        var navigation = new MavNavigationPage(page);
         var window = new Window
         {
             Width = 400,
@@ -99,7 +99,7 @@ public class KeyboardTests
 
         // The gallery previews the soft keyboard on one of its pages. That preview is
         // global to overlays, so it must stop contributing when the page is left.
-        var preview = new MdKeyboardAvoidingHost
+        var preview = new MavKeyboardAvoidingHost
         {
             SimulatedKeyboardHeight = 120,
             Body = new Border(),
@@ -107,16 +107,16 @@ public class KeyboardTests
         page.Content = preview;
         for (var i = 0; i < 3; i++)
             Dispatcher.UIThread.RunJobs();
-        MdOverlay.GetOverlaySize(preview);
+        MavOverlay.GetOverlaySize(preview);
         for (var i = 0; i < 3; i++)
             Dispatcher.UIThread.RunJobs();
-        Assert.True(MdOverlay.GetOverlaySize(preview).Height < 700);
+        Assert.True(MavOverlay.GetOverlaySize(preview).Height < 700);
 
         page.Content = new Border();
         for (var i = 0; i < 3; i++)
             Dispatcher.UIThread.RunJobs();
 
-        Assert.Equal(800, MdOverlay.GetOverlaySize(navigation).Height, 1);
+        Assert.Equal(800, MavOverlay.GetOverlaySize(navigation).Height, 1);
 
         window.Close();
     }
@@ -124,8 +124,8 @@ public class KeyboardTests
     [AvaloniaFact]
     public void Dialog_opened_after_a_keyboard_preview_page_is_centered()
     {
-        var page = new MdContentPage("Root");
-        var navigation = new MdNavigationPage(page);
+        var page = new MavContentPage("Root");
+        var navigation = new MavNavigationPage(page);
         var window = new Window
         {
             Width = 400,
@@ -135,7 +135,7 @@ public class KeyboardTests
         window.Show();
         Dispatcher.UIThread.RunJobs();
 
-        var preview = new MdKeyboardAvoidingHost
+        var preview = new MavKeyboardAvoidingHost
         {
             SimulatedKeyboardHeight = 120,
             Body = new Border(),
@@ -147,7 +147,7 @@ public class KeyboardTests
         for (var i = 0; i < 3; i++)
             Dispatcher.UIThread.RunJobs();
 
-        var dialog = new MdDialog
+        var dialog = new MavDialog
         {
             Title = "Delete project?",
             Message = "This action cannot be undone.",
@@ -159,13 +159,13 @@ public class KeyboardTests
             Dispatcher.UIThread.RunJobs();
 
         var card = navigation.GetVisualDescendants()
-            .OfType<Md3.Avalonia.Primitives.MdSurface>()
+            .OfType<Mav.Primitives.MavSurface>()
             .First(surface => surface.Radius == 28);
         var center = card.TranslatePoint(
             new Point(card.Bounds.Width / 2, card.Bounds.Height / 2), window)!.Value;
 
         Assert.InRange(center.Y, 399, 401);
-        Assert.Equal(800, MdOverlay.GetOverlaySize(navigation).Height, 1);
+        Assert.Equal(800, MavOverlay.GetOverlaySize(navigation).Height, 1);
 
         dialog.Close();
         window.Close();
@@ -174,8 +174,8 @@ public class KeyboardTests
     [AvaloniaFact]
     public void Popover_stays_inside_the_overlay_when_the_keyboard_opens()
     {
-        var page = new MdContentPage("Root");
-        var navigation = new MdNavigationPage(page);
+        var page = new MavContentPage("Root");
+        var navigation = new MavNavigationPage(page);
         var window = new Window
         {
             Width = 400,
@@ -187,26 +187,26 @@ public class KeyboardTests
 
         navigation.KeyboardHost.AnimateInset = false;
 
-        var field = new MdTextField("Name")
+        var field = new MavTextField("Name")
         {
             VerticalAlignment = VerticalAlignment.Bottom,
         };
         page.Content = field;
         Dispatcher.UIThread.RunJobs();
 
-        var popover = new MdPopover(new Border { Height = 120 }, "Details");
+        var popover = new MavPopover(new Border { Height = 120 }, "Details");
         popover.Show(field);
         Dispatcher.UIThread.RunJobs();
 
         var card = navigation.GetVisualDescendants()
-            .OfType<Md3.Avalonia.Primitives.MdSurface>()
+            .OfType<Mav.Primitives.MavSurface>()
             .First(surface => surface.Radius == 16);
 
         navigation.KeyboardHost.SimulatedKeyboardHeight = 300;
         for (var i = 0; i < 3; i++)
             Dispatcher.UIThread.RunJobs();
 
-        var overlaySize = MdOverlay.GetOverlaySize(field);
+        var overlaySize = MavOverlay.GetOverlaySize(field);
         Assert.True(overlaySize.Height < 800);
         Assert.True(card.Bounds.Bottom <= overlaySize.Height + 0.5);
 

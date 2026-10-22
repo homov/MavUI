@@ -1,42 +1,42 @@
 using Avalonia.Headless.XUnit;
-using Md3.Avalonia.Controls;
+using Mav.Controls;
 using Xunit;
 
-namespace Md3.Avalonia.Tests;
+namespace Mav.Tests;
 
 public class ListTableTreeTests
 {
     [AvaloniaFact]
-    public void MdList_add_item_and_subheader()
+    public void MavList_add_item_and_subheader()
     {
-        var list = new MdList { ShowDividers = true };
+        var list = new MavList { ShowDividers = true };
         list.AddSubheader("Today");
-        list.AddItem(new MdListItem("Design review") { LeadingIcon = MdIcons.Event });
+        list.AddItem(new MavListItem("Design review") { LeadingIcon = MavIcons.Event });
         Assert.True(list.Children.Count > 0);
     }
 
     [AvaloniaFact]
-    public void MdDataTable_columns_and_rows()
+    public void MavDataTable_columns_and_rows()
     {
-        var table = new MdDataTable { ItemsSource = new[] { new { Name = "A", Score = 1 } } };
+        var table = new MavDataTable { ItemsSource = new[] { new { Name = "A", Score = 1 } } };
         table.AddColumn("Name", r => ((dynamic)r).Name);
         table.AddColumn("Score", r => ((dynamic)r).Score, isNumeric: true);
         Assert.True(table.Columns.Count > 0);
     }
 
     [AvaloniaFact]
-    public void MdTreeView_root_and_child()
+    public void MavTreeView_root_and_child()
     {
-        var tree = new MdTreeView();
+        var tree = new MavTreeView();
         tree.Add("Root");
         Assert.True(tree.Roots.Count > 0);
     }
 
     [AvaloniaFact]
-    public void MdCarousel_item()
+    public void MavCarousel_item()
     {
-        var carousel = new MdCarousel();
-        carousel.AddItem("Title", "Sub", MdIcons.Home);
+        var carousel = new MavCarousel();
+        carousel.AddItem("Title", "Sub", MavIcons.Home);
         Assert.True(carousel.Items.Count > 0);
     }
 }

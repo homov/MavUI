@@ -1,77 +1,77 @@
 using Avalonia.Headless.XUnit;
-using Md3.Avalonia;
-using Md3.Avalonia.Controls;
+using Mav;
+using Mav.Controls;
 using Xunit;
 
-namespace Md3.Avalonia.Tests;
+namespace Mav.Tests;
 
 public class SelectionTests
 {
     [AvaloniaFact]
-    public void MdSwitch_toggled()
+    public void MavSwitch_toggled()
     {
-        var s = new MdSwitch { IsToggled = true, ShowIcons = true };
+        var s = new MavSwitch { IsToggled = true, ShowIcons = true };
         Assert.True(s.IsToggled);
         s.Toggled += (_, on) => Assert.True(on);
     }
 
     [AvaloniaFact]
-    public void MdCheckBox_indeterminate()
+    public void MavCheckBox_indeterminate()
     {
-        var c = new MdCheckBox("Accept") { IsIndeterminate = true, IsThreeState = true };
-        Assert.Equal(MdCheckState.Indeterminate, c.State);
+        var c = new MavCheckBox("Accept") { IsIndeterminate = true, IsThreeState = true };
+        Assert.Equal(MavCheckState.Indeterminate, c.State);
     }
 
     [AvaloniaFact]
-    public void MdRadioGroup_selection()
+    public void MavRadioGroup_selection()
     {
-        var group = new MdRadioGroup();
+        var group = new MavRadioGroup();
         group.AddOption("Admin", "admin", selected: true);
         Assert.Equal(0, group.SelectedIndex);
     }
 
     [AvaloniaFact]
-    public void MdSlider_value_changed()
+    public void MavSlider_value_changed()
     {
-        var slider = new MdSlider { Minimum = 0, Maximum = 100, Value = 30, ShowValueLabel = true };
+        var slider = new MavSlider { Minimum = 0, Maximum = 100, Value = 30, ShowValueLabel = true };
         Assert.Equal(30, slider.Value);
     }
 
     [AvaloniaFact]
-    public void MdSegmentedButton_multi()
+    public void MavSegmentedButton_multi()
     {
-        var seg = new MdSegmentedButton { MultiSelect = true };
+        var seg = new MavSegmentedButton { MultiSelect = true };
         seg.AddSegment("A");
         seg.AddSegment("B", selected: true);
         Assert.True(seg.MultiSelect);
     }
 
     [AvaloniaFact]
-    public void MdChip_removable()
+    public void MavChip_removable()
     {
-        var chip = new MdChip("Delete", MdChipKind.Filter) { ShowCloseIcon = true };
+        var chip = new MavChip("Delete", MavChipKind.Filter) { ShowCloseIcon = true };
         Assert.True(chip.ShowCloseIcon);
     }
 
     [AvaloniaFact]
-    public void MdChipGroup_single_selection()
+    public void MavChipGroup_single_selection()
     {
-        var group = new MdChipGroup { SingleSelection = true };
+        var group = new MavChipGroup { SingleSelection = true };
         group.AddChip("Red", selected: true);
         Assert.Equal(0, group.SelectedIndex);
     }
 
     [AvaloniaFact]
-    public void MdSelect_option()
+    public void MavSelect_option()
     {
-        var sel = new MdSelect("Role", new[] { "A", "B", "C" }) { SelectedIndex = 1 };
+        var sel = new MavSelect("Role", new[] { "A", "B", "C" }) { SelectedIndex = 1 };
         Assert.Equal("B", sel.SelectedItem);
     }
 
     [AvaloniaFact]
-    public void MdComboBox_text()
+    public void MavComboBox_text()
     {
-        var combo = new MdComboBox("Role", new[] { "Dev", "QA" }) { Text = "Dev" };
+        var combo = new MavComboBox("Role", new[] { "Dev", "QA" }) { Text = "Dev" };
         Assert.Equal("Dev", combo.Text);
     }
 }

@@ -1,17 +1,17 @@
 using Avalonia.Headless.XUnit;
-using Md3.Avalonia;
-using Md3.Avalonia.Controls;
-using Md3.Avalonia.Theming;
+using Mav;
+using Mav.Controls;
+using Mav.Theming;
 using Xunit;
 
-namespace Md3.Avalonia.Tests;
+namespace Mav.Tests;
 
 public class InputTests
 {
     [AvaloniaFact]
-    public void MdTextField_outlined_with_error()
+    public void MavTextField_outlined_with_error()
     {
-        var field = new MdTextField("Email", MdTextFieldVariant.Outlined, placeholder: "you@example.com")
+        var field = new MavTextField("Email", MavTextFieldVariant.Outlined, placeholder: "you@example.com")
         {
             Text = "wrong",
             ErrorText = "Invalid email",
@@ -22,30 +22,30 @@ public class InputTests
     }
 
     [AvaloniaFact]
-    public void MdTextArea_min_height()
+    public void MavTextArea_min_height()
     {
-        var area = new MdTextArea("Notes", minHeight: 200);
+        var area = new MavTextArea("Notes", minHeight: 200);
         Assert.Equal(200, area.MinBoxHeight);
     }
 
     [AvaloniaFact]
-    public void MdPinInput_numeric_done()
+    public void MavPinInput_numeric_done()
     {
-        var pin = new MdPinInput { Length = 6, Code = "123456", IsMasked = true };
+        var pin = new MavPinInput { Length = 6, Code = "123456", IsMasked = true };
         Assert.Equal("123456", pin.Code);
     }
 
     [AvaloniaFact]
-    public void MdNumberBox_range()
+    public void MavNumberBox_range()
     {
-        var box = new MdNumberBox { Label = "Age", Minimum = 0, Maximum = 120, Value = 25 };
+        var box = new MavNumberBox { Label = "Age", Minimum = 0, Maximum = 120, Value = 25 };
         Assert.Equal(25, box.Value);
     }
 
     [AvaloniaFact]
-    public void MdTagInput_add_remove()
+    public void MavTagInput_add_remove()
     {
-        var tags = new MdTagInput { Label = "Tags" };
+        var tags = new MavTagInput { Label = "Tags" };
         tags.AddTag("c#");
         Assert.Single(tags.Tags);
         tags.ClearTags();
@@ -53,9 +53,9 @@ public class InputTests
     }
 
     [AvaloniaFact]
-    public void MdRatingBar_half_stars()
+    public void MavRatingBar_half_stars()
     {
-        var rating = new MdRatingBar { MaxRating = 5, Value = 3.5, AllowHalf = true };
+        var rating = new MavRatingBar { MaxRating = 5, Value = 3.5, AllowHalf = true };
         Assert.Equal(3.5, rating.Value);
     }
 }

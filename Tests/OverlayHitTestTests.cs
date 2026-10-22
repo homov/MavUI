@@ -5,28 +5,28 @@ using Avalonia.Headless.XUnit;
 using Avalonia.Input;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
-using Md3.Avalonia.Controls;
+using Mav.Controls;
 using Xunit;
 
-namespace Md3.Avalonia.Tests;
+namespace Mav.Tests;
 
 public class OverlayHitTestTests
 {
     [AvaloniaFact]
     public void Empty_overlay_host_is_not_hit_test_visible()
     {
-        var button = new MdButton("Target");
-        var page = new MdContentPage("Root")
+        var button = new MavButton("Target");
+        var page = new MavContentPage("Root")
         {
             Content = new StackPanel { Margin = new Thickness(40), Children = { button } },
         };
-        var navigation = new MdNavigationPage(page);
+        var navigation = new MavNavigationPage(page);
         var window = new Window { Width = 480, Height = 640, Content = navigation };
         window.Show();
         Dispatcher.UIThread.RunJobs();
 
         // Force the fallback overlay host to exist.
-        var dialog = new MdDialog { Title = "Overlay" };
+        var dialog = new MavDialog { Title = "Overlay" };
         dialog.Show(button);
         Dispatcher.UIThread.RunJobs();
 

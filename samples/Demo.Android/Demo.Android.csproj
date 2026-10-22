@@ -6,8 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
-    <RootNamespace>Md3.Demo.Android</RootNamespace>
-    <AssemblyName>Md3.Demo.Android</AssemblyName>
+    <RootNamespace>Mav.Demo.Android</RootNamespace>
+    <AssemblyName>Mav.Demo.Android</AssemblyName>
     <ApplicationId>com.md3.demo</ApplicationId>
     <ApplicationVersion>1</ApplicationVersion>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Md3.Avalonia\Md3.Avalonia.csproj" />
+    <ProjectReference Include="..\..\MavUI\MavUI.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+
+    <RootNamespace>Mav</RootNamespace>
+    <AssemblyName>MavUI</AssemblyName>
+    <PackageId>MavUI</PackageId>
+    <Version>0.1.0</Version>
+    <Description>Material Design 3 component library for Avalonia in pure C# (no AXAML).</Description>
+
+    <IsTrimmable>true</IsTrimmable>
+    <IsAotCompatible>true</IsAotCompatible>
+
+    <!--
+      Icon font sets embedded into the assembly:
+        all      - Roboto + Material Symbols + Material Icons + Material Design Icons (default)
+        no-mdi   - everything except the 1.24 MB Material Design Icons set
+        minimal  - Roboto + Material Symbols Rounded only (smallest)
+      Icons from an excluded set will not render; pick the set that covers MavIcons used by the app.
+    -->
+    <MavFonts Condition="'$(MavFonts)' == ''">all</MavFonts>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="12.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Resources\Fonts\Roboto-Regular.ttf" />
+    <AvaloniaResource Include="Resources\Fonts\MaterialSymbolsRounded.ttf"
+                      Condition="'$(MavFonts)' != 'roboto'" />
+    <AvaloniaResource Include="Resources\Fonts\MaterialIcons-Regular.ttf"
+                      Condition="'$(MavFonts)' == 'all' or '$(MavFonts)' == 'no-mdi'" />
+    <AvaloniaResource Include="Resources\Fonts\MaterialDesignIcons.ttf"
+                      Condition="'$(MavFonts)' == 'all'" />
+  </ItemGroup>
+
+</Project>

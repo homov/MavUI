@@ -1,0 +1,126 @@
+using System.ComponentModel;
+using Avalonia.Media;
+
+namespace Mav.Theming;
+
+/// <summary>
+/// Injectable service facade over <see cref="MavTheme"/> for MVVM / DI consumers.
+/// </summary>
+public interface IMavThemeService : INotifyPropertyChanged, IDisposable
+{
+    MavTheme Current { get; }
+    MavColorScheme ColorScheme { get; }
+    Color SeedColor { get; set; }
+    MavThemeMode Mode { get; set; }
+    MavSchemeVariant Variant { get; set; }
+    MavContrast Contrast { get; set; }
+    MavDensity Density { get; set; }
+    MavMotionScheme Motion { get; set; }
+    MavShapeScale ShapeScale { get; set; }
+    bool IsDark { get; }
+
+    event EventHandler<MavTheme>? ThemeChanged;
+
+    void Configure(Action<MavThemeOptions> configure);
+    void ApplyCustomSchemes(MavColorScheme light, MavColorScheme dark);
+    void ClearCustomSchemes();
+}
+
+public sealed class MavThemeService : IMavThemeService, IDisposable
+{
+    public static MavThemeService Instance { get; } = new();
+
+    private readonly EventHandler<MavTheme> _themeChangedHandler;
+    private bool _disposed;
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+    public event EventHandler<MavTheme>? ThemeChanged;
+
+    public MavThemeService()
+    {
+        _themeChangedHandler = OnThemeChanged;
+        MavTheme.Changed += _themeChangedHandler;
+    }
+
+    private void OnThemeChanged(object? _, MavTheme theme)
+    {
+        ThemeChanged?.Invoke(this, theme);
+        OnPropertyChanged(nameof(Current));
+        OnPropertyChanged(nameof(ColorScheme));
+        OnPropertyChanged(nameof(SeedColor));
+        OnPropertyChanged(nameof(Mode));
+        OnPropertyChanged(nameof(Variant));
+        OnPropertyChanged(nameof(Contrast));
+        OnPropertyChanged(nameof(Density));
+        OnPropertyChanged(nameof(Motion));
+        OnPropertyChanged(nameof(ShapeScale));
+        OnPropertyChanged(nameof(IsDark));
+    }
+
+    /// <summary>
+    /// Detaches the service from the process-wide <see cref="MavTheme.Changed"/> event.
+    /// </summary>
+    public void Dispose()
+    {
+        if (_disposed) return;
+        _disposed = true;
+        MavTheme.Changed -= _themeChangedHandler;
+    }
+
+    public MavTheme Current => MavTheme.Current;
+    public MavColorScheme ColorScheme => MavTheme.Current.Color;
+
+    public Color SeedColor
+    {
+        get => MavTheme.SeedColor;
+        set => MavTheme.SeedColor = value;
+    }
+
+    public MavThemeMode Mode
+    {
+        get => MavTheme.Mode;
+        set => MavTheme.Mode = value;
+    }
+
+    public MavSchemeVariant Variant
+    {
+        get => MavTheme.Variant;
+        set => MavTheme.Variant = value;
+    }
+
+    public MavContrast Contrast
+    {
+        get => MavTheme.Contrast;
+        set => MavTheme.Contrast = value;
+    }
+
+    public MavDensity Density
+    {
+        get => MavTheme.Density;
+        set => MavTheme.Density = value;
+    }
+
+    public MavMotionScheme Motion
+    {
+        get => MavTheme.Motion;
+        set => MavTheme.Motion = value;
+    }
+
+    public MavShapeScale ShapeScale
+    {
+        get => MavTheme.ShapeScaleMode;
+        set => MavTheme.ShapeScaleMode = value;
+    }
+
+    public bool IsDark => MavTheme.Current.IsDark;
+
+    public void Configure(Action<MavThemeOptions> configure) => MavTheme.Configure(configure);
+
+    public void ApplyCustomSchemes(MavColorScheme light, MavColorScheme dark) =>
+        MavTheme.ApplyCustomSchemes(light, dark);
+
+    public void ClearCustomSchemes() => MavTheme.ClearCustomSchemes();
+
+    private void OnPropertyChanged(string name) =>
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+}

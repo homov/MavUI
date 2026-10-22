@@ -1,9 +1,9 @@
 using Avalonia.Controls;
 using Avalonia.Layout;
-using Md3.Avalonia;
-using Md3.Avalonia.Controls;
+using Mav;
+using Mav.Controls;
 
-namespace Md3.Gallery;
+namespace Mav.Gallery;
 
 internal static class ActionsPage
 {
@@ -12,7 +12,7 @@ internal static class ActionsPage
         return GalleryUi.Page(
             GalleryUi.Section(
                 "Buttons",
-                "MdButton supports five variants, five sizes, icons, toggle and loading states.",
+                "MavButton supports five variants, five sizes, icons, toggle and loading states.",
                 ButtonsShowcase()),
             GalleryUi.Section(
                 "Icon buttons and FABs",
@@ -28,25 +28,25 @@ internal static class ActionsPage
     private static Control ButtonsShowcase()
     {
         var variants = GalleryUi.Row(
-            new MdButton("Filled", MdButtonVariant.Filled),
-            new MdButton("Tonal", MdButtonVariant.Tonal),
-            new MdButton("Elevated", MdButtonVariant.Elevated),
-            new MdButton("Outlined", MdButtonVariant.Outlined),
-            new MdButton("Text", MdButtonVariant.Text));
+            new MavButton("Filled", MavButtonVariant.Filled),
+            new MavButton("Tonal", MavButtonVariant.Tonal),
+            new MavButton("Elevated", MavButtonVariant.Elevated),
+            new MavButton("Outlined", MavButtonVariant.Outlined),
+            new MavButton("Text", MavButtonVariant.Text));
 
         var sizes = GalleryUi.Row(
-            new MdButton("XS", MdButtonVariant.Filled, size: MdButtonSize.ExtraSmall),
-            new MdButton("S", MdButtonVariant.Filled, size: MdButtonSize.Small),
-            new MdButton("M", MdButtonVariant.Filled, size: MdButtonSize.Medium),
-            new MdButton("L", MdButtonVariant.Filled, size: MdButtonSize.Large),
-            new MdButton("XL", MdButtonVariant.Filled, size: MdButtonSize.ExtraLarge));
+            new MavButton("XS", MavButtonVariant.Filled, size: MavButtonSize.ExtraSmall),
+            new MavButton("S", MavButtonVariant.Filled, size: MavButtonSize.Small),
+            new MavButton("M", MavButtonVariant.Filled, size: MavButtonSize.Medium),
+            new MavButton("L", MavButtonVariant.Filled, size: MavButtonSize.Large),
+            new MavButton("XL", MavButtonVariant.Filled, size: MavButtonSize.ExtraLarge));
 
-        var toggle = new MdButton("Toggle", MdButtonVariant.Tonal, MdIcons.Star) { IsToggle = true };
-        var loading = new MdButton("Loading", MdButtonVariant.Filled, MdIcons.Download);
+        var toggle = new MavButton("Toggle", MavButtonVariant.Tonal, MavIcons.Star) { IsToggle = true };
+        var loading = new MavButton("Loading", MavButtonVariant.Filled, MavIcons.Download);
         var clicks = 0;
-        var counter = new MdLabel { Text = "Clicks: 0", Role = Md3.Avalonia.Theming.MdTypeRole.BodySmall };
+        var counter = new MavLabel { Text = "Clicks: 0", Role = Mav.Theming.MavTypeRole.BodySmall };
 
-        var click = new MdButton("Click me", MdButtonVariant.Elevated, MdIcons.TouchApp);
+        var click = new MavButton("Click me", MavButtonVariant.Elevated, MavIcons.TouchApp);
         click.Clicked += (_, _) =>
         {
             clicks++;
@@ -58,7 +58,7 @@ internal static class ActionsPage
             counter,
             toggle,
             loading,
-            new MdButton("Disabled", MdButtonVariant.Outlined) { IsEnabled = false });
+            new MavButton("Disabled", MavButtonVariant.Outlined) { IsEnabled = false });
 
         loading.Clicked += async (_, _) =>
         {
@@ -68,79 +68,79 @@ internal static class ActionsPage
         };
 
         return GalleryUi.Showcase(
-            "MdButton",
+            "MavButton",
             "A text button with optional leading/trailing icons, toggle/selected and loading states.",
             GalleryUi.Column(variants, sizes, states),
-            "new MdButton(text, variant, icon, size) · Clicked · IsToggle · IsSelected · IsLoading");
+            "new MavButton(text, variant, icon, size) · Clicked · IsToggle · IsSelected · IsLoading");
     }
 
     private static Control IconButtons()
     {
-        var toggle = new MdIconButton(MdIcons.Favorite, isToggle: true)
+        var toggle = new MavIconButton(MavIcons.Favorite, isToggle: true)
         {
-            SelectedIcon = MdIcons.Favorite,
+            SelectedIcon = MavIcons.Favorite,
         };
 
         return GalleryUi.Showcase(
-            "MdIconButton",
+            "MavIconButton",
             "Standard, filled, tonal and outlined icon buttons. The touch target stays 48 dp even when the visual is smaller.",
             GalleryUi.Row(
-                new MdIconButton(MdIcons.Search),
-                new MdIconButton(MdIcons.Add, MdIconButtonVariant.Filled),
-                new MdIconButton(MdIcons.Edit, MdIconButtonVariant.Tonal),
-                new MdIconButton(MdIcons.Delete, MdIconButtonVariant.Outlined),
+                new MavIconButton(MavIcons.Search),
+                new MavIconButton(MavIcons.Add, MavIconButtonVariant.Filled),
+                new MavIconButton(MavIcons.Edit, MavIconButtonVariant.Tonal),
+                new MavIconButton(MavIcons.Delete, MavIconButtonVariant.Outlined),
                 toggle),
-            "new MdIconButton(icon, variant, isToggle) · SelectedIcon · TouchTargetSize");
+            "new MavIconButton(icon, variant, isToggle) · SelectedIcon · TouchTargetSize");
     }
 
     private static Control Fabs()
     {
-        var extended = new MdExtendedFab("Compose", MdIcons.Edit);
+        var extended = new MavExtendedFab("Compose", MavIcons.Edit);
 
         return GalleryUi.Showcase(
-            "MdFab and MdExtendedFab",
+            "MavFab and MavExtendedFab",
             "Floating action buttons in small, regular and large sizes, with primary, secondary, tertiary or surface color.",
             GalleryUi.Column(
                 GalleryUi.Row(
-                    new MdFab(MdIcons.Add, MdFabSize.Small, MdFabColor.Primary),
-                    new MdFab(MdIcons.Add, MdFabSize.Regular, MdFabColor.Secondary),
-                    new MdFab(MdIcons.Add, MdFabSize.Large, MdFabColor.Tertiary),
-                    new MdFab(MdIcons.Edit, MdFabSize.Regular, MdFabColor.Surface)),
+                    new MavFab(MavIcons.Add, MavFabSize.Small, MavFabColor.Primary),
+                    new MavFab(MavIcons.Add, MavFabSize.Regular, MavFabColor.Secondary),
+                    new MavFab(MavIcons.Add, MavFabSize.Large, MavFabColor.Tertiary),
+                    new MavFab(MavIcons.Edit, MavFabSize.Regular, MavFabColor.Surface)),
                 extended),
-            "new MdFab(icon, size, color) · MdExtendedFab(text, icon, color)");
+            "new MavFab(icon, size, color) · MavExtendedFab(text, icon, color)");
     }
 
     private static Control Groups()
     {
-        var standard = new MdButtonGroup { Kind = MdButtonGroupKind.Standard };
-        standard.AddButton(new MdButton("Day", MdButtonVariant.Outlined));
-        standard.AddButton(new MdButton("Week", MdButtonVariant.Outlined));
-        standard.AddButton(new MdButton("Month", MdButtonVariant.Outlined));
+        var standard = new MavButtonGroup { Kind = MavButtonGroupKind.Standard };
+        standard.AddButton(new MavButton("Day", MavButtonVariant.Outlined));
+        standard.AddButton(new MavButton("Week", MavButtonVariant.Outlined));
+        standard.AddButton(new MavButton("Month", MavButtonVariant.Outlined));
 
-        var connected = new MdButtonGroup { Kind = MdButtonGroupKind.Connected };
-        connected.AddButton(new MdButton("Bold", MdButtonVariant.Tonal, MdIcons.FormatBold));
-        connected.AddButton(new MdButton("Italic", MdButtonVariant.Tonal, MdIcons.FormatItalic));
-        connected.AddButton(new MdButton("Underline", MdButtonVariant.Tonal, MdIcons.FormatUnderlined));
+        var connected = new MavButtonGroup { Kind = MavButtonGroupKind.Connected };
+        connected.AddButton(new MavButton("Bold", MavButtonVariant.Tonal, MavIcons.FormatBold));
+        connected.AddButton(new MavButton("Italic", MavButtonVariant.Tonal, MavIcons.FormatItalic));
+        connected.AddButton(new MavButton("Underline", MavButtonVariant.Tonal, MavIcons.FormatUnderlined));
 
-        var split = new MdSplitButton
+        var split = new MavSplitButton
         {
             Text = "Save",
-            Menu = new MdMenu()
-                .AddItem("Save as draft", MdIcons.Description, onSelected: () => { })
-                .AddItem("Save and close", MdIcons.Close, onSelected: () => { }),
+            Menu = new MavMenu()
+                .AddItem("Save as draft", MavIcons.Description, onSelected: () => { })
+                .AddItem("Save and close", MavIcons.Close, onSelected: () => { }),
         };
 
-        var fabMenu = new MdFabMenu();
-        fabMenu.AddItem("New document", MdIcons.NoteAdd, () => { });
-        fabMenu.AddItem("Upload", MdIcons.Upload, () => { });
-        fabMenu.AddItem("Scan", MdIcons.DocumentScanner, () => { });
+        var fabMenu = new MavFabMenu();
+        fabMenu.AddItem("New document", MavIcons.NoteAdd, () => { });
+        fabMenu.AddItem("Upload", MavIcons.Upload, () => { });
+        fabMenu.AddItem("Scan", MavIcons.DocumentScanner, () => { });
 
         return GalleryUi.Showcase(
-            "MdButtonGroup, MdSplitButton and MdFabMenu",
+            "MavButtonGroup, MavSplitButton and MavFabMenu",
             "Group related actions, pair a primary action with a menu, or expand a FAB into labeled actions.",
             GalleryUi.Column(
                 GalleryUi.Row(standard, connected),
                 GalleryUi.Row(split, fabMenu)),
-            "MdButtonGroup.Kind · MdSplitButton.Menu · MdFabMenu.AddItem(label, icon, action)");
+            "MavButtonGroup.Kind · MavSplitButton.Menu · MavFabMenu.AddItem(label, icon, action)");
     }
 }
