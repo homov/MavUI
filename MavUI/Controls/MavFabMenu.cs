@@ -193,14 +193,29 @@ public class MavFabMenu : MavContentView, IEnumerable<MavFabMenuItem>
         return this;
     }
 
+    /// <summary>
+    /// Adds an action item to the menu.
+    /// </summary>
     public void Add(MavFabMenuItem item) => _items.Add(item);
 
+    /// <summary>
+    /// Returns an enumerator over the menu items.
+    /// </summary>
     public IEnumerator<MavFabMenuItem> GetEnumerator() => _items.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
+    /// <summary>
+    /// Opens the menu if it is closed, or closes it if it is open.
+    /// </summary>
     public void Toggle() => IsOpen = !IsOpen;
+    /// <summary>
+    /// Opens the menu.
+    /// </summary>
     public void Open() => IsOpen = true;
+    /// <summary>
+    /// Closes the menu.
+    /// </summary>
     public void Close() => IsOpen = false;
 
     private void RebuildItems()

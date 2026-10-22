@@ -93,5 +93,8 @@ public sealed class MavNavigationDestination : Control
         BadgeText = badgeText;
     }
 
+    /// <summary>
+    /// Measures the destination during the layout pass.
+    /// </summary>
     protected override Size MeasureOverride(Size availableSize) => default;
 }

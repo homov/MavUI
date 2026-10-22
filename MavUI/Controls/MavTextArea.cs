@@ -387,6 +387,9 @@ public class MavTextArea : MavContentView
 
     private sealed class AreaChrome(MavTextArea owner) : Control
     {
+        /// <summary>
+        /// Draws the text area chrome and text.
+        /// </summary>
         public override void Render(DrawingContext context) =>
             MavDrawingHelpers.DrawFieldChrome(
                 context,

@@ -70,5 +70,8 @@ public sealed class MavSegment : Control
         set => SetValue(IsSelectedProperty, value);
     }
 
+    /// <summary>
+    /// Measures the segment during the layout pass.
+    /// </summary>
     protected override Size MeasureOverride(Size availableSize) => default;
 }

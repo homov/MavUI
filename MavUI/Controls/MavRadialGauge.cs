@@ -164,6 +164,9 @@ public class MavRadialGauge : Control
         set => SetValue(TickCountProperty, Math.Max(0, value));
     }
 
+    /// <summary>
+    /// Measures the gauge as a square of the configured size.
+    /// </summary>
     protected override Size MeasureOverride(Size availableSize) => new(Size, Size);
 
     /// <summary>Starts dragging the gauge handle to change the value.</summary>

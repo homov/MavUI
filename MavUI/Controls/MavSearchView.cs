@@ -91,6 +91,9 @@ public class MavSearchView : Control
         };
     }
 
+    /// <summary>
+    /// Measures the search view during the layout pass.
+    /// </summary>
     protected override Size MeasureOverride(Size availableSize) => default;
 
     [Content]
@@ -161,6 +164,9 @@ public class MavSearchView : Control
         return this;
     }
 
+    /// <summary>
+    /// Removes all recent search queries.
+    /// </summary>
     public void ClearRecentSearches() => _recentQueries.Clear();
 
     private void ReloadFromSource(System.Collections.IEnumerable? source)

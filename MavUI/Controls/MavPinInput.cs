@@ -163,6 +163,9 @@ public class MavPinInput : MavContentView
         set => SetValue(CompletedCommandParameterProperty, value);
     }
 
+    /// <summary>
+    /// Clears the entered code.
+    /// </summary>
     public void Clear() => Code = string.Empty;
 
     private void RebuildCells()

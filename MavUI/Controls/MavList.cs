@@ -175,8 +175,14 @@ public class MavList : StackPanel, IEnumerable<Control>
         return this;
     }
 
+    /// <summary>
+    /// Adds an item to the list.
+    /// </summary>
     public void Add(Control item) => Children.Add(item);
 
+    /// <summary>
+    /// Returns an enumerator over the list items.
+    /// </summary>
     public IEnumerator<Control> GetEnumerator() => Children.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -811,6 +817,9 @@ public class MavList : StackPanel, IEnumerable<Control>
 
         public int Count => _values.Count;
 
+        /// <summary>
+        /// Resets the height table to count items, all with the initial height.
+        /// </summary>
         public void Reset(int count, double initial)
         {
             _values.Clear();
@@ -828,6 +837,9 @@ public class MavList : StackPanel, IEnumerable<Control>
             RebuildTree();
         }
 
+        /// <summary>
+        /// Inserts count items with the given height at the index.
+        /// </summary>
         public void InsertRange(int index, int count, double height)
         {
             if (count <= 0)
@@ -846,6 +858,9 @@ public class MavList : StackPanel, IEnumerable<Control>
             RebuildTree();
         }
 
+        /// <summary>
+        /// Removes count items starting at the index.
+        /// </summary>
         public void RemoveRange(int index, int count)
         {
             if (count <= 0)
@@ -877,6 +892,9 @@ public class MavList : StackPanel, IEnumerable<Control>
             RebuildTree();
         }
 
+        /// <summary>
+        /// Moves count items from one index to another.
+        /// </summary>
         public void MoveRange(int oldIndex, int newIndex, int count)
         {
             if (count <= 0 || oldIndex == newIndex)
@@ -893,6 +911,9 @@ public class MavList : StackPanel, IEnumerable<Control>
             RebuildTree();
         }
 
+        /// <summary>
+        /// Sets the height of the item at the index.
+        /// </summary>
         public void Set(int index, double height)
         {
             if ((uint)index >= (uint)_values.Count || height <= 0)
@@ -907,6 +928,9 @@ public class MavList : StackPanel, IEnumerable<Control>
                 _tree[parent] += delta;
         }
 
+        /// <summary>
+        /// Returns the total height of items in the given range.
+        /// </summary>
         public double Sum(int startInclusive, int endExclusive)
         {
             var start = Math.Clamp(startInclusive, 0, _values.Count);

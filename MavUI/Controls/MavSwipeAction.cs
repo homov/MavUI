@@ -108,6 +108,9 @@ public sealed class MavSwipeAction : Control
         ForegroundColor = foregroundColor;
     }
 
+    /// <summary>
+    /// Measures the action during the layout pass.
+    /// </summary>
     protected override Size MeasureOverride(Size availableSize) => default;
 
     /// <summary>Runs the action callback, used by the list when the swipe is confirmed.</summary>

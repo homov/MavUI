@@ -332,8 +332,14 @@ public class MavNavigationSuiteScaffold : MavContentView, IEnumerable<MavSuiteDe
         return this;
     }
 
+    /// <summary>
+    /// Adds a destination to the scaffold.
+    /// </summary>
     public void Add(MavSuiteDestination destination) => _destinations.Add(destination);
 
+    /// <summary>
+    /// Returns an enumerator over the destinations.
+    /// </summary>
     public IEnumerator<MavSuiteDestination> GetEnumerator() => _destinations.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

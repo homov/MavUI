@@ -66,43 +66,121 @@ public static class MavValidation
         ValidatorProperty.Changed.AddClassHandler<Control>((c, _) => RebuildRules(c));
     }
 
+    /// <summary>
+    /// Gets the form validator attached to the element.
+    /// </summary>
     public static MavFormValidator? GetValidator(Control element) => element.GetValue(ValidatorProperty);
+    /// <summary>
+    /// Attaches a form validator to the element.
+    /// </summary>
     public static void SetValidator(Control element, MavFormValidator? value) => element.SetValue(ValidatorProperty, value);
 
+    /// <summary>
+    /// Gets whether the element is required to have a value.
+    /// </summary>
     public static bool GetIsRequired(Control element) => element.GetValue(IsRequiredProperty);
+    /// <summary>
+    /// Sets whether the element is required to have a value.
+    /// </summary>
     public static void SetIsRequired(Control element, bool value) => element.SetValue(IsRequiredProperty, value);
 
+    /// <summary>
+    /// Gets whether the element is required to have a value.
+    /// </summary>
     public static bool GetRequired(Control element) => element.GetValue(IsRequiredProperty);
+    /// <summary>
+    /// Sets whether the element is required to have a value.
+    /// </summary>
     public static void SetRequired(Control element, bool value) => element.SetValue(IsRequiredProperty, value);
 
+    /// <summary>
+    /// Gets the message shown when the required rule fails.
+    /// </summary>
     public static string GetRequiredMessage(Control element) => element.GetValue(RequiredMessageProperty);
+    /// <summary>
+    /// Sets the message shown when the required rule fails.
+    /// </summary>
     public static void SetRequiredMessage(Control element, string value) => element.SetValue(RequiredMessageProperty, value);
 
+    /// <summary>
+    /// Gets whether the element must contain a valid email address.
+    /// </summary>
     public static bool GetIsEmail(Control element) => element.GetValue(IsEmailProperty);
+    /// <summary>
+    /// Sets whether the element must contain a valid email address.
+    /// </summary>
     public static void SetIsEmail(Control element, bool value) => element.SetValue(IsEmailProperty, value);
 
+    /// <summary>
+    /// Gets whether the element must contain a valid email address.
+    /// </summary>
     public static bool GetEmail(Control element) => element.GetValue(IsEmailProperty);
+    /// <summary>
+    /// Sets whether the element must contain a valid email address.
+    /// </summary>
     public static void SetEmail(Control element, bool value) => element.SetValue(IsEmailProperty, value);
 
+    /// <summary>
+    /// Gets the message shown when the email rule fails.
+    /// </summary>
     public static string GetEmailMessage(Control element) => element.GetValue(EmailMessageProperty);
+    /// <summary>
+    /// Sets the message shown when the email rule fails.
+    /// </summary>
     public static void SetEmailMessage(Control element, string value) => element.SetValue(EmailMessageProperty, value);
 
+    /// <summary>
+    /// Gets whether the element must contain a number.
+    /// </summary>
     public static bool GetIsNumeric(Control element) => element.GetValue(IsNumericProperty);
+    /// <summary>
+    /// Sets whether the element must contain a number.
+    /// </summary>
     public static void SetIsNumeric(Control element, bool value) => element.SetValue(IsNumericProperty, value);
 
+    /// <summary>
+    /// Gets the message shown when the numeric rule fails.
+    /// </summary>
     public static string GetNumericMessage(Control element) => element.GetValue(NumericMessageProperty);
+    /// <summary>
+    /// Sets the message shown when the numeric rule fails.
+    /// </summary>
     public static void SetNumericMessage(Control element, string value) => element.SetValue(NumericMessageProperty, value);
 
+    /// <summary>
+    /// Gets the minimum number of characters the element must contain.
+    /// </summary>
     public static int GetMinLength(Control element) => element.GetValue(MinLengthProperty);
+    /// <summary>
+    /// Sets the minimum number of characters the element must contain.
+    /// </summary>
     public static void SetMinLength(Control element, int value) => element.SetValue(MinLengthProperty, value);
 
+    /// <summary>
+    /// Gets the maximum number of characters the element may contain.
+    /// </summary>
     public static int GetMaxLength(Control element) => element.GetValue(MaxLengthProperty);
+    /// <summary>
+    /// Sets the maximum number of characters the element may contain.
+    /// </summary>
     public static void SetMaxLength(Control element, int value) => element.SetValue(MaxLengthProperty, value);
 
+    /// <summary>
+    /// Gets the regular expression the element's value must match.
+    /// </summary>
     public static string? GetPattern(Control element) => element.GetValue(PatternProperty);
+    /// <summary>
+    /// Sets the regular expression the element's value must match.
+    /// </summary>
     public static void SetPattern(Control element, string? value) => element.SetValue(PatternProperty, value);
 
+    /// <summary>
+    /// Gets the message shown when the pattern rule fails.
+    /// </summary>
     public static string GetPatternMessage(Control element) => element.GetValue(PatternMessageProperty);
+    /// <summary>
+    /// Sets the message shown when the pattern rule fails.
+    /// </summary>
     public static void SetPatternMessage(Control element, string value) => element.SetValue(PatternMessageProperty, value);
 
     private static bool HasAnyRule(Control c) =>

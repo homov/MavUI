@@ -201,8 +201,14 @@ public class MavTabs : MavContentView, IEnumerable<MavTabItem>
     public void Add(string text, string? icon = null, string? badge = null, Control? content = null) =>
         AddTab(text, icon, badge, content);
 
+    /// <summary>
+    /// Adds a tab to the control.
+    /// </summary>
     public void Add(MavTabItem item) => AddTab(item);
 
+    /// <summary>
+    /// Returns an enumerator over the tabs.
+    /// </summary>
     public IEnumerator<MavTabItem> GetEnumerator() => _tabs.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -326,6 +332,9 @@ public class MavTabs : MavContentView, IEnumerable<MavTabItem>
         private readonly TextBlock _label;
         private readonly Border _indicator;
 
+        /// <summary>
+        /// Creates a cell for one tab.
+        /// </summary>
         public TabCell(MavTabItem item, MavTabVariant variant, Action onClick)
         {
             _item = item;
@@ -409,6 +418,9 @@ public class MavTabs : MavContentView, IEnumerable<MavTabItem>
             Content = _surface;
         }
 
+        /// <summary>
+        /// Updates the selected state of the cell, optionally animating the change.
+        /// </summary>
         public void SetSelected(bool selected, bool animate)
         {
             ApplyTheme(MavTheme.Current, selected);
@@ -429,6 +441,9 @@ public class MavTabs : MavContentView, IEnumerable<MavTabItem>
             }
         }
 
+        /// <summary>
+        /// Applies the theme colors for the selected or unselected state.
+        /// </summary>
         public void ApplyTheme(MavTheme t, bool selected)
         {
             var c = t.Color;

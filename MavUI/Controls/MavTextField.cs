@@ -496,7 +496,13 @@ public class MavTextField : MavContentView
 
     public MavNativeEntry InnerEntry => _entry;
 
+    /// <summary>
+    /// Moves keyboard focus to the text field.
+    /// </summary>
     public void Focus() => _entry.Focus();
+    /// <summary>
+    /// Removes keyboard focus from the text field.
+    /// </summary>
     public void Unfocus() => _entry.Unfocus();
 
     /// <summary>Updates the field when a visual property changes.</summary>
@@ -763,6 +769,9 @@ public class MavTextField : MavContentView
 
     private sealed class FieldChrome(MavTextField owner) : Control
     {
+        /// <summary>
+        /// Draws the text field chrome, label, and indicator.
+        /// </summary>
         public override void Render(DrawingContext context) =>
             MavDrawingHelpers.DrawFieldChrome(
                 context,

@@ -34,5 +34,8 @@ public sealed class MavSnackbarService : IMavSnackbarService
         MavSnackbarDuration duration = MavSnackbarDuration.Short) =>
         MavSnackbar.Enqueue(message, actionText, onAction, showCloseIcon, duration);
 
+    /// <summary>
+    /// Dismisses the current snackbar.
+    /// </summary>
     public void Dismiss() => MavSnackbar.Dismiss();
 }

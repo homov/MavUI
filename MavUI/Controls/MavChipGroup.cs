@@ -229,8 +229,14 @@ public class MavChipGroup : MavContentView, System.Collections.Generic.IEnumerab
         bool selected = false,
         bool elevated = false) => AddChip(text, kind, icon, selected, elevated);
 
+    /// <summary>
+    /// Adds a chip to the group.
+    /// </summary>
     public void Add(MavChip chip) => AddChip(chip);
 
+    /// <summary>
+    /// Returns an enumerator over the chips in the group.
+    /// </summary>
     public IEnumerator<MavChip> GetEnumerator() => _chips.GetEnumerator();
 
     System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();

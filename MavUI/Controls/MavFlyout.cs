@@ -75,25 +75,67 @@ public static class MavFlyout
         });
     }
 
+    /// <summary>
+    /// Gets the menu attached to the element.
+    /// </summary>
     public static MavMenu? GetMenu(Control element) => element.GetValue(MenuProperty);
+    /// <summary>
+    /// Attaches a menu to the element.
+    /// </summary>
     public static void SetMenu(Control element, MavMenu? value) => element.SetValue(MenuProperty, value);
 
+    /// <summary>
+    /// Gets the popover attached to the element.
+    /// </summary>
     public static MavPopover? GetPopover(Control element) => element.GetValue(PopoverProperty);
+    /// <summary>
+    /// Attaches a popover to the element.
+    /// </summary>
     public static void SetPopover(Control element, MavPopover? value) => element.SetValue(PopoverProperty, value);
 
+    /// <summary>
+    /// Gets the rich tooltip attached to the element.
+    /// </summary>
     public static MavRichTooltip? GetRichTooltip(Control element) => element.GetValue(RichTooltipProperty);
+    /// <summary>
+    /// Attaches a rich tooltip to the element.
+    /// </summary>
     public static void SetRichTooltip(Control element, MavRichTooltip? value) => element.SetValue(RichTooltipProperty, value);
 
+    /// <summary>
+    /// Gets the bottom sheet attached to the element.
+    /// </summary>
     public static MavBottomSheet? GetBottomSheet(Control element) => element.GetValue(BottomSheetProperty);
+    /// <summary>
+    /// Attaches a bottom sheet to the element.
+    /// </summary>
     public static void SetBottomSheet(Control element, MavBottomSheet? value) => element.SetValue(BottomSheetProperty, value);
 
+    /// <summary>
+    /// Gets the side sheet attached to the element.
+    /// </summary>
     public static MavSideSheet? GetSideSheet(Control element) => element.GetValue(SideSheetProperty);
+    /// <summary>
+    /// Attaches a side sheet to the element.
+    /// </summary>
     public static void SetSideSheet(Control element, MavSideSheet? value) => element.SetValue(SideSheetProperty, value);
 
+    /// <summary>
+    /// Gets the dialog attached to the element.
+    /// </summary>
     public static MavDialog? GetDialog(Control element) => element.GetValue(DialogProperty);
+    /// <summary>
+    /// Attaches a dialog to the element.
+    /// </summary>
     public static void SetDialog(Control element, MavDialog? value) => element.SetValue(DialogProperty, value);
 
+    /// <summary>
+    /// Gets the modal navigation drawer attached to the element.
+    /// </summary>
     public static MavModalNavigationDrawer? GetModalDrawer(Control element) => element.GetValue(ModalDrawerProperty);
+    /// <summary>
+    /// Attaches a modal navigation drawer to the element.
+    /// </summary>
     public static void SetModalDrawer(Control element, MavModalNavigationDrawer? value) => element.SetValue(ModalDrawerProperty, value);
 
     private static void EnsureTriggerWired(Control control)

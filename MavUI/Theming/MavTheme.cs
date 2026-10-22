@@ -71,8 +71,14 @@ public sealed class MavTheme
         ShapeScale = shapeScale;
     }
 
+    /// <summary>
+    /// Returns the color for the given role in the current theme.
+    /// </summary>
     public static Color ColorOf(MavColorRole role) => Current.Color.Get(role);
 
+    /// <summary>
+    /// Returns a brush for the given role in the current theme.
+    /// </summary>
     public static IImmutableSolidColorBrush BrushOf(MavColorRole role) => BrushOf(Current.Color.Get(role));
 
     /// <summary>
@@ -227,9 +233,21 @@ public sealed class MavTheme
         }
     }
 
+    /// <summary>
+    /// Switches the theme to light mode.
+    /// </summary>
     public static void UseLight() => Mode = MavThemeMode.Light;
+    /// <summary>
+    /// Switches the theme to dark mode.
+    /// </summary>
     public static void UseDark() => Mode = MavThemeMode.Dark;
+    /// <summary>
+    /// Makes the theme follow the system light or dark setting.
+    /// </summary>
     public static void UseSystemMode() => Mode = MavThemeMode.System;
+    /// <summary>
+    /// Switches between light and dark mode.
+    /// </summary>
     public static void ToggleDark() => Mode = Current.IsDark ? MavThemeMode.Light : MavThemeMode.Dark;
 
     /// <summary>

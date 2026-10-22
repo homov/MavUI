@@ -68,6 +68,9 @@ public class MavTimePickerField : MavPickerFieldBase
 
     protected override bool HasSelectedValue => SelectedTime is not null;
 
+    /// <summary>
+    /// Clears the selected time.
+    /// </summary>
     public override void Clear() => SelectedTime = null;
 
     /// <summary>Opens the time picker for this field and applies the picked time.</summary>

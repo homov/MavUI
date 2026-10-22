@@ -263,6 +263,9 @@ public class MavNavigationPage : MavContentView
         NotifyCanGoBackChanged();
     }
 
+    /// <summary>
+    /// Pops the top page and returns true when a page was removed.
+    /// </summary>
     public bool Pop(bool animated = true) => PopCore(animated, checkPage: true);
 
     /// <summary>
@@ -633,10 +636,19 @@ public class MavNavigationPage : MavContentView
     {
         public event EventHandler? CanExecuteChanged;
 
+        /// <summary>
+        /// Returns true when the page can navigate back.
+        /// </summary>
         public bool CanExecute(object? parameter) => owner.CanGoBack;
 
+        /// <summary>
+        /// Navigates back to the previous page.
+        /// </summary>
         public void Execute(object? parameter) => owner.TryGoBack();
 
+        /// <summary>
+        /// Notifies bound commands that the back-navigation state may have changed.
+        /// </summary>
         public void RaiseCanExecuteChanged() =>
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);
     }

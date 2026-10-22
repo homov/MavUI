@@ -143,6 +143,9 @@ public class MavSideSheet : Control
     public event EventHandler? BackClicked;
     public event EventHandler? Closed;
 
+    /// <summary>
+    /// Measures the sheet during the layout pass.
+    /// </summary>
     protected override Size MeasureOverride(Size availableSize) => default;
 
     /// <summary>Shows the side sheet at the edge of the window, anchored to <paramref name="anchor"/>.</summary>

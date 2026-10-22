@@ -308,6 +308,9 @@ public class MavCheckBox : MavContentView
 
     private sealed class CheckBoxGlyph(MavCheckBox owner) : Control
     {
+        /// <summary>
+        /// Draws the check box box, check mark, and state layer.
+        /// </summary>
         public override void Render(DrawingContext context)
         {
             var t = MavTheme.Current;

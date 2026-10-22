@@ -124,6 +124,9 @@ public class MavSwitch : Control
         set => SetValue(CommandParameterProperty, value);
     }
 
+    /// <summary>
+    /// Measures the switch as its fixed 52x32 track size.
+    /// </summary>
     protected override Size MeasureOverride(Size availableSize) => new(52, 32);
 
     /// <summary>Redraws the switch when a visual property changes.</summary>

@@ -247,6 +247,9 @@ public class MavRadioButton : MavContentView
 
     private sealed class RadioGlyph(MavRadioButton owner) : Control
     {
+        /// <summary>
+        /// Draws the radio circle, dot, and state layer.
+        /// </summary>
         public override void Render(DrawingContext context)
         {
             var t = MavTheme.Current;

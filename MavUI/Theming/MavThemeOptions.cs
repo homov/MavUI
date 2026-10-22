@@ -18,5 +18,8 @@ public sealed class MavThemeOptions
     public MavColorScheme? CustomLightScheme { get; set; }
     public MavColorScheme? CustomDarkScheme { get; set; }
 
+    /// <summary>
+    /// Applies these options to the current theme.
+    /// </summary>
     public void Apply() => MavTheme.Configure(this);
 }

@@ -153,8 +153,14 @@ public class MavToolbar : MavContentView, IEnumerable<Control>
         return this;
     }
 
+    /// <summary>
+    /// Adds a control to the toolbar.
+    /// </summary>
     public void Add(Control control) => _itemsPanel.Children.Add(control);
 
+    /// <summary>
+    /// Returns an enumerator over the toolbar items.
+    /// </summary>
     public IEnumerator<Control> GetEnumerator() => _itemsPanel.Children.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

@@ -260,7 +260,13 @@ public class MavNumberBox : MavContentView
         }
     }
 
+    /// <summary>
+    /// Increases the value by one step, clamped to the range.
+    /// </summary>
     public void Increment() => Value = Math.Clamp(Math.Round((Value + Step) / Step) * Step, Minimum, Maximum);
+    /// <summary>
+    /// Decreases the value by one step, clamped to the range.
+    /// </summary>
     public void Decrement() => Value = Math.Clamp(Math.Round((Value - Step) / Step) * Step, Minimum, Maximum);
 
     private void CommitEntryText()

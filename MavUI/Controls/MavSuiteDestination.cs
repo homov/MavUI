@@ -97,5 +97,8 @@ public sealed class MavSuiteDestination : Control
         Content = content;
     }
 
+    /// <summary>
+    /// Measures the destination during the layout pass.
+    /// </summary>
     protected override Size MeasureOverride(Size availableSize) => default;
 }

@@ -238,8 +238,14 @@ public class MavSettingsExpander : MavContentView, System.Collections.Generic.IE
     [Content]
     public AvaloniaList<Control> Items => _items;
 
+    /// <summary>
+    /// Adds a row to the expander.
+    /// </summary>
     public void Add(Control item) => _items.Add(item);
 
+    /// <summary>
+    /// Returns an enumerator over the rows in the expander.
+    /// </summary>
     public System.Collections.Generic.IEnumerator<Control> GetEnumerator() => _items.GetEnumerator();
 
     System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();

@@ -39,11 +39,29 @@ public static class MavLocalization
         TargetProperty.Changed.AddClassHandler<Control>((control, _) => OnLocalizationChanged(control));
     }
 
+    /// <summary>
+    /// Gets the localization key assigned to the control.
+    /// </summary>
     public static string? GetKey(Control control) => control.GetValue(KeyProperty);
+    /// <summary>
+    /// Sets the localization key used to resolve the control's text.
+    /// </summary>
     public static void SetKey(Control control, string? value) => control.SetValue(KeyProperty, value);
+    /// <summary>
+    /// Gets the fallback text used when the localization key is missing.
+    /// </summary>
     public static string? GetFallback(Control control) => control.GetValue(FallbackProperty);
+    /// <summary>
+    /// Sets the fallback text used when the localization key is missing.
+    /// </summary>
     public static void SetFallback(Control control, string? value) => control.SetValue(FallbackProperty, value);
+    /// <summary>
+    /// Gets the property of the control that receives the localized text.
+    /// </summary>
     public static MavLocalizationTarget GetTarget(Control control) => control.GetValue(TargetProperty);
+    /// <summary>
+    /// Sets the property of the control that receives the localized text.
+    /// </summary>
     public static void SetTarget(Control control, MavLocalizationTarget value) => control.SetValue(TargetProperty, value);
 
     private static void OnLocalizationChanged(Control control)
@@ -486,6 +504,9 @@ public static class MavLocalization
             [Keys.EmptyPageRange] = "0 of 0",
         };
 
+        /// <summary>
+        /// Returns the localized string for the key, or null when the dictionary has no entry.
+        /// </summary>
         public string? GetString(string key, CultureInfo? culture = null) =>
             Defaults.TryGetValue(key, out var value) ? value : null;
     }
@@ -499,6 +520,9 @@ public static class MavLocalization
         private readonly Dictionary<string, string> _values;
         private readonly IMavLocalizationProvider _fallback;
 
+        /// <summary>
+        /// Creates a provider backed by a dictionary of culture-specific strings.
+        /// </summary>
         public DictionaryProvider(
             IDictionary<string, string> values,
             IMavLocalizationProvider? fallback = null)
@@ -508,6 +532,9 @@ public static class MavLocalization
             _fallback = fallback ?? DefaultProvider.Instance;
         }
 
+        /// <summary>
+        /// Returns the string for the key from the dictionary, or null when it is missing.
+        /// </summary>
         public string? GetString(string key, CultureInfo? culture = null)
         {
             if (_values.TryGetValue(key, out var value) && !string.IsNullOrEmpty(value))
@@ -527,6 +554,9 @@ public static class MavLocalization
         private readonly ResourceManager _resources;
         private readonly IMavLocalizationProvider _fallback;
 
+        /// <summary>
+        /// Creates a provider that reads strings from a resource manager.
+        /// </summary>
         public ResourceManagerProvider(
             ResourceManager resources,
             IMavLocalizationProvider? fallback = null)
@@ -535,6 +565,9 @@ public static class MavLocalization
             _fallback = fallback ?? DefaultProvider.Instance;
         }
 
+        /// <summary>
+        /// Creates a provider that reads strings from the resources of the given type.
+        /// </summary>
         public ResourceManagerProvider(
             Type resourceSource,
             IMavLocalizationProvider? fallback = null)
@@ -542,6 +575,9 @@ public static class MavLocalization
         {
         }
 
+        /// <summary>
+        /// Returns the string for the key from the resource manager, or null when it is missing.
+        /// </summary>
         public string? GetString(string key, CultureInfo? culture = null)
         {
             var value = _resources.GetString(key, culture ?? CultureInfo.CurrentUICulture);
@@ -554,6 +590,9 @@ public static class MavLocalization
     {
         private readonly IMavLocalizationProvider[] _providers;
 
+        /// <summary>
+        /// Creates a provider that asks each provider in order until one returns a string.
+        /// </summary>
         public ChainedProvider(params IMavLocalizationProvider[] providers)
         {
             ArgumentNullException.ThrowIfNull(providers);
@@ -563,6 +602,9 @@ public static class MavLocalization
             _providers = providers;
         }
 
+        /// <summary>
+        /// Returns the string from the first provider in the chain that resolves the key.
+        /// </summary>
         public string? GetString(string key, CultureInfo? culture = null)
         {
             foreach (var provider in _providers)
@@ -581,17 +623,26 @@ public static class MavLocalization
     {
         private readonly Func<string, CultureInfo?, string?> _getString;
 
+        /// <summary>
+        /// Creates a provider that delegates lookups to the given function.
+        /// </summary>
         public DelegateProvider(Func<string, CultureInfo?, string?> getString)
         {
             _getString = getString ?? throw new ArgumentNullException(nameof(getString));
         }
 
+        /// <summary>
+        /// Creates a provider that delegates lookups to a function that ignores the culture.
+        /// </summary>
         public DelegateProvider(Func<string, string?> getString)
             : this((key, _) => getString(key))
         {
             ArgumentNullException.ThrowIfNull(getString);
         }
 
+        /// <summary>
+        /// Returns the string produced by the delegate for the key.
+        /// </summary>
         public string? GetString(string key, CultureInfo? culture = null) =>
             _getString(key, culture);
     }

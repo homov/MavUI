@@ -67,6 +67,9 @@ public class MavModalNavigationDrawer : Control
         _drawer.PointerCaptureLost += (_, _) => _dragging = false;
     }
 
+    /// <summary>
+    /// Measures the drawer during the layout pass.
+    /// </summary>
     protected override Size MeasureOverride(Size availableSize) => default;
 
     public MavNavigationDrawer Drawer => _drawer;

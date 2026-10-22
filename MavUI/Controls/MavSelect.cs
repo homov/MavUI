@@ -253,10 +253,19 @@ public class MavSelect : MavContentView, IEnumerable<string>
         return this;
     }
 
+    /// <summary>
+    /// Adds an option to the select control.
+    /// </summary>
     public void Add(string option) => AddOption(option);
 
+    /// <summary>
+    /// Clears the selection.
+    /// </summary>
     public void Clear() => SelectedIndex = -1;
 
+    /// <summary>
+    /// Returns an enumerator over the options.
+    /// </summary>
     public IEnumerator<string> GetEnumerator() => _options.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

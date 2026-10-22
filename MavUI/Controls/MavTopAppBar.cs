@@ -285,6 +285,9 @@ public class MavTopAppBar : MavContentView
         return this;
     }
 
+    /// <summary>
+    /// Attaches a scroll viewer whose offset drives the app bar's scroll behavior.
+    /// </summary>
     public void AttachScrollViewer(ScrollViewer scroll) => ScrollViewer = scroll;
 
     /// <summary>Subscribes to theme and layout changes once the bar is in the visual tree.</summary>

@@ -9,8 +9,14 @@ namespace Mav.ColorUtilities.Schemes
         where TCorePalette : CorePalette
         where TScheme : Scheme<uint>, new()
     {
+        /// <summary>
+        /// Maps the core palette to a new scheme.
+        /// </summary>
         public TScheme Map(TCorePalette corePalette) => Map(corePalette, new());
 
+        /// <summary>
+        /// Maps the core palette onto the given scheme and returns it.
+        /// </summary>
         public TScheme Map(TCorePalette corePalette, TScheme scheme)
         {
             MapCore(corePalette, scheme);

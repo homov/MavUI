@@ -124,6 +124,9 @@ public class MavBreadcrumbBar : MavContentView, IEnumerable<MavBreadcrumbItem>
     public void Add(string text, string? icon = null, object? tag = null)
         => Add(new MavBreadcrumbItem(text, icon, tag));
 
+    /// <summary>
+    /// Adds a breadcrumb item to the end of the bar.
+    /// </summary>
     public void Add(MavBreadcrumbItem item) => _items.Add(item);
 
     /// <summary>Replaces the whole path with the given labels.</summary>
@@ -157,6 +160,9 @@ public class MavBreadcrumbBar : MavContentView, IEnumerable<MavBreadcrumbItem>
         Rebuild();
     }
 
+    /// <summary>
+    /// Returns an enumerator over the breadcrumb items.
+    /// </summary>
     public IEnumerator<MavBreadcrumbItem> GetEnumerator() => _items.GetEnumerator();
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 

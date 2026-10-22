@@ -93,12 +93,18 @@ public sealed class MavThemeService : IMavThemeService, IDisposable
 
     public bool IsDark => MavTheme.Current.IsDark;
 
+    /// <summary>
+    /// Configures the theme with the given options.
+    /// </summary>
     public void Configure(Action<MavThemeOptions> configure) => MavTheme.Configure(configure);
 
     /// <summary>Applies the custom light and dark schemes to the service.</summary>
     public void ApplyCustomSchemes(MavColorScheme light, MavColorScheme dark) =>
         MavTheme.ApplyCustomSchemes(light, dark);
 
+    /// <summary>
+    /// Removes all custom color schemes.
+    /// </summary>
     public void ClearCustomSchemes() => MavTheme.ClearCustomSchemes();
 
     private void OnPropertyChanged(string name) =>

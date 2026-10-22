@@ -180,12 +180,18 @@ public class MavNavigationRail : MavContentView, IEnumerable<MavNavigationDestin
         return this;
     }
 
+    /// <summary>
+    /// Adds a destination to the rail.
+    /// </summary>
     public void Add(MavNavigationDestination destination) => _destinations.Add(destination);
 
     /// <summary>Adds a destination without returning the rail.</summary>
     public void Add(string label, string icon, string? selectedIcon = null, string? badge = null) =>
         AddDestination(label, icon, selectedIcon, badge);
 
+    /// <summary>
+    /// Returns an enumerator over the destinations.
+    /// </summary>
     public IEnumerator<MavNavigationDestination> GetEnumerator() => _destinations.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -263,6 +269,9 @@ public class MavNavigationRail : MavContentView, IEnumerable<MavNavigationDestin
         private readonly MavIcon _icon;
         private readonly TextBlock _label;
 
+        /// <summary>
+        /// Creates a cell for one destination in the rail.
+        /// </summary>
         public RailCell(MavNavigationDestination dest, Action onClick)
         {
             _dest = dest;
@@ -301,12 +310,18 @@ public class MavNavigationRail : MavContentView, IEnumerable<MavNavigationDestin
             Content = stack;
         }
 
+        /// <summary>
+        /// Updates the selected state of the cell.
+        /// </summary>
         public void SetSelected(bool selected)
         {
             _icon.Glyph = selected && !string.IsNullOrEmpty(_dest.SelectedIcon) ? _dest.SelectedIcon : _dest.Icon;
             ApplyTheme(MavTheme.Current, selected);
         }
 
+        /// <summary>
+        /// Applies the theme colors for the selected or unselected state.
+        /// </summary>
         public void ApplyTheme(MavTheme t, bool selected)
         {
             var c = t.Color;

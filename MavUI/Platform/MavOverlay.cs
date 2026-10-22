@@ -87,6 +87,9 @@ public static class MavOverlay
         return false;
     }
 
+    /// <summary>
+    /// Dismisses the topmost overlay and returns true when one was dismissed.
+    /// </summary>
     public static bool DismissTopMost(TopLevel? _ = null) => TryDismissTop();
 
     /// <summary>
@@ -598,6 +601,9 @@ public static class MavOverlay
 
         public TopLevel HostTopLevel => _topLevel;
 
+        /// <summary>
+        /// Creates the grid that hosts overlays for a top-level window.
+        /// </summary>
         public OverlayRootGrid(TopLevel topLevel, Panel container)
         {
             _topLevel = topLevel;
@@ -673,6 +679,9 @@ public static class MavOverlay
             NotifyViewportChanged();
         }
 
+        /// <summary>
+        /// Removes the grid and all overlays it hosts.
+        /// </summary>
         internal void Close()
         {
             if (_closed) return;
@@ -706,6 +715,9 @@ public static class MavOverlay
             Margin = new Thickness(0, 0, 0, bottom);
         }
 
+        /// <summary>
+        /// Measures the grid to fill the available size.
+        /// </summary>
         protected override Size MeasureOverride(Size availableSize)
         {
             // Canvas-based OverlayLayer measures children with infinity; its Bounds can
@@ -746,6 +758,9 @@ public static class MavOverlay
         private bool _disposed;
         private bool _dismissed;
 
+        /// <summary>
+        /// Creates a handle that tracks one shown overlay.
+        /// </summary>
         public OverlayHandle(
             Grid? host,
             Grid? layer,
@@ -764,21 +779,33 @@ public static class MavOverlay
             _topLevel = topLevel is null ? null : new WeakReference<TopLevel>(topLevel);
         }
 
+        /// <summary>
+        /// Returns true when the overlay belongs to the given page.
+        /// </summary>
         public bool IsOwnedBy(MavContentPage page) =>
             _owner is not null && _owner.TryGetTarget(out var target) && ReferenceEquals(target, page);
 
+        /// <summary>
+        /// Returns true when the overlay is hosted by the given top-level window.
+        /// </summary>
         public bool IsHostedBy(TopLevel topLevel) =>
             (_host is OverlayRootGrid root && ReferenceEquals(root.HostTopLevel, topLevel)) ||
             (_topLevel is not null &&
              _topLevel.TryGetTarget(out var cached) &&
              ReferenceEquals(cached, topLevel));
 
+        /// <summary>
+        /// Tells the overlay that the viewport size changed so it can reposition.
+        /// </summary>
         public void NotifyViewportChanged()
         {
             if (_disposed) return;
             _onViewportChanged?.Invoke();
         }
 
+        /// <summary>
+        /// Invokes the overlay's dismiss action and returns true when it was invoked.
+        /// </summary>
         public bool TryInvokeDismiss()
         {
             if (_disposed || _dismissed || _onDismiss is null)
@@ -792,6 +819,9 @@ public static class MavOverlay
             return true;
         }
 
+        /// <summary>
+        /// Removes the overlay and releases its resources.
+        /// </summary>
         public void Dispose()
         {
             if (_disposed) return;
@@ -863,6 +893,9 @@ public static class MavOverlay
         public Action? OnViewportChanged { get; } = onViewportChanged;
         public Action? OnClosed { get; } = onClosed;
 
+        /// <summary>
+        /// Attaches the disposable that closes the shown overlay.
+        /// </summary>
         public void Attach(IDisposable shown)
         {
             // Disposed while waiting: release the newly shown overlay straight away.
@@ -874,6 +907,9 @@ public static class MavOverlay
             _inner = shown;
         }
 
+        /// <summary>
+        /// Releases the attached overlay resource.
+        /// </summary>
         public void Dispose()
         {
             if (_disposed) return;
@@ -894,6 +930,9 @@ public static class MavOverlay
     private sealed class NoopDisposable : IDisposable
     {
         public static NoopDisposable Instance { get; } = new();
+        /// <summary>
+        /// Does nothing; used as a placeholder when no resource needs to be released.
+        /// </summary>
         public void Dispose() { }
     }
 

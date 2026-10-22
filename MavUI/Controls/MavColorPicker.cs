@@ -456,6 +456,9 @@ public class MavColorPicker : MavContentView, IMavDraggableControl
             }
         }
 
+        /// <summary>
+        /// Creates the hue bar that lets the user pick a hue.
+        /// </summary>
         public HueSpectrumBar()
         {
             Height = 36;
@@ -465,12 +468,18 @@ public class MavColorPicker : MavContentView, IMavDraggableControl
             Cursor = new Cursor(StandardCursorType.Hand);
         }
 
+        /// <summary>
+        /// Measures the hue bar during the layout pass.
+        /// </summary>
         protected override Size MeasureOverride(Size availableSize)
         {
             var w = double.IsFinite(availableSize.Width) && availableSize.Width > 0 ? availableSize.Width : 240;
             return new Size(w, 36);
         }
 
+        /// <summary>
+        /// Starts a hue drag and captures the pointer.
+        /// </summary>
         protected override void OnPointerPressed(PointerPressedEventArgs e)
         {
             base.OnPointerPressed(e);
@@ -483,6 +492,9 @@ public class MavColorPicker : MavContentView, IMavDraggableControl
             e.Handled = true;
         }
 
+        /// <summary>
+        /// Updates the hue while the pointer is dragged.
+        /// </summary>
         protected override void OnPointerMoved(PointerEventArgs e)
         {
             base.OnPointerMoved(e);
@@ -492,6 +504,9 @@ public class MavColorPicker : MavContentView, IMavDraggableControl
             e.Handled = true;
         }
 
+        /// <summary>
+        /// Ends the hue drag when the pointer is released.
+        /// </summary>
         protected override void OnPointerReleased(PointerReleasedEventArgs e)
         {
             base.OnPointerReleased(e);
@@ -501,6 +516,9 @@ public class MavColorPicker : MavContentView, IMavDraggableControl
             e.Handled = true;
         }
 
+        /// <summary>
+        /// Ends the hue drag when the pointer capture is lost.
+        /// </summary>
         protected override void OnPointerCaptureLost(PointerCaptureLostEventArgs e)
         {
             base.OnPointerCaptureLost(e);
@@ -516,6 +534,9 @@ public class MavColorPicker : MavContentView, IMavDraggableControl
             HueSelected?.Invoke(this, _hue);
         }
 
+        /// <summary>
+        /// Draws the hue gradient and the selection indicator.
+        /// </summary>
         public override void Render(DrawingContext context)
         {
             var w = Bounds.Width;

@@ -50,6 +50,9 @@ public sealed class MavFabMenuItem : Control
     public Action? OnClick { get; set; }
     public event EventHandler? Clicked;
 
+    /// <summary>
+    /// Raises the Clicked event for this item.
+    /// </summary>
     internal void RaiseClicked() => Clicked?.Invoke(this, EventArgs.Empty);
 
     public ICommand? Command
@@ -77,5 +80,8 @@ public sealed class MavFabMenuItem : Control
         OnClick = onClick;
     }
 
+    /// <summary>
+    /// Measures the item during the layout pass.
+    /// </summary>
     protected override Size MeasureOverride(Size availableSize) => default;
 }

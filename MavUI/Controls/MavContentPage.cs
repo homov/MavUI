@@ -120,6 +120,9 @@ public class MavContentPage : MavContentView
         return action;
     }
 
+    /// <summary>
+    /// Removes all page actions.
+    /// </summary>
     public void ClearActions() => _actions.Clear();
 
     /// <summary>

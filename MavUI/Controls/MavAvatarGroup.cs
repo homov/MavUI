@@ -128,10 +128,19 @@ public class MavAvatarGroup : MavContentView, IEnumerable<MavAvatar>
         return this;
     }
 
+    /// <summary>
+    /// Adds an avatar to the group.
+    /// </summary>
     public void Add(MavAvatar avatar) => AddAvatar(avatar);
 
+    /// <summary>
+    /// Adds an avatar that shows the given initials.
+    /// </summary>
     public void Add(string initials) => AddAvatar(initials);
 
+    /// <summary>
+    /// Returns an enumerator over the avatars in the group.
+    /// </summary>
     public IEnumerator<MavAvatar> GetEnumerator() => _avatars.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

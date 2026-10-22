@@ -194,6 +194,9 @@ public class MavDialog : Control
     public event EventHandler? NeutralClicked;
     public event EventHandler? Closed;
 
+    /// <summary>
+    /// Measures the dialog during the layout pass.
+    /// </summary>
     protected override Size MeasureOverride(Size availableSize) => default;
 
     /// <summary>Shows the dialog over <paramref name="anchor"/>.</summary>

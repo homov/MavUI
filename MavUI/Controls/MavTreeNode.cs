@@ -102,6 +102,9 @@ public sealed class MavTreeNode : Control, IEnumerable<MavTreeNode>
         IsExpanded = isExpanded;
     }
 
+    /// <summary>
+    /// Measures the node during the layout pass.
+    /// </summary>
     protected override Size MeasureOverride(Size availableSize) => default;
 
     /// <summary>Adds a child node and returns this node for chaining.</summary>
@@ -124,6 +127,9 @@ public sealed class MavTreeNode : Control, IEnumerable<MavTreeNode>
         return child;
     }
 
+    /// <summary>
+    /// Returns an enumerator over the child nodes.
+    /// </summary>
     public IEnumerator<MavTreeNode> GetEnumerator() => Children.GetEnumerator();
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 }

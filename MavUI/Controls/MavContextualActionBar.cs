@@ -152,8 +152,14 @@ public class MavContextualActionBar : MavContentView, IEnumerable<Control>
     [Content]
     public global::Avalonia.Controls.Controls Actions => _actionsRow.Children;
 
+    /// <summary>
+    /// Adds a control to the action row.
+    /// </summary>
     public void Add(Control control) => _actionsRow.Children.Add(control);
 
+    /// <summary>
+    /// Returns an enumerator over the controls in the action row.
+    /// </summary>
     public IEnumerator<Control> GetEnumerator() => _actionsRow.Children.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

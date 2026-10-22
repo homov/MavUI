@@ -86,6 +86,9 @@ internal sealed class MavLruCache<TKey, TValue>
 
     private struct Entry
     {
+        /// <summary>
+        /// Creates a cache entry that holds the key and its value.
+        /// </summary>
         public Entry(TKey key, TValue value)
         {
             Key = key;

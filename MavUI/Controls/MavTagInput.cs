@@ -260,8 +260,14 @@ public class MavTagInput : MavContentView, IEnumerable<string>
         return this;
     }
 
+    /// <summary>
+    /// Adds a tag.
+    /// </summary>
     public void Add(string tag) => AddTag(tag);
 
+    /// <summary>
+    /// Returns an enumerator over the tags.
+    /// </summary>
     public IEnumerator<string> GetEnumerator() => _tags.GetEnumerator();
 
     System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();

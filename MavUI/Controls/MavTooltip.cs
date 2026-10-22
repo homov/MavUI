@@ -31,12 +31,24 @@ public static class MavTooltip
         TextProperty.Changed.AddClassHandler<Control>((ctrl, _) => EnsureHooked(ctrl));
     }
 
+    /// <summary>
+    /// Gets the tooltip text attached to the element.
+    /// </summary>
     public static string? GetText(Control element) => element.GetValue(TextProperty);
 
+    /// <summary>
+    /// Sets the tooltip text attached to the element.
+    /// </summary>
     public static void SetText(Control element, string? value) => element.SetValue(TextProperty, value);
 
+    /// <summary>
+    /// Gets the placement of the tooltip relative to the element.
+    /// </summary>
     public static MavTooltipPlacement GetPlacement(Control element) => element.GetValue(PlacementProperty);
 
+    /// <summary>
+    /// Sets the placement of the tooltip relative to the element.
+    /// </summary>
     public static void SetPlacement(Control element, MavTooltipPlacement value) => element.SetValue(PlacementProperty, value);
 
     /// <summary>Attaches a tooltip to <paramref name="target"/> that shows the given text or content on hover and focus.</summary>

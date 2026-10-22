@@ -86,6 +86,9 @@ public class MavDatePickerField : MavPickerFieldBase
 
     protected override bool HasSelectedValue => SelectedDate is not null;
 
+    /// <summary>
+    /// Clears the selected date.
+    /// </summary>
     public override void Clear() => SelectedDate = null;
 
     /// <summary>Opens the date picker for this field and applies the picked date.</summary>

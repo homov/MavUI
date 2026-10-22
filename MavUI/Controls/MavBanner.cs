@@ -222,7 +222,13 @@ public class MavBanner : MavContentView
         _actionsRow.IsVisible = _primaryBtn.IsVisible || _secondaryBtn.IsVisible;
     }
 
+    /// <summary>
+    /// Hides the banner.
+    /// </summary>
     public void Dismiss() => IsVisible = false;
+    /// <summary>
+    /// Shows the banner.
+    /// </summary>
     public void Show() => IsVisible = true;
 
     private void ApplyTheme(MavTheme t)

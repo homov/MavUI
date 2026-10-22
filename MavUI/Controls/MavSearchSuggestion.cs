@@ -74,5 +74,8 @@ public sealed class MavSearchSuggestion : Control
         set => SetValue(IsRecentProperty, value);
     }
 
+    /// <summary>
+    /// Measures the suggestion during the layout pass.
+    /// </summary>
     protected override Size MeasureOverride(Size availableSize) => default;
 }

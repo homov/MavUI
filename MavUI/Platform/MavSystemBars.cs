@@ -125,6 +125,9 @@ public static class MavSystemBars
         private bool _themeSubscribed;
         private bool _disposed;
 
+        /// <summary>
+        /// Attaches the system bar handling to the root control.
+        /// </summary>
         internal Attachment(Control root, bool edgeToEdge)
         {
             _root = root;
@@ -198,6 +201,9 @@ public static class MavSystemBars
             _themeSubscribed = false;
         }
 
+        /// <summary>
+        /// Detaches the system bar handling from the root control.
+        /// </summary>
         public void Dispose()
         {
             if (_disposed)

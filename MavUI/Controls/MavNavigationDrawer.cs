@@ -199,8 +199,14 @@ public class MavNavigationDrawer : MavContentView, IEnumerable<MavDrawerItem>
         return this;
     }
 
+    /// <summary>
+    /// Adds an item to the drawer.
+    /// </summary>
     public void Add(MavDrawerItem item) => _items.Add(item);
 
+    /// <summary>
+    /// Returns an enumerator over the drawer items.
+    /// </summary>
     public IEnumerator<MavDrawerItem> GetEnumerator() => _items.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

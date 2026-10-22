@@ -228,10 +228,19 @@ public class MavSegmentedButton : MavContentView, IEnumerable<MavSegment>
         return this;
     }
 
+    /// <summary>
+    /// Adds a segment with the given text and optional icon.
+    /// </summary>
     public void Add(string text, string? icon = null, bool selected = false) => AddSegment(text, icon, selected);
 
+    /// <summary>
+    /// Adds a segment to the control.
+    /// </summary>
     public void Add(MavSegment segment) => AddSegment(segment);
 
+    /// <summary>
+    /// Returns an enumerator over the segments.
+    /// </summary>
     public IEnumerator<MavSegment> GetEnumerator() => _segments.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -310,11 +319,17 @@ public class MavSegmentedButton : MavContentView, IEnumerable<MavSegment>
         private readonly MavSegmentedButton _owner;
         private double[] _naturalWidths = [];
 
+        /// <summary>
+        /// Creates the panel that lays out the segments in a row.
+        /// </summary>
         public SegmentedRowPanel(MavSegmentedButton owner)
         {
             _owner = owner;
         }
 
+        /// <summary>
+        /// Measures the segments and distributes the available width between them.
+        /// </summary>
         protected override Size MeasureOverride(Size availableSize)
         {
             var count = Children.Count;
@@ -368,6 +383,9 @@ public class MavSegmentedButton : MavContentView, IEnumerable<MavSegment>
             return new Size(targetTotalWidth, maxHeight);
         }
 
+        /// <summary>
+        /// Arranges the segments in a row over the final size.
+        /// </summary>
         protected override Size ArrangeOverride(Size finalSize)
         {
             var count = Children.Count;
@@ -504,6 +522,9 @@ public class MavSegmentedButton : MavContentView, IEnumerable<MavSegment>
         private readonly MavIcon _icon;
         private readonly TextBlock _label;
 
+        /// <summary>
+        /// Creates a cell for one segment.
+        /// </summary>
         public SegmentCell(MavSegment seg, Action onClick)
         {
             _seg = seg;
@@ -537,6 +558,9 @@ public class MavSegmentedButton : MavContentView, IEnumerable<MavSegment>
             Content = _surface;
         }
 
+        /// <summary>
+        /// Sets the width the cell is allowed to use.
+        /// </summary>
         public void SetAvailableWidth(double cellWidth)
         {
             if (double.IsInfinity(cellWidth))
@@ -549,6 +573,9 @@ public class MavSegmentedButton : MavContentView, IEnumerable<MavSegment>
             _label.MaxWidth = Math.Max(0, cellWidth - 32.0 - iconBudget);
         }
 
+        /// <summary>
+        /// Updates the cell's theme colors, corner radii, and height.
+        /// </summary>
         public void Update(MavTheme t, CornerRadius radii, double height)
         {
             var c = t.Color;

@@ -110,6 +110,9 @@ public class MavTimeline : MavContentView, IEnumerable<MavTimelineItem>
         }
     }
 
+    /// <summary>
+    /// Adds an item to the timeline.
+    /// </summary>
     public void Add(MavTimelineItem item) => _items.Add(item);
 
     /// <summary>Adds an item to the timeline.</summary>
@@ -122,8 +125,14 @@ public class MavTimeline : MavContentView, IEnumerable<MavTimelineItem>
         Control? customContent = null)
         => Add(new MavTimelineItem(title, description, timestamp, icon, status, customContent));
 
+    /// <summary>
+    /// Removes all items from the timeline.
+    /// </summary>
     public void Clear() => _items.Clear();
 
+    /// <summary>
+    /// Returns an enumerator over the timeline items.
+    /// </summary>
     public IEnumerator<MavTimelineItem> GetEnumerator() => _items.GetEnumerator();
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 

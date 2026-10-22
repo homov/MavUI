@@ -95,5 +95,8 @@ public sealed class MavStep : Control
         set => SetValue(StateOverrideProperty, value);
     }
 
+    /// <summary>
+    /// Measures the step during the layout pass.
+    /// </summary>
     protected override Size MeasureOverride(Size availableSize) => default;
 }

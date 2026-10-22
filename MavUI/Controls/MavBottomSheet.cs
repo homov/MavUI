@@ -91,6 +91,9 @@ public class MavBottomSheet : Control
 
     public event EventHandler? Closed;
 
+    /// <summary>
+    /// Measures the sheet during the layout pass; its size is set by the overlay host.
+    /// </summary>
     protected override Size MeasureOverride(Size availableSize) => default;
 
     /// <summary>Shows the sheet above the content, anchored to <paramref name="anchor"/> for safe-area and overlay placement.</summary>

@@ -17,6 +17,9 @@ public sealed class LocExtension : MarkupExtension
     {
     }
 
+    /// <summary>
+    /// Creates a markup extension that resolves the localization key at runtime.
+    /// </summary>
     public LocExtension(string key) => Key = key;
 
     /// <summary>Creates the extension for <paramref name="key"/> with the given fallback text.</summary>

@@ -111,9 +111,21 @@ internal static class MathUtils
         return new double[] { a, b, c };
     }
 
+    /// <summary>
+    /// Converts degrees to radians.
+    /// </summary>
     public static double ToRadians(double angdeg) => Math.PI / 180 * angdeg;
+    /// <summary>
+    /// Returns the length of the hypotenuse for the given legs.
+    /// </summary>
     public static double Hypot(double x, double y) => Math.Sqrt(x * x + y * y);
+    /// <summary>
+    /// Returns the natural logarithm of 1 + x.
+    /// </summary>
     public static double Log1p(double x) => Math.Log(1 + x);
+    /// <summary>
+    /// Returns e raised to x minus 1.
+    /// </summary>
     public static double Expm1(double x) => Math.Exp(x) - 1;
     
     /// <summary>

@@ -91,6 +91,9 @@ public sealed class MavMenuItem : Control, IEnumerable<MavMenuItem>
     public Action? OnSelected { get; set; }
     public event EventHandler? Clicked;
 
+    /// <summary>
+    /// Raises the Clicked event for this item.
+    /// </summary>
     internal void RaiseClicked() => Clicked?.Invoke(this, EventArgs.Empty);
 
     public ICommand? Command
@@ -146,8 +149,14 @@ public sealed class MavMenuItem : Control, IEnumerable<MavMenuItem>
 
     internal bool HasSubItems => _subItems is { Count: > 0 };
 
+    /// <summary>
+    /// Adds a sub-item to this item.
+    /// </summary>
     public void Add(MavMenuItem subItem) => SubItems!.Add(subItem);
 
+    /// <summary>
+    /// Returns an enumerator over the sub-items.
+    /// </summary>
     public IEnumerator<MavMenuItem> GetEnumerator() => (_subItems ?? Enumerable.Empty<MavMenuItem>()).GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

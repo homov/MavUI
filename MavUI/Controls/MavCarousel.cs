@@ -216,8 +216,14 @@ public class MavCarousel : Control, IMavDraggableControl, IEnumerable<MavCarouse
     public void Add(string title, string? subtitle = null, string? icon = null, Color? accent = null) =>
         AddItem(title, subtitle, icon, accent);
 
+    /// <summary>
+    /// Adds an item to the carousel.
+    /// </summary>
     public void Add(MavCarouselItem item) => AddItem(item);
 
+    /// <summary>
+    /// Returns an enumerator over the carousel items.
+    /// </summary>
     public IEnumerator<MavCarouselItem> GetEnumerator() => _items.GetEnumerator();
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
@@ -358,9 +364,15 @@ public class MavCarousel : Control, IMavDraggableControl, IEnumerable<MavCarouse
         return -1;
     }
 
+    /// <summary>
+    /// Computes card positions for the static layout at the current index.
+    /// </summary>
     internal List<(double X, double W, double Focus)> ComputeCardLayouts(double totalW) =>
         ComputeCardLayouts(totalW, _animatedIndex);
 
+    /// <summary>
+    /// Computes card positions and focus values for the given animated index.
+    /// </summary>
     internal List<(double X, double W, double Focus)> ComputeCardLayouts(double totalW, double animatedIndex)
     {
         return Layout switch

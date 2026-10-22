@@ -461,8 +461,14 @@ public class MavDataTable : MavContentView, IEnumerable<MavDataColumn>
         return this;
     }
 
+    /// <summary>
+    /// Adds a column to the table.
+    /// </summary>
     public void Add(MavDataColumn column) => _columns.Add(column);
 
+    /// <summary>
+    /// Returns an enumerator over the table columns.
+    /// </summary>
     public IEnumerator<MavDataColumn> GetEnumerator() => _columns.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

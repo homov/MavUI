@@ -86,5 +86,8 @@ public sealed class MavTabItem : Control
         Content = content;
     }
 
+    /// <summary>
+    /// Measures the tab item during the layout pass.
+    /// </summary>
     protected override Size MeasureOverride(Size availableSize) => default;
 }

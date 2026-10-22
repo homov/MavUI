@@ -136,12 +136,18 @@ public class MavNavigationBar : MavContentView, IEnumerable<MavNavigationDestina
         return this;
     }
 
+    /// <summary>
+    /// Adds a destination to the bar.
+    /// </summary>
     public void Add(MavNavigationDestination destination) => _destinations.Add(destination);
 
     /// <summary>Adds a destination without returning the bar.</summary>
     public void Add(string label, string icon, string? selectedIcon = null, string? badge = null) =>
         AddDestination(label, icon, selectedIcon, badge);
 
+    /// <summary>
+    /// Returns an enumerator over the destinations.
+    /// </summary>
     public IEnumerator<MavNavigationDestination> GetEnumerator() => _destinations.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -221,6 +227,9 @@ public class MavNavigationBar : MavContentView, IEnumerable<MavNavigationDestina
         private readonly MavIcon _icon;
         private readonly TextBlock _label;
 
+        /// <summary>
+        /// Creates a cell for one destination in the bar.
+        /// </summary>
         public NavBarCell(MavNavigationDestination dest, bool showLabel, Action onClick)
         {
             _dest = dest;
@@ -269,6 +278,9 @@ public class MavNavigationBar : MavContentView, IEnumerable<MavNavigationDestina
             Content = tapBox;
         }
 
+        /// <summary>
+        /// Updates the selected state of the cell, optionally animating the change.
+        /// </summary>
         public void SetSelected(bool selected, bool animate)
         {
             _icon.Glyph = selected && !string.IsNullOrEmpty(_dest.SelectedIcon) ? _dest.SelectedIcon : _dest.Icon;
@@ -283,6 +295,9 @@ public class MavNavigationBar : MavContentView, IEnumerable<MavNavigationDestina
             }
         }
 
+        /// <summary>
+        /// Applies the theme colors for the selected or unselected state.
+        /// </summary>
         public void ApplyTheme(MavTheme t, bool selected)
         {
             var c = t.Color;

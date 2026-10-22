@@ -55,5 +55,8 @@ public sealed class MavBreadcrumbItem : Control
         Tag = tag;
     }
 
+    /// <summary>
+    /// Measures the item during the layout pass.
+    /// </summary>
     protected override Size MeasureOverride(Size availableSize) => default;
 }

@@ -72,6 +72,9 @@ public class MavRichTooltip : Control
         set => SetValue(ActionCommandParameterProperty, value);
     }
 
+    /// <summary>
+    /// Measures the tooltip during the layout pass.
+    /// </summary>
     protected override Size MeasureOverride(Size availableSize) => default;
 
     /// <summary>Shows the tooltip next to <paramref name="anchor"/>.</summary>

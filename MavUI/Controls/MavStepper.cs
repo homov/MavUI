@@ -254,8 +254,14 @@ public class MavStepper : MavContentView, IEnumerable<MavStep>
         return this;
     }
 
+    /// <summary>
+    /// Adds a step to the stepper.
+    /// </summary>
     public void Add(MavStep step) => _steps.Add(step);
 
+    /// <summary>
+    /// Returns an enumerator over the steps.
+    /// </summary>
     public IEnumerator<MavStep> GetEnumerator() => _steps.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

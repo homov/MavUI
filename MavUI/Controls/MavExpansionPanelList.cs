@@ -53,8 +53,14 @@ public class MavExpansionPanelList : StackPanel, System.Collections.Generic.IEnu
         return this;
     }
 
+    /// <summary>
+    /// Adds a panel to the list.
+    /// </summary>
     public void Add(Control panel) => Children.Add(panel);
 
+    /// <summary>
+    /// Returns an enumerator over the panels in the list.
+    /// </summary>
     public System.Collections.Generic.IEnumerator<Control> GetEnumerator() => Children.GetEnumerator();
 
     System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();

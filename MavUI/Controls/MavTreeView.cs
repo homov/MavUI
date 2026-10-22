@@ -198,6 +198,9 @@ public class MavTreeView : MavContentView, IEnumerable<MavTreeNode>
     [Content]
     public AvaloniaList<MavTreeNode> Roots => _roots;
 
+    /// <summary>
+    /// Adds a root node to the tree.
+    /// </summary>
     public void Add(MavTreeNode node) => _roots.Add(node);
 
     /// <summary>Adds a root node and returns the tree view for chaining.</summary>
@@ -225,6 +228,9 @@ public class MavTreeView : MavContentView, IEnumerable<MavTreeNode>
         RunDeferredRefresh(() => SetExpandedRecursive(_roots, false));
     }
 
+    /// <summary>
+    /// Recalculates the visible rows after the tree changes.
+    /// </summary>
     public void Refresh() => RefreshVisibleRows();
 
     /// <summary>Returns the nodes whose check box is checked.</summary>
@@ -260,6 +266,9 @@ public class MavTreeView : MavContentView, IEnumerable<MavTreeNode>
             SetCheckedRecursive(child, isChecked);
     }
 
+    /// <summary>
+    /// Returns an enumerator over the root nodes.
+    /// </summary>
     public IEnumerator<MavTreeNode> GetEnumerator() => _roots.GetEnumerator();
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 

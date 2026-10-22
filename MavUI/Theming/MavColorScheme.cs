@@ -273,6 +273,9 @@ public sealed record MavColorScheme
         };
     }
 
+    /// <summary>
+    /// Returns the color for the given role.
+    /// </summary>
     public Color Get(MavColorRole role) => role switch
     {
         MavColorRole.Primary => Primary,
@@ -338,6 +341,9 @@ public sealed record MavColorScheme
         return dict;
     }
 
+    /// <summary>
+    /// Returns the surface color for the given elevation level.
+    /// </summary>
     public Color SurfaceAtElevation(int level) => level switch
     {
         <= 0 => Surface,

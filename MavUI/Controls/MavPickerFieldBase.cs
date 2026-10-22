@@ -117,8 +117,17 @@ public abstract class MavPickerFieldBase : MavContentView
     }
 
     protected abstract bool HasSelectedValue { get; }
+    /// <summary>
+    /// Clears the selected value.
+    /// </summary>
     public abstract void Clear();
+    /// <summary>
+    /// Opens the picker and applies the value the user selects.
+    /// </summary>
     protected abstract Task OpenPickerAsync();
+    /// <summary>
+    /// Returns the text shown in the field for the current value.
+    /// </summary>
     protected abstract string FormatDisplayValue();
 
     /// <summary>Updates the text in the field from the current value.</summary>

@@ -111,8 +111,14 @@ public class MavButtonGroup : StackPanel, IEnumerable<Control>
         return this;
     }
 
+    /// <summary>
+    /// Adds a button to the group.
+    /// </summary>
     public void Add(MavButton button) => AddButton(button);
 
+    /// <summary>
+    /// Returns an enumerator over the buttons in the group.
+    /// </summary>
     public IEnumerator<Control> GetEnumerator() => Children.GetEnumerator();
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 

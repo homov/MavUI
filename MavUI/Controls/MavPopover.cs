@@ -109,6 +109,9 @@ public class MavPopover : Control
         Placement = placement;
     }
 
+    /// <summary>
+    /// Measures the popover during the layout pass.
+    /// </summary>
     protected override Size MeasureOverride(Size availableSize) => default;
 
     /// <summary>Opens the popover next to <paramref name="anchor"/>.</summary>

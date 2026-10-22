@@ -126,6 +126,9 @@ public class MavCircularProgress : Control
         set => SetValue(IsWavyProperty, value);
     }
 
+    /// <summary>
+    /// Measures the indicator as a square of the configured size.
+    /// </summary>
     protected override Size MeasureOverride(Size availableSize) => new(Size, Size);
 
     private void UpdateLoop()

@@ -105,6 +105,9 @@ internal class Hct
         set => SetInternalState(CamSolver.SolveToInt(hue, chroma, value));
     }
 
+    /// <summary>
+    /// Returns the color as an ARGB integer.
+    /// </summary>
     public uint ToInt() => argb;
 
     private void SetInternalState(uint argb)

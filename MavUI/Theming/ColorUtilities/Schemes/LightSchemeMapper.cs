@@ -16,6 +16,9 @@ namespace Mav.ColorUtilities.Schemes
         where TCorePalette : CorePalette
         where TScheme : Scheme<uint>, new()
     {
+        /// <summary>
+        /// Fills the scheme with the light-theme color roles.
+        /// </summary>
         protected override void MapCore(TCorePalette corePalette, TScheme scheme)
         {
             scheme.Primary = corePalette.Primary[40];

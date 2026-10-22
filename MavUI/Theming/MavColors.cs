@@ -41,5 +41,8 @@ public static class MavColors
     public static Color WithAlpha(this Color c, double alpha) =>
         Color.FromArgb((byte)Math.Clamp((int)Math.Round(alpha * 255.0), 0, 255), c.R, c.G, c.B);
 
+    /// <summary>
+    /// Converts the color to a solid brush.
+    /// </summary>
     public static ISolidColorBrush ToBrush(this Color c) => new SolidColorBrush(c);
 }

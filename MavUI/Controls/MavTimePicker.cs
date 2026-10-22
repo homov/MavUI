@@ -44,6 +44,9 @@ public class MavTimePicker : Control
         });
     }
 
+    /// <summary>
+    /// Measures the picker during the layout pass.
+    /// </summary>
     protected override Size MeasureOverride(Size availableSize) => default;
 
     public TimeSpan SelectedTime

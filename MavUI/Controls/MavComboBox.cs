@@ -272,10 +272,19 @@ public class MavComboBox : MavContentView, IEnumerable<string>
         return this;
     }
 
+    /// <summary>
+    /// Adds an option to the combo box.
+    /// </summary>
     public void Add(string item) => AddOption(item);
 
+    /// <summary>
+    /// Clears the selected item.
+    /// </summary>
     public void Clear() => SelectedItem = null;
 
+    /// <summary>
+    /// Returns an enumerator over the options.
+    /// </summary>
     public IEnumerator<string> GetEnumerator() => _items.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

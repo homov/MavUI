@@ -31,6 +31,9 @@ public sealed class MavTypography
     public MavTextStyle LabelMedium => new(12, 16, 0.50, FontWeight.Medium, PlainFont);
     public MavTextStyle LabelSmall => new(11, 16, 0.50, FontWeight.Medium, PlainFont);
 
+    /// <summary>
+    /// Returns the text style for the given type role.
+    /// </summary>
     public MavTextStyle For(MavTypeRole role) => role switch
     {
         MavTypeRole.DisplayLarge => DisplayLarge,

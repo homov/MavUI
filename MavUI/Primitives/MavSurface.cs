@@ -16,6 +16,9 @@ namespace Mav.Primitives
     /// </summary>
     internal static class MavDrawingHelpers
     {
+        /// <summary>
+        /// Draws an arc of a circle, starting at the given angle and sweeping by the given angle.
+        /// </summary>
         public static void DrawArc(
             DrawingContext ctx, IPen pen, double cx, double cy, double r, double startDeg, double sweepDeg)
         {
@@ -38,6 +41,9 @@ namespace Mav.Primitives
             ctx.DrawGeometry(null, pen, geo);
         }
 
+        /// <summary>
+        /// Draws the outline of a text field, with a notch for its floating label.
+        /// </summary>
         public static void DrawFieldChrome(
             DrawingContext context,
             double w,
@@ -159,6 +165,9 @@ namespace Mav.Primitives
         private Geometry? _geometry;
         private bool _hasKey;
 
+        /// <summary>
+        /// Returns the field outline geometry, reusing the cached geometry when the size is unchanged.
+        /// </summary>
         public Geometry Get(double width, double height, double strokeWidth, double notchEnd)
         {
             var key = new FieldKey(width, height, strokeWidth, notchEnd);
@@ -191,6 +200,9 @@ namespace Mav.Primitives
     /// </summary>
     internal static class MavVisualTreeHelpers
     {
+        /// <summary>
+        /// Removes the control from its current parent so it can be attached elsewhere.
+        /// </summary>
         public static void DetachFromParent(Control? control)
         {
             if (control is null) return;
@@ -212,6 +224,9 @@ namespace Mav.Primitives
             }
         }
 
+        /// <summary>
+        /// Adds the child as a logical child of the parent.
+        /// </summary>
         public static void AttachLogicalChild(StyledElement parent, StyledElement? child)
         {
             if (child is null || ReferenceEquals(child.Parent, parent)) return;
@@ -219,6 +234,9 @@ namespace Mav.Primitives
                 slp.SetParent(parent);
         }
 
+        /// <summary>
+        /// Builds the control that displays an item, using the data template or the factory.
+        /// </summary>
         public static Control? BuildTemplateControl(
             object? item,
             IDataTemplate? dataTemplate,
@@ -250,6 +268,9 @@ namespace Mav.Primitives
             "IL2072",
             Justification = "DisplayMemberPath targets an application model type; trimmed apps " +
                             "must root those properties or use ItemTemplate/ItemFormatter.")]
+        /// <summary>
+        /// Formats an item for display, using the given format or the item's string value.
+        /// </summary>
         public static string FormatItemText(
             object? item,
             string? displayMemberPath,
@@ -283,6 +304,9 @@ namespace Mav.Primitives
         private bool _inTree;
         private bool _needsRefresh;
 
+        /// <summary>
+        /// Creates an observer that tracks changes to a collection.
+        /// </summary>
         public MavCollectionObserver(
             Control owner,
             Action onChanged,
@@ -298,6 +322,9 @@ namespace Mav.Primitives
             _owner.DetachedFromVisualTree += OnDetached;
         }
 
+        /// <summary>
+        /// Starts observing the collection, or stops when source is null.
+        /// </summary>
         public void Attach(IEnumerable? source)
         {
             _source = source;
@@ -441,6 +468,9 @@ namespace Mav.Primitives
             });
         }
 
+        /// <summary>
+        /// Creates a surface with the default shape and colors.
+        /// </summary>
         public MavSurface()
         {
             BorderThickness = new Thickness(0);
@@ -485,6 +515,9 @@ namespace Mav.Primitives
             set => SetValue(ElevationProperty, value);
         }
 
+        /// <summary>
+        /// Sets the corner radii of the surface.
+        /// </summary>
         public void SetCornerRadii(double topLeft, double topRight, double bottomLeft, double bottomRight)
         {
             CornerRadius = new CornerRadius(topLeft, topRight, bottomRight, bottomLeft);
@@ -505,6 +538,9 @@ namespace Avalonia.Controls
     /// <summary>Extension methods for building grid layouts with <see cref="MavSurface"/> and related panels.</summary>
     public static class MavGridExtensions
     {
+        /// <summary>
+        /// Adds a control to the grid at the given column and row.
+        /// </summary>
         public static void Add(
             this Grid grid,
             Control child,

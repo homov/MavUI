@@ -49,6 +49,9 @@ public static class MavSnackbar
         ShowCore(message, actionText, onAction, showCloseIcon, duration, anchor);
     }
 
+    /// <summary>
+    /// Removes all snackbars waiting in the queue.
+    /// </summary>
     public static void ClearQueue() => Queue.Clear();
 
     /// <summary>Shows a snackbar immediately, replacing the one that is visible.</summary>

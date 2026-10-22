@@ -55,6 +55,9 @@ public class MavDatePicker : Control
         });
     }
 
+    /// <summary>
+    /// Measures the calendar during the layout pass.
+    /// </summary>
     protected override Size MeasureOverride(Size availableSize) => default;
 
     public DateTime? SelectedDate
@@ -393,6 +396,9 @@ public class MavDatePicker : Control
         Visual? anchor = null) =>
         PickAsync(initial, startInInputMode: false, anchor: anchor, minDate: minDate, maxDate: maxDate);
 
+    /// <summary>
+    /// Shows a date-range picker and returns the selected range, or null when cancelled.
+    /// </summary>
     public static Task<(DateTime Start, DateTime End)?> PickRangeAsync(
         DateTime? start = null,
         DateTime? end = null,
@@ -415,6 +421,9 @@ public class MavDatePicker : Control
         return tcs.Task;
     }
 
+    /// <summary>
+    /// Shows a date-range picker and returns the selected range, or null when cancelled.
+    /// </summary>
     public static Task<(DateTime Start, DateTime End)?> PickDateRangeAsync(
         DateTime? start = null,
         DateTime? end = null,

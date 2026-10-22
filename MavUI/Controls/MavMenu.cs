@@ -46,10 +46,19 @@ public class MavMenu : Control, IEnumerable<MavMenuItem>
     [Content]
     public AvaloniaList<MavMenuItem> Items => _items;
 
+    /// <summary>
+    /// Measures the menu during the layout pass.
+    /// </summary>
     protected override Size MeasureOverride(Size availableSize) => default;
 
+    /// <summary>
+    /// Adds an item to the menu.
+    /// </summary>
     public void Add(MavMenuItem item) => _items.Add(item);
 
+    /// <summary>
+    /// Returns an enumerator over the menu items.
+    /// </summary>
     public IEnumerator<MavMenuItem> GetEnumerator() => _items.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -86,6 +95,9 @@ public class MavMenu : Control, IEnumerable<MavMenuItem>
         return this;
     }
 
+    /// <summary>
+    /// Removes all items from the menu.
+    /// </summary>
     public void Clear() => _items.Clear();
 
     /// <summary>Opens the menu next to <paramref name="anchor"/>.</summary>
