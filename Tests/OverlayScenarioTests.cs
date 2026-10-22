@@ -35,12 +35,13 @@ public class OverlayScenarioTests
     [AvaloniaFact]
     public void BottomSheet_Show_opens_an_overlay_with_its_title_and_body()
     {
-        var (window, _) = CreateHost();
+        var (window, navigation) = CreateHost();
         try
         {
             var body = new TextBlock { Text = "Share with" };
 
-            var sheet = MavBottomSheet.Show("Share", body);
+            // Without an anchor in the window the sheet waits in PendingShows and is not on the stack.
+            var sheet = MavBottomSheet.Show("Share", body, anchor: navigation);
 
             Assert.True(MavOverlay.HasActiveOverlay);
             Assert.Equal("Share", sheet.Title);
