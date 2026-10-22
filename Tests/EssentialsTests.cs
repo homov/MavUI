@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Mav.Essentials;
+using Mav.Essentials.Linux;
 using Xunit;
 
 namespace Mav.Tests;
