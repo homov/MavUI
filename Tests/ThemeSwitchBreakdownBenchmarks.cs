@@ -61,6 +61,48 @@ public class ThemeSwitchBreakdownBenchmarks
         Report(lines);
     }
 
+    [AvaloniaFact]
+    public void Theme_switch_phases()
+    {
+        // Splits one switch into: synchronous part (Mode setter -> Changed -> apply of every control)
+        // and deferred part (RunJobs: layout and render work queued by the property changes).
+        var panel = new StackPanel();
+        for (int i = 0; i < Count; i++)
+            panel.Children.Add(new MdButton { Text = "x" });
+        var window = new Window { Width = 800, Height = 900, Content = new ScrollViewer { Content = panel } };
+        window.Show();
+        Dispatcher.UIThread.RunJobs();
+
+        var sync = new List<double>();
+        var deferred = new List<double>();
+        for (int i = 0; i < Warmup + Rounds; i++)
+        {
+            var s = Stopwatch.StartNew();
+            if (i % 2 == 0) MdTheme.UseDark(); else MdTheme.UseLight();
+            s.Stop();
+            var d = Stopwatch.StartNew();
+            Dispatcher.UIThread.RunJobs();
+            d.Stop();
+            if (i >= Warmup)
+            {
+                sync.Add(s.Elapsed.TotalMilliseconds);
+                deferred.Add(d.Elapsed.TotalMilliseconds);
+            }
+        }
+
+        MdTheme.UseLight();
+        Dispatcher.UIThread.RunJobs();
+        window.Content = null;
+        window.Close();
+        Dispatcher.UIThread.RunJobs();
+
+        Report(new List<string>
+        {
+            $"phases, {Count} x MdButton attached: synchronous Mode set (apply of all controls) median {Median(sync):F2} ms; " +
+            $"deferred RunJobs (layout/render) median {Median(deferred):F2} ms",
+        }, "benchmark-theme-phases.txt");
+    }
+
     /// <summary>Attaches <paramref name="count"/> controls to a window and measures theme switches.</summary>
     private static double MeasureSwitchWith(Func<Control> create, int count)
     {
@@ -129,11 +171,11 @@ public class ThemeSwitchBreakdownBenchmarks
             : (sorted[sorted.Count / 2 - 1] + sorted[sorted.Count / 2]) / 2.0;
     }
 
-    private static void Report(List<string> lines)
+    private static void Report(List<string> lines, string file = "benchmark-theme-breakdown.txt")
     {
         var dir = Path.Combine(FindRepoRoot(), "ci");
         Directory.CreateDirectory(dir);
-        File.WriteAllText(Path.Combine(dir, "benchmark-theme-breakdown.txt"),
+        File.WriteAllText(Path.Combine(dir, file),
             string.Join(Environment.NewLine, lines) + Environment.NewLine);
     }
 
