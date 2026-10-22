@@ -1,20 +1,20 @@
 # Last build log
-commit: 44e0d1d165e6ffe135e56623bec090ec63983efa
-run: https://github.com/homov/MavUI/actions/runs/39866136306
+commit: d73018b9d437caf552d8b29860745bfb61163261
+run: https://github.com/homov/MavUI/actions/runs/39866297707
 
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 260 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 284 ms).
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:05.03
+Time Elapsed 00:00:04.83
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 230 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 230 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 236 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 224 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 224 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 229 ms).
   1 of 4 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
@@ -25,9 +25,9 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:04.87
+Time Elapsed 00:00:04.70
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 290 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 278 ms).
   2 of 3 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
@@ -37,7 +37,7 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.15
+Time Elapsed 00:00:02.12
   Determining projects to restore...
   All projects are up-to-date for restore.
   MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0-windows/MavUI.Essentials.dll
@@ -47,59 +47,11 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:01.05
+Time Elapsed 00:00:01.03
 Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/MavUI.Tests.dll (.NETCoreApp,Version=v10.0)
 VSTest version 18.0.2 (x64)
 
 Starting test execution, please wait...
 A total of 1 test files matched the specified pattern.
-[xUnit.net 00:00:11.68]     Mav.Tests.NavigationSuiteScaffoldTests.OpenNavigationMenu_can_be_called_without_a_top_bar [FAIL]
-  Failed Mav.Tests.NavigationSuiteScaffoldTests.OpenNavigationMenu_can_be_called_without_a_top_bar [3 ms]
-  Error Message:
-   Assert.True() Failure
-Expected: True
-Actual:   False
-  Stack Trace:
-     at Mav.Tests.NavigationSuiteScaffoldTests.OpenNavigationMenu_can_be_called_without_a_top_bar() in /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/NavigationSuiteScaffoldTests.cs:line 72
-   at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
-   at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
-   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
-   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
-[xUnit.net 00:00:14.11]     Mav.Tests.LifetimeTests.Closing_a_window_releases_its_overlay_handles_and_root [FAIL]
-  Failed Mav.Tests.LifetimeTests.Closing_a_window_releases_its_overlay_handles_and_root [2 ms]
-  Error Message:
-   Assert.False() Failure
-Expected: False
-Actual:   True
-  Stack Trace:
-     at Mav.Tests.LifetimeTests.Closing_a_window_releases_its_overlay_handles_and_root() in /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/LifetimeTests.cs:line 73
-   at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
-   at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
-   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
-   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
-[xUnit.net 00:00:14.83]     Mav.Tests.NavigationTests.Overlay_falls_back_to_the_navigation_host_without_an_overlay_layer [FAIL]
-  Failed Mav.Tests.NavigationTests.Overlay_falls_back_to_the_navigation_host_without_an_overlay_layer [1 ms]
-  Error Message:
-   Assert.False() Failure
-Expected: False
-Actual:   True
-  Stack Trace:
-     at Mav.Tests.NavigationTests.Overlay_falls_back_to_the_navigation_host_without_an_overlay_layer() in /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/NavigationTests.cs:line 245
-   at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
-   at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
-   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
-   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
-[xUnit.net 00:00:15.14]     Mav.Tests.NavigationTests.System_back_request_pops_the_top_page [FAIL]
-  Failed Mav.Tests.NavigationTests.System_back_request_pops_the_top_page [3 ms]
-  Error Message:
-   Assert.Equal() Failure: Values differ
-Expected: 1
-Actual:   2
-  Stack Trace:
-     at Mav.Tests.NavigationTests.System_back_request_pops_the_top_page() in /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/NavigationTests.cs:line 211
-   at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
-   at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
-   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
-   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
 
-Failed!  - Failed:     4, Passed:   266, Skipped:     0, Total:   270, Duration: 15 s - MavUI.Tests.dll (net10.0)
+Passed!  - Failed:     0, Passed:   270, Skipped:     0, Total:   270, Duration: 16 s - MavUI.Tests.dll (net10.0)
