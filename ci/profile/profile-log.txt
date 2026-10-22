@@ -1,7 +1,7 @@
 pgrep: /usr/bin/pgrep
 Tool 'dotnet-trace' is already installed.
 dotnet-trace: /home/homo/.dotnet/tools/dotnet-trace
-testhost pid: 92356
+testhost pid: 94574
 
 Provider Name                           Keywords            Level               Enabled By
 Microsoft-DotNETCore-SampleProfiler     0x0000F00000000000  Informational(4)    --profile
@@ -19,3 +19,4 @@ A total of 1 test files matched the specified pattern.
 Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: 10 s - Md3.Avalonia.Tests.dll (net10.0)
 Processing trace data file '/home/homo/github/actions-runner/_work/_temp/theme.nettrace' to create a new Speedscope file '/home/homo/github/actions-runner/_work/_temp/theme.speedscope.json'.
 Conversion complete
+speedscope profiles: [('evented', 0), ('evented', 0), ('evented', 0), ('evented', 0), ('evented', 0), ('evented', 0), ('evented', 0), ('evented', 0), ('evented', 0), ('evented', 0), ('evented', 0), ('evented', 0), ('evented', 0), ('evented', 0), ('evented', 0)]
