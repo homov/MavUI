@@ -5,7 +5,7 @@
              x:Class="Mav.ControlsGallery.Pages.OverviewPage"
              x:DataType="pages:OverviewPage">
   <mav:MavScrollViewer>
-    <Border MaxWidth="1180" HorizontalAlignment="Center" Padding="20,16,20,40">
+    <Border Padding="20,16,20,40">
       <StackPanel Spacing="18">
 
         <mav:MavCard Variant="Filled" CardPadding="24">

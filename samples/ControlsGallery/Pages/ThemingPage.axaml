@@ -3,7 +3,7 @@
              xmlns:mav="https://where.it/mav"
              x:Class="Mav.ControlsGallery.Pages.ThemingPage">
   <mav:MavScrollViewer>
-    <Border MaxWidth="1180" HorizontalAlignment="Center" Padding="20,16,20,40">
+    <Border Padding="20,16,20,40">
       <StackPanel Spacing="18">
 
         <StackPanel Spacing="12">
