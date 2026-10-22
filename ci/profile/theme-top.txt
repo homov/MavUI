@@ -1,22 +1,62 @@
-[ERROR] System.FormatException: Read past end of stream.
-   at Microsoft.Diagnostics.Tracing.EventPipe.RewindableStream.ReadAtLeast(Span`1 buffer, Int32 minLength)
-   at Microsoft.Diagnostics.Tracing.EventPipe.RewindableStream.Read(Span`1 buffer)
-   at Microsoft.Diagnostics.Tracing.EventPipe.RewindableStream.Read[T]()
-   at Microsoft.Diagnostics.Tracing.FastSerializationObjectParser.ReadBlockHeader()
-   at Microsoft.Diagnostics.Tracing.BlockParser.ReadBlock()
-   at Microsoft.Diagnostics.Tracing.BlockParser.ParseRemainder()
-   at Microsoft.Diagnostics.Tracing.EventPipeEventSource.Process()
-   at Microsoft.Diagnostics.Tracing.Etlx.TraceLog.CopyRawEvents(TraceEventDispatcher rawEvents, IStreamWriter writer)
-   at Microsoft.Diagnostics.Tracing.Etlx.TraceLog.<>c__DisplayClass134_0.<FastSerialization.IFastSerializable.ToStream>b__0()
-   at FastSerialization.DeferedRegion.Write(Serializer serializer, Action toStream)
-   at Microsoft.Diagnostics.Tracing.Etlx.TraceLog.FastSerialization.IFastSerializable.ToStream(Serializer serializer)
-   at FastSerialization.Serializer.WriteObjectData(IFastSerializable obj, Tags beginTag)
-   at FastSerialization.Serializer.WriteObjectRef(IFastSerializable obj, Boolean defered)
-   at FastSerialization.Serializer.Write(IFastSerializable obj)
-   at FastSerialization.Serializer..ctor(IStreamWriter writer, IFastSerializable entryObject)
-   at Microsoft.Diagnostics.Tracing.Etlx.TraceLog.CreateFromEventPipeEventSources(TraceEventDispatcher source, IOStreamStreamWriter streamWriter, TraceLogOptions options)
-   at Microsoft.Diagnostics.Tracing.Etlx.TraceLog.CreateFromEventPipeEventSources(TraceEventDispatcher source, String etlxFilePath, TraceLogOptions options)
-   at Microsoft.Diagnostics.Tracing.Etlx.TraceLog.CreateFromEventPipeDataFile(String filePath, String etlxFilePath, TraceLogOptions options)
-   at Microsoft.Diagnostics.Tools.Trace.ReportCommandHandler.TopNReport(String traceFile, Int32 number, Boolean inclusive, Boolean verbose) in /_/src/Tools/dotnet-trace/CommandLine/Commands/ReportCommand.cs:line 44
+Top 1033 Functions (Exclusive)                                                  Inclusive           Exclusive           
+1.    LowLevelLifoSemaphore.WaitNative(class Microsoft.Win32.SafeHandles.Saf    28.58%              28.58%              
+2.    WaitHandle.WaitOneNoCheck(int32,bool,class System.Object,value class W    26.77%              26.77%              
+3.    Monitor.Wait(class System.Object,int32)                                   13.56%              13.56%              
+4.    LowLevelLifoSemaphore.WaitForSignal(int32)                                39.05%              10.47%              
+5.    Missing Symbol                                                            6.78%               6.78%               
+6.    WaitHandle.WaitAnyMultiple(value class System.ReadOnlySpan`1<class Mic    6.78%               6.78%               
+7.    Sockets!Interop+Sys.Poll(class System.Runtime.InteropServices.SafeHand    6.72%               6.72%               
+8.    LowLevelSpinWaiter.Wait(int32,int32,bool)                                 0.03%               0.02%               
+9.    Thread.<PollGC>g__PollGCWorker|67_0()                                     0.02%               0.02%               
+10.   LowLevelLifoSemaphore.Wait(int32,bool)                                    11.81%              0.01%               
+11.   RuntimeModule.GetDefinedTypes()                                           0.01%               0.01%               
+12.   MetadataReaderExtensionsHelper.DiscoverTestExtensionTypesV2AttributeIn    0.01%               0.01%               
+13.   DynamicMethod.CreateDelegate(class System.Type,class System.Object)       0.01%               0.01%               
+14.   Thread.Yield()                                                            0.01%               0.01%               
+15.   InitHelpers.InitClassSlow(value class System.Runtime.CompilerServices.    0.03%               0.01%               
+16.   GC.<AllocateUninitializedArray>g__AllocateNewArrayWorker|77_0(int32,bo    0.01%               0.01%               
+17.   MessageSinkMessageExtensions.DispatchWhen(class Xunit.Sdk.IMessageSink    0.02%               0.01%               
+18.   CompareInfo.IcuCompareString(value class System.ReadOnlySpan`1<wchar>,    0.01%               0.01%               
+19.   FrameworkNameProvider.InitMappings(class System.Collections.Generic.IE    0.01%               0%                  
+20.   JsonSerializerInternalWriter.SerializeValue(class Newtonsoft.Json.Json    0.03%               0%                  
+21.   Buffer.MemmoveInternal(unsigned int8&,unsigned int8&,unsigned int)        0%                  0%                  
+22.   GenericsHelpers.MethodWithSlotAndModule(int,value class GenericHandleA    0%                  0%                  
+23.   PortableThreadPool+WorkerThread.MaybeAddWorkingWorker(class System.Thr    0%                  0%                  
+24.   CoreLib!Interop+Globalization.GetLocaleInfoInt(class System.String,uns    0%                  0%                  
+25.   GenericsHelpers.ClassWithSlotAndModule(int,value class GenericHandleAr    0%                  0%                  
+26.   AsyncMethodBuilderCore.Start(!!0&)                                        13.24%              0%                  
+27.   .ctor(class Xunit.Runner.Common.IRunnerLogger)                            0%                  0%                  
+28.   ExpressionReflectionDelegateFactory.CreateDefaultConstructor(class Sys    0.01%               0%                  
+29.   TestAssemblyInfo.FromJson(class System.String)                            0%                  0%                  
+30.   __Canon].OnMessage(class Xunit.Sdk.IMessageSinkMessage)                   0.02%               0%                  
+31.   JsonSerializerInternalReader.CreateNewObject(class Newtonsoft.Json.Jso    0.01%               0%                  
+32.   JsonWriter.WriteValue(class Newtonsoft.Json.JsonWriter,value class New    0%                  0%                  
+33.   .cctor()                                                                  0%                  0%                  
+34.   FrameworkNameProvider.TryConvertOrNormalize(class System.String,class     0%                  0%                  
+35.   .cctor()                                                                  0%                  0%                  
+36.   .ctor(class System.Object,bool)                                           0%                  0%                  
+37.   __Canon].PopulateProperties(value class Filter,class System.RuntimeTyp    0%                  0%                  
+38.   CustomAttribute.IsCustomAttributeDefined(class System.Reflection.Runti    0%                  0%                  
+39.   MessageSinkMessage.FromJson(class System.Collections.Generic.IReadOnly    0.01%               0%                  
+40.   RuntimeCustomAttributeData.GetCustomAttributeRecords(class System.Refl    0%                  0%                  
+41.   JsonSerializerInternalReader.PopulateObject(class System.Object,class     0.03%               0%                  
+42.   XmlRunSettingsUtilities.GetDataCollectionRunSettings(class System.Stri    0%                  0%                  
+43.   .ctor(class Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.IRe    0.03%               0%                  
+44.   .ctor(class System.IRuntimeMethodInfo,class System.RuntimeType)           0%                  0%                  
+45.   XmlRunSettingsUtilities.GetNodeValue(class System.String,class System.    0.02%               0%                  
+46.   GenericsHelpers.Class(int,int)                                            0%                  0%                  
+47.   AsyncValueTaskMethodBuilder.Start(!!0&)                                   0%                  0%                  
+48.   Monitor.Enter(class System.Object,bool&)                                  0%                  0%                  
+49.   DefaultContractResolver.CreateObjectContract(class System.Type)           0.03%               0%                  
+50.   GenericsHelpers.Method(int,int)                                           0%                  0%                  
+51.   VoidTaskResult].AwaitUnsafeOnCompleted(!!0&,!!1&,class System.Threadin    0%                  0%                  
+52.   DefaultContractResolver.CreateProperties(class System.Type,value class    0.01%               0%                  
+53.   BaseRunTests.RunTestsInternal()                                           6.65%               0%                  
+54.   JsonSerializerInternalReader.Deserialize(class Newtonsoft.Json.JsonRea    0.05%               0%                  
+55.   JsonSerializerInternalReader.CreateObject(class Newtonsoft.Json.JsonRe    0.03%               0%                  
+56.   RunTestsWithSources.GetExecutorUriExtensionMap(class Microsoft.VisualS    0.01%               0%                  
+57.   Xunit3.Run(class Xunit.Sdk.IMessageSink,class Xunit.FrontControllerRun    6.36%               0%                  
+58.   TestFrameworkOptions.ForExecution(class Xunit.Runner.Common.TestAssemb    0%                  0%                  
+59.   TestPluginDiscoverer.GetTestExtensionsFromAssembly(class System.Reflec    0.02%               0%                  
 
 == Md3 / Avalonia-controls / theme frames:

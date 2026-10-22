@@ -1,18 +1,18 @@
 # Last build log
-commit: 79a74d3d7b0ec59adc3fc59373121d0aae2792c4
-run: https://github.com/homov/MavUI/actions/runs/39821561971
+commit: 512013fdbc3a3cdb3c67a5b6edf84b66583e999f
+run: https://github.com/homov/MavUI/actions/runs/39822213105
 
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Md3.Avalonia/Md3.Avalonia.csproj (in 263 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Md3.Avalonia/Md3.Avalonia.csproj (in 272 ms).
   Md3.Avalonia -> /home/homo/github/actions-runner/_work/MavUI/MavUI/Md3.Avalonia/bin/Release/net10.0/Md3.Avalonia.dll
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:07.81
+Time Elapsed 00:00:08.48
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/Md3.Avalonia.Tests.csproj (in 277 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/Md3.Avalonia.Tests.csproj (in 288 ms).
   1 of 2 projects are up-to-date for restore.
   Md3.Avalonia -> /home/homo/github/actions-runner/_work/MavUI/MavUI/Md3.Avalonia/bin/Release/net10.0/Md3.Avalonia.dll
   Md3.Avalonia.Tests -> /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/Md3.Avalonia.Tests.dll
@@ -21,9 +21,9 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.13
+Time Elapsed 00:00:02.19
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/Demo/Md3.Demo.csproj (in 266 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/Demo/Md3.Demo.csproj (in 271 ms).
   1 of 2 projects are up-to-date for restore.
   Md3.Avalonia -> /home/homo/github/actions-runner/_work/MavUI/MavUI/Md3.Avalonia/bin/Release/net10.0/Md3.Avalonia.dll
   Md3.Demo -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/Demo/bin/Release/net10.0/Md3.Demo.dll
@@ -32,7 +32,7 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.00
+Time Elapsed 00:00:02.04
   Determining projects to restore...
   Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/Gallery/Md3.Gallery.csproj (in 273 ms).
   1 of 2 projects are up-to-date for restore.
@@ -43,7 +43,7 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.06
+Time Elapsed 00:00:02.12
 Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/Md3.Avalonia.Tests.dll (.NETCoreApp,Version=v10.0)
 VSTest version 18.0.2 (x64)
 
