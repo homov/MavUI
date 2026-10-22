@@ -5,8 +5,8 @@ All notable changes to **Mav**.
 ## Versioning policy
 
 - The library follows [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`.
-- The version is **independent of the roadmap stages** in `docs/PLAN.md`. Stage numbers
-  describe implementation order; they are not part of the package version.
+- The version is **independent of internal implementation stages**. Stage numbers used in
+  older entries describe implementation order; they are not part of the package version.
 - `0.x` releases are previews: the public API may still change in a minor release.
   After `1.0.0`, breaking public-API changes require a major version bump.
 - NuGet publication is intentionally **not** part of the plan. Consume the library as a

@@ -14,7 +14,7 @@ using Xunit;
 namespace Mav.Tests;
 
 /// <summary>
-/// Breaks down the cost of a theme switch (docs/ANALYSIS.md, section 0 and item 4):
+/// Breaks down the cost of a theme switch:
 /// the theme rebuild itself, and the per-control apply cost for each control type.
 /// Results are written to ci/benchmark-theme-breakdown.txt.
 /// </summary>

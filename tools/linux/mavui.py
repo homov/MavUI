@@ -18,7 +18,7 @@ Examples::
 
     python3 tools/linux/mavui.py start
     python3 tools/linux/mavui.py start --window 400x800 --safe-area 24,48 --keyboard 300
-    python3 tools/linux/mavui.py shot  --out docs/handoff/linux-home.png
+    python3 tools/linux/mavui.py shot  --out /tmp/linux-home.png
     python3 tools/linux/mavui.py click --x 779 --y 313
     python3 tools/linux/mavui.py key   --keys Escape
     python3 tools/linux/mavui.py wheel --x 400 --y 300 --delta -600

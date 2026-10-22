@@ -14,7 +14,7 @@ using Xunit;
 namespace Mav.Tests;
 
 /// <summary>
-/// Step-by-step cost of the per-control theme apply (docs/ANALYSIS.md, item 4).
+/// Step-by-step cost of the per-control theme apply.
 /// Private apply steps are called through reflection on one attached control, alternating
 /// dark/light schemes so that every call changes colors (the real theme-switch path).
 /// Results are written to ci/benchmark-apply-micro.txt.

@@ -50,21 +50,8 @@ Prerequisite: `dotnet workload install wasm-tools` and the `Avalonia.Browser` pa
 ```bash
 dotnet build samples/ControlsGallery/ControlsGallery.Android/ControlsGallery.Android.csproj
 adb install -r samples/ControlsGallery/ControlsGallery.Android/bin/Debug/net10.0-android/com.mav.controlsgallery-Signed.apk
-adb shell monkey -p com.md3.gallery -c android.intent.category.LAUNCHER 1
+adb shell monkey -p com.mav.controlsgallery -c android.intent.category.LAUNCHER 1
 ```
 
-`com.md3.gallery` needs the Android workload and SDK platform 36. Edge-to-edge is
+Building needs the Android workload and SDK platform 36. Edge-to-edge is
 enabled on Android 15+; older releases use the theme surface color for system bars.
-
-## Screenshots
-
-`docs/gallery/`:
-
-* `desktop-overview.png`, `desktop-navigation.png`, `desktop-theming.png`,
-  `desktop-theming-localization.png`, `desktop-inputs.png`,
-  `desktop-collections.png`, `desktop-feedback.png`, `desktop-overlays.png`
-* `tablet-rail.png`, `phone-shell.png`, `phone-drawer.png`
-* `android-phone.png`, `android-tablet-rail.png`, `android-tablet-drawer.png`
-* `android15-feedback.png`, `android15-dialog.png`, `android15-bottom-sheet.png`,
-  `android15-side-sheet.png`, `android15-snackbar-indefinite.png`
-* `browser-overview.png`, `web-feedback-snackbar.png`

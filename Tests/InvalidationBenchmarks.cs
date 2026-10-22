@@ -15,7 +15,7 @@ using Xunit;
 namespace Mav.Tests;
 
 /// <summary>
-/// Isolates the deferred cost of a theme switch (docs/ANALYSIS.md, item 4):
+/// Isolates the deferred cost of a theme switch:
 /// a render-only change (background) versus a layout-affecting change (padding) on the same controls.
 /// Results are written to ci/benchmark-invalidation.txt.
 /// </summary>

@@ -14,7 +14,7 @@ using Xunit;
 namespace Mav.Tests;
 
 /// <summary>
-/// Baseline measurements for the analysis in docs/ANALYSIS.md (item 1: leaks, theme subscriptions).
+/// Lifecycle measurements: leaks and theme subscriptions.
 /// Results are written to the test output (ci/last-build.log) so runs can be compared.
 /// </summary>
 public class LifecycleBenchmarks

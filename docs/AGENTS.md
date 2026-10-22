@@ -8,8 +8,8 @@ This file is the single reference for using the library:
 §1–§4 are required reading before writing UI code, §5 is a control lookup catalog,
 §6 has end-to-end recipes, §7 lists pitfalls, §8 maps the repository.
 
-> Continuing an interrupted session? Read `docs/HANDOFF.md` first: it contains the
-> current navigation work state, known testing issues, and the next steps.
+> This is the only agent-facing document in `docs/`. Older plans, session handoffs and performance
+> analyses were removed; the facts that still matter are kept here. Release history: `CHANGELOG.md`.
 
 ---
 
@@ -25,6 +25,10 @@ This file is the single reference for using the library:
 8. For forms, use the inline picker fields (`MavDatePickerField`, `MavTimePickerField`) and `MavFormValidator`.
 9. Do not mix `ItemsSource` with manually added children/items; `ItemsSource` owns the child list.
 10. Build with `dotnet build MavUI/MavUI.csproj`; the project targets `net10.0`.
+11. Pass an attached control as the overlay anchor (`dialog.Show(this)`). A `null` anchor falls back to the last tracked `TopLevel`; if none exists yet the overlay waits in a pending queue (§4.1).
+12. Change the theme once per change, not per control. Headless measurements: switching the theme took ~63 ms for 500 `MavButton` and ~111 ms for 500 `MavTextField`, so batch your changes.
+13. For long lists use `ItemsSource` inside a `ScrollViewer` (virtualized) and `MavDataTable` with pagination for very large sources (§7).
+14. Shrink the bundle with `-p:MavFonts=no-mdi` when you use classic `MavIcons`; `minimal` breaks them (§1.5).
 
 ---
 
@@ -737,7 +741,17 @@ overlay host registered by the nearest `MavNavigationPage`.
   `MavKeyboardAvoidingHost.SimulatedKeyboardHeight` / `MAV_KEYBOARD` on desktop).
 * Escape / hardware Back dismisses the most recent dismissable overlay (`PushDismissable`).
 * The anchor may be any attached `Visual`; if it is `null`, the last known `TopLevel` is used.
+  If no `TopLevel` has been seen yet (for example in a test before the window is tracked), the overlay
+  is parked in an internal pending queue (`PendingShows`, at most 8). A pending overlay is **not** on the
+  dismiss stack: `HasActiveOverlay` stays `false` and `TryDismissTop()` returns `false` until a host appears.
+  Always pass an attached control in tests.
   Call overlay APIs only after a window/view exists — not in `Application.Initialize()`.
+* Overlays opened from a page are dismissed when that page disappears (`MavOverlay.DismissForPage`,
+  called by `MavContentPage` on disappearing).
+* The fallback host inside `MavNavigationPage` is hit-test invisible while no overlay is open, so it never
+  blocks taps on the page. Do not add your own full-window hit-testable root for overlays.
+* Closing is animated (`MavMotion`). `Closed` and the removal from the overlay layer happen when the
+  animation ends, not synchronously inside `Close()`/`Dismiss()` (for example `MavSideSheet`).
 
 **Popup controls are launcher handles, not layout children.** `MavDialog`, `MavBottomSheet`,
 `MavSideSheet`, `MavPopover`, `MavMenu`, `MavRichTooltip`, `MavDatePicker`, `MavTimePicker`,
@@ -928,6 +942,7 @@ Or use `MavSearchView` directly with `Suggestions`, `SuggestionsSource`, `Result
 | `MavButtonGroup` | `StackPanel` of buttons. `Kind`/`Variant` (`Standard`/`Connected`), `MultiSelect`, `AddButton`, `SelectionChanged(int)`. |
 | `MavSplitButton` | primary action + menu arrow. `Menu` (`MavMenu`), `IsMenuOpen`, `MenuCommand`, `Clicked`, `MenuClicked`. |
 | `MavFabMenu` | FAB that expands into labeled actions. `AddItem(label, icon, onClick)`, `Open`/`Close`/`Toggle`, `ItemClicked`, `OpenChanged`. |
+| `MavFabMenuItem` | action inside a FAB menu. `Label`, `Icon`, `OnClick`, `Clicked`, `Command`, `CommandParameter`. |
 
 ```csharp
 var more = new MavIconButton(MavIcons.MoreVert);
@@ -947,6 +962,7 @@ group.AddButton(new MavButton("Week", MavButtonVariant.Outlined));
 |---|---|
 | `MavTextField` | single-line text field. `new MavTextField(label, variant, placeholder, leadingIcon, supportingText)`; `Text`, `Placeholder`, `Variant` (`Filled`/`Outlined`), `LeadingIcon`, `TrailingIcon`, `PrefixText`, `SuffixText`, `ErrorText`, `HasError` (also true when `ErrorText` set), `IsPassword`, `IsReadOnly`, `ShowClearButton`, `MaxLength`, `ShowCounter`/`ShowCharacterCounter`, `ContentType`, `ReturnKeyType`, `AutoCapitalize`, `Completed`, `TrailingIconClicked`, `Focus()`/`Unfocus()`. |
 | `MavTextArea` | multiline field. `new MavTextArea(label, variant, placeholder, supportingText, minHeight)`; `MaxLength`, `ShowCounter`, `MinBoxHeight`, `TextChanged`; sends `ReturnKeyType`/newline as text input options. |
+| `MavTextContextMenu` | static `Attach(textBox, mode = Auto)` adds the Material copy, cut, paste and select-all menu to a `TextBox` and returns a `MavTextContextFlyout`. |
 | `MavPinInput` | PIN/OTP boxes. `Length`, `Code`, `Value`, `Text` (aliases), `IsMasked`, `HasError`, `CodeChanged`, `Completed`, `Clear()`; numeric keyboard and `Done` return key. |
 | `MavNumberBox` | numeric stepper. `Value`, `Minimum`, `Maximum`, `Step`, `DecimalPlaces`, `Label`, `Suffix`, `FormatString`, `ValueChanged`, `Increment`, `Decrement`. |
 | `MavTagInput` | chip/tag entry. `Tags`, `Label`, `Placeholder`, `MaxTags`, `AllowDuplicates`, `TagAdded`, `TagRemoved`, `TagsChanged`, `AddTag`, `RemoveTag`, `ClearTags`. |
@@ -958,6 +974,7 @@ group.AddButton(new MavButton("Week", MavButtonVariant.Outlined));
 | `MavSlider` | single-value slider. `Minimum`, `Maximum`, `Value`, `Step`, `Divisions`, `Centered`, `ShowValueIndicator`/`ShowLabel`/`ShowValueLabel`, `ValueFormatter`, `ValueChanged`. |
 | `MavRangeSlider` | two-thumb slider. `StartValue`/`EndValue` (aliases `LowerValue`/`UpperValue`), `Step`, `Divisions`, `ValueFormatter`. |
 | `MavSegmentedButton` | connected segmented control. `MultiSelect`, `AddSegment(text, icon, selected)`, `Segments`, `SelectedIndex`, `SelectedIndices`, `SelectedItem`, `SelectedItemsSource`, `SelectionChanged`. |
+| `MavSegment` | segment item. `Text`, `Label`, `Icon`, `IsSelected`. |
 | `MavChip` | chip. `new MavChip(text, kind, icon, selected, elevated)`; `Kind` (`Assist`/`Filter`/`Input`/`Suggestion`), `IsSelected`, `IsElevated`, `ShowCloseIcon`/`IsRemovable`, `AvatarView`, `Clicked`, `SelectedChanged`, `CloseClicked`. |
 | `MavChipGroup` | chip collection. `AddChip(text, kind, icon, selected, elevated)`, `Chips`, `ItemsSource`, `SingleSelection`, `SelectionRequired`, `Wrap`, `SelectedIndex`, `SelectedItem`, `SelectedIndices`, `SelectedTexts`, `SelectionChanged`. |
 | `MavSelect` | dropdown select. `new MavSelect(label, options, variant, leadingIcon)`; `Options`, `SelectedItem` (string), `SelectedObject`, `SelectedIndex`, `ItemsSource`, `DisplayMemberPath`, `ItemFormatter`, `ErrorText`, `IsClearable`, `OpenMenu()`. |
@@ -1023,15 +1040,21 @@ app bar, actions, bottom bar and FAB fully Material.
 | `MavNavigationPage` | own page stack. `SetRoot`, `Push`, `Pop`, `PopToRoot`, `Replace`, `TryGoBack`, `GoBackCommand`, `RefreshChrome`, `NavigationStack`, `CurrentPage`, `CanGoBack`, `StackDepth`, `Transition` (`None`/`Slide`/`Fade`), `PageChanged`; `ApplySafeArea`, `SafeAreaOverride`, `SafeAreaInsets`, `KeyboardHost`. Uses `MavTopAppBar` and `MavMotion` transitions and lifts the page above the soft keyboard. |
 | `MavTopAppBar` | top app bar. `Title`, `Subtitle`, `NavigationIcon`, `Variant` (`CenterAligned`/`Small`/`Medium`/`Large`), `NavigationClicked`, `AddAction(icon, onClick)`, `AttachScrollViewer(scroll)`, `IsScrolled`, `CollapseProgress`, `SafeAreaPadding` (filled by `MavNavigationPage`). |
 | `MavBottomAppBar` | bottom bar with FAB. `Fab`, `FabIcon`, `FabCommand`, `FabClicked`, `AddAction`, `SafeAreaPadding` (filled by `MavNavigationPage`). |
+| `MavContextualActionBar` | bar for selection mode. `SelectedCount`, `AutoHideWhenEmpty` (default true), `TitleFormat` or `TitleFormatter`, `ClearCommand`, `SelectionCleared`, `AddAction(icon, tooltip, onClicked)`, `AddButton(text, icon, onClicked)`. |
 | `MavNavigationBar` | bottom navigation. `AddDestination(label, icon, selectedIcon, badge)`, `SelectedIndex`, `SelectedItem`, `ItemsSource`, `ShowLabels`, `SelectedIndexChanged`. |
 | `MavNavigationRail` | side rail. Same destination API + `Header`. |
 | `MavNavigationDrawer` | permanent drawer. `AddItem`, `AddSectionHeader`, `AddDivider`, `Title`/`Headline`, `DrawerWidth`, `SelectedIndex`. |
+| `MavDrawerItem` | item for `MavNavigationDrawer` and the modal drawer (derives `MavNavigationItemBase`: `Label`, `Icon`, `SelectedIcon`, `BadgeText`). `SectionHeader`, `ShowDividerBefore`, `OnClick`, `Clicked`, `Command`, `CommandParameter`. |
+| `MavNavigationDestination` | item for `MavNavigationBar` and `MavNavigationRail` (`Label`, `Icon`, `SelectedIcon`, `BadgeText`, `ShowBadgeDot`). |
+| `MavSuiteDestination` | item for `MavNavigationSuiteScaffold`. Same base members plus `Content` (the page body shown for the destination). |
 | `MavModalNavigationDrawer` | modal drawer handle. `Drawer`, `Items`, `IsOpen`, `Show(anchor)`/`Close()`. |
 | `MavNavigationSuiteScaffold` | adaptive bar → rail → drawer. `Destinations`/`AddDestination(label, icon, selectedIcon, badge, content)`, `Mode` (`Auto`), `EffectiveMode`, `CompactBreakpoint` (600), `ExpandedBreakpoint` (840), `Body`, `TopAppBar`, `FloatingActionButton`, `RailHeader`, `DrawerHeadline`. |
 | `MavTabs` | primary/secondary tabs. `Variant`, `IsScrollable`, `AddTab(text, icon, badge, content)`, `SelectedIndex`, `SelectedItem`, `ItemsSource`, `ItemTemplate`. |
+| `MavTabItem` | tab item. `Text`, `Icon`, `BadgeText`, `Content`. |
 | `MavBreadcrumbBar` | breadcrumb trail. `Add`, `SetPath(params string[])`, `MaxVisibleItems`, `SelectedItem`, `ItemClickCommand`. |
 | `MavPagination` | page buttons. `TotalPages`, `CurrentPage`, `MaxVisiblePages`, `ShowFirstLastButtons`, `PageChanged`, `Command`. |
 | `MavStepper` | wizard steps. `AddStep(title, subtitle, content, stateOverride)`, `CurrentStep`, `Orientation`, `ShowControls`, `AllowStepTap`, `Next()`, `Previous()`, `StepChanged`, `Completed`. |
+| `MavStep` | step item. `Title`, `Subtitle`, `IsOptional`, `Content`, `StateOverride` (`MavStepState`). |
 | `MavToolbar` | floating/docked action bar. `Variant`, `ColorStyle`, `Orientation`, `AddAction`, `AddControl`, `AddDivider`, `CompanionFab`. |
 
 Custom page stack:
@@ -1105,6 +1128,7 @@ shell.SelectedIndexChanged += (_, i) => { };
 | `MavExpansionPanelList` | accordion list. `SingleExpand`/`AllowMultipleExpanded`, `AddPanel`. |
 | `MavSplitView` | resizable master/detail. `Pane`, `DetailContent`, `PaneWidth`, `MinPaneWidth`, `MaxPaneWidth`, `InitialRatio`, `IsPaneOpen`, `IsResizable`, `CompactBreakpoint`, `IsCompact`, `CompactModeChanged`. |
 | `MavCarousel` | swipeable card carousel. `AddItem(title, subtitle, icon, accent)`, `Items`, `ItemsSource`, `ItemTemplate`, `Layout` (`Hero`/`CenterAligned`/`MultiBrowse`/`Uncontained`), `SelectedIndex`, `ShowIndicators`, `Next`, `Previous`, `SelectedIndexChanged`, `ItemClicked`. |
+| `MavCarouselItem` | card item. `Title`, `Subtitle`, `Icon`, `AccentColor`. |
 | `MavSettingsCard` | settings row. `Header`/`Title`, `Description`, `Icon`, `ActionContent`, `IsActionable`, `Command`, `Clicked`. |
 | `MavSettingsExpander` | settings group. `AddItem(title, subtitle, trailingControl, leadingIcon)`, `AddCustomContent`, `IsExpanded`, `HeaderAction`. |
 | `MavAvatar` | initials/icon/image avatar. `Initials`, `Icon`, `ImageSource`, `Size`, `Status` (`None`/`Online`/`Busy`/`Away`/`Offline`), `CustomFillColor`, `CustomTextColor`. |
@@ -1511,8 +1535,8 @@ All controls accept `Command`/`CommandParameter`; use the CLR events only for vi
 19. **Headless tests cover overlays too.** `Tests/MavUI.Tests.csproj` uses
     `Avalonia.Headless.XUnit` (xunit v3). `MavNavigationPage` registers a fallback overlay host, so
     dialogs, pickers and sheets can be tested without an Avalonia `OverlayLayer`. The suite has
-    233 tests across navigation, list, keyboard, controls (buttons/inputs/selection/pickers/
-    feedback/chrome/containers) and a control-creation smoke test. The source under
+    about 330 tests across navigation, lists, keyboard, overlays, controls and a control-creation
+    smoke test (see §10). The source under
     `MavUI/` remains the source of truth; run the build after changes.
 20. **`adb shell input` is not a reliable touch test on every ROM.** Some devices inject
     `MotionEvent`s with `ToolType=Unknown`, which Avalonia ignores; use a real finger or
@@ -1523,120 +1547,200 @@ All controls accept `Command`/`CommandParameter`; use the CLR events only for vi
     (dialogs, sheets, popovers) above that inset. The value is contributed only while the
     host is in the visual tree, so leaving a preview page restores the full-height overlay;
     the effective value is the maximum across currently attached hosts.
+22. **Android Back arrives once, through `TopLevel.BackRequested`.** `Keycode.Back` also maps to
+    `Key.Escape`. Custom key handlers must not treat Escape as Back on Android, or one press closes two
+    layers and can finish the Activity.
+23. **Read safe-area insets after scaling settles.** On Android `TopLevel.RenderScaling` starts at `1` and
+    then becomes about `2.625`. Custom layouts that read `SafeAreaPadding` must read it again on
+    `ScalingChanged` and on `DispatcherPriority.Loaded`, as `MavNavigationPage` does.
+24. **Edge-to-edge only on Android 15 and newer.** On Android 11 transparent system bars show the wallpaper
+    behind the status bar. Pass `edgeToEdge: true` to `MavSystemBars.Attach(...)` only when
+    `Build.VERSION.SdkInt >= 35`; use `false` on older releases.
+25. **Declare configuration changes on the Android Activity.** Without them a rotation recreates the Activity
+    and an open dialog is lost. The gallery declares `Orientation | ScreenSize | UiMode | Density | Locale |
+    LayoutDirection`, so overlays reflow in place.
 
 ---
 
-## 8. Repository map and build
+## 8. Repository map, build and CI
 
 ```
 <repo-root>/
-├── MavUI.sln                     solution: library, tests and all sample hosts
-├── CHANGELOG.md                versions, notable changes and SemVer policy
-├── MavUI/
-│   ├── MavUI.csproj      net10.0, Avalonia 12.1.4, embedded fonts
-│   ├── MavFonts.cs               UseMav, font collections, XML namespace
-│   ├── MavIcons.cs               ~10,800 icon glyph constants
-│   ├── MavLocalization.cs        providers, culture switching, Observe, AXAML + keys
-│   ├── LocExtension.cs          {mav:Loc ...} AXAML markup extension
-│   ├── MavLocalizationExtensions.cs  Localize / LocalizeLabel / LocalizePlaceholder
-│   ├── Controls/                60 control source files
-│   ├── Primitives/
-│   │   ├── MavSurface.cs         MavContentView, MavSurface, MavGridExtensions
-│   │   ├── MavInkSurface.cs      ripple/state-layer clickable surface
-│   │   └── MavIcon.cs            icon TextBlock with font auto-selection
-│   ├── Platform/
-│   │   ├── MavOverlay.cs         OverlayLayer/fallback host, dismiss stack
-│   │   ├── MavInputs.cs          MavNativeEntry/MavNativeEditor, context menu
-│   │   ├── MavKeyboard.cs        soft-keyboard helpers
-│   │   └── MavTextMetrics.cs     text measurement helpers
-│   ├── Theming/
-│   │   ├── MavTheme.cs           MavTheme + MavThemeStyle style
-│   │   ├── MavThemeOptions.cs    configuration object
-│   │   ├── MavThemeService.cs    injectable theme service
-│   │   ├── MavColorScheme.cs     roles, variants, contrast, seed extraction
-│   │   ├── MavColors.cs          named seed colors
-│   │   ├── MavTokens.cs          shape/elevation/state/density tokens
-│   │   ├── MavTypography.cs      15-role type scale + Apply extensions
-│   │   ├── MavMotion.cs          durations, easings, animation helpers
-│   │   └── ColorUtilities/      HCT/quantizer/color math
-│   └── Resources/Fonts/         Roboto + 3 icon fonts
-├── Tests/
-│   └── MavUI.Tests.csproj headless navigation/list/keyboard/overlay tests
-├── samples/
-│   ├── ControlsGallery/         shared library: App, shell, 11 AXAML pages, localization
-│   │   ├── ControlsGallery.csproj
-│   │   ├── Shell/               adaptive shell (bar/rail/drawer) and destination list
-│   │   ├── Pages/               11 pages: AXAML markup + code-behind
-│   │   └── Localization/        en fallbacks in AXAML, ru tables in Ru*.cs
-│   ├── ControlsGallery.Desktop/ desktop head (Program.cs)
-│   ├── ControlsGallery.Android/ Android head (com.mav.controlsgallery)
-│   └── ControlsGallery.Browser/ WebAssembly head (Avalonia.Browser)
-├── docs/
-│   ├── README.md                documentation index
-│   ├── AGENTS.md                library rules and API catalogue
-│   ├── HANDOFF.md               session handoff, current status and next steps
-│   ├── PLAN.md                  project plan and current status
-│   ├── gallery/                 gallery README + screenshots
-│   └── handoff/                 verification screenshots (Linux, Windows legacy, Android)
-├── tools/linux/mavui.py         Linux/X11 run/screenshot/click/key/wheel helper
-├── tools/win/mavui.ps1          native Windows run/screenshot/click/key helper
+├── MavUI.sln                        solution: library, Essentials, tests, gallery hosts
+├── CHANGELOG.md                     versions, notable changes, SemVer policy
+├── MavUI/                           the library (net10.0, Avalonia 12.1.4, embedded fonts)
+│   ├── MavUI.csproj                 MavFonts, trimming and AOT properties
+│   ├── MavIcons.cs                  ~10,800 icon glyph constants
+│   ├── MavFonts.cs                  font families, ResolveIconFont / ResolveIconTypeface
+│   ├── MavAppBuilderExtensions.cs   UseMav(...)
+│   ├── MavLocalization.cs           providers, culture switching, Observe
+│   ├── LocExtension.cs              {mav:Loc ...} AXAML markup extension
+│   ├── Controls/                    ~158 files, one public type per file
+│   ├── Primitives/                  MavContentView/MavSurface, MavInkSurface (ripple, focus), MavIcon
+│   ├── Platform/                    MavOverlay, MavSystemBars, MavKeyboard, MavNativeEntry/Editor,
+│   │                                MavTextContextMenu, MavGestureZones, MavAutomation (accessibility),
+│   │                                MavTextMetrics, MavLruCache
+│   ├── Theming/                     MavTheme, MavThemeOptions, MavThemeService, MavColorScheme,
+│   │                                MavTypography, MavMotion, MavTokens (shape, elevation, state, density),
+│   │                                MavAccessibility (WCAG), ColorUtilities/
+│   └── Resources/Fonts/             Roboto and icon fonts
+├── MavUI.Essentials/                separate package: preferences and secure storage (§9.5)
+├── Tests/                           MavUI.Tests: xUnit with Avalonia.Headless (§10)
+├── samples/ControlsGallery/         one gallery, four sibling projects (§9)
+│   ├── ControlsGallery/             shared library: App, adaptive shell, pages, localization
+│   ├── ControlsGallery.Desktop/     desktop host
+│   ├── ControlsGallery.Android/     Android host, applicationId com.mav.controlsgallery
+│   └── ControlsGallery.Browser/     WebAssembly host (Sdk.WebAssembly, own csproj)
+├── docs/                            AGENTS.md (this file), NOTES.md, gallery/README.md
+├── tools/
+│   ├── linux/mavui.py               X11 run, screenshot, click, key, wheel helper
+│   ├── win/mavui.ps1                Windows helper (legacy)
+│   └── summarize_speedscope.py      summarizes the profiler output of the [profile] CI step
+└── .github/workflows/build.yml      CI
 ```
 
-Build:
+### Build and test
 
 ```bash
 dotnet build MavUI.sln -v q --nologo
 dotnet build MavUI/MavUI.csproj -v q --nologo
-dotnet build samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj -v q --nologo
 dotnet test Tests/MavUI.Tests.csproj --nologo
-```
-
-On Linux (current development platform, Mint/Ubuntu, X11) and on Windows the Android
-host builds with the same SDK, once the Android workload and SDK platform 36 exist:
-
-```bash
-dotnet workload install android            # once per SDK feature band
-dotnet build samples/ControlsGallery/ControlsGallery.Android/ControlsGallery.Android.csproj -v q --nologo
-```
-
-The Android host needs `ANDROID_HOME` pointing at an SDK that contains
-`platforms/android-36` (plus `build-tools`, `platform-tools`) and a JDK 17+ `JAVA_HOME`.
-On Windows the same command is run through the Windows SDK:
-
-```powershell
-& "C:\Program Files\dotnet\dotnet.exe" build samples\ControlsGallery.Android\ControlsGallery.Android.csproj -v q --nologo
-```
-
-Expected: `Build succeeded. 0 Warning(s) 0 Error(s)` and all tests passing.
-
-Run the desktop gallery:
-
-```bash
 dotnet run --project samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj
 ```
 
-There is a solution at `MavUI.sln` containing the library, tests and all sample hosts:
-`samples/ControlsGallery/` is the single control gallery (desktop, Android and browser heads over one
-shared library) and `Tests/` the headless test project, which also builds every gallery page. `docs/PLAN.md` tracks implementation status.
+Expected: `Build succeeded. 0 Warning(s) 0 Error(s)` and all tests passing. If `dotnet` is not
+installed in your environment, the CI result is the source of truth.
 
-Control gallery:
+### CI
 
-```bash
-dotnet run --project samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj            # desktop
-dotnet run --project samples/ControlsGallery/ControlsGallery.Browser/ControlsGallery.Browser.csproj # WebAssembly server
-dotnet build samples/ControlsGallery/ControlsGallery.Android/ControlsGallery.Android.csproj        # com.mav.controlsgallery APK
-```
+Workflow `.github/workflows/build.yml` runs on a **self-hosted Linux runner** for every push that
+changes code (not for commits that only touch `docs/**` or `**/*.md`). It builds the library, the
+tests, the desktop gallery and `MavUI.Essentials`, runs the tests and commits the build log to
+`ci/last-build.log` on the same branch (`[skip ci]`).
 
-GUI automation helpers (both click by window-relative pixels of the **client area**, send
-keys, scroll under the cursor and write screenshots):
+Commit-message tags:
 
-* Linux/X11: `tools/linux/mavui.py` — `start|stop|shot|click|move|key|type|wheel|info`,
-  `--window`, `--safe-area`, `--keyboard`, `--frame`; needs `python3-xlib`, `Pillow` and
+* `[heads]` — also builds the Android and Browser targets (`MavUI.Essentials` with
+  `IncludeAndroid`/`IncludeBrowser`, the gallery Android and Browser hosts). These need the Android
+  and wasm workloads, so they are opt-in.
+* `[profile]` — runs the theme-switch profiling step with `dotnet-trace`.
+* Manual `workflow_dispatch` runs are possible from the GitHub UI; they are not available from the
+  agent sandbox.
+
+### GUI helpers
+
+* Linux/X11: `tools/linux/mavui.py` — `start|stop|shot|click|move|key|type|wheel|info`, with
+  `--window`, `--safe-area`, `--keyboard`, `--frame`. Needs `python3-xlib`, `Pillow` and
   `gnome-screenshot` or `scrot`. Example:
   `python3 tools/linux/mavui.py start --window 400x800 --safe-area 24,48 --keyboard 300`.
-* Windows: `tools/win/mavui.ps1` — `-Action start|stop|shot|click|key|wheel|info`,
-  `-EnvWindow`, `-EnvSafeArea`, `-EnvKeyboard`.
-* Android: `adb install -r samples/ControlsGallery/ControlsGallery.Android/bin/Debug/net10.0-android/com.mav.controlsgallery-Signed.apk`,
-  then `adb shell monkey -p com.mav.controlsgallery 1 and
-  `adb exec-out screencap -p > shot.png`. The emulator runs locally on Linux via KVM
-  (AVD `Medium_Phone_API_37.0`); stop it with `adb emu kill`.
+  `shot --out <path>` writes a screenshot to the given path. Clicks use window-relative pixels of
+  the **client area**.
+* Windows: `tools/win/mavui.ps1` — `-Action start|stop|shot|click|key|wheel|info`, `-EnvWindow`,
+  `-EnvSafeArea`, `-EnvKeyboard`.
+
+---
+
+## 9. Platforms
+
+### 9.1 Desktop (Windows, Linux, macOS)
+
+* Use `MavWindow` for desktop windows. It supplies the presenter and overlay layer the library needs,
+  so no Avalonia theme is required.
+* `Escape` and `Alt+Left` go back, and `Escape` also closes the topmost overlay (`KeyDown` on the
+  `TopLevel`).
+* Desktop has no system insets. To preview safe-area or keyboard layouts, set
+  `SafeAreaOverride` on the navigation page, or use `MAV_KEYBOARD=<px>` /
+  `--keyboard <px>` (sets `SimulatedKeyboardHeight`).
+
+### 9.2 Android
+
+* Minimum API: the gallery host declares 23 (`SupportedOSPlatformVersion`); `MavUI.Essentials`
+  declares 21. Build with the Android workload and SDK platform 36.
+* No Avalonia theme is needed. `EmbeddableControlRoot` has no `OverlayLayer`, so
+  `MavNavigationPage` registers its own overlay host and dialogs, sheets, pickers and menus work
+  without extra code.
+* Back order: open overlay → page `OnBackPressed()` → `Pop()`; the Activity finishes only on the
+  second press at the root. See gotcha 22.
+* System bars: `MavSystemBars.Attach(navigation, edgeToEdge)` colors the bars from
+  `MavTheme.Current.Color.Surface`, sets light or dark icons from `MavTheme.Current.IsDark`, and
+  follows `MavTheme.Changed`. Edge-to-edge only on Android 15+ (gotcha 24).
+* Soft keyboard: the real `IInputPane` lifts the page and overlays. Use `MavTextField.ContentType`,
+  `ReturnKeyType` and `AutoCapitalize` for the right keyboard.
+* Trimmed and AOT Release publish works (measured on a physical device). See §1.7 for
+  `DisplayMemberPath` rooting.
+* Verified: AVD Android 17 (emulator on Linux/KVM) and a physical device on Android 11, then Android 15
+  after an OS update.
+* Testing on devices and emulators:
+  * `adb shell input tap/swipe` may be ignored on some ROMs (touch `ToolType=Unknown`). Verify with
+    keyboard (`Tab`/`Enter`) or `adb shell input keyevent KEYCODE_BACK`, and with a real finger.
+  * Rotate the emulator: `adb shell settings put system user_rotation 1`.
+  * Launch: `adb shell monkey -p com.mav.controlsgallery -c android.intent.category.LAUNCHER 1`.
+  * Screenshot: `adb exec-out screencap -p > shot.png`. Stop the emulator with `adb emu kill`.
+
+### 9.3 Browser (WebAssembly)
+
+* `ControlsGallery.Browser` uses `Sdk.WebAssembly`, so it cannot share a csproj with the other
+  hosts. Requires `dotnet workload install wasm-tools`. The run command prints a
+  `http://127.0.0.1:<port>/` URL.
+* `MavUI.Essentials` preferences use `localStorage` in the browser; this has not been checked in a
+  browser yet.
+* Secure storage is not wired in the browser and fails closed. It never falls back to plain
+  `localStorage`.
+* Caution: JS calls such as `JSImport("globalThis.window.localStorage...")` can work in Debug and
+  fail in published builds. Verify with a Release publish before relying on them.
+
+### 9.4 Desktop automation
+
+Use `tools/linux/mavui.py` on X11 (see §8). Windows automation (`tools/win/mavui.ps1`) is legacy.
+
+### 9.5 MavUI.Essentials
+
+* Separate project, not part of the `MavUI` package. Targets `net10.0` and `net10.0-windows`;
+  Android and Browser targets are added with `-p:IncludeAndroid=true` and `-p:IncludeBrowser=true`.
+* `MavPreferences.Default` (`IMavPreferences`) — `JsonFilePreferences` on desktop. Use
+  `MavPreferences.SetDefault(...)` to inject another implementation. `MavPreferenceValues` lists the
+  supported value types.
+* `MavSecureStorage.Default` (`IMavSecureStorage`). Platform code lives in
+  `MavUI.Essentials/Platform/{Linux,Windows,Android,Browser}`.
+* Status (see `docs/NOTES.md`): Android Keystore and SharedPreferences code builds but is not yet
+  verified on a device. Apple (Keychain, `NSUserDefaults`) is deferred until a macOS runner or Mac is
+  available.
+
+---
+
+## 10. Testing the library
+
+* Project: `Tests/MavUI.Tests.csproj`, xUnit v3 with `Avalonia.Headless.XUnit`. Use `[AvaloniaFact]`
+  for tests that need a UI thread. `InternalsVisibleTo("MavUI.Tests")` gives tests access to internal
+  members.
+* Host pattern used across the suite:
+
+  ```csharp
+  var navigation = new MavNavigationPage(new MavContentPage("Root"));
+  var window = new Window { Width = 800, Height = 600, Content = navigation };
+  window.Show();
+  Dispatcher.UIThread.RunJobs();
+  ```
+
+* Overlays are global. `MavOverlay` keeps a static dismiss stack, so every overlay test must clear
+  it, even when the test fails:
+
+  ```csharp
+  finally
+  {
+      while (MavOverlay.TryDismissTop()) { }
+      window.Close();
+  }
+  ```
+
+* Pass an attached control as the anchor. A `null` anchor without a tracked `TopLevel` parks the
+  overlay in the pending queue (§4.1), and the test then sees no overlay.
+* Closing is animated and there is no switch to turn animations off. Assert only facts that are set
+  synchronously: `HasActiveOverlay`, `IsOpen`, `TryDismissTop()` results and properties after `Show`.
+  Do not assert `Closed` right after `Close()`.
+* Assert layout and properties, not pixels. Visual checks are done by the maintainer on a device or
+  emulator.
+* `*Benchmarks.cs` tests print timings or check loose time limits (for example, `< 5 s`). They catch
+  large regressions only and are not precise performance gates.
+* Put new tests in a file named after the feature (`Tests/<Feature>Tests.cs`). The control smoke test
+  (`ControlSmokeTests.cs`) builds every control in §5, so keep it passing when you add controls.
