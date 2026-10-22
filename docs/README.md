@@ -25,7 +25,6 @@ Project documentation and verification screenshots live here.
   - `Gallery/`, `Gallery.Browser/` and `Gallery.Android/`
 - `MavUI.sln` — solution with the library, tests and all sample hosts.
 - `tools/` — Linux/Windows GUI automation helpers.
-- `ref/` — external Avalonia source/reference checkout.
 
 ## Quick start
 

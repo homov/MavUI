@@ -1586,7 +1586,6 @@ All controls accept `Command`/`CommandParameter`; use the CLR events only for vi
 │   └── handoff/                 verification screenshots (Linux, Windows legacy, Android)
 ├── tools/linux/mavui.py         Linux/X11 run/screenshot/click/key/wheel helper
 ├── tools/win/mavui.ps1          native Windows run/screenshot/click/key helper
-└── ref/                         Avalonia source/reference checkout
 ```
 
 Build:

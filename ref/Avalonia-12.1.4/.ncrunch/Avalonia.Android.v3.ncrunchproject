@@ -1,8 +1,0 @@
-﻿<ProjectConfiguration>
-  <Settings>
-    <CustomBuildProperties>
-      <Value>TargetFramework = net10.0-android36.0</Value>
-    </CustomBuildProperties>
-    <IgnoreThisComponentCompletely>True</IgnoreThisComponentCompletely>
-  </Settings>
-</ProjectConfiguration>

@@ -1,8 +1,0 @@
-﻿<ProjectConfiguration>
-  <Settings>
-    <HiddenComponentWarnings>
-      <Value>DerivedFilesIncludedInWorkspace</Value>
-    </HiddenComponentWarnings>
-    <IgnoreThisComponentCompletely>False</IgnoreThisComponentCompletely>
-  </Settings>
-</ProjectConfiguration>

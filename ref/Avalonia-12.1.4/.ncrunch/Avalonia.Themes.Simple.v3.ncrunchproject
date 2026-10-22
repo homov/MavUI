@@ -1,8 +1,0 @@
-﻿<ProjectConfiguration>
-  <Settings>
-    <IgnoreThisComponentCompletely>False</IgnoreThisComponentCompletely>
-    <AdditionalFilesToIncludeForProject>
-      <Value>..\Avalonia.Themes.Fluent\Strings\InvariantResources.xaml</Value>
-    </AdditionalFilesToIncludeForProject>
-  </Settings>
-</ProjectConfiguration>

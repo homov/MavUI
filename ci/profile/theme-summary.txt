@@ -1,5 +1,0 @@
-total samples weight: 0
-
-== Top 40 by SELF time
-
-== Top 40 by INCLUSIVE time (Md3/Avalonia frames only)
