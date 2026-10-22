@@ -7,6 +7,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
 using Avalonia.Media;
+using Avalonia.Styling;
 using Avalonia.Threading;
 using Md3.Avalonia.Controls;
 using Xunit;
@@ -65,6 +66,55 @@ public class InvalidationBenchmarks
             $"{Count} x MdButton, background change (render only): median {Median(renderOnly):F2} ms",
             $"{Count} x MdButton, padding change (layout): median {Median(layout):F2} ms",
         });
+    }
+
+    [AvaloniaFact]
+    public void App_resource_sync_cost_with_500_buttons()
+    {
+        var buttons = Enumerable.Range(0, Count).Select(i => new MdButton { Text = $"B{i}" }).ToList();
+        var panel = new StackPanel();
+        foreach (var b in buttons) panel.Children.Add(b);
+        var window = new Window { Width = 800, Height = 900, Content = new ScrollViewer { Content = panel } };
+        window.Show();
+        Dispatcher.UIThread.RunJobs();
+
+        var app = Application.Current!;
+        var sync = typeof(Md3.Avalonia.Theming.MdTheme)
+            .GetMethod("SyncAppResources", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static)!;
+        var theme = Md3.Avalonia.Theming.MdTheme.Current;
+
+        var resources = new List<double>();
+        var variant = new List<double>();
+        for (int i = 0; i < Warmup + Rounds; i++)
+        {
+            // A: all app resource writes (colors, shapes), without the variant change.
+            var sw = Stopwatch.StartNew();
+            sync.Invoke(null, [theme]);
+            Dispatcher.UIThread.RunJobs();
+            sw.Stop();
+            if (i >= Warmup) resources.Add(sw.Elapsed.TotalMilliseconds);
+
+            // B: only the RequestedThemeVariant flip (what SyncAppResources also does).
+            sw.Restart();
+            app.RequestedThemeVariant = (i % 2 == 0) ? ThemeVariant.Dark : ThemeVariant.Light;
+            Dispatcher.UIThread.RunJobs();
+            sw.Stop();
+            if (i >= Warmup) variant.Add(sw.Elapsed.TotalMilliseconds);
+        }
+
+        app.RequestedThemeVariant = ThemeVariant.Default;
+        window.Content = null;
+        window.Close();
+        Dispatcher.UIThread.RunJobs();
+
+        var lines = new List<string>
+        {
+            $"{Count} x MdButton attached, SyncAppResources (app.Resources writes) + RunJobs: median {Median(resources):F2} ms",
+            $"{Count} x MdButton attached, RequestedThemeVariant flip + RunJobs: median {Median(variant):F2} ms",
+        };
+        var dir = Path.Combine(FindRepoRoot(), "ci");
+        Directory.CreateDirectory(dir);
+        File.WriteAllText(Path.Combine(dir, "benchmark-resources.txt"), string.Join(Environment.NewLine, lines) + Environment.NewLine);
     }
 
     private static double Median(List<double> values)
