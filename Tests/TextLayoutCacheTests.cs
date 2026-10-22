@@ -55,6 +55,19 @@ public class TextLayoutCacheTests
     }
 
     [AvaloniaFact]
+    public void Wrap_widths_within_one_step_share_the_same_layout()
+    {
+        // Resizing or animating a width by a fraction of a step must not create a new layout.
+        var a = MdTextMetrics.GetFormattedText("Wrapped label", 14, MdFonts.RobotoRegularTypeface,
+            Colors.Black, maxTextWidth: 101.0, maxLineCount: 2);
+        var b = MdTextMetrics.GetFormattedText("Wrapped label", 14, MdFonts.RobotoRegularTypeface,
+            Colors.Black, maxTextWidth: 102.5, maxLineCount: 2);
+
+        Assert.Same(a, b);
+        Assert.True(a.MaxTextWidth <= 101.0, $"layout got more room than requested: {a.MaxTextWidth}");
+    }
+
+    [AvaloniaFact]
     public void Width_cache_is_cleared_when_the_font_manager_changes()
     {
         MdTextMetrics.MeasureWidth("Measured", 14);
@@ -62,8 +75,9 @@ public class TextLayoutCacheTests
         var cacheField = typeof(MdTextMetrics).GetField(
             "WidthCache", BindingFlags.Static | BindingFlags.NonPublic);
         Assert.NotNull(cacheField);
-        var cache = Assert.IsAssignableFrom<System.Collections.ICollection>(cacheField.GetValue(null));
-        Assert.True(cache.Count > 0);
+        var cache = cacheField.GetValue(null)!;
+        var countProperty = cache.GetType().GetProperty("Count")!;
+        Assert.True((int)countProperty.GetValue(cache)! > 0);
 
         // Simulate a host replacing (or losing) the FontManager whose widths were cached.
         var fontManagerField = typeof(MdTextMetrics).GetField(
@@ -73,6 +87,7 @@ public class TextLayoutCacheTests
 
         var width = MdTextMetrics.MeasureWidth("Measured", 14);
         Assert.True(width > 0);
-        Assert.True(cache.Count == 1, $"width cache was not invalidated (count {cache.Count})");
+        var count = (int)countProperty.GetValue(cache)!;
+        Assert.True(count == 1, $"width cache was not invalidated (count {count})");
     }
 }

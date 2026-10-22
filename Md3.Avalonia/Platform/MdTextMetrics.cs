@@ -1,4 +1,3 @@
-using System.Collections.Concurrent;
 using System.Globalization;
 using Avalonia;
 using Avalonia.Media;
@@ -15,8 +14,16 @@ public static class MdTextMetrics
 {
     private const int MaxCacheEntries = 2048;
     private const int MaxFormattedTextEntries = 2048;
-    private static readonly ConcurrentDictionary<(string? Culture, string? Text, double FontSize, bool Bold), double> WidthCache = new();
-    private static readonly ConcurrentDictionary<TextKey, FormattedText> FormattedTextCache = new();
+
+    /// <summary>
+    /// Wrap widths are quantized to this step (DIPs) in the cache key. Without it, every
+    /// new window width or animated width creates a new layout and evicts useful entries.
+    /// Widths are rounded DOWN, so text never gets more room than the caller allowed.
+    /// </summary>
+    private const double MaxTextWidthStep = 4.0;
+
+    private static readonly MdLruCache<(string? Culture, string? Text, double FontSize, bool Bold), double> WidthCache = new(MaxCacheEntries);
+    private static readonly MdLruCache<TextKey, FormattedText> FormattedTextCache = new(MaxFormattedTextEntries);
     private static WeakReference<FontManager>? _fontManager;
 
     /// <summary>
@@ -39,6 +46,9 @@ public static class MdTextMetrics
 
         var culture = CultureInfo.CurrentUICulture ?? CultureInfo.InvariantCulture;
         var effectiveTrimming = trimming ?? TextTrimming.WordEllipsis;
+        if (!double.IsPositiveInfinity(maxTextWidth) && maxTextWidth >= MaxTextWidthStep)
+            maxTextWidth = Math.Floor(maxTextWidth / MaxTextWidthStep) * MaxTextWidthStep;
+
         var key = new TextKey(
             culture.Name,
             text,
@@ -49,7 +59,7 @@ public static class MdTextMetrics
             maxLineCount,
             effectiveTrimming);
 
-        if (FormattedTextCache.TryGetValue(key, out var cached))
+        if (FormattedTextCache.TryGet(key, out var cached))
             return cached;
 
         var created = new FormattedText(
@@ -67,20 +77,8 @@ public static class MdTextMetrics
         if (effectiveTrimming != TextTrimming.WordEllipsis)
             created.Trimming = effectiveTrimming;
 
-        TrimFormattedTextCache();
-        FormattedTextCache[key] = created;
+        FormattedTextCache.Set(key, created);
         return created;
-    }
-
-    private static void TrimFormattedTextCache()
-    {
-        var count = FormattedTextCache.Count;
-        if (count <= MaxFormattedTextEntries)
-            return;
-
-        var target = MaxFormattedTextEntries * 3 / 4;
-        foreach (var key in FormattedTextCache.Keys.Take(count - target))
-            FormattedTextCache.TryRemove(key, out _);
     }
 
     private static void EnsureFontManagerCurrent()
@@ -119,7 +117,7 @@ public static class MdTextMetrics
 
         var culture = CultureInfo.CurrentUICulture?.Name ?? string.Empty;
         var key = (culture, text, fontSize, bold);
-        if (WidthCache.TryGetValue(key, out var cached))
+        if (WidthCache.TryGet(key, out var cached))
             return cached;
 
         double result = 0;
@@ -135,8 +133,7 @@ public static class MdTextMetrics
             if (ft.Width > 0)
             {
                 result = ft.Width + 1.0;
-                if (WidthCache.Count < MaxCacheEntries)
-                    WidthCache[key] = result;
+                WidthCache.Set(key, result);
                 return result;
             }
         }

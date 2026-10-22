@@ -1,4 +1,3 @@
-using System.Collections.Concurrent;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
@@ -24,8 +23,8 @@ public enum MdThemeMode
 public sealed class MdTheme
 {
     private const int CacheLimit = 2048;
-    private static readonly ConcurrentDictionary<uint, ImmutableSolidColorBrush> BrushCache = new();
-    private static readonly ConcurrentDictionary<ulong, IPen> PenCache = new();
+    private static readonly MdLruCache<uint, IImmutableSolidColorBrush> BrushCache = new(CacheLimit);
+    private static readonly MdLruCache<ulong, IPen> PenCache = new(CacheLimit);
     private static readonly ImmutableSolidColorBrush TransparentBrush = new(Colors.Transparent);
 
     private static Color _seed = MdColors.Purple;
@@ -93,13 +92,11 @@ public sealed class MdTheme
             return TransparentBrush;
 
         var key = color.ToUInt32();
-        if (BrushCache.TryGetValue(key, out var existing))
+        if (BrushCache.TryGet(key, out var existing))
             return existing;
 
-        TrimCache(BrushCache);
-
         var created = new ImmutableSolidColorBrush(color);
-        BrushCache[key] = created;
+        BrushCache.Set(key, created);
         return created;
     }
 
@@ -117,32 +114,12 @@ public sealed class MdTheme
         var styleBits = (ulong)((tQuant << 4) | (((uint)lineCap & 0x3) << 2) | ((uint)lineJoin & 0x3));
         var key = ((ulong)color.ToUInt32() << 32) | styleBits;
 
-        if (PenCache.TryGetValue(key, out var existing))
+        if (PenCache.TryGet(key, out var existing))
             return existing;
 
-        TrimCache(PenCache);
-
         var created = new Pen(BrushOf(color), thickness, lineCap: lineCap, lineJoin: lineJoin);
-        PenCache[key] = created;
+        PenCache.Set(key, created);
         return created;
-    }
-
-    /// <summary>
-    /// Drops a batch of older entries instead of clearing the whole cache. Alpha
-    /// animations create short-lived colors, and a full clear would also evict the
-    /// stable scheme colors used by every control.
-    /// </summary>
-    private static void TrimCache<TKey, TValue>(ConcurrentDictionary<TKey, TValue> cache)
-        where TKey : notnull
-    {
-        var count = cache.Count;
-        if (count <= CacheLimit) return;
-
-        // Keep the cache around three quarters full so trimming is amortized.
-        var target = CacheLimit * 3 / 4;
-        var removeCount = count - target;
-        foreach (var key in cache.Keys.Take(removeCount))
-            cache.TryRemove(key, out _);
     }
 
     public static MdTheme Current
