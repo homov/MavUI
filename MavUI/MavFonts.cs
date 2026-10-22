@@ -3,12 +3,12 @@ using Avalonia.Media;
 using Avalonia.Media.Fonts;
 using Avalonia.Metadata;
 
-[assembly: XmlnsDefinition("https://github.com/homov/md3-maui", "Mav")]
-[assembly: XmlnsDefinition("https://github.com/homov/md3-maui", "Mav.Controls")]
-[assembly: XmlnsDefinition("https://github.com/homov/md3-maui", "Mav.Primitives")]
-[assembly: XmlnsDefinition("https://github.com/homov/md3-maui", "Mav.Theming")]
-[assembly: XmlnsDefinition("https://github.com/homov/md3-maui", "Mav.Platform")]
-[assembly: XmlnsPrefix("https://github.com/homov/md3-maui", "mav")]
+[assembly: XmlnsDefinition("https://where.it/mav", "Mav")]
+[assembly: XmlnsDefinition("https://where.it/mav", "Mav.Controls")]
+[assembly: XmlnsDefinition("https://where.it/mav", "Mav.Primitives")]
+[assembly: XmlnsDefinition("https://where.it/mav", "Mav.Theming")]
+[assembly: XmlnsDefinition("https://where.it/mav", "Mav.Platform")]
+[assembly: XmlnsPrefix("https://where.it/mav", "mav")]
 
 namespace Mav;
 

@@ -163,13 +163,13 @@ public class MainWindow : MavWindow
 
 ### 1.4 AXAML usage (optional)
 
-The library exposes the XML namespace `https://github.com/homov/md3-maui` with prefix `md3`.
+The library exposes the XML namespace `https://where.it/mav` with prefix `mav`.
 All controls work in AXAML even though the implementation is C#.
 
 ```xml
 <mav:MavWindow xmlns="https://github.com/avaloniaui"
               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-              xmlns:md3="https://github.com/homov/md3-maui"
+              xmlns:mav="https://where.it/mav"
               x:Class="MyApp.MainWindow">
   <mav:MavWindow.Styles>
     <mav:MavThemeStyle SeedColor="#6750A4" Mode="System"
@@ -324,19 +324,19 @@ strings can use `MavLocalization.Format("Rows", "{0} rows", count)`.
 
 #### AXAML
 
-The shortest form is the `{md:Loc ...}` markup extension. It works on any
+The shortest form is the `{mav:Loc ...}` markup extension. It works on any
 property and updates itself after `SetCulture` or a provider change:
 
 ```xml
 <Window xmlns="https://github.com/avaloniaui"
-        xmlns:md="https://github.com/homov/md3-maui"
-        Title="{md:Loc AppTitle, Fallback=My app}">
+        xmlns:mav="https://where.it/mav"
+        Title="{mav:Loc AppTitle, Fallback=My app}">
   <StackPanel>
-    <TextBlock Text="{md:Loc Greeting, Fallback=Hello}" />
-    <md:MavButton Text="{md:Loc Save}" />
-    <md:MavTextField Label="{md:Loc Name}" />
-    <md:MavTextField Placeholder="{md:Loc NameHint}" />
-    <Button ToolTip.Tip="{md:Loc MoreOptions}" />
+    <TextBlock Text="{mav:Loc Greeting, Fallback=Hello}" />
+    <mav:MavButton Text="{mav:Loc Save}" />
+    <mav:MavTextField Label="{mav:Loc Name}" />
+    <mav:MavTextField Placeholder="{mav:Loc NameHint}" />
+    <Button ToolTip.Tip="{mav:Loc MoreOptions}" />
   </StackPanel>
 </Window>
 ```
@@ -345,7 +345,7 @@ property and updates itself after `SetCulture` or a provider change:
 knows the exact target property from XAML.
 
 For scenarios where the key must be changed at runtime, the attached properties
-`md:MavLocalization.Key` / `.Fallback` / `.Target` remain available. `Target=Auto`
+`mav:MavLocalization.Key` / `.Fallback` / `.Target` remain available. `Target=Auto`
 (default) maps a `TextBlock` to `Text`, `MavButton` to `Text`,
 `Window`/`MavDialog` to `Title`, `MavTextField` to `Label`, `MavSelect` to `Label`,
 and `MavSearchBar` to `Placeholder`. Use `Text`, `Label`, `Placeholder`, `Title`
@@ -1537,7 +1537,7 @@ All controls accept `Command`/`CommandParameter`; use the CLR events only for vi
 │   ├── MavFonts.cs               UseMav, font collections, XML namespace
 │   ├── MavIcons.cs               ~10,800 icon glyph constants
 │   ├── MavLocalization.cs        providers, culture switching, Observe, AXAML + keys
-│   ├── LocExtension.cs          {md:Loc ...} AXAML markup extension
+│   ├── LocExtension.cs          {mav:Loc ...} AXAML markup extension
 │   ├── MavLocalizationExtensions.cs  Localize / LocalizeLabel / LocalizePlaceholder
 │   ├── Controls/                60 control source files
 │   ├── Primitives/
