@@ -1,20 +1,20 @@
 # Last build log
-commit: 6df57a67192076b86b9369916bbc673365fd573c
-run: https://github.com/homov/MavUI/actions/runs/39861861851
+commit: ed9877f84bea9068c0211227bfb5a6725a51ea0f
+run: https://github.com/homov/MavUI/actions/runs/39862004749
 
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 264 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 265 ms).
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:04.76
+Time Elapsed 00:00:04.72
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 230 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 223 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 223 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 227 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 222 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 222 ms).
   1 of 4 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
@@ -25,7 +25,7 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:04.78
+Time Elapsed 00:00:04.57
   Determining projects to restore...
   Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 283 ms).
   2 of 3 projects are up-to-date for restore.
@@ -37,7 +37,7 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.07
+Time Elapsed 00:00:02.14
   Determining projects to restore...
   All projects are up-to-date for restore.
   MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0-windows/MavUI.Essentials.dll
@@ -47,142 +47,11 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:01.03
+Time Elapsed 00:00:01.01
 Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/MavUI.Tests.dll (.NETCoreApp,Version=v10.0)
 VSTest version 18.0.2 (x64)
 
 Starting test execution, please wait...
 A total of 1 test files matched the specified pattern.
 
-Passed!  - Failed:     0, Passed:   266, Skipped:     0, Total:   266, Duration: 15 s - MavUI.Tests.dll (net10.0)
-
-Checking for updated workload version.
-Skipping NuGet package signature verification.
-No workload update found.
-Workload(s) 'wasm-tools android' are already installed.
-Pack Microsoft.Android.Sdk.Linux version 36.1.118 is already installed.
-Writing workload pack installation record for Microsoft.Android.Sdk.Linux version 36.1.118...
-Pack Microsoft.Android.Sdk.Linux version 35.0.105 is already installed.
-Writing workload pack installation record for Microsoft.Android.Sdk.Linux version 35.0.105...
-Pack Microsoft.Android.Ref.36 version 36.1.118 is already installed.
-Writing workload pack installation record for Microsoft.Android.Ref.36 version 36.1.118...
-Pack Microsoft.Android.Runtime.36.android version 36.1.118 is already installed.
-Writing workload pack installation record for Microsoft.Android.Runtime.36.android version 36.1.118...
-Pack Microsoft.Android.Runtime.Mono.36.android-arm version 36.1.118 is already installed.
-Writing workload pack installation record for Microsoft.Android.Runtime.Mono.36.android-arm version 36.1.118...
-Pack Microsoft.Android.Runtime.Mono.36.android-arm64 version 36.1.118 is already installed.
-Writing workload pack installation record for Microsoft.Android.Runtime.Mono.36.android-arm64 version 36.1.118...
-Pack Microsoft.Android.Runtime.Mono.36.android-x86 version 36.1.118 is already installed.
-Writing workload pack installation record for Microsoft.Android.Runtime.Mono.36.android-x86 version 36.1.118...
-Pack Microsoft.Android.Runtime.Mono.36.android-x64 version 36.1.118 is already installed.
-Writing workload pack installation record for Microsoft.Android.Runtime.Mono.36.android-x64 version 36.1.118...
-Pack Microsoft.Android.Runtime.CoreCLR.36.android-arm64 version 36.1.118 is already installed.
-Writing workload pack installation record for Microsoft.Android.Runtime.CoreCLR.36.android-arm64 version 36.1.118...
-Pack Microsoft.Android.Runtime.CoreCLR.36.android-x64 version 36.1.118 is already installed.
-Writing workload pack installation record for Microsoft.Android.Runtime.CoreCLR.36.android-x64 version 36.1.118...
-Pack Microsoft.Android.Runtime.NativeAOT.36.android-arm64 version 36.1.118 is already installed.
-Writing workload pack installation record for Microsoft.Android.Runtime.NativeAOT.36.android-arm64 version 36.1.118...
-Pack Microsoft.Android.Runtime.NativeAOT.36.android-x64 version 36.1.118 is already installed.
-Writing workload pack installation record for Microsoft.Android.Runtime.NativeAOT.36.android-x64 version 36.1.118...
-Pack Microsoft.Android.Templates version 36.1.118 is already installed.
-Writing workload pack installation record for Microsoft.Android.Templates version 36.1.118...
-Pack Microsoft.NETCore.App.Runtime.Mono.android-arm version 9.0.21 is already installed.
-Writing workload pack installation record for Microsoft.NETCore.App.Runtime.Mono.android-arm version 9.0.21...
-Pack Microsoft.NETCore.App.Runtime.Mono.android-arm64 version 9.0.21 is already installed.
-Writing workload pack installation record for Microsoft.NETCore.App.Runtime.Mono.android-arm64 version 9.0.21...
-Pack Microsoft.NETCore.App.Runtime.Mono.android-x64 version 9.0.21 is already installed.
-Writing workload pack installation record for Microsoft.NETCore.App.Runtime.Mono.android-x64 version 9.0.21...
-Pack Microsoft.NETCore.App.Runtime.Mono.android-x86 version 9.0.21 is already installed.
-Writing workload pack installation record for Microsoft.NETCore.App.Runtime.Mono.android-x86 version 9.0.21...
-Pack Microsoft.NET.Runtime.MonoAOTCompiler.Task version 9.0.21 is already installed.
-Writing workload pack installation record for Microsoft.NET.Runtime.MonoAOTCompiler.Task version 9.0.21...
-Pack Microsoft.NET.Runtime.MonoTargets.Sdk version 9.0.21 is already installed.
-Writing workload pack installation record for Microsoft.NET.Runtime.MonoTargets.Sdk version 9.0.21...
-Pack Microsoft.NETCore.App.Runtime.AOT.linux-x64.Cross.android-x86 version 9.0.21 is already installed.
-Writing workload pack installation record for Microsoft.NETCore.App.Runtime.AOT.linux-x64.Cross.android-x86 version 9.0.21...
-Pack Microsoft.NETCore.App.Runtime.AOT.linux-x64.Cross.android-x64 version 9.0.21 is already installed.
-Writing workload pack installation record for Microsoft.NETCore.App.Runtime.AOT.linux-x64.Cross.android-x64 version 9.0.21...
-Pack Microsoft.NETCore.App.Runtime.AOT.linux-x64.Cross.android-arm version 9.0.21 is already installed.
-Writing workload pack installation record for Microsoft.NETCore.App.Runtime.AOT.linux-x64.Cross.android-arm version 9.0.21...
-Pack Microsoft.NETCore.App.Runtime.AOT.linux-x64.Cross.android-arm64 version 9.0.21 is already installed.
-Writing workload pack installation record for Microsoft.NETCore.App.Runtime.AOT.linux-x64.Cross.android-arm64 version 9.0.21...
-Pack Microsoft.NETCore.App.Runtime.Mono.android-arm version 10.0.13 is already installed.
-Writing workload pack installation record for Microsoft.NETCore.App.Runtime.Mono.android-arm version 10.0.13...
-Pack Microsoft.NETCore.App.Runtime.Mono.android-arm64 version 10.0.13 is already installed.
-Writing workload pack installation record for Microsoft.NETCore.App.Runtime.Mono.android-arm64 version 10.0.13...
-Pack Microsoft.NETCore.App.Runtime.Mono.android-x64 version 10.0.13 is already installed.
-Writing workload pack installation record for Microsoft.NETCore.App.Runtime.Mono.android-x64 version 10.0.13...
-Pack Microsoft.NETCore.App.Runtime.Mono.android-x86 version 10.0.13 is already installed.
-Writing workload pack installation record for Microsoft.NETCore.App.Runtime.Mono.android-x86 version 10.0.13...
-Pack Microsoft.NET.Runtime.MonoAOTCompiler.Task version 10.0.13 is already installed.
-Writing workload pack installation record for Microsoft.NET.Runtime.MonoAOTCompiler.Task version 10.0.13...
-Pack Microsoft.NET.Runtime.MonoTargets.Sdk version 10.0.13 is already installed.
-Writing workload pack installation record for Microsoft.NET.Runtime.MonoTargets.Sdk version 10.0.13...
-Pack Microsoft.NETCore.App.Runtime.AOT.linux-x64.Cross.android-x86 version 10.0.13 is already installed.
-Writing workload pack installation record for Microsoft.NETCore.App.Runtime.AOT.linux-x64.Cross.android-x86 version 10.0.13...
-Pack Microsoft.NETCore.App.Runtime.AOT.linux-x64.Cross.android-x64 version 10.0.13 is already installed.
-Writing workload pack installation record for Microsoft.NETCore.App.Runtime.AOT.linux-x64.Cross.android-x64 version 10.0.13...
-Pack Microsoft.NETCore.App.Runtime.AOT.linux-x64.Cross.android-arm version 10.0.13 is already installed.
-Writing workload pack installation record for Microsoft.NETCore.App.Runtime.AOT.linux-x64.Cross.android-arm version 10.0.13...
-Pack Microsoft.NETCore.App.Runtime.AOT.linux-x64.Cross.android-arm64 version 10.0.13 is already installed.
-Writing workload pack installation record for Microsoft.NETCore.App.Runtime.AOT.linux-x64.Cross.android-arm64 version 10.0.13...
-Pack Microsoft.NET.Runtime.WebAssembly.Sdk version 10.0.13 is already installed.
-Writing workload pack installation record for Microsoft.NET.Runtime.WebAssembly.Sdk version 10.0.13...
-Pack Microsoft.NET.Sdk.WebAssembly.Pack version 10.0.13 is already installed.
-Writing workload pack installation record for Microsoft.NET.Sdk.WebAssembly.Pack version 10.0.13...
-Pack Microsoft.NETCore.App.Runtime.Mono.browser-wasm version 10.0.13 is already installed.
-Writing workload pack installation record for Microsoft.NETCore.App.Runtime.Mono.browser-wasm version 10.0.13...
-Pack Microsoft.NETCore.App.Runtime.AOT.linux-x64.Cross.browser-wasm version 10.0.13 is already installed.
-Writing workload pack installation record for Microsoft.NETCore.App.Runtime.AOT.linux-x64.Cross.browser-wasm version 10.0.13...
-Pack Microsoft.NET.Runtime.Emscripten.3.1.56.Node.linux-x64 version 10.0.13 is already installed.
-Writing workload pack installation record for Microsoft.NET.Runtime.Emscripten.3.1.56.Node.linux-x64 version 10.0.13...
-Pack Microsoft.NET.Runtime.Emscripten.3.1.56.Cache.linux-x64 version 10.0.13 is already installed.
-Writing workload pack installation record for Microsoft.NET.Runtime.Emscripten.3.1.56.Cache.linux-x64 version 10.0.13...
-Pack Microsoft.NET.Runtime.Emscripten.3.1.56.Sdk.linux-x64 version 10.0.13 is already installed.
-Writing workload pack installation record for Microsoft.NET.Runtime.Emscripten.3.1.56.Sdk.linux-x64 version 10.0.13...
-Garbage collecting for SDK feature band(s) 10.0.100...
-
-Successfully installed workload(s) .
-
-  Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 253 ms).
-  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0-windows/MavUI.Essentials.dll
-  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
-  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0-browser/MavUI.Essentials.dll
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/Platform/Android/AndroidKeystoreSecureStorage.cs(145,35): warning CS8604: Possible null reference argument for parameter 'publicKey' in 'byte[] AndroidKeystoreSecureStorage.Wrap(byte[] material, IPublicKey publicKey)'. [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj::TargetFramework=net10.0-android]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/Platform/Android/AndroidKeystoreSecureStorage.cs(164,30): warning CS8604: Possible null reference argument for parameter 'serialNumber' in 'Builder Builder.SetSerialNumber(BigInteger serialNumber)'. [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj::TargetFramework=net10.0-android]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/Platform/Android/AndroidKeystoreSecureStorage.cs(161,20): warning CS8602: Dereference of a possibly null reference. [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj::TargetFramework=net10.0-android]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/Platform/Android/AndroidKeystoreSecureStorage.cs(180,21): error CS0619: 'Cipher.EncryptMode' is obsolete: 'This constant will be removed in the future version. Use Javax.Crypto.CipherMode enum directly instead of this field.' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj::TargetFramework=net10.0-android]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/Platform/Android/AndroidKeystoreSecureStorage.cs(188,21): error CS0619: 'Cipher.DecryptMode' is obsolete: 'This constant will be removed in the future version. Use Javax.Crypto.CipherMode enum directly instead of this field.' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj::TargetFramework=net10.0-android]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/Platform/Android/AndroidKeystoreSecureStorage.cs(202,20): error CS0104: 'CipherMode' is an ambiguous reference between 'Javax.Crypto.CipherMode' and 'System.Security.Cryptography.CipherMode' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj::TargetFramework=net10.0-android]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/Platform/Android/AndroidKeystoreSecureStorage.cs(237,20): error CS0104: 'CipherMode' is an ambiguous reference between 'Javax.Crypto.CipherMode' and 'System.Security.Cryptography.CipherMode' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj::TargetFramework=net10.0-android]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/Platform/Android/AndroidKeystoreSecureStorage.cs(161,20): warning CA1422: This call site is reachable on: 'Android' 21.0 and later. 'KeyPairGeneratorSpec.Builder.Build()' is obsoleted on: 'Android' 23.0 and later (This class is obsoleted in this android platform). (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1422) [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj::TargetFramework=net10.0-android]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/Platform/Android/AndroidKeystoreSecureStorage.cs(161,20): warning CA1422: This call site is reachable on: 'Android' 21.0 and later. 'KeyPairGeneratorSpec.Builder.SetSubject(X500Principal)' is obsoleted on: 'Android' 23.0 and later (This class is obsoleted in this android platform). (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1422) [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj::TargetFramework=net10.0-android]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/Platform/Android/AndroidKeystoreSecureStorage.cs(161,20): warning CA1422: This call site is reachable on: 'Android' 21.0 and later. 'KeyPairGeneratorSpec.Builder' is obsoleted on: 'Android' 23.0 and later (This class is obsoleted in this android platform). (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1422) [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj::TargetFramework=net10.0-android]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/Platform/Android/AndroidKeystoreSecureStorage.cs(161,20): warning CA1422: This call site is reachable on: 'Android' 21.0 and later. 'KeyPairGeneratorSpec.Builder.SetAlgorithmParameterSpec(IAlgorithmParameterSpec)' is obsoleted on: 'Android' 23.0 and later (This class is obsoleted in this android platform). (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1422) [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj::TargetFramework=net10.0-android]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/Platform/Android/AndroidKeystoreSecureStorage.cs(161,20): warning CA1422: This call site is reachable on: 'Android' 21.0 and later. 'KeyPairGeneratorSpec.Builder.SetEndDate(Date)' is obsoleted on: 'Android' 23.0 and later (This class is obsoleted in this android platform). (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1422) [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj::TargetFramework=net10.0-android]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/Platform/Android/AndroidKeystoreSecureStorage.cs(161,20): warning CA1422: This call site is reachable on: 'Android' 21.0 and later. 'KeyPairGeneratorSpec.Builder.SetAlias(string)' is obsoleted on: 'Android' 23.0 and later (This class is obsoleted in this android platform). (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1422) [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj::TargetFramework=net10.0-android]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/Platform/Android/AndroidKeystoreSecureStorage.cs(161,20): warning CA1422: This call site is reachable on: 'Android' 21.0 and later. 'KeyPairGeneratorSpec.Builder.SetStartDate(Date)' is obsoleted on: 'Android' 23.0 and later (This class is obsoleted in this android platform). (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1422) [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj::TargetFramework=net10.0-android]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/Platform/Android/AndroidKeystoreSecureStorage.cs(161,20): warning CA1422: This call site is reachable on: 'Android' 21.0 and later. 'KeyPairGeneratorSpec.Builder.SetSerialNumber(BigInteger)' is obsoleted on: 'Android' 23.0 and later (This class is obsoleted in this android platform). (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1422) [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj::TargetFramework=net10.0-android]
-
-Build FAILED.
-
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/Platform/Android/AndroidKeystoreSecureStorage.cs(145,35): warning CS8604: Possible null reference argument for parameter 'publicKey' in 'byte[] AndroidKeystoreSecureStorage.Wrap(byte[] material, IPublicKey publicKey)'. [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj::TargetFramework=net10.0-android]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/Platform/Android/AndroidKeystoreSecureStorage.cs(164,30): warning CS8604: Possible null reference argument for parameter 'serialNumber' in 'Builder Builder.SetSerialNumber(BigInteger serialNumber)'. [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj::TargetFramework=net10.0-android]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/Platform/Android/AndroidKeystoreSecureStorage.cs(161,20): warning CS8602: Dereference of a possibly null reference. [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj::TargetFramework=net10.0-android]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/Platform/Android/AndroidKeystoreSecureStorage.cs(161,20): warning CA1422: This call site is reachable on: 'Android' 21.0 and later. 'KeyPairGeneratorSpec.Builder.Build()' is obsoleted on: 'Android' 23.0 and later (This class is obsoleted in this android platform). (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1422) [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj::TargetFramework=net10.0-android]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/Platform/Android/AndroidKeystoreSecureStorage.cs(161,20): warning CA1422: This call site is reachable on: 'Android' 21.0 and later. 'KeyPairGeneratorSpec.Builder.SetSubject(X500Principal)' is obsoleted on: 'Android' 23.0 and later (This class is obsoleted in this android platform). (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1422) [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj::TargetFramework=net10.0-android]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/Platform/Android/AndroidKeystoreSecureStorage.cs(161,20): warning CA1422: This call site is reachable on: 'Android' 21.0 and later. 'KeyPairGeneratorSpec.Builder' is obsoleted on: 'Android' 23.0 and later (This class is obsoleted in this android platform). (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1422) [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj::TargetFramework=net10.0-android]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/Platform/Android/AndroidKeystoreSecureStorage.cs(161,20): warning CA1422: This call site is reachable on: 'Android' 21.0 and later. 'KeyPairGeneratorSpec.Builder.SetAlgorithmParameterSpec(IAlgorithmParameterSpec)' is obsoleted on: 'Android' 23.0 and later (This class is obsoleted in this android platform). (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1422) [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj::TargetFramework=net10.0-android]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/Platform/Android/AndroidKeystoreSecureStorage.cs(161,20): warning CA1422: This call site is reachable on: 'Android' 21.0 and later. 'KeyPairGeneratorSpec.Builder.SetEndDate(Date)' is obsoleted on: 'Android' 23.0 and later (This class is obsoleted in this android platform). (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1422) [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj::TargetFramework=net10.0-android]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/Platform/Android/AndroidKeystoreSecureStorage.cs(161,20): warning CA1422: This call site is reachable on: 'Android' 21.0 and later. 'KeyPairGeneratorSpec.Builder.SetAlias(string)' is obsoleted on: 'Android' 23.0 and later (This class is obsoleted in this android platform). (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1422) [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj::TargetFramework=net10.0-android]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/Platform/Android/AndroidKeystoreSecureStorage.cs(161,20): warning CA1422: This call site is reachable on: 'Android' 21.0 and later. 'KeyPairGeneratorSpec.Builder.SetStartDate(Date)' is obsoleted on: 'Android' 23.0 and later (This class is obsoleted in this android platform). (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1422) [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj::TargetFramework=net10.0-android]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/Platform/Android/AndroidKeystoreSecureStorage.cs(161,20): warning CA1422: This call site is reachable on: 'Android' 21.0 and later. 'KeyPairGeneratorSpec.Builder.SetSerialNumber(BigInteger)' is obsoleted on: 'Android' 23.0 and later (This class is obsoleted in this android platform). (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1422) [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj::TargetFramework=net10.0-android]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/Platform/Android/AndroidKeystoreSecureStorage.cs(180,21): error CS0619: 'Cipher.EncryptMode' is obsolete: 'This constant will be removed in the future version. Use Javax.Crypto.CipherMode enum directly instead of this field.' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj::TargetFramework=net10.0-android]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/Platform/Android/AndroidKeystoreSecureStorage.cs(188,21): error CS0619: 'Cipher.DecryptMode' is obsolete: 'This constant will be removed in the future version. Use Javax.Crypto.CipherMode enum directly instead of this field.' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj::TargetFramework=net10.0-android]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/Platform/Android/AndroidKeystoreSecureStorage.cs(202,20): error CS0104: 'CipherMode' is an ambiguous reference between 'Javax.Crypto.CipherMode' and 'System.Security.Cryptography.CipherMode' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj::TargetFramework=net10.0-android]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/Platform/Android/AndroidKeystoreSecureStorage.cs(237,20): error CS0104: 'CipherMode' is an ambiguous reference between 'Javax.Crypto.CipherMode' and 'System.Security.Cryptography.CipherMode' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj::TargetFramework=net10.0-android]
-    11 Warning(s)
-    4 Error(s)
-
-Time Elapsed 00:00:02.14
+Passed!  - Failed:     0, Passed:   266, Skipped:     0, Total:   266, Duration: 16 s - MavUI.Tests.dll (net10.0)
