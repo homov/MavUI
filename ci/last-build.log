@@ -1,7 +1,6 @@
 # Last build log
-commit: 4393ad8b068c23f89f4a846eab5387c8aaa653f7
-job status: success
-run: https://github.com/homov/MavUI/actions/runs/39803020352
+commit: 4c16825a3f38a1cce907b7296c45d34d45f081bf
+run: https://github.com/homov/MavUI/actions/runs/39803213205
 
   Md3.Avalonia -> /home/homo/github/actions-runner/_work/MavUI/MavUI/ref/Md3.Avalonia/bin/Release/net10.0/Md3.Avalonia.dll
 
@@ -9,9 +8,18 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:04.01
+Time Elapsed 00:00:03.85
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/tests/Md3.Avalonia.Headless.Tests/Md3.Avalonia.Headless.Tests.csproj (in 257 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/tests/Md3.Avalonia.Headless.Tests/Md3.Avalonia.Headless.Tests.csproj (in 260 ms).
   1 of 2 projects are up-to-date for restore.
   Md3.Avalonia -> /home/homo/github/actions-runner/_work/MavUI/MavUI/ref/Md3.Avalonia/bin/Release/net10.0/Md3.Avalonia.dll
-/home/homo/github/actions-runner/_work/MavUI/MavUI/tests/Md3.Avalonia.Headless.Tests/TestApp.cs(4,16): error CS0234: The type or namespace name 'Skia' does not exist in the namespace 'Avalonia' (are you missing an assembly reference?) [/home/homo/github/actions-runner/_work/MavUI/MavUI/tests/Md3.Avalonia.Headless.Tests/Md3.Avalonia.Headless.Tests.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/tests/Md3.Avalonia.Headless.Tests/RenderTests.cs(59,9): warning CS0618: 'Bitmap.Save(string, int?)' is obsolete: 'Use the overload accepting BitmapEncoderOptions instead.' [/home/homo/github/actions-runner/_work/MavUI/MavUI/tests/Md3.Avalonia.Headless.Tests/Md3.Avalonia.Headless.Tests.csproj]
+  Md3.Avalonia.Headless.Tests -> /home/homo/github/actions-runner/_work/MavUI/MavUI/tests/Md3.Avalonia.Headless.Tests/bin/Release/net10.0/Md3.Avalonia.Headless.Tests.dll
+Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/tests/Md3.Avalonia.Headless.Tests/bin/Release/net10.0/Md3.Avalonia.Headless.Tests.dll (.NETCoreApp,Version=v10.0)
+VSTest version 18.0.2 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+No test is available in /home/homo/github/actions-runner/_work/MavUI/MavUI/tests/Md3.Avalonia.Headless.Tests/bin/Release/net10.0/Md3.Avalonia.Headless.Tests.dll. Make sure that test discoverer & executors are registered and platform & framework version settings are appropriate and try again.
+
+Additionally, path to test adapters can be specified using /TestAdapterPath command. Example  /TestAdapterPath:<pathToCustomAdapters>.
