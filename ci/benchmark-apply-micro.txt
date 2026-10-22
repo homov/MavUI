@@ -1,0 +1,5 @@
+MdButton.ApplySizeTokens: median 1.4 us
+MdButton.ApplyShape:      median 0.2 us
+MdButton.ApplyTheme (full): median 3.2 us
+MdTextField.ApplyTheme:   median 10.7 us
+(iterations=300; ApplyTheme of button includes size tokens and shape)
