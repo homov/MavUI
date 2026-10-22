@@ -18,6 +18,5 @@
     <ProjectReference Include="..\MavUI\MavUI.csproj" />
     <ProjectReference Include="..\samples\ControlsGallery\ControlsGallery\ControlsGallery.csproj" />
     <ProjectReference Include="..\MavUI.Essentials\MavUI.Essentials.csproj" />
-    <ProjectReference Include="..\MavUI.Essentials.Linux\MavUI.Essentials.Linux.csproj" />
   </ItemGroup>
 </Project>

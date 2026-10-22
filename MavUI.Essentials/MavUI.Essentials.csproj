@@ -1,12 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <!--
-    Platform-neutral storage primitives: Preferences (non-secret) and SecureStorage (secret).
-    Does not reference MAUI or MavUI. Platform backends live in sibling projects
-    (MavUI.Essentials.Android, ...).
+    One cross-platform MavUI.Essentials library: Preferences (non-secret) and SecureStorage (secret).
+    Does not reference MAUI or MavUI.
+
+    Targets:
+      net10.0          shared code; SecureStorage on Linux (libsecret), fail-closed elsewhere
+      net10.0-windows  SecureStorage with DPAPI (CurrentUser scope)
+      net10.0-android  Preferences (SharedPreferences) and SecureStorage (Android Keystore), API 21+
+    The Android target needs the Android workload, so it is built only when IncludeAndroid=true
+    (for example: dotnet build -p:IncludeAndroid=true).
+    Platform code lives under Platform/<name> and is compiled only for its target.
   -->
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFrameworks>net10.0;net10.0-windows</TargetFrameworks>
+    <TargetFrameworks Condition="'$(IncludeAndroid)' == 'true'">$(TargetFrameworks);net10.0-android</TargetFrameworks>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
@@ -14,5 +23,20 @@
     <AssemblyName>MavUI.Essentials</AssemblyName>
     <PackageId>MavUI.Essentials</PackageId>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net10.0-android'">
+    <SupportedOSPlatformVersion>21.0</SupportedOSPlatformVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Platform/**" />
+    <Compile Include="Platform/Linux/**/*.cs" Condition="'$(TargetFramework)' == 'net10.0'" />
+    <Compile Include="Platform/Windows/**/*.cs" Condition="'$(TargetFramework)' == 'net10.0-windows'" />
+    <Compile Include="Platform/Android/**/*.cs" Condition="'$(TargetFramework)' == 'net10.0-android'" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net10.0-windows'">
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="9.0.0" />
+  </ItemGroup>
 
 </Project>
