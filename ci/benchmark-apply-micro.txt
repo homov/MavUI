@@ -1,5 +1,5 @@
-MavButton.ApplySizeTokens: median 4.1 us
-MavButton.ApplyShape:      median 0.3 us
-MavButton.ApplyTheme (full): median 16.2 us
-MavTextField.ApplyTheme:   median 45.9 us
+MavButton.ApplySizeTokens: median 0.9 us
+MavButton.ApplyShape:      median 0.2 us
+MavButton.ApplyTheme (full): median 3.0 us
+MavTextField.ApplyTheme:   median 8.1 us
 (iterations=300; ApplyTheme of button includes size tokens and shape)
