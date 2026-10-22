@@ -8,6 +8,8 @@ using Java.Security.Spec;
 using Javax.Crypto;
 using Javax.Security.Auth.X500;
 using JKeyStore = Java.Security.KeyStore;
+using AesCipherMode = System.Security.Cryptography.CipherMode;
+using JavaCipherMode = Javax.Crypto.CipherMode;
 
 namespace Mav.Essentials.Droid;
 
@@ -177,7 +179,7 @@ public sealed class AndroidKeystoreSecureStorage : IMavSecureStorage
     {
         var cipher = Cipher.GetInstance("RSA/ECB/PKCS1Padding", "AndroidOpenSSL")
             ?? throw new InvalidOperationException("RSA cipher is unavailable.");
-        cipher.Init(Cipher.EncryptMode, publicKey);
+        cipher.Init(JavaCipherMode.EncryptMode, publicKey);
         return cipher.DoFinal(material) ?? throw new InvalidOperationException("Key wrapping returned no data.");
     }
 
@@ -185,7 +187,7 @@ public sealed class AndroidKeystoreSecureStorage : IMavSecureStorage
     {
         var cipher = Cipher.GetInstance("RSA/ECB/PKCS1Padding", "AndroidOpenSSL")
             ?? throw new InvalidOperationException("RSA cipher is unavailable.");
-        cipher.Init(Cipher.DecryptMode, privateKey);
+        cipher.Init(JavaCipherMode.DecryptMode, privateKey);
         var material = cipher.DoFinal(blob) ?? throw new InvalidOperationException("Key unwrapping returned no data.");
         if (material.Length != AesKeyBytes + HmacKeyBytes)
         {
@@ -199,7 +201,7 @@ public sealed class AndroidKeystoreSecureStorage : IMavSecureStorage
     {
         var iv = RandomNumberGenerator.GetBytes(IvBytes);
         using var aes = Aes.Create();
-        aes.Mode = CipherMode.CBC;
+        aes.Mode = AesCipherMode.CBC;
         aes.Padding = PaddingMode.PKCS7;
         using var encryptor = aes.CreateEncryptor(enc, iv);
         var plain = Encoding.UTF8.GetBytes(plaintext);
@@ -234,7 +236,7 @@ public sealed class AndroidKeystoreSecureStorage : IMavSecureStorage
         var iv = body[..IvBytes];
         var cipher = body[IvBytes..];
         using var aes = Aes.Create();
-        aes.Mode = CipherMode.CBC;
+        aes.Mode = AesCipherMode.CBC;
         aes.Padding = PaddingMode.PKCS7;
         using var decryptor = aes.CreateDecryptor(enc, iv);
         var plain = decryptor.TransformFinalBlock(cipher, 0, cipher.Length);
