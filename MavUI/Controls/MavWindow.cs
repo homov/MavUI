@@ -66,7 +66,8 @@ public class MavWindow : Window
         MavTheme.Observe(this, (self, theme) =>
         {
             var brush = MavTheme.BrushOf(theme.Color.Surface);
-            if (self.Background is null || ReferenceEquals(self.Background, self._themeBackground))
+            var userSet = self.IsSet(BackgroundProperty) && !ReferenceEquals(self.Background, self._themeBackground);
+            if (!userSet)
                 self.Background = brush;
             self._themeBackground = brush;
         });
