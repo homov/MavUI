@@ -85,15 +85,6 @@ public static class MavValidation
     public static void SetIsRequired(Control element, bool value) => element.SetValue(IsRequiredProperty, value);
 
     /// <summary>
-    /// Gets whether the element is required to have a value.
-    /// </summary>
-    public static bool GetRequired(Control element) => element.GetValue(IsRequiredProperty);
-    /// <summary>
-    /// Sets whether the element is required to have a value.
-    /// </summary>
-    public static void SetRequired(Control element, bool value) => element.SetValue(IsRequiredProperty, value);
-
-    /// <summary>
     /// Gets the message shown when the required rule fails.
     /// </summary>
     public static string GetRequiredMessage(Control element) => element.GetValue(RequiredMessageProperty);
@@ -110,15 +101,6 @@ public static class MavValidation
     /// Sets whether the element must contain a valid email address.
     /// </summary>
     public static void SetIsEmail(Control element, bool value) => element.SetValue(IsEmailProperty, value);
-
-    /// <summary>
-    /// Gets whether the element must contain a valid email address.
-    /// </summary>
-    public static bool GetEmail(Control element) => element.GetValue(IsEmailProperty);
-    /// <summary>
-    /// Sets whether the element must contain a valid email address.
-    /// </summary>
-    public static void SetEmail(Control element, bool value) => element.SetValue(IsEmailProperty, value);
 
     /// <summary>
     /// Gets the message shown when the email rule fails.

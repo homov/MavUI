@@ -440,7 +440,7 @@ announce meaningful names without extra code:
 * toggles and selection controls expose their `Label` and the matching role
   (`CheckBox`, `RadioButton`, `Slider`, `ComboBox`, `ListItem`, `MenuItem`);
 * `MavListItem` exposes `Headline` + `SupportingText`, dialogs/sheets expose `Title`/`Message`;
-* `MavValidation.SetRequired(control, true)` also sets `IsRequiredForForm`.
+* `MavValidation.SetIsRequired(control, true)` also sets `IsRequiredForForm`.
 
 Use the helpers when building custom UI:
 
@@ -1265,8 +1265,8 @@ Rules: `Required`, `MinLength`, `MaxLength`, `Email`, `Numeric`, `Pattern(regex)
 Attached-property validation for AXAML:
 
 ```csharp
-MavValidation.SetRequired(textField, true);
-MavValidation.SetEmail(textField, true);
+MavValidation.SetIsRequired(textField, true);
+MavValidation.SetIsEmail(textField, true);
 MavValidation.SetMinLength(textField, 3);
 MavValidation.SetPattern(textField, @"^[A-Z].*");
 MavValidation.SetRequiredMessage(textField, "Required");

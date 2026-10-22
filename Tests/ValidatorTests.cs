@@ -134,8 +134,8 @@ public class ValidatorTests
     public void Attached_validation_properties_validate_tree()
     {
         var field = new MavTextField("Name");
-        MavValidation.SetRequired(field, true);
-        MavValidation.SetEmail(field, true);
+        MavValidation.SetIsRequired(field, true);
+        MavValidation.SetIsEmail(field, true);
 
         var host = new StackPanel { Children = { field } };
         var window = new Window { Content = host };

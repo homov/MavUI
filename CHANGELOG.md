@@ -52,6 +52,10 @@ All notable changes to **Mav**.
   it when the theme, error/focus/enabled state and floating-label state are unchanged.
   Text width and outlined-notch geometry remain cached.
 
+### Removed
+
+- `MavValidation.GetRequired` / `SetRequired` and `GetEmail` / `SetEmail`: duplicates of `GetIsRequired` / `SetIsRequired` and `GetIsEmail` / `SetIsEmail`. Use the `Is*` names.
+
 ### Fixed
 
 - Closing snackbar/tooltip/search/dialog/popover overlays externally (top-level close,

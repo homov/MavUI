@@ -86,10 +86,10 @@ public class AccessibilityTests
         var field = new MavTextField("Name");
         Assert.False(AutomationProperties.GetIsRequiredForForm(field));
 
-        MavValidation.SetRequired(field, true);
+        MavValidation.SetIsRequired(field, true);
         Assert.True(AutomationProperties.GetIsRequiredForForm(field));
 
-        MavValidation.SetRequired(field, false);
+        MavValidation.SetIsRequired(field, false);
         Assert.False(AutomationProperties.GetIsRequiredForForm(field));
     }
 
