@@ -19,6 +19,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlsGallery.Android", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlsGallery.Browser", "samples\ControlsGallery.Browser\ControlsGallery.Browser.csproj", "{36BD3DA4-8776-4CCC-ACB2-170A2B3A8CEB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MavUI.Essentials", "MavUI.Essentials\MavUI.Essentials.csproj", "{1C2AC3DC-6FC6-43E9-9CAF-B37564442018}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MavUI.Essentials.Android", "MavUI.Essentials.Android\MavUI.Essentials.Android.csproj", "{BA1C6C0A-2C96-4AC5-9244-8F46E733E92A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +57,14 @@ Global
 		{36BD3DA4-8776-4CCC-ACB2-170A2B3A8CEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36BD3DA4-8776-4CCC-ACB2-170A2B3A8CEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36BD3DA4-8776-4CCC-ACB2-170A2B3A8CEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C2AC3DC-6FC6-43E9-9CAF-B37564442018}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C2AC3DC-6FC6-43E9-9CAF-B37564442018}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C2AC3DC-6FC6-43E9-9CAF-B37564442018}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C2AC3DC-6FC6-43E9-9CAF-B37564442018}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA1C6C0A-2C96-4AC5-9244-8F46E733E92A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA1C6C0A-2C96-4AC5-9244-8F46E733E92A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA1C6C0A-2C96-4AC5-9244-8F46E733E92A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA1C6C0A-2C96-4AC5-9244-8F46E733E92A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

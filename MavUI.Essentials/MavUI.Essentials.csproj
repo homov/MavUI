@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Platform-neutral storage primitives: Preferences (non-secret) and SecureStorage (secret).
+    Does not reference MAUI or MavUI. Platform backends live in sibling projects
+    (MavUI.Essentials.Android, ...).
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>Mav.Essentials</RootNamespace>
+    <AssemblyName>MavUI.Essentials</AssemblyName>
+    <PackageId>MavUI.Essentials</PackageId>
+  </PropertyGroup>
+
+</Project>
+</content>
