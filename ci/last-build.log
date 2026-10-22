@@ -1,57 +1,17 @@
 # Last build log
-commit: 10e77b98f719abba3ffd065ecb0fbd7731bbe96e
-run: https://github.com/homov/MavUI/actions/runs/39869659574
+commit: f3993cb2afa420c73cd473ce0b387c2fcf545463
+run: https://github.com/homov/MavUI/actions/runs/39869925536
 
   Determining projects to restore...
   Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 261 ms).
-  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavDrawerItem.cs(34,82): error CS0070: The event 'MavNavigationItemBase.ItemChanged' can only appear on the left hand side of += or -= (except when used from within the type 'MavNavigationItemBase') [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavDrawerItem.cs(35,86): error CS0070: The event 'MavNavigationItemBase.ItemChanged' can only appear on the left hand side of += or -= (except when used from within the type 'MavNavigationItemBase') [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
 
-Build succeeded.
+Build FAILED.
+
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavDrawerItem.cs(34,82): error CS0070: The event 'MavNavigationItemBase.ItemChanged' can only appear on the left hand side of += or -= (except when used from within the type 'MavNavigationItemBase') [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavDrawerItem.cs(35,86): error CS0070: The event 'MavNavigationItemBase.ItemChanged' can only appear on the left hand side of += or -= (except when used from within the type 'MavNavigationItemBase') [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
     0 Warning(s)
-    0 Error(s)
+    2 Error(s)
 
-Time Elapsed 00:00:04.82
-  Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 227 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 223 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 223 ms).
-  1 of 4 projects are up-to-date for restore.
-  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
-  ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
-  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
-  MavUI.Tests -> /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/MavUI.Tests.dll
-
-Build succeeded.
-    0 Warning(s)
-    0 Error(s)
-
-Time Elapsed 00:00:04.58
-  Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 279 ms).
-  2 of 3 projects are up-to-date for restore.
-  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
-  ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
-  ControlsGallery.Desktop -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/bin/Release/net10.0/ControlsGallery.Desktop.dll
-
-Build succeeded.
-    0 Warning(s)
-    0 Error(s)
-
-Time Elapsed 00:00:02.18
-  Determining projects to restore...
-  All projects are up-to-date for restore.
-  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0-windows/MavUI.Essentials.dll
-  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
-
-Build succeeded.
-    0 Warning(s)
-    0 Error(s)
-
-Time Elapsed 00:00:01.03
-Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/MavUI.Tests.dll (.NETCoreApp,Version=v10.0)
-VSTest version 18.0.2 (x64)
-
-Starting test execution, please wait...
-A total of 1 test files matched the specified pattern.
-
-Passed!  - Failed:     0, Passed:   282, Skipped:     0, Total:   282, Duration: 16 s - MavUI.Tests.dll (net10.0)
+Time Elapsed 00:00:04.21
