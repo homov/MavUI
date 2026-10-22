@@ -23,6 +23,8 @@ public static class MavOverlay
 {
     private static readonly ConditionalWeakTable<Panel, OverlayRootGrid> OverlayMap = new();
     private static readonly List<OverlayHostEntry> Hosts = [];
+    private static readonly List<PendingOverlay> PendingShows = [];
+    private const int MaxPendingShows = 8;
     private static readonly List<OverlayHandle> DismissStack = [];
     private static readonly List<OverlayHandle> OverlayHandles = [];
     private static readonly List<WeakReference<OverlayRootGrid>> OverlayRoots = [];
@@ -148,7 +150,10 @@ public static class MavOverlay
     {
         if (visual is null) return;
         if (TopLevel.GetTopLevel(visual) is { } tl)
+        {
             _lastTopLevel = new WeakReference<TopLevel>(tl);
+            FlushPendingShows();
+        }
     }
 
     /// <summary>
@@ -163,6 +168,7 @@ public static class MavOverlay
         PruneHosts();
         UnregisterHost(owner);
         Hosts.Add(new OverlayHostEntry(new WeakReference<Control>(owner), new WeakReference<Panel>(host)));
+        FlushPendingShows();
     }
 
     /// <summary>Removes the overlay host owned by <paramref name="owner"/>.</summary>
@@ -233,7 +239,11 @@ public static class MavOverlay
         return null;
     }
 
-    /// <summary>Shows content in the overlay layer and returns a handle that removes it when disposed.</summary>
+    /// <summary>
+    /// Shows content in the overlay layer and returns a handle that removes it when disposed.
+    /// When no overlay host exists yet (for example before the first page is attached), the request
+    /// is kept and shown as soon as a host is registered. Disposing the handle cancels it.
+    /// </summary>
     public static IDisposable Show(
         Visual? anchor,
         Control content,
@@ -243,13 +253,34 @@ public static class MavOverlay
         Action? onViewportChanged = null,
         Action? onClosed = null)
     {
+        var shown = TryShowNow(anchor, content, scrimColor, onScrimTap, passThroughScrim, onViewportChanged, onClosed);
+        if (shown is not null) return shown;
+
+        var pending = new PendingOverlay(anchor, content, scrimColor, onScrimTap, passThroughScrim, onViewportChanged, onClosed);
+        PendingShows.Add(pending);
+
+        // Bound the queue: the oldest request is dropped and its onClosed runs, so the caller's state
+        // (for example the active snackbar) is not left pointing at a handle that will never show.
+        if (PendingShows.Count > MaxPendingShows)
+            PendingShows[0].Dispose();
+        return pending;
+    }
+
+    /// <summary>Shows content now; returns <c>null</c> when no overlay layer or host is available.</summary>
+    private static IDisposable? TryShowNow(
+        Visual? anchor,
+        Control content,
+        Color? scrimColor,
+        Action? onScrimTap,
+        bool passThroughScrim,
+        Action? onViewportChanged,
+        Action? onClosed)
+    {
         // Hide the on-screen keyboard first so the overlay is positioned without it.
         MavKeyboard.Hide(anchor);
 
-        // Without an overlay layer (no top-level window known yet) the call does nothing and
-        // returns a no-op handle, so callers can always dispose the result.
         var overlayRoot = EnsureOverlayRoot(anchor);
-        if (overlayRoot is null) return NoopDisposable.Instance;
+        if (overlayRoot is null) return null;
 
         var layer = new Grid
         {
@@ -785,6 +816,78 @@ public static class MavOverlay
             var onClosed = _onClosed;
             _onClosed = null;
             onClosed?.Invoke();
+        }
+    }
+
+    /// <summary>Shows the requests that were waiting for an overlay host, in their original order.</summary>
+    private static void FlushPendingShows()
+    {
+        if (PendingShows.Count == 0) return;
+
+        // Work on a copy: showing a request may dispose or re-enter the queue.
+        foreach (var pending in PendingShows.ToArray())
+        {
+            var shown = TryShowNow(
+                pending.Anchor,
+                pending.Content,
+                pending.ScrimColor,
+                pending.OnScrimTap,
+                pending.PassThroughScrim,
+                pending.OnViewportChanged,
+                pending.OnClosed);
+            if (shown is null) continue;
+
+            PendingShows.Remove(pending);
+            pending.Attach(shown);
+        }
+    }
+
+    /// <summary>A request made before an overlay host existed. It is shown later or cancelled.</summary>
+    private sealed class PendingOverlay(
+        Visual? anchor,
+        Control content,
+        Color? scrimColor,
+        Action? onScrimTap,
+        bool passThroughScrim,
+        Action? onViewportChanged,
+        Action? onClosed) : IDisposable
+    {
+        private IDisposable? _inner;
+        private bool _disposed;
+
+        public Visual? Anchor { get; } = anchor;
+        public Control Content { get; } = content;
+        public Color? ScrimColor { get; } = scrimColor;
+        public Action? OnScrimTap { get; } = onScrimTap;
+        public bool PassThroughScrim { get; } = passThroughScrim;
+        public Action? OnViewportChanged { get; } = onViewportChanged;
+        public Action? OnClosed { get; } = onClosed;
+
+        public void Attach(IDisposable shown)
+        {
+            // Disposed while waiting: release the newly shown overlay straight away.
+            if (_disposed)
+            {
+                shown.Dispose();
+                return;
+            }
+            _inner = shown;
+        }
+
+        public void Dispose()
+        {
+            if (_disposed) return;
+            _disposed = true;
+            PendingShows.Remove(this);
+
+            if (_inner is not null)
+            {
+                _inner.Dispose();
+                return;
+            }
+
+            // Never shown: report the close so the caller can clear its state.
+            OnClosed?.Invoke();
         }
     }
 
