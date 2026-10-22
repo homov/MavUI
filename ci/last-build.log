@@ -1,7 +1,7 @@
 # Last build log
-commit: 749515ab240ce476e7dff66bc7532ea86bfd3e8d
+commit: 4393ad8b068c23f89f4a846eab5387c8aaa653f7
 job status: success
-run: https://github.com/homov/MavUI/actions/runs/39802710722
+run: https://github.com/homov/MavUI/actions/runs/39803020352
 
   Md3.Avalonia -> /home/homo/github/actions-runner/_work/MavUI/MavUI/ref/Md3.Avalonia/bin/Release/net10.0/Md3.Avalonia.dll
 
@@ -9,12 +9,9 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:04.04
+Time Elapsed 00:00:04.01
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/tests/Md3.Avalonia.Headless.Tests/Md3.Avalonia.Headless.Tests.csproj (in 3.5 sec).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/tests/Md3.Avalonia.Headless.Tests/Md3.Avalonia.Headless.Tests.csproj (in 257 ms).
   1 of 2 projects are up-to-date for restore.
   Md3.Avalonia -> /home/homo/github/actions-runner/_work/MavUI/MavUI/ref/Md3.Avalonia/bin/Release/net10.0/Md3.Avalonia.dll
-/home/homo/github/actions-runner/_work/MavUI/MavUI/tests/Md3.Avalonia.Headless.Tests/TestApp.cs(15,14): error CS1061: 'AppBuilder' does not contain a definition for 'UseSkia' and no accessible extension method 'UseSkia' accepting a first argument of type 'AppBuilder' could be found (are you missing a using directive or an assembly reference?) [/home/homo/github/actions-runner/_work/MavUI/MavUI/tests/Md3.Avalonia.Headless.Tests/Md3.Avalonia.Headless.Tests.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/tests/Md3.Avalonia.Headless.Tests/RenderTests.cs(49,16): error CS1061: 'Window' does not contain a definition for 'LayoutManager' and no accessible extension method 'LayoutManager' accepting a first argument of type 'Window' could be found (are you missing a using directive or an assembly reference?) [/home/homo/github/actions-runner/_work/MavUI/MavUI/tests/Md3.Avalonia.Headless.Tests/Md3.Avalonia.Headless.Tests.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/tests/Md3.Avalonia.Headless.Tests/RenderTests.cs(53,9): error CS0103: The name 'Assert' does not exist in the current context [/home/homo/github/actions-runner/_work/MavUI/MavUI/tests/Md3.Avalonia.Headless.Tests/Md3.Avalonia.Headless.Tests.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/tests/Md3.Avalonia.Headless.Tests/RenderTests.cs(57,9): warning CS0618: 'Bitmap.Save(string, int?)' is obsolete: 'Use the overload accepting BitmapEncoderOptions instead.' [/home/homo/github/actions-runner/_work/MavUI/MavUI/tests/Md3.Avalonia.Headless.Tests/Md3.Avalonia.Headless.Tests.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/tests/Md3.Avalonia.Headless.Tests/TestApp.cs(4,16): error CS0234: The type or namespace name 'Skia' does not exist in the namespace 'Avalonia' (are you missing an assembly reference?) [/home/homo/github/actions-runner/_work/MavUI/MavUI/tests/Md3.Avalonia.Headless.Tests/Md3.Avalonia.Headless.Tests.csproj]
