@@ -6,8 +6,6 @@
   -->
   <PropertyGroup>
     <TargetFramework>net10.0-windows</TargetFramework>
-    <TargetPlatformVersion>10.0</TargetPlatformVersion>
-    <SupportedOSPlatformVersion>10.0</SupportedOSPlatformVersion>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
