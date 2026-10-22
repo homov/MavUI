@@ -1,0 +1,5 @@
+full report lines: 615
+--- test/theme/avalonia frames (count):
+0
+0
+--- sample lines:
