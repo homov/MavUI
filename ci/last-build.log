@@ -1,26 +1,53 @@
 # Last build log
-commit: 70f338c89c85d223ecbe994f38b2341dfd19fc67
-run: https://github.com/homov/MavUI/actions/runs/39808063586
+commit: 45a9d6f5699a263d8c32ced06e3c10fe90810d80
+run: https://github.com/homov/MavUI/actions/runs/39808217257
 
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Md3.Avalonia/Md3.Avalonia.csproj (in 256 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Md3.Avalonia/Md3.Avalonia.csproj (in 260 ms).
   Md3.Avalonia -> /home/homo/github/actions-runner/_work/MavUI/MavUI/Md3.Avalonia/bin/Release/net10.0/Md3.Avalonia.dll
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:07.49
+Time Elapsed 00:00:07.40
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/Md3.Avalonia.Tests.csproj (in 263 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/Md3.Avalonia.Tests.csproj (in 265 ms).
   1 of 2 projects are up-to-date for restore.
   Md3.Avalonia -> /home/homo/github/actions-runner/_work/MavUI/MavUI/Md3.Avalonia/bin/Release/net10.0/Md3.Avalonia.dll
-/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/LifecycleBenchmarks.cs(86,66): error CS0234: The type or namespace name 'TextBlock' does not exist in the namespace 'Md3.Avalonia.Controls' (are you missing an assembly reference?) [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/Md3.Avalonia.Tests.csproj]
+  Md3.Avalonia.Tests -> /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/Md3.Avalonia.Tests.dll
 
-Build FAILED.
-
-/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/LifecycleBenchmarks.cs(86,66): error CS0234: The type or namespace name 'TextBlock' does not exist in the namespace 'Md3.Avalonia.Controls' (are you missing an assembly reference?) [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/Md3.Avalonia.Tests.csproj]
+Build succeeded.
     0 Warning(s)
-    1 Error(s)
+    0 Error(s)
 
-Time Elapsed 00:00:01.77
+Time Elapsed 00:00:02.01
+  Determining projects to restore...
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/Demo/Md3.Demo.csproj (in 261 ms).
+  1 of 2 projects are up-to-date for restore.
+  Md3.Avalonia -> /home/homo/github/actions-runner/_work/MavUI/MavUI/Md3.Avalonia/bin/Release/net10.0/Md3.Avalonia.dll
+  Md3.Demo -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/Demo/bin/Release/net10.0/Md3.Demo.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.99
+  Determining projects to restore...
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/Gallery/Md3.Gallery.csproj (in 263 ms).
+  1 of 2 projects are up-to-date for restore.
+  Md3.Avalonia -> /home/homo/github/actions-runner/_work/MavUI/MavUI/Md3.Avalonia/bin/Release/net10.0/Md3.Avalonia.dll
+  Md3.Gallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/Gallery/bin/Release/net10.0/Md3.Gallery.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.98
+Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/Md3.Avalonia.Tests.dll (.NETCoreApp,Version=v10.0)
+VSTest version 18.0.2 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:   235, Skipped:     0, Total:   235, Duration: 12 s - Md3.Avalonia.Tests.dll (net10.0)
