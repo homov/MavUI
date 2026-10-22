@@ -1,7 +1,9 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
+using System.Linq;
 using Avalonia.Controls.Primitives;
+using Avalonia.VisualTree;
 using Mav.ControlsGallery.Shell;
 using Mav.Controls;
 using Xunit;
@@ -24,7 +26,7 @@ public class ControlsGalleryShellTests
         view.Measure(new Size(1200, 900));
         view.Arrange(new Rect(0, 0, 1200, 900));
 
-        Assert.NotNull(view.OverlayHost);
+        Assert.NotNull(OverlayHostOf(view));
         window.Close();
     }
 
@@ -39,7 +41,7 @@ public class ControlsGalleryShellTests
         {
             MavSnackbar.Show("Saved");
 
-            var inHost = view.OverlayHost.Children.Count > 0;
+            var inHost = OverlayHostOf(view).Children.Count > 0;
             var inLayer = OverlayLayer.GetOverlayLayer(window) is { Children.Count: > 0 };
             Assert.True(inHost || inLayer, "Snackbar was not added to any overlay.");
         }
@@ -49,4 +51,7 @@ public class ControlsGalleryShellTests
             window.Close();
         }
     }
+
+    private static Panel OverlayHostOf(MainView view) =>
+        view.GetVisualDescendants().OfType<Panel>().Single(p => p.Name == "OverlayHost");
 }
