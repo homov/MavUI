@@ -1,2 +1,2 @@
-500 x MavButton, background change (render only): median 0.14 ms
-500 x MavButton, padding change (layout): median 3.63 ms
+500 x MavButton, background change (render only): median 0.11 ms
+500 x MavButton, padding change (layout): median 0.81 ms
