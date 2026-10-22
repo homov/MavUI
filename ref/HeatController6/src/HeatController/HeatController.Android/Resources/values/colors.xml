@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="splash_background">#000000</color>
+
+    <!-- Светлая (default) палитра -->
+    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimaryDark">#1976D2</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+
+    <!-- colorSurface — используется для background / status bar в светлой теме -->
+    <color name="colorSurface">#FFFFFFFF</color>
+    <color name="colorOnSurface">#212121</color>
+
+    <!-- Можно менять на нужный вам светлый цвет для статуса, если нужно -->
+<!--  <color name="statusBarColor">#F5F5F5</color>-->
+</resources>

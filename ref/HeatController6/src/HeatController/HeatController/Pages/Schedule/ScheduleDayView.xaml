@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="HeatController.ScheduleDayView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:l="clr-namespace:HeatController"
+    xmlns:m="clr-namespace:HeatController.Models"
+    xmlns:t="clr-namespace:Xamarin.CommunityToolkit.Extensions;assembly=Xamarin.CommunityToolkit"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    x:Name="self"
+    IsHourEditEnabled="{Binding Day.IsHourEditEnabled, Source={Reference self}}">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <xct:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid
+            BackgroundColor="{DynamicResource GrayBg}"
+            ColumnDefinitions="*,1,*,1,160"
+            RowDefinitions="Auto,1,*"
+            RowSpacing="10">
+            <Label
+                Grid.Column="0"
+                Margin="0,10,0,0"
+                FontSize="12"
+                HorizontalOptions="Center"
+                Text="{t:Translate Start}" />
+            <Label
+                Grid.Column="2"
+                Margin="0,10,0,0"
+                FontSize="12"
+                HorizontalOptions="Center"
+                Text="{t:Translate End}" />
+            <Label
+                Grid.Column="4"
+                Margin="0,10,0,0"
+                FontSize="12"
+                HorizontalOptions="Center"
+                IsVisible="{Binding IsValueControl, Source={Reference self}}"
+                Text="{Binding ControlValueName, Source={Reference self}}" />
+            <Label
+                Grid.Column="4"
+                Margin="0,10,0,0"
+                FontSize="12"
+                HorizontalOptions="Center"
+                IsVisible="{Binding IsValueControl, Source={Reference self}, Converter={StaticResource InvertedBoolConverter}}"
+                Text="{t:Translate State}" />
+
+            <CollectionView
+                Grid.Row="2"
+                Grid.ColumnSpan="5"
+                ItemsSource="{Binding Day.Hours, Source={Reference self}}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid
+                            Margin="0,0,0,10"
+                            x:DataType="m:ScheduleHourModel"
+                            ColumnDefinitions="*,1,*,1,160">
+                            <Label
+                                Grid.Column="0"
+                                xct:TouchEffect.Command="{Binding EditHourRangeCommand, Source={Reference self}}"
+                                xct:TouchEffect.CommandParameter="{Binding .}"
+                                xct:TouchEffect.NativeAnimation="True"
+                                HorizontalOptions="Fill"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding StartHour, StringFormat='{0:00}:00'}"
+                                VerticalOptions="Fill"
+                                VerticalTextAlignment="Center" />
+                            <Label
+                                Grid.Column="2"
+                                xct:TouchEffect.Command="{Binding EditHourRangeCommand, Source={Reference self}}"
+                                xct:TouchEffect.CommandParameter="{Binding .}"
+                                xct:TouchEffect.NativeAnimation="True"
+                                HorizontalOptions="Fill"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding EndHour, StringFormat='{0:00}:00'}"
+                                VerticalOptions="Fill"
+                                VerticalTextAlignment="Center" />
+                            <StackLayout
+                                Grid.Column="4"
+                                HorizontalOptions="Center"
+                                Orientation="Horizontal"
+                                Spacing="10">
+                                <Label
+                                    Padding="8,0"
+                                    xct:TouchEffect.Command="{Binding EditTemperatureCommand, Source={Reference self}}"
+                                    xct:TouchEffect.CommandParameter="{Binding .}"
+                                    xct:TouchEffect.NativeAnimation="True"
+                                    HorizontalOptions="Center"
+                                    HorizontalTextAlignment="Center"
+                                    IsVisible="{Binding IsValueControl, Source={Reference self}}"
+                                    Text="{Binding DisplayValue}"
+                                    VerticalOptions="FillAndExpand"
+                                    VerticalTextAlignment="Center" />
+                                <Switch
+                                    HorizontalOptions="Center"
+                                    IsToggled="{Binding IsDeviceOn}"
+                                    VerticalOptions="Center" />
+                            </StackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <l:Separator
+                Grid.Row="1"
+                Grid.ColumnSpan="5"
+                Orientation="Horizontal"
+                Color="{DynamicResource Gray200}" />
+            <l:Separator
+                Grid.RowSpan="3"
+                Grid.Column="1"
+                Orientation="Vertical"
+                Color="{DynamicResource Gray200}" />
+            <l:Separator
+                Grid.RowSpan="3"
+                Grid.Column="3"
+                Orientation="Vertical"
+                Color="{DynamicResource Gray200}" />
+        </Grid>
+    </ContentView.Content>
+</ContentView>

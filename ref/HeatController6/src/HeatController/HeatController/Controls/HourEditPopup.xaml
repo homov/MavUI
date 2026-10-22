@@ -1,0 +1,57 @@
+﻿<xct:Popup
+    x:Class="HeatController.HourEditPopup"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:gauge="clr-namespace:Syncfusion.SfGauge.XForms;assembly=Syncfusion.SfGauge.XForms"
+    xmlns:l="clr-namespace:HeatController"
+    xmlns:t="clr-namespace:Xamarin.CommunityToolkit.Extensions;assembly=Xamarin.CommunityToolkit"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    x:Name="self"
+    IsLightDismissEnabled="False"
+    Size="320,400">
+    <Grid
+        BackgroundColor="{DynamicResource GrayBg}"
+        HorizontalOptions="Center"
+        RowDefinitions="Auto,*,Auto"
+        VerticalOptions="Center">
+        <Label
+            Padding="10"
+            FontFamily="{Static l:Fonts.MonsterratSemiBold}"
+            FontSize="18"
+            HorizontalOptions="Center"
+            Text="{t:Translate TimeRange}"
+            VerticalOptions="Center" />
+        <l:HourEditControl
+            x:Name="HourEdit"
+            Grid.Row="1"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand" />
+        <StackLayout
+            Grid.Row="2"
+            Margin="20,0"
+            HorizontalOptions="End"
+            Orientation="Horizontal"
+            Spacing="10"
+            VerticalOptions="CenterAndExpand">
+            <Label
+                Padding="10"
+                xct:TouchEffect.Command="{Binding CancelCommand, Source={Reference self}}"
+                xct:TouchEffect.CommandParameter="{Binding .}"
+                xct:TouchEffect.NativeAnimation="True"
+                HorizontalOptions="End"
+                Style="{DynamicResource LinkLabel}"
+                Text="{t:Translate Cancel}"
+                TextTransform="Uppercase"
+                VerticalOptions="Center" />
+            <Label
+                Padding="10"
+                xct:TouchEffect.Command="{Binding OkCommand, Source={Reference self}}"
+                xct:TouchEffect.CommandParameter="{Binding .}"
+                xct:TouchEffect.NativeAnimation="True"
+                HorizontalOptions="End"
+                Style="{DynamicResource LinkLabel}"
+                Text="OK"
+                VerticalOptions="Center" />
+        </StackLayout>
+    </Grid>
+</xct:Popup>

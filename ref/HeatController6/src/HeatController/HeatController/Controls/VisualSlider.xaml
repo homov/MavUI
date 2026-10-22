@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="HeatController.VisualSlider"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    x:Name="self"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <ContentView.Content>
+        <StackLayout Orientation="Vertical" Spacing="0">
+            <Label
+                x:Name="ValueLabel"
+                FontSize="12"
+                HorizontalOptions="FillAndExpand"
+                HorizontalTextAlignment="Center" />
+            <StackLayout
+                HorizontalOptions="FillAndExpand"
+                Orientation="Horizontal"
+                Spacing="0">
+                <Label
+                    x:Name="MinimumLabel"
+                    FontSize="10"
+                    HorizontalOptions="Start"
+                    VerticalOptions="CenterAndExpand"
+                    VerticalTextAlignment="Center" />
+                <Slider
+                    x:Name="Slider"
+                    Margin="-10,0"
+                    HorizontalOptions="FillAndExpand"
+                    Maximum="{Binding Source={x:Reference self}, Path=Maximum}"
+                    Minimum="{Binding Source={x:Reference self}, Path=Minimum}"
+                    Value="{Binding Source={x:Reference self}, Path=Value}" />
+                <Label
+                    x:Name="MaximumLabel"
+                    FontSize="10"
+                    HorizontalOptions="End"
+                    VerticalOptions="CenterAndExpand"
+                    VerticalTextAlignment="Center" />
+            </StackLayout>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

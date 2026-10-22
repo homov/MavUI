@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="HeatController.TemperatureEdit"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:gauge="clr-namespace:Syncfusion.SfGauge.XForms;assembly=Syncfusion.SfGauge.XForms"
+    xmlns:l="clr-namespace:HeatController"
+    x:Name="self">
+    <Grid RowSpacing="0">
+        <gauge:SfCircularGauge
+            Margin="40,0"
+            BackgroundColor="Transparent"
+            HorizontalOptions="Fill"
+            VerticalOptions="Start">
+            <gauge:SfCircularGauge.Headers>
+                <gauge:Header
+                    FontAttributes="Bold"
+                    FontFamily="{x:Static l:Fonts.MonsterratSemiBold}"
+                    ForegroundColor="{DynamicResource Gray700}"
+                    Position="0.5,0.5"
+                    Text="{Binding DisplayValue, Source={x:Reference self}}"
+                    TextSize="Large" />
+            </gauge:SfCircularGauge.Headers>
+            <gauge:SfCircularGauge.Scales>
+                <gauge:Scale
+                    x:Name="_scale"
+                    EndValue="{Binding MaxValue, Source={x:Reference self}}"
+                    RadiusFactor="0.93"
+                    RimThickness="2"
+                    ShowFirstLabel="False"
+                    ShowLabels="False"
+                    ShowLastLabel="True"
+                    ShowTicks="False"
+                    StartAngle="120"
+                    StartValue="{Binding MinValue, Source={x:Reference self}}"
+                    SweepAngle="300">
+                    <gauge:Scale.Ranges>
+                        <gauge:Range
+                            EndValue="{Binding Value, Source={x:Reference _pointer}}"
+                            StartValue="{Binding StartValue, Source={x:Reference _scale}}"
+                            Thickness="{Binding RimThickness, Source={x:Reference _scale}}"
+                            Offset="{Binding RadiusFactor, Source={x:Reference _scale}}"
+                            Color="{DynamicResource PrimaryColor}" />
+                    </gauge:Scale.Ranges>
+                    <gauge:Scale.Pointers>
+                        <gauge:NeedlePointer
+                            EnableAnimation="False"
+                            EnableDragging="False"
+                            KnobColor="{DynamicResource Gray200}"
+                            KnobRadiusFactor="0.78"
+                            StepFrequency="1"
+                            Thickness="0" />
+                        <gauge:MarkerPointer
+                            x:Name="_pointer"
+                            EnableAnimation="False"
+                            EnableDragging="True"
+                            MarkerHeight="20"
+                            MarkerShape="Circle"
+                            MarkerWidth="20"
+                            StepFrequency="1"
+                            Offset="0.98"
+                            Color="{DynamicResource PrimaryColor}"
+                            Value="{Binding Value, Source={Reference self}, Mode=TwoWay}" />
+                    </gauge:Scale.Pointers>
+                </gauge:Scale>
+            </gauge:SfCircularGauge.Scales>
+            <gauge:SfCircularGauge.Triggers>
+                <DataTrigger
+                    Binding="{Binding ShowButtons, Source={Reference self}}"
+                    TargetType="gauge:SfCircularGauge"
+                    Value="False">
+                    <Setter Property="Margin" Value="0" />
+                </DataTrigger>
+            </gauge:SfCircularGauge.Triggers>
+        </gauge:SfCircularGauge>
+
+        <Grid
+            BackgroundColor="Transparent"
+            ColumnDefinitions="*,*"
+            HorizontalOptions="FillAndExpand"
+            IsVisible="{Binding ShowButtons, Source={Reference self}}"
+            VerticalOptions="Center">
+            <Button
+                x:Name="DecreseButton"
+                Grid.Column="0"
+                Clicked="DecreseButton_Clicked"
+                CornerRadius="20"
+                FontFamily="{Static l:Fonts.MaterialIconsRegular}"
+                HeightRequest="40"
+                HorizontalOptions="Start"
+                Text="{Static l:Icons.Minus}"
+                VerticalOptions="Start"
+                WidthRequest="40" />
+            <Button
+                x:Name="IncreseButton"
+                Grid.Column="1"
+                Clicked="IncreseButton_Clicked"
+                CornerRadius="20"
+                FontFamily="{Static l:Fonts.MaterialIconsRegular}"
+                HeightRequest="40"
+                HorizontalOptions="End"
+                Text="{Static l:Icons.Plus}"
+                VerticalOptions="Center"
+                WidthRequest="40" />
+        </Grid>
+    </Grid>
+</ContentView>

@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<l:BasePage
+    x:Class="HeatController.DevicePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:il="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+    xmlns:l="clr-namespace:HeatController"
+    xmlns:t="clr-namespace:Xamarin.CommunityToolkit.Extensions;assembly=Xamarin.CommunityToolkit"
+    xmlns:tv="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    Title="{Binding DeviceName}"
+    x:DataType="l:DevicePageViewModel"
+    MenuCommand="{Binding ActionCommand}"
+    MenuCommandParameter="{Binding SelectedIndex, Source={x:Reference tabView}}"
+    MenuIcon="{Static l:Icons.ContentSaveOutline}"
+    MenuIconVisible="True">
+    <l:BasePage.Resources>
+        <ResourceDictionary>
+            <xct:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </l:BasePage.Resources>
+    <l:BasePage.Body>
+        <tv:SfTabView
+            x:Name="tabView"
+            DisplayMode="Image"
+            EnableSwiping="False"
+            SelectedIndex="{Binding SelectedPage}"
+            TabHeaderPosition="Bottom"
+            VisibleHeaderCount="2">
+            <tv:SfTabItem IconFont="{Static l:Icons.HomeClockOutline}">
+                <tv:SfTabItem.Content>
+                    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <l:ScheduleView
+                            x:Name="scheduleView"
+                            IsVisible="{Binding CanSetControl}"
+                            ScheduleModel="{Binding ScheduleModel}" />
+                        <Label
+                            Margin="10"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Center"
+                            IsVisible="{Binding CanSetControl, Converter={StaticResource InvertedBoolConverter}}"
+                            Text="{t:Translate TheDeviceControlledByGroupSchedule}"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+                    </Grid>
+                </tv:SfTabItem.Content>
+            </tv:SfTabItem>
+            <tv:SfTabItem IconFont="{Static l:Icons.Cog}">
+                <tv:SfTabItem.Content>
+                    <l:DeviceEditView />
+                </tv:SfTabItem.Content>
+            </tv:SfTabItem>
+        </tv:SfTabView>
+    </l:BasePage.Body>
+</l:BasePage>

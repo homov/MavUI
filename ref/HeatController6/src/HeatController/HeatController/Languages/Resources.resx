@@ -1,0 +1,534 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="EmailNotSpecified" xml:space="preserve">
+    <value>Email not specified</value>
+  </data>
+  <data name="PasswordNotSpecified" xml:space="preserve">
+    <value>Password not specified</value>
+  </data>
+  <data name="CodeNotSpecified" xml:space="preserve">
+    <value>Code not specified</value>
+  </data>
+  <data name="PasswordsDoNotMatch" xml:space="preserve">
+    <value>Passwords do not match</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="LoginToStartManagingYourHeaters" xml:space="preserve">
+    <value>Login to start managing your devices</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="SavePassword" xml:space="preserve">
+    <value>save password</value>
+  </data>
+  <data name="ForgotPasswordLink" xml:space="preserve">
+    <value>Forgot password?</value>
+  </data>
+  <data name="RegisterLink" xml:space="preserve">
+    <value>Register!</value>
+  </data>
+  <data name="ForgotPasswordTitle" xml:space="preserve">
+    <value>Forgot Password?</value>
+  </data>
+  <data name="WeSendPasswordResetCode" xml:space="preserve">
+    <value>We'll send a password reset code to the email address you have registered with us</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="RestorePassword" xml:space="preserve">
+    <value>Restore password</value>
+  </data>
+  <data name="CheckEmailEnterCode" xml:space="preserve">
+    <value>Check email, enter the code we sent you and enter your new password</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="SaveNewPassword" xml:space="preserve">
+    <value>Save new password</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="EnterCurrentPasswordAndNew" xml:space="preserve">
+    <value>Enter your current password and a new one</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Current password</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="ConfirmEmail" xml:space="preserve">
+    <value>Confirm Email</value>
+  </data>
+  <data name="CheckEmailEnterConfirmCode" xml:space="preserve">
+    <value>Check email, enter the code we sent you</value>
+  </data>
+  <data name="Verify" xml:space="preserve">
+    <value>Verify</value>
+  </data>
+  <data name="RegisterNewAccount" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="CreateAccount" xml:space="preserve">
+    <value>Create an account to start managing your devices</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="TimeZone" xml:space="preserve">
+    <value>Time zone</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="RemoveAccount" xml:space="preserve">
+    <value>Remove account</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Theme</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Account" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="ApplicationSettings" xml:space="preserve">
+    <value>Application settings</value>
+  </data>
+  <data name="ChooseTimezone" xml:space="preserve">
+    <value>Choose timezone</value>
+  </data>
+  <data name="ChooseTheme" xml:space="preserve">
+    <value>Choose theme</value>
+  </data>
+  <data name="ChooseLanguage" xml:space="preserve">
+    <value>Choose language</value>
+  </data>
+  <data name="NewPasswordNotSpecified" xml:space="preserve">
+    <value>New password not specified</value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="ConfirmAccountDelete" xml:space="preserve">
+    <value>Delete your account. Proceed?</value>
+  </data>
+  <data name="MyHome" xml:space="preserve">
+    <value>My Home</value>
+  </data>
+  <data name="Groups" xml:space="preserve">
+    <value>Groups</value>
+  </data>
+  <data name="Devices" xml:space="preserve">
+    <value>Devices</value>
+  </data>
+  <data name="Control" xml:space="preserve">
+    <value>Control</value>
+  </data>
+  <data name="ControlManual" xml:space="preserve">
+    <value>Manual</value>
+  </data>
+  <data name="ControlSchedule" xml:space="preserve">
+    <value>Schedule</value>
+  </data>
+  <data name="NewGroup" xml:space="preserve">
+    <value>New group</value>
+  </data>
+  <data name="EnterNewGroupName" xml:space="preserve">
+    <value>Enter new group name</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="LocationName" xml:space="preserve">
+    <value>Group name</value>
+  </data>
+  <data name="ControlScheduleTemperature" xml:space="preserve">
+    <value>Temperature</value>
+  </data>
+  <data name="ControlScheduleTime" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="ControlUnknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="WithoutSensor" xml:space="preserve">
+    <value>Without sensor</value>
+  </data>
+  <data name="Sensor" xml:space="preserve">
+    <value>Sensor</value>
+  </data>
+  <data name="Saved" xml:space="preserve">
+    <value>Information saved</value>
+  </data>
+  <data name="ConfirmGroupDelete" xml:space="preserve">
+    <value>Delete group. Proceed?</value>
+  </data>
+  <data name="monday" xml:space="preserve">
+    <value>Monday</value>
+  </data>
+  <data name="tuesday" xml:space="preserve">
+    <value>Tuesday</value>
+  </data>
+  <data name="wednesday" xml:space="preserve">
+    <value>Wednesday</value>
+  </data>
+  <data name="thursday" xml:space="preserve">
+    <value>Thursday</value>
+  </data>
+  <data name="friday" xml:space="preserve">
+    <value>Friday</value>
+  </data>
+  <data name="saturday" xml:space="preserve">
+    <value>Saturday</value>
+  </data>
+  <data name="sunday" xml:space="preserve">
+    <value>Sunday</value>
+  </data>
+  <data name="WithoutLocation" xml:space="preserve">
+    <value>Not in a group</value>
+  </data>
+  <data name="DeviceName" xml:space="preserve">
+    <value>Device name</value>
+  </data>
+  <data name="TheDeviceControlledByGroupSchedule" xml:space="preserve">
+    <value>The device is controlled by the group schedule</value>
+  </data>
+  <data name="Hysteresis" xml:space="preserve">
+    <value>Hysteresis</value>
+  </data>
+  <data name="PanelTemperatureCoefficient" xml:space="preserve">
+    <value>Panel temperature coefficient</value>
+  </data>
+  <data name="PanelTemperature" xml:space="preserve">
+    <value>Panel temperature</value>
+  </data>
+  <data name="AntiFreezeMode" xml:space="preserve">
+    <value>Anti-freeze mode</value>
+  </data>
+  <data name="NameNotSpecified" xml:space="preserve">
+    <value>Name not specified</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Group</value>
+  </data>
+  <data name="RoomTemperatureCoefficient" xml:space="preserve">
+    <value>Room temperature coefficient</value>
+  </data>
+  <data name="ConfirmDeviceDelete" xml:space="preserve">
+    <value>Delete device. Proceed?</value>
+  </data>
+  <data name="Temperature" xml:space="preserve">
+    <value>Temperature</value>
+  </data>
+  <data name="State" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="End" xml:space="preserve">
+    <value>End</value>
+  </data>
+  <data name="Mon" xml:space="preserve">
+    <value>Mon</value>
+  </data>
+  <data name="Sun" xml:space="preserve">
+    <value>Sun</value>
+  </data>
+  <data name="Sat" xml:space="preserve">
+    <value>Sat</value>
+  </data>
+  <data name="Fri" xml:space="preserve">
+    <value>Fri</value>
+  </data>
+  <data name="Thu" xml:space="preserve">
+    <value>Thu</value>
+  </data>
+  <data name="Wed" xml:space="preserve">
+    <value>Wed</value>
+  </data>
+  <data name="Tue" xml:space="preserve">
+    <value>Tue</value>
+  </data>
+  <data name="AddNewDevice" xml:space="preserve">
+    <value>New device</value>
+  </data>
+  <data name="AddNewDeviceInstuction" xml:space="preserve">
+    <value>Put your device into pairing mode, and connect to the Wi-Fi network of the device</value>
+  </data>
+  <data name="LookingForDevice" xml:space="preserve">
+    <value>Looking for a device...</value>
+  </data>
+  <data name="OpenWiFiSettings" xml:space="preserve">
+    <value>Open Wi-Fi settings</value>
+  </data>
+  <data name="DeviceFound" xml:space="preserve">
+    <value>Device found. To register it, select the Wi-Fi network, enter the password for the selected network and enter a name for the new device</value>
+  </data>
+  <data name="WifiNetwork" xml:space="preserve">
+    <value>Wi-Fi network</value>
+  </data>
+  <data name="WifiNetworkNotSpecified" xml:space="preserve">
+    <value>Wi-FI network not specified</value>
+  </data>
+  <data name="ErrorPassingParameters" xml:space="preserve">
+    <value>Error passing parameters for device</value>
+  </data>
+  <data name="RegisteringDevice" xml:space="preserve">
+    <value>Please wait . Registering your device...</value>
+  </data>
+  <data name="DeviceRegistered" xml:space="preserve">
+    <value>The device has been successfully registered. Click Configure button to configure advanced device settings</value>
+  </data>
+  <data name="Configure" xml:space="preserve">
+    <value>Configure</value>
+  </data>
+  <data name="RegisterDevice" xml:space="preserve">
+    <value>Register device</value>
+  </data>
+  <data name="WaitDeviceTimeout" xml:space="preserve">
+    <value>Timeout while waiting for registration to complete</value>
+  </data>
+  <data name="InvalidEmailOrPassword" xml:space="preserve">
+    <value>Invalid email or password</value>
+  </data>
+  <data name="NameAlreadyUsedText" xml:space="preserve">
+    <value>Name already used</value>
+  </data>
+  <data name="ConnectionErrorText" xml:space="preserve">
+    <value>Can't connect. Check the network connection</value>
+  </data>
+  <data name="TimeRange" xml:space="preserve">
+    <value>Time range</value>
+  </data>
+  <data name="SelectDevice" xml:space="preserve">
+    <value>Select device</value>
+  </data>
+  <data name="Humidity" xml:space="preserve">
+    <value>Humidity</value>
+  </data>
+  <data name="HumiMode" xml:space="preserve">
+    <value>Humidification / drying mode</value>
+  </data>
+  <data name="Step1EnterName" xml:space="preserve">
+    <value>1. Enter the controller name.</value>
+  </data>
+  <data name="Step1Add" xml:space="preserve">
+    <value>2. Add a controller to an existing room or create a new one.</value>
+  </data>
+  <data name="Step1NewRoom" xml:space="preserve">
+    <value>new room</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="Step2DeviceSetting" xml:space="preserve">
+    <value>To add a device, you need to put it into setup mode:</value>
+  </data>
+  <data name="Step2DeviceWifi" xml:space="preserve">
+    <value>For models with a display, go to Wi-Fi settings in the menu, and press the OK button.</value>
+  </data>
+  <data name="Step2DeviceLed" xml:space="preserve">
+    <value>For thermostats without a display, hold down the button on the housing for 10 seconds, the LED indicator should blink slowly.</value>
+  </data>
+  <data name="Step2Wait" xml:space="preserve">
+    <value>Connecting to the thermostat...</value>
+  </data>
+  <data name="Step3SelectWifi" xml:space="preserve">
+    <value>Select the name of your home Wi-Fi network and enter the password for it.</value>
+  </data>
+  <data name="Step3WifiNetwork" xml:space="preserve">
+    <value>Wi-Fi network</value>
+  </data>
+  <data name="Step3Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Step3Wait" xml:space="preserve">
+    <value>Device registration in progress...</value>
+  </data>
+  <data name="ErrorStepNoDevice" xml:space="preserve">
+    <value>Connection to the device is not established.</value>
+  </data>
+  <data name="ErrorStepMakeSure" xml:space="preserve">
+    <value>Make sure that:</value>
+  </data>
+  <data name="ErrorStepInWifi" xml:space="preserve">
+    <value>1. The thermostat is in Wi-Fi setup mode</value>
+  </data>
+  <data name="ErrorStepWifiOnPhone" xml:space="preserve">
+    <value>2. Wi-Fi on your smartphone is turned on.</value>
+  </data>
+  <data name="ErrorStepPermissions" xml:space="preserve">
+    <value>3. You have granted all necessary permissions for the Heat Ceram application.</value>
+  </data>
+  <data name="ErrorStepRetryOrHand" xml:space="preserve">
+    <value>Try again or connect to the Wi-Fi network named "HeatCeram" manually, then click Retry.</value>
+  </data>
+  <data name="ErrorStepRetry" xml:space="preserve">
+    <value>Retry</value>
+  </data>
+  <data name="NoWiFIPermissions" xml:space="preserve">
+    <value>The application does not have permission to access the list of WiFi access points.</value>
+  </data>
+  <data name="GotoSetup" xml:space="preserve">
+    <value>Go to settings</value>
+  </data>
+</root>

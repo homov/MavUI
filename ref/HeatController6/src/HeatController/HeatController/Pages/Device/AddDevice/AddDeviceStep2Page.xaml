@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="HeatController.Pages.Device.AddDevice.AddDeviceStep2Page"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:l="clr-namespace:HeatController"
+    xmlns:progressBar="clr-namespace:Syncfusion.XForms.ProgressBar;assembly=Syncfusion.SfProgressBar.XForms"
+    xmlns:t="clr-namespace:Xamarin.CommunityToolkit.Extensions;assembly=Xamarin.CommunityToolkit"
+    Title="{t:Translate AddNewDevice}"
+    x:DataType="l:AddDeviceSteps">
+    <ContentPage.Content>
+        <Grid>
+            <ScrollView Padding="20">
+
+                <StackLayout Orientation="Vertical">
+
+                    <Label Text="{t:Translate Step2DeviceSetting}" />
+
+                    <Image
+                        Margin="0,10"
+                        Aspect="AspectFit"
+                        HeightRequest="142"
+                        HorizontalOptions="Center"
+                        Source="instruction1.png"
+                        WidthRequest="121" />
+
+                    <Label Text="{t:Translate Step2DeviceWifi}" />
+
+                    <Image
+                        Margin="0,10"
+                        Aspect="AspectFit"
+                        HeightRequest="102"
+                        HorizontalOptions="Center"
+                        Source="instruction2.png"
+                        WidthRequest="144" />
+
+                    <Label Text="{t:Translate Step2DeviceLed}" />
+
+                    <Button
+                        Margin="0,40,0,0"
+                        Command="{Binding TryConnectCommand}"
+                        Text="Далі"
+                        WidthRequest="200" />
+                </StackLayout>
+
+            </ScrollView>
+            <Grid
+                Background="White"
+                IsVisible="{Binding SearchingAccessPoint}"
+                Opacity="0.8">
+                <StackLayout
+                    Background="Transparent"
+                    HorizontalOptions="Center"
+                    Spacing="20"
+                    VerticalOptions="Center">
+
+                    <progressBar:SfLinearProgressBar
+                        Background="Transparent"
+                        IndeterminateAnimationDuration="2000"
+                        IsIndeterminate="True" />
+
+                    <Label
+                        Background="Transparent"
+                        Text="{t:Translate Step2Wait}"
+                        TextColor="Black" />
+                </StackLayout>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

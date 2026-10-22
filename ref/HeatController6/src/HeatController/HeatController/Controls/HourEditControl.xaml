@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<gauge:SfCircularGauge
+    x:Class="HeatController.HourEditControl"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:gauge="clr-namespace:Syncfusion.SfGauge.XForms;assembly=Syncfusion.SfGauge.XForms"
+    xmlns:l="clr-namespace:HeatController"
+    xmlns:t="clr-namespace:Xamarin.CommunityToolkit.Extensions;assembly=Xamarin.CommunityToolkit"
+    BackgroundColor="Transparent">
+    <gauge:SfCircularGauge.Headers>
+        <gauge:Header
+            x:Name="Header"
+            FontAttributes="Bold"
+            FontFamily="{x:Static l:Fonts.MonsterratBold}"
+            ForegroundColor="{DynamicResource Gray800}"
+            Position="0.5,0.5"
+            TextSize="Large" />
+    </gauge:SfCircularGauge.Headers>
+    <gauge:SfCircularGauge.Scales>
+        <gauge:Scale
+            EndValue="24"
+            Interval="1"
+            LabelColor="{DynamicResource Gray600}"
+            LabelFont="{x:Static l:Fonts.MonsterratBold}"
+            LabelFontSize="12"
+            LabelOffset="0.81"
+            MinorTicksPerInterval="0"
+            RimColor="{DynamicResource Gray400}"
+            ScaleEndOffset="0.94"
+            ScaleStartOffset="0.95"
+            ShowFirstLabel="False"
+            ShowLabels="True"
+            ShowTicks="True"
+            StartAngle="270"
+            StartValue="0"
+            SweepAngle="360">
+            <gauge:Scale.MajorTickSettings>
+                <gauge:TickSettings
+                    Length="8"
+                    Offset="0.93"
+                    Color="{DynamicResource Gray200}" />
+            </gauge:Scale.MajorTickSettings>
+            <gauge:Scale.Pointers>
+                <gauge:NeedlePointer
+                    EnableAnimation="False"
+                    EnableDragging="False"
+                    KnobColor="{DynamicResource Gray200}"
+                    KnobRadiusFactor="0.68"
+                    StepFrequency="1"
+                    Thickness="0" />
+                <gauge:MarkerPointer
+                    x:Name="Start"
+                    EnableAnimation="False"
+                    EnableDragging="True"
+                    MarkerHeight="20"
+                    MarkerShape="Circle"
+                    MarkerWidth="20"
+                    StepFrequency="1"
+                    ValueChanging="Start_ValueChanging"
+                    Color="{DynamicResource PrimaryColor}" />
+                <gauge:MarkerPointer
+                    x:Name="End"
+                    EnableAnimation="False"
+                    EnableDragging="True"
+                    MarkerHeight="20"
+                    MarkerShape="Circle"
+                    MarkerWidth="20"
+                    StepFrequency="1"
+                    ValueChanging="End_ValueChanging"
+                    Color="{DynamicResource PrimaryColor}" />
+            </gauge:Scale.Pointers>
+            <gauge:Scale.Ranges>
+                <gauge:Range
+                    EndValue="{Binding Value, Source={x:Reference End}}"
+                    StartValue="{Binding Value, Source={x:Reference Start}}"
+                    Thickness="3"
+                    Offset="0.95"
+                    Color="{DynamicResource PrimaryColor}" />
+            </gauge:Scale.Ranges>
+        </gauge:Scale>
+    </gauge:SfCircularGauge.Scales>
+
+</gauge:SfCircularGauge>

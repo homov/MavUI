@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<l:BasePage
+    x:Class="HeatController.CreateAccountPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:il="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+    xmlns:l="clr-namespace:HeatController"
+    xmlns:t="clr-namespace:Xamarin.CommunityToolkit.Extensions;assembly=Xamarin.CommunityToolkit"
+    Title="{t:Translate RegisterNewAccount}"
+    x:DataType="l:CreateAccountPageViewModel"
+    IsBusy="{Binding IsBusy}">
+    <l:BasePage.Body>
+        <ScrollView>
+            <StackLayout Margin="20">
+
+                <StackLayout Margin="0,10,0,20">
+                    <Label Text="{t:Translate CreateAccount}"  FontSize="12"/>
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Text="{t:Translate Email}" />
+                    <il:SfTextInputLayout>
+                        <Entry Keyboard="Email" Text="{Binding Email}" />
+                    </il:SfTextInputLayout>
+                    <Label Text="{t:Translate Password}" />
+                    <il:SfTextInputLayout EnablePasswordVisibilityToggle="True">
+                        <Entry IsPassword="True" Text="{Binding Password}" />
+                    </il:SfTextInputLayout>
+                    <Label Text="{t:Translate ConfirmPassword}" />
+                    <il:SfTextInputLayout EnablePasswordVisibilityToggle="True">
+                        <Entry IsPassword="True" Text="{Binding ConfirmPassword}" />
+                    </il:SfTextInputLayout>
+                </StackLayout>
+
+                <Button
+                    Margin="0,15"
+                    Command="{Binding SignUpCommand}"
+                    Text="{t:Translate Register}" />
+            </StackLayout>
+        </ScrollView>
+    </l:BasePage.Body>
+</l:BasePage>

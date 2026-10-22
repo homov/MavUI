@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="HeatController.ScheduleView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:l="clr-namespace:HeatController"
+    xmlns:m="clr-namespace:HeatController.Models"
+    xmlns:t="clr-namespace:Xamarin.CommunityToolkit.Extensions;assembly=Xamarin.CommunityToolkit"
+    xmlns:tv="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms">
+    <ContentView.Content>
+        <Grid
+            x:Name="RootGrid"
+            Margin="0,10"
+            x:DataType="m:ScheduleModel"
+            RowDefinitions="Auto,*">
+
+            <StackLayout
+                Grid.Row="1"
+                Margin="10"
+                HorizontalOptions="Center"
+                IsVisible="{Binding IsManual}"
+                Spacing="20"
+                VerticalOptions="Start">
+                <l:TemperatureEdit
+                    MaxValue="{Binding MaxValue}"
+                    MinValue="{Binding MinValue}"
+                    ValueFormat="{Binding ControlValueFormat}"
+                    Value="{Binding DefaultValue}" />
+            </StackLayout>
+
+            <Frame
+                Grid.Row="1"
+                Margin="10,5,10,5"
+                Padding="1"
+                BackgroundColor="{StaticResource Gray300}"
+                CornerRadius="0"
+                HasShadow="False"
+                IsClippedToBounds="True"
+                IsVisible="{Binding IsNotManual}">
+                <tv:SfTabView
+                    Grid.Row="1"
+                    BackgroundColor="Transparent"
+                    TabHeaderPosition="Top"
+                    VisibleHeaderCount="7">
+                    <tv:SfTabItem Title="{t:Translate Mon}">
+                        <tv:SfTabItem.Content>
+                            <l:ScheduleDayView
+                                ControlValueName="{Binding ControlValueName}"
+                                Day="{Binding Mon}"
+                                IsValueControl="{Binding IsValueControl}" />
+                        </tv:SfTabItem.Content>
+                    </tv:SfTabItem>
+                    <tv:SfTabItem Title="{t:Translate Tue}">
+                        <tv:SfTabItem.Content>
+                            <l:ScheduleDayView
+                                ControlValueName="{Binding ControlValueName}"
+                                Day="{Binding Tue}"
+                                IsValueControl="{Binding IsValueControl}" />
+                        </tv:SfTabItem.Content>
+                    </tv:SfTabItem>
+                    <tv:SfTabItem Title="{t:Translate Wed}">
+                        <tv:SfTabItem.Content>
+                            <l:ScheduleDayView
+                                ControlValueName="{Binding ControlValueName}"
+                                Day="{Binding Wed}"
+                                IsValueControl="{Binding IsValueControl}" />
+                        </tv:SfTabItem.Content>
+                    </tv:SfTabItem>
+                    <tv:SfTabItem Title="{t:Translate Thu}">
+                        <tv:SfTabItem.Content>
+                            <l:ScheduleDayView
+                                ControlValueName="{Binding ControlValueName}"
+                                Day="{Binding Thu}"
+                                IsValueControl="{Binding IsValueControl}" />
+                        </tv:SfTabItem.Content>
+                    </tv:SfTabItem>
+                    <tv:SfTabItem Title="{t:Translate Fri}">
+                        <tv:SfTabItem.Content>
+                            <l:ScheduleDayView
+                                ControlValueName="{Binding ControlValueName}"
+                                Day="{Binding Fri}"
+                                IsValueControl="{Binding IsValueControl}" />
+                        </tv:SfTabItem.Content>
+                    </tv:SfTabItem>
+                    <tv:SfTabItem Title="{t:Translate Sat}">
+                        <tv:SfTabItem.Content>
+                            <l:ScheduleDayView
+                                ControlValueName="{Binding ControlValueName}"
+                                Day="{Binding Sat}"
+                                IsValueControl="{Binding IsValueControl}" />
+                        </tv:SfTabItem.Content>
+                    </tv:SfTabItem>
+                    <tv:SfTabItem Title="{t:Translate Sun}">
+                        <tv:SfTabItem.Content>
+                            <l:ScheduleDayView
+                                ControlValueName="{Binding ControlValueName}"
+                                Day="{Binding Sun}"
+                                IsValueControl="{Binding IsValueControl}" />
+                        </tv:SfTabItem.Content>
+                    </tv:SfTabItem>
+                </tv:SfTabView>
+            </Frame>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,534 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Cancel" xml:space="preserve">
+    <value>Zrušit</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Chyba</value>
+  </data>
+  <data name="EmailNotSpecified" xml:space="preserve">
+    <value>E-mail není zadán</value>
+  </data>
+  <data name="PasswordNotSpecified" xml:space="preserve">
+    <value>Heslo není zadáno</value>
+  </data>
+  <data name="CodeNotSpecified" xml:space="preserve">
+    <value>Kód není zadán</value>
+  </data>
+  <data name="PasswordsDoNotMatch" xml:space="preserve">
+    <value>Hesla se neshodují</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Informace</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Přihlásit se</value>
+  </data>
+  <data name="LoginToStartManagingYourHeaters" xml:space="preserve">
+    <value>Přihlaste se, abyste mohli začít ovládat svá zařízení</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Heslo</value>
+  </data>
+  <data name="SavePassword" xml:space="preserve">
+    <value>Uložit heslo</value>
+  </data>
+  <data name="ForgotPasswordLink" xml:space="preserve">
+    <value>Zapomněli jste heslo?</value>
+  </data>
+  <data name="RegisterLink" xml:space="preserve">
+    <value>Registrujte se!</value>
+  </data>
+  <data name="ForgotPasswordTitle" xml:space="preserve">
+    <value>Zapomněli jste heslo?</value>
+  </data>
+  <data name="WeSendPasswordResetCode" xml:space="preserve">
+    <value>Pošleme vám kód pro resetování hesla na e-mailovou adresu, kterou jste u nás zaregistrovali</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Odeslat</value>
+  </data>
+  <data name="RestorePassword" xml:space="preserve">
+    <value>Obnovit heslo</value>
+  </data>
+  <data name="CheckEmailEnterCode" xml:space="preserve">
+    <value>Zkontrolujte e-mail, zadejte kód, který jsme vám poslali, a zadejte nové heslo</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>Kód</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Potvrďte heslo</value>
+  </data>
+  <data name="SaveNewPassword" xml:space="preserve">
+    <value>Uložit nové heslo</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Změna hesla</value>
+  </data>
+  <data name="EnterCurrentPasswordAndNew" xml:space="preserve">
+    <value>Zadejte aktuální a nové heslo</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Aktuální heslo</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Nové heslo</value>
+  </data>
+  <data name="ConfirmEmail" xml:space="preserve">
+    <value>Potvrďte e-mail</value>
+  </data>
+  <data name="CheckEmailEnterConfirmCode" xml:space="preserve">
+    <value>Zkontrolujte e-mail, zadejte kód, který jsme vám poslali</value>
+  </data>
+  <data name="Verify" xml:space="preserve">
+    <value>Ověřit</value>
+  </data>
+  <data name="RegisterNewAccount" xml:space="preserve">
+    <value>Registrovat se</value>
+  </data>
+  <data name="CreateAccount" xml:space="preserve">
+    <value>Vytvořte účet, abyste mohli začít ovládat svá zařízení</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Registrovat</value>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>Výchozí</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>Tmavý</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>Světlý</value>
+  </data>
+  <data name="TimeZone" xml:space="preserve">
+    <value>Časové pásmo</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Odhlásit se</value>
+  </data>
+  <data name="RemoveAccount" xml:space="preserve">
+    <value>Smazat účet</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Motiv</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Jazyk</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Nastavení</value>
+  </data>
+  <data name="Account" xml:space="preserve">
+    <value>Účet</value>
+  </data>
+  <data name="ApplicationSettings" xml:space="preserve">
+    <value>Nastavení aplikace</value>
+  </data>
+  <data name="ChooseTimezone" xml:space="preserve">
+    <value>Vybrat časové pásmo</value>
+  </data>
+  <data name="ChooseTheme" xml:space="preserve">
+    <value>Vybrat motiv</value>
+  </data>
+  <data name="ChooseLanguage" xml:space="preserve">
+    <value>Vybrat jazyk</value>
+  </data>
+  <data name="NewPasswordNotSpecified" xml:space="preserve">
+    <value>Nové heslo není zadáno</value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>Potvrďte</value>
+  </data>
+  <data name="ConfirmAccountDelete" xml:space="preserve">
+    <value>Smazat účet. Pokračovat?</value>
+  </data>
+  <data name="MyHome" xml:space="preserve">
+    <value>Můj domov</value>
+  </data>
+  <data name="Groups" xml:space="preserve">
+    <value>Skupiny</value>
+  </data>
+  <data name="Devices" xml:space="preserve">
+    <value>Regulátory</value>
+  </data>
+  <data name="Control" xml:space="preserve">
+    <value>Řízení</value>
+  </data>
+  <data name="ControlManual" xml:space="preserve">
+    <value>Ruční řízení</value>
+  </data>
+  <data name="ControlSchedule" xml:space="preserve">
+    <value>Plán</value>
+  </data>
+  <data name="NewGroup" xml:space="preserve">
+    <value>Nová skupina</value>
+  </data>
+  <data name="EnterNewGroupName" xml:space="preserve">
+    <value>Zadejte nový název skupiny</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Jméno</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Smazat</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Uložit</value>
+  </data>
+  <data name="LocationName" xml:space="preserve">
+    <value>Název skupiny</value>
+  </data>
+  <data name="ControlScheduleTemperature" xml:space="preserve">
+    <value>Teplota</value>
+  </data>
+  <data name="ControlScheduleTime" xml:space="preserve">
+    <value>Čas</value>
+  </data>
+  <data name="ControlUnknown" xml:space="preserve">
+    <value>Neznámý</value>
+  </data>
+  <data name="WithoutSensor" xml:space="preserve">
+    <value>Bez senzoru</value>
+  </data>
+  <data name="Sensor" xml:space="preserve">
+    <value>Senzor</value>
+  </data>
+  <data name="Saved" xml:space="preserve">
+    <value>Informace uložena</value>
+  </data>
+  <data name="ConfirmGroupDelete" xml:space="preserve">
+    <value>Smazat skupinu. Pokračovat?</value>
+  </data>
+  <data name="monday" xml:space="preserve">
+    <value>Pondělí</value>
+  </data>
+  <data name="tuesday" xml:space="preserve">
+    <value>Úterý</value>
+  </data>
+  <data name="wednesday" xml:space="preserve">
+    <value>Středa</value>
+  </data>
+  <data name="thursday" xml:space="preserve">
+    <value>Čtvrtek</value>
+  </data>
+  <data name="friday" xml:space="preserve">
+    <value>Pátek</value>
+  </data>
+  <data name="saturday" xml:space="preserve">
+    <value>Sobota</value>
+  </data>
+  <data name="sunday" xml:space="preserve">
+    <value>Neděle</value>
+  </data>
+  <data name="WithoutLocation" xml:space="preserve">
+    <value>Mimo skupinu</value>
+  </data>
+  <data name="DeviceName" xml:space="preserve">
+    <value>Název zařízení</value>
+  </data>
+  <data name="TheDeviceControlledByGroupSchedule" xml:space="preserve">
+    <value>Zařízení je ovládáno podle skupinového plánu</value>
+  </data>
+  <data name="Hysteresis" xml:space="preserve">
+    <value>Hystereze</value>
+  </data>
+  <data name="PanelTemperatureCoefficient" xml:space="preserve">
+    <value>Teplotní koeficient panelu</value>
+  </data>
+  <data name="PanelTemperature" xml:space="preserve">
+    <value>Teplota panelu</value>
+  </data>
+  <data name="AntiFreezeMode" xml:space="preserve">
+    <value>Ochrana proti zamrznutí</value>
+  </data>
+  <data name="NameNotSpecified" xml:space="preserve">
+    <value>Jméno není zadáno</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Skupina</value>
+  </data>
+  <data name="RoomTemperatureCoefficient" xml:space="preserve">
+    <value>Koeficient pokojové teploty</value>
+  </data>
+  <data name="ConfirmDeviceDelete" xml:space="preserve">
+    <value>Smazat zařízení. Pokračovat?</value>
+  </data>
+  <data name="Temperature" xml:space="preserve">
+    <value>Teplota</value>
+  </data>
+  <data name="State" xml:space="preserve">
+    <value>Stav</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Začátek</value>
+  </data>
+  <data name="End" xml:space="preserve">
+    <value>Konec</value>
+  </data>
+  <data name="Mon" xml:space="preserve">
+    <value>Po</value>
+  </data>
+  <data name="Sun" xml:space="preserve">
+    <value>Ne</value>
+  </data>
+  <data name="Sat" xml:space="preserve">
+    <value>So</value>
+  </data>
+  <data name="Fri" xml:space="preserve">
+    <value>Pá</value>
+  </data>
+  <data name="Thu" xml:space="preserve">
+    <value>Čt</value>
+  </data>
+  <data name="Wed" xml:space="preserve">
+    <value>St</value>
+  </data>
+  <data name="Tue" xml:space="preserve">
+    <value>Út</value>
+  </data>
+  <data name="AddNewDevice" xml:space="preserve">
+    <value>Přidání nového regulátoru</value>
+  </data>
+  <data name="AddNewDeviceInstuction" xml:space="preserve">
+    <value>Přepněte zařízení do režimu párování a připojte se k Wi-Fi síti zařízení</value>
+  </data>
+  <data name="LookingForDevice" xml:space="preserve">
+    <value>Hledám zařízení...</value>
+  </data>
+  <data name="OpenWiFiSettings" xml:space="preserve">
+    <value>Otevřít nastavení Wi-Fi</value>
+  </data>
+  <data name="DeviceFound" xml:space="preserve">
+    <value>Zařízení nalezeno. Chcete-li jej zaregistrovat, vyberte síť Wi-Fi, zadejte heslo pro vybranou síť a zadejte název nového zařízení</value>
+  </data>
+  <data name="WifiNetwork" xml:space="preserve">
+    <value>Wi-Fi síť</value>
+  </data>
+  <data name="WifiNetworkNotSpecified" xml:space="preserve">
+    <value>Síť Wi-Fi není zadána</value>
+  </data>
+  <data name="ErrorPassingParameters" xml:space="preserve">
+    <value>Chyba při předávání parametrů zařízení</value>
+  </data>
+  <data name="RegisteringDevice" xml:space="preserve">
+    <value>Prosím čekejte. Registrace zařízení...</value>
+  </data>
+  <data name="DeviceRegistered" xml:space="preserve">
+    <value>Zařízení bylo úspěšně zaregistrováno. Klikněte na tlačítko "Konfigurovat" pro nastavení dalších parametrů zařízení</value>
+  </data>
+  <data name="Configure" xml:space="preserve">
+    <value>Konfigurovat</value>
+  </data>
+  <data name="RegisterDevice" xml:space="preserve">
+    <value>Registrovat zařízení</value>
+  </data>
+  <data name="WaitDeviceTimeout" xml:space="preserve">
+    <value>Časový limit čekání na dokončení registrace</value>
+  </data>
+  <data name="InvalidEmailOrPassword" xml:space="preserve">
+    <value>Neplatný e-mail nebo heslo</value>
+  </data>
+  <data name="NameAlreadyUsedText" xml:space="preserve">
+    <value>Jméno je již použito</value>
+  </data>
+  <data name="ConnectionErrorText" xml:space="preserve">
+    <value>Nelze se připojit. Zkontrolujte připojení k síti</value>
+  </data>
+  <data name="TimeRange" xml:space="preserve">
+    <value>Časový rozsah</value>
+  </data>
+  <data name="SelectDevice" xml:space="preserve">
+    <value>Vyberte zařízení</value>
+  </data>
+  <data name="Humidity" xml:space="preserve">
+    <value>Vlhkost</value>
+  </data>
+  <data name="HumiMode" xml:space="preserve">
+    <value>Režim zvlhčování/vysoušení</value>
+  </data>
+  <data name="Step1EnterName" xml:space="preserve">
+    <value>1. Zadejte název regulátoru.</value>
+  </data>
+  <data name="Step1Add" xml:space="preserve">
+    <value>2. Přidejte regulátor do stávající místnosti nebo vytvořte novou.</value>
+  </data>
+  <data name="Step1NewRoom" xml:space="preserve">
+    <value>nová místnost</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Další</value>
+  </data>
+  <data name="Step2DeviceSetting" xml:space="preserve">
+    <value>Pro přidání zařízení je třeba přepnout jej do režimu nastavení:</value>
+  </data>
+  <data name="Step2DeviceWifi" xml:space="preserve">
+    <value>U modelů s displejem přejděte v menu na položku nastavení Wi-Fi a stiskněte tlačítko OK.</value>
+  </data>
+  <data name="Step2DeviceLed" xml:space="preserve">
+    <value>U termoregulátorů bez displeje podržte tlačítko na těle přístroje po dobu 10 sekund, LED indikátor by měl pomalu blikat.</value>
+  </data>
+  <data name="Step2Wait" xml:space="preserve">
+    <value>Probíhá připojení k termoregulátoru…</value>
+  </data>
+  <data name="Step3SelectWifi" xml:space="preserve">
+    <value>Vyberte název vaší domácí Wi-Fi sítě a zadejte heslo k ní.</value>
+  </data>
+  <data name="Step3WifiNetwork" xml:space="preserve">
+    <value>Wi-Fi síť</value>
+  </data>
+  <data name="Step3Add" xml:space="preserve">
+    <value>Přidat</value>
+  </data>
+  <data name="Step3Wait" xml:space="preserve">
+    <value>Probíhá registrace zařízení…</value>
+  </data>
+  <data name="ErrorStepNoDevice" xml:space="preserve">
+    <value>Spojení se zařízením nebylo navázáno.</value>
+  </data>
+  <data name="ErrorStepMakeSure" xml:space="preserve">
+    <value>Ujistěte se, že:</value>
+  </data>
+  <data name="ErrorStepInWifi" xml:space="preserve">
+    <value>1. Termoregulátor je v režimu nastavení Wi-Fi</value>
+  </data>
+  <data name="ErrorStepWifiOnPhone" xml:space="preserve">
+    <value>2. Wi-Fi na vašem smartfonu je zapnuto.</value>
+  </data>
+  <data name="ErrorStepPermissions" xml:space="preserve">
+    <value>3. Udělili jste všechny potřebné oprávnění pro aplikaci Heat Ceram.</value>
+  </data>
+  <data name="ErrorStepRetryOrHand" xml:space="preserve">
+    <value>Zkuste to znovu nebo se připojte ručně k Wi-Fi síti s názvem „HeatCeram“ a poté klikněte na Opakovat</value>
+  </data>
+  <data name="ErrorStepRetry" xml:space="preserve">
+    <value>Opakovat</value>
+  </data>
+  <data name="NoWiFIPermissions" xml:space="preserve">
+    <value>Aplikace nemá oprávnění k přístupu ke seznamu přístupových bodů WiFi.</value>
+  </data>
+  <data name="GotoSetup" xml:space="preserve">
+    <value>Přejděte na Nastavení</value>
+  </data>
+</root>

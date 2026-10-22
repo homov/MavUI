@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<l:BasePage
+    x:Class="HeatController.LocationPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:il="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+    xmlns:l="clr-namespace:HeatController"
+    xmlns:t="clr-namespace:Xamarin.CommunityToolkit.Extensions;assembly=Xamarin.CommunityToolkit"
+    xmlns:tv="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    Title="{Binding LocationName}"
+    x:DataType="l:LocationPageViewModel"
+    IsBusy="{Binding IsBusy}"
+    MenuCommand="{Binding ActionCommand}"
+    MenuCommandParameter="{Binding SelectedIndex, Source={x:Reference tabView}}"
+    MenuIcon="{Binding SelectedIndex, Source={x:Reference tabView}, Converter={StaticResource IndexToButtonConverter}, ConverterParameter={Static l:LocationPageViewModel.Buttons}}"
+    MenuIconVisible="True">
+    <l:BasePage.Resources>
+        <ResourceDictionary>
+            <xct:IndexToArrayItemConverter x:Key="IndexToButtonConverter" />
+        </ResourceDictionary>
+    </l:BasePage.Resources>
+    <l:BasePage.Body>
+        <tv:SfTabView
+            x:Name="tabView"
+            DisplayMode="Image"
+            EnableSwiping="False"
+            SelectionChanged="tabView_SelectionChanged"
+            TabHeaderPosition="Bottom"
+            VisibleHeaderCount="3">
+            <tv:SfTabItem IconFont="{Static l:Icons.HomeClockOutline}">
+                <tv:SfTabItem.Content>
+                    <l:ScheduleView x:Name="scheduleView" ScheduleModel="{Binding ScheduleModel}" />
+                </tv:SfTabItem.Content>
+            </tv:SfTabItem>
+            <tv:SfTabItem IconFont="{Static l:Icons.CellphoneWireless}">
+                <tv:SfTabItem.Content>
+                    <l:DeviceListView x:Name="deviceListView" />
+                </tv:SfTabItem.Content>
+            </tv:SfTabItem>
+            <tv:SfTabItem IconFont="{Static l:Icons.Cog}">
+                <tv:SfTabItem.Content>
+                    <StackLayout Padding="10">
+                        <StackLayout>
+                            <Label Text="{t:Translate LocationName}" />
+                            <il:SfTextInputLayout ContainerType="Outlined">
+                                <Entry Text="{Binding LocationName}" />
+                            </il:SfTextInputLayout>
+                            <Label Text="{t:Translate Control}" />
+                            <il:SfTextInputLayout ContainerType="Outlined">
+                                <l:ExtendedPicker
+                                    CancelButton="{t:Translate Cancel}"
+                                    DisplayProperty="Name"
+                                    ItemsSource="{Binding ScheduleTypeList}"
+                                    SelectedItem="{Binding SelectedScheduleType, Mode=TwoWay}" />
+                            </il:SfTextInputLayout>
+                            <Label Text="{t:Translate Sensor}" />
+                            <il:SfTextInputLayout ContainerType="Outlined">
+                                <l:ExtendedPicker
+                                    CancelButton="{t:Translate Cancel}"
+                                    DisplayProperty="Name"
+                                    ItemsSource="{Binding SensorList}"
+                                    SelectedItem="{Binding SelectedSensor, Mode=TwoWay}" />
+                            </il:SfTextInputLayout>
+                        </StackLayout>
+                        <StackLayout
+                            Margin="0,10"
+                            HorizontalOptions="FillAndExpand"
+                            Orientation="Horizontal"
+                            Spacing="10"
+                            VerticalOptions="Start">
+                            <Button
+                                Command="{Binding DeleteLocationCommand}"
+                                HorizontalOptions="FillAndExpand"
+                                Text="{t:Translate Delete}" />
+                        </StackLayout>
+                    </StackLayout>
+                </tv:SfTabItem.Content>
+            </tv:SfTabItem>
+        </tv:SfTabView>
+    </l:BasePage.Body>
+</l:BasePage>

@@ -1,0 +1,534 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Cancel" xml:space="preserve">
+    <value>Скасувати</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Помилка</value>
+  </data>
+  <data name="EmailNotSpecified" xml:space="preserve">
+    <value>Електронна пошта не вказана</value>
+  </data>
+  <data name="PasswordNotSpecified" xml:space="preserve">
+    <value>Пароль не вказано</value>
+  </data>
+  <data name="CodeNotSpecified" xml:space="preserve">
+    <value>Код не вказано</value>
+  </data>
+  <data name="PasswordsDoNotMatch" xml:space="preserve">
+    <value>Паролі не співпадають</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Інформація</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Авторизуватися</value>
+  </data>
+  <data name="LoginToStartManagingYourHeaters" xml:space="preserve">
+    <value>Увійдіть, щоб почати керувати своїми пристроями</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Ел. пошта</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="SavePassword" xml:space="preserve">
+    <value>Зберегти пароль</value>
+  </data>
+  <data name="ForgotPasswordLink" xml:space="preserve">
+    <value>Забули пароль?</value>
+  </data>
+  <data name="RegisterLink" xml:space="preserve">
+    <value>Зареєструватись!</value>
+  </data>
+  <data name="ForgotPasswordTitle" xml:space="preserve">
+    <value>Забули пароль?</value>
+  </data>
+  <data name="WeSendPasswordResetCode" xml:space="preserve">
+    <value>Ми надішлемо код скидання пароля на адресу електронної пошти, яку Ви зареєстрували у нас</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Надіслати</value>
+  </data>
+  <data name="RestorePassword" xml:space="preserve">
+    <value>Відновити пароль</value>
+  </data>
+  <data name="CheckEmailEnterCode" xml:space="preserve">
+    <value>Перевірте електронну пошту, введіть код, який ми Вам надіслали та введіть новий пароль</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>Код</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Підтвердіть пароль</value>
+  </data>
+  <data name="SaveNewPassword" xml:space="preserve">
+    <value>Зберегти новий пароль</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Змінити пароль</value>
+  </data>
+  <data name="EnterCurrentPasswordAndNew" xml:space="preserve">
+    <value>Введіть поточний та новий пароль</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Поточний пароль</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Новий пароль</value>
+  </data>
+  <data name="ConfirmEmail" xml:space="preserve">
+    <value>Підтвердьте Email</value>
+  </data>
+  <data name="CheckEmailEnterConfirmCode" xml:space="preserve">
+    <value>Перевірте електронну пошту, введіть код, який ми Вам надіслали</value>
+  </data>
+  <data name="Verify" xml:space="preserve">
+    <value>Перевірити</value>
+  </data>
+  <data name="RegisterNewAccount" xml:space="preserve">
+    <value>Зареєструватись</value>
+  </data>
+  <data name="CreateAccount" xml:space="preserve">
+    <value>Створіть обліковий запис, щоб почати керувати своїми пристроями</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Зареєструвати</value>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>За замовчуванням</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>Темна</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>Світла</value>
+  </data>
+  <data name="TimeZone" xml:space="preserve">
+    <value>Часовий пояс</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Вийти</value>
+  </data>
+  <data name="RemoveAccount" xml:space="preserve">
+    <value>Видалити обліковий запис</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Тема</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Мова</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Налаштування</value>
+  </data>
+  <data name="Account" xml:space="preserve">
+    <value>Обліковий запис</value>
+  </data>
+  <data name="ApplicationSettings" xml:space="preserve">
+    <value>Налаштування програми</value>
+  </data>
+  <data name="ChooseTimezone" xml:space="preserve">
+    <value>Вибрати часовий пояс</value>
+  </data>
+  <data name="ChooseTheme" xml:space="preserve">
+    <value>Вибрати тему</value>
+  </data>
+  <data name="ChooseLanguage" xml:space="preserve">
+    <value>Вибрати мову</value>
+  </data>
+  <data name="NewPasswordNotSpecified" xml:space="preserve">
+    <value>Новий пароль не вказано</value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>Підтвердіть</value>
+  </data>
+  <data name="ConfirmAccountDelete" xml:space="preserve">
+    <value>Видалити обліковий запис. Продовжити?</value>
+  </data>
+  <data name="MyHome" xml:space="preserve">
+    <value>Мій будинок</value>
+  </data>
+  <data name="Groups" xml:space="preserve">
+    <value>Групи</value>
+  </data>
+  <data name="Devices" xml:space="preserve">
+    <value>Пристрої</value>
+  </data>
+  <data name="Control" xml:space="preserve">
+    <value>Керування</value>
+  </data>
+  <data name="ControlManual" xml:space="preserve">
+    <value>Ручне</value>
+  </data>
+  <data name="ControlSchedule" xml:space="preserve">
+    <value>Розклад</value>
+  </data>
+  <data name="NewGroup" xml:space="preserve">
+    <value>Нова група</value>
+  </data>
+  <data name="EnterNewGroupName" xml:space="preserve">
+    <value>Введіть нову назву групи</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Ім'я</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Вилучити</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Зберегти</value>
+  </data>
+  <data name="LocationName" xml:space="preserve">
+    <value>Ім'я групи</value>
+  </data>
+  <data name="ControlScheduleTemperature" xml:space="preserve">
+    <value>Температура</value>
+  </data>
+  <data name="ControlScheduleTime" xml:space="preserve">
+    <value>Час</value>
+  </data>
+  <data name="ControlUnknown" xml:space="preserve">
+    <value>Невідомий</value>
+  </data>
+  <data name="WithoutSensor" xml:space="preserve">
+    <value>Без датчика</value>
+  </data>
+  <data name="Sensor" xml:space="preserve">
+    <value>Датчик</value>
+  </data>
+  <data name="Saved" xml:space="preserve">
+    <value>Інформацію збережено</value>
+  </data>
+  <data name="ConfirmGroupDelete" xml:space="preserve">
+    <value>Видалити групу. Продовжити?</value>
+  </data>
+  <data name="monday" xml:space="preserve">
+    <value>Понеділок</value>
+  </data>
+  <data name="tuesday" xml:space="preserve">
+    <value>Вівторок</value>
+  </data>
+  <data name="wednesday" xml:space="preserve">
+    <value>Середа</value>
+  </data>
+  <data name="thursday" xml:space="preserve">
+    <value>Четвер</value>
+  </data>
+  <data name="friday" xml:space="preserve">
+    <value>П’ятниця</value>
+  </data>
+  <data name="saturday" xml:space="preserve">
+    <value>Субота</value>
+  </data>
+  <data name="sunday" xml:space="preserve">
+    <value>Неділя</value>
+  </data>
+  <data name="WithoutLocation" xml:space="preserve">
+    <value>Не в групі</value>
+  </data>
+  <data name="DeviceName" xml:space="preserve">
+    <value>Ім'я пристрою</value>
+  </data>
+  <data name="TheDeviceControlledByGroupSchedule" xml:space="preserve">
+    <value>Пристрій керується за груповим розкладом</value>
+  </data>
+  <data name="Hysteresis" xml:space="preserve">
+    <value>Гістерезис</value>
+  </data>
+  <data name="PanelTemperatureCoefficient" xml:space="preserve">
+    <value>Температурний коефіцієнт панелі</value>
+  </data>
+  <data name="PanelTemperature" xml:space="preserve">
+    <value>Температура панелі</value>
+  </data>
+  <data name="AntiFreezeMode" xml:space="preserve">
+    <value>Режим захисту від замерзання</value>
+  </data>
+  <data name="NameNotSpecified" xml:space="preserve">
+    <value>Ім'я не вказано</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Група</value>
+  </data>
+  <data name="RoomTemperatureCoefficient" xml:space="preserve">
+    <value>Коефіцієнт кімнатної температури</value>
+  </data>
+  <data name="ConfirmDeviceDelete" xml:space="preserve">
+    <value>Видалити пристрій. Продовжити?</value>
+  </data>
+  <data name="Temperature" xml:space="preserve">
+    <value>Температура</value>
+  </data>
+  <data name="State" xml:space="preserve">
+    <value>Стан</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Початок</value>
+  </data>
+  <data name="End" xml:space="preserve">
+    <value>Завершення</value>
+  </data>
+  <data name="Mon" xml:space="preserve">
+    <value>ПН</value>
+  </data>
+  <data name="Sun" xml:space="preserve">
+    <value>НД</value>
+  </data>
+  <data name="Sat" xml:space="preserve">
+    <value>СБ</value>
+  </data>
+  <data name="Fri" xml:space="preserve">
+    <value>ПТ</value>
+  </data>
+  <data name="Thu" xml:space="preserve">
+    <value>ЧТ</value>
+  </data>
+  <data name="Wed" xml:space="preserve">
+    <value>СР</value>
+  </data>
+  <data name="Tue" xml:space="preserve">
+    <value>ВТ</value>
+  </data>
+  <data name="AddNewDevice" xml:space="preserve">
+    <value>Новий пристрій</value>
+  </data>
+  <data name="AddNewDeviceInstuction" xml:space="preserve">
+    <value>Переведіть пристрій у режим сполучення та підключіться до мережі Wi-Fi пристрою</value>
+  </data>
+  <data name="LookingForDevice" xml:space="preserve">
+    <value>Шукаю пристрій...</value>
+  </data>
+  <data name="OpenWiFiSettings" xml:space="preserve">
+    <value>Відкрити налаштування Wi-Fi</value>
+  </data>
+  <data name="DeviceFound" xml:space="preserve">
+    <value>Пристрій знайдено. Щоб зареєструвати його, виберіть мережу Wi-Fi, введіть пароль для вибраної мережі та введіть ім'я нового пристрою</value>
+  </data>
+  <data name="WifiNetwork" xml:space="preserve">
+    <value>Wi-Fi мережа</value>
+  </data>
+  <data name="WifiNetworkNotSpecified" xml:space="preserve">
+    <value>Мережу Wi-Fi не вказано</value>
+  </data>
+  <data name="ErrorPassingParameters" xml:space="preserve">
+    <value>Помилка передачі параметрів для пристрою</value>
+  </data>
+  <data name="RegisteringDevice" xml:space="preserve">
+    <value>Будь ласка зачекайте. Реєстрація пристрою...</value>
+  </data>
+  <data name="DeviceRegistered" xml:space="preserve">
+    <value>Пристрій успішно зареєстрований. Натисніть кнопку «Налаштувати», щоб настроїти додаткові параметри пристрою</value>
+  </data>
+  <data name="Configure" xml:space="preserve">
+    <value>Налаштувати</value>
+  </data>
+  <data name="RegisterDevice" xml:space="preserve">
+    <value>Зареєструвати пристрій</value>
+  </data>
+  <data name="WaitDeviceTimeout" xml:space="preserve">
+    <value>Тайм-аут очікування завершення реєстрації</value>
+  </data>
+  <data name="InvalidEmailOrPassword" xml:space="preserve">
+    <value>Неправильна адреса електронної пошти або пароль</value>
+  </data>
+  <data name="NameAlreadyUsedText" xml:space="preserve">
+    <value>Ім'я вже використовується</value>
+  </data>
+  <data name="ConnectionErrorText" xml:space="preserve">
+    <value>Не можу підключитись. Перевірте підключення до мережі</value>
+  </data>
+  <data name="TimeRange" xml:space="preserve">
+    <value>Діапазон часу</value>
+  </data>
+  <data name="SelectDevice" xml:space="preserve">
+    <value>Виберіть пристрій</value>
+  </data>
+  <data name="Humidity" xml:space="preserve">
+    <value>Вологість</value>
+  </data>
+  <data name="HumiMode" xml:space="preserve">
+    <value>Режим зволоження / осушення</value>
+  </data>
+  <data name="Step1EnterName" xml:space="preserve">
+    <value>1. Введіть назву контролера.</value>
+  </data>
+  <data name="Step1Add" xml:space="preserve">
+    <value>2. Додайте контролер до існуючої кімнати або створіть нову.</value>
+  </data>
+  <data name="Step1NewRoom" xml:space="preserve">
+    <value>нова кімната</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Далі</value>
+  </data>
+  <data name="Step2DeviceSetting" xml:space="preserve">
+    <value>Для додавання пристрою його необхідно перевести у режим налаштування:</value>
+  </data>
+  <data name="Step2DeviceWifi" xml:space="preserve">
+    <value>Для моделей з дисплеєм у меню перейдіть у пункт Wi-Fi налаштування,  та натисніть кнопку ОК.</value>
+  </data>
+  <data name="Step2DeviceLed" xml:space="preserve">
+    <value>Для терморегуляторів без дисплею утримуйте кнопку, на корпусі протягом 10 сек., LED індикатор має повільно моргати.</value>
+  </data>
+  <data name="Step2Wait" xml:space="preserve">
+    <value>Йде з’єднання з терморегулятором…</value>
+  </data>
+  <data name="Step3SelectWifi" xml:space="preserve">
+    <value>Виберіть назву вашої домашньої Wi-Fi мережі та введіть пароль для неї.</value>
+  </data>
+  <data name="Step3WifiNetwork" xml:space="preserve">
+    <value>Wi-Fi мережа</value>
+  </data>
+  <data name="Step3Add" xml:space="preserve">
+    <value>Додати</value>
+  </data>
+  <data name="Step3Wait" xml:space="preserve">
+    <value>Триває реєстрація пристрою…</value>
+  </data>
+  <data name="ErrorStepNoDevice" xml:space="preserve">
+    <value>З’єднання з пристроєм не встановлено.</value>
+  </data>
+  <data name="ErrorStepMakeSure" xml:space="preserve">
+    <value>Переконайтесь, що:</value>
+  </data>
+  <data name="ErrorStepInWifi" xml:space="preserve">
+    <value>1. Терморегулятор знаходиться в режимі налаштування Wi-Fi</value>
+  </data>
+  <data name="ErrorStepWifiOnPhone" xml:space="preserve">
+    <value>2. Wi-Fi на вашому смартфоні увімкнений.</value>
+  </data>
+  <data name="ErrorStepPermissions" xml:space="preserve">
+    <value>3. Ви надали всі необхідні дозволи для застосунку Heat Ceram.</value>
+  </data>
+  <data name="ErrorStepRetryOrHand" xml:space="preserve">
+    <value>Повторіть спробу або під’єднайтесь до Wi-Fi мережі з назвою «HeatCeram» вручну, після чого натисніть Повторити</value>
+  </data>
+  <data name="ErrorStepRetry" xml:space="preserve">
+    <value>Повторити</value>
+  </data>
+  <data name="NoWiFIPermissions" xml:space="preserve">
+    <value>Додаток немає прав для доступу до списку точок доступу WiFi</value>
+  </data>
+  <data name="GotoSetup" xml:space="preserve">
+    <value>Перейти до налаштувань</value>
+  </data>
+</root>

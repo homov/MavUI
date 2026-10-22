@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="HeatController.Pages.Device.AddDevice.AddDeviceStep3Page"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:il="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+    xmlns:l="clr-namespace:HeatController"
+    xmlns:progressBar="clr-namespace:Syncfusion.XForms.ProgressBar;assembly=Syncfusion.SfProgressBar.XForms"
+    xmlns:t="clr-namespace:Xamarin.CommunityToolkit.Extensions;assembly=Xamarin.CommunityToolkit"
+    Title="{t:Translate AddNewDevice}"
+    x:DataType="l:AddDeviceSteps">
+    <ContentPage.Content>
+        <Grid>
+            <ScrollView Padding="20">
+
+                <StackLayout Orientation="Vertical">
+
+                    <Label Margin="0,0,0,20" Text="{t:Translate Step3SelectWifi}" />
+
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="{t:Translate Step3WifiNetwork}" />
+                        <il:SfTextInputLayout
+                            ContainerType="Outlined"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="End">
+                            <l:ExtendedPicker
+                                CancelButton="{t:Translate Cancel}"
+                                DisplayProperty="Ssid"
+                                ItemsSource="{Binding AccespointList}"
+                                SelectedItem="{Binding SelectedAccespoint, Mode=TwoWay}" />
+                        </il:SfTextInputLayout>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="{t:Translate Password}" />
+                        <il:SfTextInputLayout ContainerType="Outlined" EnablePasswordVisibilityToggle="True">
+                            <Entry IsPassword="True" Text="{Binding AccespointPassword}" />
+                        </il:SfTextInputLayout>
+                    </StackLayout>
+
+                    <ffimageloading:CachedImage
+                        HeightRequest="120"
+                        Source="{Binding DeviceImage}"
+                        WidthRequest="120" />
+
+                    <Label
+                        HorizontalOptions="CenterAndExpand"
+                        HorizontalTextAlignment="Center"
+                        Text="{Binding DeviceModel}"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center" />
+
+                    <Button
+                        Margin="0,40,0,0"
+                        Command="{Binding RegisterCommand}"
+                        Text="Додати"
+                        WidthRequest="200" />
+
+                </StackLayout>
+
+            </ScrollView>
+            <Grid
+                Background="White"
+                IsVisible="{Binding IsRegistering}"
+                Opacity="0.8">
+                <StackLayout
+                    Background="Transparent"
+                    HorizontalOptions="Center"
+                    Spacing="20"
+                    VerticalOptions="Center">
+
+                    <progressBar:SfLinearProgressBar
+                        Background="Transparent"
+                        IndeterminateAnimationDuration="2000"
+                        IsIndeterminate="True" />
+
+                    <Label
+                        Background="Transparent"
+                        Text="{t:Translate Step3Wait}"
+                        TextColor="Black" />
+                </StackLayout>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

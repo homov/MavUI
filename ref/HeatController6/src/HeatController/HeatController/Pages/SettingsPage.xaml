@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<l:BasePage
+    x:Class="HeatController.SettingsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:l="clr-namespace:HeatController"
+    xmlns:t="clr-namespace:Xamarin.CommunityToolkit.Extensions;assembly=Xamarin.CommunityToolkit"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    Title="{t:Translate Settings}"
+    x:DataType="l:SettingsPageViewModel"
+    IsBusy="{Binding IsBusy}">
+    <l:BasePage.Resources>
+        <xct:EqualConverter x:Key="EqualConverter" />
+
+    </l:BasePage.Resources>
+    <l:BasePage.Body>
+        <CollectionView ItemSizingStrategy="MeasureAllItems" ItemsSource="{Binding Items}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Orientation="Vertical" Spacing="0">
+                        <StackLayout
+                            Padding="20,10"
+                            x:DataType="l:SettingsItemViewModel"
+                            xct:TouchEffect.Command="{Binding Command}"
+                            xct:TouchEffect.CommandParameter="{Binding .}"
+                            xct:TouchEffect.NativeAnimation="True"
+                            HorizontalOptions="FillAndExpand"
+                            Orientation="Horizontal"
+                            Spacing="0"
+                            VerticalOptions="Start">
+                            <l:FontIcon
+                                Margin="0,0,10,0"
+                                HorizontalOptions="Start"
+                                Icon="{Binding Icon}"
+                                IsVisible="{Binding HasIcon}"
+                                VerticalOptions="Center" />
+                            <StackLayout
+                                HorizontalOptions="FillAndExpand"
+                                Orientation="Vertical"
+                                Spacing="0"
+                                VerticalOptions="Center">
+                                <Label Text="{Binding Text}">
+                                    <Label.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding IsGroup}"
+                                            TargetType="Label"
+                                            Value="True">
+                                            <Setter Property="FontSize" Value="16" />
+                                            <Setter Property="FontFamily" Value="{Static l:Fonts.MonsterratSemiBold}" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                                <Label
+                                    FontSize="12"
+                                    IsVisible="{Binding HasValue}"
+                                    Text="{Binding Value}" />
+                            </StackLayout>
+                        </StackLayout>
+                        <l:Separator Orientation="Horizontal" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </l:BasePage.Body>
+</l:BasePage>

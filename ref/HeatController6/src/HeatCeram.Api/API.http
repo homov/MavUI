@@ -1,0 +1,30 @@
+@baseUrl=https://api.heatceram.com.ua:443/stinexapiv1
+@email=test_1@la.la
+@password=5c890828a8e7641760b16fc3406686b6
+
+
+POST {{baseUrl}}/user_authorization/
+Content-Type: application/x-www-form-urlencoded
+
+email={{email}}&password={{password}}
+
+###
+
+
+POST {{baseUrl}}/get_timezones/
+
+###
+
+POST {{baseUrl}}/get_user_devices/
+
+###
+POST {{baseUrl}}/get_device_types/
+
+
+###
+
+POST {{baseUrl}}/get_user_settings/
+Content-Type: application/x-www-form-urlencoded
+
+email={{email}}
+

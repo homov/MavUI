@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="HeatController.Pages.Device.AddDevice.AddDeviceStep1Page"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:il="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+    xmlns:l="clr-namespace:HeatController"
+    xmlns:t="clr-namespace:Xamarin.CommunityToolkit.Extensions;assembly=Xamarin.CommunityToolkit"
+    Title="{t:Translate AddNewDevice}"
+    x:DataType="l:AddDeviceSteps"
+    IsEnabled="{Binding IsReady}">
+    <ContentPage.Content>
+        <ScrollView Padding="20">
+
+            <StackLayout Orientation="Vertical">
+
+                <StackLayout Orientation="Vertical">
+                    <Label Text="{t:Translate Step1EnterName}" />
+                    <il:SfTextInputLayout ContainerType="Outlined">
+                        <Entry Text="{Binding ControllerName}" />
+                    </il:SfTextInputLayout>
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical">
+                    <Label Text="{t:Translate Step1Add}" />
+                    <il:SfTextInputLayout
+                        ContainerType="Outlined"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="End">
+                        <l:ExtendedPicker
+                            CancelButton="{t:Translate Cancel}"
+                            DisplayProperty="Name"
+                            ItemsSource="{Binding LocationList}"
+                            SelectedItem="{Binding SelectedLocation, Mode=TwoWay}" />
+                    </il:SfTextInputLayout>
+
+                    <Label
+                        x:Name="RegisterLabel"
+                        HorizontalOptions="StartAndExpand"
+                        Style="{DynamicResource LinkLabel}"
+                        Text="{t:Translate Step1NewRoom}"
+                        VerticalOptions="StartAndExpand">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NewLocationCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+
+                <Button
+                    Margin="0,40,0,0"
+                    Command="{Binding InstructionCommand}"
+                    Text="{t:Translate Next}"
+                    WidthRequest="200" />
+
+            </StackLayout>
+
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

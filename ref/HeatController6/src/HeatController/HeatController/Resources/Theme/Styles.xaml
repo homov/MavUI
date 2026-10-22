@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    x:Class="HeatController.Styles"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:il="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+    xmlns:l="clr-namespace:HeatController"
+    xmlns:progressBar="clr-namespace:Syncfusion.XForms.ProgressBar;assembly=Syncfusion.SfProgressBar.XForms"
+    xmlns:tv="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
+
+    <Style
+        ApplyToDerivedTypes="True"
+        TargetType="ContentPage">
+        <Setter Property="BackgroundColor" Value="{DynamicResource GrayBg}" />
+    </Style>
+
+    <Style
+        ApplyToDerivedTypes="True"
+        TargetType="xct:Popup">
+        <Setter Property="BackgroundColor" Value="{DynamicResource GrayBg}" />
+    </Style>
+
+    <Style
+        ApplyToDerivedTypes="True"
+        TargetType="NavigationPage">
+        <!--<Setter Property="BackgroundColor" Value="{DynamicResource GrayBg}" />-->
+        <Setter Property="BackgroundColor" Value="Transparent" />
+    </Style>
+
+    <Style
+        TargetType="tv:SfTabView">
+        <Setter Property="TabHeaderPosition" Value="Bottom" />
+        <Setter Property="VisibleHeaderCount" Value="2" />
+        <Setter Property="TabHeaderBackgroundColor" Value="{DynamicResource Gray300}" />
+        <Setter Property="tv:SfTabView.SelectionIndicatorSettings">
+            <tv:SelectionIndicatorSettings
+                Position="Bottom"
+                StrokeThickness="3"
+                Color="{DynamicResource PrimaryColor}" />
+        </Setter>
+    </Style>
+
+
+    <Style
+        TargetType="tv:SfTabItem">
+        <Setter Property="TitleFontFamily" Value="{Static l:Fonts.MontserratRegular}" />
+        <Setter Property="TitleFontColor" Value="{DynamicResource Gray800}" />
+        <Setter Property="FontIconFontColor" Value="{DynamicResource Gray600}" />
+        <Setter Property="FontIconFontFamily" Value="{Static l:Fonts.MaterialIconsRegular}" />
+        <Setter Property="SelectionColor" Value="{DynamicResource PrimaryColor}" />
+    </Style>
+
+    <Style
+        TargetType="progressBar:SfLinearProgressBar">
+        <Setter Property="ProgressColor" Value="{DynamicResource PrimaryColor}" />
+        <Setter Property="SecondaryProgressColor" Value="{DynamicResource PrimaryLight}" />
+    </Style>
+
+    <Style
+        TargetType="Label">
+        <Setter Property="FontFamily" Value="{Static l:Fonts.MontserratRegular}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="TextColor" Value="{DynamicResource Gray800}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+    </Style>
+
+    <Style
+        TargetType="Picker">
+        <Setter Property="FontFamily" Value="{Static l:Fonts.MontserratRegular}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="TextColor" Value="{DynamicResource Gray800}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+    </Style>
+
+    <Style
+        TargetType="l:CardView">
+        <Setter Property="HeaderBackgroundColor" Value="{DynamicResource Gray300}" />
+        <Setter Property="BodyBackgroundColor" Value="{DynamicResource GrayBg}" />
+        <Setter Property="HeaderHeight" Value="36" />
+    </Style>
+
+    <Style
+        TargetType="l:Separator">
+        <Setter Property="Color" Value="{DynamicResource Gray300}" />
+        <Setter Property="Thickness" Value="1" />
+        <Setter Property="SpacingAfter" Value="0" />
+        <Setter Property="SpacingBefore" Value="0" />
+    </Style>
+
+    <Style
+        TargetType="l:FontIcon">
+        <Setter Property="TextColor" Value="{DynamicResource Gray800}" />
+        <Setter Property="Opacity" Value="0.8" />
+        <Setter Property="VerticalOptions" Value="End" />
+        <Setter Property="VerticalTextAlignment" Value="End" />
+    </Style>
+
+    <Style
+        x:Key="LinkLabel"
+        TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryColor}" />
+        <Setter Property="FontFamily" Value="{Static l:Fonts.MonsterratSemiBold}" />
+    </Style>
+
+    <Style
+        ApplyToDerivedTypes="True"
+        TargetType="l:BasePage">
+        <Setter Property="SeparatorColor" Value="{DynamicResource Gray400}" />
+        <Setter Property="HeaderPadding" Value="10" />
+        <Setter Property="HeaderTextColor" Value="{DynamicResource Gray800}" />
+        <Setter Property="HeaderFontFamily" Value="{Static l:Fonts.MonsterratSemiBold}" />
+        <Setter Property="HeaderFontSize" Value="20" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource GrayBg}" />
+        <Setter Property="HeaderBackgroundColor" Value="{DynamicResource GrayBg}" />
+        <Setter Property="BodyBackgroundColor" Value="{DynamicResource GrayBg}" />
+    </Style>
+
+    <Style
+        TargetType="il:SfTextInputLayout">
+        <Setter Property="FocusedColor" Value="{DynamicResource PrimaryLight}" />
+        <Setter Property="UnfocusedColor" Value="{DynamicResource Gray600}" />
+        <Setter Property="ContainerType" Value="Outlined" />
+    </Style>
+
+    <Style
+        TargetType="Slider">
+        <Setter Property="ThumbColor" Value="{DynamicResource PrimaryColor}" />
+        <Setter Property="MaximumTrackColor" Value="{DynamicResource PrimaryColor}" />
+        <Setter Property="MinimumTrackColor" Value="{DynamicResource PrimaryColor}" />
+    </Style>
+    <Style
+        TargetType="Entry">
+        <Setter Property="FontFamily" Value="{Static l:Fonts.MontserratRegular}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="TextColor" Value="{DynamicResource Gray800}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+    </Style>
+
+    <Style
+        TargetType="Button">
+        <Setter Property="FontFamily" Value="{Static l:Fonts.MonsterratSemiBold}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
+        <Setter Property="TextColor" Value="{DynamicResource GrayWhiteColor}" />
+    </Style>
+
+    <Style
+        TargetType="ActivityIndicator">
+        <Setter Property="Color" Value="{DynamicResource PrimaryColor}" />
+    </Style>
+
+    <Style
+        TargetType="Switch">
+        <Setter Property="OnColor" Value="{DynamicResource PrimaryColor}" />
+        <Setter Property="ThumbColor" Value="{DynamicResource GrayWhiteColor}" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup
+                    x:Name="CommonStates">
+                    <VisualState
+                        x:Name="Normal" />
+                    <VisualState
+                        x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="OnColor" Value="{DynamicResource Gray400}" />
+                            <Setter Property="ThumbColor" Value="{DynamicResource Gray400}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState
+                        x:Name="On">
+                        <VisualState.Setters>
+                            <Setter Property="OnColor" Value="{DynamicResource PrimaryLight}" />
+                            <Setter Property="ThumbColor" Value="{DynamicResource PrimaryColor}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState
+                        x:Name="Off">
+                        <VisualState.Setters>
+                            <Setter Property="ThumbColor" Value="{DynamicResource Gray400}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <Style
+        TargetType="l:ToggleFontIcon">
+        <Setter Property="FontSize" Value="32" />
+        <Setter Property="Opacity" Value="1" />
+        <Setter Property="OnColor" Value="{DynamicResource PrimaryColor}" />
+        <Setter Property="OffColor" Value="{DynamicResource Gray600}" />
+        <Setter Property="TextColor" Value="{DynamicResource Gray600}" />
+        <Style.Triggers>
+            <Trigger TargetType="l:ToggleFontIcon" Property="IsOn" Value="True">
+                <Setter Property="Opacity" Value="1" />
+            </Trigger>
+            <Trigger TargetType="l:ToggleFontIcon" Property="IsOn" Value="False">
+                <Setter Property="Opacity" Value="0.8" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style
+        TargetType="l:ExtendedPicker">
+        <Setter Property="FontFamily" Value="{Static l:Fonts.MontserratRegular}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="TextColor" Value="{DynamicResource Gray800}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+    </Style>
+</ResourceDictionary>

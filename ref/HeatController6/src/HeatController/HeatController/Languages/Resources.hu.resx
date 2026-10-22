@@ -1,0 +1,534 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Cancel" xml:space="preserve">
+    <value>Mégsem</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Hiba</value>
+  </data>
+  <data name="EmailNotSpecified" xml:space="preserve">
+    <value>Az e-mail nincs megadva</value>
+  </data>
+  <data name="PasswordNotSpecified" xml:space="preserve">
+    <value>A jelszó nincs megadva</value>
+  </data>
+  <data name="CodeNotSpecified" xml:space="preserve">
+    <value>A kód nincs megadva</value>
+  </data>
+  <data name="PasswordsDoNotMatch" xml:space="preserve">
+    <value>A jelszavak nem egyeznek</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Információ</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Bejelentkezés</value>
+  </data>
+  <data name="LoginToStartManagingYourHeaters" xml:space="preserve">
+    <value>Jelentkezzen be, hogy elkezdhesse kezelni eszközeit</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Jelszó</value>
+  </data>
+  <data name="SavePassword" xml:space="preserve">
+    <value>Jelszó mentése</value>
+  </data>
+  <data name="ForgotPasswordLink" xml:space="preserve">
+    <value>Elfelejtette jelszavát?</value>
+  </data>
+  <data name="RegisterLink" xml:space="preserve">
+    <value>Regisztráljon!</value>
+  </data>
+  <data name="ForgotPasswordTitle" xml:space="preserve">
+    <value>Elfelejtette jelszavát?</value>
+  </data>
+  <data name="WeSendPasswordResetCode" xml:space="preserve">
+    <value>Elküldünk egy jelszó-visszaállítási kódot arra az e-mail címre, amelyet nálunk regisztrált</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Küldés</value>
+  </data>
+  <data name="RestorePassword" xml:space="preserve">
+    <value>Jelszó visszaállítása</value>
+  </data>
+  <data name="CheckEmailEnterCode" xml:space="preserve">
+    <value>Ellenőrizze e-mailjét, adja meg a kapott kódot, és írjon be egy új jelszót</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>Kód</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Erősítse meg a jelszót</value>
+  </data>
+  <data name="SaveNewPassword" xml:space="preserve">
+    <value>Új jelszó mentése</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Jelszó módosítása</value>
+  </data>
+  <data name="EnterCurrentPasswordAndNew" xml:space="preserve">
+    <value>Adja meg a jelenlegi és az új jelszót</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Jelenlegi jelszó</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Új jelszó</value>
+  </data>
+  <data name="ConfirmEmail" xml:space="preserve">
+    <value>Erősítse meg az e-mailt</value>
+  </data>
+  <data name="CheckEmailEnterConfirmCode" xml:space="preserve">
+    <value>Ellenőrizze e-mailjét, adja meg a kapott kódot</value>
+  </data>
+  <data name="Verify" xml:space="preserve">
+    <value>Ellenőrizze</value>
+  </data>
+  <data name="RegisterNewAccount" xml:space="preserve">
+    <value>Regisztráció</value>
+  </data>
+  <data name="CreateAccount" xml:space="preserve">
+    <value>Hozzon létre fiókot, hogy elkezdhesse kezelni eszközeit</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Regisztrál</value>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>Alapértelmezett</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>Sötét</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>Világos</value>
+  </data>
+  <data name="TimeZone" xml:space="preserve">
+    <value>Időzóna</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Kijelentkezés</value>
+  </data>
+  <data name="RemoveAccount" xml:space="preserve">
+    <value>Fiók törlése</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Téma</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Nyelv</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Beállítások</value>
+  </data>
+  <data name="Account" xml:space="preserve">
+    <value>Fiók</value>
+  </data>
+  <data name="ApplicationSettings" xml:space="preserve">
+    <value>Alkalmazás beállításai</value>
+  </data>
+  <data name="ChooseTimezone" xml:space="preserve">
+    <value>Időzóna választása</value>
+  </data>
+  <data name="ChooseTheme" xml:space="preserve">
+    <value>Téma választása</value>
+  </data>
+  <data name="ChooseLanguage" xml:space="preserve">
+    <value>Nyelv választása</value>
+  </data>
+  <data name="NewPasswordNotSpecified" xml:space="preserve">
+    <value>Az új jelszó nincs megadva</value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>Erősítse meg</value>
+  </data>
+  <data name="ConfirmAccountDelete" xml:space="preserve">
+    <value>Fiók törlése. Folytatja?</value>
+  </data>
+  <data name="MyHome" xml:space="preserve">
+    <value>Otthonom</value>
+  </data>
+  <data name="Groups" xml:space="preserve">
+    <value>Csoportok</value>
+  </data>
+  <data name="Devices" xml:space="preserve">
+    <value>Szabályozók</value>
+  </data>
+  <data name="Control" xml:space="preserve">
+    <value>Vezérlés</value>
+  </data>
+  <data name="ControlManual" xml:space="preserve">
+    <value>Kézi vezérlés</value>
+  </data>
+  <data name="ControlSchedule" xml:space="preserve">
+    <value>Ütemezés</value>
+  </data>
+  <data name="NewGroup" xml:space="preserve">
+    <value>Új csoport</value>
+  </data>
+  <data name="EnterNewGroupName" xml:space="preserve">
+    <value>Adjon meg egy új csoportnevet</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Név</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Törlés</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Mentés</value>
+  </data>
+  <data name="LocationName" xml:space="preserve">
+    <value>Csoport neve</value>
+  </data>
+  <data name="ControlScheduleTemperature" xml:space="preserve">
+    <value>Hőmérséklet</value>
+  </data>
+  <data name="ControlScheduleTime" xml:space="preserve">
+    <value>Idő</value>
+  </data>
+  <data name="ControlUnknown" xml:space="preserve">
+    <value>Ismeretlen</value>
+  </data>
+  <data name="WithoutSensor" xml:space="preserve">
+    <value>Érzékelő nélkül</value>
+  </data>
+  <data name="Sensor" xml:space="preserve">
+    <value>Érzékelő</value>
+  </data>
+  <data name="Saved" xml:space="preserve">
+    <value>Az információ elmentve</value>
+  </data>
+  <data name="ConfirmGroupDelete" xml:space="preserve">
+    <value>Csoport törlése. Folytatja?</value>
+  </data>
+  <data name="monday" xml:space="preserve">
+    <value>Hétfő</value>
+  </data>
+  <data name="tuesday" xml:space="preserve">
+    <value>Kedd</value>
+  </data>
+  <data name="wednesday" xml:space="preserve">
+    <value>Szerda</value>
+  </data>
+  <data name="thursday" xml:space="preserve">
+    <value>Csütörtök</value>
+  </data>
+  <data name="friday" xml:space="preserve">
+    <value>Péntek</value>
+  </data>
+  <data name="saturday" xml:space="preserve">
+    <value>Szombat</value>
+  </data>
+  <data name="sunday" xml:space="preserve">
+    <value>Vasárnap</value>
+  </data>
+  <data name="WithoutLocation" xml:space="preserve">
+    <value>Csoport nélkül</value>
+  </data>
+  <data name="DeviceName" xml:space="preserve">
+    <value>Eszköz neve</value>
+  </data>
+  <data name="TheDeviceControlledByGroupSchedule" xml:space="preserve">
+    <value>Az eszközt a csoportos ütemezés vezérli</value>
+  </data>
+  <data name="Hysteresis" xml:space="preserve">
+    <value>Hiszterézis</value>
+  </data>
+  <data name="PanelTemperatureCoefficient" xml:space="preserve">
+    <value>Panel hőmérsékleti együtthatója</value>
+  </data>
+  <data name="PanelTemperature" xml:space="preserve">
+    <value>Panel hőmérséklete</value>
+  </data>
+  <data name="AntiFreezeMode" xml:space="preserve">
+    <value>Fagyvédő mód</value>
+  </data>
+  <data name="NameNotSpecified" xml:space="preserve">
+    <value>A név nincs megadva</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Csoport</value>
+  </data>
+  <data name="RoomTemperatureCoefficient" xml:space="preserve">
+    <value>Szobahőmérséklet együtthatója</value>
+  </data>
+  <data name="ConfirmDeviceDelete" xml:space="preserve">
+    <value>Eszköz törlése. Folytatja?</value>
+  </data>
+  <data name="Temperature" xml:space="preserve">
+    <value>Hőmérséklet</value>
+  </data>
+  <data name="State" xml:space="preserve">
+    <value>Állapot</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Kezdés</value>
+  </data>
+  <data name="End" xml:space="preserve">
+    <value>Befejezés</value>
+  </data>
+  <data name="Mon" xml:space="preserve">
+    <value>Hé</value>
+  </data>
+  <data name="Sun" xml:space="preserve">
+    <value>Va</value>
+  </data>
+  <data name="Sat" xml:space="preserve">
+    <value>Szo</value>
+  </data>
+  <data name="Fri" xml:space="preserve">
+    <value>Pén</value>
+  </data>
+  <data name="Thu" xml:space="preserve">
+    <value>Csü</value>
+  </data>
+  <data name="Wed" xml:space="preserve">
+    <value>Sze</value>
+  </data>
+  <data name="Tue" xml:space="preserve">
+    <value>Ke</value>
+  </data>
+  <data name="AddNewDevice" xml:space="preserve">
+    <value>Új szabályozó hozzáadása</value>
+  </data>
+  <data name="AddNewDeviceInstuction" xml:space="preserve">
+    <value>Kapcsolja a készüléket párosítási módba, és csatlakozzon a készülék Wi-Fi hálózatához</value>
+  </data>
+  <data name="LookingForDevice" xml:space="preserve">
+    <value>Keresem az eszközt...</value>
+  </data>
+  <data name="OpenWiFiSettings" xml:space="preserve">
+    <value>Nyissa meg a Wi-Fi beállításokat</value>
+  </data>
+  <data name="DeviceFound" xml:space="preserve">
+    <value>Eszköz megtalálva. Regisztrálásához válasszon Wi-Fi hálózatot, adja meg a kiválasztott hálózat jelszavát, és adja meg az új eszköz nevét</value>
+  </data>
+  <data name="WifiNetwork" xml:space="preserve">
+    <value>Wi-Fi hálózat</value>
+  </data>
+  <data name="WifiNetworkNotSpecified" xml:space="preserve">
+    <value>A Wi-Fi hálózat nincs megadva</value>
+  </data>
+  <data name="ErrorPassingParameters" xml:space="preserve">
+    <value>Hiba az eszköz paramétereinek átadásakor</value>
+  </data>
+  <data name="RegisteringDevice" xml:space="preserve">
+    <value>Kérjük, várjon. Az eszköz regisztrálása...</value>
+  </data>
+  <data name="DeviceRegistered" xml:space="preserve">
+    <value>Az eszköz sikeresen regisztrálva. Kattintson a "Beállítás" gombra az eszköz további paramétereinek konfigurálásához</value>
+  </data>
+  <data name="Configure" xml:space="preserve">
+    <value>Beállítás</value>
+  </data>
+  <data name="RegisterDevice" xml:space="preserve">
+    <value>Eszköz regisztrálása</value>
+  </data>
+  <data name="WaitDeviceTimeout" xml:space="preserve">
+    <value>Regisztráció befejezésének időkorlátja</value>
+  </data>
+  <data name="InvalidEmailOrPassword" xml:space="preserve">
+    <value>Érvénytelen e-mail cím vagy jelszó</value>
+  </data>
+  <data name="NameAlreadyUsedText" xml:space="preserve">
+    <value>A név már használatban van</value>
+  </data>
+  <data name="ConnectionErrorText" xml:space="preserve">
+    <value>Nem tudok csatlakozni. Ellenőrizze a hálózati kapcsolatot</value>
+  </data>
+  <data name="TimeRange" xml:space="preserve">
+    <value>Időtartomány</value>
+  </data>
+  <data name="SelectDevice" xml:space="preserve">
+    <value>Válasszon eszközt</value>
+  </data>
+  <data name="Humidity" xml:space="preserve">
+    <value>Páratartalom</value>
+  </data>
+  <data name="HumiMode" xml:space="preserve">
+    <value>Párásító/szárító mód</value>
+  </data>
+  <data name="Step1EnterName" xml:space="preserve">
+    <value>1. Adja meg a szabályozó nevét.</value>
+  </data>
+  <data name="Step1Add" xml:space="preserve">
+    <value>2. Adja hozzá a szabályozót egy meglévő szobához, vagy hozzon létre újat.</value>
+  </data>
+  <data name="Step1NewRoom" xml:space="preserve">
+    <value>új szoba</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Tovább</value>
+  </data>
+  <data name="Step2DeviceSetting" xml:space="preserve">
+    <value>Az eszköz hozzáadásához át kell állítani konfigurációs módba:</value>
+  </data>
+  <data name="Step2DeviceWifi" xml:space="preserve">
+    <value>A kijelzővel rendelkező modelleknél a menüben lépjen a Wi-Fi beállítások pontra, és nyomja meg az OK gombot.</value>
+  </data>
+  <data name="Step2DeviceLed" xml:space="preserve">
+    <value>A kijelző nélküli termosztátoknál tartsa lenyomva a házon lévő gombot 10 másodpercig, a LED jelzőfénynek lassan kell villognia.</value>
+  </data>
+  <data name="Step2Wait" xml:space="preserve">
+    <value>Folyamatban van a termosztáttal való kapcsolat…</value>
+  </data>
+  <data name="Step3SelectWifi" xml:space="preserve">
+    <value>Válassza ki az otthoni Wi-Fi hálózat nevét, és adja meg a jelszavát.</value>
+  </data>
+  <data name="Step3WifiNetwork" xml:space="preserve">
+    <value>Wi-Fi hálózat</value>
+  </data>
+  <data name="Step3Add" xml:space="preserve">
+    <value>Hozzáadás</value>
+  </data>
+  <data name="Step3Wait" xml:space="preserve">
+    <value>Az eszköz regisztrációja folyamatban…</value>
+  </data>
+  <data name="ErrorStepNoDevice" xml:space="preserve">
+    <value>Nem létesült kapcsolat az eszközzel.</value>
+  </data>
+  <data name="ErrorStepMakeSure" xml:space="preserve">
+    <value>Győződjön meg róla, hogy:</value>
+  </data>
+  <data name="ErrorStepInWifi" xml:space="preserve">
+    <value>1. A termosztát Wi-Fi konfigurációs módban van</value>
+  </data>
+  <data name="ErrorStepWifiOnPhone" xml:space="preserve">
+    <value>2. A Wi-Fi be van kapcsolva az okostelefonján.</value>
+  </data>
+  <data name="ErrorStepPermissions" xml:space="preserve">
+    <value>3. Megadta az összes szükséges engedélyt a Heat Ceram alkalmazáshoz.</value>
+  </data>
+  <data name="ErrorStepRetryOrHand" xml:space="preserve">
+    <value>Próbálja újra, vagy csatlakozzon manuálisan a „HeatCeram” nevű Wi-Fi hálózathoz, majd nyomja meg az Újra gombot</value>
+  </data>
+  <data name="ErrorStepRetry" xml:space="preserve">
+    <value>Újra</value>
+  </data>
+  <data name="NoWiFIPermissions" xml:space="preserve">
+    <value>Az alkalmazásnak nincs engedélye a WiFi hozzáférési pontok listájának eléréséhez.</value>
+  </data>
+  <data name="GotoSetup" xml:space="preserve">
+    <value>Lépjen a Beállítások elemre</value>
+  </data>
+</root>

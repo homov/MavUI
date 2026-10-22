@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    x:Class="HeatController.Light"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Color x:Key="PrimaryLight">#71B0FF</Color>
+    <Color x:Key="PrimaryColor">#3E94FF</Color>
+    <Color x:Key="GrayWhiteColor">#FFFFFF</Color>
+    <Color x:Key="GrayBg">#FFFFFF</Color>
+    <Color x:Key="Gray900">#333942</Color>
+    <Color x:Key="Gray800">#4a515e</Color>
+    <Color x:Key="Gray700">#606a7b</Color>
+    <Color x:Key="Gray600">#788396</Color>
+    <Color x:Key="Gray400">#b2b8c2</Color>
+    <Color x:Key="Gray300">#ebecef</Color>
+    <Color x:Key="Gray200">#ced2d9</Color>
+
+</ResourceDictionary>

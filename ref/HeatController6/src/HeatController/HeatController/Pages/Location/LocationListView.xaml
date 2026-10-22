@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="HeatController.LocationListView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:l="clr-namespace:HeatController"
+    xmlns:m="clr-namespace:HeatController.Models"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    x:Name="root"
+    x:DataType="l:LocationListViewModel">
+
+    <ContentView.Content>
+        <Grid>
+            <RefreshView Command="{Binding LoadCommand}" IsRefreshing="{Binding IsRefreshing}">
+                <CollectionView
+                    Margin="10"
+                    HorizontalOptions="FillAndExpand"
+                    ItemsSource="{Binding Locations}"
+                    VerticalOptions="FillAndExpand">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout
+                            HorizontalItemSpacing="10"
+                            Orientation="Vertical"
+                            Span="2"
+                            VerticalItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="m:UserLocation">
+                            <Frame
+                                Padding="10"
+                                xct:TouchEffect.Command="{Binding BindingContext.ShowCommand, Source={Reference root}}"
+                                xct:TouchEffect.CommandParameter="{Binding .}"
+                                xct:TouchEffect.NativeAnimation="True"
+                                BackgroundColor="{DynamicResource Gray300}"
+                                CornerRadius="8"
+                                HasShadow="False">
+                                <StackLayout Orientation="Vertical">
+
+                                    <Label FontFamily="{Static l:Fonts.MonsterratMedium}" Text="{Binding Info.Name}" />
+                                    <StackLayout
+                                        Margin="0,-5,0,0"
+                                        Orientation="Horizontal"
+                                        Spacing="2">
+                                        <Label FontFamily="{Static l:Fonts.MonsterratMedium}" FontSize="10">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{xct:Translate Control}" />
+                                                    <Span Text=": " />
+                                                    <Span Text="{Binding ScheduleTypeName}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
+
+                                    <StackLayout
+                                        Grid.Row="1"
+                                        Padding="0,10,0,0"
+                                        HorizontalOptions="Start"
+                                        Orientation="Horizontal">
+
+                                        <l:FontIcon Text="{Static l:Icons.HomeThermometerOutline}" />
+                                        <Label
+                                            Grid.Column="1"
+                                            HorizontalOptions="Start"
+                                            Text="{Binding Info.FormattedTemperature}"
+                                            VerticalOptions="Center" />
+
+                                        <l:Separator
+                                            IsVisible="{Binding Info.HasHumidity}"
+                                            Orientation="Vertical"
+                                            SpacingBefore="5"
+                                            Color="{DynamicResource Gray400}" />
+
+                                        <l:FontIcon IsVisible="{Binding Info.HasHumidity}" Text="{Static l:Icons.WaterPercent}" />
+
+                                        <Label
+                                            Grid.Column="1"
+                                            HorizontalOptions="Center"
+                                            IsVisible="{Binding Info.HasHumidity}"
+                                            Text="{Binding Info.FormattedHumidity}" />
+
+                                    </StackLayout>
+                                </StackLayout>
+
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+            <ActivityIndicator
+                HorizontalOptions="Center"
+                IsRunning="{Binding IsBusy}"
+                VerticalOptions="Center" />
+        </Grid>
+    </ContentView.Content>
+</ContentView>

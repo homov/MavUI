@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="HeatController.BasePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:l="clr-namespace:HeatController"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    x:Name="self"
+    x:DataType="l:BasePage"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid
+            Padding="0"
+            ColumnSpacing="0"
+            HorizontalOptions="FillAndExpand"
+            RowDefinitions="Auto,1,*"
+            RowSpacing="0"
+            VerticalOptions="FillAndExpand">
+            <Grid
+                Padding="{Binding HeaderPadding, Source={Reference self}}"
+                BackgroundColor="{Binding HeaderBackgroundColor, Source={Reference self}}"
+                ColumnDefinitions="Auto,*,Auto"
+                ColumnSpacing="0"
+                IsVisible="{Binding ShowHeader, Source={Reference self}}"
+                RowSpacing="0">
+                <l:FontImageIcon
+                    x:Name="BackImageIcon"
+                    Grid.Column="0"
+                    xct:TouchEffect.Command="{Binding DefaultBackCommand, Source={Reference self}}"
+                    xct:TouchEffect.NativeAnimation="True"
+                    HorizontalOptions="Start"
+                    Icon="{Binding BackIcon, Source={Reference self}}"
+                    IsVisible="{Binding BackIconVisible, Source={Reference self}}"
+                    Size="26"
+                    Color="{Binding HeaderTextColor, Source={Reference self}}" />
+                <Label
+                    Grid.Column="1"
+                    Margin="10,0"
+                    FontFamily="{Binding HeaderFontFamily, Source={Reference self}}"
+                    FontSize="{Binding HeaderFontSize, Source={Reference self}}"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding Title, Source={Reference self}}"
+                    TextColor="{Binding HeaderTextColor, Source={Reference self}}"
+                    VerticalOptions="Center" />
+                <l:FontImageIcon
+                    x:Name="MenuImageIcon"
+                    Grid.Column="2"
+                    xct:TouchEffect.Command="{Binding DefaultMenuCommand, Source={Reference self}}"
+                    xct:TouchEffect.NativeAnimation="True"
+                    HorizontalOptions="End"
+                    Icon="{Binding MenuIcon, Source={Reference self}}"
+                    IsVisible="{Binding MenuIconVisible, Source={Reference self}}"
+                    Size="26"
+                    Color="{Binding HeaderTextColor, Source={Reference self}}" />
+            </Grid>
+
+            <l:Separator
+                Grid.Row="1"
+                IsVisible="{Binding ShowHeader, Source={Reference self}}"
+                Color="{Binding SeparatorColor, Source={Reference self}}" />
+
+            <ContentView
+                Grid.Row="2"
+                Padding="{Binding BodyPadding, Source={Reference self}}"
+                BackgroundColor="{Binding BodyBackgroundColor, Source={Reference self}}"
+                Content="{Binding Body, Source={Reference self}}"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand" />
+
+            <ActivityIndicator
+                Grid.Row="2"
+                HorizontalOptions="Center"
+                IsRunning="{Binding IsBusy, Source={Reference self}}"
+                VerticalOptions="Center" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

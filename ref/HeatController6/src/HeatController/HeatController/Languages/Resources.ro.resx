@@ -1,0 +1,534 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Cancel" xml:space="preserve">
+    <value>Anulați</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Eroare</value>
+  </data>
+  <data name="EmailNotSpecified" xml:space="preserve">
+    <value>E-mailul nu este specificat</value>
+  </data>
+  <data name="PasswordNotSpecified" xml:space="preserve">
+    <value>Parola nu este specificată</value>
+  </data>
+  <data name="CodeNotSpecified" xml:space="preserve">
+    <value>Codul nu este specificat</value>
+  </data>
+  <data name="PasswordsDoNotMatch" xml:space="preserve">
+    <value>Parolele nu se potrivesc</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Informație</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Autentificați-vă</value>
+  </data>
+  <data name="LoginToStartManagingYourHeaters" xml:space="preserve">
+    <value>Conectați-vă pentru a începe să gestionați dispozitivele</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Parolă</value>
+  </data>
+  <data name="SavePassword" xml:space="preserve">
+    <value>Salvați parola</value>
+  </data>
+  <data name="ForgotPasswordLink" xml:space="preserve">
+    <value>Ați uitat parola?</value>
+  </data>
+  <data name="RegisterLink" xml:space="preserve">
+    <value>Înregistrați-vă!</value>
+  </data>
+  <data name="ForgotPasswordTitle" xml:space="preserve">
+    <value>Ați uitat parola?</value>
+  </data>
+  <data name="WeSendPasswordResetCode" xml:space="preserve">
+    <value>Vă vom trimite un cod de resetare a parolei pe adresa de e-mail pe care ați înregistrat-o la noi</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Trimiteți</value>
+  </data>
+  <data name="RestorePassword" xml:space="preserve">
+    <value>Restaurați parola</value>
+  </data>
+  <data name="CheckEmailEnterCode" xml:space="preserve">
+    <value>Verificați e-mailul, introduceți codul pe care vi l-am trimis și introduceți o nouă parolă</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>Cod</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirmați parola</value>
+  </data>
+  <data name="SaveNewPassword" xml:space="preserve">
+    <value>Salvați noua parolă</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Schimbați parola</value>
+  </data>
+  <data name="EnterCurrentPasswordAndNew" xml:space="preserve">
+    <value>Introduceți parola curentă și noua parolă</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Parola curentă</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Parolă nouă</value>
+  </data>
+  <data name="ConfirmEmail" xml:space="preserve">
+    <value>Confirmați e-mailul</value>
+  </data>
+  <data name="CheckEmailEnterConfirmCode" xml:space="preserve">
+    <value>Verificați e-mailul, introduceți codul pe care vi l-am trimis</value>
+  </data>
+  <data name="Verify" xml:space="preserve">
+    <value>Verificați</value>
+  </data>
+  <data name="RegisterNewAccount" xml:space="preserve">
+    <value>Înregistrați-vă</value>
+  </data>
+  <data name="CreateAccount" xml:space="preserve">
+    <value>Creați un cont pentru a începe să gestionați dispozitivele</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Înregistrați</value>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>Implicit</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>Întunecat</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>Luminos</value>
+  </data>
+  <data name="TimeZone" xml:space="preserve">
+    <value>Fus orar</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Deconectați-vă</value>
+  </data>
+  <data name="RemoveAccount" xml:space="preserve">
+    <value>Ștergeți contul</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Temă</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Limbă</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Setări</value>
+  </data>
+  <data name="Account" xml:space="preserve">
+    <value>Cont</value>
+  </data>
+  <data name="ApplicationSettings" xml:space="preserve">
+    <value>Setări aplicație</value>
+  </data>
+  <data name="ChooseTimezone" xml:space="preserve">
+    <value>Alegeți fusul orar</value>
+  </data>
+  <data name="ChooseTheme" xml:space="preserve">
+    <value>Alegeți tema</value>
+  </data>
+  <data name="ChooseLanguage" xml:space="preserve">
+    <value>Alegeți limba</value>
+  </data>
+  <data name="NewPasswordNotSpecified" xml:space="preserve">
+    <value>Noua parolă nu este specificată</value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>Confirmați</value>
+  </data>
+  <data name="ConfirmAccountDelete" xml:space="preserve">
+    <value>Ștergeți contul. Continuați?</value>
+  </data>
+  <data name="MyHome" xml:space="preserve">
+    <value>Casa mea</value>
+  </data>
+  <data name="Groups" xml:space="preserve">
+    <value>Grupuri</value>
+  </data>
+  <data name="Devices" xml:space="preserve">
+    <value>Regulatoare</value>
+  </data>
+  <data name="Control" xml:space="preserve">
+    <value>Control</value>
+  </data>
+  <data name="ControlManual" xml:space="preserve">
+    <value>Control manual</value>
+  </data>
+  <data name="ControlSchedule" xml:space="preserve">
+    <value>Program</value>
+  </data>
+  <data name="NewGroup" xml:space="preserve">
+    <value>Grup nou</value>
+  </data>
+  <data name="EnterNewGroupName" xml:space="preserve">
+    <value>Introduceți un nou nume de grup</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nume</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Ștergeți</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Salvați</value>
+  </data>
+  <data name="LocationName" xml:space="preserve">
+    <value>Nume grup</value>
+  </data>
+  <data name="ControlScheduleTemperature" xml:space="preserve">
+    <value>Temperatură</value>
+  </data>
+  <data name="ControlScheduleTime" xml:space="preserve">
+    <value>Timp</value>
+  </data>
+  <data name="ControlUnknown" xml:space="preserve">
+    <value>Necunoscut</value>
+  </data>
+  <data name="WithoutSensor" xml:space="preserve">
+    <value>Fără senzor</value>
+  </data>
+  <data name="Sensor" xml:space="preserve">
+    <value>Senzor</value>
+  </data>
+  <data name="Saved" xml:space="preserve">
+    <value>Informația a fost salvată</value>
+  </data>
+  <data name="ConfirmGroupDelete" xml:space="preserve">
+    <value>Ștergeți grupul. Continuați?</value>
+  </data>
+  <data name="monday" xml:space="preserve">
+    <value>Luni</value>
+  </data>
+  <data name="tuesday" xml:space="preserve">
+    <value>Marți</value>
+  </data>
+  <data name="wednesday" xml:space="preserve">
+    <value>Miercuri</value>
+  </data>
+  <data name="thursday" xml:space="preserve">
+    <value>Joi</value>
+  </data>
+  <data name="friday" xml:space="preserve">
+    <value>Vineri</value>
+  </data>
+  <data name="saturday" xml:space="preserve">
+    <value>Sâmbătă</value>
+  </data>
+  <data name="sunday" xml:space="preserve">
+    <value>Duminică</value>
+  </data>
+  <data name="WithoutLocation" xml:space="preserve">
+    <value>Fără grup</value>
+  </data>
+  <data name="DeviceName" xml:space="preserve">
+    <value>Nume dispozitiv</value>
+  </data>
+  <data name="TheDeviceControlledByGroupSchedule" xml:space="preserve">
+    <value>Dispozitivul este controlat conform programului de grup</value>
+  </data>
+  <data name="Hysteresis" xml:space="preserve">
+    <value>Histerezis</value>
+  </data>
+  <data name="PanelTemperatureCoefficient" xml:space="preserve">
+    <value>Coeficient de temperatură al panoului</value>
+  </data>
+  <data name="PanelTemperature" xml:space="preserve">
+    <value>Temperatura panoului</value>
+  </data>
+  <data name="AntiFreezeMode" xml:space="preserve">
+    <value>Antiîngheț</value>
+  </data>
+  <data name="NameNotSpecified" xml:space="preserve">
+    <value>Numele nu este specificat</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Grup</value>
+  </data>
+  <data name="RoomTemperatureCoefficient" xml:space="preserve">
+    <value>Coeficient de temperatură al camerei</value>
+  </data>
+  <data name="ConfirmDeviceDelete" xml:space="preserve">
+    <value>Ștergeți dispozitivul. Continuați?</value>
+  </data>
+  <data name="Temperature" xml:space="preserve">
+    <value>Temperatură</value>
+  </data>
+  <data name="State" xml:space="preserve">
+    <value>Stare</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Început</value>
+  </data>
+  <data name="End" xml:space="preserve">
+    <value>Sfârșit</value>
+  </data>
+  <data name="Mon" xml:space="preserve">
+    <value>Lu</value>
+  </data>
+  <data name="Sun" xml:space="preserve">
+    <value>Du</value>
+  </data>
+  <data name="Sat" xml:space="preserve">
+    <value>Sâ</value>
+  </data>
+  <data name="Fri" xml:space="preserve">
+    <value>Vi</value>
+  </data>
+  <data name="Thu" xml:space="preserve">
+    <value>Jo</value>
+  </data>
+  <data name="Wed" xml:space="preserve">
+    <value>Mi</value>
+  </data>
+  <data name="Tue" xml:space="preserve">
+    <value>Ma</value>
+  </data>
+  <data name="AddNewDevice" xml:space="preserve">
+    <value>Adăugați un controler nou</value>
+  </data>
+  <data name="AddNewDeviceInstuction" xml:space="preserve">
+    <value>Comutați dispozitivul în modul de asociere și conectați-vă la rețeaua Wi-Fi a dispozitivului</value>
+  </data>
+  <data name="LookingForDevice" xml:space="preserve">
+    <value>Caut dispozitiv...</value>
+  </data>
+  <data name="OpenWiFiSettings" xml:space="preserve">
+    <value>Deschideți setările Wi-Fi</value>
+  </data>
+  <data name="DeviceFound" xml:space="preserve">
+    <value>Dispozitiv găsit. Pentru a-l înregistra, selectați rețeaua Wi-Fi, introduceți parola pentru rețeaua aleasă și introduceți numele noului dispozitiv</value>
+  </data>
+  <data name="WifiNetwork" xml:space="preserve">
+    <value>Rețea Wi-Fi</value>
+  </data>
+  <data name="WifiNetworkNotSpecified" xml:space="preserve">
+    <value>Rețeaua Wi-Fi nu este specificată</value>
+  </data>
+  <data name="ErrorPassingParameters" xml:space="preserve">
+    <value>Eroare la transmiterea parametrilor pentru dispozitiv</value>
+  </data>
+  <data name="RegisteringDevice" xml:space="preserve">
+    <value>Vă rugăm să așteptați. Înregistrarea dispozitivului...</value>
+  </data>
+  <data name="DeviceRegistered" xml:space="preserve">
+    <value>Dispozitivul a fost înregistrat cu succes. Apăsați butonul "Configurați" pentru a seta parametrii suplimentari ai dispozitivului</value>
+  </data>
+  <data name="Configure" xml:space="preserve">
+    <value>Configurați</value>
+  </data>
+  <data name="RegisterDevice" xml:space="preserve">
+    <value>Înregistrați dispozitivul</value>
+  </data>
+  <data name="WaitDeviceTimeout" xml:space="preserve">
+    <value>Timp de așteptare pentru finalizarea înregistrării</value>
+  </data>
+  <data name="InvalidEmailOrPassword" xml:space="preserve">
+    <value>Adresă de e-mail sau parolă invalidă</value>
+  </data>
+  <data name="NameAlreadyUsedText" xml:space="preserve">
+    <value>Numele este deja folosit</value>
+  </data>
+  <data name="ConnectionErrorText" xml:space="preserve">
+    <value>Nu se poate conecta. Verificați conexiunea la rețea</value>
+  </data>
+  <data name="TimeRange" xml:space="preserve">
+    <value>Interval de timp</value>
+  </data>
+  <data name="SelectDevice" xml:space="preserve">
+    <value>Selectați dispozitivul</value>
+  </data>
+  <data name="Humidity" xml:space="preserve">
+    <value>Umiditate</value>
+  </data>
+  <data name="HumiMode" xml:space="preserve">
+    <value>Mod umidificare/uscare</value>
+  </data>
+  <data name="Step1EnterName" xml:space="preserve">
+    <value>1. Introduceți numele controlerului.</value>
+  </data>
+  <data name="Step1Add" xml:space="preserve">
+    <value>2. Adăugați controlerul la o cameră existentă sau creați una nouă.</value>
+  </data>
+  <data name="Step1NewRoom" xml:space="preserve">
+    <value>cameră nouă</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Următor</value>
+  </data>
+  <data name="Step2DeviceSetting" xml:space="preserve">
+    <value>Pentru a adăuga dispozitivul, acesta trebuie trecut în modul de configurare:</value>
+  </data>
+  <data name="Step2DeviceWifi" xml:space="preserve">
+    <value>Pentru modelele cu afișaj, în meniu accesați setările Wi-Fi și apăsați butonul OK.</value>
+  </data>
+  <data name="Step2DeviceLed" xml:space="preserve">
+    <value>Pentru termoregulatoarele fără afișaj, țineți apăsat butonul de pe carcasă timp de 10 secunde, indicatorul LED trebuie să clipească lent.</value>
+  </data>
+  <data name="Step2Wait" xml:space="preserve">
+    <value>Se realizează conectarea la termoregulator…</value>
+  </data>
+  <data name="Step3SelectWifi" xml:space="preserve">
+    <value>Selectați numele rețelei Wi-Fi de acasă și introduceți parola pentru aceasta.</value>
+  </data>
+  <data name="Step3WifiNetwork" xml:space="preserve">
+    <value>Rețea Wi-Fi</value>
+  </data>
+  <data name="Step3Add" xml:space="preserve">
+    <value>Adăugați</value>
+  </data>
+  <data name="Step3Wait" xml:space="preserve">
+    <value>Înregistrarea dispozitivului este în curs…</value>
+  </data>
+  <data name="ErrorStepNoDevice" xml:space="preserve">
+    <value>Conexiunea cu dispozitivul nu a fost stabilită.</value>
+  </data>
+  <data name="ErrorStepMakeSure" xml:space="preserve">
+    <value>Asigurați-vă că:</value>
+  </data>
+  <data name="ErrorStepInWifi" xml:space="preserve">
+    <value>1. Termoregulatorul este în modul de configurare Wi-Fi</value>
+  </data>
+  <data name="ErrorStepWifiOnPhone" xml:space="preserve">
+    <value>2. Wi-Fi-ul de pe smartphone-ul dumneavoastră este activat.</value>
+  </data>
+  <data name="ErrorStepPermissions" xml:space="preserve">
+    <value>3. Ați acordat toate permisiunile necesare pentru aplicația Heat Ceram.</value>
+  </data>
+  <data name="ErrorStepRetryOrHand" xml:space="preserve">
+    <value>Încercați din nou sau conectați-vă manual la rețeaua Wi-Fi numită „HeatCeram”, apoi apăsați Reîncercați</value>
+  </data>
+  <data name="ErrorStepRetry" xml:space="preserve">
+    <value>Reîncercați</value>
+  </data>
+  <data name="NoWiFIPermissions" xml:space="preserve">
+    <value>Aplicația nu are permisiunea de a accesa lista punctelor de acces WiFi.</value>
+  </data>
+  <data name="GotoSetup" xml:space="preserve">
+    <value>Accesați setările</value>
+  </data>
+</root>

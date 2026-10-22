@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<l:BasePage
+    x:Class="HeatController.AddDevicePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:il="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+    xmlns:l="clr-namespace:HeatController"
+    xmlns:progressBar="clr-namespace:Syncfusion.XForms.ProgressBar;assembly=Syncfusion.SfProgressBar.XForms"
+    xmlns:t="clr-namespace:Xamarin.CommunityToolkit.Extensions;assembly=Xamarin.CommunityToolkit"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    Title="{t:Translate AddNewDevice}"
+    x:DataType="l:AddDevicePageModel">
+    <l:BasePage.Body>
+        <ScrollView>
+            <StackLayout>
+                <StackLayout
+                    x:Name="Step1Layout"
+                    Margin="40"
+                    IsVisible="False">
+                    <Label
+                        FontSize="14"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        Text="{t:Translate AddNewDeviceInstuction}"
+                        VerticalOptions="Start" />
+                    <Label
+                        Margin="0,40,0,0"
+                        FontSize="10"
+                        HorizontalOptions="Center"
+                        Text="{t:Translate LookingForDevice}"
+                        VerticalOptions="Center" />
+                    <progressBar:SfLinearProgressBar
+                        Margin="20,0"
+                        IndeterminateAnimationDuration="2000"
+                        IsIndeterminate="True" />
+                    <Label
+                        Margin="0,20,0,0"
+                        Padding="20"
+                        xct:TouchEffect.Command="{Binding WiFiSettingsCommand}"
+                        xct:TouchEffect.CommandParameter="{Binding .}"
+                        xct:TouchEffect.NativeAnimation="True"
+                        HorizontalOptions="Center"
+                        Style="{DynamicResource LinkLabel}"
+                        Text="{t:Translate OpenWiFiSettings}"
+                        VerticalOptions="StartAndExpand" />
+                    <StackLayout.Triggers>
+                        <DataTrigger
+                            Binding="{Binding Step}"
+                            TargetType="StackLayout"
+                            Value="1">
+                            <Setter Property="IsVisible" Value="True" />
+                        </DataTrigger>
+                    </StackLayout.Triggers>
+                </StackLayout>
+
+                <StackLayout
+                    x:Name="Step2Layout"
+                    Margin="10"
+                    IsVisible="False"
+                    Spacing="0">
+
+                    <StackLayout Orientation="Horizontal">
+
+                        <ffimageloading:CachedImage
+                            HeightRequest="120"
+                            Source="{Binding ImageUrl}"
+                            WidthRequest="120" />
+
+                        <Label
+                            FontSize="10"
+                            HorizontalOptions="CenterAndExpand"
+                            HorizontalTextAlignment="Center"
+                            Text="{t:Translate DeviceFound}"
+                            VerticalOptions="Center"
+                            VerticalTextAlignment="Center" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical" Spacing="0">
+                        <Label Text="{t:Translate WifiNetwork}" />
+                        <il:SfTextInputLayout ContainerType="Outlined">
+                            <Picker ItemsSource="{Binding FoundDevice.Networks}" SelectedItem="{Binding SelectedNetwork}" />
+                        </il:SfTextInputLayout>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical" Spacing="0">
+                        <Label Text="{t:Translate Password}" />
+                        <il:SfTextInputLayout ContainerType="Outlined" EnablePasswordVisibilityToggle="True">
+                            <Entry IsPassword="True" Text="{Binding Password}" />
+                        </il:SfTextInputLayout>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical" Spacing="0">
+                        <Label Text="{t:Translate DeviceName}" />
+                        <il:SfTextInputLayout ContainerType="Outlined">
+                            <Entry Text="{Binding Name}" />
+                        </il:SfTextInputLayout>
+                    </StackLayout>
+
+                    <Button Command="{Binding RegisterCommand}" Text="{t:Translate RegisterDevice}" />
+
+                    <StackLayout.Triggers>
+                        <DataTrigger
+                            Binding="{Binding Step}"
+                            TargetType="StackLayout"
+                            Value="2">
+                            <Setter Property="IsVisible" Value="True" />
+                        </DataTrigger>
+                    </StackLayout.Triggers>
+                </StackLayout>
+
+                <StackLayout
+                    x:Name="Step3Layout"
+                    Margin="40"
+                    IsVisible="False">
+                    <Label
+                        FontSize="14"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        Text="{t:Translate RegisteringDevice}"
+                        VerticalOptions="Start" />
+                    <progressBar:SfLinearProgressBar
+                        Margin="20,40,0,0"
+                        IndeterminateAnimationDuration="2000"
+                        IsIndeterminate="True" />
+                    <Label
+                        Margin="0,20,0,0"
+                        Padding="20"
+                        xct:TouchEffect.Command="{Binding WiFiSettingsCommand}"
+                        xct:TouchEffect.CommandParameter="{Binding .}"
+                        xct:TouchEffect.NativeAnimation="True"
+                        HorizontalOptions="Center"
+                        Style="{DynamicResource LinkLabel}"
+                        Text="{t:Translate OpenWiFiSettings}"
+                        VerticalOptions="StartAndExpand" />
+                    <StackLayout.Triggers>
+                        <DataTrigger
+                            Binding="{Binding Step}"
+                            TargetType="StackLayout"
+                            Value="3">
+                            <Setter Property="IsVisible" Value="True" />
+                        </DataTrigger>
+                    </StackLayout.Triggers>
+                </StackLayout>
+
+                <StackLayout
+                    x:Name="Step4Layout"
+                    Margin="40"
+                    IsVisible="False">
+                    <Label
+                        FontSize="14"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        Text="{t:Translate DeviceRegistered}"
+                        VerticalOptions="Start" />
+
+                    <Button
+                        Margin="0,40,0,0"
+                        Command="{Binding ConfigureCommand}"
+                        Text="{t:Translate Configure}" />
+
+                    <StackLayout.Triggers>
+                        <DataTrigger
+                            Binding="{Binding Step}"
+                            TargetType="StackLayout"
+                            Value="4">
+                            <Setter Property="IsVisible" Value="True" />
+                        </DataTrigger>
+                    </StackLayout.Triggers>
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
+    </l:BasePage.Body>
+</l:BasePage>

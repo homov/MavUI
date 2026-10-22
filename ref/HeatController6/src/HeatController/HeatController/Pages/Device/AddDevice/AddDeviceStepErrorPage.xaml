@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="HeatController.Pages.Device.AddDevice.AddDeviceStepErrorPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:l="clr-namespace:HeatController"
+    xmlns:t="clr-namespace:Xamarin.CommunityToolkit.Extensions;assembly=Xamarin.CommunityToolkit"
+    Title="{t:Translate AddNewDevice}"
+    x:DataType="l:AddDeviceSteps">
+    <ContentPage.Content>
+        <ScrollView Padding="20">
+            <StackLayout Orientation="Vertical" Spacing="20">
+
+                <Label Text="{t:Translate ErrorStepNoDevice}" />
+
+                <Label Text="{t:Translate ErrorStepMakeSure}" />
+
+                <Label Text="{t:Translate ErrorStepInWifi}" />
+
+                <Label Text="{t:Translate ErrorStepWifiOnPhone}" />
+
+                <Label Text="{t:Translate ErrorStepPermissions}" />
+
+                <Label Text="{t:Translate ErrorStepRetryOrHand}" />
+
+                <Label
+                    HorizontalOptions="StartAndExpand"
+                    Style="{DynamicResource LinkLabel}"
+                    Text="{t:Translate GotoSetup}"
+                    VerticalOptions="StartAndExpand">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoSettingsCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Button
+                    Margin="0,40,0,0"
+                    Command="{Binding RetryConnectCommand}"
+                    Text="{t:Translate ErrorStepRetry}"
+                    WidthRequest="200" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

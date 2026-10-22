@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="HeatController.DeviceEditView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:il="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+    xmlns:l="clr-namespace:HeatController"
+    xmlns:t="clr-namespace:Xamarin.CommunityToolkit.Extensions;assembly=Xamarin.CommunityToolkit"
+    xmlns:tv="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    x:DataType="l:DevicePageViewModel">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style x:Key="LeftLabel" TargetType="Label">
+                <Setter Property="WidthRequest" Value="150" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="VerticalOptions" Value="End" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <ScrollView>
+            <StackLayout Padding="10">
+                <StackLayout Spacing="5">
+                    <!--<Image
+                        HeightRequest="150"
+                        Source="{Binding UserDevice.Info.ImageUrl}"
+                        WidthRequest="150" />-->
+
+                    <ffimageloading:CachedImage
+                        HeightRequest="150"
+                        Source="{Binding UserDevice.DeviceType.DeviceTypeInfo.ImageUrl}"
+                        WidthRequest="150" />
+
+                    <StackLayout Spacing="0">
+                        <Label Style="{StaticResource LeftLabel}" Text="{t:Translate DeviceName}" />
+                        <il:SfTextInputLayout ContainerType="Outlined">
+                            <Entry Text="{Binding DeviceName}" />
+                        </il:SfTextInputLayout>
+                    </StackLayout>
+
+                    <StackLayout
+                        x:Name="LocationLayout"
+                        IsVisible="{Binding UserDevice.Info.GroupWork}"
+                        Orientation="Vertical"
+                        Spacing="0">
+                        <Label Style="{StaticResource LeftLabel}" Text="{t:Translate Location}" />
+                        <il:SfTextInputLayout
+                            ContainerType="Outlined"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="End">
+                            <l:ExtendedPicker
+                                CancelButton="{t:Translate Cancel}"
+                                DisplayProperty="Name"
+                                ItemsSource="{Binding LocationList}"
+                                SelectedItem="{Binding SelectedLocation, Mode=TwoWay}" />
+                        </il:SfTextInputLayout>
+                    </StackLayout>
+
+                    <StackLayout
+                        x:Name="ControlLayout"
+                        IsVisible="{Binding CanSetControl}"
+                        Orientation="Vertical"
+                        Spacing="0">
+                        <Label Style="{StaticResource LeftLabel}" Text="{t:Translate Control}" />
+                        <il:SfTextInputLayout
+                            ContainerType="Outlined"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="End">
+                            <l:ExtendedPicker
+                                CancelButton="{t:Translate Cancel}"
+                                DisplayProperty="Name"
+                                ItemsSource="{Binding ScheduleTypeList}"
+                                SelectedItem="{Binding SelectedScheduleType, Mode=TwoWay}" />
+                        </il:SfTextInputLayout>
+                    </StackLayout>
+
+                    <StackLayout
+                        x:Name="SensorLayout"
+                        IsVisible="{Binding CanSetSensor}"
+                        Orientation="Vertical"
+                        Spacing="0">
+                        <Label Style="{StaticResource LeftLabel}" Text="{t:Translate Sensor}" />
+                        <il:SfTextInputLayout
+                            ContainerType="Outlined"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="End">
+                            <l:ExtendedPicker
+                                CancelButton="{t:Translate Cancel}"
+                                DisplayProperty="Name"
+                                ItemsSource="{Binding SensorList}"
+                                SelectedItem="{Binding SelectedSensor, Mode=TwoWay}" />
+                        </il:SfTextInputLayout>
+                    </StackLayout>
+
+                    <StackLayout
+                        x:Name="AntiFreezeModeLayout"
+                        Margin="0,0,0,10"
+                        IsVisible="{Binding CanSetAntiFreezeMode}"
+                        Orientation="Horizontal"
+                        Spacing="0">
+                        <Label Style="{StaticResource LeftLabel}" Text="{t:Translate AntiFreezeMode}" />
+                        <Switch
+                            HorizontalOptions="CenterAndExpand"
+                            IsToggled="{Binding AntiFreezeMode}"
+                            VerticalOptions="Start" />
+                    </StackLayout>
+
+                    <StackLayout
+                        x:Name="HysteresisLayout"
+                        Margin="0,0,0,10"
+                        IsVisible="{Binding CanSetHysteresis}"
+                        Orientation="Horizontal">
+                        <Label Style="{StaticResource LeftLabel}" Text="{t:Translate Hysteresis}" />
+                        <l:VisualSlider
+                            HorizontalOptions="FillAndExpand"
+                            Maximum="{Binding MaxHysteresis}"
+                            Minimum="{Binding MinHysteresis}"
+                            StringFormat="{Binding HysteresisFormat}"
+                            Value="{Binding Hysteresis}" />
+                    </StackLayout>
+                    <StackLayout
+                        x:Name="HumiModeLayout"
+                        Margin="0,0,0,10"
+                        IsVisible="{Binding CanSetHumiMode}"
+                        Orientation="Horizontal"
+                        Spacing="0">
+                        <Label Style="{StaticResource LeftLabel}" Text="{t:Translate HumiMode}" />
+                        <Switch
+                            HorizontalOptions="CenterAndExpand"
+                            IsToggled="{Binding}"
+                            VerticalOptions="Start" />
+                    </StackLayout>
+                    <StackLayout
+                        x:Name="RoomTemperatureCoefficientLayout"
+                        Margin="0,0,0,10"
+                        IsVisible="{Binding CanSetRoomTemperatureCoefficient}"
+                        Orientation="Horizontal">
+                        <Label Style="{StaticResource LeftLabel}" Text="{t:Translate RoomTemperatureCoefficient}" />
+                        <l:VisualSlider
+                            HorizontalOptions="FillAndExpand"
+                            Maximum="50"
+                            Minimum="-50"
+                            StringFormat="{}{0:+#;-#;0}%"
+                            Value="{Binding RoomTempCoff}" />
+                    </StackLayout>
+
+                    <StackLayout
+                        x:Name="PanelTemperatureCoefficientLayout"
+                        Margin="0,0,0,10"
+                        IsVisible="{Binding CanSetPanelTemperatureCoefficient}"
+                        Orientation="Horizontal">
+                        <Label Style="{StaticResource LeftLabel}" Text="{t:Translate PanelTemperatureCoefficient}" />
+                        <l:VisualSlider
+                            HorizontalOptions="FillAndExpand"
+                            Maximum="50"
+                            Minimum="-50"
+                            StringFormat="{}{0:+#;-#;0}%"
+                            Value="{Binding PanelTempCoff}" />
+                    </StackLayout>
+
+                    <StackLayout
+                        x:Name="PanelTemperatureLayout"
+                        IsVisible="{Binding CanSetPanelTemperature}"
+                        Orientation="Horizontal">
+                        <Label Style="{StaticResource LeftLabel}" Text="{t:Translate PanelTemperature}" />
+                        <l:VisualSlider
+                            HorizontalOptions="FillAndExpand"
+                            Maximum="90"
+                            Minimum="30"
+                            StringFormat="{}{0}°C"
+                            Value="{Binding PanelTemp}" />
+                    </StackLayout>
+
+                </StackLayout>
+                <Button
+                    Margin="0,15,0,0"
+                    Command="{Binding DeleteDeviceCommand}"
+                    HorizontalOptions="FillAndExpand"
+                    Text="{t:Translate Delete}" />
+            </StackLayout>
+        </ScrollView>
+    </ContentView.Content>
+</ContentView>

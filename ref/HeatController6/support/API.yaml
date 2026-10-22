@@ -1,0 +1,2390 @@
+openapi: "3.0.2"
+info:
+  title: API Title
+  version: "1.0"
+servers:
+  - url: http://localhost:8080
+  - url: https://apitest.heatceram.com.ua
+  - url: https://api.heatceram.com.ua
+tags:
+  - name: users
+  - name: devices
+  - name: schedules
+  - name: groups
+
+paths:
+
+  /stinexapiv1/user_registration/:
+    post:
+      tags:
+        - users
+      summary: user_registration
+      security: [ ]
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: "email_user"
+                  example: "user@mail.com"
+                password:
+                  type: string
+                  description: "password_user"
+                  example: example_password
+                timezone:
+                  type: string
+                  description: "timezone user"
+                  example: 'Europe/Kyiv'
+                language:
+                  $ref: '#/components/schemas/SetLanguage'
+              required:
+                - email
+                - password
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/StateResponse'
+
+  /stinexapiv1/user_validation/:
+    post:
+      tags:
+        - users
+      summary: Валідація користувача
+      security: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: Email
+                code:
+                  type: string
+                  description: Code
+                language:
+                  $ref: '#/components/schemas/SetLanguage'
+              required:
+                - email
+                - code
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/StateResponse'
+
+
+  /stinexapiv1/user_authorization/:
+    post:
+      tags:
+        - users
+      summary: Авторизація користувача
+      security: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: Email
+                password:
+                  type: string
+                  description: Password
+                language:
+                  $ref: '#/components/schemas/SetLanguage'
+              required:
+                - email
+                - password
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/UserAuthorizationResponse'
+
+
+  /stinexapiv1/change_timezone/:
+    post:
+      tags:
+        - users
+      summary: Змінити часовий пояс користувача
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                timezone:
+                  type: string
+                  description: timezone of user
+                  example: Europe/Kyiv
+              required:
+                - timezone
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/StateResponse'
+
+  /stinexapiv1/get_timezones/:
+    post:
+      tags:
+        - users
+      summary: Отримати список часових поясів
+      security: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                language:
+                  $ref: '#/components/schemas/SetLanguage'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/GetTimezonesResponse'
+
+  /stinexapiv1/user_password_restoration/:
+    post:
+      tags:
+        - users
+      summary: Відновлення паролю
+      security: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: Email
+                language:
+                  $ref: '#/components/schemas/SetLanguage'
+              required:
+                - email
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/StateResponse'
+
+
+  /stinexapiv1/password_change/:
+    post:
+      tags:
+        - users
+      summary: Зміна паролю
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: Email
+                password:
+                  type: string
+                  description: Старий пароль
+                new_password:
+                  type: string
+                  description: Новий пароль
+              required:
+                - email
+                - password
+                - new_password
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/StateResponse'
+
+
+  /stinexapiv1/password_restoration_validate/:
+    post:
+      tags:
+        - users
+      security: []
+      summary: Підтвердження відновлення паролю
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: Email
+                password:
+                  type: string
+                  description: Пароль
+                code:
+                  type: string
+                  description: Код
+              required:
+                - email
+                - password
+                - code
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/StateResponse'
+
+
+  /stinexapiv1/get_user_settings/:
+    post:
+      tags:
+        - users
+      summary: get_user_settings
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties: {}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/get_user_settings_response'
+
+  /stinexapiv1/user_delete/:
+    post:
+      tags:
+        - users
+      summary: user_delete
+      requestBody:
+        content: { }
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/user_delete_response'
+
+  /stinexapiv1/error_codes/:
+    post:
+      tags:
+        - users
+      summary: error_codes
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+#                language:
+#                  type: string
+#                  example: en
+#                  default: en
+                language:
+                  $ref: '#/components/schemas/SetLanguage'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/error_codes_response'
+
+  /stinexapiv1/get_all_error_codes:
+    post:
+      tags:
+        - users
+      summary: get all code error codes
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                language:
+                  $ref: '#/components/schemas/SetLanguage'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/all_error_codes_response'
+
+
+  /stinexapiv1/app_version/:
+    post:
+      tags:
+        - users
+      summary: app_version
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                version:
+                  type: string
+                  example: 0.1.1
+                  default: "1.0.0"
+                os:
+                  type: string
+                  example: "android"
+                  default: "android"
+                  enum:
+                    - android
+                    - ios
+              required:
+                - version
+                - os
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/app_version_response'
+
+  /stinexapiv1/set_user_language:
+    post:
+      tags:
+        - users
+      summary: set user language
+      description: set language for description when an error occurs
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                language:
+                  $ref: '#/components/schemas/SetLanguage'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/StateResponse'
+
+
+
+####################################################
+####################################################
+####################################################
+
+  /stinexapiv1/get_schedule_by_id/:
+    post:
+      tags:
+        - schedules
+      summary: get_schedule_by_id
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                schedule_id:
+                  type: string
+                  example: 65e59059be481568e809c557
+              required:
+                - schedule_id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/GetScheduleByID"
+
+  /stinexapiv1/update_schedule_type/:
+    post:
+      tags:
+        - schedules
+      summary: update_schedule_type
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                schedule_id:
+                  type: string
+                  example: 65e59059be481568e809c557
+                schedule_type:
+                  type: string
+                  example: manual
+              required:
+                - schedule_id
+                - schedule_type
+            examples:
+              example_1:
+                summary: by_manual
+                value:
+                  schedule_id: 65e59059be481568e809c557
+                  schedule_type: manual
+              example_2:
+                summary: by_time
+                value:
+                  schedule_id: 65e59059be481568e809c557
+                  schedule_type: time
+              example_3:
+                summary: by_temperature
+                value:
+                  schedule_id: 65e59059be481568e809c557
+                  schedule_type: temperature
+              example_4:
+                summary: by_humidity
+                value:
+                  schedule_id: 65e59059be481568e809c557
+                  schedule_type: humidity
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/GetScheduleByID"
+
+
+  /stinexapiv1/update_schedule/:
+    post:
+      tags:
+        - schedules
+      summary: update_schedule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                schedule_id:
+                  type: string
+                  example: 65e59059be481568e809c557
+                schedule_type:
+                  type: string
+                  enum: [time, temperature, humidity, manual]
+                schedule:
+                  $ref: '#/components/schemas/schedule_week'
+            examples:
+              example1:
+                summary: "by_manual"
+                value:
+                  schedule_id: 65e59059be481568e809c557
+                  schedule_type: manual
+                  schedule: |
+                    {"monday":[{"h":0,"t":21,"s":1}],"tuesday":[{"h":0,"t":21,"s":1}],"wednesday":[{"h":0,"t":21,"s":1}],"thursday":[{"h":0,"t":21,"s":1}],"friday":[{"h":0,"t":21,"s":1}],"saturday":[{"h":0,"t":21,"s":1}],"sunday":[{"h":0,"t":21,"s":1}]}
+
+              example2:
+                summary: "by_time"
+                value:
+                  schedule_id: 65e59059be481568e809c557
+                  schedule_type: time
+                  schedule: |
+                    {"monday":[{"h":0,"s":1}],"tuesday":[{"h":0,"s":1}],"wednesday":[{"h":0,"s":1}],"thursday":[{"h":0,"s":1}],"friday":[{"h":0,"s":1}],"saturday":[{"h":0,"s":1}],"sunday":[{"h":0,"s":1}]}
+              example3:
+                summary: "by_temperature"
+                value:
+                  schedule_id: 65e59059be481568e809c557
+                  schedule_type: temperature
+                  schedule:  |
+                    {"monday":[{"h":0,"t":21,"s":1},{"h":1,"t":21,"s":1}],"tuesday":[{"h":0,"t":21,"s":1}],"wednesday":[{"h":0,"t":21,"s":1}],"thursday":[{"h":0,"t":21,"s":1}],"friday":[{"h":0,"t":21,"s":1}],"saturday":[{"h":0,"t":21,"s":1}],"sunday":[{"h":0,"t":21,"s":1}]}
+              example4:
+                summary: "by_humidity"
+                value:
+                  schedule_id: 65e59059be481568e809c557
+                  schedule_type: humidity
+                  schedule:  |
+                    {"monday":[{"h":0,"p":21,"s":1},{"h":1,"p":21,"s":1}],"tuesday":[{"h":0,"p":21,"s":1}],"wednesday":[{"h":0,"p":21,"s":1}],"thursday":[{"h":0,"p":21,"s":1}],"friday":[{"h":0,"p":21,"s":1}],"saturday":[{"h":0,"p":21,"s":1}],"sunday":[{"h":0,"p":21,"s":1}]}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              examples:
+                schedule_update_ok:
+                  summary: schedule be updated
+                  value:
+#                    $ref: '#/components/schemas/update_schedule_response'
+                    $ref: '#/components/schemas/StateResponse'
+
+####################################################
+####################################################
+####################################################
+
+  /stinexapiv1/set_heat_state/:
+    post:
+      tags:
+        - devices
+      summary: set_heat_state
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                device_id:
+                  type: string
+                  example: '65e4df8c1c413b387b81b73b'
+                state:
+                  type: string
+                  example: 'true'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/StateResponse'
+
+
+  /stinexapiv1/get_device_types/:
+    post:
+      tags:
+        - devices
+      summary: get_device_types
+      requestBody:
+        content: {}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/get_device_types_rsponse'
+
+
+  /stinexapiv1/set_room_temp:
+    post:
+      tags:
+        - devices
+      summary: set_room_temp
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                device_id:
+                  type: string
+                  example: 65e59028be481568e809c555
+                temp:
+                  type: string
+                  example: '25.5'
+                  description: this parameter must be convertible to float
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/StateResponse'
+
+  /stinexapiv1/set_panel_temp/:
+    post:
+      tags:
+        - devices
+      summary: set_panel_temp
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                device_id:
+                  type: string
+                  example: 65e59028be481568e809c555
+                temp:
+                  type: string
+                  example: '29'
+                  description: this parameter must be convertible to float
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/StateResponse'
+
+  /stinexapiv1/change_antifreeze_mode/:
+    post:
+      tags:
+        - devices
+      summary: change_antifreeze_mode
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                device_id:
+                  type: string
+                  example: 65e59028be481568e809c555
+                state:
+                  type: integer
+                  example: '0'
+                  description: this parameter must be convertible to integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/StateResponse'
+
+  /stinexapiv1/change_gisteresis/:
+    post:
+      tags:
+        - devices
+      summary: change_gisteresis
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                device_id:
+                  type: string
+                  example: 65e59028be481568e809c555
+                temp:
+                  type: string
+                  example: '5'
+                  description: this parameter must be convertible to integer
+
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/StateResponse'
+
+  /stinexapiv1/change_gisteresis_panel/:
+    post:
+      tags:
+        - devices
+      summary: change_gisteresis_panel
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                device_id:
+                  type: string
+                  example: 65e59028be481568e809c555
+                temp:
+                  type: integer
+                  example: '4'
+                  description: this parameter must be convertible to integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/StateResponse'
+
+
+  /stinexapiv1/change_room_coef/:
+    post:
+      tags:
+        - devices
+      summary: change_room_coef
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                device_id:
+                  type: string
+                  example: 65e59028be481568e809c555
+                value:
+                  type: number
+                  example: '-19'
+                  description: this parameter must be convertible to integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/StateResponse'
+
+
+  /stinexapiv1/change_panel_coef/:
+    post:
+      tags:
+        - devices
+      summary: change_panel_coef
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                device_id:
+                  type: string
+                  example: 65e59028be481568e809c555
+                value:
+                  type: number
+                  example: '-19'
+                  description: this parameter must be convertible to integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/StateResponse'
+
+  /stinexapiv1/set_device_sensor/:
+    post:
+      tags:
+        - devices
+      summary: set_device_sensor
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                device_id:
+                  type: string
+                  example: 65e59028be481568e809c555
+                sensor_id:
+                  type: string
+                  nullable: true
+                  description: if sensor_id is null, device sensor will be deleted
+                  example: 65e59d3ebe481568e809c558
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/StateResponse'
+
+  /stinexapiv1/set_device_name/:
+    post:
+      tags:
+        - devices
+      summary: set_device_name
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                device_id:
+                  type: string
+                  example: 65e59028be481568e809c555
+                name:
+                  type: string
+                  example: example_name
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/StateResponse'
+
+  /stinexapiv1/get_needed_heat_state:
+    post:
+      tags:
+        - devices
+      summary: get_needed_heat_state --> ?
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                device_id:
+                  type: string
+                  example: 65c37e0258bf1e08a4fad9c4
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/heat_state_response'
+
+
+  /stinexapiv1/get_dev_name/:
+    post:
+      tags:
+        - devices
+      summary: get_dev_name
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                device_id:
+                  type: string
+                  example: 65e59028be481568e809c555
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/get_dev_name_response'
+
+
+  /stinexapiv1/get_connection_state/:
+    post:
+      tags:
+        - devices
+      summary: get_connection_state
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                device_id:
+                  type: string
+                  example: 65e59028be481568e809c555
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/get_connection_state_response'
+
+
+  /stinexapiv1/get_heat_state/:
+    post:
+      tags:
+        - devices
+      summary: get_heat_state
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                device_id:
+                  type: string
+                  example: 65e59028be481568e809c555
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/heat_state_response'
+
+
+  /stinexapiv1/get_needed_temp_panel/:
+    post:
+      tags:
+        - devices
+      summary: get_needed_temp_panel
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                device_id:
+                  type: string
+                  example: 65e59028be481568e809c555
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/temp_panel_response'
+  
+  /stinexapiv1/get_temp_panel/:
+    post:
+      tags:
+        - devices
+      summary: get_temp_panel
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                device_id:
+                  type: string
+                  example: 65e59028be481568e809c555
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/temp_panel_response'
+  
+
+  /stinexapiv1/get_needed_temp_room/:
+    post:
+      tags:
+        - devices
+      summary: get_needed_temp_room
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                device_id:
+                  type: string
+                  example: 65e59028be481568e809c555
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/temp_room_response'
+
+  /stinexapiv1/get_temp_room/:
+    post:
+      tags:
+        - devices
+      summary: get_temp_room
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                device_id:
+                  type: string
+                  example: 65e59028be481568e809c555
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/temp_room_response'
+
+  /stinexapiv1/get_device_info_by_id/:
+    post:
+      tags:
+        - devices
+      summary: get_device_info_by_id
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                device_id:
+                  type: string
+                  example: 65e59028be481568e809c555
+              required:
+                - device_id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/get_device_info_by_id_response'
+
+
+
+  /stinexapiv1/get_user_devices/:
+    post:
+      tags:
+        - devices
+      summary: get_user_devices
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties: {}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/get_user_devices_responce'
+##
+#                get_device_OK:
+#                  summary: get_user_devices - OK
+#                  value:
+#                    $ref: '#/components/schemas/get_user_devices_responce'
+#                device_list_empty:
+#                  summary: user_dont_have_devices
+#                  value:
+#                    $ref: '#/components/schemas/get_user_devices_empty_responce'
+##
+
+
+
+
+
+
+  /stinexapiv1/remove_device/:
+    post:
+      tags:
+        - devices
+      summary: remove_device
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                device_id:
+                  type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/StateResponse'
+
+
+
+  ####################################################
+####################################################
+####################################################
+
+  /stinexapiv1/create_new_group/:
+    post:
+      tags:
+        - groups
+      summary: create_new_group
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                group_name:
+                  type: string
+                  example: "example_name"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/create_new_group_response'
+
+
+  /stinexapiv1/set_group_name/:
+    post:
+      tags:
+        - groups
+      summary: set_group_name
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                group_id:
+                  type: string
+                  example: 65e674a79eaf4e1718089482
+                group_name:
+                  type: string
+                  example: "test_name_group"
+              required:
+                - group_id
+                - group_name
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/StateResponse'
+
+  /stinexapiv1/set_device_group/:
+    post:
+      tags:
+        - groups
+      summary: create_new_group
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                group_id:
+                  type: string
+                  nullable: true
+                  example: "65e674a79eaf4e1718089482"
+                device_id:
+                  type: string
+                  nullable: false
+                  example: "65e674a79eaf4e1718089482"
+              required:
+                - device_id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/StateResponse'
+
+  /stinexapiv1/set_group_sensor/:
+    post:
+      tags:
+        - groups
+      summary: set_group_sensor
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                group_id:
+                  type: string
+                  example: "65e674a79eaf4e1718089482"
+                sensor_id:
+                  type: string
+                  example: "65e674a79eaf4e1718089482"
+              required:
+                - group_id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/StateResponse'
+
+
+  /stinexapiv1/remove_group/:
+    post:
+      tags:
+        - groups
+      summary: remove_group
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                group_id:
+                  type: string
+                  example: "65e674a79eaf4e1718089482"
+              required:
+                - group_id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/StateResponse'
+
+  /stinexapiv1/get_user_groups/:
+    post:
+      tags:
+        - groups
+      summary: get_user_groups
+      requestBody:
+        content: {}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/get_user_groups_response'
+
+  /stinexapiv1/get_group_devices/:
+    post:
+      tags:
+        - groups
+      summary: get_group_devices
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                group_id:
+                  type: string
+                  example: 6616b2c67e96071c29488113
+              required:
+                - group_id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/get_group_devices_responses'
+
+
+
+
+
+#  StateResponse
+########################################################################3
+########################################################################3
+########################################################################3
+########################################################################3
+########################################################################3
+########################################################################3
+
+components:
+  schemas:
+
+    State:
+      type: string
+      enum:
+        - ok
+        - error
+
+    ErrorDescription:
+      type: string
+      nullable: true
+      example: 'user not found'
+
+
+    ErrorCodes:
+      type: string
+      nullable: true
+      enum:
+        - e101
+        - e102
+        - e103
+        - e104
+        - e105
+        - e106
+        - e107
+        - e108
+        - e109
+        - e110
+        - e111
+        - e112
+        - e113
+        - e114
+        - e115
+        - e201
+        - e202
+        - e203
+        - e204
+        - e205
+        - e206
+        - e207
+        - e301
+        - e302
+        - e303
+        - e303
+        - e400
+        - e401
+        - e402
+        - e403
+        - e404
+        - e405
+        - e406
+        - e407
+        - e408
+
+
+    BaseResponse:
+      type: object
+      properties:
+        state:
+          $ref: '#/components/schemas/State'
+        description:
+          $ref: '#/components/schemas/ErrorDescription'
+        code:
+          $ref: '#/components/schemas/ErrorCodes'
+      required:
+        - state
+
+    StateResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            status:
+              type: string
+              nullable: true
+              enum:
+                - validating
+                - validated
+                - updated
+                - authorized
+                - repeatedly validating
+                - password changed
+                - users deleted
+                - group created
+                - group created
+                - group sensor seted
+                - group deleted
+                - timezone changed
+                - seted
+                - sensor seted
+                - removed
+                - group seted
+
+    UserAuthorizationResponse:
+      allOf:
+        - $ref: '#/components/schemas/StateResponse'
+        - type: object
+          properties:
+            uuid:
+              type: string
+              nullable: true
+              example: "660e9b331a32fa5adf9051ff"
+      example: |
+        {
+          "state": "ok",
+          "status": "authorized",
+          "uuid": "660e9b331a32fa5adf9051ff"
+        }
+
+    GetTimezonesResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            timezones:
+              type: array
+              items:
+                $ref: '#/components/schemas/Timezones'
+      example: |
+        {
+          "state": "ok",
+          "timezones": [
+            {
+              "0": "Europe/Amsterdam"
+            },
+            {
+              "1": "Europe/Andorra"
+            },
+            {
+              "2": "Europe/Astrakhan"
+            },
+            {
+              "3": "Europe/Athens"
+            },
+            {
+              "4": "Europe/Belgrade"
+            },
+            {
+              "5": "Europe/Berlin"
+            },
+            {
+              "6": "Europe/Bratislava"
+            },
+            {
+              "7": "Europe/Brussels"
+            },
+            {
+              "8": "Europe/Bucharest"
+            },
+            {
+              "9": "Europe/Budapest"
+            },
+            {
+              "10": "Europe/Busingen"
+            },
+            {
+              "11": "Europe/Chisinau"
+            },
+            {
+              "12": "Europe/Copenhagen"
+            },
+            {
+              "13": "Europe/Dublin"
+            },
+            {
+              "14": "Europe/Gibraltar"
+            },
+            {
+              "15": "Europe/Guernsey"
+            },
+            {
+              "16": "Europe/Helsinki"
+            },
+            {
+              "17": "Europe/Isle_of_Man"
+            },
+            {
+              "18": "Europe/Istanbul"
+            },
+            {
+              "19": "Europe/Jersey"
+            },
+            {
+              "20": "Europe/Kaliningrad"
+            },
+            {
+              "21": "Europe/Kiev"
+            },
+            {
+              "22": "Europe/Kirov"
+            },
+            {
+              "23": "Europe/Lisbon"
+            },
+            {
+              "24": "Europe/Ljubljana"
+            },
+            {
+              "25": "Europe/London"
+            },
+            {
+              "26": "Europe/Luxembourg"
+            },
+            {
+              "27": "Europe/Madrid"
+            },
+            {
+              "28": "Europe/Malta"
+            },
+            {
+              "29": "Europe/Mariehamn"
+            },
+            {
+              "30": "Europe/Minsk"
+            },
+            {
+              "31": "Europe/Monaco"
+            },
+            {
+              "32": "Europe/Moscow"
+            },
+            {
+              "33": "Europe/Oslo"
+            },
+            {
+              "34": "Europe/Paris"
+            },
+            {
+              "35": "Europe/Podgorica"
+            },
+            {
+              "36": "Europe/Prague"
+            },
+            {
+              "37": "Europe/Riga"
+            },
+            {
+              "38": "Europe/Rome"
+            },
+            {
+              "39": "Europe/Samara"
+            },
+            {
+              "40": "Europe/San_Marino"
+            },
+            {
+              "41": "Europe/Sarajevo"
+            },
+            {
+              "42": "Europe/Saratov"
+            },
+            {
+              "43": "Europe/Simferopol"
+            },
+            {
+              "44": "Europe/Skopje"
+            },
+            {
+              "45": "Europe/Sofia"
+            },
+            {
+              "46": "Europe/Stockholm"
+            },
+            {
+              "47": "Europe/Tallinn"
+            },
+            {
+              "48": "Europe/Tirane"
+            },
+            {
+              "49": "Europe/Ulyanovsk"
+            },
+            {
+              "50": "Europe/Uzhgorod"
+            },
+            {
+              "51": "Europe/Vaduz"
+            },
+            {
+              "52": "Europe/Vatican"
+            },
+            {
+              "53": "Europe/Vienna"
+            },
+            {
+              "54": "Europe/Vilnius"
+            },
+            {
+              "55": "Europe/Volgograd"
+            },
+            {
+              "56": "Europe/Warsaw"
+            },
+            {
+              "57": "Europe/Zagreb"
+            },
+            {
+              "58": "Europe/Zaporozhye"
+            },
+            {
+              "59": "Europe/Zurich"
+            }
+          ]
+        }
+
+
+
+    Timezones:
+      type: object
+      additionalProperties:
+        type: string
+      example:
+        '0': Europe/Amsterdam
+
+    get_user_settings_response:
+      allOf:
+#        - $ref: '#/components/schemas/StateResponse'
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            timezone:
+              type: string
+              nullable: true
+              example: Europe/Amsterdam
+
+    user_delete_response:
+      allOf:
+        - $ref: '#/components/schemas/StateResponse'
+
+    error_codes_response:
+      # TODO: не певен чи правильно зобразив
+      allOf:
+        - $ref: '#/components/schemas/StateResponse'
+        - type: object
+          properties:
+            errors:
+              type: object
+              nullable: true
+              properties:
+                err_name:
+                  type: string
+                  nullable: true
+                  example: "authorization error"
+      example: |
+        {"state": "ok", "errors": {"e101": "authorization error", "e102": "user not found", "e103": "wrong password", "e104": "Wrong data", "e105": "bad data", "e106": "bad email", "e107": "bad code", "e108": "wrong code", "e109": "too many requests", "e110": "registrant not found", "e111": "timezone missed", "e112": "server internal error", "e201": "device not found", "e202": "user not bound", "e203": "cant set", "e204": "bad value", "e205": "sensor not found", "e206": "device already bounded", "e207": "internal server error", "e301": "schedule not found", "e302": "schedule bad type", "e303": "schedule bad format", "e401": "group not found", "e402": "name already used", "e403": "error creating", "e404": "error creating schedule", "e405": "user dont have groups", "e406": "device not groupable", "e407": "sensor not found", "e408": "group is not empty"}}
+
+    all_error_codes_response:
+      allOf:
+        - $ref: '#/components/schemas/StateResponse'
+        - type: object
+          properties:
+            errors:
+              type: object
+              nullable: true
+              properties:
+                err_name:
+                  type: object
+                  nullable: true
+                  properties:
+                    EN:
+                      type: string
+                      example: "authorization error"
+                    UA:
+                      type: string
+                      example: "помилка авторизації"
+                    PL:
+                      type: string
+                      example: "błąd autoryzacji"
+      example: |
+        {"state": "ok", "errors": {"e101": {"EN": "authorization error", "UA": "помилка авторизації", "PL": "błąd autoryzacji"}, "e102": {"EN": "user not found", "UA": "Користувач не знайдений", "PL": "użytkownik nie znaleziony"}, "e103": {"EN": "wrong password", "UA": "неправильний пароль", "PL": "złe hasło"}, "e104": {"EN": "Wrong data", "UA": "Неправильні дані", "PL": "Złe dane"}, "e105": {"EN": "bad data", "UA": "погані дані", "PL": "złe dane"}, "e106": {"EN": "bad email", "UA": "погана електронна пошта", "PL": "zły e-mail"}, "e107": {"EN": "bad code", "UA": "поганий код", "PL": "zły kod"}, "e108": {"EN": "wrong code", "UA": "невірний код", "PL": "niepoprawny kod"}, "e109": {"EN": "too many requests", "UA": "занадто багато запитів", "PL": "zbyt dużo próśb"}, "e110": {"EN": "registrant not found", "UA": "реєстрант не знайдений", "PL": "nie znaleziono rejestrującego"}, "e111": {"EN": "timezone missed", "UA": "часовий пояс пропущено", "PL": "strefa czasowa pominięta"}, "e112": {"EN": "server internal error", "UA": "внутрішня помилка сервера", "PL": "Wewnętrzny błąd serwera"}, "e201": {"EN": "device not found", "UA": "пристрій не знайдено", "PL": "urządzenie nie zostało znalezione"}, "e202": {"EN": "user not bound", "UA": "користувач не прив'язаний", "PL": "użytkownik niezwiązany"}, "e203": {"EN": "cant set", "UA": "неможливо встановити", "PL": "nie mogę ustawić"}, "e204": {"EN": "bad value", "UA": "погане значення", "PL": "zła wartość"}, "e205": {"EN": "sensor not found", "UA": "датчик не знайдено", "PL": "nie znaleziono czujnika"}, "e206": {"EN": "device already bounded", "UA": "пристрій уже з'єднано", "PL": "urządzenie jest już ograniczone"}, "e207": {"EN": "internal server error", "UA": "Внутрішня помилка сервера", "PL": "wewnętrzny błąd serwera"}, "e301": {"EN": "schedule not found", "UA": "розклад не знайдено", "PL": "nie znaleziono harmonogramu"}, "e302": {"EN": "schedule bad type", "UA": "поганий тип розкладу", "PL": "harmonogram zły typ"}, "e303": {"EN": "schedule bad format", "UA": "поганий формат розкладу", "PL": "zaplanuj zły format"}, "e401": {"EN": "group not found", "UA": "група не знайдена", "PL": "nie znaleziono grupy"}, "e402": {"EN": "name already used", "UA": "назва вже використана", "PL": "nazwa już używana"}, "e403": {"EN": "error creating", "UA": "помилка створення групи", "PL": "tworzenie błędu"}, "e404": {"EN": "error creating schedule", "UA": "помилка створення розкладу", "PL": "błąd podczas tworzenia harmonogramu"}, "e405": {"EN": "user dont have groups", "UA": "користувач не має груп", "PL": "użytkownik nie ma grup"}, "e406": {"EN": "device not groupable", "UA": "пристрій неможливо згрупувати", "PL": "urządzenia nie można grupować"}, "e407": {"EN": "sensor not found", "UA": "датчик не знайдено", "PL": "nie znaleziono czujnika"}, "e408": {"EN": "group is not empty", "UA": "група не порожня", "PL": "grupa nie jest pusta"}}}
+
+    app_version_response:
+      allOf:
+        - $ref: '#/components/schemas/StateResponse'
+        - type: object
+          nullable: true
+          properties:
+            need_update:
+              type: boolean
+#              nullable: true
+              example: false
+              description: "if true, then the update is required and the user should not be able to access other features"
+            can_update:
+                type: boolean
+#                nullable: trueg
+                example: true
+                description: "if true, then an update is available, but it is not required, and the user can access the functionality anyway"
+            last_version:
+                type: string
+#                nullable: true
+                example: "2.1.2"
+                description: "displays the latest available version of the application"
+          example: |
+                {"state": "ok", "need_update": true, "can_update": true, "current_version": "3.45.23"}
+    
+    
+
+    schedules:
+      type: object
+      properties:
+        schedule_id:
+          type: string
+          example: "662142bcc2361f1e04cfdfa9"
+        reciver_id:
+          type: string
+          example: "66213c1336faff20c29a29f2"
+        schedule_type:
+          type: string
+          enum:
+            - manual
+            - time
+            - humidity
+            - temperature
+          example: "humidity"
+        reciver_type:
+          type: string
+          example: "device"
+          description: "or --> group"
+        schedule:
+          $ref: '#/components/schemas/schedule_week'
+
+    schedule_week:
+      properties:
+        monday:
+          $ref: '#/components/schemas/schedule_day_params'
+        tuesday:
+          $ref: '#/components/schemas/schedule_day_params'
+        wednesday:
+          $ref: '#/components/schemas/schedule_day_params'
+        thursday:
+          $ref: '#/components/schemas/schedule_day_params'
+        friday:
+          $ref: '#/components/schemas/schedule_day_params'
+        saturday:
+          $ref: '#/components/schemas/schedule_day_params'
+        sunday:
+          $ref: '#/components/schemas/schedule_day_params'
+
+    schedule_day_params:
+      type: array
+      items:
+        type: object
+        properties:
+          h:
+            type: integer
+            nullable: false
+            description: hour
+          s:
+            type: integer
+            nullable: false
+            description: state
+          t:
+            type: integer
+            nullable: true
+            description: temperature
+          p:
+            type: integer
+            nullable: true
+            description: humidity
+      description: >
+        if this component contain t than schedule type is temperature or time and schedule cant contain h 
+        if this component contain h than schedule type is humidity and schedule cant contain t 
+        if t == null and p == null than schedule type is manual
+
+    GetScheduleByID:
+      allOf:
+        - $ref: '#/components/schemas/StateResponse'
+        - type: object
+          properties:
+            schedule:
+#              additionalProperties:
+              $ref: '#/components/schemas/schedules'
+
+#    update_schedule_response:
+#      allOf:
+#        - $ref: '#/components/schemas/StateResponse'
+#        - type: object
+#          properties:
+#            status:
+#              type: string
+#              enum:
+#                - updated
+#              example: updated
+
+
+    create_new_group_response:
+      allOf:
+        - $ref: '#/components/schemas/StateResponse'
+        - type: object
+          properties:
+            group_id:
+              type: string
+              nullable: true
+              example: "65f2d69f8cb4280fbdd13888"
+            schedule_id:
+              type: string
+              nullable: true
+              example: "65f2d69f8cb4280fbdd13ccc"
+
+    get_user_groups_response:
+      allOf:
+        - $ref: '#/components/schemas/StateResponse'
+        - type: object
+          nullable: true
+          properties:
+            groups:
+              type: array
+              items:
+                $ref: '#/components/schemas/user_groups_item'
+
+    user_groups_item:
+      type: object
+      properties:
+        group_id:
+          type: string
+          description: id group
+        name:
+          type: string
+          description: group name
+        schedule:
+          type: string
+          description: id schedule
+        average_temp:
+          type: number
+          description: average temp in room
+        average_humidity:
+          type: number
+          description: average humidity in room
+        manual:
+          type: string
+          description:  automatic (0) or manual (1).
+        temp_room:
+          type: integer
+          description: average temp in room
+        timer:
+          type: integer
+          description: don't use
+        heat_state:
+          type: integer
+          description: heat state panel (0 або 1).
+        external_sensor_id:
+          type: string
+          description: external sensor id.
+        external_sensor_state:
+          type: string
+          nullable: true
+          description: state external sensor (can be null).
+        sharing_info:
+          type: array
+          items: { }
+          description: don't use
+
+    get_group_devices_responses:
+      allOf: 
+        - $ref: '#/components/schemas/StateResponse'
+        - type: object
+          nullable: true
+          properties:
+            devices:
+              type: array
+              items:
+                $ref: '#/components/schemas/group_devices'
+      example: |
+        {
+          "state": "ok",
+          "devices": [
+            {
+              "schedule_id": "6621274736710020c29a29ef",
+              "group_work": false,
+              "timer": 0,
+              "is_sensor": false,
+              "device_type": "panel-e2d",
+              "external_sensor_id": null,
+              "sensors": [
+                "t_room",
+                "t_panel"
+              ],
+              "control_type": [
+                "time",
+                "temperature"
+              ],
+              "online_status": "offline",
+              "heat_state": null,
+              "need_heat_state": null,
+              "device_id": "6616ac7a221f02554d042c2b",
+              "device_name": "e2dрозетка",
+              "temp_panel": "22",
+              "temp_room": "21",
+              "need_temp_panel": "80",
+              "need_temp_room": "23",
+              "group_id": "66140b14e5c9a65f7ab4d5d5",
+              "bound_state": 1,
+              "sharing_info": [],
+              "gistereses_panel": null,
+              "gistereses": 1
+            }
+          ]
+        }
+
+    group_devices:
+      type: object
+      properties:
+        schedule_id:
+          type: string
+          example: 6621274736710020c29a29ef
+          description: Unique identifier of the schedule.
+        group_work:
+          type: boolean
+          example: false
+          description: Group working mode (true or false).
+        timer:
+          type: integer
+          default: 0
+          example: 0
+          description: Timer (0 or 1).
+        is_sensor:
+          type: boolean
+          example: false
+          description: Whether it is a sensor (true or false).
+        device_type:
+          type: string
+          example: panel-e2d
+          description: Type of the device.
+        external_sensor_id:
+          type: string
+          example: 6621274736710020c29a29ff
+          nullable: true
+          description: Unique identifier of the external sensor (can be null).
+        sensors:
+          type: array
+          items:
+            type: string
+          example: [ "t_room", "t_panel" ]
+          description: List of sensors.
+        control_type:
+          type: array
+          items:
+            type: string
+          example: [ "time","temperature" ]
+          description: Types of control.
+        online_status:
+          type: string
+          example: "offline"
+          description: Online status (online or offline).
+        heat_state:
+          type: string
+          nullable: true
+          description: Heating state (can be null).
+        need_heat_state:
+          type: string
+          nullable: true
+          description: Required heating state (can be null).
+        device_id:
+          type: string
+          example: 6616ac7a221f02554d042c2b
+          description: Unique identifier of the device.
+        device_name:
+          type: string
+          example: example_dev_name
+          description: Name of the device.
+        temp_panel:
+          type: string
+          example: 22
+          description: Temperature of the panel.
+        temp_room:
+          type: string
+          example: 21
+          description: Temperature in the room.
+        need_temp_panel:
+          type: string
+          example: 80
+          description: Required temperature of the panel.
+        need_temp_room:
+          type: string
+          example: 23
+          description: Required temperature in the room.
+        group_id:
+          type: string
+          example: 66140b14e5c9a65f7ab4d5d5
+          description: Unique identifier of the group.
+        bound_state:
+          type: integer
+          example: 1
+          description: Connection state (1 or 0).
+        sharing_info:
+          type: array
+          items: { }
+          description: Sharing information (empty array).
+        gistereses_panel:
+          type: string
+          nullable: true
+          description: Panel state (can be null).
+        gistereses:
+          type: integer
+          example: 1
+          description: Number of "gistereses".
+
+
+    get_device_types_rsponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          nullable: true
+          properties:
+            device_types:
+              type: array
+              items:
+                $ref: '#/components/schemas/device_types'
+
+    device_types:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: false
+          enum:
+            - combo
+            - ambrella-t
+            - ambrella-th
+            - ambrella-p
+            - hunter-pro
+            - hunter
+            - panel-2d
+            - panel-e2d
+            - proline
+            - relay
+            - relay-c
+            - alter
+        picture:
+          type: string
+          nullable: false
+          enum:
+            - combo
+            - ambrella-t.png
+            - ambrella-th.png
+            - ambrella-p.png
+            - hunter-pro.png
+            - hunter.png
+            - panel-2d.png
+            - panel-e2d.png
+            - proline.png
+            - relay.png
+            - relay-c.png
+            - alter.png
+        temp_min:
+          type: integer
+          nullable: true
+        temp_max:
+          type: integer
+          nullable: true
+        humi_min:
+          type: integer
+          nullable: true
+        humi_max:
+          type: integer
+          nullable: true
+        gis_min:
+          type: integer
+          nullable: true
+        gis_max:
+          type: integer
+          nullable: true
+        controll_by:
+          type: string
+          enum:
+            - humi
+            - temp
+          nullable: true
+        control_type:
+          type: array
+          items:
+            type: string
+          example: [ "time","humidity", "temperature" ]
+
+    heat_state_response:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          nullable: true
+          properties:
+            heat_state:
+              type: string
+              enum:
+                - 1
+                - 0
+              description: if 1 device is On, else device is Off
+
+    get_dev_name_response:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          nullable: true
+          properties:
+            dev_name:
+              type: string
+              description: device name
+
+    get_connection_state_response:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          nullable: true
+          properties:
+            device_status:
+              type: string
+              enum:
+                - online
+                - offline
+  
+    temp_panel_response:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          nullable: true
+          properties:
+            temp_panel:
+              type: string
+
+    temp_room_response:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          nullable: true
+          properties:
+            temp_room:
+              type: string
+
+
+    get_device_info_by_id_response:
+      oneOf:
+        - type: object
+          nullable: true
+          additionalProperties:
+            $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          nullable: true
+          additionalProperties:
+            $ref: '#/components/schemas/device_info'
+
+
+    device_info:
+      type: object
+      properties:
+        schedule_id:
+          type: string
+          example: 6621274736710020c29a29ef
+          description: Unique identifier of the schedule.
+        group_work:
+          type: boolean
+          example: false
+          description: Group working mode (true or false).
+        timer:
+          type: integer
+          default: 0
+          example: 0
+          description: Timer (0 or 1).
+        is_sensor:
+          type: boolean
+          example: false
+          description: Whether it is a sensor (true or false).
+        device_type:
+          type: string
+          example: proline
+          description: Type of the device.
+        external_sensor_id:
+          type: string
+          example: 6621274736710020c29a29ff
+          nullable: true
+          description: Unique identifier of the external sensor (can be null).
+        sensors:
+          type: array
+          items:
+            type: string
+          example: [ "t_room","humidity" ]
+          description: List of sensors.
+        control_type:
+          type: array
+          items:
+            type: string
+          example: [ "time","temperature","humidity" ]
+          description: Types of control.
+        online_status:
+          type: string
+          example: "offline"
+          description: Online status (online or offline).
+        heat_state:
+          type: integer
+          nullable: true
+          description: Heating state (can be null).
+        need_heat_state:
+          type: integer
+          nullable: true
+          description: Required heating state (can be null).
+        device_id:
+          type: string
+          example: 6616ac7a221f02554d042c2b
+          description: Unique identifier of the device.
+        device_name:
+          type: string
+          example: example_dev_name
+          description: Name of the device.
+        temp_panel:
+          type: string
+          example: 22
+          description: Temperature of the panel.
+        temp_room:
+          type: string
+          example: 21
+          description: Temperature in the room.
+        need_temp_panel:
+          type: string
+          example: 80
+          description: Required temperature of the panel.
+        need_temp_room:
+          type: string
+          example: 23
+          description: Required temperature in the room.
+        group_id:
+          type: string
+          example: 66140b14e5c9a65f7ab4d5d5
+          description: Unique identifier of the group.
+        bound_state:
+          type: integer
+          example: 1
+          default: 1
+          description: Connection state (1 or 0).
+        sharing_info:
+          type: array
+          items: { }
+          description: Sharing information (empty array).
+        gistereses_panel:
+          type: string
+          nullable: true
+          description: Panel state (can be null).
+        gistereses:
+          type: integer
+          example: 1
+          nullable: true
+          description: Number of "gistereses".
+      example: |
+        {
+          "schedule_id": "662142bcc2361f1e04cfcea9",
+          "group_work": false,
+          "is_sensor": false,
+          "device_type": "proline",
+          "external_sensor_id": null,
+          "sensors": [
+            "t_room",
+            "humidity"
+          ],
+          "control_type": [
+            "time",
+            "temperature",
+            "humidity"
+          ],
+          "online_status": "offline",
+          "heat_state": 1,
+          "need_heat_state": 1,
+          "device_id": "66213c1336710020c29a29f2",
+          "device_name": "prolineeee",
+          "temp_panel": "0",
+          "temp_room": "22",
+          "need_temp_panel": "80",
+          "need_temp_room": "23",
+          "group_id": null,
+          "bound_state": 1,
+          "gistereses": 1,
+          "gistereses_panel": null
+        }
+    
+
+    get_user_devices_responce:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          nullable: true
+          properties:
+            devices:
+              type: array
+              items:
+                nullable: true
+                $ref: '#/components/schemas/User_Devices'
+
+    User_Devices:
+      type: object
+      nullable: true
+      properties:
+        schedule_id:
+          type: string
+          description: Unique identifier of the schedule.
+          example: "6613e9fdbfaad916cc93c5bb"
+        group_work:
+          type: boolean
+          description: Group working mode (true or false).
+          example: false
+        timer:
+          type: integer
+          description: Timer 0.
+          example: 0
+        is_sensor:
+          type: boolean
+          description: Whether it is a sensor (true or false).
+          example: true
+        device_type:
+          type: string
+          description: Type of the device.
+          example: "umbrella-th"
+        external_sensor_id:
+          type: string
+          nullable: true
+          description: Unique identifier of the external sensor (can be null).
+          example: null
+        sensors:
+          type: array
+          items:
+            type: string
+          description: List of sensors.
+          example: [ "t_room", "humidity" ]
+        control_type:
+          type: string
+          nullable: true
+          description: Type of control (can be null).
+        online_status:
+          type: string
+          description: Online status ("online" or "offline").
+          example: "offline"
+        humidity:
+          type: number
+          nullable: true
+          description: Humidity value (can be null).
+          example: null
+        antifreeze_bit:
+          type: integer
+          description: Antifreeze bit (0 or 1).
+          example: 0
+        gistereses:
+          type: integer
+          description: Number of "gistereses".
+          example: 4
+        gistereses_panel:
+          type: integer
+          description: Panel gistereses.
+          example: 0
+        t1_coef:
+          type: integer
+          description: Coefficient T1.
+          example: -50
+        t2_coef:
+          type: integer
+          description: Coefficient T2.
+          example: 0
+        heat_state:
+          type: boolean
+          description: Heating state (true or false).
+          example: false
+        need_heat_state:
+          type: boolean
+          description: Whether heat is needed (true or false).
+          example: true
+        device_id:
+          type: string
+          description: Unique identifier of the device.
+          example: "6613da89bfaad916cc93c5b9"
+        device_name:
+          type: string
+          description: Name of the device.
+          example: "umbrella"
+        temp_panel:
+          type: number
+          description: Temperature of the panel.
+          example: 0.0
+        temp_room:
+          type: number
+          description: Temperature in the room.
+          example: 0.0
+        need_temp_panel:
+          type: number
+          description: Required temperature of the panel.
+          example: 80.0
+        need_temp_room:
+          type: number
+          description: Required temperature in the room.
+          example: 23.0
+        group_id:
+          type: string
+          nullable: true
+          description: Unique identifier of the group (can be null).
+          example: null
+        bound_state:
+          type: string
+          description: Bound state ("1" or "0").
+          example: "1"
+        sharing_info:
+          type: array
+          items: { }
+          description: Sharing information (empty array).
+          example: [ ]
+
+
+    SetLanguage:
+      type: string
+      nullable: true
+      description: 'this parameter sets the language in which the description will be received'
+      default: EN
+      enum:
+        - UA
+        - PL
+        - EN
+
+
+  securitySchemes:
+    cookieAuth: # arbitrary name for the security scheme; will be used in the "security" key later
+      type: apiKey
+      in: cookie
+      name: session  # cookie name
+
+
+security:
+  - cookieAuth: []

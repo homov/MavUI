@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="HeatController.LoadingPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Background="Black"
+    NavigationPage.HasNavigationBar="False">
+    <Grid>
+        <Image
+            Aspect="AspectFit"
+            HorizontalOptions="Center"
+            Opacity="1"
+            Source="screen.png"
+            VerticalOptions="Center" />
+        <ActivityIndicator
+            HorizontalOptions="Center"
+            IsRunning="True"
+            VerticalOptions="Center" />
+    </Grid>
+</ContentPage>

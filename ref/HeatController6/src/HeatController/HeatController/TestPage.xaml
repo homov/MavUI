@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<l:BasePage
+    x:Class="HeatController.TestPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:l="clr-namespace:HeatController"
+    xmlns:m="clr-namespace:HeatController.Models"
+    xmlns:t="clr-namespace:Xamarin.CommunityToolkit.Extensions;assembly=Xamarin.CommunityToolkit"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    x:DataType="l:SelectDeviceViewModel">
+    <l:BasePage.Body>
+        <StackLayout
+            Margin="10"
+            BackgroundColor="{DynamicResource GrayBg}"
+            HorizontalOptions="FillAndExpand"
+            Orientation="Vertical"
+            Spacing="10"
+            VerticalOptions="FillAndExpand">
+            <Label
+                x:Name="TitleLabel"
+                FontFamily="{Static l:Fonts.MonsterratSemiBold}"
+                FontSize="18"
+                HorizontalOptions="Start"
+                Text="Title"
+                VerticalOptions="Start" />
+            <Label
+                x:Name="MessageLabel"
+                Grid.Row="1"
+                FontFamily="{Static l:Fonts.MonsterratSemiBold}"
+                FontSize="14"
+                HorizontalOptions="Start"
+                Text="Message"
+                VerticalOptions="Center" />
+
+            <Entry Text="Entry" />
+
+            <StackLayout
+                Margin="20,10,20,0"
+                HorizontalOptions="End"
+                Orientation="Horizontal"
+                Spacing="10"
+                VerticalOptions="Start">
+                <Label
+                    Padding="10"
+                    xct:TouchEffect.Command="{Binding CancelCommand, Source={Reference self}}"
+                    xct:TouchEffect.CommandParameter="{Binding .}"
+                    xct:TouchEffect.NativeAnimation="True"
+                    HorizontalOptions="End"
+                    Style="{DynamicResource LinkLabel}"
+                    Text="{t:Translate Cancel}"
+                    TextTransform="Uppercase"
+                    VerticalOptions="Center" />
+                <Label
+                    Padding="10"
+                    xct:TouchEffect.Command="{Binding OkCommand, Source={Reference self}}"
+                    xct:TouchEffect.CommandParameter="{Binding .}"
+                    xct:TouchEffect.NativeAnimation="True"
+                    HorizontalOptions="End"
+                    Style="{DynamicResource LinkLabel}"
+                    Text="OK"
+                    VerticalOptions="Center" />
+            </StackLayout>
+        </StackLayout>
+    </l:BasePage.Body>
+</l:BasePage>

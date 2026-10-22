@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<l:BasePage
+    x:Class="HeatController.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:l="clr-namespace:HeatController"
+    xmlns:t="clr-namespace:Xamarin.CommunityToolkit.Extensions;assembly=Xamarin.CommunityToolkit"
+    xmlns:tv="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
+    Title="{t:Translate Groups}"
+    x:DataType="l:MainPageViewModel"
+    BackCommand="{Binding SettingsCommand}"
+    BackIcon="{Static l:Icons.Menu}"
+    BackIconVisible="True"
+    IsBusy="{Binding IsBusy}"
+    MenuCommand="{Binding AddCommand}"
+    MenuCommandParameter="{Binding SelectedIndex, Source={x:Reference tabView}}"
+    MenuIcon="{Static l:Icons.Plus}"
+    MenuIconVisible="True">
+    <l:BasePage.Resources>
+        <ResourceDictionary>
+            <l:SelectedTabTitleConverter x:Key="SelectedTabTitleConverter" />
+        </ResourceDictionary>
+    </l:BasePage.Resources>
+    <l:BasePage.Body>
+        <tv:SfTabView
+            x:Name="tabView"
+            DisplayMode="Image"
+            EnableSwiping="False"
+            SelectionChanged="tabView_SelectionChanged"
+            SelectionChanging="tabView_SelectionChanging"
+            TabHeaderPosition="Bottom"
+            VisibleHeaderCount="2">
+            <tv:SfTabItem Title="{t:Translate Groups}" IconFont="{Static l:Icons.Home}">
+                <tv:SfTabItem.Content>
+                    <l:LocationListView x:Name="locationListView" />
+                </tv:SfTabItem.Content>
+            </tv:SfTabItem>
+            <tv:SfTabItem Title="{t:Translate Devices}" IconFont="{Static l:Icons.CellphoneWireless}">
+                <tv:SfTabItem.Content>
+                    <l:DeviceListView x:Name="deviceListView" />
+                </tv:SfTabItem.Content>
+            </tv:SfTabItem>
+        </tv:SfTabView>
+    </l:BasePage.Body>
+</l:BasePage>

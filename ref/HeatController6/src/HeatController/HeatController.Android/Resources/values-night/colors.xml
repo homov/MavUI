@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="splash_background">#000000</color>
+
+    <!-- Тёмная (night) палитра -->
+    <color name="colorPrimary">#90CAF9</color>
+    <color name="colorPrimaryDark">#64B5F6</color>
+    <color name="colorOnPrimary">#000000</color>
+
+    <!-- В НОЧНОМ режиме colorSurface должен быть тёмным — тогда статус-бар станет тёмным -->
+    <color name="colorSurface">#000000</color>
+    <color name="colorOnSurface">#ECEFF1</color>
+    <!-- Можно менять на нужный вам светлый цвет для статуса, если нужно -->
+<!--  <color name="statusBarColor">#F5F5F5</color>-->
+</resources>

@@ -1,0 +1,171 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+		<LangVersion>10.0</LangVersion>
+		<UserSecretsId>40577fc0-2498-4da4-b16f-9301545fc502</UserSecretsId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DebugType>portable</DebugType>
+		<DebugSymbols>true</DebugSymbols>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="Resources\Fonts\MaterialDesignIcons.ttf" />
+	  <None Remove="Resources\Fonts\MontserratBold.ttf" />
+	  <None Remove="Resources\Fonts\MontserratMedium.ttf" />
+	  <None Remove="Resources\Fonts\MontserratRegular.ttf" />
+	  <None Remove="Resources\Fonts\MontserratSemiBold.ttf" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Resources\Fonts\MaterialDesignIcons.ttf" />
+	  <EmbeddedResource Include="Resources\Fonts\MontserratBold.ttf" />
+	  <EmbeddedResource Include="Resources\Fonts\MontserratMedium.ttf" />
+	  <EmbeddedResource Include="Resources\Fonts\MontserratRegular.ttf" />
+	  <EmbeddedResource Include="Resources\Fonts\MontserratSemiBold.ttf" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Syncfusion.Xamarin.Buttons" Version="27.1.58" />
+		<PackageReference Include="Syncfusion.Xamarin.Core" Version="27.1.58" />
+		<PackageReference Include="Syncfusion.Xamarin.SfGauge" Version="27.1.58" />
+		<PackageReference Include="Syncfusion.Xamarin.SfProgressBar" Version="27.1.58" />
+		<PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="27.1.58" />
+		<PackageReference Include="System.Reflection.Metadata" Version="9.0.3" />
+		<PackageReference Include="Xamarin.CommunityToolkit.Markup" Version="2.0.6" />
+		<PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+		<PackageReference Include="Xamarin.Forms" Version="5.0.0.2662" />
+		<PackageReference Include="Xamarin.Essentials" Version="1.8.1" />
+		<PackageReference Include="Autofac" Version="8.2.0" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.8.0" />
+		<PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.6" />
+
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Exceptions\" />
+	  <Folder Include="Extensions\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\HeatCeram.Api\HeatCeram.Api.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Languages\Resources.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Resources.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Device\DeviceListView.xaml.cs">
+	    <DependentUpon>DeviceListView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Device\DevicePage.xaml.cs">
+	    <DependentUpon>DevicePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Resources\Theme\Dark.xaml.cs">
+	    <DependentUpon>Dark.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Resources\Theme\Light.xaml.cs">
+	    <DependentUpon>Light.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="Controls\CardView.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Controls\HourEditControl.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Controls\HourEditPopup.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Controls\TemperatureEdit.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Controls\TemperatureEditPopup.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Controls\VisualSlider.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Pages\Device\AddDevicePage.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Pages\Device\AddDevice\AddDeviceStep1Page.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Pages\Device\AddDevice\AddDeviceStep2Page.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Pages\Device\AddDevice\AddDeviceStep3Page.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Pages\Device\AddDevice\AddDeviceStepErrorPage.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Pages\Device\DeviceEditView.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Pages\Device\SelectDevicePopup.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Pages\Device\SimpleDevicePage.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Pages\Location\LocationPage.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Pages\Location\LocationListView.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Pages\Schedule\ScheduleDayView.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Pages\Schedule\ScheduleView.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Pages\User\ChangePasswordPage.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Pages\User\ConfirmEmailPage.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Controls\BasePage.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Pages\User\CreateAccountPage.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Pages\User\ForgotPasswordPage.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Languages\Resources.resx">
+	    <Generator>PublicResXFileCodeGenerator</Generator>
+	    <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Pages\User\LoginPage.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Pages\LoadingPage.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Resources\Theme\Styles.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Pages\User\RestorePasswordPage.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Pages\SettingsPage.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="TestPage.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
+	</ItemGroup>
+</Project>

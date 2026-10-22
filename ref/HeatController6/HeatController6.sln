@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32811.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeatCeram.Api", "src\HeatCeram.Api\HeatCeram.Api.csproj", "{0C2A4096-83F5-4DD2-A2DE-C6072E5E501E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Xamarin", "Xamarin", "{89465167-7688-44D7-8449-269D3518B12D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeatController.Android", "src\HeatController\HeatController.Android\HeatController.Android.csproj", "{7F95CBB2-F3E4-4AAF-BE9D-DD95CD98870E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeatController", "src\HeatController\HeatController\HeatController.csproj", "{E9989A59-72BC-484A-B6A6-C03A9AF614A8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{BFE93567-E47F-4284-A1CC-63A47DC6FB9E}"
+	ProjectSection(SolutionItems) = preProject
+		support\heatceram-translation.xlsx = support\heatceram-translation.xlsx
+		support\ТЗ.docx = support\ТЗ.docx
+		support\ТЗ.pdf = support\ТЗ.pdf
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C2A4096-83F5-4DD2-A2DE-C6072E5E501E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C2A4096-83F5-4DD2-A2DE-C6072E5E501E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C2A4096-83F5-4DD2-A2DE-C6072E5E501E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C2A4096-83F5-4DD2-A2DE-C6072E5E501E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F95CBB2-F3E4-4AAF-BE9D-DD95CD98870E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F95CBB2-F3E4-4AAF-BE9D-DD95CD98870E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F95CBB2-F3E4-4AAF-BE9D-DD95CD98870E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{7F95CBB2-F3E4-4AAF-BE9D-DD95CD98870E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F95CBB2-F3E4-4AAF-BE9D-DD95CD98870E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F95CBB2-F3E4-4AAF-BE9D-DD95CD98870E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{E9989A59-72BC-484A-B6A6-C03A9AF614A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9989A59-72BC-484A-B6A6-C03A9AF614A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9989A59-72BC-484A-B6A6-C03A9AF614A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9989A59-72BC-484A-B6A6-C03A9AF614A8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7F95CBB2-F3E4-4AAF-BE9D-DD95CD98870E} = {89465167-7688-44D7-8449-269D3518B12D}
+		{E9989A59-72BC-484A-B6A6-C03A9AF614A8} = {89465167-7688-44D7-8449-269D3518B12D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3F8D0C03-80B8-431A-99CA-E2E5F2460C50}
+	EndGlobalSection
+EndGlobal

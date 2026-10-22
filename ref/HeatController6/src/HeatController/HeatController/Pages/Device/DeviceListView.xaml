@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="HeatController.DeviceListView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:l="clr-namespace:HeatController"
+    xmlns:m="clr-namespace:HeatController.Models"
+    xmlns:t="clr-namespace:Xamarin.CommunityToolkit.Extensions;assembly=Xamarin.CommunityToolkit"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    x:Name="root">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <xct:BoolToObjectConverter
+                x:Key="BoolToIconConverter"
+                FalseObject="{Static l:Icons.WifiOff}"
+                TrueObject="{Static l:Icons.Wifi}" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid>
+            <RefreshView Command="{Binding LoadCommand}" IsRefreshing="{Binding IsRefreshing}">
+                <CollectionView
+                    x:Name="DeviceCollectionView"
+                    Margin="10"
+                    HorizontalOptions="FillAndExpand"
+                    ItemsSource="{Binding Devices}"
+                    VerticalOptions="FillAndExpand">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout
+                            HorizontalItemSpacing="10"
+                            Orientation="Vertical"
+                            Span="2"
+                            VerticalItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Frame
+                                    Padding="10"
+                                    xct:TouchEffect.Command="{Binding BindingContext.ShowCommand, Source={Reference root}}"
+                                    xct:TouchEffect.CommandParameter="{Binding .}"
+                                    xct:TouchEffect.NativeAnimation="True"
+                                    BackgroundColor="{DynamicResource Gray300}"
+                                    CornerRadius="8"
+                                    HasShadow="False"
+                                    MinimumHeightRequest="400">
+                                    <StackLayout HorizontalOptions="FillAndExpand" Orientation="Vertical">
+                                        <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                                            <Grid>
+                                                <Frame
+                                                    Padding="2"
+                                                    BackgroundColor="Transparent"
+                                                    HasShadow="False"
+                                                    HeightRequest="48"
+                                                    WidthRequest="48">
+                                                    <!--<Image HorizontalOptions="Center" Source="{Binding Info.ImageUrl}" />-->
+                                                    <ffimageloading:CachedImage HorizontalOptions="Center" Source="{Binding DeviceType.DeviceTypeInfo.ImageUrl}" />
+                                                </Frame>
+                                                <l:FontIcon
+                                                    Margin="0,0,-15,0"
+                                                    FontSize="14"
+                                                    HorizontalOptions="End"
+                                                    Text="{Binding Info.IsOnline, Converter={StaticResource BoolToIconConverter}}"
+                                                    VerticalOptions="Start" />
+                                            </Grid>
+                                        </StackLayout>
+
+                                        <Label
+                                            FontFamily="{Static l:Fonts.MonsterratMedium}"
+                                            FontSize="12"
+                                            Text="{Binding Name}" />
+
+                                        <Label
+                                            Margin="0,-5,0,0"
+                                            FontFamily="{Static l:Fonts.MonsterratSemiBold}"
+                                            FontSize="10"
+                                            IsVisible="{Binding Info.HasGroup}"
+                                            Text="{Binding GroupName}"
+                                            TextColor="{DynamicResource PrimaryLight}" />
+
+                                        <StackLayout
+                                            HorizontalOptions="Start"
+                                            Orientation="Horizontal"
+                                            Spacing="4"
+                                            VerticalOptions="EndAndExpand">
+
+                                            <StackLayout
+                                                HorizontalOptions="End"
+                                                IsVisible="{Binding Info.HasRoomTemperature}"
+                                                Orientation="Horizontal"
+                                                Spacing="0">
+                                                <l:FontIcon
+                                                    FontSize="14"
+                                                    Text="{Static l:Icons.HomeThermometerOutline}"
+                                                    VerticalOptions="End" />
+                                                <Label
+                                                    Margin="2,0,0,0"
+                                                    FontSize="12"
+                                                    Text="{Binding Info.FormattedRoomTemperature}"
+                                                    VerticalOptions="Center" />
+                                            </StackLayout>
+
+                                            <StackLayout
+                                                HorizontalOptions="End"
+                                                IsVisible="{Binding Info.HasTemperature}"
+                                                Orientation="Horizontal"
+                                                Spacing="0">
+                                                <l:FontIcon
+                                                    FontSize="14"
+                                                    Text="{Static l:Icons.Thermometer}"
+                                                    VerticalOptions="End" />
+                                                <Label
+                                                    FontSize="12"
+                                                    Text="{Binding Info.FormattedTemperature}"
+                                                    VerticalOptions="Center" />
+                                            </StackLayout>
+                                          
+                                            <StackLayout
+                                                HorizontalOptions="End"
+                                                IsVisible="{Binding Info.HasHumidity}"
+                                                Orientation="Horizontal"
+                                                Spacing="0">
+                                                <l:FontIcon
+                                                    FontSize="14"
+                                                    Text="{Static l:Icons.WaterPercent}"
+                                                    VerticalOptions="End" />
+                                                <Label
+                                                    FontSize="12"
+                                                    Text="{Binding Info.FormattedHumidity}"
+                                                    VerticalOptions="Center" />
+                                            </StackLayout>
+
+                                            <StackLayout
+HorizontalOptions="End"
+IsVisible="{Binding Info.IsHeat}"
+Orientation="Vertical"
+Spacing="0">
+                                                <l:FontIcon
+    FontSize="14"
+    Text="{Static l:Icons.HeatWave}" />
+
+                                            </StackLayout>
+
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+                                <l:ToggleFontIcon
+                                    Padding="10,5"
+                                    CommandTarget="{Binding .}"
+                                    HorizontalOptions="End"
+                                    IsOn="{Binding IsOn}"
+                                    IsVisible="{Binding Info.IsNotSensor}"
+                                    OffCommand="{Binding BindingContext.TurnOffCommand, Source={Reference root}}"
+                                    OnCommand="{Binding BindingContext.TurnOnCommand, Source={Reference root}}"
+                                    VerticalOptions="Start" />
+
+                                <!--<Switch
+                                    Margin="0,10,0,0"
+                                    HorizontalOptions="End"
+                                    IsToggled="{Binding IsOn}"
+                                    IsVisible="{Binding Info.IsNotSensor}"
+                                    VerticalOptions="Start">
+                                    <Switch.Behaviors>
+                                        <xct:EventToCommandBehavior
+                                            Command="{Binding BindingContext.ToggleDeviceStateCommand, Source={Reference root}}"
+                                            CommandParameter="{TemplateBinding .}"
+                                            EventName="Toggled" />
+                                    </Switch.Behaviors>
+                                </Switch>-->
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+            <ActivityIndicator
+                HorizontalOptions="Center"
+                IsRunning="{Binding IsBusy}"
+                VerticalOptions="Center" />
+        </Grid>
+    </ContentView.Content>
+</ContentView>
