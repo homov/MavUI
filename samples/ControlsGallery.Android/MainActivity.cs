@@ -5,6 +5,7 @@ using Avalonia;
 using Avalonia.Android;
 using Avalonia.Controls;
 using Mav;
+using Mav.Platform;
 using Mav.Theming;
 
 namespace Mav.ControlsGallery.Android;
