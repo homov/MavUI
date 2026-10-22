@@ -55,10 +55,12 @@ public class MavIcon : TextBlock
         });
     }
 
+    /// <summary>Creates an empty 24 dp icon.</summary>
     public MavIcon() : this(null, 24, null)
     {
     }
 
+    /// <summary>Creates an icon of the given <paramref name="size"/> that shows <paramref name="glyph"/> in the given color role.</summary>
     public MavIcon(string? glyph = null, double size = 24, MavColorRole? colorRole = null)
     {
         FontFamily = MavFonts.ResolveIconFont(glyph);

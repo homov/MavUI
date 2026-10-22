@@ -47,10 +47,12 @@ public class MavContextualActionBar : MavContentView, IEnumerable<Control>
         TitleFormatProperty.Changed.AddClassHandler<MavContextualActionBar>((b, _) => b.SyncState());
     }
 
+    /// <summary>Creates an empty contextual action bar that hides when nothing is selected.</summary>
     public MavContextualActionBar() : this(0, true)
     {
     }
 
+    /// <summary>Creates a contextual action bar for <paramref name="selectedCount"/> selected items.</summary>
     public MavContextualActionBar(int selectedCount = 0, bool autoHideWhenEmpty = true)
     {
         HorizontalAlignment = HorizontalAlignment.Stretch;
@@ -156,6 +158,7 @@ public class MavContextualActionBar : MavContentView, IEnumerable<Control>
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
+    /// <summary>Adds an icon action and returns the bar for chaining.</summary>
     public MavContextualActionBar AddAction(string icon, string? tooltip = null, Action? onClicked = null)
     {
         var btn = new MavIconButton(icon);
@@ -167,6 +170,7 @@ public class MavContextualActionBar : MavContentView, IEnumerable<Control>
         return this;
     }
 
+    /// <summary>Adds a text button and returns the bar for chaining.</summary>
     public MavContextualActionBar AddButton(string text, string? icon = null, Action? onClicked = null)
     {
         var btn = new MavButton(text, MavButtonVariant.Tonal, icon, MavButtonSize.Small);

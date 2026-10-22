@@ -12,6 +12,7 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>Drawing style of a <see cref="MavSparkline"/>: line or bars.</summary>
 public enum MavSparklineKind
 {
     Line,
@@ -83,10 +84,12 @@ public class MavSparkline : Control
         });
     }
 
+    /// <summary>Creates an empty line sparkline.</summary>
     public MavSparkline() : this(null, MavSparklineKind.Line, null)
     {
     }
 
+    /// <summary>Creates a sparkline with the given values, kind and color.</summary>
     public MavSparkline(
         IReadOnlyList<double>? values = null,
         MavSparklineKind kind = MavSparklineKind.Line,
@@ -136,6 +139,7 @@ public class MavSparkline : Control
         set => SetValue(CenterLabelProperty, value);
     }
 
+    /// <summary>Draws the sparkline for the current values.</summary>
     public override void Render(DrawingContext context)
     {
         var w = Bounds.Width;

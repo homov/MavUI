@@ -14,6 +14,7 @@ internal sealed class MavLruCache<TKey, TValue>
     private readonly LinkedList<Entry> _order = new();
     private readonly object _gate = new();
 
+    /// <summary>Creates a cache that keeps at most <paramref name="capacity"/> entries.</summary>
     public MavLruCache(int capacity)
     {
         if (capacity <= 0) throw new ArgumentOutOfRangeException(nameof(capacity));
@@ -29,6 +30,7 @@ internal sealed class MavLruCache<TKey, TValue>
         }
     }
 
+    /// <summary>Returns the cached value for <paramref name="key"/> and marks it as recently used.</summary>
     public bool TryGet(TKey key, out TValue value)
     {
         lock (_gate)
@@ -47,6 +49,7 @@ internal sealed class MavLruCache<TKey, TValue>
         return false;
     }
 
+    /// <summary>Stores a value and evicts the least recently used entry when the cache is full.</summary>
     public void Set(TKey key, TValue value)
     {
         lock (_gate)
@@ -71,6 +74,7 @@ internal sealed class MavLruCache<TKey, TValue>
         }
     }
 
+    /// <summary>Removes all entries from the cache.</summary>
     public void Clear()
     {
         lock (_gate)

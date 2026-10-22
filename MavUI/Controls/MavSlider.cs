@@ -57,10 +57,12 @@ public class MavSlider : Control, IMavDraggableControl
         CenteredProperty.Changed.AddClassHandler<MavSlider>((s, _) => s.InvalidateVisual());
     }
 
+    /// <summary>Creates a slider from 0 to 100 at 50.</summary>
     public MavSlider() : this(0, 100, 50, 0)
     {
     }
 
+    /// <summary>Creates a slider with the given range, value and number of discrete steps.</summary>
     public MavSlider(double min = 0, double max = 100, double value = 50, int divisions = 0)
     {
         Height = 48;
@@ -141,12 +143,14 @@ public class MavSlider : Control, IMavDraggableControl
         set => ValueFormatter = value;
     }
 
+    /// <summary>Measures the track and the thumb to fill the available width.</summary>
     protected override Size MeasureOverride(Size availableSize)
     {
         var w = double.IsFinite(availableSize.Width) && availableSize.Width > 0 ? availableSize.Width : 240;
         return new Size(w, 48);
     }
 
+    /// <summary>Starts dragging the thumb, or jumps the thumb to the pointer position.</summary>
     protected override void OnPointerPressed(PointerPressedEventArgs e)
     {
         base.OnPointerPressed(e);
@@ -160,6 +164,7 @@ public class MavSlider : Control, IMavDraggableControl
         e.Handled = true;
     }
 
+    /// <summary>Updates the value while the thumb is dragged.</summary>
     protected override void OnPointerMoved(PointerEventArgs e)
     {
         base.OnPointerMoved(e);
@@ -169,6 +174,7 @@ public class MavSlider : Control, IMavDraggableControl
         e.Handled = true;
     }
 
+    /// <summary>Ends the drag and commits the value.</summary>
     protected override void OnPointerReleased(PointerReleasedEventArgs e)
     {
         base.OnPointerReleased(e);
@@ -179,6 +185,7 @@ public class MavSlider : Control, IMavDraggableControl
         e.Handled = true;
     }
 
+    /// <summary>Ends the drag when the pointer capture is lost.</summary>
     protected override void OnPointerCaptureLost(PointerCaptureLostEventArgs e)
     {
         base.OnPointerCaptureLost(e);
@@ -189,6 +196,7 @@ public class MavSlider : Control, IMavDraggableControl
         }
     }
 
+    /// <summary>Changes the value with the arrow, Home and End keys.</summary>
     protected override void OnKeyDown(KeyEventArgs e)
     {
         base.OnKeyDown(e);
@@ -247,6 +255,7 @@ public class MavSlider : Control, IMavDraggableControl
         return clamped;
     }
 
+    /// <summary>Draws the active and inactive track segments, the tick marks and the thumb.</summary>
     public override void Render(DrawingContext context)
     {
         var w = Bounds.Width;
@@ -349,6 +358,7 @@ public class MavSlider : Control, IMavDraggableControl
         }
     }
 
+    /// <summary>Draws one track segment between two positions, with rounded ends.</summary>
     internal static void DrawTrackSegment(
         DrawingContext context,
         IBrush brush,
@@ -421,10 +431,12 @@ public class MavRangeSlider : Control, IMavDraggableControl
         DivisionsProperty.Changed.AddClassHandler<MavRangeSlider>((s, _) => s.InvalidateVisual());
     }
 
+    /// <summary>Creates a range slider from 0 to 100 with the range 25 to 75.</summary>
     public MavRangeSlider() : this(0, 100, 25, 75, 0)
     {
     }
 
+    /// <summary>Creates a range slider with the given bounds, start and end values and divisions.</summary>
     public MavRangeSlider(double min = 0, double max = 100, double start = 25, double end = 75, int divisions = 0)
     {
         Height = 48;
@@ -500,12 +512,14 @@ public class MavRangeSlider : Control, IMavDraggableControl
 
     public Func<double, string>? ValueFormatter { get; set; }
 
+    /// <summary>Measures the track and the thumbs to fill the available width.</summary>
     protected override Size MeasureOverride(Size availableSize)
     {
         var w = double.IsFinite(availableSize.Width) && availableSize.Width > 0 ? availableSize.Width : 240;
         return new Size(w, 48);
     }
 
+    /// <summary>Starts dragging the closer thumb, or jumps it to the pointer position.</summary>
     protected override void OnPointerPressed(PointerPressedEventArgs e)
     {
         base.OnPointerPressed(e);
@@ -528,6 +542,7 @@ public class MavRangeSlider : Control, IMavDraggableControl
         e.Handled = true;
     }
 
+    /// <summary>Updates the moved thumb while the pointer drags.</summary>
     protected override void OnPointerMoved(PointerEventArgs e)
     {
         base.OnPointerMoved(e);
@@ -537,6 +552,7 @@ public class MavRangeSlider : Control, IMavDraggableControl
         e.Handled = true;
     }
 
+    /// <summary>Ends the drag and commits the range.</summary>
     protected override void OnPointerReleased(PointerReleasedEventArgs e)
     {
         base.OnPointerReleased(e);
@@ -547,6 +563,7 @@ public class MavRangeSlider : Control, IMavDraggableControl
         e.Handled = true;
     }
 
+    /// <summary>Ends the drag when the pointer capture is lost.</summary>
     protected override void OnPointerCaptureLost(PointerCaptureLostEventArgs e)
     {
         base.OnPointerCaptureLost(e);
@@ -557,6 +574,7 @@ public class MavRangeSlider : Control, IMavDraggableControl
         }
     }
 
+    /// <summary>Changes the focused thumb with the arrow, Home and End keys.</summary>
     protected override void OnKeyDown(KeyEventArgs e)
     {
         base.OnKeyDown(e);
@@ -636,6 +654,7 @@ public class MavRangeSlider : Control, IMavDraggableControl
         return clamped;
     }
 
+    /// <summary>Draws the track, the selected range, the tick marks and both thumbs.</summary>
     public override void Render(DrawingContext context)
     {
         var w = Bounds.Width;

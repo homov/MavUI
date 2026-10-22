@@ -38,10 +38,12 @@ public class MavLoadingIndicator : Control
         IsVisibleProperty.Changed.AddClassHandler<MavLoadingIndicator>((l, _) => l.UpdateLoop());
     }
 
+    /// <summary>Creates a 48 dp loading indicator without a container.</summary>
     public MavLoadingIndicator() : this(48, false)
     {
     }
 
+    /// <summary>Creates a loading indicator of the given <paramref name="size"/>, optionally on a container circle.</summary>
     public MavLoadingIndicator(double size = 48, bool contained = false)
     {
         Size = size;
@@ -113,6 +115,7 @@ public class MavLoadingIndicator : Control
         });
     }
 
+    /// <summary>Draws the animated lobes at the current rotation and pulse phase.</summary>
     public override void Render(DrawingContext context)
     {
         var w = Bounds.Width;

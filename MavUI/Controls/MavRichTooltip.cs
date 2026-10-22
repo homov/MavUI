@@ -74,6 +74,7 @@ public class MavRichTooltip : Control
 
     protected override Size MeasureOverride(Size availableSize) => default;
 
+    /// <summary>Shows the tooltip next to <paramref name="anchor"/>.</summary>
     public void Show(Control anchor)
     {
         Dismiss();
@@ -168,6 +169,7 @@ public class MavRichTooltip : Control
         MavMotion.ScaleIn(card, 0.94, MavMotion.Short3);
     }
 
+    /// <summary>Hides the tooltip.</summary>
     public void Dismiss()
     {
         if (_handle is not null)
@@ -177,6 +179,7 @@ public class MavRichTooltip : Control
         }
     }
 
+    /// <summary>Creates a rich tooltip with the given content, shows it next to <paramref name="anchor"/> and returns it.</summary>
     public static MavRichTooltip Show(
         Control anchor,
         string? subhead,

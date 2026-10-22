@@ -13,6 +13,7 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>Size of a floating action button (<see cref="MavFab"/>).</summary>
 public enum MavFabSize
 {
     Small,
@@ -20,6 +21,7 @@ public enum MavFabSize
     Large,
 }
 
+/// <summary>Color role of a floating action button (<see cref="MavFab"/>).</summary>
 public enum MavFabColor
 {
     Primary,
@@ -62,10 +64,12 @@ public class MavFab : MavContentView
         CommandParameterProperty.Changed.AddClassHandler<MavFab>((f, e) => f._surface.CommandParameter = e.GetNewValue<object?>());
     }
 
+    /// <summary>Creates a floating action button with the add icon.</summary>
     public MavFab() : this(MavIcons.Add)
     {
     }
 
+    /// <summary>Creates a floating action button with the given icon, size and variant.</summary>
     public MavFab(
         string icon = MavIcons.Add,
         MavFabSize size = MavFabSize.Regular,
@@ -208,10 +212,12 @@ public class MavExtendedFab : MavContentView
         CommandParameterProperty.Changed.AddClassHandler<MavExtendedFab>((f, e) => f._surface.CommandParameter = e.GetNewValue<object?>());
     }
 
+    /// <summary>Creates an extended floating action button without a label.</summary>
     public MavExtendedFab() : this(string.Empty)
     {
     }
 
+    /// <summary>Creates an extended floating action button with a label and icon.</summary>
     public MavExtendedFab(
         string text,
         string icon = MavIcons.Edit,

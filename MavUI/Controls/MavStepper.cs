@@ -14,6 +14,7 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>State of a step in a <see cref="MavStepper"/>.</summary>
 public enum MavStepState
 {
     Indexed,
@@ -22,6 +23,7 @@ public enum MavStepState
     Error,
 }
 
+/// <summary>One step of a <see cref="MavStepper"/>.</summary>
 public sealed class MavStep : Control
 {
     public static readonly StyledProperty<string> TitleProperty =
@@ -53,10 +55,12 @@ public sealed class MavStep : Control
         StateOverrideProperty.Changed.AddClassHandler<MavStep>((s, _) => s.StepItemChanged?.Invoke(s, EventArgs.Empty));
     }
 
+    /// <summary>Creates an empty step.</summary>
     public MavStep()
     {
     }
 
+    /// <summary>Creates a step with a title, optional description and content.</summary>
     public MavStep(
         string title,
         string? subtitle = null,
@@ -178,10 +182,12 @@ public class MavStepper : MavContentView, IEnumerable<MavStep>
             s.RebuildFromItemsSource(s.ItemsSource));
     }
 
+    /// <summary>Creates a horizontal stepper with navigation controls.</summary>
     public MavStepper() : this(Orientation.Horizontal, true)
     {
     }
 
+    /// <summary>Creates a stepper with the given <paramref name="orientation"/>, optionally showing the navigation controls.</summary>
     public MavStepper(Orientation orientation = Orientation.Horizontal, bool showControls = true)
     {
         HorizontalAlignment = HorizontalAlignment.Stretch;
@@ -330,6 +336,7 @@ public class MavStepper : MavContentView, IEnumerable<MavStep>
         }
     }
 
+    /// <summary>Adds a step and returns the stepper for chaining.</summary>
     public MavStepper AddStep(
         string title,
         string? subtitle = null,
@@ -346,6 +353,7 @@ public class MavStepper : MavContentView, IEnumerable<MavStep>
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
+    /// <summary>Moves to the next step, if there is one.</summary>
     public void Next()
     {
         if (_steps.Count == 0) return;
@@ -361,6 +369,7 @@ public class MavStepper : MavContentView, IEnumerable<MavStep>
         }
     }
 
+    /// <summary>Moves to the previous step, if there is one.</summary>
     public void Previous()
     {
         if (CurrentStep > 0)

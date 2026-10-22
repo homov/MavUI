@@ -18,6 +18,7 @@ internal static class MavPropertyCache
     private const int MaxEntries = 1024;
     private static readonly ConcurrentDictionary<PropertyKey, PropertyInfo?> Cache = new();
 
+    /// <summary>Returns the cached property info for the given type and name, or <c>null</c> if it does not exist.</summary>
     public static PropertyInfo? Get(
         [DynamicallyAccessedMembers(
             DynamicallyAccessedMemberTypes.PublicProperties |

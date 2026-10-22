@@ -26,6 +26,7 @@ public interface IMavThemeService : INotifyPropertyChanged, IDisposable
     void ClearCustomSchemes();
 }
 
+/// <summary>Default implementation of <see cref="IMavThemeService"/>; applies theme changes to <see cref="MavTheme"/>.</summary>
 public sealed class MavThemeService : IMavThemeService, IDisposable
 {
     public static MavThemeService Instance { get; } = new();
@@ -36,6 +37,7 @@ public sealed class MavThemeService : IMavThemeService, IDisposable
     public event PropertyChangedEventHandler? PropertyChanged;
     public event EventHandler<MavTheme>? ThemeChanged;
 
+    /// <summary>Creates the service and subscribes to the application theme changes.</summary>
     public MavThemeService()
     {
         _themeChangedHandler = OnThemeChanged;
@@ -116,6 +118,7 @@ public sealed class MavThemeService : IMavThemeService, IDisposable
 
     public void Configure(Action<MavThemeOptions> configure) => MavTheme.Configure(configure);
 
+    /// <summary>Applies the custom light and dark schemes to the service.</summary>
     public void ApplyCustomSchemes(MavColorScheme light, MavColorScheme dark) =>
         MavTheme.ApplyCustomSchemes(light, dark);
 

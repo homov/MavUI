@@ -35,10 +35,12 @@ public sealed class MavSearchSuggestion : Control
     public static readonly StyledProperty<bool> IsRecentProperty =
         AvaloniaProperty.Register<MavSearchSuggestion, bool>(nameof(IsRecent));
 
+    /// <summary>Creates an empty search suggestion.</summary>
     public MavSearchSuggestion()
     {
     }
 
+    /// <summary>Creates a suggestion with the given text, optional subtitle and icon.</summary>
     public MavSearchSuggestion(string text, string? subtitle = null, string icon = MavIcons.Search, bool isRecent = false)
     {
         Text = text;
@@ -137,10 +139,12 @@ public class MavSearchBar : MavContentView
         });
     }
 
+    /// <summary>Creates a search bar with the localized default placeholder.</summary>
     public MavSearchBar() : this(MavLocalization.Search, null)
     {
     }
 
+    /// <summary>Creates a search bar with the given placeholder and trailing icon.</summary>
     public MavSearchBar(string? placeholder = null, string? trailingIcon = null)
     {
         placeholder ??= MavLocalization.Search;
@@ -479,6 +483,7 @@ public class MavSearchView : Control
         });
     }
 
+    /// <summary>Creates an empty search view.</summary>
     public MavSearchView()
     {
         Placeholder = MavLocalization.Search;
@@ -551,12 +556,14 @@ public class MavSearchView : Control
     public event EventHandler<string>? ResultSelected;
     public event EventHandler? Closed;
 
+    /// <summary>Adds a suggestion and returns the view for chaining.</summary>
     public MavSearchView AddSuggestion(string text, string? subtitle = null, string icon = MavIcons.Search)
     {
         _suggestions.Add((text, subtitle, icon));
         return this;
     }
 
+    /// <summary>Adds a recent query and returns the view for chaining.</summary>
     public MavSearchView AddRecent(string query)
     {
         if (!string.IsNullOrWhiteSpace(query) && !_recentQueries.Contains(query, StringComparer.OrdinalIgnoreCase))
@@ -577,6 +584,7 @@ public class MavSearchView : Control
         }
     }
 
+    /// <summary>Opens the search view over <paramref name="anchor"/>.</summary>
     public void Show(Visual? anchor = null)
     {
         Close();
@@ -814,6 +822,7 @@ public class MavSearchView : Control
         Dispatcher.UIThread.Post(() => entry.Focus(), DispatcherPriority.Input);
     }
 
+    /// <summary>Closes the search view.</summary>
     public void Close()
     {
         var handle = _handle;

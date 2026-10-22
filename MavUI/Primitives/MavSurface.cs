@@ -502,6 +502,7 @@ namespace Mav.Primitives
 
 namespace Avalonia.Controls
 {
+    /// <summary>Extension methods for building grid layouts with <see cref="MavSurface"/> and related panels.</summary>
     public static class MavGridExtensions
     {
         public static void Add(

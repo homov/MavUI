@@ -12,6 +12,7 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>One item of a <see cref="MavBreadcrumbBar"/>.</summary>
 public sealed class MavBreadcrumbItem : Control
 {
     public static readonly StyledProperty<string> TextProperty =
@@ -41,10 +42,12 @@ public sealed class MavBreadcrumbItem : Control
         set => SetValue(IconProperty, value);
     }
 
+    /// <summary>Creates an empty breadcrumb item.</summary>
     public MavBreadcrumbItem()
     {
     }
 
+    /// <summary>Creates a breadcrumb item with a label, optional icon and an opaque tag for the caller.</summary>
     public MavBreadcrumbItem(string text, string? icon = null, object? tag = null)
     {
         Text = text;
@@ -90,6 +93,7 @@ public class MavBreadcrumbBar : MavContentView, IEnumerable<MavBreadcrumbItem>
         ItemsSourceProperty.Changed.AddClassHandler<MavBreadcrumbBar>((b, e) => b.OnItemsSourceChanged(e.GetNewValue<IEnumerable?>()));
     }
 
+    /// <summary>Creates an empty breadcrumb bar.</summary>
     public MavBreadcrumbBar()
     {
         _observer = new MavCollectionObserver(this, () => RebuildFromItemsSource(ItemsSource));
@@ -162,11 +166,13 @@ public class MavBreadcrumbBar : MavContentView, IEnumerable<MavBreadcrumbItem>
         }
     }
 
+    /// <summary>Appends an item to the path.</summary>
     public void Add(string text, string? icon = null, object? tag = null)
         => Add(new MavBreadcrumbItem(text, icon, tag));
 
     public void Add(MavBreadcrumbItem item) => _items.Add(item);
 
+    /// <summary>Replaces the whole path with the given labels.</summary>
     public void SetPath(params string[] segments)
     {
         _items.Clear();
@@ -179,6 +185,7 @@ public class MavBreadcrumbBar : MavContentView, IEnumerable<MavBreadcrumbItem>
         Rebuild();
     }
 
+    /// <summary>Removes the items after <paramref name="index"/> and makes that item the current location.</summary>
     public void NavigateToIndex(int index)
     {
         if (index < 0 || index >= _items.Count) return;
@@ -188,6 +195,7 @@ public class MavBreadcrumbBar : MavContentView, IEnumerable<MavBreadcrumbItem>
         Rebuild();
     }
 
+    /// <summary>Removes all items from the path.</summary>
     public void Clear()
     {
         _items.Clear();
@@ -363,10 +371,12 @@ public class MavPagination : MavContentView
         ShowFirstLastButtonsProperty.Changed.AddClassHandler<MavPagination>((p, _) => p.Rebuild());
     }
 
+    /// <summary>Creates a pagination control with ten pages, starting at page 1.</summary>
     public MavPagination() : this(10, 1)
     {
     }
 
+    /// <summary>Creates a pagination control for <paramref name="totalPages"/> pages, starting at <paramref name="currentPage"/>.</summary>
     public MavPagination(int totalPages = 10, int currentPage = 1)
     {
         _row = new StackPanel

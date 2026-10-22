@@ -19,6 +19,7 @@ internal sealed class MavItemEventWiring<TItem, TDelegate>
     private readonly Action<TItem, TDelegate> _subscribe;
     private readonly Action<TItem, TDelegate> _unsubscribe;
 
+    /// <summary>Creates a helper that attaches one event handler to each item and detaches it again.</summary>
     public MavItemEventWiring(
         Action<TItem, TDelegate> subscribe,
         Action<TItem, TDelegate> unsubscribe)
@@ -29,6 +30,7 @@ internal sealed class MavItemEventWiring<TItem, TDelegate>
         _unsubscribe = unsubscribe;
     }
 
+    /// <summary>Attaches <paramref name="handler"/> to <paramref name="item"/> unless it is already attached, and returns <c>true</c> if it was attached.</summary>
     public bool Add(TItem item, TDelegate handler)
     {
         ArgumentNullException.ThrowIfNull(item);
@@ -41,6 +43,7 @@ internal sealed class MavItemEventWiring<TItem, TDelegate>
         return true;
     }
 
+    /// <summary>Detaches the handler from <paramref name="item"/>.</summary>
     public void Remove(TItem item)
     {
         if (!_handlers.Remove(item, out var handler))
@@ -50,6 +53,7 @@ internal sealed class MavItemEventWiring<TItem, TDelegate>
         MavVisualTreeHelpers.DetachFromParent(item);
     }
 
+    /// <summary>Detaches the handler from each item in <paramref name="items"/>.</summary>
     public void RemoveRange(IEnumerable? items)
     {
         if (items is null)
@@ -62,6 +66,7 @@ internal sealed class MavItemEventWiring<TItem, TDelegate>
         }
     }
 
+    /// <summary>Attaches handlers to added items and detaches them from removed items.</summary>
     public void HandleCollectionChanged(NotifyCollectionChangedEventArgs e)
     {
         // Reset does not report which items disappeared. Clear all handlers and
@@ -75,6 +80,7 @@ internal sealed class MavItemEventWiring<TItem, TDelegate>
         RemoveRange(e.OldItems);
     }
 
+    /// <summary>Detaches the handler from all items.</summary>
     public void Clear()
     {
         foreach (var pair in _handlers.ToArray())

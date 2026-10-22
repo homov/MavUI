@@ -11,6 +11,7 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>One segment of a <see cref="MavSegmentedButton"/>.</summary>
 public sealed class MavSegment : Control
 {
     public static readonly StyledProperty<string> TextProperty =
@@ -31,10 +32,12 @@ public sealed class MavSegment : Control
         IsSelectedProperty.Changed.AddClassHandler<MavSegment>((s, _) => s.SegmentChanged?.Invoke(s, EventArgs.Empty));
     }
 
+    /// <summary>Creates an empty segment.</summary>
     public MavSegment()
     {
     }
 
+    /// <summary>Creates a segment with the given text, optional icon and initial selection state.</summary>
     public MavSegment(string text, string? icon = null, bool selected = false)
     {
         Text = text;
@@ -116,10 +119,12 @@ public class MavSegmentedButton : MavContentView, IEnumerable<MavSegment>
             b.OnItemsSourceChanged(e.GetNewValue<IEnumerable?>()));
     }
 
+    /// <summary>Creates a single-select segmented button.</summary>
     public MavSegmentedButton() : this(false)
     {
     }
 
+    /// <summary>Creates a segmented button that allows one or several selected segments.</summary>
     public MavSegmentedButton(bool multiSelect = false)
     {
         _multiSelect = multiSelect;
@@ -271,12 +276,14 @@ public class MavSegmentedButton : MavContentView, IEnumerable<MavSegment>
     public IReadOnlyList<int> SelectedIndices =>
         _segments.Select((s, i) => (s, i)).Where(x => x.s.IsSelected).Select(x => x.i).ToList();
 
+    /// <summary>Adds a segment with the given text and returns the button for chaining.</summary>
     public MavSegmentedButton AddSegment(string text, string? icon = null, bool selected = false)
     {
         _segments.Add(new MavSegment(text, icon, selected));
         return this;
     }
 
+    /// <summary>Adds an existing segment and returns the button for chaining.</summary>
     public MavSegmentedButton AddSegment(MavSegment segment)
     {
         _segments.Add(segment);

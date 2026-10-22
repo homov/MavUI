@@ -11,6 +11,7 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>Status of a <see cref="MavTimelineItem"/>, which selects its marker color.</summary>
 public enum MavTimelineStatus
 {
     Completed,
@@ -20,6 +21,7 @@ public enum MavTimelineStatus
     Error,
 }
 
+/// <summary>One entry of a <see cref="MavTimeline"/>.</summary>
 public sealed class MavTimelineItem : Control
 {
     public static readonly StyledProperty<string> TitleProperty =
@@ -111,10 +113,12 @@ public sealed class MavTimelineItem : Control
         set => SetValue(CustomContentProperty, value);
     }
 
+    /// <summary>Creates an empty timeline item.</summary>
     public MavTimelineItem()
     {
     }
 
+    /// <summary>Creates a timeline item with a title, description, time and marker.</summary>
     public MavTimelineItem(
         string title,
         string? description = null,
@@ -161,6 +165,7 @@ public class MavTimeline : MavContentView, IEnumerable<MavTimelineItem>
             tl.RebuildFromItemsSource(tl.ItemsSource));
     }
 
+    /// <summary>Creates an empty timeline.</summary>
     public MavTimeline()
     {
         HorizontalAlignment = HorizontalAlignment.Stretch;
@@ -234,6 +239,7 @@ public class MavTimeline : MavContentView, IEnumerable<MavTimelineItem>
 
     public void Add(MavTimelineItem item) => _items.Add(item);
 
+    /// <summary>Adds an item to the timeline.</summary>
     public void Add(
         string title,
         string? description = null,

@@ -79,10 +79,12 @@ public class MavRadialGauge : Control
         TickCountProperty.Changed.AddClassHandler<MavRadialGauge>((g, _) => g.InvalidateVisual());
     }
 
+    /// <summary>Creates a radial gauge with a value of 65 on a scale from 0 to 100.</summary>
     public MavRadialGauge() : this(65, 0, 100, "%", null, 176)
     {
     }
 
+    /// <summary>Creates a radial gauge with the given range, value, unit and size.</summary>
     public MavRadialGauge(
         double value = 65,
         double minimum = 0,
@@ -164,6 +166,7 @@ public class MavRadialGauge : Control
 
     protected override Size MeasureOverride(Size availableSize) => new(Size, Size);
 
+    /// <summary>Starts dragging the gauge handle to change the value.</summary>
     protected override void OnPointerPressed(PointerPressedEventArgs e)
     {
         base.OnPointerPressed(e);
@@ -181,6 +184,7 @@ public class MavRadialGauge : Control
         }
     }
 
+    /// <summary>Updates the value while the handle is dragged.</summary>
     protected override void OnPointerMoved(PointerEventArgs e)
     {
         base.OnPointerMoved(e);
@@ -191,6 +195,7 @@ public class MavRadialGauge : Control
         e.Handled = true;
     }
 
+    /// <summary>Ends the drag and keeps the value at the handle position.</summary>
     protected override void OnPointerReleased(PointerReleasedEventArgs e)
     {
         base.OnPointerReleased(e);
@@ -205,6 +210,7 @@ public class MavRadialGauge : Control
         e.Handled = true;
     }
 
+    /// <summary>Ends the drag when the pointer capture is lost.</summary>
     protected override void OnPointerCaptureLost(PointerCaptureLostEventArgs e)
     {
         base.OnPointerCaptureLost(e);
@@ -272,6 +278,7 @@ public class MavRadialGauge : Control
         });
     }
 
+    /// <summary>Draws the gauge arc, the value arc and the centered value text.</summary>
     public override void Render(DrawingContext context)
     {
         var w = Bounds.Width;

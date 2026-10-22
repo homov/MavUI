@@ -54,10 +54,12 @@ public class MavExpansionPanel : MavContentView
         });
     }
 
+    /// <summary>Creates an empty expansion panel.</summary>
     public MavExpansionPanel() : this(string.Empty)
     {
     }
 
+    /// <summary>Creates an expansion panel with a header, icon and content.</summary>
     public MavExpansionPanel(
         string title = "",
         string? subtitle = null,
@@ -245,10 +247,12 @@ public class MavExpansionPanelList : StackPanel, System.Collections.Generic.IEnu
     private readonly List<MavExpansionPanel> _panels = [];
     private bool _updating;
 
+    /// <summary>Creates a list of panels that can be expanded together.</summary>
     public MavExpansionPanelList() : this(false)
     {
     }
 
+    /// <summary>Creates a list of panels; with <paramref name="singleExpand"/> only one panel can be open.</summary>
     public MavExpansionPanelList(bool singleExpand = false)
     {
         Orientation = Orientation.Vertical;
@@ -269,6 +273,7 @@ public class MavExpansionPanelList : StackPanel, System.Collections.Generic.IEnu
         set => SingleExpand = !value;
     }
 
+    /// <summary>Adds a panel and returns the list for chaining.</summary>
     public MavExpansionPanelList AddPanel(MavExpansionPanel panel)
     {
         Children.Add(panel);

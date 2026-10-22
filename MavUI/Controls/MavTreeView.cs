@@ -13,6 +13,7 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>One node of a <see cref="MavTreeView"/>, with optional child nodes.</summary>
 public sealed class MavTreeNode : Control, IEnumerable<MavTreeNode>
 {
     public static readonly StyledProperty<string> TextProperty =
@@ -75,6 +76,7 @@ public sealed class MavTreeNode : Control, IEnumerable<MavTreeNode>
     [Content]
     public AvaloniaList<MavTreeNode> Children { get; } = new();
 
+    /// <summary>Creates an empty tree node.</summary>
     public MavTreeNode()
     {
         Children.CollectionChanged += (_, e) =>
@@ -85,6 +87,7 @@ public sealed class MavTreeNode : Control, IEnumerable<MavTreeNode>
         };
     }
 
+    /// <summary>Creates a tree node with a label, optional icon and value.</summary>
     public MavTreeNode(
         string text,
         string? icon = null,
@@ -101,12 +104,14 @@ public sealed class MavTreeNode : Control, IEnumerable<MavTreeNode>
 
     protected override Size MeasureOverride(Size availableSize) => default;
 
+    /// <summary>Adds a child node and returns this node for chaining.</summary>
     public MavTreeNode Add(MavTreeNode child)
     {
         Children.Add(child);
         return this;
     }
 
+    /// <summary>Adds a child node with the given label and returns the new node.</summary>
     public MavTreeNode Add(
         string text,
         string? icon = null,
@@ -196,6 +201,7 @@ public class MavTreeView : MavContentView, IEnumerable<MavTreeNode>
         ItemTemplateProperty.Changed.AddClassHandler<MavTreeView>((tv, _) => tv.RebuildFromItemsSource(tv.ItemsSource));
     }
 
+    /// <summary>Creates an empty tree view.</summary>
     public MavTreeView()
     {
         HorizontalAlignment = HorizontalAlignment.Stretch;
@@ -309,6 +315,7 @@ public class MavTreeView : MavContentView, IEnumerable<MavTreeNode>
 
     public void Add(MavTreeNode node) => _roots.Add(node);
 
+    /// <summary>Adds a root node and returns the tree view for chaining.</summary>
     public MavTreeNode Add(
         string text,
         string? icon = null,
@@ -321,11 +328,13 @@ public class MavTreeView : MavContentView, IEnumerable<MavTreeNode>
         return node;
     }
 
+    /// <summary>Expands every node in the tree.</summary>
     public void ExpandAll()
     {
         RunDeferredRefresh(() => SetExpandedRecursive(_roots, true));
     }
 
+    /// <summary>Collapses every node in the tree.</summary>
     public void CollapseAll()
     {
         RunDeferredRefresh(() => SetExpandedRecursive(_roots, false));
@@ -333,6 +342,7 @@ public class MavTreeView : MavContentView, IEnumerable<MavTreeNode>
 
     public void Refresh() => RefreshVisibleRows();
 
+    /// <summary>Returns the nodes whose check box is checked.</summary>
     public IReadOnlyList<MavTreeNode> GetCheckedNodes()
     {
         var list = new List<MavTreeNode>();

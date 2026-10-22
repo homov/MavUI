@@ -30,10 +30,12 @@ public class MavLabel : TextBlock
         SecondaryProperty.Changed.AddClassHandler<MavLabel>((lbl, _) => lbl.ApplyTheme(MavTheme.Current));
     }
 
+    /// <summary>Creates an empty label with the body-medium text role.</summary>
     public MavLabel() : this(null, MavTypeRole.BodyMedium, null)
     {
     }
 
+    /// <summary>Creates a label with the given text, type role and optional color role.</summary>
     public MavLabel(string? text = null, MavTypeRole role = MavTypeRole.BodyMedium, MavColorRole? colorRole = null)
     {
         if (text is not null) Text = text;

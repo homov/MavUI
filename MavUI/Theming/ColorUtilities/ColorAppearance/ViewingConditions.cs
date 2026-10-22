@@ -57,6 +57,7 @@ internal class ViewingConditions
     public double FlRoot { get; }
     public double Z { get; }
 
+    /// <summary>Creates viewing conditions for the given background and surround, used by the color appearance model.</summary>
     public static ViewingConditions Make(
         double[] whitePoint,
         double adaptingLuminance,

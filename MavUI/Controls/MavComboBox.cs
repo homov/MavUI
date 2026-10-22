@@ -104,10 +104,12 @@ public class MavComboBox : MavContentView, IEnumerable<string>
         });
     }
 
+    /// <summary>Creates an empty combo box with the default label.</summary>
     public MavComboBox() : this("Choose", null)
     {
     }
 
+    /// <summary>Creates a combo box with the given label and options.</summary>
     public MavComboBox(
         string label = "Choose",
         IEnumerable<string>? items = null,
@@ -254,6 +256,7 @@ public class MavComboBox : MavContentView, IEnumerable<string>
         SelectedItemChanged?.Invoke(this, text);
     }
 
+    /// <summary>Adds an option and returns the combo box for chaining.</summary>
     public MavComboBox AddOption(string item)
     {
         _items.Add(item);
@@ -261,6 +264,7 @@ public class MavComboBox : MavContentView, IEnumerable<string>
         return this;
     }
 
+    /// <summary>Adds several options and returns the combo box for chaining.</summary>
     public MavComboBox AddOptions(IEnumerable<string> items)
     {
         foreach (var item in items)
@@ -367,12 +371,14 @@ public class MavComboBox : MavContentView, IEnumerable<string>
         SelectedItemChanged?.Invoke(this, itemText);
     }
 
+    /// <summary>Opens the dropdown list, optionally filtered by <paramref name="filter"/>.</summary>
     public void OpenDropdown(string? filter = null)
     {
         if (!IsEnabled || _items.Count == 0) return;
         RefreshDropdown(filter ?? Text);
     }
 
+    /// <summary>Closes the dropdown list.</summary>
     public void CloseDropdown()
     {
         if (_dropdownHandle is not null)

@@ -66,10 +66,12 @@ public class MavSettingsCard : MavContentView
         });
     }
 
+    /// <summary>Creates an empty settings card.</summary>
     public MavSettingsCard() : this(string.Empty)
     {
     }
 
+    /// <summary>Creates a settings card with a title, description, icon and optional trailing control.</summary>
     public MavSettingsCard(
         string header = "",
         string? description = null,
@@ -320,10 +322,12 @@ public class MavSettingsExpander : MavContentView, System.Collections.Generic.IE
             ex.OnExpandedChanged(e.GetNewValue<bool>()));
     }
 
+    /// <summary>Creates an empty settings expander.</summary>
     public MavSettingsExpander() : this(string.Empty)
     {
     }
 
+    /// <summary>Creates a settings expander with a title, description and icon.</summary>
     public MavSettingsExpander(
         string header = "",
         string? description = null,
@@ -488,6 +492,7 @@ public class MavSettingsExpander : MavContentView, System.Collections.Generic.IE
 
     System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
 
+    /// <summary>Adds a row to the expanded section and returns the expander for chaining.</summary>
     public MavSettingsExpander AddItem(
         string title,
         string? subtitle = null,
@@ -506,6 +511,7 @@ public class MavSettingsExpander : MavContentView, System.Collections.Generic.IE
         return this;
     }
 
+    /// <summary>Adds custom content to the expanded section and returns the expander for chaining.</summary>
     public MavSettingsExpander AddCustomContent(Control content)
     {
         _items.Add(new Border

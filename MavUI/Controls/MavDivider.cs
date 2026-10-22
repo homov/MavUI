@@ -39,10 +39,12 @@ public class MavDivider : Border
         InsetEndProperty.Changed.AddClassHandler<MavDivider>((d, _) => d.SyncMetrics());
     }
 
+    /// <summary>Creates a horizontal divider without insets.</summary>
     public MavDivider() : this(0, 0, false)
     {
     }
 
+    /// <summary>Creates a divider with the given insets and orientation.</summary>
     public MavDivider(double insetStart = 0, double insetEnd = 0, bool vertical = false)
     {
         InsetStart = insetStart;

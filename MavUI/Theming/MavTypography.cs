@@ -25,6 +25,7 @@ public enum MavTypeRole
     LabelSmall,
 }
 
+/// <summary>A complete text style: font family, size, weight, line height and letter spacing.</summary>
 public readonly record struct MavTextStyle(
     double Size,
     double LineHeight,
@@ -35,6 +36,7 @@ public readonly record struct MavTextStyle(
     public double LineHeightRatio => Size > 0 ? LineHeight / Size : 1.25;
 }
 
+/// <summary>Type scale of the theme: a <see cref="MavTextStyle"/> for each Material 3 role.</summary>
 public sealed class MavTypography
 {
     public static MavTypography Default { get; } = new();
@@ -83,14 +85,17 @@ public sealed class MavTypography
     };
 }
 
+/// <summary>Helpers for applying a type role from <see cref="MavTypography"/> to text.</summary>
 public static class MavTypographyExtensions
 {
+    /// <summary>Applies the type role and optional scale to <paramref name="label"/>.</summary>
     public static void Apply(this TextBlock label, MavTypeRole role, MavTypography? scale = null)
     {
         var s = (scale ?? MavTypography.Default).For(role);
         s.ApplyTo(label);
     }
 
+    /// <summary>Applies the text style to <paramref name="label"/>.</summary>
     public static void ApplyTo(this MavTextStyle s, TextBlock label)
     {
         label.FontFamily = s.FontFamily;

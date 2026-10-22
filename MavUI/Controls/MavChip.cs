@@ -15,6 +15,7 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>Behaviour of a <see cref="MavChip"/>: assist, filter, input or suggestion.</summary>
 public enum MavChipKind
 {
     Assist,
@@ -100,10 +101,12 @@ public class MavChip : MavContentView
         });
     }
 
+    /// <summary>Creates an empty chip.</summary>
     public MavChip() : this(string.Empty)
     {
     }
 
+    /// <summary>Creates a chip with a label, optional icon, and selected state.</summary>
     public MavChip(
         string text = "",
         MavChipKind kind = MavChipKind.Assist,
@@ -276,6 +279,7 @@ public class MavChip : MavContentView
         set => SetValue(AvatarViewProperty, value);
     }
 
+    /// <summary>Redraws the chip when a visual property changes.</summary>
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
@@ -448,10 +452,12 @@ public class MavChipGroup : MavContentView, System.Collections.Generic.IEnumerab
         ItemsSourceProperty.Changed.AddClassHandler<MavChipGroup>((g, e) => g.OnItemsSourceChanged(e.GetNewValue<System.Collections.IEnumerable?>()));
     }
 
+    /// <summary>Creates a multi-select chip group with spacing 8.</summary>
     public MavChipGroup() : this(false, false, 8)
     {
     }
 
+    /// <summary>Creates a chip group with the given selection mode, line mode and spacing.</summary>
     public MavChipGroup(bool singleSelection = false, bool singleLine = false, double spacing = 8)
     {
         HorizontalAlignment = HorizontalAlignment.Stretch;
@@ -551,6 +557,7 @@ public class MavChipGroup : MavContentView, System.Collections.Generic.IEnumerab
     public IReadOnlyList<string> SelectedTexts =>
         _chips.Where(c => c.IsSelected).Select(c => c.Text).ToList();
 
+    /// <summary>Adds a chip with a label, icon and selection state and returns the group for chaining.</summary>
     public MavChipGroup AddChip(
         string text,
         MavChipKind kind = MavChipKind.Filter,
@@ -562,6 +569,7 @@ public class MavChipGroup : MavContentView, System.Collections.Generic.IEnumerab
         return AddChip(chip);
     }
 
+    /// <summary>Adds an existing chip and returns the group for chaining.</summary>
     public MavChipGroup AddChip(MavChip chip)
     {
         var idx = _chips.Count;
@@ -585,6 +593,7 @@ public class MavChipGroup : MavContentView, System.Collections.Generic.IEnumerab
         });
     }
 
+    /// <summary>Adds a chip without returning the group.</summary>
     public void Add(
         string text,
         MavChipKind kind = MavChipKind.Filter,

@@ -13,6 +13,7 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>State of a <see cref="MavRefreshIndicator"/> during a pull-to-refresh gesture.</summary>
 public enum MavRefreshIndicatorState
 {
     Idle,
@@ -90,10 +91,12 @@ public class MavRefreshIndicator : MavContentView
         });
     }
 
+    /// <summary>Creates a refresh indicator without content.</summary>
     public MavRefreshIndicator() : this(null)
     {
     }
 
+    /// <summary>Creates a pull-to-refresh indicator around <paramref name="content"/>.</summary>
     public MavRefreshIndicator(Control? content = null)
     {
         HorizontalAlignment = HorizontalAlignment.Stretch;
@@ -258,6 +261,7 @@ public class MavRefreshIndicator : MavContentView
     public double PullProgress => _pullProgress;
     public MavRefreshIndicatorState State => _state;
 
+    /// <summary>Runs the refresh request as if the user had pulled the content, and shows the indicator until it completes.</summary>
     public async Task TriggerRefreshAsync()
     {
         if (IsRefreshing) return;
@@ -364,6 +368,7 @@ public class MavRefreshIndicator : MavContentView
         }
     }
 
+    /// <summary>Ends a pull gesture that lost pointer capture.</summary>
     protected override void OnPointerCaptureLost(PointerCaptureLostEventArgs e)
     {
         base.OnPointerCaptureLost(e);
@@ -375,6 +380,7 @@ public class MavRefreshIndicator : MavContentView
         }
     }
 
+    /// <summary>Cancels a pending pull gesture when the indicator is removed.</summary>
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         ResetPull(releaseCapture: true, animate: false);

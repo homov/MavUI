@@ -11,6 +11,7 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>Layout chosen by <see cref="MavNavigationSuiteScaffold"/> for the current width: bottom bar, rail or drawer.</summary>
 public enum MavNavigationSuiteMode
 {
     Auto,
@@ -20,6 +21,7 @@ public enum MavNavigationSuiteMode
     None,
 }
 
+/// <summary>Destination shown by a <see cref="MavNavigationSuiteScaffold"/>.</summary>
 public sealed class MavSuiteDestination : Control
 {
     public static readonly StyledProperty<string> LabelProperty =
@@ -83,10 +85,12 @@ public sealed class MavSuiteDestination : Control
         set => SetValue(ContentProperty, value);
     }
 
+    /// <summary>Creates an empty destination.</summary>
     public MavSuiteDestination()
     {
     }
 
+    /// <summary>Creates a destination with label, icon, and the content it shows.</summary>
     public MavSuiteDestination(
         string label,
         string icon,
@@ -217,6 +221,7 @@ public class MavNavigationSuiteScaffold : MavContentView, IEnumerable<MavSuiteDe
             s._navRail.Header = e.GetNewValue<Control?>());
     }
 
+    /// <summary>Creates an empty adaptive navigation scaffold.</summary>
     public MavNavigationSuiteScaffold()
     {
         HorizontalAlignment = HorizontalAlignment.Stretch;
@@ -372,6 +377,7 @@ public class MavNavigationSuiteScaffold : MavContentView, IEnumerable<MavSuiteDe
     [Content]
     public AvaloniaList<MavSuiteDestination> Destinations => _destinations;
 
+    /// <summary>Adds a destination and returns the scaffold for chaining.</summary>
     public MavNavigationSuiteScaffold AddDestination(
         string label,
         string icon,

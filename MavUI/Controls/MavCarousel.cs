@@ -15,6 +15,7 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>One card in a <see cref="MavCarousel"/>: title, optional subtitle, icon and accent color.</summary>
 public sealed class MavCarouselItem : Control
 {
     public static readonly StyledProperty<string> TitleProperty =
@@ -63,10 +64,12 @@ public sealed class MavCarouselItem : Control
         set => SetValue(AccentColorProperty, value);
     }
 
+    /// <summary>Creates an empty carousel item.</summary>
     public MavCarouselItem()
     {
     }
 
+    /// <summary>Creates a carousel item with a title, subtitle, icon and accent color.</summary>
     public MavCarouselItem(
         string title,
         string? subtitle = null,
@@ -82,6 +85,7 @@ public sealed class MavCarouselItem : Control
     protected override Size MeasureOverride(Size availableSize) => default;
 }
 
+/// <summary>Layout mode of a <see cref="MavCarousel"/>: how neighbouring items are shown around the focused one.</summary>
 public enum MavCarouselLayout
 {
     Hero,
@@ -146,10 +150,12 @@ public class MavCarousel : Control, IMavDraggableControl, IEnumerable<MavCarouse
         ItemTemplateProperty.Changed.AddClassHandler<MavCarousel>((c, _) => c.RebuildFromItemsSource(c.ItemsSource));
     }
 
+    /// <summary>Creates a carousel 210 dp high.</summary>
     public MavCarousel() : this(210)
     {
     }
 
+    /// <summary>Creates a carousel of the given <paramref name="height"/>.</summary>
     public MavCarousel(double height = 210)
     {
         Height = height;
@@ -267,21 +273,25 @@ public class MavCarousel : Control, IMavDraggableControl, IEnumerable<MavCarouse
         }
     }
 
+    /// <summary>Adds a card with a title, subtitle, icon and accent color and returns the carousel for chaining.</summary>
     public MavCarousel AddItem(string title, string? subtitle = null, string? icon = null, Color? accent = null)
     {
         _items.Add(new MavCarouselItem(title, subtitle, icon, accent));
         return this;
     }
 
+    /// <summary>Adds an existing item and returns the carousel for chaining.</summary>
     public MavCarousel AddItem(MavCarouselItem item)
     {
         _items.Add(item);
         return this;
     }
 
+    /// <summary>Adds a card and returns the carousel for chaining.</summary>
     public MavCarousel AddCard(string title, string? subtitle = null, string? icon = null, Color? accent = null) =>
         AddItem(title, subtitle, icon, accent);
 
+    /// <summary>Adds a card without returning the carousel.</summary>
     public void Add(string title, string? subtitle = null, string? icon = null, Color? accent = null) =>
         AddItem(title, subtitle, icon, accent);
 
@@ -290,18 +300,21 @@ public class MavCarousel : Control, IMavDraggableControl, IEnumerable<MavCarouse
     public IEnumerator<MavCarouselItem> GetEnumerator() => _items.GetEnumerator();
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
+    /// <summary>Scrolls to the next item, if there is one.</summary>
     public void Next()
     {
         if (_items.Count == 0) return;
         SelectedIndex = (SelectedIndex + 1) % _items.Count;
     }
 
+    /// <summary>Scrolls to the previous item, if there is one.</summary>
     public void Previous()
     {
         if (_items.Count == 0) return;
         SelectedIndex = (SelectedIndex - 1 + _items.Count) % _items.Count;
     }
 
+    /// <summary>Measures the carousel to the available width and the configured height.</summary>
     protected override Size MeasureOverride(Size availableSize)
     {
         var w = double.IsFinite(availableSize.Width) && availableSize.Width > 0 ? availableSize.Width : 320;
@@ -309,6 +322,7 @@ public class MavCarousel : Control, IMavDraggableControl, IEnumerable<MavCarouse
         return new Size(w, h);
     }
 
+    /// <summary>Starts tracking a drag to scroll the carousel.</summary>
     protected override void OnPointerPressed(PointerPressedEventArgs e)
     {
         base.OnPointerPressed(e);
@@ -324,6 +338,7 @@ public class MavCarousel : Control, IMavDraggableControl, IEnumerable<MavCarouse
         e.Handled = true;
     }
 
+    /// <summary>Scrolls the carousel with the pointer while it is dragged.</summary>
     protected override void OnPointerMoved(PointerEventArgs e)
     {
         base.OnPointerMoved(e);
@@ -338,6 +353,7 @@ public class MavCarousel : Control, IMavDraggableControl, IEnumerable<MavCarouse
         e.Handled = true;
     }
 
+    /// <summary>Ends the drag and snaps to the nearest item.</summary>
     protected override void OnPointerReleased(PointerReleasedEventArgs e)
     {
         base.OnPointerReleased(e);
@@ -585,6 +601,7 @@ public class MavCarousel : Control, IMavDraggableControl, IEnumerable<MavCarouse
         return result;
     }
 
+    /// <summary>Draws the visible cards and their shadows.</summary>
     public override void Render(DrawingContext context)
     {
         var w = Bounds.Width;

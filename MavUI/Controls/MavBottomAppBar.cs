@@ -77,10 +77,12 @@ public class MavBottomAppBar : MavContentView
         });
     }
 
+    /// <summary>Creates a bottom app bar with the default add button.</summary>
     public MavBottomAppBar() : this(MavIcons.Add, null)
     {
     }
 
+    /// <summary>Creates a bottom app bar with a floating button that uses <paramref name="fabIcon"/> and <paramref name="onFabClick"/>.</summary>
     public MavBottomAppBar(string? fabIcon = MavIcons.Add, Action? onFabClick = null)
     {
         HorizontalAlignment = HorizontalAlignment.Stretch;
@@ -159,6 +161,7 @@ public class MavBottomAppBar : MavContentView
         set => SetValue(SafeAreaPaddingProperty, value);
     }
 
+    /// <summary>Adds an icon action to the bar and returns the bar for chaining.</summary>
     public MavBottomAppBar AddAction(string icon, Action? onClick = null)
     {
         var btn = new MavIconButton(icon);

@@ -16,6 +16,7 @@ internal sealed class MavArcCache
     private Geometry? _geometry;
     private bool _hasKey;
 
+    /// <summary>Returns a cached arc geometry for the given center, radius and angles.</summary>
     public Geometry Get(Point center, double radius, double startAngleDeg, double sweepAngleDeg)
     {
         var key = new ArcKey(center.X, center.Y, radius, startAngleDeg, sweepAngleDeg);
@@ -36,8 +37,10 @@ internal sealed class MavArcCache
         double SweepAngle);
 }
 
+/// <summary>Geometry helpers shared by the progress indicators: arc and wave path construction.</summary>
 internal static class MavGeometryHelpers
 {
+    /// <summary>Builds an arc geometry from start angle and sweep, in degrees.</summary>
     public static Geometry CreateArc(Point center, double radius, double startAngleDeg, double sweepAngleDeg)
     {
         var geom = new StreamGeometry();
@@ -121,10 +124,12 @@ public class MavLinearProgress : Control
         });
     }
 
+    /// <summary>Creates a linear progress indicator at 50 % without indeterminate or wavy mode.</summary>
     public MavLinearProgress() : this(0.5, false, false)
     {
     }
 
+    /// <summary>Creates a linear progress indicator with the given value, indeterminate and wavy modes.</summary>
     public MavLinearProgress(double value = 0.5, bool indeterminate = false, bool wavy = false)
     {
         Height = wavy ? 12 : 4;
@@ -177,6 +182,7 @@ public class MavLinearProgress : Control
         set => SetValue(WaveLengthProperty, value);
     }
 
+    /// <summary>Measures the track to fill the available width at the track height.</summary>
     protected override Size MeasureOverride(Size availableSize)
     {
         var w = double.IsFinite(availableSize.Width) && availableSize.Width > 0 ? availableSize.Width : 200;
@@ -217,6 +223,7 @@ public class MavLinearProgress : Control
         });
     }
 
+    /// <summary>Draws the track, the active part and the animated wave or indeterminate segment.</summary>
     public override void Render(DrawingContext context)
     {
         var w = Bounds.Width;
@@ -349,10 +356,12 @@ public class MavCircularProgress : Control
         });
     }
 
+    /// <summary>Creates an indeterminate circular progress indicator of 44 dp.</summary>
     public MavCircularProgress() : this(44, true, 0.65)
     {
     }
 
+    /// <summary>Creates a circular progress indicator of the given size, mode and value.</summary>
     public MavCircularProgress(double size = 44, bool indeterminate = true, double value = 0.65)
     {
         Size = size;
@@ -369,6 +378,7 @@ public class MavCircularProgress : Control
         MavTheme.Observe(this, (self, _) => self.InvalidateVisual());
     }
 
+    /// <summary>Creates a circular progress indicator of the given size and stroke width.</summary>
     public MavCircularProgress(double size, double strokeWidth)
         : this(size, indeterminate: true, value: 0.65)
     {
@@ -452,6 +462,7 @@ public class MavCircularProgress : Control
         });
     }
 
+    /// <summary>Draws the ring track and the arc for the current value or animation phase.</summary>
     public override void Render(DrawingContext context)
     {
         var w = Bounds.Width;
@@ -554,10 +565,12 @@ public class MavSegmentedProgressBar : Control
         TrackHeightProperty.Changed.AddClassHandler<MavSegmentedProgressBar>((p, _) => p.InvalidateVisual());
     }
 
+    /// <summary>Creates a segmented progress bar with five segments at 60 %.</summary>
     public MavSegmentedProgressBar() : this(5, 0.6, 6.0)
     {
     }
 
+    /// <summary>Creates a segmented progress bar with the given segment count, value and track height.</summary>
     public MavSegmentedProgressBar(int segmentCount = 5, double value = 0.6, double trackHeight = 6.0)
     {
         HorizontalAlignment = HorizontalAlignment.Stretch;
@@ -594,12 +607,14 @@ public class MavSegmentedProgressBar : Control
         set => SetValue(TrackHeightProperty, Math.Max(4, value));
     }
 
+    /// <summary>Measures the bar to fill the available width at the track height.</summary>
     protected override Size MeasureOverride(Size availableSize)
     {
         var w = double.IsFinite(availableSize.Width) && availableSize.Width > 0 ? availableSize.Width : 200;
         return new Size(w, TrackHeight);
     }
 
+    /// <summary>Draws the segments, filled up to the current value.</summary>
     public override void Render(DrawingContext context)
     {
         var w = Bounds.Width;
@@ -648,10 +663,12 @@ public class MavSegmentedProgressBar : Control
 /// </summary>
 public class MavWavyProgressIndicator : MavLinearProgress
 {
+    /// <summary>Creates a wavy progress indicator with default settings.</summary>
     public MavWavyProgressIndicator() : this(0.65, false, 3.0, 24.0)
     {
     }
 
+    /// <summary>Creates a wavy progress indicator with the given value, indeterminate mode, amplitude and wavelength.</summary>
     public MavWavyProgressIndicator(
         double value = 0.65,
         bool indeterminate = false,

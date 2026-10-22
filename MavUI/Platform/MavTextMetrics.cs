@@ -108,6 +108,7 @@ public static class MavTextMetrics
         int MaxLineCount,
         TextTrimming Trimming);
 
+    /// <summary>Returns the width of <paramref name="text"/> in the given font size and weight.</summary>
     public static double MeasureWidth(string? text, double fontSize, bool bold = false)
     {
         if (string.IsNullOrEmpty(text) || fontSize <= 0)

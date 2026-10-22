@@ -74,10 +74,12 @@ public class MavSplitButton : MavContentView
         });
     }
 
+    /// <summary>Creates an empty split button.</summary>
     public MavSplitButton() : this(string.Empty)
     {
     }
 
+    /// <summary>Creates a split button with a main action and a menu of secondary actions.</summary>
     public MavSplitButton(
         string text = "",
         MavButtonVariant variant = MavButtonVariant.Filled,

@@ -52,10 +52,12 @@ public class MavPinInput : MavContentView
         HasErrorProperty.Changed.AddClassHandler<MavPinInput>((p, _) => p.UpdateVisuals(MavTheme.Current));
     }
 
+    /// <summary>Creates a six-digit PIN input that shows the digits.</summary>
     public MavPinInput() : this(6, false)
     {
     }
 
+    /// <summary>Creates a PIN input with <paramref name="length"/> cells, optionally masking the digits.</summary>
     public MavPinInput(int length = 6, bool masked = false)
     {
         HorizontalAlignment = HorizontalAlignment.Left;

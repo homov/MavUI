@@ -17,6 +17,7 @@ public sealed class MavFieldRuleBuilder
     private readonly List<Func<string?, string?>> _rules = [];
     private bool _hasBeenValidated;
 
+    /// <summary>Creates a rule builder for one field, which the validator uses to store the rules and the error.</summary>
     internal MavFieldRuleBuilder(
         Func<string?> getValue,
         Action<string?> setError,
@@ -33,12 +34,14 @@ public sealed class MavFieldRuleBuilder
         });
     }
 
+    /// <summary>Adds a rule that fails for empty text.</summary>
     public MavFieldRuleBuilder Required(string message = "This field is required")
     {
         _rules.Add(v => string.IsNullOrWhiteSpace(v) ? message : null);
         return this;
     }
 
+    /// <summary>Adds a rule that fails for text shorter than <paramref name="minLength"/>.</summary>
     public MavFieldRuleBuilder MinLength(int minLength, string? message = null)
     {
         var msg = message ?? $"Must be at least {minLength} characters";
@@ -50,6 +53,7 @@ public sealed class MavFieldRuleBuilder
         return this;
     }
 
+    /// <summary>Adds a rule that fails for text longer than <paramref name="maxLength"/>.</summary>
     public MavFieldRuleBuilder MaxLength(int maxLength, string? message = null)
     {
         var msg = message ?? $"Must be at most {maxLength} characters";
@@ -61,6 +65,7 @@ public sealed class MavFieldRuleBuilder
         return this;
     }
 
+    /// <summary>Adds a rule that fails for text that is not an email address.</summary>
     public MavFieldRuleBuilder Email(string message = "Enter a valid email address")
     {
         _rules.Add(v =>
@@ -73,6 +78,7 @@ public sealed class MavFieldRuleBuilder
         return this;
     }
 
+    /// <summary>Adds a rule that fails for text that is not a number.</summary>
     public MavFieldRuleBuilder Numeric(string message = "Enter a valid number")
     {
         _rules.Add(v =>
@@ -86,6 +92,7 @@ public sealed class MavFieldRuleBuilder
         return this;
     }
 
+    /// <summary>Adds a rule that fails for text that does not match <paramref name="regexPattern"/>.</summary>
     public MavFieldRuleBuilder Pattern(string regexPattern, string message = "Invalid format")
     {
         var regex = new Regex(regexPattern, RegexOptions.Compiled | RegexOptions.CultureInvariant);
@@ -97,6 +104,7 @@ public sealed class MavFieldRuleBuilder
         return this;
     }
 
+    /// <summary>Adds a rule that fails when the text differs from the value returned by <paramref name="otherValueGetter"/>.</summary>
     public MavFieldRuleBuilder Matches(Func<string?> otherValueGetter, string message = "Values do not match")
     {
         _rules.Add(v => string.Equals(v ?? string.Empty, otherValueGetter() ?? string.Empty, StringComparison.Ordinal)
@@ -105,12 +113,14 @@ public sealed class MavFieldRuleBuilder
         return this;
     }
 
+    /// <summary>Adds a rule that fails when <paramref name="predicate"/> returns <c>false</c>.</summary>
     public MavFieldRuleBuilder Must(Func<string?, bool> predicate, string message)
     {
         _rules.Add(v => predicate(v) ? null : message);
         return this;
     }
 
+    /// <summary>Runs the rules in order and returns the first error message, or <c>null</c> if the value is valid.</summary>
     internal string? Validate()
     {
         _hasBeenValidated = true;
@@ -129,6 +139,7 @@ public sealed class MavFieldRuleBuilder
         return null;
     }
 
+    /// <summary>Clears the error message shown for the field.</summary>
     internal void ClearError()
     {
         _hasBeenValidated = false;
@@ -154,6 +165,7 @@ public sealed class MavFormValidator
 
     public IReadOnlyList<string> Errors => _lastErrors;
 
+    /// <summary>Adds a field with a custom value getter and a field name for the error message.</summary>
     public MavFieldRuleBuilder Field(
         Func<string?> valueGetter,
         Action<string?> errorSetter,
@@ -168,42 +180,49 @@ public sealed class MavFormValidator
         return builder;
     }
 
+    /// <summary>Adds a text field to the validation.</summary>
     public MavFieldRuleBuilder Field(MavTextField textField) =>
         Field(
             () => textField.Text,
             err => textField.ErrorText = err,
             cb => textField.TextChanged += (_, _) => cb());
 
+    /// <summary>Adds a multi-line text field to the validation.</summary>
     public MavFieldRuleBuilder Field(MavTextArea textArea) =>
         Field(
             () => textArea.Text,
             err => textArea.ErrorText = err,
             cb => textArea.TextChanged += (_, _) => cb());
 
+    /// <summary>Adds a select field to the validation.</summary>
     public MavFieldRuleBuilder Field(MavSelect select) =>
         Field(
             () => select.SelectedItem,
             err => select.ErrorText = err,
             cb => select.SelectedIndexChanged += (_, _) => cb());
 
+    /// <summary>Adds a combo box to the validation.</summary>
     public MavFieldRuleBuilder Field(MavComboBox comboBox) =>
         Field(
             () => comboBox.Text,
             err => comboBox.ErrorText = err,
             cb => comboBox.TextChanged += (_, _) => cb());
 
+    /// <summary>Adds a PIN input to the validation.</summary>
     public MavFieldRuleBuilder Field(MavPinInput pinInput) =>
         Field(
             () => pinInput.Code.Length >= pinInput.Length ? pinInput.Code : string.Empty,
             err => pinInput.HasError = !string.IsNullOrEmpty(err),
             cb => pinInput.CodeChanged += (_, _) => cb());
 
+    /// <summary>Adds a date field to the validation.</summary>
     public MavFieldRuleBuilder Field(MavDatePickerField dateField) =>
         Field(
             () => dateField.SelectedDate?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture),
             err => dateField.ErrorText = err,
             cb => dateField.SelectedDateChanged += (_, _) => cb());
 
+    /// <summary>Adds a date range field to the validation.</summary>
     public MavFieldRuleBuilder Field(MavDateRangePickerField rangeField) =>
         Field(
             () => rangeField.StartDate is not null && rangeField.EndDate is not null
@@ -212,12 +231,14 @@ public sealed class MavFormValidator
             err => rangeField.ErrorText = err,
             cb => rangeField.RangeChanged += (_, _) => cb());
 
+    /// <summary>Adds a time field to the validation.</summary>
     public MavFieldRuleBuilder Field(MavTimePickerField timeField) =>
         Field(
             () => timeField.SelectedTime?.ToString(),
             err => timeField.ErrorText = err,
             cb => timeField.SelectedTimeChanged += (_, _) => cb());
 
+    /// <summary>Validates all fields, shows the errors and returns <c>true</c> if every field is valid.</summary>
     public bool Validate()
     {
         _lastErrors.Clear();
@@ -233,6 +254,7 @@ public sealed class MavFormValidator
         return valid;
     }
 
+    /// <summary>Clears the error messages of all fields.</summary>
     public void ClearErrors()
     {
         _lastErrors.Clear();

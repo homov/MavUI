@@ -12,12 +12,14 @@ namespace Mav;
 /// </summary>
 public sealed class LocExtension : MarkupExtension
 {
+    /// <summary>Creates the extension with no key; set <c>Key</c> before use.</summary>
     public LocExtension()
     {
     }
 
     public LocExtension(string key) => Key = key;
 
+    /// <summary>Creates the extension for <paramref name="key"/> with the given fallback text.</summary>
     public LocExtension(string key, string fallback)
     {
         Key = key;
@@ -30,6 +32,7 @@ public sealed class LocExtension : MarkupExtension
     /// <summary>Text used when the provider has no value for <see cref="Key"/>.</summary>
     public string? Fallback { get; set; }
 
+    /// <summary>Returns the localized string for <see cref="Key"/>, updating the bound target when the culture changes.</summary>
     public override object ProvideValue(IServiceProvider serviceProvider)
     {
         var key = Key;

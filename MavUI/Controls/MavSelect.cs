@@ -78,10 +78,12 @@ public class MavSelect : MavContentView, IEnumerable<string>
         });
     }
 
+    /// <summary>Creates a select field with the localized default label.</summary>
     public MavSelect() : this(MavLocalization.Select, null)
     {
     }
 
+    /// <summary>Creates a select field with the given label, options and selection.</summary>
     public MavSelect(
         string? label = null,
         IEnumerable<string>? options = null,
@@ -235,6 +237,7 @@ public class MavSelect : MavContentView, IEnumerable<string>
         set => SetValue(ItemsSourceProperty, value);
     }
 
+    /// <summary>Adds an option by its text and returns the field for chaining.</summary>
     public MavSelect AddOption(string option)
     {
         _options.Add(option);
@@ -242,6 +245,7 @@ public class MavSelect : MavContentView, IEnumerable<string>
         return this;
     }
 
+    /// <summary>Adds an option object, shown by its string form, and returns the field for chaining.</summary>
     public MavSelect AddOption(object item)
     {
         _rawItems.Add(item);
@@ -284,6 +288,7 @@ public class MavSelect : MavContentView, IEnumerable<string>
         OnIndexChanged(SelectedIndex);
     }
 
+    /// <summary>Opens the list of options.</summary>
     public void OpenMenu()
     {
         if (!IsEnabled || _options.Count == 0) return;

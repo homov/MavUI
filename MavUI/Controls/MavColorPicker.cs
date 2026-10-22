@@ -88,10 +88,12 @@ public class MavColorPicker : MavContentView, IMavDraggableControl
             cp._swatchesPanel.IsVisible = e.GetNewValue<bool>());
     }
 
+    /// <summary>Creates a color picker with the default color.</summary>
     public MavColorPicker() : this(null)
     {
     }
 
+    /// <summary>Creates a color picker that starts with <paramref name="initialColor"/>.</summary>
     public MavColorPicker(Color? initialColor = null)
     {
         HorizontalAlignment = HorizontalAlignment.Stretch;
@@ -242,6 +244,7 @@ public class MavColorPicker : MavContentView, IMavDraggableControl
         set => SetValue(ShowPresetSwatchesProperty, value);
     }
 
+    /// <summary>Shows a color picker next to <paramref name="anchor"/> and returns the picked color, or <c>null</c> if it was cancelled.</summary>
     public static Task<Color?> PickAsync(Control anchor, Color? initialColor = null, string title = "Select color")
     {
         var tcs = new TaskCompletionSource<Color?>();

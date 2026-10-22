@@ -13,6 +13,7 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>Layout of a <see cref="MavButtonGroup"/>: connected or standard spacing.</summary>
 public enum MavButtonGroupKind
 {
     Standard,
@@ -46,10 +47,12 @@ public class MavButtonGroup : StackPanel, IEnumerable<Control>
         });
     }
 
+    /// <summary>Creates a standard button group.</summary>
     public MavButtonGroup() : this(MavButtonGroupKind.Standard)
     {
     }
 
+    /// <summary>Creates a button group with the given layout <paramref name="kind"/>.</summary>
     public MavButtonGroup(MavButtonGroupKind kind = MavButtonGroupKind.Standard)
     {
         Orientation = Orientation.Horizontal;
@@ -107,6 +110,7 @@ public class MavButtonGroup : StackPanel, IEnumerable<Control>
         }
     }
 
+    /// <summary>Adds a button to the group and returns the group for chaining.</summary>
     public MavButtonGroup AddButton(MavButton button)
     {
         Children.Add(button);

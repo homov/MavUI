@@ -10,6 +10,7 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>Which part of the time a <see cref="MavTimeDial"/> is currently selecting: hours or minutes.</summary>
 public enum MavTimeDialMode
 {
     Hour,
@@ -80,10 +81,12 @@ public class MavTimeDial : Control
         });
     }
 
+    /// <summary>Creates a time dial showing 9:30 in 12-hour format.</summary>
     public MavTimeDial() : this(9, 30, false)
     {
     }
 
+    /// <summary>Creates a time dial with the given time and 24-hour setting.</summary>
     public MavTimeDial(int hour = 9, int minute = 30, bool is24Hour = false)
     {
         HorizontalAlignment = HorizontalAlignment.Center;
@@ -125,6 +128,7 @@ public class MavTimeDial : Control
         set => SetValue(ModeProperty, value);
     }
 
+    /// <summary>Measures the dial to fill the available width, keeping it round.</summary>
     protected override Size MeasureOverride(Size availableSize)
     {
         var side = 256.0;
@@ -135,6 +139,7 @@ public class MavTimeDial : Control
         return new Size(side, side);
     }
 
+    /// <summary>Starts dragging the hand, or selects the hour or minute under the pointer.</summary>
     protected override void OnPointerPressed(PointerPressedEventArgs e)
     {
         base.OnPointerPressed(e);
@@ -146,6 +151,7 @@ public class MavTimeDial : Control
         e.Handled = true;
     }
 
+    /// <summary>Updates the time while the hand is dragged.</summary>
     protected override void OnPointerMoved(PointerEventArgs e)
     {
         base.OnPointerMoved(e);
@@ -155,6 +161,7 @@ public class MavTimeDial : Control
         e.Handled = true;
     }
 
+    /// <summary>Ends the drag and commits the time.</summary>
     protected override void OnPointerReleased(PointerReleasedEventArgs e)
     {
         base.OnPointerReleased(e);
@@ -258,6 +265,7 @@ public class MavTimeDial : Control
         }
     }
 
+    /// <summary>Draws the clock face, the numbers and the hand for the selected unit.</summary>
     public override void Render(DrawingContext context)
     {
         var w = Bounds.Width;

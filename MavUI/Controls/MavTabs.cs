@@ -14,12 +14,14 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>Visual style of a <see cref="MavTabs"/> control.</summary>
 public enum MavTabVariant
 {
     Primary,
     Secondary,
 }
 
+/// <summary>One tab of a <see cref="MavTabs"/> control.</summary>
 public sealed class MavTabItem : Control
 {
     public static readonly StyledProperty<string> TextProperty =
@@ -73,10 +75,12 @@ public sealed class MavTabItem : Control
         set => SetValue(ContentProperty, value);
     }
 
+    /// <summary>Creates an empty tab item.</summary>
     public MavTabItem()
     {
     }
 
+    /// <summary>Creates a tab item with text, optional icon, badge and content.</summary>
     public MavTabItem(
         string text,
         string? icon = null,
@@ -139,10 +143,12 @@ public class MavTabs : MavContentView, IEnumerable<MavTabItem>
         ItemTemplateProperty.Changed.AddClassHandler<MavTabs>((t, _) => t.RebuildFromItemsSource(t.ItemsSource));
     }
 
+    /// <summary>Creates a primary tab bar that does not scroll.</summary>
     public MavTabs() : this(MavTabVariant.Primary, false)
     {
     }
 
+    /// <summary>Creates a tab bar with the given <paramref name="variant"/>, optionally scrollable.</summary>
     public MavTabs(MavTabVariant variant = MavTabVariant.Primary, bool scrollable = false)
     {
         HorizontalAlignment = HorizontalAlignment.Stretch;
@@ -259,18 +265,21 @@ public class MavTabs : MavContentView, IEnumerable<MavTabItem>
         }
     }
 
+    /// <summary>Adds a tab with text and returns the tab bar for chaining.</summary>
     public MavTabs AddTab(string text, string? icon = null, string? badge = null, Control? content = null)
     {
         _tabs.Add(new MavTabItem(text, icon, badge, content));
         return this;
     }
 
+    /// <summary>Adds an existing tab item and returns the tab bar for chaining.</summary>
     public MavTabs AddTab(MavTabItem item)
     {
         _tabs.Add(item);
         return this;
     }
 
+    /// <summary>Adds a tab without returning the tab bar.</summary>
     public void Add(string text, string? icon = null, string? badge = null, Control? content = null) =>
         AddTab(text, icon, badge, content);
 

@@ -94,10 +94,12 @@ public class MavCalendarGrid : MavContentView
         });
     }
 
+    /// <summary>Creates a calendar grid that shows the current month.</summary>
     public MavCalendarGrid() : this(null, false)
     {
     }
 
+    /// <summary>Creates a calendar grid that shows the month of <paramref name="initialDate"/>, optionally in range mode.</summary>
     public MavCalendarGrid(DateTime? initialDate = null, bool isRange = false)
     {
         _isRange = isRange;
@@ -576,6 +578,7 @@ public class MavDatePicker : Control
     public event EventHandler<(DateTime Start, DateTime End)>? RangeSelected;
     public event EventHandler? Dismissed;
 
+    /// <summary>Shows the picker over <paramref name="anchor"/>.</summary>
     public void Show(Visual? anchor = null)
     {
         Close();
@@ -812,6 +815,7 @@ public class MavDatePicker : Control
         MavMotion.ScaleIn(card, 0.92, MavMotion.Medium1);
     }
 
+    /// <summary>Hides the picker.</summary>
     public void Close()
     {
         if (_handle is not null)
@@ -824,6 +828,7 @@ public class MavDatePicker : Control
         }
     }
 
+    /// <summary>Shows the picker next to <paramref name="anchor"/> and returns the picked date, or <c>null</c> if it was cancelled.</summary>
     public static Task<DateTime?> PickAsync(
         DateTime? initial = null,
         bool startInInputMode = false,
@@ -847,6 +852,7 @@ public class MavDatePicker : Control
         return tcs.Task;
     }
 
+    /// <summary>Shows the picker and returns the picked date, or <c>null</c> if it was cancelled.</summary>
     public static Task<DateTime?> PickDateAsync(
         DateTime? initial = null,
         DateTime? minDate = null,
@@ -917,6 +923,7 @@ public abstract class MavPickerFieldBase : MavContentView
         IsClearableProperty.Changed.AddClassHandler<MavPickerFieldBase>((f, _) => f.SyncFieldText());
     }
 
+    /// <summary>Creates a picker field with the given label, variant and leading icon.</summary>
     protected MavPickerFieldBase(string label, MavTextFieldVariant variant, string leadingIcon)
     {
         HorizontalAlignment = HorizontalAlignment.Stretch;
@@ -994,6 +1001,7 @@ public abstract class MavPickerFieldBase : MavContentView
     protected abstract Task OpenPickerAsync();
     protected abstract string FormatDisplayValue();
 
+    /// <summary>Updates the text in the field from the current value.</summary>
     protected void SyncFieldText()
     {
         Field.Text = FormatDisplayValue();
@@ -1031,10 +1039,12 @@ public class MavDatePickerField : MavPickerFieldBase
         FormatProperty.Changed.AddClassHandler<MavDatePickerField>((f, _) => f.SyncFieldText());
     }
 
+    /// <summary>Creates a date field labeled "Date".</summary>
     public MavDatePickerField() : this("Date")
     {
     }
 
+    /// <summary>Creates a date field with the given label, variant and icon.</summary>
     public MavDatePickerField(
         string label = "Date",
         DateTime? initial = null,
@@ -1076,6 +1086,7 @@ public class MavDatePickerField : MavPickerFieldBase
 
     public override void Clear() => SelectedDate = null;
 
+    /// <summary>Opens the date picker for this field and applies the picked date.</summary>
     protected override async Task OpenPickerAsync()
     {
         var picked = await MavDatePicker.PickAsync(SelectedDate, anchor: this, minDate: MinDate, maxDate: MaxDate, selectableDayPredicate: SelectableDayPredicate);
@@ -1083,6 +1094,7 @@ public class MavDatePickerField : MavPickerFieldBase
             SelectedDate = dt;
     }
 
+    /// <summary>Formats the selected date for display in the field.</summary>
     protected override string FormatDisplayValue() =>
         SelectedDate?.ToString(Format, CultureInfo.CurrentUICulture) ?? string.Empty;
 
@@ -1131,10 +1143,12 @@ public class MavDateRangePickerField : MavPickerFieldBase
         FormatProperty.Changed.AddClassHandler<MavDateRangePickerField>((f, _) => f.SyncFieldText());
     }
 
+    /// <summary>Creates a date range field labeled "Date Range".</summary>
     public MavDateRangePickerField() : this("Date Range")
     {
     }
 
+    /// <summary>Creates a date range field with the given label, variant and icon.</summary>
     public MavDateRangePickerField(
         string label = "Date Range",
         DateTime? start = null,
@@ -1179,12 +1193,14 @@ public class MavDateRangePickerField : MavPickerFieldBase
 
     protected override bool HasSelectedValue => StartDate is not null || EndDate is not null;
 
+    /// <summary>Clears both ends of the range.</summary>
     public override void Clear()
     {
         StartDate = null;
         EndDate = null;
     }
 
+    /// <summary>Opens the range picker for this field and applies the picked range.</summary>
     protected override async Task OpenPickerAsync()
     {
         var picked = await MavDatePicker.PickRangeAsync(StartDate, EndDate, anchor: this, minDate: MinDate, maxDate: MaxDate);
@@ -1195,6 +1211,7 @@ public class MavDateRangePickerField : MavPickerFieldBase
         }
     }
 
+    /// <summary>Formats the selected range for display in the field.</summary>
     protected override string FormatDisplayValue()
     {
         if (StartDate is { } s && EndDate is { } e)

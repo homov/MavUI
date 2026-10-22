@@ -14,6 +14,7 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>File attached to a chat or form: name, size and an optional local path.</summary>
 public sealed record MavAttachedFile(string Name, long SizeBytes, string? Path = null)
 {
     public string FormattedSize =>
@@ -73,10 +74,12 @@ public class MavFileDropZone : MavContentView
             z.OnFilesSourceChanged(e.GetNewValue<IEnumerable?>()));
     }
 
+    /// <summary>Creates a drop zone that accepts several files.</summary>
     public MavFileDropZone() : this(null, null, true)
     {
     }
 
+    /// <summary>Creates a drop zone with the given title, subtitle and multi-file setting.</summary>
     public MavFileDropZone(string? title = null, string? subtitle = null, bool allowMultiple = true)
     {
         HorizontalAlignment = HorizontalAlignment.Stretch;
@@ -214,6 +217,7 @@ public class MavFileDropZone : MavContentView
         RebuildFileList();
     }
 
+    /// <summary>Adds a file to the list and returns the drop zone for chaining.</summary>
     public MavFileDropZone AddFile(string name, long sizeBytes, string? path = null)
     {
         var file = new MavAttachedFile(name, Math.Max(0, sizeBytes), path);
@@ -237,6 +241,7 @@ public class MavFileDropZone : MavContentView
         return this;
     }
 
+    /// <summary>Removes a file from the list and returns <c>true</c> if it was present.</summary>
     public bool RemoveFile(MavAttachedFile file)
     {
         _syncingFiles = true;
@@ -253,6 +258,7 @@ public class MavFileDropZone : MavContentView
         return true;
     }
 
+    /// <summary>Removes all files from the list.</summary>
     public void ClearFiles()
     {
         if (_files.Count == 0) return;
@@ -265,6 +271,7 @@ public class MavFileDropZone : MavContentView
         FilesChanged?.Invoke(this, EventArgs.Empty);
     }
 
+    /// <summary>Opens the platform file picker and adds the chosen files.</summary>
     public async Task BrowseFilesAsync()
     {
         var top = TopLevel.GetTopLevel(this);
@@ -469,10 +476,12 @@ public class MavChatBubble : MavContentView
         IsReadProperty.Changed.AddClassHandler<MavChatBubble>((b, _) => b.Sync());
     }
 
+    /// <summary>Creates an empty chat bubble.</summary>
     public MavChatBubble() : this(string.Empty)
     {
     }
 
+    /// <summary>Creates a chat bubble with the given text, sender side and optional time.</summary>
     public MavChatBubble(
         string text = "",
         bool isOutgoing = false,

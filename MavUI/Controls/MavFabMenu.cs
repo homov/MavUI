@@ -12,6 +12,7 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>One action inside a <see cref="MavFabMenu"/>.</summary>
 public sealed class MavFabMenuItem : Control
 {
     public static readonly StyledProperty<string> LabelProperty =
@@ -63,10 +64,12 @@ public sealed class MavFabMenuItem : Control
         set => SetValue(CommandParameterProperty, value);
     }
 
+    /// <summary>Creates an empty menu item.</summary>
     public MavFabMenuItem()
     {
     }
 
+    /// <summary>Creates a menu item with a label, icon and click handler.</summary>
     public MavFabMenuItem(string label, string icon, Action? onClick = null)
     {
         Label = label;
@@ -136,10 +139,12 @@ public class MavFabMenu : MavContentView, IEnumerable<MavFabMenuItem>
             m.OnItemsSourceChanged(e.GetNewValue<IEnumerable?>()));
     }
 
+    /// <summary>Creates a floating action menu with the add icon.</summary>
     public MavFabMenu() : this(MavIcons.Add)
     {
     }
 
+    /// <summary>Creates a floating action menu with the given icon.</summary>
     public MavFabMenu(string icon = MavIcons.Add)
     {
         _closedIcon = icon;
@@ -249,6 +254,7 @@ public class MavFabMenu : MavContentView, IEnumerable<MavFabMenuItem>
     [Content]
     public AvaloniaList<MavFabMenuItem> Items => _items;
 
+    /// <summary>Adds an item and returns the menu for chaining.</summary>
     public MavFabMenu AddItem(string label, string icon, Action? onClick = null)
     {
         _items.Add(new MavFabMenuItem(label, icon, onClick));

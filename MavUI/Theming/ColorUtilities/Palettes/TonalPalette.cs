@@ -42,6 +42,7 @@ internal class TonalPalette
     /// <returns>Tones matching hue and chroma.</returns>
     public static TonalPalette FromHueAndChroma(double hue, double chroma) => new(hue, chroma);
 
+    /// <summary>Creates a tonal palette with the given <paramref name="hue"/> and <paramref name="chroma"/>.</summary>
     public TonalPalette(double hue, double chroma)
     {
         _hue = hue;

@@ -92,10 +92,12 @@ public class MavTextArea : MavContentView
         MinBoxHeightProperty.Changed.AddClassHandler<MavTextArea>((a, e) => a._fieldBox.MinHeight = e.GetNewValue<double>());
     }
 
+    /// <summary>Creates an empty multi-line text field.</summary>
     public MavTextArea() : this(string.Empty)
     {
     }
 
+    /// <summary>Creates a multi-line text field with the given label, text and variant.</summary>
     public MavTextArea(
         string label = "",
         MavTextFieldVariant variant = MavTextFieldVariant.Outlined,
@@ -254,6 +256,7 @@ public class MavTextArea : MavContentView
 
     public MavNativeEditor InnerEditor => _editor;
 
+    /// <summary>Shows or clears the validation message when the bound data validation state changes.</summary>
     protected override void UpdateDataValidation(AvaloniaProperty property, BindingValueType state, Exception? error)
     {
         base.UpdateDataValidation(property, state, error);

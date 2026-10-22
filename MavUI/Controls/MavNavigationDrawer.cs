@@ -14,6 +14,7 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>Entry of a <see cref="MavNavigationDrawer"/>: a destination, section header or divider.</summary>
 public sealed class MavDrawerItem : Control
 {
     public static readonly StyledProperty<string> LabelProperty =
@@ -104,10 +105,12 @@ public sealed class MavDrawerItem : Control
         set => SetValue(CommandParameterProperty, value);
     }
 
+    /// <summary>Creates an empty drawer entry.</summary>
     public MavDrawerItem()
     {
     }
 
+    /// <summary>Creates a drawer entry with label, icon, optional badge and click handler.</summary>
     public MavDrawerItem(
         string label,
         string icon,
@@ -178,10 +181,12 @@ public class MavNavigationDrawer : MavContentView, IEnumerable<MavDrawerItem>
         });
     }
 
+    /// <summary>Creates an empty navigation drawer 300 dp wide.</summary>
     public MavNavigationDrawer() : this(null, 300)
     {
     }
 
+    /// <summary>Creates a navigation drawer with an optional title and width.</summary>
     public MavNavigationDrawer(string? title = null, double width = 300)
     {
         Width = width;
@@ -294,6 +299,7 @@ public class MavNavigationDrawer : MavContentView, IEnumerable<MavDrawerItem>
     [Content]
     public AvaloniaList<MavDrawerItem> Items => _items;
 
+    /// <summary>Adds an item and returns the drawer for chaining.</summary>
     public MavNavigationDrawer AddItem(string label, string icon, string? badge = null, Action? onClick = null)
     {
         var item = new MavDrawerItem(label, icon, badge, onClick);
@@ -380,6 +386,7 @@ public class MavNavigationDrawer : MavContentView, IEnumerable<MavDrawerItem>
         _stack.Children.Add(pill);
     }
 
+    /// <summary>Adds a section heading and returns the drawer for chaining.</summary>
     public MavNavigationDrawer AddSectionHeader(string text)
     {
         var hdr = new TextBlock
@@ -393,6 +400,7 @@ public class MavNavigationDrawer : MavContentView, IEnumerable<MavDrawerItem>
         return this;
     }
 
+    /// <summary>Adds a divider and returns the drawer for chaining.</summary>
     public MavNavigationDrawer AddDivider()
     {
         _stack.Children.Add(new MavDivider(16, 16) { Margin = new Thickness(16, 8) });
@@ -501,10 +509,12 @@ public class MavModalNavigationDrawer : Control
         });
     }
 
+    /// <summary>Creates an empty modal navigation drawer 300 dp wide.</summary>
     public MavModalNavigationDrawer() : this(null, 300)
     {
     }
 
+    /// <summary>Creates a modal navigation drawer with an optional title and width.</summary>
     public MavModalNavigationDrawer(string? title = null, double width = 300)
     {
         _drawer = new MavNavigationDrawer(title, width)
@@ -546,24 +556,28 @@ public class MavModalNavigationDrawer : Control
     [Content]
     public AvaloniaList<MavDrawerItem> Items => _drawer.Items;
 
+    /// <summary>Adds an item and returns the modal drawer for chaining.</summary>
     public MavModalNavigationDrawer AddItem(string label, string icon, string? badge = null, Action? onClick = null)
     {
         _drawer.AddItem(label, icon, badge, onClick);
         return this;
     }
 
+    /// <summary>Adds a section heading and returns the modal drawer for chaining.</summary>
     public MavModalNavigationDrawer AddSectionHeader(string text)
     {
         _drawer.AddSectionHeader(text);
         return this;
     }
 
+    /// <summary>Adds a divider and returns the modal drawer for chaining.</summary>
     public MavModalNavigationDrawer AddDivider()
     {
         _drawer.AddDivider();
         return this;
     }
 
+    /// <summary>Shows the modal drawer over <paramref name="anchor"/> with a scrim behind it.</summary>
     public void Show(Visual? anchor = null)
     {
         Close();
@@ -597,6 +611,7 @@ public class MavModalNavigationDrawer : Control
         });
     }
 
+    /// <summary>Hides the modal drawer and removes its scrim.</summary>
     public void Close()
     {
         if (_handle is null) return;

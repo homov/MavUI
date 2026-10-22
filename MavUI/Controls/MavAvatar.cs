@@ -12,6 +12,7 @@ using Mav.Platform;
 
 namespace Mav.Controls;
 
+/// <summary>Presence status shown as a badge on a <see cref="MavAvatar"/>.</summary>
 public enum MavAvatarStatus
 {
     None,
@@ -69,10 +70,12 @@ public class MavAvatar : MavContentView
         CustomTextColorProperty.Changed.AddClassHandler<MavAvatar>((a, _) => a.ApplyTheme(MavTheme.Current));
     }
 
+    /// <summary>Creates an avatar showing the initial "A".</summary>
     public MavAvatar() : this("A")
     {
     }
 
+    /// <summary>Creates an avatar with initials or an icon, an optional fill color and a size.</summary>
     public MavAvatar(
         string? initials = "A",
         string? icon = null,
@@ -269,10 +272,12 @@ public class MavAvatarGroup : MavContentView, IEnumerable<MavAvatar>
         ItemsSourceProperty.Changed.AddClassHandler<MavAvatarGroup>((g, e) => g.OnItemsSourceChanged(e.GetNewValue<IEnumerable?>()));
     }
 
+    /// <summary>Creates an avatar group that shows up to four avatars.</summary>
     public MavAvatarGroup() : this(4, 38.0)
     {
     }
 
+    /// <summary>Creates an avatar group that shows up to <paramref name="maxDisplayed"/> avatars and a "+N" overflow badge.</summary>
     public MavAvatarGroup(int maxDisplayed = 4, double avatarSize = 38.0)
     {
         HorizontalAlignment = HorizontalAlignment.Left;
@@ -337,6 +342,7 @@ public class MavAvatarGroup : MavContentView, IEnumerable<MavAvatar>
     [Content]
     public AvaloniaList<MavAvatar> Avatars => _avatars;
 
+    /// <summary>Adds an avatar built from initials or an icon and returns the group for chaining.</summary>
     public MavAvatarGroup AddAvatar(string initials, string? icon = null, Color? fillColor = null, Color? textColor = null)
     {
         var avatar = new MavAvatar(initials, icon, AvatarSize);
@@ -346,6 +352,7 @@ public class MavAvatarGroup : MavContentView, IEnumerable<MavAvatar>
         return this;
     }
 
+    /// <summary>Adds an existing avatar to the group and returns the group for chaining.</summary>
     public MavAvatarGroup AddAvatar(MavAvatar avatar)
     {
         _avatars.Add(avatar);

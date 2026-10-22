@@ -143,6 +143,7 @@ public static class MavOverlay
         }
     }
 
+    /// <summary>Registers the top-level window of <paramref name="visual"/> so overlays can be shown in it.</summary>
     public static void TrackTopLevel(Visual? visual)
     {
         if (visual is null) return;
@@ -164,6 +165,7 @@ public static class MavOverlay
         Hosts.Add(new OverlayHostEntry(new WeakReference<Control>(owner), new WeakReference<Panel>(host)));
     }
 
+    /// <summary>Removes the overlay host owned by <paramref name="owner"/>.</summary>
     public static void UnregisterHost(Control owner)
     {
         PruneHosts();
@@ -188,6 +190,7 @@ public static class MavOverlay
         }
     }
 
+    /// <summary>Returns the top-level window that contains <paramref name="anchor"/>, or <c>null</c>.</summary>
     public static TopLevel? ResolveTopLevel(Visual? anchor)
     {
         if (anchor is not null && TopLevel.GetTopLevel(anchor) is { } fromAnchor)
@@ -230,6 +233,7 @@ public static class MavOverlay
         return null;
     }
 
+    /// <summary>Shows content in the overlay layer and returns a handle that removes it when disposed.</summary>
     public static IDisposable Show(
         Visual? anchor,
         Control content,
@@ -395,6 +399,7 @@ public static class MavOverlay
         NotifyViewportChanged();
     }
 
+    /// <summary>Tells the visible overlays that the window size or keyboard inset changed, so they can reposition.</summary>
     internal static void NotifyViewportChanged()
     {
         if (_layoutNotificationQueued) return;
@@ -409,6 +414,7 @@ public static class MavOverlay
         }, DispatcherPriority.Loaded);
     }
 
+    /// <summary>Returns the bounds of <paramref name="element"/> in the coordinate space of <paramref name="overlayRoot"/>.</summary>
     public static Rect BoundsInOverlay(Visual element, Visual overlayRoot)
     {
         try
@@ -434,6 +440,7 @@ public static class MavOverlay
         return new Rect(x, y, element.Bounds.Width, element.Bounds.Height);
     }
 
+    /// <summary>Returns the size of the overlay area for <paramref name="anchor"/>.</summary>
     public static Size GetOverlaySize(Visual? anchor)
     {
         var root = EnsureOverlayRoot(anchor);
@@ -447,6 +454,7 @@ public static class MavOverlay
         return new Size(400, 720);
     }
 
+    /// <summary>Returns the overlay root for <paramref name="anchor"/> and creates it if it does not exist.</summary>
     internal static Grid? EnsureOverlayRoot(Visual? anchor)
     {
         var topLevel = ResolveTopLevel(anchor);

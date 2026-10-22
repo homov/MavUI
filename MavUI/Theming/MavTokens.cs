@@ -21,6 +21,7 @@ public sealed class MavShapeTokens
 
     public MavShapeScale Scale { get; }
 
+    /// <summary>Creates the shape tokens for the given <paramref name="scale"/>.</summary>
     public MavShapeTokens(MavShapeScale scale = MavShapeScale.Standard)
     {
         Scale = scale;
@@ -33,6 +34,7 @@ public sealed class MavShapeTokens
         _ => 1.0,
     };
 
+    /// <summary>Scales <paramref name="baseRadius"/> to the current shape scale.</summary>
     public double ScaleRadius(double baseRadius) =>
         baseRadius <= 0 || baseRadius >= 500 ? baseRadius : Math.Round(baseRadius * ScaleMultiplier, 1);
 
@@ -46,6 +48,7 @@ public sealed class MavShapeTokens
     public double Full => 999;
 }
 
+/// <summary>Shadow elevation levels from the Material 3 token set.</summary>
 public sealed class MavElevationTokens
 {
     public static MavElevationTokens Default { get; } = new();
@@ -123,6 +126,7 @@ public sealed class MavElevationTokens
     }
 }
 
+/// <summary>Opacity values for hover, focus, pressed and dragged state layers.</summary>
 public sealed class MavStateLayerTokens
 {
     public static MavStateLayerTokens Default { get; } = new();
@@ -135,6 +139,7 @@ public sealed class MavStateLayerTokens
     public float DisabledContent => 0.38f;
 }
 
+/// <summary>Spacing density of the theme: default, comfortable or compact.</summary>
 public enum MavDensity
 {
     Comfortable = 0,

@@ -13,6 +13,7 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>Visual style of a <see cref="MavButton"/> (filled, tonal, outlined, text, and so on).</summary>
 public enum MavButtonVariant
 {
     Filled,
@@ -22,6 +23,7 @@ public enum MavButtonVariant
     Text,
 }
 
+/// <summary>Size preset of a <see cref="MavButton"/>.</summary>
 public enum MavButtonSize
 {
     ExtraSmall,
@@ -31,6 +33,7 @@ public enum MavButtonSize
     ExtraLarge,
 }
 
+/// <summary>Corner shape of a <see cref="MavButton"/>.</summary>
 public enum MavButtonShape
 {
     Round,
@@ -119,10 +122,12 @@ public class MavButton : MavContentView
         CommandParameterProperty.Changed.AddClassHandler<MavButton>((b, e) => b._surface.CommandParameter = e.GetNewValue<object?>());
     }
 
+    /// <summary>Creates an empty button.</summary>
     public MavButton() : this(string.Empty)
     {
     }
 
+    /// <summary>Creates a button with the given text, variant and optional leading icon.</summary>
     public MavButton(
         string text = "",
         MavButtonVariant variant = MavButtonVariant.Filled,
@@ -256,12 +261,14 @@ public class MavButton : MavContentView
         set => SetValue(CommandParameterProperty, value);
     }
 
+    /// <summary>Sets the corner radii used when the button is part of a <see cref="MavButtonGroup"/>, so inner corners look connected.</summary>
     internal void SetGroupCornerRadii(CornerRadius? radii)
     {
         _customCornerRadii = radii;
         ApplyShape(MavTheme.Current);
     }
 
+    /// <summary>Re-applies the theme-dependent colors when a styled property that affects them changes.</summary>
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);

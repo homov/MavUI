@@ -69,10 +69,12 @@ public class MavBanner : MavContentView
             b._secondaryBtn.CommandParameter = e.GetNewValue<object?>());
     }
 
+    /// <summary>Creates an empty banner.</summary>
     public MavBanner() : this(string.Empty)
     {
     }
 
+    /// <summary>Creates a banner with the given message and optional actions.</summary>
     public MavBanner(
         string message = "",
         string? icon = MavIcons.Info,

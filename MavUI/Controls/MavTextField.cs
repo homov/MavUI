@@ -13,6 +13,7 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>Visual style of a <see cref="MavTextField"/>: filled or outlined.</summary>
 public enum MavTextFieldVariant
 {
     Filled,
@@ -173,10 +174,12 @@ public class MavTextField : MavContentView
         ShowCounterProperty.Changed.AddClassHandler<MavTextField>((f, _) => f.SyncFooter());
     }
 
+    /// <summary>Creates an empty single-line text field.</summary>
     public MavTextField() : this(string.Empty)
     {
     }
 
+    /// <summary>Creates a text field with the given label, text, variant and icons.</summary>
     public MavTextField(
         string label = "",
         MavTextFieldVariant variant = MavTextFieldVariant.Outlined,
@@ -503,6 +506,7 @@ public class MavTextField : MavContentView
     public void Focus() => _entry.Focus();
     public void Unfocus() => _entry.Unfocus();
 
+    /// <summary>Updates the field when a visual property changes.</summary>
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
@@ -513,6 +517,7 @@ public class MavTextField : MavContentView
         }
     }
 
+    /// <summary>Shows or clears the validation message when the bound data validation state changes.</summary>
     protected override void UpdateDataValidation(AvaloniaProperty property, BindingValueType state, Exception? error)
     {
         base.UpdateDataValidation(property, state, error);

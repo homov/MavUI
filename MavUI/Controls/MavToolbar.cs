@@ -9,12 +9,14 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>Layout of a <see cref="MavToolbar"/>: standard, floating or docked.</summary>
 public enum MavToolbarVariant
 {
     Floating,
     Docked,
 }
 
+/// <summary>Color treatment of a <see cref="MavToolbar"/>.</summary>
 public enum MavToolbarColorStyle
 {
     Standard,
@@ -63,10 +65,12 @@ public class MavToolbar : MavContentView, IEnumerable<Control>
         });
     }
 
+    /// <summary>Creates a floating standard toolbar with a horizontal layout.</summary>
     public MavToolbar() : this(MavToolbarVariant.Floating, MavToolbarColorStyle.Standard, Orientation.Horizontal)
     {
     }
 
+    /// <summary>Creates a toolbar with the given variant, color style and orientation.</summary>
     public MavToolbar(
         MavToolbarVariant variant = MavToolbarVariant.Floating,
         MavToolbarColorStyle colorStyle = MavToolbarColorStyle.Standard,
@@ -129,6 +133,7 @@ public class MavToolbar : MavContentView, IEnumerable<Control>
         set => SetValue(CompanionFabProperty, value);
     }
 
+    /// <summary>Adds an icon action and returns the toolbar for chaining.</summary>
     public MavToolbar AddAction(
         string icon,
         Action? onClick = null,
@@ -155,6 +160,7 @@ public class MavToolbar : MavContentView, IEnumerable<Control>
         return this;
     }
 
+    /// <summary>Adds a custom control and returns the toolbar for chaining.</summary>
     public MavToolbar AddControl(Control control)
     {
         _itemsPanel.Children.Add(control);
@@ -167,6 +173,7 @@ public class MavToolbar : MavContentView, IEnumerable<Control>
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
+    /// <summary>Adds a divider and returns the toolbar for chaining.</summary>
     public MavToolbar AddDivider()
     {
         var vertical = Orientation == Orientation.Horizontal;

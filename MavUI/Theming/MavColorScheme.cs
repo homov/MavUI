@@ -143,6 +143,7 @@ public sealed record MavColorScheme
     public required Color InversePrimary { get; init; }
     public required Color SurfaceTint { get; init; }
 
+    /// <summary>Creates a color scheme from a seed color, with the given brightness and contrast.</summary>
     public static MavColorScheme FromSeed(
         Color seed,
         bool dark,
@@ -184,6 +185,7 @@ public sealed record MavColorScheme
         _ => PaletteStyle.TonalSpot,
     };
 
+    /// <summary>Creates a color scheme from the tonal palettes in <paramref name="core"/>.</summary>
     internal static MavColorScheme FromCorePalette(
         Color seed,
         CorePalette core,
@@ -394,6 +396,7 @@ public sealed record MavColorScheme
 
     public Color this[MavColorRole role] => Get(role);
 
+    /// <summary>Returns all roles of this scheme as a dictionary, for resource lookups.</summary>
     public IReadOnlyDictionary<MavColorRole, Color> ToDictionary()
     {
         var dict = new Dictionary<MavColorRole, Color>(42);
@@ -412,6 +415,7 @@ public sealed record MavColorScheme
         _ => SurfaceContainerHighest,
     };
 
+    /// <summary>Blends two colors, where <paramref name="amount"/> 0 gives <paramref name="from"/> and 1 gives <paramref name="to"/>.</summary>
     public static Color Blend(Color from, Color to, double amount)
     {
         var t = Math.Clamp(amount, 0, 1);
@@ -422,6 +426,7 @@ public sealed record MavColorScheme
             (byte)Math.Round(from.B + (to.B - from.B) * t));
     }
 
+    /// <summary>Converts an ARGB value to a <see cref="Color"/>.</summary>
     public static Color FromArgb(uint argb)
     {
         var a = (byte)((argb >> 24) & 0xFF);
@@ -431,6 +436,7 @@ public sealed record MavColorScheme
         return Color.FromArgb(a, r, g, b);
     }
 
+    /// <summary>Converts a <see cref="Color"/> to an ARGB value.</summary>
     public static uint ToArgb(Color c) =>
         ((uint)c.A << 24) | ((uint)c.R << 16) | ((uint)c.G << 8) | c.B;
 
@@ -546,6 +552,7 @@ public sealed record MavColorScheme
     }
 }
 
+/// <summary>Contrast level of a generated color scheme (standard, medium or high).</summary>
 public enum MavContrast
 {
     Standard,

@@ -18,6 +18,7 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>Action revealed when a <see cref="MavListItem"/> is swiped.</summary>
 public sealed class MavSwipeAction : Control
 {
     public static readonly StyledProperty<string> LabelProperty =
@@ -87,10 +88,12 @@ public sealed class MavSwipeAction : Control
         set => SetValue(ForegroundColorProperty, value);
     }
 
+    /// <summary>Creates an empty swipe action.</summary>
     public MavSwipeAction()
     {
     }
 
+    /// <summary>Creates a swipe action with a label, icon, color and click handler.</summary>
     public MavSwipeAction(
         string label,
         string icon,
@@ -107,6 +110,7 @@ public sealed class MavSwipeAction : Control
 
     protected override Size MeasureOverride(Size availableSize) => default;
 
+    /// <summary>Runs the action callback, used by the list when the swipe is confirmed.</summary>
     internal void Invoke()
     {
         OnTriggered?.Invoke();
@@ -132,10 +136,12 @@ public class MavListSubheader : MavContentView
         TextProperty.Changed.AddClassHandler<MavListSubheader>((s, e) => s._label.Text = e.GetNewValue<string>());
     }
 
+    /// <summary>Creates an empty subheader.</summary>
     public MavListSubheader() : this(string.Empty)
     {
     }
 
+    /// <summary>Creates a subheader with the given text.</summary>
     public MavListSubheader(string text)
     {
         Padding = new Thickness(16, 12, 16, 4);
@@ -158,6 +164,7 @@ public class MavListSubheader : MavContentView
     }
 }
 
+/// <summary>Number of text lines a <see cref="MavListItem"/> shows (one, two or three).</summary>
 public enum MavListItemLines
 {
     OneLine,
@@ -299,10 +306,12 @@ public class MavListItem : MavContentView, IMavDraggableControl
         TrailingSwipeActionProperty.Changed.AddClassHandler<MavListItem>((i, _) => i.ApplyTheme(MavTheme.Current));
     }
 
+    /// <summary>Creates an empty list item.</summary>
     public MavListItem() : this(string.Empty)
     {
     }
 
+    /// <summary>Creates a list item with headline, supporting text, leading and trailing content.</summary>
     public MavListItem(
         string headline = "",
         string? supportingText = null,
@@ -635,6 +644,7 @@ public class MavListItem : MavContentView, IMavDraggableControl
         _trailingIconView.Color = subFg;
     }
 
+    /// <summary>Starts tracking a press on the item, for swipe and click detection.</summary>
     protected override void OnPointerPressed(PointerPressedEventArgs e)
     {
         base.OnPointerPressed(e);
@@ -645,6 +655,7 @@ public class MavListItem : MavContentView, IMavDraggableControl
         _swiping = false;
     }
 
+    /// <summary>Follows the pointer while an item is being swiped.</summary>
     protected override void OnPointerMoved(PointerEventArgs e)
     {
         base.OnPointerMoved(e);
@@ -694,6 +705,7 @@ public class MavListItem : MavContentView, IMavDraggableControl
         e.Handled = true;
     }
 
+    /// <summary>Completes a swipe or click gesture, animating the item back or to the action.</summary>
     protected override void OnPointerReleased(PointerReleasedEventArgs e)
     {
         base.OnPointerReleased(e);
@@ -851,6 +863,7 @@ public class MavList : StackPanel, IEnumerable<Control>
             item.ShowDivider = false;
     }
 
+    /// <summary>Creates an empty list.</summary>
     public MavList()
     {
         Orientation = Orientation.Vertical;
@@ -897,24 +910,28 @@ public class MavList : StackPanel, IEnumerable<Control>
         }
     }
 
+    /// <summary>Sets the factory that creates a control for each data item.</summary>
     public MavList SetItemTemplate(Func<object, Control> factory)
     {
         ItemFactory = factory;
         return this;
     }
 
+    /// <summary>Adds an item and returns the list for chaining.</summary>
     public MavList AddItem(MavListItem item)
     {
         Children.Add(item);
         return this;
     }
 
+    /// <summary>Adds a subheader row and returns the list for chaining.</summary>
     public MavList AddSubheader(string text)
     {
         Children.Add(new MavListSubheader(text));
         return this;
     }
 
+    /// <summary>Adds a divider row with optional start and end insets.</summary>
     public MavList AddDivider(double insetStart = 0, double insetEnd = 0)
     {
         Children.Add(new MavDivider(insetStart, insetEnd));
@@ -1527,6 +1544,7 @@ public class MavList : StackPanel, IEnumerable<Control>
         }
     }
 
+    /// <summary>Places the rows and keeps them aligned to the virtualized viewport.</summary>
     protected override Size ArrangeOverride(Size finalSize)
     {
         var result = base.ArrangeOverride(finalSize);

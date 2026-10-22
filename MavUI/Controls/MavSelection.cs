@@ -58,10 +58,12 @@ public class MavSwitch : Control
         });
     }
 
+    /// <summary>Creates an off switch without icons.</summary>
     public MavSwitch() : this(false, false)
     {
     }
 
+    /// <summary>Creates a switch with the given state, optionally showing the on and off icons.</summary>
     public MavSwitch(bool isToggled = false, bool showIcons = false)
     {
         Width = 52;
@@ -124,6 +126,7 @@ public class MavSwitch : Control
 
     protected override Size MeasureOverride(Size availableSize) => new(52, 32);
 
+    /// <summary>Redraws the switch when a visual property changes.</summary>
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
@@ -131,6 +134,7 @@ public class MavSwitch : Control
             InvalidateVisual();
     }
 
+    /// <summary>Shows the hover state when the pointer enters the switch.</summary>
     protected override void OnPointerEntered(PointerEventArgs e)
     {
         base.OnPointerEntered(e);
@@ -139,6 +143,7 @@ public class MavSwitch : Control
         InvalidateVisual();
     }
 
+    /// <summary>Clears the hover state when the pointer leaves the switch.</summary>
     protected override void OnPointerExited(PointerEventArgs e)
     {
         base.OnPointerExited(e);
@@ -151,6 +156,7 @@ public class MavSwitch : Control
         InvalidateVisual();
     }
 
+    /// <summary>Starts a press on the switch and shows the pressed state.</summary>
     protected override void OnPointerPressed(PointerPressedEventArgs e)
     {
         base.OnPointerPressed(e);
@@ -159,6 +165,7 @@ public class MavSwitch : Control
         AnimatePress(1);
     }
 
+    /// <summary>Completes a click and toggles the switch when the pointer is released over it.</summary>
     protected override void OnPointerReleased(PointerReleasedEventArgs e)
     {
         base.OnPointerReleased(e);
@@ -173,6 +180,7 @@ public class MavSwitch : Control
         }
     }
 
+    /// <summary>Toggles the switch with the Space or Enter key.</summary>
     protected override void OnKeyDown(KeyEventArgs e)
     {
         base.OnKeyDown(e);
@@ -207,6 +215,7 @@ public class MavSwitch : Control
             Command.Execute(param);
     }
 
+    /// <summary>Draws the track, the thumb and the optional icons for the current state.</summary>
     public override void Render(DrawingContext context)
     {
         var t = MavTheme.Current;
@@ -281,6 +290,7 @@ public class MavSwitch : Control
     }
 }
 
+/// <summary>Checked state of a <see cref="MavCheckBox"/>: unchecked, checked or indeterminate.</summary>
 public enum MavCheckState
 {
     Unchecked,
@@ -337,10 +347,12 @@ public class MavCheckBox : MavContentView
         HasErrorProperty.Changed.AddClassHandler<MavCheckBox>((cb, _) => cb._box.InvalidateVisual());
     }
 
+    /// <summary>Creates an unchecked checkbox without a label.</summary>
     public MavCheckBox() : this(null, false, false)
     {
     }
 
+    /// <summary>Creates a checkbox with an optional label and the given checked and indeterminate state.</summary>
     public MavCheckBox(string? label = null, bool isChecked = false, bool isIndeterminate = false)
     {
         HorizontalAlignment = HorizontalAlignment.Left;
@@ -456,6 +468,7 @@ public class MavCheckBox : MavContentView
         }
     }
 
+    /// <summary>Redraws the checkbox when a visual property changes.</summary>
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
@@ -466,6 +479,7 @@ public class MavCheckBox : MavContentView
         }
     }
 
+    /// <summary>Shows the hover state when the pointer enters the checkbox.</summary>
     protected override void OnPointerEntered(PointerEventArgs e)
     {
         base.OnPointerEntered(e);
@@ -474,6 +488,7 @@ public class MavCheckBox : MavContentView
         _box.InvalidateVisual();
     }
 
+    /// <summary>Clears the hover state when the pointer leaves the checkbox.</summary>
     protected override void OnPointerExited(PointerEventArgs e)
     {
         base.OnPointerExited(e);
@@ -482,6 +497,7 @@ public class MavCheckBox : MavContentView
         _box.InvalidateVisual();
     }
 
+    /// <summary>Starts a press on the checkbox and shows the pressed state.</summary>
     protected override void OnPointerPressed(PointerPressedEventArgs e)
     {
         base.OnPointerPressed(e);
@@ -490,6 +506,7 @@ public class MavCheckBox : MavContentView
         _box.InvalidateVisual();
     }
 
+    /// <summary>Completes a click and toggles the checkbox when the pointer is released over it.</summary>
     protected override void OnPointerReleased(PointerReleasedEventArgs e)
     {
         base.OnPointerReleased(e);
@@ -504,6 +521,7 @@ public class MavCheckBox : MavContentView
         }
     }
 
+    /// <summary>Toggles the checkbox with the Space key.</summary>
     protected override void OnKeyDown(KeyEventArgs e)
     {
         base.OnKeyDown(e);
@@ -515,6 +533,7 @@ public class MavCheckBox : MavContentView
         }
     }
 
+    /// <summary>Switches between checked and unchecked, and clears the indeterminate state.</summary>
     public void Toggle()
     {
         if (IsThreeState)
@@ -681,10 +700,12 @@ public class MavRadioButton : MavContentView
         });
     }
 
+    /// <summary>Creates an unchecked radio button without a label or value.</summary>
     public MavRadioButton() : this(null, false, null)
     {
     }
 
+    /// <summary>Creates a radio button with an optional label, checked state and value.</summary>
     public MavRadioButton(string? label = null, bool isChecked = false, object? value = null)
     {
         HorizontalAlignment = HorizontalAlignment.Left;
@@ -765,6 +786,7 @@ public class MavRadioButton : MavContentView
         set => SetValue(CommandParameterProperty, value);
     }
 
+    /// <summary>Redraws the radio button when a visual property changes.</summary>
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
@@ -775,6 +797,7 @@ public class MavRadioButton : MavContentView
         }
     }
 
+    /// <summary>Shows the hover state when the pointer enters the radio button.</summary>
     protected override void OnPointerEntered(PointerEventArgs e)
     {
         base.OnPointerEntered(e);
@@ -783,6 +806,7 @@ public class MavRadioButton : MavContentView
         _glyph.InvalidateVisual();
     }
 
+    /// <summary>Clears the hover state when the pointer leaves the radio button.</summary>
     protected override void OnPointerExited(PointerEventArgs e)
     {
         base.OnPointerExited(e);
@@ -791,6 +815,7 @@ public class MavRadioButton : MavContentView
         _glyph.InvalidateVisual();
     }
 
+    /// <summary>Starts a press on the radio button and shows the pressed state.</summary>
     protected override void OnPointerPressed(PointerPressedEventArgs e)
     {
         base.OnPointerPressed(e);
@@ -799,6 +824,7 @@ public class MavRadioButton : MavContentView
         _glyph.InvalidateVisual();
     }
 
+    /// <summary>Completes a click and selects the radio button when the pointer is released over it.</summary>
     protected override void OnPointerReleased(PointerReleasedEventArgs e)
     {
         base.OnPointerReleased(e);
@@ -813,6 +839,7 @@ public class MavRadioButton : MavContentView
         }
     }
 
+    /// <summary>Selects the radio button with the Space key.</summary>
     protected override void OnKeyDown(KeyEventArgs e)
     {
         base.OnKeyDown(e);
@@ -937,10 +964,12 @@ public class MavRadioGroup : StackPanel
             g.OnItemsSourceChanged(e.GetNewValue<System.Collections.IEnumerable?>()));
     }
 
+    /// <summary>Creates a vertical radio group.</summary>
     public MavRadioGroup() : this(Orientation.Vertical)
     {
     }
 
+    /// <summary>Creates a radio group with the given <paramref name="orientation"/>.</summary>
     public MavRadioGroup(Orientation orientation = Orientation.Vertical)
     {
         Orientation = orientation;
@@ -1026,6 +1055,7 @@ public class MavRadioGroup : StackPanel
             ? (_buttons[_selectedIndex].Value ?? _buttons[_selectedIndex].Label)
             : null;
 
+    /// <summary>Adds a radio button with the given label and value and returns it.</summary>
     public MavRadioButton AddOption(string label, object? value = null, bool selected = false)
     {
         var rb = new MavRadioButton(label, selected, value);
@@ -1033,6 +1063,7 @@ public class MavRadioGroup : StackPanel
         return rb;
     }
 
+    /// <summary>Adds an existing radio button to the group.</summary>
     public void AddRadio(MavRadioButton button)
     {
         if (!Children.Contains(button))

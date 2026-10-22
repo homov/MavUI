@@ -10,6 +10,7 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>Layout of a <see cref="MavTopAppBar"/>: small, center-aligned, medium or large.</summary>
 public enum MavTopAppBarVariant
 {
     CenterAligned,
@@ -101,10 +102,12 @@ public class MavTopAppBar : MavContentView
         SafeAreaPaddingProperty.Changed.AddClassHandler<MavTopAppBar>((b, _) => b.ApplySafeAreaPadding());
     }
 
+    /// <summary>Creates an empty top app bar.</summary>
     public MavTopAppBar() : this(string.Empty)
     {
     }
 
+    /// <summary>Creates a top app bar with the given title and layout variant.</summary>
     public MavTopAppBar(
         string title = "",
         MavTopAppBarVariant variant = MavTopAppBarVariant.Small,
@@ -281,6 +284,7 @@ public class MavTopAppBar : MavContentView
     [Content]
     public global::Avalonia.Controls.Controls Actions => _actionsRow.Children;
 
+    /// <summary>Adds an icon action to the trailing side of the bar and returns the bar for chaining.</summary>
     public MavTopAppBar AddAction(string icon, Action? onClick = null)
     {
         var btn = new MavIconButton(icon);
@@ -292,12 +296,14 @@ public class MavTopAppBar : MavContentView
 
     public void AttachScrollViewer(ScrollViewer scroll) => ScrollViewer = scroll;
 
+    /// <summary>Subscribes to theme and layout changes once the bar is in the visual tree.</summary>
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
         SubscribeToScrollViewer();
     }
 
+    /// <summary>Unsubscribes from theme and layout changes so the bar can be collected.</summary>
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         UnsubscribeFromScrollViewer();

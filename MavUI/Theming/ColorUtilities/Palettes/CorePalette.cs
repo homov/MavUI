@@ -55,6 +55,7 @@ internal class CorePalette
         return corePalette;
     }
 
+    /// <summary>Fills the palette from <paramref name="seed"/> using the given <paramref name="style"/>.</summary>
     public virtual void Fill(uint seed, Style style = Style.TonalSpot)
     {
         Hct hct = Hct.FromInt(seed);

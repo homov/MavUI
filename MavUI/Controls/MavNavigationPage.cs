@@ -13,6 +13,7 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>Animation used when a <see cref="MavNavigationPage"/> changes its page.</summary>
 public enum MavNavigationTransition
 {
     None,
@@ -70,6 +71,7 @@ public class MavNavigationPage : MavContentView
         SafeAreaOverrideProperty.Changed.AddClassHandler<MavNavigationPage>((p, _) => p.ApplySafeAreaInsets());
     }
 
+    /// <summary>Creates an empty navigation page host.</summary>
     public MavNavigationPage()
     {
         // The page distributes safe-area insets to its app bar, bottom bar and
@@ -145,6 +147,7 @@ public class MavNavigationPage : MavContentView
         MavTheme.Observe(this, (self, theme) => self.ApplyTheme(theme));
     }
 
+    /// <summary>Creates a navigation host with <paramref name="rootPage"/> as its root.</summary>
     public MavNavigationPage(MavContentPage rootPage) : this()
     {
         SetRoot(rootPage);
@@ -212,6 +215,7 @@ public class MavNavigationPage : MavContentView
     /// </summary>
     public ICommand GoBackCommand => _goBackCommand;
 
+    /// <summary>Replaces the whole stack with <paramref name="page"/> as the new root.</summary>
     public void SetRoot(MavContentPage page)
     {
         ArgumentNullException.ThrowIfNull(page);
@@ -236,6 +240,7 @@ public class MavNavigationPage : MavContentView
         NotifyCanGoBackChanged();
     }
 
+    /// <summary>Pushes a page onto the stack, optionally with the transition animation.</summary>
     public void Push(MavContentPage page, bool animated = true)
     {
         ArgumentNullException.ThrowIfNull(page);
@@ -309,6 +314,7 @@ public class MavNavigationPage : MavContentView
         return true;
     }
 
+    /// <summary>Removes all pages above the root.</summary>
     public void PopToRoot(bool animated = true)
     {
         if (_stack.Count <= 1)
@@ -332,6 +338,7 @@ public class MavNavigationPage : MavContentView
         NotifyCanGoBackChanged();
     }
 
+    /// <summary>Replaces the current page with <paramref name="page"/> without adding a history entry.</summary>
     public void Replace(MavContentPage page, bool animated = true)
     {
         ArgumentNullException.ThrowIfNull(page);
@@ -415,6 +422,7 @@ public class MavNavigationPage : MavContentView
             Pop();
     }
 
+    /// <summary>Shows the current page and raises its appearing notification.</summary>
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
@@ -444,6 +452,7 @@ public class MavNavigationPage : MavContentView
         ApplySafeAreaInsets();
     }
 
+    /// <summary>Raises the disappearing notification for the current page.</summary>
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         if (_hookedTopLevel is not null)

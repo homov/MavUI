@@ -52,6 +52,7 @@ public class MavBottomSheet : Control
         });
     }
 
+    /// <summary>Creates an empty bottom sheet.</summary>
     public MavBottomSheet()
     {
         MaxWidth = 640;
@@ -92,6 +93,7 @@ public class MavBottomSheet : Control
 
     protected override Size MeasureOverride(Size availableSize) => default;
 
+    /// <summary>Shows the sheet above the content, anchored to <paramref name="anchor"/> for safe-area and overlay placement.</summary>
     public void Show(Visual? anchor = null)
     {
         Close();
@@ -231,6 +233,7 @@ public class MavBottomSheet : Control
         });
     }
 
+    /// <summary>Hides the sheet with the exit animation and removes it from the overlay layer.</summary>
     public void Close()
     {
         if (_handle is null) return;
@@ -265,6 +268,7 @@ public class MavBottomSheet : Control
         }
     }
 
+    /// <summary>Creates a sheet with the given content, shows it and returns it so the caller can close it later.</summary>
     public static MavBottomSheet Show(
         string? title,
         Control body,
@@ -281,6 +285,7 @@ public class MavBottomSheet : Control
         return sheet;
     }
 
+    /// <summary>Shows a sheet over the current page with the given content and returns it.</summary>
     public static MavBottomSheet ShowCurrent(
         string? title,
         Control body,

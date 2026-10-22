@@ -10,6 +10,7 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>Side of the anchor on which a <see cref="MavPopover"/> opens.</summary>
 public enum MavPopoverPlacement
 {
     Auto,
@@ -103,10 +104,12 @@ public class MavPopover : Control
     public event EventHandler? Opened;
     public event EventHandler? Closed;
 
+    /// <summary>Creates an empty popover.</summary>
     public MavPopover() : this(null, null)
     {
     }
 
+    /// <summary>Creates a popover with optional content, title and placement.</summary>
     public MavPopover(Control? content = null, string? title = null, MavPopoverPlacement placement = MavPopoverPlacement.Auto)
     {
         MinWidth = 180;
@@ -118,6 +121,7 @@ public class MavPopover : Control
 
     protected override Size MeasureOverride(Size availableSize) => default;
 
+    /// <summary>Opens the popover next to <paramref name="anchor"/>.</summary>
     public void Show(Control anchor)
     {
         Close();
@@ -283,12 +287,14 @@ public class MavPopover : Control
         _card.Margin = new Thickness(x, y, 0, 0);
     }
 
+    /// <summary>Opens the popover next to <paramref name="anchor"/> if it is closed, or closes it if it is open.</summary>
     public void Toggle(Control anchor)
     {
         if (_handle is not null) Close();
         else Show(anchor);
     }
 
+    /// <summary>Closes the popover.</summary>
     public void Close()
     {
         var handle = _handle;
@@ -320,6 +326,7 @@ public class MavPopover : Control
         Closed?.Invoke(this, EventArgs.Empty);
     }
 
+    /// <summary>Creates a popover with the given content, shows it next to <paramref name="anchor"/> and returns it.</summary>
     public static MavPopover Show(
         Control anchor,
         Control content,

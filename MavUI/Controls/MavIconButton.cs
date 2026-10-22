@@ -13,6 +13,7 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>Visual style of a <see cref="MavIconButton"/>: standard, filled, tonal or outlined.</summary>
 public enum MavIconButtonVariant
 {
     Standard,
@@ -82,10 +83,12 @@ public class MavIconButton : MavContentView
         CommandParameterProperty.Changed.AddClassHandler<MavIconButton>((b, e) => b._surface.CommandParameter = e.GetNewValue<object?>());
     }
 
+    /// <summary>Creates an icon button that shows the favorite icon.</summary>
     public MavIconButton() : this(MavIcons.Favorite)
     {
     }
 
+    /// <summary>Creates an icon button with the given icon, variant and size.</summary>
     public MavIconButton(
         string icon = MavIcons.Favorite,
         MavIconButtonVariant variant = MavIconButtonVariant.Standard,
@@ -192,6 +195,7 @@ public class MavIconButton : MavContentView
         set => SetValue(CommandParameterProperty, value);
     }
 
+    /// <summary>Redraws the button when a visual property changes.</summary>
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);

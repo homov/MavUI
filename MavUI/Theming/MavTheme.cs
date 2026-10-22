@@ -8,6 +8,7 @@ using Mav.Platform;
 
 namespace Mav.Theming;
 
+/// <summary>Light or dark appearance of the theme, or follow the system setting.</summary>
 public enum MavThemeMode
 {
     System,
@@ -261,6 +262,7 @@ public sealed class MavTheme
         return extracted;
     }
 
+    /// <summary>Replaces the light and dark color schemes with custom ones.</summary>
     public static void ApplyCustomSchemes(MavColorScheme light, MavColorScheme dark)
     {
         _customLight = light;
@@ -268,6 +270,7 @@ public sealed class MavTheme
         Rebuild();
     }
 
+    /// <summary>Removes the custom schemes and returns to the seed-based schemes.</summary>
     public static void ClearCustomSchemes()
     {
         _customLight = null;
@@ -275,6 +278,7 @@ public sealed class MavTheme
         Rebuild();
     }
 
+    /// <summary>Configures the theme with the given seed color and options.</summary>
     public static void Configure(
         Color? seed = null,
         MavThemeMode? mode = null,
@@ -302,6 +306,7 @@ public sealed class MavTheme
         Rebuild();
     }
 
+    /// <summary>Configures the theme with the given <paramref name="options"/>.</summary>
     public static void Configure(MavThemeOptions options)
     {
         ArgumentNullException.ThrowIfNull(options);
@@ -318,6 +323,7 @@ public sealed class MavTheme
         Rebuild();
     }
 
+    /// <summary>Configures the theme by changing the default options in <paramref name="configure"/>.</summary>
     public static void Configure(Action<MavThemeOptions> configure)
     {
         ArgumentNullException.ThrowIfNull(configure);
@@ -520,6 +526,7 @@ public class MavThemeStyle : Style
         UseDynamicColorProperty.Changed.AddClassHandler<MavThemeStyle>((_, e) => MavTheme.UseSystemAccentColor = e.GetNewValue<bool>());
     }
 
+    /// <summary>Creates the theme style that applies the library theme to the application.</summary>
     public MavThemeStyle()
     {
         _ = MavTheme.Current;

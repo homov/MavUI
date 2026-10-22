@@ -14,6 +14,7 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>Entry of a <see cref="MavMenu"/>: an action, a divider or a submenu.</summary>
 public sealed class MavMenuItem : Control, IEnumerable<MavMenuItem>
 {
     public static readonly StyledProperty<string> TextProperty =
@@ -45,11 +46,13 @@ public sealed class MavMenuItem : Control, IEnumerable<MavMenuItem>
             MavAutomation.SetName(i, e.GetNewValue<string>()));
     }
 
+    /// <summary>Creates an empty menu entry.</summary>
     public MavMenuItem()
     {
         MavAutomation.SetControlType(this, AutomationControlType.MenuItem);
     }
 
+    /// <summary>Creates a menu entry with text, icon and click handler.</summary>
     public MavMenuItem(
         string text,
         string? leadingIcon = null,
@@ -167,6 +170,7 @@ public class MavMenu : Control, IEnumerable<MavMenuItem>
     public event EventHandler<MavMenuItem>? ItemSelected;
     public event EventHandler? Closed;
 
+    /// <summary>Creates an empty menu.</summary>
     public MavMenu()
     {
         MinWidth = 180;
@@ -189,6 +193,7 @@ public class MavMenu : Control, IEnumerable<MavMenuItem>
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
+    /// <summary>Adds an action entry and returns the menu for chaining.</summary>
     public MavMenu AddItem(
         string text,
         string? leadingIcon = null,
@@ -201,6 +206,7 @@ public class MavMenu : Control, IEnumerable<MavMenuItem>
         return this;
     }
 
+    /// <summary>Adds an entry that opens a nested menu built by <paramref name="buildSubmenu"/>.</summary>
     public MavMenu AddSubmenu(string text, Action<MavMenu> buildSubmenu, string? leadingIcon = null)
     {
         var sub = new MavMenu();
@@ -212,6 +218,7 @@ public class MavMenu : Control, IEnumerable<MavMenuItem>
         return this;
     }
 
+    /// <summary>Adds a divider line between entries.</summary>
     public MavMenu AddDivider()
     {
         _items.Add(new MavMenuItem(string.Empty) { IsDivider = true });
@@ -220,6 +227,7 @@ public class MavMenu : Control, IEnumerable<MavMenuItem>
 
     public void Clear() => _items.Clear();
 
+    /// <summary>Opens the menu next to <paramref name="anchor"/>.</summary>
     public void Show(Control anchor)
     {
         Close();
@@ -247,6 +255,7 @@ public class MavMenu : Control, IEnumerable<MavMenuItem>
         Dispatcher.UIThread.Post(Reflow, DispatcherPriority.Loaded);
     }
 
+    /// <summary>Closes the menu and any open submenu.</summary>
     public void Close()
     {
         _subOverlayHandle?.Dispose();

@@ -6,6 +6,7 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>Shape of a <see cref="MavSkeleton"/> placeholder.</summary>
 public enum MavSkeletonShape
 {
     Rounded,
@@ -32,10 +33,12 @@ public class MavSkeleton : Border
         HeightProperty.Changed.AddClassHandler<MavSkeleton>((s, _) => s.ApplyShape());
     }
 
+    /// <summary>Creates a 120 x 16 placeholder that stretches to the width of its container.</summary>
     public MavSkeleton() : this(double.NaN, 16, 8)
     {
     }
 
+    /// <summary>Creates a placeholder of the given size with rounded corners.</summary>
     public MavSkeleton(double width = 120, double height = 16, double cornerRadius = 8)
     {
         if (!double.IsNaN(width) && width > 0) Width = width;
@@ -110,12 +113,15 @@ public class MavSkeleton : Border
         Background = MavTheme.BrushOf(t.Color.SurfaceContainerHighest.WithAlpha((float)_pulse));
     }
 
+    /// <summary>Creates a circular placeholder, for an avatar or an icon.</summary>
     public static MavSkeleton Circle(double size = 40) =>
         new(size, size, size / 2.0);
 
+    /// <summary>Creates a placeholder that looks like a line of text.</summary>
     public static MavSkeleton Text(double width = 160, double height = 14) =>
         new(width, height, height / 2.0);
 
+    /// <summary>Creates a placeholder for a list row with an avatar and text lines.</summary>
     public static Control ListRow(double avatarSize = 40, int lines = 2)
     {
         var row = new Grid

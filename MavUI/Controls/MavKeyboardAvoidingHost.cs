@@ -62,10 +62,12 @@ public class MavKeyboardAvoidingHost : MavContentView
         });
     }
 
+    /// <summary>Creates a host without content.</summary>
     public MavKeyboardAvoidingHost() : this(null)
     {
     }
 
+    /// <summary>Creates a host that moves <paramref name="content"/> above the on-screen keyboard.</summary>
     public MavKeyboardAvoidingHost(Control? content = null)
     {
         if (content is not null)
@@ -107,6 +109,7 @@ public class MavKeyboardAvoidingHost : MavContentView
 
     public double KeyboardHeight => _keyboardHeight;
 
+    /// <summary>Starts listening for keyboard inset changes when the host is shown.</summary>
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
@@ -115,6 +118,7 @@ public class MavKeyboardAvoidingHost : MavContentView
         RegisterActiveHost(this);
     }
 
+    /// <summary>Stops listening for keyboard inset changes when the host is removed.</summary>
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         MavMotion.Cancel(this, "kb_inset");
@@ -200,6 +204,7 @@ public class MavKeyboardAvoidingHost : MavContentView
         }
     }
 
+    /// <summary>Reads the current keyboard inset from the platform and moves the content accordingly.</summary>
     public void UpdateKeyboardInset()
     {
         var topLevel = TopLevel.GetTopLevel(this);

@@ -82,10 +82,12 @@ public class MavNumberBox : MavContentView
         });
     }
 
+    /// <summary>Creates a number box with the range 0 to 100 and step 1.</summary>
     public MavNumberBox() : this(0, 0, 100, 1, 0, null, null)
     {
     }
 
+    /// <summary>Creates a number box with the given value range, step and formatting.</summary>
     public MavNumberBox(
         double value = 0,
         double min = 0,
@@ -241,6 +243,7 @@ public class MavNumberBox : MavContentView
         set => SetValue(FormatStringProperty, value);
     }
 
+    /// <summary>Changes the value by one step per wheel notch when the box has focus.</summary>
     protected override void OnPointerWheelChanged(PointerWheelEventArgs e)
     {
         base.OnPointerWheelChanged(e);
@@ -361,10 +364,12 @@ public class MavRatingBar : Control
         });
     }
 
+    /// <summary>Creates a five-star rating bar with a value of 4.</summary>
     public MavRatingBar() : this(4.0, 5, true, 28)
     {
     }
 
+    /// <summary>Creates a rating bar with the given value, maximum rating and half-star support.</summary>
     public MavRatingBar(double value = 4.0, int maxRating = 5, bool allowHalf = true, double iconSize = 28)
     {
         HorizontalAlignment = HorizontalAlignment.Left;
@@ -422,6 +427,7 @@ public class MavRatingBar : Control
         set => IconSize = value;
     }
 
+    /// <summary>Measures the stars so the bar keeps a constant star size.</summary>
     protected override Size MeasureOverride(Size availableSize)
     {
         const double gap = 4.0;
@@ -429,6 +435,7 @@ public class MavRatingBar : Control
         return new Size(w, IconSize + 6);
     }
 
+    /// <summary>Sets the rating from the star under the pointer and starts a drag.</summary>
     protected override void OnPointerPressed(PointerPressedEventArgs e)
     {
         base.OnPointerPressed(e);
@@ -439,6 +446,7 @@ public class MavRatingBar : Control
         e.Handled = true;
     }
 
+    /// <summary>Updates the rating while the pointer drags across the stars.</summary>
     protected override void OnPointerMoved(PointerEventArgs e)
     {
         base.OnPointerMoved(e);
@@ -447,6 +455,7 @@ public class MavRatingBar : Control
         e.Handled = true;
     }
 
+    /// <summary>Ends the drag and commits the rating.</summary>
     protected override void OnPointerReleased(PointerReleasedEventArgs e)
     {
         base.OnPointerReleased(e);
@@ -456,6 +465,7 @@ public class MavRatingBar : Control
         e.Handled = true;
     }
 
+    /// <summary>Changes the rating with the arrow keys.</summary>
     protected override void OnKeyDown(KeyEventArgs e)
     {
         base.OnKeyDown(e);
@@ -488,6 +498,7 @@ public class MavRatingBar : Control
             : Math.Round(clamped);
     }
 
+    /// <summary>Draws the stars, full, half and empty, for the current value.</summary>
     public override void Render(DrawingContext context)
     {
         var w = Bounds.Width;
@@ -587,10 +598,12 @@ public class MavTagInput : MavContentView, IEnumerable<string>
             t.OnItemsSourceChanged(e.GetNewValue<System.Collections.IEnumerable?>()));
     }
 
+    /// <summary>Creates an empty tag input with the default placeholder.</summary>
     public MavTagInput() : this(null, "Add tag…", null)
     {
     }
 
+    /// <summary>Creates a tag input with an optional placeholder and initial tags.</summary>
     public MavTagInput(
         string? label = null,
         string placeholder = "Add tag…",
@@ -750,6 +763,7 @@ public class MavTagInput : MavContentView, IEnumerable<string>
         RebuildChips();
     }
 
+    /// <summary>Adds a tag if it is not already present and returns the input for chaining.</summary>
     public MavTagInput AddTag(string tag)
     {
         var clean = tag.Trim();
@@ -780,6 +794,7 @@ public class MavTagInput : MavContentView, IEnumerable<string>
 
     System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
 
+    /// <summary>Removes a tag and returns <c>true</c> if it was present.</summary>
     public bool RemoveTag(string tag)
     {
         int idx = -1;
@@ -796,6 +811,7 @@ public class MavTagInput : MavContentView, IEnumerable<string>
         return true;
     }
 
+    /// <summary>Removes all tags.</summary>
     public void ClearTags()
     {
         if (_tags.Count == 0) return;

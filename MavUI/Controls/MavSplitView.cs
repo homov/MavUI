@@ -78,10 +78,12 @@ public class MavSplitView : MavContentView, IMavDraggableControl
         CompactBreakpointProperty.Changed.AddClassHandler<MavSplitView>((s, _) => s.UpdateCompactState(s.Bounds.Width));
     }
 
+    /// <summary>Creates an empty split view.</summary>
     public MavSplitView() : this(null, null)
     {
     }
 
+    /// <summary>Creates a split view with the given <paramref name="pane"/> and <paramref name="detailContent"/>.</summary>
     public MavSplitView(Control? pane = null, Control? detailContent = null)
     {
         HorizontalAlignment = HorizontalAlignment.Stretch;
@@ -256,6 +258,7 @@ public class MavSplitView : MavContentView, IMavDraggableControl
 
     public bool IsCompact => _isCompact;
 
+    /// <summary>Switches between the inline pane and the compact drawer when the width crosses the compact breakpoint.</summary>
     protected override void OnSizeChanged(SizeChangedEventArgs e)
     {
         base.OnSizeChanged(e);

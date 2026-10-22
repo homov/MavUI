@@ -146,6 +146,7 @@ public class MavInkSurface : Decorator
         CommandParameterProperty.Changed.AddClassHandler<MavInkSurface>((s, e) => s._commandParameter = e.GetNewValue<object?>());
     }
 
+    /// <summary>Creates an empty ink surface that draws the state layers.</summary>
     public MavInkSurface()
     {
         ClipToBounds = false;
@@ -215,6 +216,7 @@ public class MavInkSurface : Decorator
         set => SetValue(CornerRadiiProperty, value);
     }
 
+    /// <summary>Sets a separate corner radius for each corner.</summary>
     public void SetCornerRadii(double topLeft, double topRight, double bottomLeft, double bottomRight)
     {
         SetValue(CornerRadiiProperty, new CornerRadius(topLeft, topRight, bottomRight, bottomLeft));
@@ -262,6 +264,7 @@ public class MavInkSurface : Decorator
         Cursor = _interactive ? new Cursor(StandardCursorType.Hand) : Cursor.Default;
     }
 
+    /// <summary>Shows the focus ring when the surface gets keyboard focus.</summary>
     protected override void OnGotFocus(FocusChangedEventArgs e)
     {
         base.OnGotFocus(e);
@@ -269,6 +272,7 @@ public class MavInkSurface : Decorator
         InvalidateVisual();
     }
 
+    /// <summary>Hides the focus ring when the surface loses keyboard focus.</summary>
     protected override void OnLostFocus(FocusChangedEventArgs e)
     {
         base.OnLostFocus(e);
@@ -276,6 +280,7 @@ public class MavInkSurface : Decorator
         InvalidateVisual();
     }
 
+    /// <summary>Redraws the surface when a visual property changes.</summary>
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
@@ -296,6 +301,7 @@ public class MavInkSurface : Decorator
         }
     }
 
+    /// <summary>Shows the hover state when the pointer enters the surface.</summary>
     protected override void OnPointerEntered(PointerEventArgs e)
     {
         base.OnPointerEntered(e);
@@ -304,6 +310,7 @@ public class MavInkSurface : Decorator
         InvalidateVisual();
     }
 
+    /// <summary>Clears the hover state when the pointer leaves the surface.</summary>
     protected override void OnPointerExited(PointerEventArgs e)
     {
         base.OnPointerExited(e);
@@ -320,6 +327,7 @@ public class MavInkSurface : Decorator
         }
     }
 
+    /// <summary>Shows the pressed state and starts a ripple at the pointer position.</summary>
     protected override void OnPointerPressed(PointerPressedEventArgs e)
     {
         base.OnPointerPressed(e);
@@ -344,6 +352,7 @@ public class MavInkSurface : Decorator
         });
     }
 
+    /// <summary>Moves the ripple origin while the pointer is pressed.</summary>
     protected override void OnPointerMoved(PointerEventArgs e)
     {
         base.OnPointerMoved(e);
@@ -357,6 +366,7 @@ public class MavInkSurface : Decorator
         }
     }
 
+    /// <summary>Ends the pressed state and fades out the ripple.</summary>
     protected override void OnPointerReleased(PointerReleasedEventArgs e)
     {
         base.OnPointerReleased(e);
@@ -384,6 +394,7 @@ public class MavInkSurface : Decorator
         }
     }
 
+    /// <summary>Ends the pressed state when the pointer capture is lost.</summary>
     protected override void OnPointerCaptureLost(PointerCaptureLostEventArgs e)
     {
         base.OnPointerCaptureLost(e);
@@ -395,6 +406,7 @@ public class MavInkSurface : Decorator
         }
     }
 
+    /// <summary>Starts the pressed state for Space and Enter.</summary>
     protected override void OnKeyDown(KeyEventArgs e)
     {
         base.OnKeyDown(e);
@@ -407,6 +419,7 @@ public class MavInkSurface : Decorator
         }
     }
 
+    /// <summary>Plays the keyboard press animation, as if the user had clicked.</summary>
     public void TriggerKeyboardClick()
     {
         if (!IsEnabled || !_interactive) return;
@@ -445,6 +458,7 @@ public class MavInkSurface : Decorator
         });
     }
 
+    /// <summary>Draws the background, the state layer and the ripple.</summary>
     public override void Render(DrawingContext context)
     {
         var w = Bounds.Width;

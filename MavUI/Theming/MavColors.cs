@@ -33,9 +33,11 @@ public static class MavColors
         ("Slate", Slate),
     ];
 
+    /// <summary>Returns the color with the given alpha, in the range 0 to 1.</summary>
     public static Color WithAlpha(this Color c, float alpha) =>
         Color.FromArgb((byte)Math.Clamp((int)Math.Round(alpha * 255f), 0, 255), c.R, c.G, c.B);
 
+    /// <summary>Returns the color with the given alpha, in the range 0 to 1.</summary>
     public static Color WithAlpha(this Color c, double alpha) =>
         Color.FromArgb((byte)Math.Clamp((int)Math.Round(alpha * 255.0), 0, 255), c.R, c.G, c.B);
 

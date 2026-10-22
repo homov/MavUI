@@ -14,6 +14,7 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>Edge from which a <see cref="MavSideSheet"/> slides in.</summary>
 public enum MavSideSheetPlacement
 {
     End,
@@ -151,6 +152,7 @@ public class MavSideSheet : Control
 
     protected override Size MeasureOverride(Size availableSize) => default;
 
+    /// <summary>Shows the side sheet at the edge of the window, anchored to <paramref name="anchor"/>.</summary>
     public void Show(Visual? anchor = null)
     {
         Close();
@@ -289,6 +291,7 @@ public class MavSideSheet : Control
         });
     }
 
+    /// <summary>Hides the side sheet with the exit animation.</summary>
     public void Close()
     {
         if (_handle is null) return;
@@ -324,6 +327,7 @@ public class MavSideSheet : Control
         }
     }
 
+    /// <summary>Creates a side sheet with the given content, shows it and returns it.</summary>
     public static MavSideSheet Show(
         string? title,
         Control body,
@@ -342,6 +346,7 @@ public class MavSideSheet : Control
         return sheet;
     }
 
+    /// <summary>Shows a side sheet over the current page with the given content and returns it.</summary>
     public static MavSideSheet ShowCurrent(
         string? title,
         Control body,

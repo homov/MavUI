@@ -27,6 +27,7 @@ public static class MavFonts
     public static readonly Typeface RobotoMediumTypeface = new(RobotoFont, FontStyle.Normal, FontWeight.Medium);
     public static readonly Typeface RobotoSemiBoldTypeface = new(RobotoFont, FontStyle.Normal, FontWeight.SemiBold);
 
+    /// <summary>Returns the typeface that contains the given icon glyph, for drawing icons with <see cref="DrawingContext"/>.</summary>
     public static Typeface ResolveIconTypeface(string? glyph)
     {
         if (string.IsNullOrEmpty(glyph))

@@ -11,6 +11,7 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>Destination of a <see cref="MavNavigationBar"/> or <see cref="MavNavigationRail"/>.</summary>
 public sealed class MavNavigationDestination : Control
 {
     public static readonly StyledProperty<string> LabelProperty =
@@ -74,10 +75,12 @@ public sealed class MavNavigationDestination : Control
         set => SetValue(ShowBadgeDotProperty, value);
     }
 
+    /// <summary>Creates an empty navigation destination.</summary>
     public MavNavigationDestination()
     {
     }
 
+    /// <summary>Creates a destination with label, icon, selected icon and optional badge.</summary>
     public MavNavigationDestination(
         string label,
         string icon,
@@ -131,6 +134,7 @@ public class MavNavigationBar : MavContentView, IEnumerable<MavNavigationDestina
         ShowLabelsProperty.Changed.AddClassHandler<MavNavigationBar>((b, _) => b.Rebuild());
     }
 
+    /// <summary>Creates an empty bottom navigation bar.</summary>
     public MavNavigationBar()
     {
         HorizontalAlignment = HorizontalAlignment.Stretch;
@@ -210,6 +214,7 @@ public class MavNavigationBar : MavContentView, IEnumerable<MavNavigationDestina
     [Content]
     public AvaloniaList<MavNavigationDestination> Destinations => _destinations;
 
+    /// <summary>Adds a destination and returns the bar for chaining.</summary>
     public MavNavigationBar AddDestination(string label, string icon, string? selectedIcon = null, string? badge = null)
     {
         _destinations.Add(new MavNavigationDestination(label, icon, selectedIcon, badge));
@@ -218,6 +223,7 @@ public class MavNavigationBar : MavContentView, IEnumerable<MavNavigationDestina
 
     public void Add(MavNavigationDestination destination) => _destinations.Add(destination);
 
+    /// <summary>Adds a destination without returning the bar.</summary>
     public void Add(string label, string icon, string? selectedIcon = null, string? badge = null) =>
         AddDestination(label, icon, selectedIcon, badge);
 
@@ -425,10 +431,12 @@ public class MavNavigationRail : MavContentView, IEnumerable<MavNavigationDestin
         });
     }
 
+    /// <summary>Creates a navigation rail without a header.</summary>
     public MavNavigationRail() : this(null)
     {
     }
 
+    /// <summary>Creates a navigation rail with an optional <paramref name="header"/> above the destinations.</summary>
     public MavNavigationRail(Control? header = null)
     {
         Width = 80;
@@ -536,6 +544,7 @@ public class MavNavigationRail : MavContentView, IEnumerable<MavNavigationDestin
     [Content]
     public AvaloniaList<MavNavigationDestination> Destinations => _destinations;
 
+    /// <summary>Adds a destination and returns the rail for chaining.</summary>
     public MavNavigationRail AddDestination(string label, string icon, string? selectedIcon = null, string? badge = null)
     {
         _destinations.Add(new MavNavigationDestination(label, icon, selectedIcon, badge));
@@ -544,6 +553,7 @@ public class MavNavigationRail : MavContentView, IEnumerable<MavNavigationDestin
 
     public void Add(MavNavigationDestination destination) => _destinations.Add(destination);
 
+    /// <summary>Adds a destination without returning the rail.</summary>
     public void Add(string label, string icon, string? selectedIcon = null, string? badge = null) =>
         AddDestination(label, icon, selectedIcon, badge);
 

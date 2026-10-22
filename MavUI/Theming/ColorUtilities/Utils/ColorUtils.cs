@@ -253,6 +253,7 @@ internal static class ColorUtils
         return (uint)MathUtils.ClampInt(0, 255, (int)Math.Round(delinearized * 255.0));
     }
 
+    /// <summary>Applies the CIE Lab forward transfer function to <paramref name="t"/>.</summary>
     public static double LabF(double t)
     {
         const double e = 216.0 / 24389.0;
@@ -267,6 +268,7 @@ internal static class ColorUtils
         }
     }
 
+    /// <summary>Applies the inverse of the CIE Lab transfer function to <paramref name="ft"/>.</summary>
     public static double LabInvf(double ft)
     {
         double e = 216.0 / 24389.0;
@@ -282,6 +284,7 @@ internal static class ColorUtils
         }
     }
 
+    /// <summary>Composites <paramref name="foreground"/> over <paramref name="background"/> with the given alpha.</summary>
     public static uint Add(this uint background, uint foreground, double foregroundAlpha)
     {
         uint a = (uint)(foregroundAlpha * 255);
@@ -289,6 +292,7 @@ internal static class ColorUtils
         return Add(background, foreground);
     }
 
+    /// <summary>Composites <paramref name="foreground"/> over <paramref name="background"/> using its alpha.</summary>
     public static uint Add(this uint background, uint foreground)
     {
         DeconstructArgb(background,
@@ -315,12 +319,14 @@ internal static class ColorUtils
             (uint)(b * 255));
     }
 
+    /// <summary>Blends one color channel of two layers with their alpha values.</summary>
     public static float CompositeComponent(float fgC, float bgC, float fgA, float bgA, float a)
     {
         if (a == 0) return 0;
         return ((fgC * fgA) + (bgC * bgA * (1 - fgA))) / a;
     }
 
+    /// <summary>Splits an ARGB value into its four channels.</summary>
     public static void DeconstructArgb(
         uint argb,
         out float a,

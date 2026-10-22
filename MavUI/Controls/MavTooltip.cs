@@ -9,6 +9,7 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>Side of the target on which a <see cref="MavTooltip"/> appears.</summary>
 public enum MavTooltipPlacement
 {
     Top,
@@ -45,6 +46,7 @@ public static class MavTooltip
 
     public static void SetPlacement(Control element, MavTooltipPlacement value) => element.SetValue(PlacementProperty, value);
 
+    /// <summary>Attaches a tooltip to <paramref name="target"/> that shows the given text or content on hover and focus.</summary>
     public static void Attach(
         Control target,
         string text,
@@ -54,6 +56,7 @@ public static class MavTooltip
         target.SetValue(TextProperty, text);
     }
 
+    /// <summary>Sets the tooltip text of <paramref name="target"/>.</summary>
     public static void SetText(
         Control target,
         string text,
@@ -76,6 +79,7 @@ public static class MavTooltip
         target.PointerExited += (_, _) => Dismiss();
     }
 
+    /// <summary>Shows a tooltip next to <paramref name="anchor"/> with the given text.</summary>
     public static void Show(
         Control anchor,
         string text,
@@ -151,6 +155,7 @@ public static class MavTooltip
         }
     }
 
+    /// <summary>Hides the visible tooltip.</summary>
     public static void Dismiss()
     {
         StopTimer();

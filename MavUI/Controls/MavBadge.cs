@@ -37,10 +37,12 @@ public class MavBadge : MavContentView
         IsDotProperty.Changed.AddClassHandler<MavBadge>((b, _) => b.Sync());
     }
 
+    /// <summary>Creates a dot badge with no text.</summary>
     public MavBadge() : this(null)
     {
     }
 
+    /// <summary>Creates a badge that shows the given text, or a dot when the text is empty.</summary>
     public MavBadge(string? text = null)
     {
         HorizontalAlignment = HorizontalAlignment.Center;
@@ -161,10 +163,12 @@ public class MavBadgedBox : Grid
         IsBadgeVisibleProperty.Changed.AddClassHandler<MavBadgedBox>((b, e) => b._badge.IsVisible = e.GetNewValue<bool>());
     }
 
+    /// <summary>Creates a badged box without a target or badge text.</summary>
     public MavBadgedBox() : this(null, null)
     {
     }
 
+    /// <summary>Creates a box that overlays a badge on <paramref name="target"/>.</summary>
     public MavBadgedBox(Control? target = null, string? badgeText = null)
     {
         HorizontalAlignment = HorizontalAlignment.Center;

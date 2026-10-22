@@ -6,6 +6,7 @@ using Mav.Primitives;
 
 namespace Mav.Controls;
 
+/// <summary>Screen edges a <see cref="MavSafeArea"/> keeps clear of system insets.</summary>
 [Flags]
 public enum MavSafeAreaEdges
 {
@@ -55,10 +56,12 @@ public class MavSafeArea : MavContentView
         });
     }
 
+    /// <summary>Creates a safe area without content that applies to all edges.</summary>
     public MavSafeArea() : this(null)
     {
     }
 
+    /// <summary>Creates a safe area that pads <paramref name="content"/> on the given <paramref name="edges"/>.</summary>
     public MavSafeArea(Control? content = null, MavSafeAreaEdges edges = MavSafeAreaEdges.All)
     {
         Edges = edges;
@@ -93,6 +96,7 @@ public class MavSafeArea : MavContentView
 
     public Thickness AppliedInset => _appliedInset;
 
+    /// <summary>Reads the system insets once the area is shown.</summary>
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
@@ -100,12 +104,14 @@ public class MavSafeArea : MavContentView
         RefreshInsets();
     }
 
+    /// <summary>Stops listening for inset changes when the area is removed.</summary>
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         DetachInsetsManager();
         base.OnDetachedFromVisualTree(e);
     }
 
+    /// <summary>Re-reads the system insets and updates the padding.</summary>
     public void RefreshInsets()
     {
         var safe = SimulatedInset ?? _insetsManager?.SafeAreaPadding ?? default;

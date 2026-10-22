@@ -8,6 +8,7 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>Visual style of a <see cref="MavCard"/>.</summary>
 public enum MavCardVariant
 {
     Elevated,
@@ -63,10 +64,12 @@ public class MavCard : MavContentView
         });
     }
 
+    /// <summary>Creates an elevated card with no content.</summary>
     public MavCard() : this(MavCardVariant.Elevated)
     {
     }
 
+    /// <summary>Creates a card in the given <paramref name="variant"/>, with optional body content and interaction.</summary>
     public MavCard(MavCardVariant variant = MavCardVariant.Elevated, Control? body = null, bool interactive = false)
     {
         _surface = new MavInkSurface

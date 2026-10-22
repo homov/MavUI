@@ -196,6 +196,7 @@ public class MavDialog : Control
 
     protected override Size MeasureOverride(Size availableSize) => default;
 
+    /// <summary>Shows the dialog over <paramref name="anchor"/>.</summary>
     public void Show(Visual? anchor = null)
     {
         Close();
@@ -390,6 +391,7 @@ public class MavDialog : Control
         MavMotion.ScaleIn(card, 0.90, MavMotion.Medium1);
     }
 
+    /// <summary>Hides the dialog.</summary>
     public void Close()
     {
         var handle = _handle;
@@ -418,6 +420,7 @@ public class MavDialog : Control
         Closed?.Invoke(this, EventArgs.Empty);
     }
 
+    /// <summary>Shows an alert with a single button and completes when the user closes it.</summary>
     public static Task ShowAlertAsync(
         string title,
         string message,
@@ -438,6 +441,7 @@ public class MavDialog : Control
         return tcs.Task;
     }
 
+    /// <summary>Shows a dialog with confirm and cancel buttons and returns <c>true</c> if the user confirmed.</summary>
     public static Task<bool> ShowConfirmAsync(
         string title,
         string message,
@@ -462,6 +466,7 @@ public class MavDialog : Control
         return tcs.Task;
     }
 
+    /// <summary>Shows content in a full-screen dialog and returns a handle that closes it when disposed.</summary>
     public static IDisposable ShowFullscreen(
         string title,
         Control content,
@@ -550,13 +555,16 @@ public interface IMavDialogService
     Task<bool> ShowConfirmAsync(string title, string message, string? confirmText = null, string? dismissText = null, string? icon = null);
 }
 
+/// <summary>Default implementation of <see cref="IMavDialogService"/>; shows dialogs on the current top-level window.</summary>
 public sealed class MavDialogService : IMavDialogService
 {
     public static MavDialogService Instance { get; } = new();
 
+    /// <summary>Shows an alert with the given title and message in the current window.</summary>
     public Task ShowAlertAsync(string title, string message, string? confirmText = null, string? icon = null) =>
         MavDialog.ShowAlertAsync(title, message, confirmText, icon);
 
+    /// <summary>Shows a confirmation with the given title and message and returns <c>true</c> if the user confirmed.</summary>
     public Task<bool> ShowConfirmAsync(string title, string message, string? confirmText = null, string? dismissText = null, string? icon = null) =>
         MavDialog.ShowConfirmAsync(title, message, confirmText, dismissText, icon);
 }

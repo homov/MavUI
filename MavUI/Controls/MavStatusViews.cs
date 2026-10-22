@@ -70,10 +70,12 @@ public class MavEmptyState : MavContentView
             s._secondaryBtn.CommandParameter = e.GetNewValue<object?>());
     }
 
+    /// <summary>Creates an empty state with the default message.</summary>
     public MavEmptyState() : this("Nothing here yet")
     {
     }
 
+    /// <summary>Creates an empty state with an icon, title, description and optional action.</summary>
     public MavEmptyState(
         string title = "Nothing here yet",
         string? description = null,
@@ -244,6 +246,7 @@ public class MavEmptyState : MavContentView
     }
 }
 
+/// <summary>Severity of a <see cref="MavInfoBar"/>, which selects its colors and icon.</summary>
 public enum MavInfoBarSeverity
 {
     Info,
@@ -311,10 +314,12 @@ public class MavInfoBar : MavContentView
         });
     }
 
+    /// <summary>Creates an empty info bar.</summary>
     public MavInfoBar() : this(string.Empty)
     {
     }
 
+    /// <summary>Creates an info bar with a severity, message and optional action.</summary>
     public MavInfoBar(
         string title = "",
         string? message = null,

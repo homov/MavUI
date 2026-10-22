@@ -8,6 +8,7 @@ namespace Mav.Platform;
 /// </summary>
 public static class MavKeyboard
 {
+    /// <summary>Hides the on-screen keyboard, if the platform shows one.</summary>
     public static void Hide(Visual? scope = null)
     {
         try

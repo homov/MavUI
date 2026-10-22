@@ -6,6 +6,7 @@ using Mav.Primitives;
 
 namespace Mav.Controls;
 
+/// <summary>Kind of navigation that changed the visible page in a <see cref="MavNavigationPage"/>.</summary>
 public enum MavPageNavigationType
 {
     Root,
@@ -14,6 +15,7 @@ public enum MavPageNavigationType
     Replace,
 }
 
+/// <summary>Toolbar action of a <see cref="MavContentPage"/>, shown in its app bar.</summary>
 public sealed class MavPageAction
 {
     public string Icon { get; init; } = string.Empty;
@@ -21,8 +23,10 @@ public sealed class MavPageAction
     public Action? OnClick { get; init; }
 }
 
+/// <summary>Event data for a page change in a <see cref="MavNavigationPage"/>: the page and the kind of navigation.</summary>
 public sealed class MavPageChangedEventArgs : EventArgs
 {
+    /// <summary>Creates the event data for a page change, with the old and the new page.</summary>
     public MavPageChangedEventArgs(
         MavContentPage? oldPage,
         MavContentPage newPage,
@@ -66,12 +70,14 @@ public class MavContentPage : MavContentView
             nameof(AppBarVariant),
             MavTopAppBarVariant.Small);
 
+    /// <summary>Creates an empty content page.</summary>
     public MavContentPage()
     {
         HorizontalAlignment = global::Avalonia.Layout.HorizontalAlignment.Stretch;
         VerticalAlignment = global::Avalonia.Layout.VerticalAlignment.Stretch;
     }
 
+    /// <summary>Creates a content page with the given title and content.</summary>
     public MavContentPage(string title, Control? content = null) : this()
     {
         Title = title;
@@ -137,6 +143,7 @@ public class MavContentPage : MavContentView
     public event EventHandler? Disappearing;
     public event EventHandler? NavigationClicked;
 
+    /// <summary>Adds an action to the app bar and returns it.</summary>
     public MavPageAction AddAction(string icon, Action? onClick = null, string? tooltip = null)
     {
         var action = new MavPageAction
@@ -157,12 +164,14 @@ public class MavContentPage : MavContentView
     /// </summary>
     public virtual bool OnBackPressed() => false;
 
+    /// <summary>Raises the appearing notification, which calls <see cref="OnAppearing"/>.</summary>
     internal void NotifyAppearing()
     {
         OnAppearing();
         Appearing?.Invoke(this, EventArgs.Empty);
     }
 
+    /// <summary>Raises the disappearing notification, which calls <see cref="OnDisappearing"/>.</summary>
     internal void NotifyDisappearing()
     {
         // Dialogs, sheets and other overlays belong to the page that opened them.
@@ -173,6 +182,7 @@ public class MavContentPage : MavContentView
         Disappearing?.Invoke(this, EventArgs.Empty);
     }
 
+    /// <summary>Handles a click on the navigation button and returns <c>true</c> if the click was handled.</summary>
     internal bool HandleNavigationClick()
     {
         if (NavigationAction is not null)
@@ -190,10 +200,12 @@ public class MavContentPage : MavContentView
         return false;
     }
 
+    /// <summary>Called when the page becomes visible. Override to load data.</summary>
     protected virtual void OnAppearing()
     {
     }
 
+    /// <summary>Called when the page stops being visible. Override to release resources.</summary>
     protected virtual void OnDisappearing()
     {
     }

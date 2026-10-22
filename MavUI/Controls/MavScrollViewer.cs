@@ -60,6 +60,7 @@ public class MavScrollViewer : ScrollViewer
             return presenter;
         });
 
+    /// <summary>Creates a scroll viewer with the library defaults.</summary>
     public MavScrollViewer()
     {
         Background = Brushes.Transparent;

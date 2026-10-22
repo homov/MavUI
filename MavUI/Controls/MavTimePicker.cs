@@ -73,6 +73,7 @@ public class MavTimePicker : Control
     public event EventHandler<TimeSpan>? TimeSelected;
     public event EventHandler? Dismissed;
 
+    /// <summary>Shows the picker over <paramref name="anchor"/>.</summary>
     public void Show(Visual? anchor = null)
     {
         Close();
@@ -461,6 +462,7 @@ public class MavTimePicker : Control
         MavMotion.ScaleIn(card, 0.92, MavMotion.Medium1);
     }
 
+    /// <summary>Hides the picker.</summary>
     public void Close()
     {
         if (_handle is not null)
@@ -473,6 +475,7 @@ public class MavTimePicker : Control
         }
     }
 
+    /// <summary>Shows the picker next to <paramref name="anchor"/> and returns the picked time, or <c>null</c> if it was cancelled.</summary>
     public static Task<TimeSpan?> PickAsync(
         TimeSpan? initial = null,
         bool is24Hour = false,
@@ -497,6 +500,7 @@ public class MavTimePicker : Control
         return tcs.Task;
     }
 
+    /// <summary>Shows the picker and returns the picked time, or <c>null</c> if it was cancelled.</summary>
     public static Task<TimeSpan?> PickTimeAsync(
         TimeSpan? initial = null,
         bool is24Hour = false,
@@ -528,10 +532,12 @@ public class MavTimePickerField : MavPickerFieldBase
         Is24HourProperty.Changed.AddClassHandler<MavTimePickerField>((f, _) => f.SyncFieldText());
     }
 
+    /// <summary>Creates a time field labeled "Time".</summary>
     public MavTimePickerField() : this("Time")
     {
     }
 
+    /// <summary>Creates a time field with the given label, variant and icon.</summary>
     public MavTimePickerField(
         string label = "Time",
         TimeSpan? initial = null,
@@ -561,6 +567,7 @@ public class MavTimePickerField : MavPickerFieldBase
 
     public override void Clear() => SelectedTime = null;
 
+    /// <summary>Opens the time picker for this field and applies the picked time.</summary>
     protected override async Task OpenPickerAsync()
     {
         var picked = await MavTimePicker.PickAsync(SelectedTime, Is24Hour, anchor: this);
@@ -568,6 +575,7 @@ public class MavTimePickerField : MavPickerFieldBase
             SelectedTime = tm;
     }
 
+    /// <summary>Formats the selected time for display in the field, respecting the 12 or 24-hour setting.</summary>
     protected override string FormatDisplayValue()
     {
         if (SelectedTime is not { } tm)

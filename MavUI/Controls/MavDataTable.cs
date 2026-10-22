@@ -19,6 +19,7 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
+/// <summary>Column definition for a <see cref="MavDataTable"/>: header, value selector, width and alignment.</summary>
 public sealed class MavDataColumn : StyledElement
 {
     public static readonly StyledProperty<string> HeaderProperty =
@@ -92,10 +93,12 @@ public sealed class MavDataColumn : StyledElement
         set => SetValue(WidthProperty, value);
     }
 
+    /// <summary>Creates an empty column.</summary>
     public MavDataColumn()
     {
     }
 
+    /// <summary>Creates a column with a header, a value selector and an optional width.</summary>
     public MavDataColumn(
         string header,
         Func<object, object?> valueSelector,
@@ -276,6 +279,7 @@ public class MavDataTable : MavContentView, IEnumerable<MavDataColumn>
         CompactBreakpointProperty.Changed.AddClassHandler<MavDataTable>((t, _) => t.RebuildTable());
     }
 
+    /// <summary>Creates an empty data table.</summary>
     public MavDataTable()
     {
         HorizontalAlignment = HorizontalAlignment.Stretch;
@@ -561,6 +565,7 @@ public class MavDataTable : MavContentView, IEnumerable<MavDataColumn>
         }
     }
 
+    /// <summary>Adds a column with a header and a value selector and returns the table for chaining.</summary>
     public MavDataTable AddColumn(
         string header,
         Func<object, object?> valueSelector,
@@ -573,6 +578,7 @@ public class MavDataTable : MavContentView, IEnumerable<MavDataColumn>
         return this;
     }
 
+    /// <summary>Adds an existing column and returns the table for chaining.</summary>
     public MavDataTable AddColumn(MavDataColumn column)
     {
         _columns.Add(column);
@@ -585,6 +591,7 @@ public class MavDataTable : MavContentView, IEnumerable<MavDataColumn>
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
+    /// <summary>Clears the selected rows.</summary>
     public void ClearSelection()
     {
         if (_selectedItems.Count == 0) return;

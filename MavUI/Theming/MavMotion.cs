@@ -67,12 +67,14 @@ public static class MavMotion
         return Math.Pow(2, -9 * t) * Math.Sin((t * 6.5 - 0.75) * c4) + 1;
     };
 
+    /// <summary>Applies the standard easing curve to <paramref name="t"/>.</summary>
     public static double StandardInterpolate(double t)
     {
         t = Math.Clamp(t, 0, 1);
         return t * t * (3.0 - 2.0 * t);
     }
 
+    /// <summary>Applies the deceleration easing curve to <paramref name="t"/>.</summary>
     public static double DecelerateInterpolate(double t)
     {
         t = Math.Clamp(t, 0, 1);
@@ -80,6 +82,7 @@ public static class MavMotion
         return 1.0 - inv * inv * inv;
     }
 
+    /// <summary>Applies the acceleration easing curve to <paramref name="t"/>.</summary>
     public static double AccelerateInterpolate(double t)
     {
         t = Math.Clamp(t, 0, 1);
@@ -104,6 +107,7 @@ public static class MavMotion
     private static WeakReference<TopLevel>? _frameSource;
     private static bool _frameRequested;
 
+    /// <summary>Animates a property from one value to another over the given duration and easing.</summary>
     public static void Animate(
         Visual owner,
         string name,
@@ -166,6 +170,7 @@ public static class MavMotion
         }
     }
 
+    /// <summary>Stops the animation with the given <paramref name="name"/> on <paramref name="owner"/>.</summary>
     public static void Cancel(Visual owner, string name)
     {
         lock (TickList)
@@ -299,12 +304,14 @@ public static class MavMotion
         }
     }
 
+    /// <summary>Fades the target in from transparent to opaque.</summary>
     public static void FadeIn(Visual target, uint duration = Short3)
     {
         target.Opacity = 0;
         Animate(target, "md_fade_in", 0, 1, duration, CubicOut, v => target.Opacity = v);
     }
 
+    /// <summary>Scales the target in from <paramref name="from"/> to its normal size while it fades in.</summary>
     public static void ScaleIn(Visual target, double from = 0.92, uint duration = Medium1)
     {
         target.SetScale(from);
@@ -341,9 +348,11 @@ public static class MavMotion
         return created;
     }
 
+    /// <summary>Sets the uniform scale of the visual.</summary>
     public static void SetScale(this Visual visual, double scale) =>
         visual.SetScale(scale, scale);
 
+    /// <summary>Sets the horizontal and vertical scale of the visual.</summary>
     public static void SetScale(this Visual visual, double scaleX, double scaleY)
     {
         var group = EnsureTransformGroup(visual);
@@ -352,6 +361,7 @@ public static class MavMotion
         st.ScaleY = scaleY;
     }
 
+    /// <summary>Sets the rotation of the visual, in degrees.</summary>
     public static void SetRotation(this Visual visual, double angleDegrees)
     {
         var group = EnsureTransformGroup(visual);
@@ -359,6 +369,7 @@ public static class MavMotion
         rt.Angle = angleDegrees;
     }
 
+    /// <summary>Sets the horizontal and vertical offset of the visual.</summary>
     public static void SetTranslation(this Visual visual, double x, double y)
     {
         var group = EnsureTransformGroup(visual);
@@ -367,6 +378,7 @@ public static class MavMotion
         tt.Y = y;
     }
 
+    /// <summary>Sets the horizontal offset of the visual.</summary>
     public static void SetTranslationX(this Visual visual, double x)
     {
         var group = EnsureTransformGroup(visual);
@@ -374,6 +386,7 @@ public static class MavMotion
         tt.X = x;
     }
 
+    /// <summary>Sets the vertical offset of the visual.</summary>
     public static void SetTranslationY(this Visual visual, double y)
     {
         var group = EnsureTransformGroup(visual);
@@ -381,18 +394,23 @@ public static class MavMotion
         tt.Y = y;
     }
 
+    /// <summary>Returns the horizontal offset of the visual.</summary>
     public static double GetTranslationX(this Visual visual) =>
         visual.RenderTransform is TransformGroup g && g.Children.Count == 3 && g.Children[2] is TranslateTransform tt ? tt.X : 0;
 
+    /// <summary>Returns the vertical offset of the visual.</summary>
     public static double GetTranslationY(this Visual visual) =>
         visual.RenderTransform is TransformGroup g && g.Children.Count == 3 && g.Children[2] is TranslateTransform tt ? tt.Y : 0;
 
+    /// <summary>Returns the horizontal scale of the visual.</summary>
     public static double GetScaleX(this Visual visual) =>
         visual.RenderTransform is TransformGroup g && g.Children.Count == 3 && g.Children[0] is ScaleTransform st ? st.ScaleX : 1;
 
+    /// <summary>Returns the vertical scale of the visual.</summary>
     public static double GetScaleY(this Visual visual) =>
         visual.RenderTransform is TransformGroup g && g.Children.Count == 3 && g.Children[0] is ScaleTransform st ? st.ScaleY : 1;
 
+    /// <summary>Returns the rotation of the visual, in degrees.</summary>
     public static double GetRotation(this Visual visual) =>
         visual.RenderTransform is TransformGroup g && g.Children.Count == 3 && g.Children[1] is RotateTransform rt ? rt.Angle : 0;
 }
@@ -404,10 +422,12 @@ public static class MavMotion
 /// </summary>
 public sealed class MavPageSlide : PageSlide
 {
+    /// <summary>Creates a horizontal page slide transition.</summary>
     public MavPageSlide() : base(TimeSpan.FromMilliseconds(MavMotion.Short4), SlideAxis.Horizontal)
     {
     }
 
+    /// <summary>Runs the slide transition between <paramref name="from"/> and <paramref name="to"/>.</summary>
     public override async Task Start(Visual? from, Visual? to, bool forward, CancellationToken cancellationToken)
     {
         if (cancellationToken.IsCancellationRequested)

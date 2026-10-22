@@ -16,6 +16,7 @@ using Mav.Theming;
 
 namespace Mav.Platform;
 
+/// <summary>When a text input shows its context menu: never, on right click, or on long press.</summary>
 public enum MavTextContextMenuMode
 {
     Auto,
@@ -33,6 +34,7 @@ public enum MavTextContextMenuMode
 /// </summary>
 public static class MavTextContextMenu
 {
+    /// <summary>Attaches the platform context menu to <paramref name="textBox"/>, using the given <paramref name="mode"/>.</summary>
     public static MavTextContextFlyout Attach(TextBox textBox, MavTextContextMenuMode mode = MavTextContextMenuMode.Auto)
     {
         ArgumentNullException.ThrowIfNull(textBox);
@@ -87,6 +89,7 @@ public sealed class MavTextContextFlyout : PopupFlyoutBase
              || _lastPointerType != PointerType.Mouse,
     };
 
+    /// <summary>Creates a context flyout for <paramref name="textBox"/>.</summary>
     public MavTextContextFlyout(TextBox textBox)
     {
         _textBox = textBox ?? throw new ArgumentNullException(nameof(textBox));
@@ -117,6 +120,7 @@ public sealed class MavTextContextFlyout : PopupFlyoutBase
         Popup.Closed += OnFlyoutPopupClosed;
     }
 
+    /// <summary>Creates the presenter that shows the menu items.</summary>
     protected override Control CreatePresenter()
     {
         _itemsPanel = new StackPanel();
@@ -144,6 +148,7 @@ public sealed class MavTextContextFlyout : PopupFlyoutBase
         return _presenterRoot;
     }
 
+    /// <summary>Shows the menu at <paramref name="placementTarget"/> or at the pointer.</summary>
     protected override bool ShowAtCore(Control placementTarget, bool showAtPointer = false)
     {
         _showAtPointer = showAtPointer;
@@ -174,6 +179,7 @@ public sealed class MavTextContextFlyout : PopupFlyoutBase
         return base.ShowAtCore(placementTarget, showAtPointer: false);
     }
 
+    /// <summary>Hides the menu and returns <c>true</c> if it was hidden.</summary>
     protected override bool HideCore(bool canCancel = true)
     {
         DetachDismissRoot();
@@ -651,6 +657,7 @@ public class MavNativeEntry : TextBox
 
     public event EventHandler? Completed;
 
+    /// <summary>Creates an entry that uses the native text control on the current platform.</summary>
     public MavNativeEntry()
     {
         Theme = null;
@@ -722,12 +729,14 @@ public class MavNativeEntry : TextBox
         set => SelectionEnd = SelectionStart + Math.Max(0, value);
     }
 
+    /// <summary>Removes focus from the native control.</summary>
     public void Unfocus()
     {
         if (IsFocused)
             TopLevel.GetTopLevel(this)?.FocusManager?.Focus(null);
     }
 
+    /// <summary>Forwards the press to the native control and keeps focus on it.</summary>
     protected override void OnPointerPressed(PointerPressedEventArgs e)
     {
         if (IsEnabled && !IsFocused && e.GetCurrentPoint(this).Properties.IsRightButtonPressed)
@@ -735,6 +744,7 @@ public class MavNativeEntry : TextBox
         base.OnPointerPressed(e);
     }
 
+    /// <summary>Opens the context menu on a long press.</summary>
     protected override void OnHolding(HoldingRoutedEventArgs e)
     {
         if (Text is null)
@@ -744,6 +754,7 @@ public class MavNativeEntry : TextBox
         base.OnHolding(e);
     }
 
+    /// <summary>Forwards key presses to the native control.</summary>
     protected override void OnKeyDown(KeyEventArgs e)
     {
         base.OnKeyDown(e);
@@ -815,6 +826,7 @@ public class MavNativeEditor : TextBox
             return scroll;
         });
 
+    /// <summary>Creates a multi-line editor that uses the native text control on the current platform.</summary>
     public MavNativeEditor()
     {
         Theme = null;
@@ -862,12 +874,14 @@ public class MavNativeEditor : TextBox
         set => PlaceholderForeground = MavTheme.BrushOf(value);
     }
 
+    /// <summary>Removes focus from the native control.</summary>
     public void Unfocus()
     {
         if (IsFocused)
             TopLevel.GetTopLevel(this)?.FocusManager?.Focus(null);
     }
 
+    /// <summary>Forwards the press to the native control and keeps focus on it.</summary>
     protected override void OnPointerPressed(PointerPressedEventArgs e)
     {
         if (IsEnabled && !IsFocused && e.GetCurrentPoint(this).Properties.IsRightButtonPressed)
@@ -875,6 +889,7 @@ public class MavNativeEditor : TextBox
         base.OnPointerPressed(e);
     }
 
+    /// <summary>Opens the context menu on a long press.</summary>
     protected override void OnHolding(HoldingRoutedEventArgs e)
     {
         if (Text is null)

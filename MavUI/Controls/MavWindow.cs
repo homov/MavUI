@@ -54,6 +54,7 @@ public class MavWindow : Window
             return root;
         });
 
+    /// <summary>Creates a window with the library chrome and theme.</summary>
     public MavWindow()
     {
         Background = Brushes.Transparent;
