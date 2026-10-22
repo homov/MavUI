@@ -38,7 +38,7 @@ public sealed class MainApplication : AvaloniaAndroidApplication<AndroidApp>
         ConfigChanges.Density |
         ConfigChanges.Locale |
         ConfigChanges.LayoutDirection)]
-public sealed class MainActivity : AvaloniaMainActivity<AndroidApp>
+public sealed class MainActivity : AvaloniaMainActivity
 {
 }
 
