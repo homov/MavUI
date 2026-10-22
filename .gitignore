@@ -1,0 +1,24 @@
+# Build output
+bin/
+obj/
+out/
+publish/
+artifacts/
+
+# IDE
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+
+# Mobile packaging
+*.apk
+*.aab
+*.ipa
+*.keystore
+*.jks
+
+# OS
+.DS_Store
+Thumbs.db
