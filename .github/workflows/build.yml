@@ -54,6 +54,7 @@ jobs:
           export PATH="$HOME/.dotnet/tools:$PATH"
           dotnet tool update -g dotnet-trace || dotnet tool install -g dotnet-trace
           echo "dotnet-trace: $(command -v dotnet-trace || echo MISSING)"
+          TRACE="$RUNNER_TEMP/theme.nettrace"
           TRACE_JSON="$RUNNER_TEMP/theme.speedscope.json"
           # Run the test in the background, then attach dotnet-trace to its testhost process.
           # dotnet-trace owns the trace session, so the file is written cleanly.
@@ -68,16 +69,16 @@ jobs:
           done
           echo "testhost pid: ${PID:-none}"
           if [ -n "$PID" ]; then
-            dotnet-trace collect -p "$PID" --profile dotnet-sampled-thread-time --format speedscope \
-              -o "$TRACE_JSON" --duration 00:01:00
+            dotnet-trace collect -p "$PID" --profile dotnet-sampled-thread-time \
+              -o "$TRACE" --duration 00:01:00
           fi
           wait "$TEST_PID" || true
           tail -5 "$RUNNER_TEMP/test.log"
-          if [ -f "$TRACE_JSON" ]; then
+          if [ -s "$TRACE" ] && dotnet-trace convert --format speedscope "$TRACE"; then
             cp "$TRACE_JSON" ci/profile/theme.speedscope.json
-            python3 tools/summarize_speedscope.py "$TRACE_JSON" 40 > ci/profile/theme-summary.txt
+            python3 tools/summarize_speedscope.py "$TRACE_JSON" 40 > ci/profile/theme-summary.txt || echo "summary failed"
           else
-            echo "no trace produced" > ci/profile/theme-summary.txt
+            echo "no trace produced or conversion failed" > ci/profile/theme-summary.txt
           fi
 
       - name: Upload raw profiler output (artifact only)
@@ -85,7 +86,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: profile-trace-speedscope
-          path: ${{ runner.temp }}/theme*.json
+          path: ${{ runner.temp }}/theme*
           if-no-files-found: ignore
 
       - name: Upload build log artifact
