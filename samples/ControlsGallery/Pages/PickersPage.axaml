@@ -42,7 +42,7 @@
                   <mav:MavTimeDial x:Name="Dial" />
                 </mav:MavCard>
                 <mav:MavCard Variant="Outlined" Margin="0,0,8,8">
-                  <mav:MavColorPicker x:Name="ColorPicker" Width="320" />
+                  <mav:MavColorPicker x:Name="ColorPicker" MaxWidth="320" HorizontalAlignment="Left" />
                 </mav:MavCard>
               </pages:AdaptiveWrap>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap"

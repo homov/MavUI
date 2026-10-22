@@ -121,8 +121,17 @@ public partial class LayoutPage : UserControl
             MaxPaneWidth = 320,
             IsResizable = true,
             Pane = new MavCard(MavCardVariant.Filled, new MavLabel { Text = "Pane" }),
-            DetailContent = new MavCard(MavCardVariant.Outlined, new MavLabel { Text = "Detail content" }),
         };
+
+        // On narrow windows the pane becomes a drawer that closes on a tap outside it; this button opens it again.
+        var toggle = new MavButton(
+            MavLocalization.Get("Layout.Split.Toggle", "Toggle pane"),
+            MavButtonVariant.Tonal,
+            MavIcons.Menu);
+        toggle.Clicked += (_, _) => split.IsPaneOpen = !split.IsPaneOpen;
+        split.DetailContent = new MavCard(MavCardVariant.Outlined, Column(
+            new MavLabel { Text = "Detail content" },
+            toggle));
 
         var carousel = new MavCarousel { Height = 220 };
         carousel.AddItem("Material 3", "Tonal palettes and shape", MavIcons.Palette);

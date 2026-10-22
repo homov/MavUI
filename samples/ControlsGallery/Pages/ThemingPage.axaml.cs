@@ -59,26 +59,43 @@ public partial class ThemingPage : UserControl
             ("Rose", MavColors.Rose), ("Slate", MavColors.Slate),
         };
 
-        // One seed at a time: a radio group, not independent toggles.
-        var seedGroup = new MavRadioGroup(Orientation.Horizontal);
+        // One seed at a time: radio buttons that wrap with the window width. Each button unchecks the others.
+        var seedRow = new WrapPanel();
+        var radios = new System.Collections.Generic.List<MavRadioButton>();
+        var syncing = false;
         for (var i = 0; i < seeds.Length; i++)
         {
+            var index = i;
             var (name, color) = seeds[i];
-            seedGroup.AddOption(MavLocalization.Get("Overview.Seed." + name, name), color, selected: i == 0);
+            var radio = new MavRadioButton(MavLocalization.Get("Overview.Seed." + name, name), i == 0)
+            {
+                Margin = new Thickness(0, 0, 16, 8),
+            };
+            radio.PropertyChanged += (_, e) =>
+            {
+                if (syncing || e.Property != MavRadioButton.IsCheckedProperty)
+                    return;
+
+                syncing = true;
+                if (radio.IsChecked)
+                {
+                    for (var j = 0; j < radios.Count; j++)
+                        if (j != index) radios[j].IsChecked = false;
+                    syncing = false;
+                    MavTheme.Configure(seed: color);
+                    return;
+                }
+
+                // A seed is always selected: re-check the one that was just cleared.
+                var any = false;
+                foreach (var other in radios)
+                    any |= other.IsChecked;
+                if (!any) radio.IsChecked = true;
+                syncing = false;
+            };
+            radios.Add(radio);
+            seedRow.Children.Add(radio);
         }
-
-        seedGroup.SelectedIndexChanged += (_, index) =>
-        {
-            if (index >= 0 && index < seeds.Length)
-                MavTheme.Configure(seed: seeds[index].Color);
-        };
-
-        var seedRow = new ScrollViewer
-        {
-            HorizontalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Auto,
-            VerticalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Disabled,
-            Content = seedGroup,
-        };
 
         return Column(
             Row(

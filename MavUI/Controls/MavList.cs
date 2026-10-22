@@ -727,6 +727,15 @@ public class MavListItem : MavContentView, IMavDraggableControl
         base.OnPointerMoved(e);
         if (!_swipeTracking) return;
 
+        // Tracking must not outlive the press: a tap on the revealed area never reaches OnPointerReleased,
+        // so plain mouse movement afterwards would otherwise drag the row again.
+        if (!e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
+        {
+            _swipeTracking = false;
+            if (_swiping) SettleSwipe(0);
+            return;
+        }
+
         var pt = e.GetPosition(this);
         var dx = pt.X - _swipeStart.X;
         var dy = pt.Y - _swipeStart.Y;
@@ -802,6 +811,7 @@ public class MavListItem : MavContentView, IMavDraggableControl
 
     private void OnSwipeBackgroundReleased(object? sender, PointerReleasedEventArgs e)
     {
+        _swipeTracking = false;
         if (_swipeOffset == 0) return;
         var action = _swipeOffset > 0 ? LeadingSwipeAction : TrailingSwipeAction;
         e.Handled = true;

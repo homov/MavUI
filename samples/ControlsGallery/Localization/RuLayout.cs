@@ -24,6 +24,7 @@ internal static class RuLayout
         ("Layout.Insets.CardBody", "Отступы и обработка IME, которые MavNavigationPage использует на мобильных; SimulatedInset и SimulatedKeyboardHeight показывают их на десктопе."),
         ("Layout.Window.Unsupported", "MavWindow — окно только для десктопа и недоступно на этой платформе."),
         ("Layout.Window.Open", "Открыть новое окно"),
+        ("Layout.Split.Toggle", "Переключить панель"),
         ("Layout.Window.Body", "Это второе окно MavWindow со своим слоем оверлеев."),
     ];
 }

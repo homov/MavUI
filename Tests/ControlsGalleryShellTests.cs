@@ -89,17 +89,13 @@ public class ControlsGalleryShellTests
 
         try
         {
-            var group = page.GetVisualDescendants().OfType<MavRadioGroup>().Single();
-            var options = page.GetVisualDescendants().OfType<MavRadioButton>()
-                .Where(rb => group.GetVisualDescendants().Contains(rb))
-                .ToList();
+            var options = page.GetVisualDescendants().OfType<MavRadioButton>().ToList();
 
             Assert.Equal(8, options.Count);
             Assert.Equal(1, options.Count(rb => rb.IsChecked));
 
-            group.SelectedIndex = 2;
+            options[2].IsChecked = true;
 
-            Assert.Equal(2, group.SelectedIndex);
             Assert.Equal(1, options.Count(rb => rb.IsChecked));
             Assert.True(options[2].IsChecked);
         }
