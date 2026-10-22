@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Diagnostics;
 using System.Windows.Input;
 using Avalonia;
 using Avalonia.Collections;
@@ -305,6 +306,20 @@ public class MdFileDropZone : MdContentView
 
     private async void OnDrop(object? sender, DragEventArgs e)
     {
+        // async void: any exception escaping here would crash the process,
+        // so the whole drop pipeline is guarded, not only the awaited call.
+        try
+        {
+            await HandleDropAsync(e);
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"MdFileDrop: drop handling failed: {ex}");
+        }
+    }
+
+    private async Task HandleDropAsync(DragEventArgs e)
+    {
         _dragOver = false;
         ApplyTheme(MdTheme.Current);
 
@@ -320,6 +335,7 @@ public class MdFileDropZone : MdContentView
             }
             catch
             {
+                // Size is optional metadata; the file is still added without it.
             }
             AddFile(item.Name, size, item.TryGetLocalPath());
         }
