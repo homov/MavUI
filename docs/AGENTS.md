@@ -172,7 +172,7 @@ All controls work in AXAML even though the implementation is C#.
               xmlns:md3="https://github.com/homov/md3-maui"
               x:Class="MyApp.MainWindow">
   <mav:MavWindow.Styles>
-    <mav:MavTheme SeedColor="#6750A4" Mode="System"
+    <mav:MavThemeStyle SeedColor="#6750A4" Mode="System"
                   Variant="TonalSpot" Density="Comfortable" />
   </mav:MavWindow.Styles>
 
@@ -185,7 +185,7 @@ All controls work in AXAML even though the implementation is C#.
 </mav:MavWindow>
 ```
 
-`MavTheme` is a `Style` that forwards its properties to the static `MavTheme` state, so it is
+`MavThemeStyle` is a `Style` that forwards its properties to the static `MavTheme` state, so it is
 equivalent to calling `MavTheme.Configure`. You still need `UseMav()` in `Program.cs` for fonts.
 The base `Window` from `https://github.com/avaloniaui` has no template without an Avalonia theme,
 so prefer `mav:MavWindow` and `mav:MavScrollViewer` in theme-free apps.
@@ -369,7 +369,7 @@ using Mav.Theming;     // MavTheme, tokens, typography, motion
 using Mav.Platform;    // MavOverlay, native inputs
 ```
 
-`MavColors` and `MavTheme` both live in `Mav.Theming`.
+`MavColors` and `MavThemeStyle` both live in `Mav.Theming`.
 
 ### 2.2 `MavContentView` — the single-child base
 
@@ -1502,7 +1502,7 @@ All controls accept `Command`/`CommandParameter`; use the CLR events only for vi
 15. **The library ships no Avalonia control theme.** Plain `Button`, `TextBox`, `ScrollViewer`, etc.
     have no template unless the host application installs a theme. Use Mav controls plus
     `MavWindow`/`MavScrollViewer`, or install `Avalonia.Themes.Fluent` yourself.
-16. **`MavTheme` is a `Style`, not a theme dictionary.** Add it to `Window.Styles`/`Application.Styles`;
+16. **`MavThemeStyle` is a `Style`, not a theme dictionary.** Add it to `Window.Styles`/`Application.Styles`;
     it forwards properties to the static theme but does not style arbitrary controls.
 17. **Custom-drawn controls (`MavSwitch`, `MavSlider`, `MavCarousel`, `MavTabs`, …) have no `Content`.**
     Put content in their items/body properties instead.
@@ -1550,7 +1550,7 @@ All controls accept `Command`/`CommandParameter`; use the CLR events only for vi
 │   │   ├── MavKeyboard.cs        soft-keyboard helpers
 │   │   └── MavTextMetrics.cs     text measurement helpers
 │   ├── Theming/
-│   │   ├── MavTheme.cs           MavTheme + MavTheme style
+│   │   ├── MavTheme.cs           MavTheme + MavThemeStyle style
 │   │   ├── MavThemeOptions.cs    configuration object
 │   │   ├── MavThemeService.cs    injectable theme service
 │   │   ├── MavColorScheme.cs     roles, variants, contrast, seed extraction
