@@ -1,6 +1,8 @@
 using Avalonia.Controls;
+using System.Linq;
 using Avalonia.Headless.XUnit;
 using Avalonia.Threading;
+using Avalonia.VisualTree;
 using Mav;
 using Mav.Controls;
 using Mav.Platform;
@@ -75,6 +77,38 @@ public class NavigationSuiteScaffoldTests
         while (MavOverlay.TryDismissTop()) { }
         Dispatcher.UIThread.RunJobs();
         Assert.False(MavOverlay.HasActiveOverlay);
+
+        window.Close();
+    }
+
+    [AvaloniaFact]
+    public void Root_page_in_a_compact_suite_shows_the_menu_icon_in_its_own_app_bar()
+    {
+        var navigation = new MavNavigationPage(new MavContentPage("Home"));
+        var scaffold = new MavNavigationSuiteScaffold { Body = navigation };
+        scaffold.AddDestination("Home", MavIcons.Home);
+        var window = new Window { Width = 400, Height = 700, Content = scaffold };
+        window.Show();
+        Dispatcher.UIThread.RunJobs();
+
+        var bar = navigation.GetVisualDescendants().OfType<MavTopAppBar>().First();
+        Assert.Equal(MavIcons.Menu, bar.NavigationIcon);
+
+        window.Close();
+    }
+
+    [AvaloniaFact]
+    public void Root_page_in_a_permanent_drawer_suite_has_no_menu_icon()
+    {
+        var navigation = new MavNavigationPage(new MavContentPage("Home"));
+        var scaffold = new MavNavigationSuiteScaffold { Body = navigation };
+        scaffold.AddDestination("Home", MavIcons.Home);
+        var window = new Window { Width = 1000, Height = 700, Content = scaffold };
+        window.Show();
+        Dispatcher.UIThread.RunJobs();
+
+        var bar = navigation.GetVisualDescendants().OfType<MavTopAppBar>().First();
+        Assert.Null(bar.NavigationIcon);
 
         window.Close();
     }

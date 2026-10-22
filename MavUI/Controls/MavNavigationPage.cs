@@ -50,6 +50,8 @@ public class MavNavigationPage : MavContentView
     private readonly List<MavContentPage> _stack = [];
     private readonly Grid _root;
     private readonly MavTopAppBar _appBar;
+    private MavNavigationSuiteScaffold? _suite;
+    private bool _menuIconShown;
     private readonly Panel _pageHost;
     private readonly MavKeyboardAvoidingHost _keyboardHost;
     private readonly Border _bottomHost;
@@ -386,9 +388,12 @@ public class MavNavigationPage : MavContentView
         _appBar.Title = page.Title;
         _appBar.Subtitle = page.Subtitle;
         _appBar.Variant = page.AppBarVariant;
+        // A root page inside a suite gets the menu icon in compact and rail modes, unless it sets its own icon.
+        var showsMenu = !CanGoBack && page.NavigationIcon is null && _suite is { ShowsNavigationMenuButton: true };
+        _menuIconShown = showsMenu;
         _appBar.NavigationIcon = CanGoBack && page.ShowBackButton
             ? MavIcons.ArrowBack
-            : page.NavigationIcon;
+            : page.NavigationIcon ?? (showsMenu ? MavIcons.Menu : null);
 
         _appBar.Actions.Clear();
         foreach (var action in page.Actions)
@@ -419,13 +424,28 @@ public class MavNavigationPage : MavContentView
             return;
 
         if (CanGoBack)
+        {
             Pop();
+            return;
+        }
+
+        if (_menuIconShown)
+            _suite?.OpenNavigationMenu();
     }
+
+    private void OnSuiteModeChanged(object? sender, MavNavigationSuiteMode mode) => RefreshChrome();
 
     /// <summary>Shows the current page and raises its appearing notification.</summary>
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
+
+        _suite = this.FindAncestorOfType<MavNavigationSuiteScaffold>();
+        if (_suite is not null)
+        {
+            _suite.EffectiveModeChanged += OnSuiteModeChanged;
+            RefreshChrome();
+        }
 
         if (TopLevel.GetTopLevel(this) is { } topLevel)
         {
@@ -455,6 +475,12 @@ public class MavNavigationPage : MavContentView
     /// <summary>Raises the disappearing notification for the current page.</summary>
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
+        if (_suite is not null)
+        {
+            _suite.EffectiveModeChanged -= OnSuiteModeChanged;
+            _suite = null;
+        }
+
         if (_hookedTopLevel is not null)
         {
             _hookedTopLevel.RemoveHandler(KeyDownEvent, OnTopLevelKeyDown);

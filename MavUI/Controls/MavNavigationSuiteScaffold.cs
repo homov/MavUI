@@ -361,6 +361,9 @@ public class MavNavigationSuiteScaffold : MavContentView, IEnumerable<MavSuiteDe
 
     public MavNavigationSuiteMode EffectiveMode => _effectiveMode;
 
+    /// <summary>True in compact and rail modes, where the destinations are not permanently visible.</summary>
+    internal bool ShowsNavigationMenuButton => _effectiveMode != MavNavigationSuiteMode.NavigationDrawer;
+
     public double CompactBreakpoint
     {
         get => GetValue(CompactBreakpointProperty);
