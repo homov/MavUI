@@ -9,20 +9,6 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
-/// <summary>Layout of a <see cref="MavToolbar"/>: standard, floating or docked.</summary>
-public enum MavToolbarVariant
-{
-    Floating,
-    Docked,
-}
-
-/// <summary>Color treatment of a <see cref="MavToolbar"/>.</summary>
-public enum MavToolbarColorStyle
-{
-    Standard,
-    Vibrant,
-}
-
 /// <summary>
 /// Material Design 3 Expressive Toolbar supporting Floating pill (64dp height, full-rounded, elevation 3)
 /// and Docked full-width configurations in Standard or Vibrant color styles, with optional companion FAB.

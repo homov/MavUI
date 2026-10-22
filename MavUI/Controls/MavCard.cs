@@ -8,14 +8,6 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
-/// <summary>Visual style of a <see cref="MavCard"/>.</summary>
-public enum MavCardVariant
-{
-    Elevated,
-    Filled,
-    Outlined,
-}
-
 /// <summary>
 /// Material Design 3 card container with Elevated, Filled, and Outlined styles and optional interactive ripple.
 /// </summary>

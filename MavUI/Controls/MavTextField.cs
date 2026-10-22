@@ -13,13 +13,6 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
-/// <summary>Visual style of a <see cref="MavTextField"/>: filled or outlined.</summary>
-public enum MavTextFieldVariant
-{
-    Filled,
-    Outlined,
-}
-
 /// <summary>
 /// Material Design 3 single-line text field with Filled and Outlined variants, animated floating label,
 /// outlined notch cutout, prefix/suffix text, password toggle, clear button, error state, and character counter.

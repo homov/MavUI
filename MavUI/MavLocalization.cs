@@ -5,34 +5,6 @@ using Avalonia.Controls;
 
 namespace Mav;
 
-/// <summary>Selects which property an attached localization key updates.</summary>
-public enum MavLocalizationTarget
-{
-    /// <summary>Pick the natural text property for the control type.</summary>
-    Auto,
-    /// <summary><see cref="TextBlock.Text"/> or <see cref="Controls.MavButton.Text"/>.</summary>
-    Text,
-    /// <summary><see cref="Controls.MavTextField.Label"/> or <see cref="Controls.MavSelect.Label"/>.</summary>
-    Label,
-    /// <summary><see cref="Controls.MavTextField.Placeholder"/> or <see cref="Controls.MavSearchBar.Placeholder"/>.</summary>
-    Placeholder,
-    /// <summary><see cref="Window.Title"/> or <see cref="Controls.MavDialog.Title"/>.</summary>
-    Title,
-    /// <summary>The control's tooltip.</summary>
-    Tooltip,
-}
-
-/// <summary>
-/// Pluggable localization provider for Material Design 3 built-in strings
-/// (date/time picker dialogs, tooltips, accessibility labels, action buttons).
-/// Return <see langword="null"/> or an empty string when a key is not available;
-/// <see cref="MavLocalization.Get"/> then uses its fallback text.
-/// </summary>
-public interface IMavLocalizationProvider
-{
-    string? GetString(string key, CultureInfo? culture = null);
-}
-
 /// <summary>
 /// Global localization entry point. Set <see cref="Current"/> once at startup,
 /// optionally call <see cref="SetCulture"/>, and use <see cref="Observe"/> or the

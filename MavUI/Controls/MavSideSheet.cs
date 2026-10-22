@@ -14,13 +14,6 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
-/// <summary>Edge from which a <see cref="MavSideSheet"/> slides in.</summary>
-public enum MavSideSheetPlacement
-{
-    End,
-    Start,
-}
-
 /// <summary>
 /// Material Design 3 Modal Side Sheet with slide-in animation, horizontal swipe-to-dismiss,
 /// header, body, and optional footer actions.

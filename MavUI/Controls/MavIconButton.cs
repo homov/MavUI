@@ -13,15 +13,6 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
-/// <summary>Visual style of a <see cref="MavIconButton"/>: standard, filled, tonal or outlined.</summary>
-public enum MavIconButtonVariant
-{
-    Standard,
-    Filled,
-    Tonal,
-    Outlined,
-}
-
 /// <summary>
 /// Material Design 3 icon button with Standard, Filled, Tonal, and Outlined styles and toggle state.
 /// </summary>

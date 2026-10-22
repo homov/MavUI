@@ -6,14 +6,6 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
-/// <summary>Shape of a <see cref="MavSkeleton"/> placeholder.</summary>
-public enum MavSkeletonShape
-{
-    Rounded,
-    Circle,
-    Text,
-}
-
 /// <summary>
 /// Pulsing placeholder skeleton block for loading states.
 /// </summary>

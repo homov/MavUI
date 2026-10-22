@@ -11,14 +11,6 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
-/// <summary>How long a <see cref="MavSnackbar"/> stays visible before it dismisses itself.</summary>
-public enum MavSnackbarDuration
-{
-    Short = 3000,
-    Long = 5500,
-    Indefinite = 0,
-}
-
 /// <summary>
 /// Material Design 3 inverse-surface Snackbar notification with optional action button,
 /// close button, and non-blocking overlay presentation.
@@ -268,52 +260,4 @@ public static class MavSnackbar
         _dismissTimer.Stop();
         _dismissTimer = null;
     }
-}
-
-/// <summary>
-/// Injectable service for showing Material Design 3 snackbar notifications from ViewModels.
-/// </summary>
-public interface IMavSnackbarService
-{
-    void Show(
-        string message,
-        string? actionText = null,
-        Action? onAction = null,
-        bool showCloseIcon = false,
-        MavSnackbarDuration duration = MavSnackbarDuration.Short);
-
-    void Enqueue(
-        string message,
-        string? actionText = null,
-        Action? onAction = null,
-        bool showCloseIcon = false,
-        MavSnackbarDuration duration = MavSnackbarDuration.Short);
-
-    void Dismiss();
-}
-
-/// <summary>Default implementation of <see cref="IMavSnackbarService"/>; forwards to the static <see cref="MavSnackbar"/> API.</summary>
-public sealed class MavSnackbarService : IMavSnackbarService
-{
-    public static MavSnackbarService Instance { get; } = new();
-
-    /// <summary>Shows this snackbar instance immediately.</summary>
-    public void Show(
-        string message,
-        string? actionText = null,
-        Action? onAction = null,
-        bool showCloseIcon = false,
-        MavSnackbarDuration duration = MavSnackbarDuration.Short) =>
-        MavSnackbar.Show(message, actionText, onAction, showCloseIcon, duration);
-
-    /// <summary>Adds this snackbar instance to the queue.</summary>
-    public void Enqueue(
-        string message,
-        string? actionText = null,
-        Action? onAction = null,
-        bool showCloseIcon = false,
-        MavSnackbarDuration duration = MavSnackbarDuration.Short) =>
-        MavSnackbar.Enqueue(message, actionText, onAction, showCloseIcon, duration);
-
-    public void Dismiss() => MavSnackbar.Dismiss();
 }

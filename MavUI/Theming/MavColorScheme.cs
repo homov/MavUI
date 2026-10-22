@@ -6,78 +6,6 @@ using PaletteStyle = Mav.ColorUtilities.Palettes.Style;
 namespace Mav.Theming;
 
 /// <summary>
-/// Controls how a dynamic Material Design 3 color scheme is derived from a seed color.
-/// </summary>
-public enum MavSchemeVariant
-{
-    TonalSpot,
-    Neutral,
-    Vibrant,
-    Expressive,
-    Monochrome,
-    Fidelity,
-    Content,
-    Rainbow,
-    FruitSalad,
-}
-
-/// <summary>
-/// Semantic Material Design 3 color roles.
-/// </summary>
-public enum MavColorRole
-{
-    Primary,
-    OnPrimary,
-    PrimaryContainer,
-    OnPrimaryContainer,
-    PrimaryFixed,
-    PrimaryFixedDim,
-    OnPrimaryFixed,
-    OnPrimaryFixedVariant,
-    Secondary,
-    OnSecondary,
-    SecondaryContainer,
-    OnSecondaryContainer,
-    SecondaryFixed,
-    SecondaryFixedDim,
-    OnSecondaryFixed,
-    OnSecondaryFixedVariant,
-    Tertiary,
-    OnTertiary,
-    TertiaryContainer,
-    OnTertiaryContainer,
-    TertiaryFixed,
-    TertiaryFixedDim,
-    OnTertiaryFixed,
-    OnTertiaryFixedVariant,
-    Error,
-    OnError,
-    ErrorContainer,
-    OnErrorContainer,
-    Background,
-    OnBackground,
-    Surface,
-    OnSurface,
-    SurfaceVariant,
-    OnSurfaceVariant,
-    SurfaceDim,
-    SurfaceBright,
-    SurfaceContainerLowest,
-    SurfaceContainerLow,
-    SurfaceContainer,
-    SurfaceContainerHigh,
-    SurfaceContainerHighest,
-    Outline,
-    OutlineVariant,
-    Shadow,
-    Scrim,
-    InverseSurface,
-    InverseOnSurface,
-    InversePrimary,
-    SurfaceTint,
-}
-
-/// <summary>
 /// Full Material Design 3 color role set, including surface container tiers
 /// and fixed accent roles. Generated from a seed color via HCT tonal palettes.
 /// </summary>
@@ -555,12 +483,4 @@ public sealed record MavColorScheme
         var seed = ExtractSeedFromPixels(argbPixels);
         return FromSeed(seed, dark, contrast, variant);
     }
-}
-
-/// <summary>Contrast level of a generated color scheme (standard, medium or high).</summary>
-public enum MavContrast
-{
-    Standard,
-    Medium,
-    High,
 }

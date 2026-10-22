@@ -13,14 +13,6 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
-/// <summary>Animation used when a <see cref="MavNavigationPage"/> changes its page.</summary>
-public enum MavNavigationTransition
-{
-    None,
-    Slide,
-    Fade,
-}
-
 /// <summary>
 /// Material Design stack navigation host. It owns its page stack, app bar,
 /// bottom bar and floating action button instead of relying on Avalonia page

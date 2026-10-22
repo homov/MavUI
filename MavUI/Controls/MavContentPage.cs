@@ -6,42 +6,6 @@ using Mav.Primitives;
 
 namespace Mav.Controls;
 
-/// <summary>Kind of navigation that changed the visible page in a <see cref="MavNavigationPage"/>.</summary>
-public enum MavPageNavigationType
-{
-    Root,
-    Push,
-    Pop,
-    Replace,
-}
-
-/// <summary>Toolbar action of a <see cref="MavContentPage"/>, shown in its app bar.</summary>
-public sealed class MavPageAction
-{
-    public string Icon { get; init; } = string.Empty;
-    public string? Tooltip { get; init; }
-    public Action? OnClick { get; init; }
-}
-
-/// <summary>Event data for a page change in a <see cref="MavNavigationPage"/>: the page and the kind of navigation.</summary>
-public sealed class MavPageChangedEventArgs : EventArgs
-{
-    /// <summary>Creates the event data for a page change, with the old and the new page.</summary>
-    public MavPageChangedEventArgs(
-        MavContentPage? oldPage,
-        MavContentPage newPage,
-        MavPageNavigationType navigationType)
-    {
-        OldPage = oldPage;
-        NewPage = newPage;
-        NavigationType = navigationType;
-    }
-
-    public MavContentPage? OldPage { get; }
-    public MavContentPage NewPage { get; }
-    public MavPageNavigationType NavigationType { get; }
-}
-
 /// <summary>
 /// Material Design content page used by <see cref="MavNavigationPage"/>.
 /// The page supplies content and app-bar metadata; navigation chrome belongs to the host.

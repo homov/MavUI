@@ -10,16 +10,6 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
-/// <summary>Side of the anchor on which a <see cref="MavPopover"/> opens.</summary>
-public enum MavPopoverPlacement
-{
-    Auto,
-    Bottom,
-    Top,
-    Left,
-    Right,
-}
-
 /// <summary>
 /// Material Design 3 Anchored Popover / Flyout card that displays arbitrary <see cref="Control"/> content
 /// next to a target anchor with automatic viewport boundary clamping.

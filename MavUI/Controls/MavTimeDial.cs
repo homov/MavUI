@@ -10,13 +10,6 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
-/// <summary>Which part of the time a <see cref="MavTimeDial"/> is currently selecting: hours or minutes.</summary>
-public enum MavTimeDialMode
-{
-    Hour,
-    Minute,
-}
-
 /// <summary>
 /// Material Design 3 256dp analog clock dial with 12h / 24h double-ring support,
 /// selector arm, and automatic hour-to-minute transition on pointer release.

@@ -13,15 +13,6 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
-/// <summary>State of a <see cref="MavRefreshIndicator"/> during a pull-to-refresh gesture.</summary>
-public enum MavRefreshIndicatorState
-{
-    Idle,
-    Pulling,
-    Armed,
-    Refreshing,
-}
-
 /// <summary>
 /// Material Design 3 pull-to-refresh host that wraps scrollable content and reveals
 /// an elevated circular progress / loading indicator pill when pulled from the top edge.

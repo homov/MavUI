@@ -13,33 +13,6 @@ using Mav.Theming;
 
 namespace Mav.Controls;
 
-/// <summary>Visual style of a <see cref="MavButton"/> (filled, tonal, outlined, text, and so on).</summary>
-public enum MavButtonVariant
-{
-    Filled,
-    Tonal,
-    Elevated,
-    Outlined,
-    Text,
-}
-
-/// <summary>Size preset of a <see cref="MavButton"/>.</summary>
-public enum MavButtonSize
-{
-    ExtraSmall,
-    Small,
-    Medium,
-    Large,
-    ExtraLarge,
-}
-
-/// <summary>Corner shape of a <see cref="MavButton"/>.</summary>
-public enum MavButtonShape
-{
-    Round,
-    Square,
-}
-
 /// <summary>
 /// Material Design 3 button with 5 variants, 5 Expressive sizes, round/square shapes,
 /// optional toggle mode, and leading/trailing icons.
