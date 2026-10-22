@@ -1,5 +1,6 @@
 name: Build and test (self-hosted)
 
+# Android and Browser target builds run on manual dispatch or when a commit message contains [heads].
 on:
   workflow_dispatch:   # manual run from the Actions tab; enables the Android/Browser step
   push:
