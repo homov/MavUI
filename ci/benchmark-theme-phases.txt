@@ -1,1 +1,1 @@
-phases, 500 x MdButton attached: synchronous Mode set (apply of all controls) median 47.08 ms; deferred RunJobs (layout/render) median 23.04 ms
+phases, 500 x MdButton attached: synchronous Mode set (apply of all controls) median 14.78 ms; deferred RunJobs (layout/render) median 24.03 ms

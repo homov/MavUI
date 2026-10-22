@@ -1,3 +1,5 @@
 pgrep: /usr/bin/pgrep
 Tool 'dotnet-trace' is already installed.
 dotnet-trace: /home/homo/.dotnet/tools/dotnet-trace
+testhost pid: 89921
+[ERROR] The specified profile 'cpu-sampling' does not apply to `dotnet-trace collect`.
