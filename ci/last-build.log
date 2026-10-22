@@ -1,34 +1,78 @@
 # Last build log
-commit: a2c2a9848268542283dbf065908b4ab0d5a58489
-run: https://github.com/homov/MavUI/actions/runs/39844878340
+commit: dc850f674de6ec972b828cc39b2256b7f850506d
+run: https://github.com/homov/MavUI/actions/runs/39844973811
 
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 702 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 259 ms).
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:08.08
+Time Elapsed 00:00:07.64
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials.Linux/MavUI.Essentials.Linux.csproj (in 93 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 85 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.csproj (in 189 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 205 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 80 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials.Linux/MavUI.Essentials.Linux.csproj (in 88 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.csproj (in 190 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 207 ms).
   1 of 5 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
   MavUI.Essentials.Linux -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials.Linux/bin/Release/net10.0/MavUI.Essentials.Linux.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
-/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/ControlsGalleryShellTests.cs(27,29): error CS1061: 'MainView' does not contain a definition for 'OverlayHost' and no accessible extension method 'OverlayHost' accepting a first argument of type 'MainView' could be found (are you missing a using directive or an assembly reference?) [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/ControlsGalleryShellTests.cs(42,31): error CS1061: 'MainView' does not contain a definition for 'OverlayHost' and no accessible extension method 'OverlayHost' accepting a first argument of type 'MainView' could be found (are you missing a using directive or an assembly reference?) [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj]
+  MavUI.Tests -> /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/MavUI.Tests.dll
 
-Build FAILED.
-
-/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/ControlsGalleryShellTests.cs(27,29): error CS1061: 'MainView' does not contain a definition for 'OverlayHost' and no accessible extension method 'OverlayHost' accepting a first argument of type 'MainView' could be found (are you missing a using directive or an assembly reference?) [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/ControlsGalleryShellTests.cs(42,31): error CS1061: 'MainView' does not contain a definition for 'OverlayHost' and no accessible extension method 'OverlayHost' accepting a first argument of type 'MainView' could be found (are you missing a using directive or an assembly reference?) [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj]
+Build succeeded.
     0 Warning(s)
-    2 Error(s)
+    0 Error(s)
 
-Time Elapsed 00:00:04.13
+Time Elapsed 00:00:04.26
+  Determining projects to restore...
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 281 ms).
+  2 of 3 projects are up-to-date for restore.
+  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
+  ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
+  ControlsGallery.Desktop -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Desktop/bin/Release/net10.0/ControlsGallery.Desktop.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.18
+  Determining projects to restore...
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials.Windows/MavUI.Essentials.Windows.csproj (in 222 ms).
+  1 of 2 projects are up-to-date for restore.
+  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
+  MavUI.Essentials.Windows -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials.Windows/bin/Release/net10.0-windows/MavUI.Essentials.Windows.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.41
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
+  MavUI.Essentials.Linux -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials.Linux/bin/Release/net10.0/MavUI.Essentials.Linux.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.04
+Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/MavUI.Tests.dll (.NETCoreApp,Version=v10.0)
+VSTest version 18.0.2 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:01.38]     Mav.Tests.ControlsGalleryShellTests.Snackbar_appears_in_a_visible_overlay [FAIL]
+  Failed Mav.Tests.ControlsGalleryShellTests.Snackbar_appears_in_a_visible_overlay [579 ms]
+  Error Message:
+   Snackbar was not added to any overlay.
+  Stack Trace:
+     at Mav.Tests.ControlsGalleryShellTests.Snackbar_appears_in_a_visible_overlay() in /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/ControlsGalleryShellTests.cs:line 44
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+
+Failed!  - Failed:     1, Passed:   261, Skipped:     0, Total:   262, Duration: 14 s - MavUI.Tests.dll (net10.0)
