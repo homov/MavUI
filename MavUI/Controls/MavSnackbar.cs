@@ -133,11 +133,23 @@ public static class MavSnackbar
 
         if (showClose)
         {
-            var closeBtn = new MavIconButton(MavIcons.Close, MavIconButtonVariant.Standard)
+            // The standard icon button is tinted for light surfaces and would disappear on the inverse
+            // surface, so the close glyph is colored explicitly like the action label.
+            var closeGlyph = new MavIcon(MavIcons.Close, 22)
             {
-                ButtonSize = 32,
-                TouchTargetSize = 36,
+                UseThemeDefaultColor = false,
+                Color = c.InverseOnSurface,
+            };
+            var closeBtn = new MavInkSurface
+            {
+                MinWidth = 36,
+                MinHeight = 36,
+                CornerRadius = 18,
+                Padding = new Thickness(7),
+                RippleColor = c.InverseOnSurface,
+                HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
+                Content = closeGlyph,
             };
             MavTooltip.SetText(closeBtn, MavLocalization.Dismiss);
             closeBtn.Clicked += (_, _) => Dismiss();

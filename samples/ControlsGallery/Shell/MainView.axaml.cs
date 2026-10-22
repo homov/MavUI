@@ -18,7 +18,7 @@ public partial class MainView : UserControl
 {
     private const double RailBreakpoint = 700;
     private const double DrawerBreakpoint = 1000;
-    private const int DefaultDestination = 8;
+    private const int DefaultDestination = 0;
 
     private readonly Control?[] _pages = new Control?[GalleryDestinations.All.Length];
     private MavNavigationDrawer? _drawer;
