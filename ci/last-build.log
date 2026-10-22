@@ -1,20 +1,20 @@
 # Last build log
-commit: 346d92bb210e02cf8f91ddbc4a70345504facbb9
-run: https://github.com/homov/MavUI/actions/runs/39871087308
+commit: 95c4be5979915ed7402d924ee673a396e6685cdb
+run: https://github.com/homov/MavUI/actions/runs/39871223282
 
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 261 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 259 ms).
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:04.86
+Time Elapsed 00:00:04.73
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 225 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 225 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 230 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 222 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 222 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 228 ms).
   1 of 4 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
@@ -25,9 +25,9 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:04.58
+Time Elapsed 00:00:04.61
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 277 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 276 ms).
   2 of 3 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
@@ -37,7 +37,7 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.12
+Time Elapsed 00:00:02.15
   Determining projects to restore...
   All projects are up-to-date for restore.
   MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0-windows/MavUI.Essentials.dll
@@ -47,20 +47,20 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:01.00
+Time Elapsed 00:00:01.03
 Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/MavUI.Tests.dll (.NETCoreApp,Version=v10.0)
 VSTest version 18.0.2 (x64)
 
 Starting test execution, please wait...
 A total of 1 test files matched the specified pattern.
-[xUnit.net 00:00:01.29]     Mav.Tests.OverlayScenarioTests.BottomSheet_Show_opens_an_overlay_with_its_title_and_body [FAIL]
-  Failed Mav.Tests.OverlayScenarioTests.BottomSheet_Show_opens_an_overlay_with_its_title_and_body [452 ms]
+[xUnit.net 00:00:05.14]     Mav.Tests.OverlayScenarioTests.SideSheet_shown_overlay_can_be_dismissed_by_the_overlay_stack [FAIL]
+  Failed Mav.Tests.OverlayScenarioTests.SideSheet_shown_overlay_can_be_dismissed_by_the_overlay_stack [16 ms]
   Error Message:
    Assert.True() Failure
 Expected: True
 Actual:   False
   Stack Trace:
-     at Mav.Tests.OverlayScenarioTests.BottomSheet_Show_opens_an_overlay_with_its_title_and_body() in /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/OverlayScenarioTests.cs:line 45
+     at Mav.Tests.OverlayScenarioTests.SideSheet_shown_overlay_can_be_dismissed_by_the_overlay_stack() in /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/OverlayScenarioTests.cs:line 84
    at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
    at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
 
