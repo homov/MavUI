@@ -1,6 +1,6 @@
 # Last build log
-commit: 4c16825a3f38a1cce907b7296c45d34d45f081bf
-run: https://github.com/homov/MavUI/actions/runs/39803213205
+commit: e6505070b5d4db6550d38e16e6ec19fe78f5f54a
+run: https://github.com/homov/MavUI/actions/runs/39803392767
 
   Md3.Avalonia -> /home/homo/github/actions-runner/_work/MavUI/MavUI/ref/Md3.Avalonia/bin/Release/net10.0/Md3.Avalonia.dll
 
@@ -8,9 +8,9 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:03.85
+Time Elapsed 00:00:03.87
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/tests/Md3.Avalonia.Headless.Tests/Md3.Avalonia.Headless.Tests.csproj (in 260 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/tests/Md3.Avalonia.Headless.Tests/Md3.Avalonia.Headless.Tests.csproj (in 3.85 sec).
   1 of 2 projects are up-to-date for restore.
   Md3.Avalonia -> /home/homo/github/actions-runner/_work/MavUI/MavUI/ref/Md3.Avalonia/bin/Release/net10.0/Md3.Avalonia.dll
 /home/homo/github/actions-runner/_work/MavUI/MavUI/tests/Md3.Avalonia.Headless.Tests/RenderTests.cs(59,9): warning CS0618: 'Bitmap.Save(string, int?)' is obsolete: 'Use the overload accepting BitmapEncoderOptions instead.' [/home/homo/github/actions-runner/_work/MavUI/MavUI/tests/Md3.Avalonia.Headless.Tests/Md3.Avalonia.Headless.Tests.csproj]
@@ -20,6 +20,5 @@ VSTest version 18.0.2 (x64)
 
 Starting test execution, please wait...
 A total of 1 test files matched the specified pattern.
-No test is available in /home/homo/github/actions-runner/_work/MavUI/MavUI/tests/Md3.Avalonia.Headless.Tests/bin/Release/net10.0/Md3.Avalonia.Headless.Tests.dll. Make sure that test discoverer & executors are registered and platform & framework version settings are appropriate and try again.
 
-Additionally, path to test adapters can be specified using /TestAdapterPath command. Example  /TestAdapterPath:<pathToCustomAdapters>.
+Passed!  - Failed:     0, Passed:     2, Skipped:     0, Total:     2, Duration: 483 ms - Md3.Avalonia.Headless.Tests.dll (net10.0)
