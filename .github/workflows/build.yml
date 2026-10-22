@@ -44,6 +44,14 @@ jobs:
           set -o pipefail
           dotnet test Tests/MavUI.Tests.csproj -c Release --no-build 2>&1 | tee -a build.log
 
+      - name: Build Android and Browser heads
+        shell: bash
+        run: |
+          set -o pipefail
+          dotnet workload install android wasm-tools 2>&1 | tee -a build.log
+          dotnet build samples/ControlsGallery.Android/ControlsGallery.Android.csproj -c Release 2>&1 | tee -a build.log
+          dotnet build samples/ControlsGallery.Browser/ControlsGallery.Browser.csproj -c Release 2>&1 | tee -a build.log
+
       - name: Profile theme switch (only when commit message has [profile])
         if: contains(github.event.head_commit.message, '[profile]')
         shell: bash
