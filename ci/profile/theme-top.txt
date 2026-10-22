@@ -1,61 +1,62 @@
-Top 60 Functions (Exclusive)                                                  Inclusive           Exclusive           
-1.  LowLevelLifoSemaphore.WaitNative(class Microsoft.Win32.SafeHandles.Saf    28.68%              28.68%              
-2.  WaitHandle.WaitOneNoCheck(int32,bool,class System.Object,value class W    26.78%              26.78%              
-3.  Monitor.Wait(class System.Object,int32)                                   13.55%              13.55%              
-4.  LowLevelLifoSemaphore.WaitForSignal(int32)                                39.09%              10.41%              
-5.  Missing Symbol                                                            6.78%               6.78%               
-6.  WaitHandle.WaitAnyMultiple(value class System.ReadOnlySpan`1<class Mic    6.78%               6.78%               
-7.  Sockets!Interop+Sys.Poll(class System.Runtime.InteropServices.SafeHand    6.73%               6.73%               
-8.  Thread.<PollGC>g__PollGCWorker|67_0()                                     0.02%               0.02%               
-9.  LowLevelSpinWaiter.Wait(int32,int32,bool)                                 0.02%               0.02%               
-10. DynamicMethod.CreateDelegate(class System.Type,class System.Object)       0.01%               0.01%               
-11. MetadataReaderExtensionsHelper.DiscoverTestExtensionTypesV2AttributeIn    0.01%               0.01%               
-12. RuntimeModule.GetDefinedTypes()                                           0.01%               0.01%               
-13. LowLevelLifoSemaphore.Wait(int32,bool)                                    10.56%              0.01%               
-14. Thread.Yield()                                                            0.01%               0.01%               
-15. InitHelpers.InitClassSlow(value class System.Runtime.CompilerServices.    0.03%               0.01%               
-16. GC.<AllocateUninitializedArray>g__AllocateNewArrayWorker|77_0(int32,bo    0.01%               0.01%               
-17. CompareInfo.IcuCompareString(value class System.ReadOnlySpan`1<wchar>,    0%                  0%                  
-18. GenericsHelpers.ClassWithSlotAndModule(int,value class GenericHandleAr    0%                  0%                  
-19. VsTestRunner+<RunTestsInAssembly>d__33.MoveNext()                         6.62%               0%                  
-20. AsyncMethodBuilderCore.Start(!!0&)                                        13.27%              0%                  
-21. RuntimeCustomAttributeData.GetCustomAttributeRecords(class System.Refl    0%                  0%                  
-22. MessageSinkMessage.FromJson(class System.Collections.Generic.IReadOnly    0.01%               0%                  
-23. MessageSinkMessageExtensions.DispatchWhen(class Xunit.Sdk.IMessageSink    0.01%               0%                  
-24. CustomAttribute.IsCustomAttributeDefined(class System.Reflection.Runti    0%                  0%                  
-25. FrameworkNameProvider.InitMappings(class System.Collections.Generic.IE    0.01%               0%                  
-26. Monitor.Enter_Slowpath(class System.Object)                               0%                  0%                  
-27. XunitProjectAssembly.WithSettings(class Xunit.FrontControllerFindSetti    0%                  0%                  
-28. CoreLib!Interop+Kernel32.ReleaseSemaphore(class Microsoft.Win32.SafeHa    0%                  0%                  
-29. GenericsHelpers.MethodWithSlotAndModule(int,value class GenericHandleA    0%                  0%                  
-30. Buffer.MemmoveInternal(unsigned int8&,unsigned int8&,unsigned int)        0%                  0%                  
-31. TestPluginDiscoverer.GetTestExtensionsFromAssembly(class System.Reflec    0.02%               0%                  
-32. VsExecutionSink.HandleTestCaseStarting(class Xunit.Runner.Common.Messa    0%                  0%                  
-33. RuntimeHelpers.<GetHashCode>g__GetHashCodeWorker|15_0(class System.Obj    0%                  0%                  
-34. TestObject.SetPropertyValue(class Microsoft.VisualStudio.TestPlatform.    0%                  0%                  
-35. TestPluginCache.GetDefaultResolutionPaths()                               0%                  0%                  
-36. SocketError].Add(!0,!1)                                                   0%                  0%                  
-37. JsonWriter.WriteValue(class Newtonsoft.Json.JsonWriter,value class New    0%                  0%                  
-38. DefaultContractResolver.CreateObjectContract(class System.Type)           0.02%               0%                  
-39. JsonSerializerInternalReader.CreateObject(class Newtonsoft.Json.JsonRe    0.03%               0%                  
-40. AsyncValueTaskMethodBuilder.Start(!!0&)                                   0%                  0%                  
-41. RuntimeAssembly.InternalLoad(class System.Reflection.AssemblyName,valu    0.01%               0%                  
-42. __Canon].MoveNext()                                                       0.17%               0%                  
-43. Xunit3.Run(class Xunit.Sdk.IMessageSink,class Xunit.FrontControllerRun    6.36%               0%                  
-44. .ctor(class System.IRuntimeMethodInfo,class System.RuntimeType)           0%                  0%                  
-45. RuntimeMethodHandle.<GetStubIfNeeded>g__GetStubIfNeededWorker|47_0(val    0%                  0%                  
-46. JsonSerializerInternalWriter.SerializeValue(class Newtonsoft.Json.Json    0.03%               0%                  
-47. BaseRunTests.RunTestsInternal()                                           6.66%               0%                  
-48. FrameworkNameProvider.InitPortableMappings(class System.Collections.Ge    0%                  0%                  
-49. Array.Copy(class System.Array,class System.Array,int32)                   0.01%               0%                  
-50. Thread.StartCore()                                                        0%                  0%                  
-51. MetadataReader.InitializeTypeDefinitions()                                0%                  0%                  
-52. JsonSerializerInternalWriter.SerializeObject(class Newtonsoft.Json.Jso    0.03%               0%                  
-53. TestPluginCache.DiscoverTestExtensions(class System.String)               0.03%               0%                  
-54. Enumerable.<ToArray>g__EnumerableToArray|324_0(class System.Collection    0%                  0%                  
-55. TestPluginDiscoverer.GetTestExtensionsFromFiles(class System.String[],    0.03%               0%                  
-56. Mixin.Resize(!!0[],int32)                                                 0%                  0%                  
-57. LambdaCompiler.EmitExpression(class System.Linq.Expressions.Expression    0%                  0%                  
-58. CoreLib!Interop+Globalization.GetLocaleInfoInt(class System.String,uns    0%                  0%                  
-59. .ctor(class Xunit.Runner.VisualStudio.LoggerHelper,class Xunit.Runner.    0%                  0%                  
-60. GenericsHelpers.Method(int,int)                                           0%                  0%                  
+Top 1010 Functions (Exclusive)                                                  Inclusive           Exclusive           
+1.    LowLevelLifoSemaphore.WaitNative(class Microsoft.Win32.SafeHandles.Saf    28.46%              28.46%              
+2.    WaitHandle.WaitOneNoCheck(int32,bool,class System.Object,value class W    26.77%              26.77%              
+3.    Monitor.Wait(class System.Object,int32)                                   13.53%              13.53%              
+4.    LowLevelLifoSemaphore.WaitForSignal(int32)                                39.14%              10.68%              
+5.    Missing Symbol                                                            6.77%               6.77%               
+6.    WaitHandle.WaitAnyMultiple(value class System.ReadOnlySpan`1<class Mic    6.77%               6.77%               
+7.    Sockets!Interop+Sys.Poll(class System.Runtime.InteropServices.SafeHand    6.74%               6.74%               
+8.    Thread.<PollGC>g__PollGCWorker|67_0()                                     0.03%               0.03%               
+9.    LowLevelSpinWaiter.Wait(int32,int32,bool)                                 0.04%               0.03%               
+10.   RuntimeModule.GetDefinedTypes()                                           0.01%               0.01%               
+11.   GC.<AllocateUninitializedArray>g__AllocateNewArrayWorker|77_0(int32,bo    0.01%               0.01%               
+12.   InitHelpers.InitClassSlow(value class System.Runtime.CompilerServices.    0.03%               0.01%               
+13.   MetadataReaderExtensionsHelper.DiscoverTestExtensionTypesV2AttributeIn    0.01%               0.01%               
+14.   DynamicMethod.CreateDelegate(class System.Type,class System.Object)       0.01%               0.01%               
+15.   Thread.Yield()                                                            0.01%               0.01%               
+16.   Buffer.MemmoveInternal(unsigned int8&,unsigned int8&,unsigned int)        0.01%               0.01%               
+17.   LowLevelLifoSemaphore.Wait(int32,bool)                                    10.73%              0%                  
+18.   CompareInfo.IcuCompareString(value class System.ReadOnlySpan`1<wchar>,    0%                  0%                  
+19.   RuntimeCustomAttributeData.GetCustomAttributeRecords(class System.Refl    0%                  0%                  
+20.   AsyncMethodBuilderCore.Start(!!0&)                                        13.28%              0%                  
+21.   GenericsHelpers.MethodWithSlotAndModule(int,value class GenericHandleA    0%                  0%                  
+22.   Monitor.Enter(class System.Object,bool&)                                  0%                  0%                  
+23.   .ctor(class System.IRuntimeMethodInfo,class System.RuntimeType)           0%                  0%                  
+24.   Monitor.Enter_Slowpath(class System.Object)                               0%                  0%                  
+25.   VsTestRunner+<RunTestsInAssembly>d__33.MoveNext()                         6.62%               0%                  
+26.   FrameworkNameProvider.InitMappings(class System.Collections.Generic.IE    0.01%               0%                  
+27.   .ctor(class Xunit.Runner.Common.IRunnerLogger)                            0%                  0%                  
+28.   BaseRunTests.RunTestsInternal()                                           6.67%               0%                  
+29.   Xunit3.Find(class Xunit.Sdk.IMessageSink,class Xunit.FrontControllerFi    0.17%               0%                  
+30.   __Canon].OnMessage(class Xunit.Sdk.IMessageSinkMessage)                   0.01%               0%                  
+31.   TestAssemblyStarting.Deserialize(class System.Collections.Generic.IRea    0%                  0%                  
+32.   MessageSinkMessageExtensions.DispatchWhen(class Xunit.Sdk.IMessageSink    0.01%               0%                  
+33.   Thread.StartCore()                                                        0%                  0%                  
+34.   JsonSerializerInternalWriter.SerializeList(class Newtonsoft.Json.JsonW    0.02%               0%                  
+35.   GenericsHelpers.ClassWithSlotAndModule(int,value class GenericHandleAr    0%                  0%                  
+36.   VsTestRunner.RunTests(class System.Collections.Generic.IEnumerable`1<c    6.66%               0%                  
+37.   JsonSerializerInternalWriter.SerializeValue(class Newtonsoft.Json.Json    0.03%               0%                  
+38.   GenericsHelpers.Method(int,int)                                           0%                  0%                  
+39.   CoreLib!Interop+Globalization.GetLocaleInfoInt(class System.String,uns    0%                  0%                  
+40.   RuntimeType.CreateInstanceDefaultCtor(bool,bool)                          0%                  0%                  
+41.   CoreLib!Interop+Globalization.GetTimeZoneDisplayName(class System.Stri    0%                  0%                  
+42.   .ctor(class System.Collections.Generic.IEnumerable`1<class NuGetClone.    0.01%               0%                  
+43.   ExecutionManager.LoadExtensions()                                         0.04%               0%                  
+44.   Array.Copy(class System.Array,class System.Array,int32)                   0.01%               0%                  
+45.   JsonSerializerInternalWriter.SerializeObject(class Newtonsoft.Json.Jso    0.03%               0%                  
+46.   Enumerable.<ToArray>g__EnumerableToArray|324_0(class System.Collection    0%                  0%                  
+47.   XmlRunSettingsUtilities.GetDataCollectionRunSettings(class System.Stri    0%                  0%                  
+48.   XmlRunSettingsUtilities.GetNodeValue(class System.String,class System.    0.02%               0%                  
+49.   JsonSerializerInternalReader.CreateNewObject(class Newtonsoft.Json.Jso    0.01%               0%                  
+50.   TestRequestHandler.OnMessageReceived(class System.Object,class Microso    0.03%               0%                  
+51.   __Canon].PushWithResize(!0)                                               0%                  0%                  
+52.   KeyValuePairConverter.WriteJson(class Newtonsoft.Json.JsonWriter,class    0%                  0%                  
+53.   TestExecutionRecorder.RecordEnd(class Microsoft.VisualStudio.TestPlatf    0%                  0%                  
+54.   .ctor()                                                                   0%                  0%                  
+55.   ExecutionSink.ConvertToRunnerMessageAndDispatch(class Xunit.Sdk.IMessa    0%                  0%                  
+56.   .cctor()                                                                  0%                  0%                  
+57.   ModuleHandle.GetDynamicMethod(value class System.Runtime.CompilerServi    0%                  0%                  
+58.   JsonTextWriter.WriteValue(value class System.TimeSpan)                    0%                  0%                  
+59.   JsonDeserializer.TryDeserializeString(class System.String,int32&,class    0.01%               0%                  
+
+== Md3 / Avalonia-controls / theme frames:
