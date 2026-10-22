@@ -1,6 +1,6 @@
 # Last build log
-commit: 631b973e92ddf185b8efede2c1c8f23471098efd
-run: https://github.com/homov/MavUI/actions/runs/39807049277
+commit: 145b29c1211aacbbab5f0926334d559eff592cbd
+run: https://github.com/homov/MavUI/actions/runs/39807912127
 
   Determining projects to restore...
   Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Md3.Avalonia/Md3.Avalonia.csproj (in 262 ms).
@@ -10,44 +10,25 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:07.57
+Time Elapsed 00:00:07.62
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/Md3.Avalonia.Tests.csproj (in 263 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/Md3.Avalonia.Tests.csproj (in 274 ms).
   1 of 2 projects are up-to-date for restore.
   Md3.Avalonia -> /home/homo/github/actions-runner/_work/MavUI/MavUI/Md3.Avalonia/bin/Release/net10.0/Md3.Avalonia.dll
-  Md3.Avalonia.Tests -> /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/Md3.Avalonia.Tests.dll
+/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/LifecycleBenchmarks.cs(76,20): error CS0246: The type or namespace name 'List<>' could not be found (are you missing a using directive or an assembly reference?) [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/Md3.Avalonia.Tests.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/LifecycleBenchmarks.cs(76,25): error CS0246: The type or namespace name 'WeakReference' could not be found (are you missing a using directive or an assembly reference?) [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/Md3.Avalonia.Tests.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/LifecycleBenchmarks.cs(103,45): error CS0246: The type or namespace name 'List<>' could not be found (are you missing a using directive or an assembly reference?) [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/Md3.Avalonia.Tests.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/LifecycleBenchmarks.cs(103,50): error CS0246: The type or namespace name 'WeakReference' could not be found (are you missing a using directive or an assembly reference?) [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/Md3.Avalonia.Tests.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/LifecycleBenchmarks.cs(125,34): error CS0246: The type or namespace name 'List<>' could not be found (are you missing a using directive or an assembly reference?) [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/Md3.Avalonia.Tests.csproj]
 
-Build succeeded.
+Build FAILED.
+
+/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/LifecycleBenchmarks.cs(76,20): error CS0246: The type or namespace name 'List<>' could not be found (are you missing a using directive or an assembly reference?) [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/Md3.Avalonia.Tests.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/LifecycleBenchmarks.cs(76,25): error CS0246: The type or namespace name 'WeakReference' could not be found (are you missing a using directive or an assembly reference?) [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/Md3.Avalonia.Tests.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/LifecycleBenchmarks.cs(103,45): error CS0246: The type or namespace name 'List<>' could not be found (are you missing a using directive or an assembly reference?) [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/Md3.Avalonia.Tests.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/LifecycleBenchmarks.cs(103,50): error CS0246: The type or namespace name 'WeakReference' could not be found (are you missing a using directive or an assembly reference?) [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/Md3.Avalonia.Tests.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/LifecycleBenchmarks.cs(125,34): error CS0246: The type or namespace name 'List<>' could not be found (are you missing a using directive or an assembly reference?) [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/Md3.Avalonia.Tests.csproj]
     0 Warning(s)
-    0 Error(s)
+    5 Error(s)
 
-Time Elapsed 00:00:01.99
-  Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/Demo/Md3.Demo.csproj (in 268 ms).
-  1 of 2 projects are up-to-date for restore.
-  Md3.Avalonia -> /home/homo/github/actions-runner/_work/MavUI/MavUI/Md3.Avalonia/bin/Release/net10.0/Md3.Avalonia.dll
-  Md3.Demo -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/Demo/bin/Release/net10.0/Md3.Demo.dll
-
-Build succeeded.
-    0 Warning(s)
-    0 Error(s)
-
-Time Elapsed 00:00:01.99
-  Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/Gallery/Md3.Gallery.csproj (in 262 ms).
-  1 of 2 projects are up-to-date for restore.
-  Md3.Avalonia -> /home/homo/github/actions-runner/_work/MavUI/MavUI/Md3.Avalonia/bin/Release/net10.0/Md3.Avalonia.dll
-  Md3.Gallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/Gallery/bin/Release/net10.0/Md3.Gallery.dll
-
-Build succeeded.
-    0 Warning(s)
-    0 Error(s)
-
-Time Elapsed 00:00:01.98
-Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/Md3.Avalonia.Tests.dll (.NETCoreApp,Version=v10.0)
-VSTest version 18.0.2 (x64)
-
-Starting test execution, please wait...
-A total of 1 test files matched the specified pattern.
-
-Passed!  - Failed:     0, Passed:   233, Skipped:     0, Total:   233, Duration: 11 s - Md3.Avalonia.Tests.dll (net10.0)
+Time Elapsed 00:00:01.57
