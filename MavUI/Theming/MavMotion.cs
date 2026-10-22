@@ -101,6 +101,8 @@ public static class MavMotion
 
     private static readonly List<AnimEntry> TickList = [];
     private static DispatcherTimer? _timer;
+    private static WeakReference<TopLevel>? _frameSource;
+    private static bool _frameRequested;
 
     public static void Animate(
         Visual owner,
@@ -160,7 +162,7 @@ public static class MavMotion
         {
             RemoveLocked(owner, name);
             TickList.Add(entry);
-            EnsureTimer();
+            EnsureTicking(owner);
         }
     }
 
@@ -185,23 +187,71 @@ public static class MavMotion
         }
     }
 
-    private static void EnsureTimer()
+    /// <summary>
+    /// Schedules the frame loop. Attached owners are driven by <see cref="TopLevel.RequestAnimationFrame"/>,
+    /// so each step lands on a display frame. A fixed-interval timer does not line up with the display,
+    /// which read as stutter in the browser and on Android. The timer is only a fallback for owners that
+    /// are not attached to a top level yet. Called under <c>lock (TickList)</c>.
+    /// </summary>
+    private static void EnsureTicking(Visual owner)
     {
-        if (_timer is not null)
+        var top = TopLevel.GetTopLevel(owner);
+        if (top is not null)
         {
-            if (!_timer.IsEnabled) _timer.Start();
+            _frameSource = new WeakReference<TopLevel>(top);
+            RequestFrameLocked(top);
             return;
         }
 
-        _timer = new DispatcherTimer
+        if (_timer is null)
         {
-            Interval = TimeSpan.FromMilliseconds(16)
-        };
-        _timer.Tick += OnFrame;
-        _timer.Start();
+            _timer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMilliseconds(16)
+            };
+            _timer.Tick += OnTimerTick;
+        }
+
+        if (!_timer.IsEnabled) _timer.Start();
     }
 
-    private static void OnFrame(object? sender, EventArgs e)
+    private static void RequestFrameLocked(TopLevel top)
+    {
+        if (_frameRequested) return;
+        _frameRequested = true;
+        top.RequestAnimationFrame(OnFrame);
+    }
+
+    private static void ScheduleNextLocked()
+    {
+        if (_frameSource is not null && _frameSource.TryGetTarget(out var top))
+        {
+            RequestFrameLocked(top);
+            return;
+        }
+
+        if (_timer is not null && !_timer.IsEnabled) _timer.Start();
+    }
+
+    private static void OnTimerTick(object? sender, EventArgs e) => Tick();
+
+    private static void OnFrame(TimeSpan _)
+    {
+        lock (TickList)
+        {
+            _frameRequested = false;
+        }
+
+        Tick();
+
+        lock (TickList)
+        {
+            if (TickList.Count > 0)
+                ScheduleNextLocked();
+        }
+    }
+
+    private static void Tick()
     {
         var now = Stopwatch.GetTimestamp();
         List<(Action<double> Cb, double Val, Action? Fin)>? invocations = null;
