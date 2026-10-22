@@ -1,15 +1,53 @@
 # Last build log
-commit: c58325193bcf3988d8a6e31613993c429fef9a39
-run: https://github.com/homov/MavUI/actions/runs/39827310754
+commit: e0c0d9bb09cdef66fe96852421db98e8b147b86a
+run: https://github.com/homov/MavUI/actions/runs/39827586726
 
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 263 ms).
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Theming/MavTheme.cs(485,14): error CS0101: The namespace 'Mav.Theming' already contains a definition for 'MavTheme' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 256 ms).
+  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
 
-Build FAILED.
-
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Theming/MavTheme.cs(485,14): error CS0101: The namespace 'Mav.Theming' already contains a definition for 'MavTheme' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+Build succeeded.
     0 Warning(s)
-    1 Error(s)
+    0 Error(s)
 
-Time Elapsed 00:00:03.62
+Time Elapsed 00:00:07.57
+  Determining projects to restore...
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 268 ms).
+  1 of 2 projects are up-to-date for restore.
+  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
+  MavUI.Tests -> /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/MavUI.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.08
+  Determining projects to restore...
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/Demo/Mav.Demo.csproj (in 262 ms).
+  1 of 2 projects are up-to-date for restore.
+  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
+  Mav.Demo -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/Demo/bin/Release/net10.0/Mav.Demo.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.97
+  Determining projects to restore...
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/Gallery/Mav.Gallery.csproj (in 263 ms).
+  1 of 2 projects are up-to-date for restore.
+  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
+  Mav.Gallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/Gallery/bin/Release/net10.0/Mav.Gallery.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.97
+Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/MavUI.Tests.dll (.NETCoreApp,Version=v10.0)
+VSTest version 18.0.2 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:   243, Skipped:     0, Total:   243, Duration: 14 s - MavUI.Tests.dll (net10.0)
