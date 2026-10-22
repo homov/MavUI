@@ -56,12 +56,12 @@ public class OverlayScenarioTests
     [AvaloniaFact]
     public void SideSheet_Show_opens_the_sheet_and_registers_an_overlay()
     {
-        var (window, _) = CreateHost();
+        var (window, navigation) = CreateHost();
         try
         {
             var sheet = new MavSideSheet { Title = "Filters" };
 
-            sheet.Show();
+            sheet.Show(navigation);
 
             Assert.True(sheet.IsOpen);
             Assert.True(MavOverlay.HasActiveOverlay);
@@ -75,11 +75,11 @@ public class OverlayScenarioTests
     [AvaloniaFact]
     public void SideSheet_shown_overlay_can_be_dismissed_by_the_overlay_stack()
     {
-        var (window, _) = CreateHost();
+        var (window, navigation) = CreateHost();
         try
         {
             var sheet = new MavSideSheet { Title = "Filters" };
-            sheet.Show();
+            sheet.Show(navigation);
 
             Assert.True(MavOverlay.TryDismissTop());
         }
