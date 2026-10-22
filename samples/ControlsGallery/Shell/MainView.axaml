@@ -4,7 +4,7 @@
              x:Class="Mav.ControlsGallery.Shell.MainView">
   <mav:MavContentPage x:Name="Page"
                       Title="{mav:Loc Shell.Title, Fallback=Control Gallery}"
-                      Subtitle="{mav:Loc Shell.Subtitle, Fallback=Every Mav control, grouped by purpose}">
+                      Subtitle="{mav:Loc Shell.Subtitle, Fallback=Every Mav control\, grouped by purpose}">
     <!-- Adaptive layout: permanent drawer (wide), rail (medium), modal drawer from the app bar (phone). -->
     <Grid ColumnDefinitions="Auto,*">
       <ContentControl x:Name="DrawerHost" Grid.Column="0" />
