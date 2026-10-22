@@ -31,8 +31,8 @@ public sealed class MavDrawerItem : MavNavigationItemBase
 
     static MavDrawerItem()
     {
-        SectionHeaderProperty.Changed.AddClassHandler<MavDrawerItem>((i, _) => i.ItemChanged?.Invoke(i, EventArgs.Empty));
-        ShowDividerBeforeProperty.Changed.AddClassHandler<MavDrawerItem>((i, _) => i.ItemChanged?.Invoke(i, EventArgs.Empty));
+        SectionHeaderProperty.Changed.AddClassHandler<MavDrawerItem>((i, _) => i.OnItemChanged());
+        ShowDividerBeforeProperty.Changed.AddClassHandler<MavDrawerItem>((i, _) => i.OnItemChanged());
     }
 
     public string? SectionHeader
