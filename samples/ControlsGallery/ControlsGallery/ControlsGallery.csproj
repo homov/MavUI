@@ -2,7 +2,7 @@
 
   <!--
     Shared multi-platform UI (AXAML pages, shell and localization).
-    The platform heads are sibling projects (samples/ControlsGallery.Desktop, .Android, .Browser) and reference this project.
+    The platform heads are sibling projects (samples/ControlsGallery/ControlsGallery.Desktop, .Android, .Browser) and reference this project.
   -->
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\MavUI\MavUI.csproj" />
+    <ProjectReference Include="..\..\..\MavUI\MavUI.csproj" />
   </ItemGroup>
 
 </Project>

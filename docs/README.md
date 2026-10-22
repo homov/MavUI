@@ -28,5 +28,5 @@ Project documentation and verification screenshots live here.
 ```bash
 dotnet build MavUI.sln
 dotnet test Tests/MavUI.Tests.csproj
-dotnet run --project samples/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj
+dotnet run --project samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj
 ```
