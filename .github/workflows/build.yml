@@ -52,37 +52,38 @@ jobs:
           export PATH="$HOME/.dotnet/tools:$PATH"
           dotnet tool update -g dotnet-trace || dotnet tool install -g dotnet-trace
           mkdir -p ci/profile
-          TRACE="$RUNNER_TEMP/theme.nettrace"
-          # EventPipe settings go ONLY into the test host (via runsettings), not into the
-          # dotnet CLI/MSBuild/vstest processes, which would all write the same trace file.
-          cat > ci/profile/profile.runsettings <<RS
-          <RunSettings>
-            <RunConfiguration>
-              <EnvironmentVariables>
-                <DOTNET_EnableEventPipe>1</DOTNET_EnableEventPipe>
-                <DOTNET_EventPipeOutputStreaming>1</DOTNET_EventPipeOutputStreaming>
-                <DOTNET_EventPipeConfig>Microsoft-DotNETCore-SampleProfiler:0:5</DOTNET_EventPipeConfig>
-                <DOTNET_EventPipeOutputPath>$TRACE</DOTNET_EventPipeOutputPath>
-              </EnvironmentVariables>
-            </RunConfiguration>
-          </RunSettings>
-          RS
-          set +e
-          dotnet test Tests/Md3.Avalonia.Tests.csproj -c Release --no-build \
-            --filter "FullyQualifiedName~Theme_switch_phases" \
-            --settings ci/profile/profile.runsettings 2>&1 | tee -a build.log
-          dotnet-trace convert --format speedscope "$TRACE" 2>&1 | tee -a build.log
-          python3 tools/summarize_speedscope.py ci/profile/theme.speedscope.json 40 > ci/profile/theme-summary.txt
-          # Keep only the summary in git; raw traces are large.
-          rm -f ci/profile/profile.runsettings
-          cp "$TRACE" "$RUNNER_TEMP/theme-trace-copy.nettrace" 2>/dev/null || true
+          TRACE_JSON="$RUNNER_TEMP/theme.speedscope.json"
+          # Run the test in the background, then attach dotnet-trace to its testhost process.
+          # dotnet-trace owns the trace session, so the file is written cleanly.
+          MD3_PROFILE_ROUNDS=400 dotnet test Tests/Md3.Avalonia.Tests.csproj -c Release --no-build \
+            --filter "FullyQualifiedName~Theme_switch_phases" > "$RUNNER_TEMP/test.log" 2>&1 &
+          TEST_PID=$!
+          PID=""
+          for i in $(seq 1 300); do
+            PID=$(pgrep -f 'testhost' | head -n1)
+            [ -n "$PID" ] && break
+            sleep 0.2
+          done
+          echo "testhost pid: ${PID:-none}" | tee -a build.log
+          if [ -n "$PID" ]; then
+            dotnet-trace collect -p "$PID" --profile cpu-sampling --format speedscope \
+              -o "$TRACE_JSON" --duration 00:01:00 2>&1 | tee -a build.log
+          fi
+          wait "$TEST_PID" || true
+          cat "$RUNNER_TEMP/test.log" >> build.log
+          if [ -f "$TRACE_JSON" ]; then
+            cp "$TRACE_JSON" ci/profile/theme.speedscope.json
+            python3 tools/summarize_speedscope.py "$TRACE_JSON" 40 > ci/profile/theme-summary.txt
+          else
+            echo "no trace produced" > ci/profile/theme-summary.txt
+          fi
 
-      - name: Upload raw profiler trace (artifact only, not committed)
+      - name: Upload raw profiler output (artifact only)
         if: contains(github.event.head_commit.message, '[profile]') && always()
         uses: actions/upload-artifact@v4
         with:
-          name: profile-trace
-          path: ${{ runner.temp }}/theme*.nettrace
+          name: profile-trace-speedscope
+          path: ${{ runner.temp }}/theme*.json
           if-no-files-found: ignore
 
       - name: Upload build log artifact

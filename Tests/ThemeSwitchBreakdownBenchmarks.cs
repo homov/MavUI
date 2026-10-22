@@ -73,9 +73,14 @@ public class ThemeSwitchBreakdownBenchmarks
         window.Show();
         Dispatcher.UIThread.RunJobs();
 
+        // MD3_PROFILE_ROUNDS lets the profiling job run the loop long enough to attach a tracer.
+        var rounds = int.TryParse(Environment.GetEnvironmentVariable("MD3_PROFILE_ROUNDS"), out var n) && n > 0
+            ? n
+            : Rounds;
+
         var sync = new List<double>();
         var deferred = new List<double>();
-        for (int i = 0; i < Warmup + Rounds; i++)
+        for (int i = 0; i < Warmup + rounds; i++)
         {
             var s = Stopwatch.StartNew();
             if (i % 2 == 0) MdTheme.UseDark(); else MdTheme.UseLight();
