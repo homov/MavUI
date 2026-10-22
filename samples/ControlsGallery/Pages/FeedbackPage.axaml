@@ -1,0 +1,77 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mav="https://where.it/mav"
+             x:Class="Mav.ControlsGallery.Pages.FeedbackPage">
+  <mav:MavScrollViewer>
+    <Border MaxWidth="1180" HorizontalAlignment="Center" Padding="20,16,20,40">
+      <StackPanel Spacing="18">
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Feedback.Dialogs.Title, Fallback=Dialogs and sheets}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Feedback.Dialogs.Body, Fallback=Modal surfaces contain their own actions and close on scrim tap or Escape/Back.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavDialog, MavBottomSheet and MavSideSheet" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Feedback.Dialogs.CardBody, Fallback=All three are overlay handles: create once\, then Show(anchor). The dialog is adaptive on phones.}" />
+              <StackPanel x:Name="DialogsHost" Spacing="10" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="new MavDialog { ... }.Show(anchor) · MavBottomSheet.Show(anchor) · MavSideSheet.Placement" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Feedback.Messages.Title, Fallback=Messages and status}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Feedback.Messages.Body, Fallback=Snackbar\, banners\, info bars and an empty state.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavSnackbar, MavBanner, MavInfoBar and MavEmptyState" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Feedback.Messages.CardBody, Fallback=Global snackbar (FIFO)\, inline banners\, four info-bar severities and an empty-state placeholder.}" />
+              <StackPanel x:Name="MessagesHost" Spacing="10" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavSnackbar.Show/Enqueue · MavBanner.PrimaryActionText · MavInfoBar.Severity · MavEmptyState.Icon" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Feedback.Progress.Title, Fallback=Progress}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Feedback.Progress.Body, Fallback=Linear\, circular\, segmented\, wavy and contained loading indicators.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavLinearProgress, MavCircularProgress, MavSegmentedProgressBar, MavWavyProgressIndicator and MavLoadingIndicator" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Feedback.Progress.CardBody, Fallback=Determinate and indeterminate progress for inline and contained loading states.}" />
+              <StackPanel x:Name="ProgressHost" Spacing="10" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavLinearProgress.Value/IsIndeterminate · MavSegmentedProgressBar.SegmentCount · MavLoadingIndicator.IsContained" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Feedback.Placeholders.Title, Fallback=Placeholders and refresh}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Feedback.Placeholders.Body, Fallback=Skeletons and pull-to-refresh.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavSkeleton and MavRefreshIndicator" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Feedback.Skeleton.CardBody, Fallback=Skeletons cover text\, circles and list rows; the refresh indicator hosts any scrollable body.}" />
+              <StackPanel x:Name="PlaceholdersHost" Spacing="10" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavSkeleton.Text/Circle/ListRow · MavRefreshIndicator.Body/RefreshHandler" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Feedback.Data.Title, Fallback=Data widgets}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Feedback.Data.Body, Fallback=Radial gauge and sparklines.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavRadialGauge and MavSparkline" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Feedback.Data.CardBody, Fallback=Interactive radial gauge and lightweight line/bar/donut charts.}" />
+              <StackPanel x:Name="DataHost" Spacing="10" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavRadialGauge.Value/IsInteractive · MavSparkline.Kind/ValuesText" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+      </StackPanel>
+    </Border>
+  </mav:MavScrollViewer>
+</UserControl>

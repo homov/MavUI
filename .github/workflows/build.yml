@@ -30,13 +30,13 @@ jobs:
           set -o pipefail
           dotnet build MavUI/MavUI.csproj -c Release 2>&1 | tee build.log
 
-      - name: Build tests and desktop samples
+      - name: Build tests and ControlsGallery desktop
         shell: bash
         run: |
           set -o pipefail
           dotnet build Tests/MavUI.Tests.csproj -c Release 2>&1 | tee -a build.log
-          dotnet build samples/Demo/Mav.Demo.csproj -c Release 2>&1 | tee -a build.log
-          dotnet build samples/Gallery/Mav.Gallery.csproj -c Release 2>&1 | tee -a build.log
+          dotnet build samples/ControlsGallery/Desktop/ControlsGallery.Desktop.csproj -c Release 2>&1 | tee -a build.log
+          
 
       - name: Run tests
         shell: bash

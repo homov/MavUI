@@ -16,5 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MavUI\MavUI.csproj" />
+    <ProjectReference Include="..\samples\ControlsGallery\ControlsGallery.csproj" />
   </ItemGroup>
 </Project>

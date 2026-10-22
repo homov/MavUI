@@ -1,0 +1,114 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mav="https://where.it/mav"
+             x:Class="Mav.ControlsGallery.Pages.ActionsPage">
+  <mav:MavScrollViewer>
+    <Border MaxWidth="1180" HorizontalAlignment="Center" Padding="20,16,20,40">
+      <StackPanel Spacing="18">
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Actions.Buttons.Section, Fallback=Buttons}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap"
+                        Text="{mav:Loc Actions.Buttons.Section.Body, Fallback=MavButton supports five variants\, five sizes\, icons\, toggle and loading states.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavButton" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap"
+                            Text="{mav:Loc Actions.Buttons.Card.Body, Fallback=A text button with optional leading/trailing icons\, toggle/selected and loading states.}" />
+              <WrapPanel>
+                <mav:MavButton Variant="Filled" Text="Filled" Margin="0,0,8,8" />
+                <mav:MavButton Variant="Tonal" Text="Tonal" Margin="0,0,8,8" />
+                <mav:MavButton Variant="Elevated" Text="Elevated" Margin="0,0,8,8" />
+                <mav:MavButton Variant="Outlined" Text="Outlined" Margin="0,0,8,8" />
+                <mav:MavButton Variant="Text" Text="Text" Margin="0,0,8,8" />
+              </WrapPanel>
+              <WrapPanel>
+                <mav:MavButton Variant="Filled" Size="ExtraSmall" Text="XS" Margin="0,0,8,8" />
+                <mav:MavButton Variant="Filled" Size="Small" Text="S" Margin="0,0,8,8" />
+                <mav:MavButton Variant="Filled" Size="Medium" Text="M" Margin="0,0,8,8" />
+                <mav:MavButton Variant="Filled" Size="Large" Text="L" Margin="0,0,8,8" />
+                <mav:MavButton Variant="Filled" Size="ExtraLarge" Text="XL" Margin="0,0,8,8" />
+              </WrapPanel>
+              <WrapPanel>
+                <mav:MavButton x:Name="ClickButton" Variant="Elevated" Icon="{x:Static mav:MavIcons.TouchApp}" Margin="0,0,8,8"
+                               Text="{mav:Loc Actions.Click.Button, Fallback=Click me}" />
+                <mav:MavLabel x:Name="ClickCounter" Role="BodySmall" Margin="0,0,8,8" VerticalAlignment="Center"
+                              Text="{mav:Loc Actions.Click.Counter, Fallback=Clicks: 0}" />
+                <mav:MavButton x:Name="ToggleButton" Variant="Tonal" Icon="{x:Static mav:MavIcons.Star}" IsToggle="True"
+                               Text="{mav:Loc Actions.Toggle, Fallback=Toggle}" Margin="0,0,8,8" />
+                <mav:MavButton x:Name="LoadingButton" Variant="Filled" Icon="{x:Static mav:MavIcons.Download}"
+                               Text="{mav:Loc Actions.Loading, Fallback=Loading}" Margin="0,0,8,8" />
+                <mav:MavButton Variant="Outlined" IsEnabled="False" Margin="0,0,8,8"
+                               Text="{mav:Loc Actions.Disabled, Fallback=Disabled}" />
+              </WrapPanel>
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap"
+                            Text="new MavButton(text, variant, icon, size) · Clicked · IsToggle · IsSelected · IsLoading" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Actions.Icon.Section, Fallback=Icon buttons and FABs}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap"
+                        Text="{mav:Loc Actions.Icon.Section.Body, Fallback=Icon-only actions keep a 48 dp touch target; FABs have three sizes and four color schemes.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavIconButton" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap"
+                            Text="{mav:Loc Actions.Icon.Card.Body, Fallback=Standard\, filled\, tonal and outlined icon buttons. The touch target stays 48 dp even when the visual is smaller.}" />
+              <WrapPanel>
+                <mav:MavIconButton Icon="{x:Static mav:MavIcons.Search}" Margin="0,0,8,8" />
+                <mav:MavIconButton Icon="{x:Static mav:MavIcons.Add}" Variant="Filled" Margin="0,0,8,8" />
+                <mav:MavIconButton Icon="{x:Static mav:MavIcons.Edit}" Variant="Tonal" Margin="0,0,8,8" />
+                <mav:MavIconButton Icon="{x:Static mav:MavIcons.Delete}" Variant="Outlined" Margin="0,0,8,8" />
+                <mav:MavIconButton Icon="{x:Static mav:MavIcons.Favorite}" SelectedIcon="{x:Static mav:MavIcons.Favorite}" IsToggle="True" Margin="0,0,8,8" />
+              </WrapPanel>
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap"
+                            Text="new MavIconButton(icon, variant, isToggle) · SelectedIcon · TouchTargetSize" />
+            </StackPanel>
+          </mav:MavCard>
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavFab and MavExtendedFab" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap"
+                            Text="{mav:Loc Actions.Fab.Card.Body, Fallback=Floating action buttons in small\, regular and large sizes\, with primary\, secondary\, tertiary or surface color.}" />
+              <WrapPanel>
+                <mav:MavFab Icon="{x:Static mav:MavIcons.Add}" Size="Small" ColorScheme="Primary" Margin="0,0,8,8" />
+                <mav:MavFab Icon="{x:Static mav:MavIcons.Add}" Size="Regular" ColorScheme="Secondary" Margin="0,0,8,8" />
+                <mav:MavFab Icon="{x:Static mav:MavIcons.Add}" Size="Large" ColorScheme="Tertiary" Margin="0,0,8,8" />
+                <mav:MavFab Icon="{x:Static mav:MavIcons.Edit}" Size="Regular" ColorScheme="Surface" Margin="0,0,8,8" />
+              </WrapPanel>
+              <mav:MavExtendedFab Text="Compose" Icon="{x:Static mav:MavIcons.Edit}" HorizontalAlignment="Left" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap"
+                            Text="new MavFab(icon, size, color) · MavExtendedFab(text, icon, color)" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Actions.Groups.Section, Fallback=Action groups}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap"
+                        Text="{mav:Loc Actions.Groups.Section.Body, Fallback=Connected groups\, split buttons and an expanding FAB menu.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavButtonGroup, MavSplitButton and MavFabMenu" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap"
+                            Text="{mav:Loc Actions.Groups.Card.Body, Fallback=Group related actions\, pair a primary action with a menu\, or expand a FAB into labeled actions.}" />
+              <WrapPanel>
+                <mav:MavButtonGroup x:Name="StandardGroup" Kind="Standard" Margin="0,0,8,8" />
+                <mav:MavButtonGroup x:Name="ConnectedGroup" Kind="Connected" Margin="0,0,8,8" />
+              </WrapPanel>
+              <WrapPanel>
+                <mav:MavSplitButton x:Name="SplitButton" Text="Save" Margin="0,0,8,8" />
+                <mav:MavFabMenu x:Name="FabMenu" Margin="0,0,8,8" />
+              </WrapPanel>
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap"
+                            Text="MavButtonGroup.Kind · MavSplitButton.Menu · MavFabMenu.AddItem(label, icon, action)" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+      </StackPanel>
+    </Border>
+  </mav:MavScrollViewer>
+</UserControl>

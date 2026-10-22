@@ -1,0 +1,102 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mav="https://where.it/mav"
+             x:Class="Mav.ControlsGallery.Pages.InputsPage">
+  <mav:MavScrollViewer>
+    <Border MaxWidth="1180" HorizontalAlignment="Center" Padding="20,16,20,40">
+      <StackPanel Spacing="18">
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Inputs.Fields.Section, Fallback=Text fields}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap"
+                        Text="{mav:Loc Inputs.Fields.Section.Body, Fallback=Outlined and filled fields with icons\, password mode\, clear button\, counters and errors.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavTextField" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap"
+                            Text="{mav:Loc Inputs.Fields.Card.Body, Fallback=Single-line field with variants\, leading/trailing icons\, password reveal\, clear button\, counter and error state.}" />
+              <mav:MavTextField Label="{mav:Loc Inputs.Field.Name, Fallback=Name}" Variant="Outlined"
+                                Text="Ada Lovelace" LeadingIcon="{x:Static mav:MavIcons.Person}" />
+              <mav:MavTextField Label="{mav:Loc Inputs.Field.Email, Fallback=Email}" Variant="Filled"
+                                Text="ada@example.com" LeadingIcon="{x:Static mav:MavIcons.Email}"
+                                SupportingText="{mav:Loc Inputs.Field.Email.Support, Fallback=We never share it}" />
+              <mav:MavTextField Label="{mav:Loc Inputs.Field.Password, Fallback=Password}" Variant="Outlined"
+                                Text="password" LeadingIcon="{x:Static mav:MavIcons.Lock}"
+                                IsPassword="True" ShowClearButton="True" />
+              <mav:MavTextField Label="{mav:Loc Inputs.Field.ApiKey, Fallback=API key}" Variant="Outlined"
+                                Text="abc" ErrorText="{mav:Loc Inputs.Field.ApiKey.Error, Fallback=The key must be 32 characters}" />
+              <mav:MavTextField Label="{mav:Loc Inputs.Field.Code, Fallback=Code}" Variant="Outlined"
+                                Text="MD3" MaxLength="12" ShowCounter="True" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap"
+                            Text="new MavTextField(label, variant, placeholder, leadingIcon, supportingText) · Text · ErrorText · ContentType · ReturnKeyType" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Inputs.Other.Section, Fallback=Multiline and structured input}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap"
+                        Text="{mav:Loc Inputs.Other.Section.Body, Fallback=Text areas\, PIN/OTP cells\, numeric steppers\, tags and search.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavTextArea, MavPinInput, MavNumberBox, MavTagInput and MavSearchBar" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap"
+                            Text="{mav:Loc Inputs.Other.Card.Body, Fallback=Multiline editor\, OTP cells\, numeric stepper\, tag entry and a search bar with a search view.}" />
+              <WrapPanel>
+                <mav:MavCard Variant="Outlined" Width="320" Margin="0,0,8,8">
+                  <mav:MavTextArea Label="{mav:Loc Inputs.Area.Label, Fallback=Notes}"
+                                   Text="The gallery shows every control."
+                                   Placeholder="{mav:Loc Inputs.Area.Placeholder, Fallback=Write a release note…}"
+                                   SupportingText="{mav:Loc Inputs.Area.Support, Fallback=Markdown is supported by the host app}"
+                                   MinBoxHeight="96" />
+                </mav:MavCard>
+                <mav:MavCard Variant="Outlined" Width="320" Margin="0,0,8,8">
+                  <StackPanel Spacing="8">
+                    <mav:MavPinInput Length="6" Code="1234" />
+                    <mav:MavNumberBox Label="{mav:Loc Inputs.Number.Label, Fallback=Seats}" Minimum="1" Maximum="20"
+                                      Value="4" Suffix="{mav:Loc Inputs.Number.Suffix, Fallback=people}" />
+                  </StackPanel>
+                </mav:MavCard>
+                <mav:MavCard Variant="Outlined" Width="320" Margin="0,0,8,8">
+                  <StackPanel Spacing="8">
+                    <mav:MavTagInput x:Name="TagInput" Label="{mav:Loc Inputs.Tags.Label, Fallback=Tags}" />
+                    <mav:MavSearchBar x:Name="SearchBar" Placeholder="{mav:Loc Inputs.Search.Placeholder, Fallback=Search the gallery}" />
+                  </StackPanel>
+                </mav:MavCard>
+              </WrapPanel>
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap"
+                            Text="MavTextArea · MavPinInput · MavNumberBox · MavTagInput · MavSearchBar.AttachSearchView" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Inputs.Validation.Section, Fallback=Validation}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap"
+                        Text="{mav:Loc Inputs.Validation.Section.Body, Fallback=MavFormValidator wires rules to fields and writes ErrorText/HasError.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavFormValidator" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap"
+                            Text="{mav:Loc Inputs.Validation.Card.Body, Fallback=Fluent rules: Required\, MinLength\, MaxLength\, Email\, Numeric\, Pattern\, Matches and Must.}" />
+              <mav:MavCard Variant="Outlined" Width="460" CardPadding="16">
+                <StackPanel Spacing="10">
+                  <mav:MavTextField x:Name="NameField" Label="{mav:Loc Inputs.Form.Name, Fallback=Full name}" Variant="Outlined" />
+                  <mav:MavTextField x:Name="EmailField" Label="{mav:Loc Inputs.Field.Email, Fallback=Email}" Variant="Outlined" />
+                  <mav:MavTextField x:Name="CityField" Label="{mav:Loc Inputs.Form.City, Fallback=City}" Variant="Outlined" />
+                  <mav:MavButton x:Name="SubmitButton" Variant="Filled" Icon="{x:Static mav:MavIcons.Check}"
+                                 Text="{mav:Loc Inputs.Form.Validate, Fallback=Validate}" />
+                  <mav:MavLabel x:Name="StatusLabel" Role="BodySmall" Secondary="True" TextWrapping="Wrap"
+                                Text="{mav:Loc Inputs.Form.Status, Fallback=Submit to validate}" />
+                </StackPanel>
+              </mav:MavCard>
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap"
+                            Text="validator.Field(email).Required().Email() · validator.Validate() · validator.Errors" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+      </StackPanel>
+    </Border>
+  </mav:MavScrollViewer>
+</UserControl>

@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Shared multi-platform UI (AXAML pages, shell and localization).
+    The platform heads live in Desktop/, Android/ and Browser/ and reference this project.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>Mav.ControlsGallery</RootNamespace>
+    <AssemblyName>Mav.ControlsGallery</AssemblyName>
+    <DefaultItemExcludes>$(DefaultItemExcludes);Desktop/**;Android/**;Browser/**</DefaultItemExcludes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="12.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\MavUI\MavUI.csproj" />
+  </ItemGroup>
+
+</Project>

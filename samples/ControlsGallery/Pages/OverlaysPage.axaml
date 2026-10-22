@@ -1,0 +1,64 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mav="https://where.it/mav"
+             x:Class="Mav.ControlsGallery.Pages.OverlaysPage">
+  <mav:MavScrollViewer>
+    <Border MaxWidth="1180" HorizontalAlignment="Center" Padding="20,16,20,40">
+      <StackPanel Spacing="18">
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Overlays.Menus.Title, Fallback=Menus and popovers}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Overlays.Menus.Body, Fallback=Anchored menus with submenus\, and a popover with arbitrary content.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavMenu, MavMenuItem and MavPopover" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Overlays.Menus.CardBody, Fallback=Menus support icons\, trailing text\, dividers and nested submenus; popovers host custom content.}" />
+              <StackPanel x:Name="MenusHost" Spacing="10" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="menu.Show(anchor) · AddItem/AddSubmenu/AddDivider · new MavPopover { Content }.Show(anchor)" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Overlays.Tooltips.Title, Fallback=Tooltips}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Overlays.Tooltips.Body, Fallback=Simple and rich tooltips.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavTooltip and MavRichTooltip" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Overlays.Tooltips.CardBody, Fallback=A global simple tooltip and a rich tooltip with a title\, body and optional action.}" />
+              <StackPanel x:Name="TooltipsHost" Spacing="10" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavTooltip.SetText(control, text) · MavRichTooltip.Show(anchor, title, text, actionText)" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Overlays.Search.Title, Fallback=Search}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Overlays.Search.Body, Fallback=A full search view with suggestions and recent searches.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavSearchView" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Overlays.Search.CardBody, Fallback=Full-screen or compact search with suggestions\, recent searches and result templates.}" />
+              <StackPanel x:Name="SearchHost" Spacing="10" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="new MavSearchView { Suggestions }.Show(anchor) · QueryChanged · ResultSelected" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Overlays.Flyouts.Title, Fallback=Declarative flyouts}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Overlays.Flyouts.Body, Fallback=MavFlyout opens a menu\, popover\, sheet or dialog when the control is clicked.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavFlyout" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Overlays.Flyouts.CardBody, Fallback=Attach a menu\, popover\, rich tooltip\, sheet\, dialog or modal drawer to any control declaratively.}" />
+              <StackPanel x:Name="FlyoutsHost" Spacing="10" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavFlyout.SetMenu/SetPopover/SetDialog/SetBottomSheet/SetSideSheet/SetModalDrawer" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+      </StackPanel>
+    </Border>
+  </mav:MavScrollViewer>
+</UserControl>

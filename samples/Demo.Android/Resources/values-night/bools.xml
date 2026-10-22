@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <!-- Light status/navigation bar icons on the dark surface. -->
-  <bool name="mav_demo_light_system_bars">false</bool>
-</resources>

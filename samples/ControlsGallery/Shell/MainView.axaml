@@ -1,0 +1,23 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mav="https://where.it/mav"
+             x:Class="Mav.ControlsGallery.Shell.MainView">
+  <mav:MavContentPage x:Name="Page"
+                      Title="{mav:Loc Shell.Title, Fallback=Control Gallery}"
+                      Subtitle="{mav:Loc Shell.Subtitle, Fallback=Every Mav control, grouped by purpose}">
+    <!-- Adaptive layout: permanent drawer (wide), rail (medium), modal drawer from the app bar (phone). -->
+    <Grid ColumnDefinitions="Auto,*">
+      <ContentControl x:Name="DrawerHost" Grid.Column="0" />
+      <mav:MavScrollViewer x:Name="RailScroll"
+                           Grid.Column="0"
+                           Width="88"
+                           HorizontalScrollBarVisibility="Disabled">
+        <ContentControl x:Name="RailHost" />
+      </mav:MavScrollViewer>
+      <ContentControl x:Name="Host"
+                      Grid.Column="1"
+                      HorizontalContentAlignment="Stretch"
+                      VerticalContentAlignment="Stretch" />
+    </Grid>
+  </mav:MavContentPage>
+</UserControl>

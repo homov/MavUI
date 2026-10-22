@@ -1,0 +1,90 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mav="https://where.it/mav"
+             x:Class="Mav.ControlsGallery.Pages.LayoutPage">
+  <mav:MavScrollViewer>
+    <Border MaxWidth="1180" HorizontalAlignment="Center" Padding="20,16,20,40">
+      <StackPanel Spacing="18">
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Layout.Surfaces.Title, Fallback=Surfaces}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Layout.Surfaces.Body, Fallback=Cards\, surfaces\, labels\, dividers and badges.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavCard, MavSurface, MavLabel, MavDivider, MavBadge and MavBadgedBox" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Layout.Surfaces.CardBody, Fallback=MD3 surfaces with two-layer elevation\, typography-aware labels\, dividers and notification badges.}" />
+              <StackPanel x:Name="SurfacesHost" Spacing="10" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="new MavCard(variant, body) · MavSurface.Elevation · MavLabel.Role · MavBadge.Count" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Layout.Expandables.Title, Fallback=Expandable and settings}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Layout.Expandables.Body, Fallback=Expansion panels\, settings cards and settings expanders.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavExpansionPanel, MavExpansionPanelList, MavSettingsCard and MavSettingsExpander" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Layout.Expandables.CardBody, Fallback=Progressive disclosure for details\, settings groups and compact forms.}" />
+              <StackPanel x:Name="ExpandablesHost" Spacing="10" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavExpansionPanel.IsExpanded · MavExpansionPanelList.SingleExpand · MavSettingsCard.ActionContent" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Layout.Responsive.Title, Fallback=Responsive containers}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Layout.Responsive.Body, Fallback=Split view\, carousel and the theme-independent scroll viewer.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavSplitView, MavCarousel and MavScrollViewer" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Layout.Responsive.CardBody, Fallback=Resizable master/detail\, swipeable carousel and the theme-independent scroll host.}" />
+              <StackPanel x:Name="ResponsiveHost" Spacing="10" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavSplitView.Pane/DetailContent · MavCarousel.AddItem(...) · MavScrollViewer.Content" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Layout.People.Title, Fallback=People and messages}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Layout.People.Body, Fallback=Avatars\, avatar groups\, file drop and chat bubbles.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavAvatar, MavAvatarGroup, MavFileDropZone and MavChatBubble" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Layout.People.CardBody, Fallback=People and workspace widgets: avatars with presence\, overlapping groups\, file drops and chat bubbles.}" />
+              <StackPanel x:Name="PeopleHost" Spacing="10" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavAvatar.Status · MavAvatarGroup.AddAvatar · MavFileDropZone.AddFile · MavChatBubble.IsOutgoing" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Layout.Windows.Title, Fallback=Windows}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Layout.Windows.Body, Fallback=MavWindow is a desktop-only TopLevel with a built-in theme-free template and overlay layer.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavWindow" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Layout.Window.CardBody, Fallback=Opens a secondary window; on web and Android it is not applicable.}" />
+              <StackPanel x:Name="WindowHost" Spacing="10" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="new MavWindow { Content = ... }.Show()" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Layout.Insets.Title, Fallback=Insets and keyboard}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Layout.Insets.Body, Fallback=Safe-area and keyboard-aware hosts with simulated insets.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavSafeArea and MavKeyboardAvoidingHost" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Layout.Insets.CardBody, Fallback=Insets and IME handling used by MavNavigationPage on mobile; SimulatedInset/SimulatedKeyboardHeight preview them on desktop.}" />
+              <StackPanel x:Name="InsetsHost" Spacing="10" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavSafeArea.Edges/SimulatedInset · MavKeyboardAvoidingHost.SimulatedKeyboardHeight" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+      </StackPanel>
+    </Border>
+  </mav:MavScrollViewer>
+</UserControl>

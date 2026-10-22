@@ -1,0 +1,195 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mav="https://where.it/mav"
+             xmlns:pages="clr-namespace:Mav.ControlsGallery.Pages"
+             x:Class="Mav.ControlsGallery.Pages.OverviewPage"
+             x:DataType="pages:OverviewPage">
+  <mav:MavScrollViewer>
+    <Border MaxWidth="1180" HorizontalAlignment="Center" Padding="20,16,20,40">
+      <StackPanel Spacing="18">
+
+        <mav:MavCard Variant="Filled" CardPadding="24">
+          <StackPanel Spacing="10">
+            <mav:MavLabel Role="DisplaySmall" TextWrapping="Wrap"
+                          Text="{mav:Loc Overview.Hero.Title, Fallback=Material Design 3 for Avalonia}" />
+            <mav:MavLabel Role="BodyLarge" Secondary="True" TextWrapping="Wrap"
+                          Text="{mav:Loc Overview.Hero.Body, Fallback=A pure C# control library: no AXAML templates\, no Avalonia control theme and no resource dictionaries. The same controls run on desktop\, in the browser and on Android.}" />
+            <WrapPanel>
+              <mav:MavChip Kind="Assist" Icon="{x:Static mav:MavIcons.DesktopWindows}" Margin="0,0,8,8"
+                           Text="{mav:Loc Overview.Chip.Desktop, Fallback=Desktop}" />
+              <mav:MavChip Kind="Assist" Icon="{x:Static mav:MavIcons.Language}" Margin="0,0,8,8"
+                           Text="{mav:Loc Overview.Chip.Web, Fallback=WebAssembly}" />
+              <mav:MavChip Kind="Assist" Icon="{x:Static mav:MavIcons.Smartphone}" Margin="0,0,8,8"
+                           Text="{mav:Loc Overview.Chip.Phone, Fallback=Android phone}" />
+              <mav:MavChip Kind="Assist" Icon="{x:Static mav:MavIcons.Tablet}" Margin="0,0,8,8"
+                           Text="{mav:Loc Overview.Chip.Tablet, Fallback=Tablet}" />
+            </WrapPanel>
+          </StackPanel>
+        </mav:MavCard>
+
+        <!-- Theme -->
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Overview.Theme.Title, Fallback=Theme}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap"
+                        Text="{mav:Loc Overview.Theme.Body, Fallback=Mode\, seed color\, contrast\, density\, motion and shape scale are global; change them and every control updates.}" />
+          <WrapPanel>
+            <mav:MavButton Variant="Outlined" Icon="{x:Static mav:MavIcons.LightMode}" Margin="0,0,8,8"
+                           Text="{mav:Loc Overview.Mode.Light, Fallback=Light}"
+                           Command="{x:Static pages:OverviewCommands.UseLight}" />
+            <mav:MavButton Variant="Outlined" Icon="{x:Static mav:MavIcons.DarkMode}" Margin="0,0,8,8"
+                           Text="{mav:Loc Overview.Mode.Dark, Fallback=Dark}"
+                           Command="{x:Static pages:OverviewCommands.UseDark}" />
+            <mav:MavButton Variant="Outlined" Icon="{x:Static mav:MavIcons.SettingsBrightness}" Margin="0,0,8,8"
+                           Text="{mav:Loc Overview.Mode.System, Fallback=System}"
+                           Command="{x:Static pages:OverviewCommands.UseSystem}" />
+          </WrapPanel>
+          <ItemsControl ItemsSource="{Binding SeedColors}">
+              <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <WrapPanel />
+                </ItemsPanelTemplate>
+              </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate x:DataType="pages:SeedChoice">
+                <mav:MavChip Kind="Filter" Icon="{x:Static mav:MavIcons.Circle}" Margin="0,0,8,8"
+                             Text="{Binding Name}"
+                             CommandParameter="{Binding Color}"
+                             Command="{x:Static pages:OverviewCommands.SetSeed}" />
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+          <WrapPanel>
+            <mav:MavButton Variant="Tonal" Margin="0,0,8,8"
+                           Text="{mav:Loc Overview.Contrast.Standard, Fallback=Standard contrast}"
+                           Command="{x:Static pages:OverviewCommands.ContrastStandard}" />
+            <mav:MavButton Variant="Tonal" Margin="0,0,8,8"
+                           Text="{mav:Loc Overview.Contrast.Medium, Fallback=Medium}"
+                           Command="{x:Static pages:OverviewCommands.ContrastMedium}" />
+            <mav:MavButton Variant="Tonal" Margin="0,0,8,8"
+                           Text="{mav:Loc Overview.Contrast.High, Fallback=High}"
+                           Command="{x:Static pages:OverviewCommands.ContrastHigh}" />
+          </WrapPanel>
+          <WrapPanel>
+            <mav:MavButton Variant="Text" Margin="0,0,8,8"
+                           Text="{mav:Loc Overview.Density.Comfortable, Fallback=Comfortable}"
+                           Command="{x:Static pages:OverviewCommands.DensityComfortable}" />
+            <mav:MavButton Variant="Text" Margin="0,0,8,8"
+                           Text="{mav:Loc Overview.Density.Compact, Fallback=Compact}"
+                           Command="{x:Static pages:OverviewCommands.DensityCompact}" />
+            <mav:MavButton Variant="Text" Margin="0,0,8,8"
+                           Text="{mav:Loc Overview.Density.Dense, Fallback=Dense}"
+                           Command="{x:Static pages:OverviewCommands.DensityDense}" />
+          </WrapPanel>
+          <WrapPanel>
+            <mav:MavButton Variant="Outlined" Margin="0,0,8,8"
+                           Text="{mav:Loc Overview.Motion.Expressive, Fallback=Expressive motion}"
+                           Command="{x:Static pages:OverviewCommands.MotionExpressive}" />
+            <mav:MavButton Variant="Outlined" Margin="0,0,8,8"
+                           Text="{mav:Loc Overview.Motion.Standard, Fallback=Standard}"
+                           Command="{x:Static pages:OverviewCommands.MotionStandard}" />
+            <mav:MavButton Variant="Outlined" Margin="0,0,8,8"
+                           Text="{mav:Loc Overview.Motion.Reduced, Fallback=Reduced}"
+                           Command="{x:Static pages:OverviewCommands.MotionReduced}" />
+          </WrapPanel>
+        </StackPanel>
+
+        <!-- Typography -->
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Overview.Typography.Title, Fallback=Typography}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap"
+                        Text="{mav:Loc Overview.Typography.Body, Fallback=15 MD3 type roles from DisplayLarge to LabelSmall.}" />
+          <ItemsControl ItemsSource="{Binding TypeRoles}">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <StackPanel Spacing="4" />
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate x:DataType="mav:MavTypeRole">
+                <mav:MavLabel Role="{Binding}" TextWrapping="Wrap"
+                              Text="{Binding StringFormat='{}{0} — The quick brown fox'}" />
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </StackPanel>
+
+        <!-- Color roles -->
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Overview.Color.Title, Fallback=Color roles}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap"
+                        Text="{mav:Loc Overview.Color.Body, Fallback=Role-based colors from MavTheme.ColorOf / MavTheme.BrushOf; they follow the current scheme.}" />
+          <ItemsControl ItemsSource="{Binding Swatches}">
+              <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <WrapPanel />
+                </ItemsPanelTemplate>
+              </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate x:DataType="pages:RoleSwatch">
+                <Border Width="132" Height="64" CornerRadius="12" Padding="10" Margin="0,0,8,8"
+                        Background="{Binding Background}">
+                  <TextBlock Text="{Binding Name}" FontSize="11" Foreground="{Binding Foreground}" />
+                </Border>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </StackPanel>
+
+        <!-- Shape and elevation -->
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Overview.Shape.Title, Fallback=Shape and elevation}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap"
+                        Text="{mav:Loc Overview.Shape.Body, Fallback=Shape tokens scale with MavShapeScale; elevation uses two-layer MD3 shadows.}" />
+          <ItemsControl ItemsSource="{Binding ShapeSamples}">
+              <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <WrapPanel />
+                </ItemsPanelTemplate>
+              </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate x:DataType="pages:ShapeSample">
+                <Border Width="120" Height="64" Margin="0,0,8,8"
+                        CornerRadius="{Binding Radius}" Background="{Binding Background}">
+                  <mav:MavLabel Role="LabelSmall" Text="{Binding Name}"
+                                HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Border>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+          <ItemsControl ItemsSource="{Binding ElevationSamples}">
+              <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <WrapPanel />
+                </ItemsPanelTemplate>
+              </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate x:DataType="pages:ElevationSample">
+                <mav:MavSurface Width="120" Height="72" Margin="0,0,8,8" Radius="12"
+                                Elevation="{Binding Elevation}" FillColor="{Binding Fill}">
+                  <mav:MavSurface.Content>
+                    <mav:MavLabel Role="LabelSmall" Text="{Binding Text}"
+                                  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                  </mav:MavSurface.Content>
+                </mav:MavSurface>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </StackPanel>
+
+        <!-- Motion -->
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Overview.Motion.Title, Fallback=Motion}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap"
+                        Text="{mav:Loc Overview.Motion.Body, Fallback=Durations and easings from MavMotion; MavMotionScheme can be Standard\, Expressive\, Reduced or None.}" />
+          <WrapPanel>
+            <mav:MavChip Kind="Assist" Margin="0,0,8,8" Text="{mav:Loc Overview.Duration.Short, Fallback=Short 50–200 ms}" />
+            <mav:MavChip Kind="Assist" Margin="0,0,8,8" Text="{mav:Loc Overview.Duration.Medium, Fallback=Medium 250–400 ms}" />
+            <mav:MavChip Kind="Assist" Margin="0,0,8,8" Text="{mav:Loc Overview.Duration.Long, Fallback=Long 450–600 ms}" />
+            <mav:MavChip Kind="Assist" Margin="0,0,8,8" Text="{mav:Loc Overview.Duration.ExtraLong, Fallback=ExtraLong 700–1000 ms}" />
+          </WrapPanel>
+        </StackPanel>
+
+      </StackPanel>
+    </Border>
+  </mav:MavScrollViewer>
+</UserControl>

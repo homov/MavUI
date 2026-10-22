@@ -1,0 +1,90 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mav="https://where.it/mav"
+             x:Class="Mav.ControlsGallery.Pages.ThemingPage">
+  <mav:MavScrollViewer>
+    <Border MaxWidth="1180" HorizontalAlignment="Center" Padding="20,16,20,40">
+      <StackPanel Spacing="18">
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Theming.Config.Title, Fallback=Configuration}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Config.Body, Fallback=All theme changes are global and rebuild the palette immediately.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="Theme controls" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Controls.CardBody, Fallback=Seed color\, mode\, contrast\, density\, motion and shape scale.}" />
+              <StackPanel x:Name="ConfigHost" Spacing="10" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavTheme.Configure(seed, mode, contrast, density, motion, shapeScale)" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Theming.Colors.Title, Fallback=Color roles}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Colors.Body, Fallback=Every MD3 color role for the current scheme.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavColorRole" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Colors.CardBody, Fallback=Each swatch shows the role name over its own color.}" />
+              <StackPanel x:Name="ColorsHost" Spacing="10" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavTheme.ColorOf(role) · MavTheme.BrushOf(color)" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Theming.Type.Title, Fallback=Type scale}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Type.Body, Fallback=15 roles; MavLabel applies the font\, size\, weight and line height.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavTypeRole" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Type.CardBody, Fallback=Every role rendered with its own style.}" />
+              <StackPanel x:Name="TypeHost" Spacing="10" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="new MavLabel { Role = MavTypeRole.TitleLarge }" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Theming.Shape.Title, Fallback=Shape and elevation}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Shape.Body, Fallback=Corner radius tokens and the five elevation levels.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavShape and MavSurface.Elevation" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Shape.CardBody, Fallback=Shape tokens follow MavShapeScale; elevation uses two-layer shadows.}" />
+              <StackPanel x:Name="ShapeHost" Spacing="10" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavTheme.Current.Shape · MavSurface.Elevation" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Theming.Contrast.Title, Fallback=Contrast}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Contrast.Body, Fallback=WCAG 2.1 ratios for common role pairs via MavAccessibility.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavAccessibility.ContrastRatio" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Contrast.CardBody, Fallback=Ratios are computed from the current scheme.}" />
+              <StackPanel x:Name="ContrastHost" Spacing="10" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavAccessibility.ContrastRatio(foreground, background)" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Theming.Localization.Title, Fallback=Localization}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Localization.Body, Fallback=Switch language with one call; no event subscriptions and no manual text reassignment.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="Language switch" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Language.CardBody, Fallback=The greeting and dialog labels use the same provider. The language buttons call SetCulture; attached texts update automatically\, without event handlers.}" />
+              <StackPanel x:Name="LocalizationHost" Spacing="10" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavLocalization.SetCulture(new CultureInfo(&quot;ru-RU&quot;)) · {mav:Loc Key, Fallback=...}" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+      </StackPanel>
+    </Border>
+  </mav:MavScrollViewer>
+</UserControl>

@@ -1,0 +1,48 @@
+namespace Mav.ControlsGallery.Localization;
+
+internal static class RuOverview
+{
+    public static readonly (string Key, string Value)[] Items =
+    [
+        ("Overview.Hero.Title", "Material Design 3 для Avalonia"),
+        ("Overview.Hero.Body", "Чистая библиотека контролов на C#: без AXAML-шаблонов, без темы контролов Avalonia и без словарей ресурсов. Одни и те же контролы работают на десктопе, в браузере и на Android."),
+        ("Overview.Chip.Desktop", "Десктоп"),
+        ("Overview.Chip.Web", "WebAssembly"),
+        ("Overview.Chip.Phone", "Телефон Android"),
+        ("Overview.Chip.Tablet", "Планшет"),
+        ("Overview.Theme.Title", "Тема"),
+        ("Overview.Theme.Body", "Режим, базовый цвет, контраст, плотность, движение и масштаб форм задаются глобально: измените их, и обновятся все контролы."),
+        ("Overview.Mode.Light", "Светлая"),
+        ("Overview.Mode.Dark", "Тёмная"),
+        ("Overview.Mode.System", "Системная"),
+        ("Overview.Seed.Indigo", "Индиго"),
+        ("Overview.Seed.Purple", "Пурпурный"),
+        ("Overview.Seed.Blue", "Синий"),
+        ("Overview.Seed.Teal", "Бирюзовый"),
+        ("Overview.Seed.Green", "Зелёный"),
+        ("Overview.Seed.Orange", "Оранжевый"),
+        ("Overview.Seed.Rose", "Розовый"),
+        ("Overview.Contrast.Standard", "Стандартный контраст"),
+        ("Overview.Contrast.Medium", "Средний"),
+        ("Overview.Contrast.High", "Высокий"),
+        ("Overview.Density.Comfortable", "Комфортная"),
+        ("Overview.Density.Compact", "Компактная"),
+        ("Overview.Density.Dense", "Плотная"),
+        ("Overview.Motion.Expressive", "Выразительное движение"),
+        ("Overview.Motion.Standard", "Стандартное"),
+        ("Overview.Motion.Reduced", "Сокращённое"),
+        ("Overview.Typography.Title", "Типографика"),
+        ("Overview.Typography.Body", "15 ролей типографики MD3 от DisplayLarge до LabelSmall."),
+        ("Overview.Color.Title", "Роли цвета"),
+        ("Overview.Color.Body", "Цвета по ролям из MavTheme.ColorOf / MavTheme.BrushOf; они следуют текущей схеме."),
+        ("Overview.Shape.Title", "Форма и высота"),
+        ("Overview.Shape.Body", "Токены формы масштабируются через MavShapeScale; высота использует двухслойные тени MD3."),
+        ("Overview.Elevation.Level", "Уровень {0}"),
+        ("Overview.Motion.Title", "Движение"),
+        ("Overview.Motion.Body", "Длительности и кривые из MavMotion; MavMotionScheme может быть Standard, Expressive, Reduced или None."),
+        ("Overview.Duration.Short", "Короткая 50–200 мс"),
+        ("Overview.Duration.Medium", "Средняя 250–400 мс"),
+        ("Overview.Duration.Long", "Длинная 450–600 мс"),
+        ("Overview.Duration.ExtraLong", "Очень длинная 700–1000 мс"),
+    ];
+}

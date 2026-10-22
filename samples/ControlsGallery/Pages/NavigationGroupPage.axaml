@@ -1,0 +1,92 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mav="https://where.it/mav"
+             x:Class="Mav.ControlsGallery.Pages.NavigationGroupPage">
+  <mav:MavScrollViewer>
+    <Border MaxWidth="1180" HorizontalAlignment="Center" Padding="20,16,20,40">
+      <StackPanel Spacing="18">
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Nav.Bars.AppBars.Section, Fallback=App bars}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap"
+                        Text="{mav:Loc Nav.Bars.AppBars.Section.Body, Fallback=Top app bars in three variants and a bottom app bar with a FAB.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavTopAppBar and MavBottomAppBar" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap"
+                            Text="{mav:Loc Nav.Bars.AppBars.Card.Body, Fallback=Small\, center-aligned and large top bars plus the bottom bar with a docked FAB and actions.}" />
+              <StackPanel x:Name="AppBarsHost" Spacing="8" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap"
+                            Text="MavTopAppBar(title) · Variant · AddAction · SafeAreaPadding · MavBottomAppBar(fabIcon, onFabClick)" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Nav.Bars.Structures.Section, Fallback=Bars\, rails and drawers}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap"
+                        Text="{mav:Loc Nav.Bars.Structures.Section.Body, Fallback=The same destinations adapt from a bottom bar to a rail and a drawer.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavNavigationBar, MavNavigationRail, MavNavigationDrawer and MavModalNavigationDrawer" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap"
+                            Text="{mav:Loc Nav.Bars.Structures.Card.Body, Fallback=Bottom navigation\, side rail\, permanent drawer and modal drawer. The gallery shell uses all three adaptively.}" />
+              <StackPanel x:Name="StructuresHost" Spacing="8" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap"
+                            Text="AddDestination(...) · AddItem(...) · SelectedIndex · Modal drawer Show(anchor)" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Nav.Bars.Tabs.Section, Fallback=Tabs\, breadcrumbs and steps}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap"
+                        Text="{mav:Loc Nav.Bars.Tabs.Section.Body, Fallback=Secondary navigation and progress through a flow.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavTabs, MavBreadcrumbBar, MavPagination and MavStepper" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap"
+                            Text="{mav:Loc Nav.Bars.Tabs.Card.Body, Fallback=Tabs switch panels\, breadcrumbs show a trail\, pagination moves through pages and the stepper tracks a flow.}" />
+              <StackPanel x:Name="TabsHost" Spacing="8" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap"
+                            Text="tabs.AddTab(text, icon, badge, content) · breadcrumbs.SetPath(...) · MavPagination.TotalPages · MavStepper.AddStep(...)" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Nav.Bars.Toolbars.Section, Fallback=Toolbars and contextual actions}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap"
+                        Text="{mav:Loc Nav.Bars.Toolbars.Section.Body, Fallback=Floating/docked toolbars and a contextual action bar.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavToolbar and MavContextualActionBar" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap"
+                            Text="{mav:Loc Nav.Bars.Toolbars.Card.Body, Fallback=A floating toolbar for editor actions and a contextual bar that appears while items are selected.}" />
+              <StackPanel x:Name="ToolbarsHost" Spacing="8" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap"
+                            Text="toolbar.AddAction(icon) · AddControl · contextual.AddAction/AddButton" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Nav.Bars.Scaffold.Section, Fallback=Adaptive scaffold and page stack}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap"
+                        Text="{mav:Loc Nav.Bars.Scaffold.Section.Body, Fallback=MavNavigationSuiteScaffold and a nested MavNavigationPage.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavNavigationSuiteScaffold and MavNavigationPage" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap"
+                            Text="{mav:Loc Nav.Bars.Scaffold.Card.Body, Fallback=The suite scaffold adapts its navigation to width; the nested page stack demonstrates MavContentPage and push/pop.}" />
+              <StackPanel x:Name="ScaffoldHost" Spacing="8" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap"
+                            Text="MavNavigationSuiteScaffold.AddDestination(...) · new MavNavigationPage(root) · Push/Pop" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+      </StackPanel>
+    </Border>
+  </mav:MavScrollViewer>
+</UserControl>

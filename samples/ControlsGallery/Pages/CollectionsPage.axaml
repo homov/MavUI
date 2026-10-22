@@ -1,0 +1,51 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mav="https://where.it/mav"
+             x:Class="Mav.ControlsGallery.Pages.CollectionsPage">
+  <mav:MavScrollViewer>
+    <Border MaxWidth="1180" HorizontalAlignment="Center" Padding="20,16,20,40">
+      <StackPanel Spacing="18">
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Collections.Lists.Title, Fallback=Lists}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Collections.Lists.Body, Fallback=Subheaders\, dividers\, leading/trailing content and swipe actions.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavList, MavListItem, MavListSubheader and MavSwipeAction" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Collections.Lists.CardBody, Fallback=A vertical list with dividers\, two-line rows\, trailing text\, selection and swipe actions.}" />
+              <StackPanel x:Name="ListsHost" Spacing="10" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="list.AddItem(new MavListItem(...)) · ShowDividers · LeadingSwipeAction/TrailingSwipeAction" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Collections.Table.Title, Fallback=Data table}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Collections.Table.Body, Fallback=Sorting\, filtering\, selection and pagination; narrow hosts automatically switch to cards.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavDataTable and MavDataColumn" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Collections.Table.CardBody, Fallback=Sort by clicking a header\, filter with FilterText\, select rows and page through data. Under 600 dp the same table becomes cards.}" />
+              <StackPanel x:Name="TableHost" Spacing="10" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="table.AddColumn(header, valueSelector, isNumeric) · Layout=Auto · ShowPagination · FilterText" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Collections.Trees.Title, Fallback=Trees and timelines}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Collections.Trees.Body, Fallback=Hierarchical data with checkboxes and a vertical activity timeline.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavTreeView, MavTreeNode and MavTimeline" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Collections.Tree.CardBody, Fallback=Expandable tree with cascading checkboxes and a vertical timeline with statuses.}" />
+              <StackPanel x:Name="TreeHost" Spacing="10" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavTreeView.ShowCheckBoxes · MavTreeNode.Add(...) · MavTimeline.Add(...)" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+      </StackPanel>
+    </Border>
+  </mav:MavScrollViewer>
+</UserControl>

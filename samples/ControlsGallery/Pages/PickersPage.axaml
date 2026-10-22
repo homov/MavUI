@@ -1,0 +1,83 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mav="https://where.it/mav"
+             x:Class="Mav.ControlsGallery.Pages.PickersPage">
+  <mav:MavScrollViewer>
+    <Border MaxWidth="1180" HorizontalAlignment="Center" Padding="20,16,20,40">
+      <StackPanel Spacing="18">
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Pickers.Fields.Section, Fallback=Inline fields}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap"
+                        Text="{mav:Loc Pickers.Fields.Section.Body, Fallback=Drop-in fields that format the selected value and open the matching picker.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavDatePickerField, MavDateRangePickerField and MavTimePickerField" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap"
+                            Text="{mav:Loc Pickers.Fields.Card.Body, Fallback=Inline fields keep the form compact and remain clearable and validatable with MavFormValidator.}" />
+              <mav:MavDatePickerField x:Name="DueDate" Label="{mav:Loc Pickers.Field.Due, Fallback=Due date}" IsClearable="True" />
+              <mav:MavDateRangePickerField x:Name="Sprint" Label="{mav:Loc Pickers.Field.Sprint, Fallback=Sprint}" />
+              <mav:MavTimePickerField x:Name="Reminder" Label="{mav:Loc Pickers.Field.Reminder, Fallback=Reminder}" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap"
+                            Text="SelectedDate · StartDate/EndDate · SelectedTime · IsClearable" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Pickers.Embedded.Section, Fallback=Embedded pickers}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap"
+                        Text="{mav:Loc Pickers.Embedded.Section.Body, Fallback=Calendar grid\, clock dial and color picker can be embedded in any layout.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavCalendarGrid, MavTimeDial and MavColorPicker" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap"
+                            Text="{mav:Loc Pickers.Embedded.Card.Body, Fallback=Embed the picker surface directly when a dialog or sheet is not the right fit.}" />
+              <WrapPanel>
+                <mav:MavCard Variant="Outlined" Width="340" Margin="0,0,8,8">
+                  <mav:MavCalendarGrid x:Name="Calendar" />
+                </mav:MavCard>
+                <mav:MavCard Variant="Outlined" Width="300" Margin="0,0,8,8">
+                  <mav:MavTimeDial x:Name="Dial" />
+                </mav:MavCard>
+                <mav:MavCard Variant="Outlined" Width="360" Margin="0,0,8,8">
+                  <mav:MavColorPicker x:Name="ColorPicker" Width="320" />
+                </mav:MavCard>
+              </WrapPanel>
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap"
+                            Text="MavCalendarGrid.SelectedDate · MavTimeDial.Hour/Minute · MavColorPicker.SelectedColor" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Pickers.Modal.Section, Fallback=Modal pickers}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap"
+                        Text="{mav:Loc Pickers.Modal.Section.Body, Fallback=Awaitable helpers return the selected value or null when dismissed.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="Modal date, time and color pickers" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap"
+                            Text="{mav:Loc Pickers.Modal.Card.Body, Fallback=Static helpers use the current top level and return null when the user dismisses the overlay.}" />
+              <WrapPanel>
+                <mav:MavButton x:Name="PickDateButton" Variant="Outlined" Icon="{x:Static mav:MavIcons.Event}" Margin="0,0,8,8"
+                               Text="{mav:Loc Pickers.Modal.Date, Fallback=Pick date}" />
+                <mav:MavButton x:Name="PickRangeButton" Variant="Outlined" Icon="{x:Static mav:MavIcons.DateRange}" Margin="0,0,8,8"
+                               Text="{mav:Loc Pickers.Modal.Range, Fallback=Pick range}" />
+                <mav:MavButton x:Name="PickTimeButton" Variant="Outlined" Icon="{x:Static mav:MavIcons.Schedule}" Margin="0,0,8,8"
+                               Text="{mav:Loc Pickers.Modal.Time, Fallback=Pick time}" />
+                <mav:MavButton x:Name="PickColorButton" Variant="Outlined" Icon="{x:Static mav:MavIcons.Palette}" Margin="0,0,8,8"
+                               Text="{mav:Loc Pickers.Modal.Color, Fallback=Pick color}" />
+              </WrapPanel>
+              <mav:MavLabel x:Name="PickResult" Role="BodySmall" Secondary="True"
+                            Text="{mav:Loc Pickers.Modal.None, Fallback=No selection yet}" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap"
+                            Text="await MavDatePicker.PickDateAsync(...) · MavDatePicker.PickDateRangeAsync(...) · MavTimePicker.PickTimeAsync(...) · MavColorPicker.PickAsync(...)" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+      </StackPanel>
+    </Border>
+  </mav:MavScrollViewer>
+</UserControl>

@@ -235,7 +235,7 @@ use reflection on application model types. In trimmed apps either root those pro
 Android Release publish (trimming and AOT are on by default in Release):
 
 ```bash
-dotnet publish samples/Demo.Android/Demo.Android.csproj -c Release \
+dotnet publish samples/ControlsGallery/Android/ControlsGallery.Android.csproj -c Release \
     -p:PublishTrimmed=true -p:MavFonts=no-mdi \
     -p:AndroidPackageFormats=apk -o artifacts/android
 ```
@@ -1563,25 +1563,19 @@ All controls accept `Command`/`CommandParameter`; use the CLR events only for vi
 ├── Tests/
 │   └── MavUI.Tests.csproj headless navigation/list/keyboard/overlay tests
 ├── samples/
-│   ├── Demo/
-│   │   └── Mav.Demo.csproj      desktop navigation demo (own Md page stack)
-│   ├── Demo.Android/
-│   │   ├── Demo.Android.csproj  Android host, links ../Demo/Pages.cs
-│   │   ├── MainActivity.cs      AvaloniaMainActivity wiring
-│   │   └── MobileApp.cs         Android Application + root MavNavigationPage
-│   ├── Gallery/                 adaptive control gallery (desktop + shared UI)
-│   │   ├── Mav.Gallery.csproj   desktop gallery host
-│   │   ├── GalleryApp.cs        shared Application (desktop/web/Android)
-│   │   ├── GalleryWindow.cs     desktop MavWindow
-│   │   └── Shared/              adaptive shell + one page per purpose group
-│   ├── Gallery.Browser/         WebAssembly host (Avalonia.Browser)
-│   └── Gallery.Android/         Android gallery host (com.md3.gallery)
+│   └── ControlsGallery/         one control gallery for desktop, Android and browser
+│       ├── ControlsGallery.csproj shared library: App, shell, 11 AXAML pages, localization
+│       ├── Shell/               adaptive shell (bar/rail/drawer) and destination list
+│       ├── Pages/               11 pages: AXAML markup + code-behind
+│       ├── Localization/        en fallbacks in AXAML, ru tables in Ru*.cs
+│       ├── Desktop/             WinExe/desktop head (Program.cs)
+│       ├── Android/             Android head (com.mav.controlsgallery)
+│       └── Browser/             WebAssembly head (Avalonia.Browser)
 ├── docs/
 │   ├── README.md                documentation index
 │   ├── AGENTS.md                library rules and API catalogue
 │   ├── HANDOFF.md               session handoff, current status and next steps
 │   ├── PLAN.md                  project plan and current status
-│   ├── demo/README.md           demo run and resize notes
 │   ├── gallery/                 gallery README + screenshots
 │   └── handoff/                 verification screenshots (Linux, Windows legacy, Android)
 ├── tools/linux/mavui.py         Linux/X11 run/screenshot/click/key/wheel helper
@@ -1593,7 +1587,7 @@ Build:
 ```bash
 dotnet build MavUI.sln -v q --nologo
 dotnet build MavUI/MavUI.csproj -v q --nologo
-dotnet build samples/Demo/Mav.Demo.csproj -v q --nologo
+dotnet build samples/ControlsGallery/Desktop/ControlsGallery.Desktop.csproj -v q --nologo
 dotnet test Tests/MavUI.Tests.csproj --nologo
 ```
 
@@ -1602,7 +1596,7 @@ host builds with the same SDK, once the Android workload and SDK platform 36 exi
 
 ```bash
 dotnet workload install android            # once per SDK feature band
-dotnet build samples/Demo.Android/Demo.Android.csproj -v q --nologo
+dotnet build samples/ControlsGallery/Android/ControlsGallery.Android.csproj -v q --nologo
 ```
 
 The Android host needs `ANDROID_HOME` pointing at an SDK that contains
@@ -1610,31 +1604,27 @@ The Android host needs `ANDROID_HOME` pointing at an SDK that contains
 On Windows the same command is run through the Windows SDK:
 
 ```powershell
-& "C:\Program Files\dotnet\dotnet.exe" build samples\Demo.Android\Demo.Android.csproj -v q --nologo
+& "C:\Program Files\dotnet\dotnet.exe" build samples\ControlsGallery\Android\ControlsGallery.Android.csproj -v q --nologo
 ```
 
 Expected: `Build succeeded. 0 Warning(s) 0 Error(s)` and all tests passing.
 
-Run the desktop demo:
+Run the desktop gallery:
 
 ```bash
-dotnet run --project samples/Demo/Mav.Demo.csproj
-MAV_SMOKE=1 dotnet run --project samples/Demo/Mav.Demo.csproj
-MAV_WINDOW=400x800 MAV_SAFE_AREA=24,48 MAV_KEYBOARD=300 dotnet run --project samples/Demo/Mav.Demo.csproj
-MAV_WINDOW=320x640 dotnet run --project samples/Demo/Mav.Demo.csproj
-MAV_WINDOW=640x360 MAV_SAFE_AREA=48,0,0,24 dotnet run --project samples/Demo/Mav.Demo.csproj
+dotnet run --project samples/ControlsGallery/Desktop/ControlsGallery.Desktop.csproj
 ```
 
 There is a solution at `MavUI.sln` containing the library, tests and all sample hosts:
-`samples/Demo/` is the desktop harness, `samples/Gallery*` the full control gallery and
-`Tests/` the headless test project. `docs/PLAN.md` tracks implementation status.
+`samples/ControlsGallery/` is the single control gallery (desktop, Android and browser heads over one
+shared library) and `Tests/` the headless test project, which also builds every gallery page. `docs/PLAN.md` tracks implementation status.
 
 Control gallery:
 
 ```bash
-dotnet run --project samples/Gallery/Mav.Gallery.csproj            # desktop
-dotnet run --project samples/Gallery.Browser/Gallery.Browser.csproj # WebAssembly server
-dotnet build samples/Gallery.Android/Gallery.Android.csproj        # com.md3.gallery APK
+dotnet run --project samples/ControlsGallery/Desktop/ControlsGallery.Desktop.csproj            # desktop
+dotnet run --project samples/ControlsGallery/Browser/ControlsGallery.Browser.csproj # WebAssembly server
+dotnet build samples/ControlsGallery/Android/ControlsGallery.Android.csproj        # com.mav.controlsgallery APK
 ```
 
 GUI automation helpers (both click by window-relative pixels of the **client area**, send
@@ -1646,7 +1636,7 @@ keys, scroll under the cursor and write screenshots):
   `python3 tools/linux/mavui.py start --window 400x800 --safe-area 24,48 --keyboard 300`.
 * Windows: `tools/win/mavui.ps1` — `-Action start|stop|shot|click|key|wheel|info`,
   `-EnvWindow`, `-EnvSafeArea`, `-EnvKeyboard`.
-* Android: `adb install -r samples/Demo.Android/bin/Debug/net10.0-android/com.md3.demo-Signed.apk`,
-  then `adb shell am start -n com.md3.demo/crc64351746bbe631ada1.MainActivity` and
+* Android: `adb install -r samples/ControlsGallery/Android/bin/Debug/net10.0-android/com.mav.controlsgallery-Signed.apk`,
+  then `adb shell monkey -p com.mav.controlsgallery 1 and
   `adb exec-out screencap -p > shot.png`. The emulator runs locally on Linux via KVM
   (AVD `Medium_Phone_API_37.0`); stop it with `adb emu kill`.

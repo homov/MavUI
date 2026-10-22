@@ -33,13 +33,13 @@ Escape and overlay ownership work exactly as in a real app.
 ### Desktop
 
 ```bash
-dotnet run --project samples/Gallery/Mav.Gallery.csproj
+dotnet run --project samples/ControlsGallery/Desktop/ControlsGallery.Desktop.csproj
 ```
 
 ### WebAssembly
 
 ```bash
-dotnet run --project samples/Gallery.Browser/Gallery.Browser.csproj
+dotnet run --project samples/ControlsGallery/Browser/ControlsGallery.Browser.csproj
 # open the printed http://127.0.0.1:<port>/ url
 ```
 
@@ -48,8 +48,8 @@ Prerequisite: `dotnet workload install wasm-tools` and the `Avalonia.Browser` pa
 ### Android
 
 ```bash
-dotnet build samples/Gallery.Android/Gallery.Android.csproj
-adb install -r samples/Gallery.Android/bin/Debug/net10.0-android/com.md3.gallery-Signed.apk
+dotnet build samples/ControlsGallery/Android/ControlsGallery.Android.csproj
+adb install -r samples/ControlsGallery/Android/bin/Debug/net10.0-android/com.mav.controlsgallery-Signed.apk
 adb shell monkey -p com.md3.gallery -c android.intent.category.LAUNCHER 1
 ```
 

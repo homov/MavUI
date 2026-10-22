@@ -1,0 +1,93 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mav="https://where.it/mav"
+             x:Class="Mav.ControlsGallery.Pages.SelectionPage">
+  <mav:MavScrollViewer>
+    <Border MaxWidth="1180" HorizontalAlignment="Center" Padding="20,16,20,40">
+      <StackPanel Spacing="18">
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Selection.Toggles.Section, Fallback=Toggles and checks}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap"
+                        Text="{mav:Loc Selection.Toggles.Section.Body, Fallback=Switches\, checkboxes (including three-state) and radio groups.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavSwitch, MavCheckBox, MavRadioButton and MavRadioGroup" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap"
+                            Text="{mav:Loc Selection.Toggles.Card.Body, Fallback=Selection controls expose IsToggled/IsChecked and raise Toggled/CheckedChanged; all support keyboard Space/Enter.}" />
+              <WrapPanel>
+                <mav:MavCard Variant="Outlined" Width="280" Margin="0,0,8,8">
+                  <StackPanel Spacing="10">
+                    <mav:MavSwitch IsToggled="True" ShowIcons="True"
+                                   OnIcon="{x:Static mav:MavIcons.Notifications}"
+                                   OffIcon="{x:Static mav:MavIcons.NotificationsOff}" />
+                    <mav:MavCheckBox Label="{mav:Loc Selection.Check.Terms, Fallback=Accept terms}" IsChecked="True" />
+                    <mav:MavCheckBox Label="{mav:Loc Selection.Check.Three, Fallback=Three-state}"
+                                     IsIndeterminate="True" IsThreeState="True" />
+                  </StackPanel>
+                </mav:MavCard>
+                <mav:MavCard Variant="Outlined" Width="280" Margin="0,0,8,8">
+                  <StackPanel Spacing="10">
+                    <mav:MavRadioGroup x:Name="RoleRadios" />
+                    <mav:MavRadioButton Label="{mav:Loc Selection.Radio.Standalone, Fallback=Standalone radio}" IsChecked="True" />
+                  </StackPanel>
+                </mav:MavCard>
+              </WrapPanel>
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap"
+                            Text="MavSwitch.IsToggled · MavCheckBox.IsThreeState · MavRadioButton.Label · MavRadioGroup.AddOption" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Selection.Sliders.Section, Fallback=Sliders and segmented buttons}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap"
+                        Text="{mav:Loc Selection.Sliders.Section.Body, Fallback=Continuous\, ranged and segmented value selection.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavSlider, MavRangeSlider and MavSegmentedButton" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap"
+                            Text="{mav:Loc Selection.Sliders.Card.Body, Fallback=Sliders support steps\, divisions\, value indicators and keyboard arrows; segmented buttons can be single or multi-select.}" />
+              <mav:MavSlider Minimum="0" Maximum="100" Value="64" ShowValueIndicator="True" />
+              <mav:MavRangeSlider Minimum="0" Maximum="100" StartValue="20" EndValue="80" />
+              <WrapPanel>
+                <mav:MavSegmentedButton x:Name="SingleSegments" Margin="0,0,8,8" />
+                <mav:MavSegmentedButton x:Name="MultiSegments" MultiSelect="True" Margin="0,0,8,8" />
+              </WrapPanel>
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap"
+                            Text="MavSlider.Value · MavRangeSlider.StartValue/EndValue · MavSegmentedButton.MultiSelect" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+        <StackPanel Spacing="12">
+          <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Selection.Chips.Section, Fallback=Chips and dropdowns}" />
+          <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap"
+                        Text="{mav:Loc Selection.Chips.Section.Body, Fallback=Chips for filters/assist/input\, chip groups\, select\, combo box and rating.}" />
+          <mav:MavCard Variant="Outlined" CardPadding="16">
+            <StackPanel Spacing="10">
+              <mav:MavLabel Role="TitleMedium" Text="MavChip, MavChipGroup, MavSelect, MavComboBox and MavRatingBar" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap"
+                            Text="{mav:Loc Selection.Chips.Card.Body, Fallback=Chips cover assist/filter/input/suggestion; select and combo box provide options; rating supports half stars.}" />
+              <WrapPanel>
+                <mav:MavChip Kind="Assist" Icon="{x:Static mav:MavIcons.TipsAndUpdates}" Text="Assist" Margin="0,0,8,8" />
+                <mav:MavChip Kind="Filter" IsSelected="True" Text="Filter" Margin="0,0,8,8" />
+                <mav:MavChip Kind="Input" Icon="{x:Static mav:MavIcons.Close}" Text="Input" Margin="0,0,8,8" />
+                <mav:MavChip Kind="Suggestion" Text="Suggestion" Margin="0,0,8,8" />
+              </WrapPanel>
+              <mav:MavChipGroup x:Name="ChipGroup" SingleSelection="True" />
+              <WrapPanel>
+                <mav:MavSelect x:Name="RoleSelect" Label="{mav:Loc Selection.Select.Role, Fallback=Role}" Width="220" Margin="0,0,8,8" />
+                <mav:MavComboBox x:Name="CityCombo" Label="{mav:Loc Selection.Combo.City, Fallback=City}" Width="220" Margin="0,0,8,8" />
+                <mav:MavRatingBar MaxRating="5" AllowHalf="True" Value="4.5" Margin="0,8,8,8" />
+              </WrapPanel>
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap"
+                            Text="MavChip.Kind · MavChipGroup.SingleSelection · MavSelect.Options · MavComboBox.Items · MavRatingBar.AllowHalf" />
+            </StackPanel>
+          </mav:MavCard>
+        </StackPanel>
+
+      </StackPanel>
+    </Border>
+  </mav:MavScrollViewer>
+</UserControl>
