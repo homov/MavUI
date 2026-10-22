@@ -1,0 +1,22 @@
+# Last build log
+commit: e36fbec38d9ff0dddc83bbc37ed84eeb98a48c87
+run: https://github.com/homov/MavUI/actions/runs/39805934967
+
+  Determining projects to restore...
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Md3.Avalonia/Md3.Avalonia.csproj (in 656 ms).
+  Md3.Avalonia -> /home/homo/github/actions-runner/_work/MavUI/MavUI/Md3.Avalonia/bin/Release/net10.0/Md3.Avalonia.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:08.03
+/usr/lib/dotnet/sdk/10.0.113/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets(266,5): error NETSDK1004: Assets file '/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/obj/project.assets.json' not found. Run a NuGet package restore to generate this file. [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/Md3.Avalonia.Tests.csproj]
+
+Build FAILED.
+
+/usr/lib/dotnet/sdk/10.0.113/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets(266,5): error NETSDK1004: Assets file '/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/obj/project.assets.json' not found. Run a NuGet package restore to generate this file. [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/Md3.Avalonia.Tests.csproj]
+    0 Warning(s)
+    1 Error(s)
+
+Time Elapsed 00:00:00.35
