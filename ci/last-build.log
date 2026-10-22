@@ -1,19 +1,19 @@
 # Last build log
-commit: cefef04ba14b7d82ddfd933fff616861d0c970a5
-run: https://github.com/homov/MavUI/actions/runs/39834594344
+commit: b92aced0959e33c75ef360465b21e3198030cc16
+run: https://github.com/homov/MavUI/actions/runs/39834754024
 
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 258 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 266 ms).
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:07.48
+Time Elapsed 00:00:07.68
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.csproj (in 250 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 255 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 254 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.csproj (in 249 ms).
   1 of 3 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
@@ -23,9 +23,9 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:04.10
+Time Elapsed 00:00:04.14
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 279 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 286 ms).
   2 of 3 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
@@ -35,14 +35,14 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.07
+Time Elapsed 00:00:02.10
 Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/MavUI.Tests.dll (.NETCoreApp,Version=v10.0)
 VSTest version 18.0.2 (x64)
 
 Starting test execution, please wait...
 A total of 1 test files matched the specified pattern.
 
-Passed!  - Failed:     0, Passed:   244, Skipped:     0, Total:   244, Duration: 14 s - MavUI.Tests.dll (net10.0)
+Passed!  - Failed:     0, Passed:   244, Skipped:     0, Total:   244, Duration: 15 s - MavUI.Tests.dll (net10.0)
 
 Checking for updated workload version.
 Skipping NuGet package signature verification.
@@ -133,16 +133,169 @@ Garbage collecting for SDK feature band(s) 10.0.100...
 Successfully installed workload(s) .
 
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Android/ControlsGallery.Android.csproj (in 336 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Android/ControlsGallery.Android.csproj (in 343 ms).
   2 of 3 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
-/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Android/MainActivity.cs(55,9): error CS0103: The name 'MavSystemBars' does not exist in the current context [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Android/ControlsGallery.Android.csproj]
+  ControlsGallery.Android -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Android/bin/Release/net10.0-android/ControlsGallery.Android.dll
+  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
+  ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
+  Optimizing assemblies for size may change the behavior of the app. Be sure to test after publishing. See: https://aka.ms/dotnet-illink
+  Optimizing assemblies for size. This process might take a while.
+  Optimizing assemblies for size may change the behavior of the app. Be sure to test after publishing. See: https://aka.ms/dotnet-illink
+  Optimizing assemblies for size. This process might take a while.
+  [1/62] Avalonia.Metal.dll -> Avalonia.Metal.dll.so
+  [2/62] Avalonia.OpenGL.dll -> Avalonia.OpenGL.dll.so
+  [3/62] Avalonia.Markup.Xaml.dll -> Avalonia.Markup.Xaml.dll.so
+  [4/62] _Microsoft.Android.Resource.Designer.dll -> _Microsoft.Android.Resource.Designer.dll.so
+  [5/62] Avalonia.Vulkan.dll -> Avalonia.Vulkan.dll.so
+  [6/62] Avalonia.dll -> Avalonia.dll.so
+  [7/62] ControlsGallery.Android.dll -> ControlsGallery.Android.dll.so
+  [1/62] _Microsoft.Android.Resource.Designer.dll -> _Microsoft.Android.Resource.Designer.dll.so
+  [8/62] Avalonia.DesignerSupport.dll -> Avalonia.DesignerSupport.dll.so
+  [9/62] Mav.ControlsGallery.dll -> Mav.ControlsGallery.dll.so
+  [10/62] Avalonia.HarfBuzz.dll -> Avalonia.HarfBuzz.dll.so
+  [11/62] Avalonia.Remote.Protocol.dll -> Avalonia.Remote.Protocol.dll.so
+  [12/62] HarfBuzzSharp.dll -> HarfBuzzSharp.dll.so
+  [13/62] Avalonia.Skia.dll -> Avalonia.Skia.dll.so
+  [14/62] MavUI.dll -> MavUI.dll.so
+  [15/62] Avalonia.Controls.dll -> Avalonia.Controls.dll.so
+  [16/62] Xamarin.AndroidX.Activity.dll -> Xamarin.AndroidX.Activity.dll.so
+  [17/62] SkiaSharp.dll -> SkiaSharp.dll.so
+  [2/62] Mav.ControlsGallery.dll -> Mav.ControlsGallery.dll.so
+  [18/62] Xamarin.AndroidX.Core.dll -> Xamarin.AndroidX.Core.dll.so
+  [19/62] Xamarin.AndroidX.AppCompat.dll -> Xamarin.AndroidX.AppCompat.dll.so
+  [20/62] Avalonia.Android.dll -> Avalonia.Android.dll.so
+  [21/62] Xamarin.AndroidX.CustomView.dll -> Xamarin.AndroidX.CustomView.dll.so
+  [22/62] Xamarin.AndroidX.DrawerLayout.dll -> Xamarin.AndroidX.DrawerLayout.dll.so
+  [23/62] Xamarin.AndroidX.Lifecycle.ViewModel.Android.dll -> Xamarin.AndroidX.Lifecycle.ViewModel.Android.dll.so
+  [24/62] Xamarin.AndroidX.Loader.dll -> Xamarin.AndroidX.Loader.dll.so
+  [26/62] Xamarin.AndroidX.Fragment.dll -> Xamarin.AndroidX.Fragment.dll.so
+  [25/62] Xamarin.AndroidX.NavigationEvent.Android.dll -> Xamarin.AndroidX.NavigationEvent.Android.dll.so
+  [27/62] Xamarin.AndroidX.Lifecycle.Common.Jvm.dll -> Xamarin.AndroidX.Lifecycle.Common.Jvm.dll.so
+  [28/62] Xamarin.AndroidX.Lifecycle.LiveData.Core.dll -> Xamarin.AndroidX.Lifecycle.LiveData.Core.dll.so
+  [29/62] Xamarin.AndroidX.SavedState.SavedState.Android.dll -> Xamarin.AndroidX.SavedState.SavedState.Android.dll.so
+  [30/62] Xamarin.Kotlin.StdLib.dll -> Xamarin.Kotlin.StdLib.dll.so
+  [31/62] Xamarin.AndroidX.Window.dll -> Xamarin.AndroidX.Window.dll.so
+  [32/62] Xamarin.KotlinX.Coroutines.Core.Jvm.dll -> Xamarin.KotlinX.Coroutines.Core.Jvm.dll.so
+  [33/62] System.Collections.NonGeneric.dll -> System.Collections.NonGeneric.dll.so
+  [34/62] System.Collections.Specialized.dll -> System.Collections.Specialized.dll.so
+  [35/62] System.ComponentModel.dll -> System.ComponentModel.dll.so
+  [36/62] System.Console.dll -> System.Console.dll.so
+  [37/62] System.ComponentModel.TypeConverter.dll -> System.ComponentModel.TypeConverter.dll.so
+  [38/62] System.ComponentModel.Primitives.dll -> System.ComponentModel.Primitives.dll.so
+  [39/62] System.Collections.Concurrent.dll -> System.Collections.Concurrent.dll.so
+  [40/62] System.IO.Compression.dll -> System.IO.Compression.dll.so
+  [3/62] MavUI.dll -> MavUI.dll.so
+  [41/62] System.Diagnostics.TraceSource.dll -> System.Diagnostics.TraceSource.dll.so
+  [42/62] System.Linq.Expressions.dll -> System.Linq.Expressions.dll.so
+  [43/62] System.Diagnostics.DiagnosticSource.dll -> System.Diagnostics.DiagnosticSource.dll.so
+  [44/62] System.Collections.dll -> System.Collections.dll.so
+  [45/62] System.Net.Primitives.dll -> System.Net.Primitives.dll.so
+  [46/62] System.ObjectModel.dll -> System.ObjectModel.dll.so
+  [47/62] System.Net.NameResolution.dll -> System.Net.NameResolution.dll.so
+  [48/62] System.Private.Xml.dll -> System.Private.Xml.dll.so
+  [49/62] System.Net.Sockets.dll -> System.Net.Sockets.dll.so
+  [50/62] System.Runtime.InteropServices.dll -> System.Runtime.InteropServices.dll.so
+  [51/62] System.Security.Cryptography.dll -> System.Security.Cryptography.dll.so
+  [52/62] System.Runtime.dll -> System.Runtime.dll.so
+  [4/62] ControlsGallery.Android.dll -> ControlsGallery.Android.dll.so
+  [53/62] System.dll -> System.dll.so
+  [54/62] System.Threading.dll -> System.Threading.dll.so
+  [55/62] Mono.Android.Runtime.dll -> Mono.Android.Runtime.dll.so
+  [56/62] System.Private.Uri.dll -> System.Private.Uri.dll.so
+  [57/62] Avalonia.Base.dll -> Avalonia.Base.dll.so
+  [58/62] System.Text.RegularExpressions.dll -> System.Text.RegularExpressions.dll.so
+  [59/62] System.Linq.dll -> System.Linq.dll.so
+  [60/62] Java.Interop.dll -> Java.Interop.dll.so
+  [61/62] Mono.Android.dll -> Mono.Android.dll.so
+  [5/62] Avalonia.Base.dll -> Avalonia.Base.dll.so
+  [6/62] Avalonia.Controls.dll -> Avalonia.Controls.dll.so
+  [7/62] Avalonia.DesignerSupport.dll -> Avalonia.DesignerSupport.dll.so
+  [8/62] Avalonia.Markup.Xaml.dll -> Avalonia.Markup.Xaml.dll.so
+  [9/62] Avalonia.Metal.dll -> Avalonia.Metal.dll.so
+  [10/62] Avalonia.OpenGL.dll -> Avalonia.OpenGL.dll.so
+  [11/62] Avalonia.Vulkan.dll -> Avalonia.Vulkan.dll.so
+  [12/62] Avalonia.dll -> Avalonia.dll.so
+  [13/62] Avalonia.Android.dll -> Avalonia.Android.dll.so
+  [14/62] Avalonia.HarfBuzz.dll -> Avalonia.HarfBuzz.dll.so
+  [15/62] Avalonia.Remote.Protocol.dll -> Avalonia.Remote.Protocol.dll.so
+  [16/62] Avalonia.Skia.dll -> Avalonia.Skia.dll.so
+  [17/62] HarfBuzzSharp.dll -> HarfBuzzSharp.dll.so
+  [18/62] SkiaSharp.dll -> SkiaSharp.dll.so
+  [19/62] Xamarin.AndroidX.Activity.dll -> Xamarin.AndroidX.Activity.dll.so
+  [20/62] Xamarin.AndroidX.AppCompat.dll -> Xamarin.AndroidX.AppCompat.dll.so
+  [21/62] Xamarin.AndroidX.Core.dll -> Xamarin.AndroidX.Core.dll.so
+  [62/62] System.Private.CoreLib.dll -> System.Private.CoreLib.dll.so
+  [22/62] Xamarin.AndroidX.CustomView.dll -> Xamarin.AndroidX.CustomView.dll.so
+  [23/62] Xamarin.AndroidX.DrawerLayout.dll -> Xamarin.AndroidX.DrawerLayout.dll.so
+  [24/62] Xamarin.AndroidX.Fragment.dll -> Xamarin.AndroidX.Fragment.dll.so
+  [25/62] Xamarin.AndroidX.Lifecycle.Common.Jvm.dll -> Xamarin.AndroidX.Lifecycle.Common.Jvm.dll.so
+  [26/62] Xamarin.AndroidX.Lifecycle.LiveData.Core.dll -> Xamarin.AndroidX.Lifecycle.LiveData.Core.dll.so
+  [27/62] Xamarin.AndroidX.Lifecycle.ViewModel.Android.dll -> Xamarin.AndroidX.Lifecycle.ViewModel.Android.dll.so
+  [28/62] Xamarin.AndroidX.Loader.dll -> Xamarin.AndroidX.Loader.dll.so
+  [29/62] Xamarin.AndroidX.NavigationEvent.Android.dll -> Xamarin.AndroidX.NavigationEvent.Android.dll.so
+  [30/62] Xamarin.AndroidX.SavedState.SavedState.Android.dll -> Xamarin.AndroidX.SavedState.SavedState.Android.dll.so
+  [31/62] Xamarin.AndroidX.Window.dll -> Xamarin.AndroidX.Window.dll.so
+  [32/62] Xamarin.Kotlin.StdLib.dll -> Xamarin.Kotlin.StdLib.dll.so
+  [33/62] Xamarin.KotlinX.Coroutines.Core.Jvm.dll -> Xamarin.KotlinX.Coroutines.Core.Jvm.dll.so
+  [34/62] System.Collections.Concurrent.dll -> System.Collections.Concurrent.dll.so
+  [35/62] System.Collections.NonGeneric.dll -> System.Collections.NonGeneric.dll.so
+  [36/62] System.Collections.Specialized.dll -> System.Collections.Specialized.dll.so
+  [37/62] System.Collections.dll -> System.Collections.dll.so
+  [38/62] System.ComponentModel.Primitives.dll -> System.ComponentModel.Primitives.dll.so
+  [39/62] System.ComponentModel.TypeConverter.dll -> System.ComponentModel.TypeConverter.dll.so
+  [40/62] System.ComponentModel.dll -> System.ComponentModel.dll.so
+  [41/62] System.Console.dll -> System.Console.dll.so
+  [42/62] System.Diagnostics.DiagnosticSource.dll -> System.Diagnostics.DiagnosticSource.dll.so
+  [43/62] System.Diagnostics.TraceSource.dll -> System.Diagnostics.TraceSource.dll.so
+  [44/62] System.IO.Compression.dll -> System.IO.Compression.dll.so
+  [45/62] System.Linq.Expressions.dll -> System.Linq.Expressions.dll.so
+  [46/62] System.Linq.dll -> System.Linq.dll.so
+  [47/62] System.Net.NameResolution.dll -> System.Net.NameResolution.dll.so
+  [48/62] System.Net.Primitives.dll -> System.Net.Primitives.dll.so
+  [49/62] System.Net.Sockets.dll -> System.Net.Sockets.dll.so
+  [50/62] System.ObjectModel.dll -> System.ObjectModel.dll.so
+  [51/62] System.Private.Uri.dll -> System.Private.Uri.dll.so
+  [52/62] System.Private.Xml.dll -> System.Private.Xml.dll.so
+  [53/62] System.Runtime.InteropServices.dll -> System.Runtime.InteropServices.dll.so
+  [54/62] System.Runtime.dll -> System.Runtime.dll.so
+  [55/62] System.Security.Cryptography.dll -> System.Security.Cryptography.dll.so
+  [56/62] System.Text.RegularExpressions.dll -> System.Text.RegularExpressions.dll.so
+  [57/62] System.Threading.dll -> System.Threading.dll.so
+  [58/62] System.dll -> System.dll.so
+  [59/62] Java.Interop.dll -> Java.Interop.dll.so
+  [60/62] Mono.Android.Runtime.dll -> Mono.Android.Runtime.dll.so
+  [61/62] Mono.Android.dll -> Mono.Android.dll.so
+  [62/62] System.Private.CoreLib.dll -> System.Private.CoreLib.dll.so
 
-Build FAILED.
-
-/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Android/MainActivity.cs(55,9): error CS0103: The name 'MavSystemBars' does not exist in the current context [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Android/ControlsGallery.Android.csproj]
+Build succeeded.
     0 Warning(s)
-    1 Error(s)
+    0 Error(s)
 
-Time Elapsed 00:00:02.93
+Time Elapsed 00:00:42.97
+  Determining projects to restore...
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Browser/ControlsGallery.Browser.csproj (in 269 ms).
+  2 of 3 projects are up-to-date for restore.
+  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
+  ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
+  Compiling native assets with /home/homo/.dotnet/packs/Microsoft.NET.Runtime.Emscripten.3.1.56.Sdk.linux-x64/10.0.13/Sdk/../tools/emscripten/emcc with -Oz. This may take a while ...
+  [1/4] corebindings.c -> corebindings.o [took 0.175s]
+  [2/4] driver.c -> driver.o [took 0.184s]
+  [3/4] runtime.c -> runtime.o [took 0.223s]
+  [4/4] pinvoke.c -> pinvoke.o [took 0.234s]
+  Linking for initial memory $(WasmInitialHeapSize)=39845888 bytes. Set this msbuild property to change the value.
+  Linking with emcc with -O2. This may take a while ...
+   /home/homo/.dotnet/packs/Microsoft.NET.Runtime.Emscripten.3.1.56.Sdk.linux-x64/10.0.13/tools/bin/clang --version
+   /home/homo/.dotnet/packs/Microsoft.NET.Runtime.Emscripten.3.1.56.Node.linux-x64/10.0.13/tools/bin/node /home/homo/.dotnet/packs/Microsoft.NET.Runtime.Emscripten.3.1.56.Sdk.linux-x64/10.0.13/tools/emscripten/src/compiler.mjs /tmp/tmpb3z34fbr.json --symbols-only
+   /home/homo/.dotnet/packs/Microsoft.NET.Runtime.Emscripten.3.1.56.Sdk.linux-x64/10.0.13/tools/bin/wasm-ld -o /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Browser/obj/Release/net10.0-browser/wasm/for-build/dotnet.native.wasm /home/homo/.nuget/packages/harfbuzzsharp.nativeassets.webassembly/8.3.1.3/buildTransitive/netstandard1.0/libHarfBuzzSharp.a/3.1.56/st,simd/libHarfBuzzSharp.a /home/homo/.nuget/packages/harfbuzzsharp.nativeassets.webassembly/8.3.1.3/buildTransitive/netstandard1.0/libHarfBuzzSharp.a/3.1.56/st/libHarfBuzzSharp.a /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Browser/obj/Release/net10.0-browser/wasm/for-build/pinvoke.o /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Browser/obj/Release/net10.0-browser/wasm/for-build/driver.o /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Browser/obj/Release/net10.0-browser/wasm/for-build/corebindings.o /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Browser/obj/Release/net10.0-browser/wasm/for-build/runtime.o /home/homo/.dotnet/packs/Microsoft.NETCore.App.Runtime.Mono.browser-wasm/10.0.13/runtimes/browser-wasm/native/libbrotlicommon.a /home/homo/.dotnet/packs/Microsoft.NETCore.App.Runtime.Mono.browser-wasm/10.0.13/runtimes/browser-wasm/native/libbrotlidec.a /home/homo/.dotnet/packs/Microsoft.NETCore.App.Runtime.Mono.browser-wasm/10.0.13/runtimes/browser-wasm/native/libbrotlienc.a /home/homo/.dotnet/packs/Microsoft.NETCore.App.Runtime.Mono.browser-wasm/10.0.13/runtimes/browser-wasm/native/libicudata.a /home/homo/.dotnet/packs/Microsoft.NETCore.App.Runtime.Mono.browser-wasm/10.0.13/runtimes/browser-wasm/native/libicui18n.a /home/homo/.dotnet/packs/Microsoft.NETCore.App.Runtime.Mono.browser-wasm/10.0.13/runtimes/browser-wasm/native/libicuuc.a /home/homo/.dotnet/packs/Microsoft.NETCore.App.Runtime.Mono.browser-wasm/10.0.13/runtimes/browser-wasm/native/libmono-component-debugger-static.a /home/homo/.dotnet/packs/Microsoft.NETCore.App.Runtime.Mono.browser-wasm/10.0.13/runtimes/browser-wasm/native/libmono-component-diagnostics_tracing-stub-static.a /home/homo/.dotnet/packs/Microsoft.NETCore.App.Runtime.Mono.browser-wasm/10.0.13/runtimes/browser-wasm/native/libmono-component-hot_reload-static.a /home/homo/.dotnet/packs/Microsoft.NETCore.App.Runtime.Mono.browser-wasm/10.0.13/runtimes/browser-wasm/native/libmono-component-marshal-ilgen-stub-static.a /home/homo/.dotnet/packs/Microsoft.NETCore.App.Runtime.Mono.browser-wasm/10.0.13/runtimes/browser-wasm/native/libmono-ee-interp.a /home/homo/.dotnet/packs/Microsoft.NETCore.App.Runtime.Mono.browser-wasm/10.0.13/runtimes/browser-wasm/native/libmono-icall-table.a /home/homo/.dotnet/packs/Microsoft.NETCore.App.Runtime.Mono.browser-wasm/10.0.13/runtimes/browser-wasm/native/libmono-profiler-aot.a /home/homo/.dotnet/packs/Microsoft.NETCore.App.Runtime.Mono.browser-wasm/10.0.13/runtimes/browser-wasm/native/libmono-profiler-browser.a /home/homo/.dotnet/packs/Microsoft.NETCore.App.Runtime.Mono.browser-wasm/10.0.13/runtimes/browser-wasm/native/libmono-profiler-log.a /home/homo/.dotnet/packs/Microsoft.NETCore.App.Runtime.Mono.browser-wasm/10.0.13/runtimes/browser-wasm/native/libmono-wasm-eh-wasm.a /home/homo/.dotnet/packs/Microsoft.NETCore.App.Runtime.Mono.browser-wasm/10.0.13/runtimes/browser-wasm/native/libmono-wasm-simd.a /home/homo/.dotnet/packs/Microsoft.NETCore.App.Runtime.Mono.browser-wasm/10.0.13/runtimes/browser-wasm/native/libmonosgen-2.0.a /home/homo/.dotnet/packs/Microsoft.NETCore.App.Runtime.Mono.browser-wasm/10.0.13/runtimes/browser-wasm/native/libSystem.Globalization.Native.a /home/homo/.dotnet/packs/Microsoft.NETCore.App.Runtime.Mono.browser-wasm/10.0.13/runtimes/browser-wasm/native/libSystem.IO.Compression.Native.a /home/homo/.dotnet/packs/Microsoft.NETCore.App.Runtime.Mono.browser-wasm/10.0.13/runtimes/browser-wasm/native/libSystem.Native.a /home/homo/.dotnet/packs/Microsoft.NETCore.App.Runtime.Mono.browser-wasm/10.0.13/runtimes/browser-wasm/native/libz.a /home/homo/.dotnet/packs/Microsoft.NETCore.App.Runtime.Mono.browser-wasm/10.0.13/runtimes/browser-wasm/native/wasm-bundled-timezones.a /home/homo/.nuget/packages/skiasharp.nativeassets.webassembly/3.119.4/buildTransitive/netstandard1.0/libSkiaSharp.a/3.1.56/st,simd/libSkiaSharp.a /home/homo/.nuget/packages/skiasharp.nativeassets.webassembly/3.119.4/buildTransitive/netstandard1.0/libSkiaSharp.a/3.1.56/st/libSkiaSharp.a -L/home/homo/.dotnet/packs/Microsoft.NET.Runtime.Emscripten.3.1.56.Cache.linux-x64/10.0.13/tools/emscripten/cache/sysroot/lib/wasm32-emscripten --whole-archive -lGL-webgl2-getprocaddr --no-whole-archive -lal -lhtml5 -lbulkmemory -lstubs -lc -ldlmalloc -lcompiler_rt-wasm-sjlj -lc++-except -lc++abi-except -lunwind-except -lsockets -mllvm -combiner-global-alias-analysis=false -mllvm -wasm-enable-sjlj -mllvm -disable-lsr -mllvm -wasm-enable-eh -mllvm -exception-model=wasm /tmp/tmp6qyln8tblibemscripten_js_symbols.so --export=free --export=htons --export=malloc --export=sbrk --export=memalign --export=posix_memalign --export=memset --export=ntohs --export=stackAlloc --export=stackRestore --export=stackSave --export=fmod --export=atan2 --export=fma --export=pow --export=fmodf --export=atan2f --export=fmaf --export=powf --export=asin --export=asinh --export=acos --export=acosh --export=atan --export=atanh --export=cbrt --export=cos --export=cosh --export=exp --export=log --export=log2 --export=log10 --export=sin --export=sinh --export=tan --export=tanh --export=asinf --export=asinhf --export=acosf --export=acoshf --export=atanf --export=atanhf --export=cbrtf --export=cosf --export=coshf --export=expf --export=logf --export=log2f --export=log10f --export=sinf --export=sinhf --export=tanf --export=tanhf --export=__cpp_exception --export=stackAlloc --export=__funcs_on_exit --export=__trap --export=__wasm_call_ctors --export=stackSave --export=stackRestore --export-if-defined=__start_em_asm --export-if-defined=__stop_em_asm --export-if-defined=__start_em_lib_deps --export-if-defined=__stop_em_lib_deps --export-if-defined=__start_em_js --export-if-defined=__stop_em_js --export-if-defined=fflush --export-table --growable-table -z stack-size=5242880 --max-memory=2147483648 --initial-memory=39845888 --no-entry --table-base=1 --global-base=1024
+   /home/homo/.dotnet/packs/Microsoft.NET.Runtime.Emscripten.3.1.56.Sdk.linux-x64/10.0.13/tools/bin/llvm-objcopy /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Browser/obj/Release/net10.0-browser/wasm/for-build/dotnet.native.wasm /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Browser/obj/Release/net10.0-browser/wasm/for-build/dotnet.native.wasm --remove-section=producers
+   /home/homo/.dotnet/packs/Microsoft.NET.Runtime.Emscripten.3.1.56.Node.linux-x64/10.0.13/tools/bin/node /home/homo/.dotnet/packs/Microsoft.NET.Runtime.Emscripten.3.1.56.Sdk.linux-x64/10.0.13/tools/emscripten/src/compiler.mjs /tmp/tmp2rgmg9d6.json
+   /home/homo/.dotnet/packs/Microsoft.NET.Runtime.Emscripten.3.1.56.Sdk.linux-x64/10.0.13/tools/bin/wasm-opt --strip-target-features --post-emscripten -O2 --low-memory-unused --zero-filled-memory --pass-arg=directize-initial-contents-immutable /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Browser/obj/Release/net10.0-browser/wasm/for-build/dotnet.native.wasm -o /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Browser/obj/Release/net10.0-browser/wasm/for-build/dotnet.native.wasm -g --mvp-features --enable-bulk-memory --enable-exception-handling --enable-multivalue --enable-mutable-globals --enable-reference-types --enable-sign-ext --enable-simd
+  ControlsGallery.Browser -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Browser/bin/Release/net10.0-browser/ControlsGallery.Browser.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:19.17
