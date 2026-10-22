@@ -1,21 +1,21 @@
 # Last build log
-commit: 3fffcd1ad92ece256615c65654cf120f6b459fed
-run: https://github.com/homov/MavUI/actions/runs/39846215920
+commit: 5a4961ff8038424dccd9a91dd21389712fb82dc6
+run: https://github.com/homov/MavUI/actions/runs/39846708759
 
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 264 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 275 ms).
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:04.92
+Time Elapsed 00:00:04.88
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials.Linux/MavUI.Essentials.Linux.csproj (in 92 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 84 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.csproj (in 192 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 208 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials.Linux/MavUI.Essentials.Linux.csproj (in 91 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 81 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.csproj (in 186 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 201 ms).
   1 of 5 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
@@ -27,9 +27,9 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:04.18
+Time Elapsed 00:00:04.02
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 288 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 279 ms).
   2 of 3 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
@@ -39,9 +39,9 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.09
+Time Elapsed 00:00:02.11
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials.Windows/MavUI.Essentials.Windows.csproj (in 220 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials.Windows/MavUI.Essentials.Windows.csproj (in 221 ms).
   1 of 2 projects are up-to-date for restore.
   MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
   MavUI.Essentials.Windows -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials.Windows/bin/Release/net10.0-windows/MavUI.Essentials.Windows.dll
@@ -50,7 +50,7 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:01.39
+Time Elapsed 00:00:01.38
   Determining projects to restore...
   All projects are up-to-date for restore.
   MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
@@ -60,11 +60,126 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:01.06
+Time Elapsed 00:00:01.05
 Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/MavUI.Tests.dll (.NETCoreApp,Version=v10.0)
 VSTest version 18.0.2 (x64)
 
 Starting test execution, please wait...
 A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:07.61]     Mav.Tests.ControlsGalleryShellTests.Shell_background_follows_the_light_theme [FAIL]
+  Failed Mav.Tests.ControlsGalleryShellTests.Shell_background_follows_the_light_theme [15 ms]
+  Error Message:
+   Assert.IsAssignableFrom() Failure: Value is null
+Expected: typeof(Avalonia.Media.ISolidColorBrush)
+Actual:   null
+  Stack Trace:
+     at Mav.Tests.ControlsGalleryShellTests.Shell_background_follows_the_light_theme() in /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/ControlsGalleryShellTests.cs:line 125
+   at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+   at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:08.67]     Mav.Tests.LocalizationTests.Get_uses_fallback_and_key_when_provider_has_no_value [FAIL]
+  Failed Mav.Tests.LocalizationTests.Get_uses_fallback_and_key_when_provider_has_no_value [9 ms]
+  Error Message:
+   System.InvalidOperationException : The calling thread cannot access this object because a different thread owns it.
+  Stack Trace:
+     at Avalonia.Threading.Dispatcher.<VerifyAccess>g__ThrowVerifyAccess|17_0()
+   at Avalonia.AvaloniaObject.SetValue[T](StyledProperty`1 property, T value, BindingPriority priority)
+   at Avalonia.Controls.ContentControl.set_Content(Object value)
+   at Mav.ControlsGallery.Shell.MainView.RebuildNavigation() in /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/Shell/MainView.axaml.cs:line 76
+   at Mav.ControlsGallery.Shell.MainView.<>c.<.ctor>b__9_2(MainView view) in /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/Shell/MainView.axaml.cs:line 46
+   at Mav.MavLocalization.<>c__DisplayClass33_0`1.<Observe>g__OnChanged|1(Object sender, EventArgs e) in /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavLocalization.cs:line 288
+   at Mav.MavLocalization.NotifyChanged() in /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavLocalization.cs:line 325
+   at Mav.MavLocalization.set_Current(IMavLocalizationProvider value) in /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavLocalization.cs:line 187
+   at Mav.Tests.LocalizationTests.Get_uses_fallback_and_key_when_provider_has_no_value() in /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/LocalizationTests.cs:line 72
+   at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+   at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:08.96]     Mav.Tests.DataTableVirtualizationTests.Adding_a_row_keeps_existing_row_controls_and_scroll [FAIL]
+[xUnit.net 00:00:08.97]     Mav.Tests.LocalizationTests.Format_uses_the_current_formatting_culture [FAIL]
+[xUnit.net 00:00:08.97]     [Test Case Cleanup Failure (Mav.Tests.VirtualizationTests.Replacing_an_item_rebuilds_only_that_control)] System.InvalidOperationException
+  Failed Mav.Tests.DataTableVirtualizationTests.Adding_a_row_keeps_existing_row_controls_and_scroll [2 ms]
+  Error Message:
+   System.InvalidOperationException : Stack empty.
+  Stack Trace:
+     at System.Collections.Generic.Stack`1.ThrowForEmptyStack()
+   at System.Collections.Generic.Stack`1.Pop()
+   at Avalonia.PropertyStore.ValueStore.SetInheritanceParent(AvaloniaObject newParent)
+   at Avalonia.StyledElement.Avalonia.Controls.ISetLogicalParent.SetParent(ILogical parent)
+   at Avalonia.Controls.Decorator.ChildChanged(AvaloniaPropertyChangedEventArgs e)
+   at Avalonia.Reactive.LightweightObservableBase`1.PublishNext(T value)
+   at Avalonia.PropertyStore.EffectiveValue`1.SetAndRaiseCore(ValueStore owner, StyledProperty`1 property, T value, BindingPriority priority, Boolean isOverriddenCurrentValue, Boolean isCoercedDefaultValue)
+   at Avalonia.Controls.Decorator.set_Child(Control value)
+   at Mav.Controls.MavDataTable.CreateRow(Object rowItem, Int32 r, Int32 count, MavTheme t, MavColorScheme c, Int32 colOffset) in /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavDataTable.cs:line 1861
+   at Mav.Controls.MavDataTable.AppendRowsChunk() in /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavDataTable.cs:line 1768
+   at Mav.Controls.MavDataTable.RebuildTable() in /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavDataTable.cs:line 1461
+   at Mav.Controls.MavDataTable.<.ctor>b__56_0(Object _, NotifyCollectionChangedEventArgs _) in /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavDataTable.cs:line 286
+   at Avalonia.Collections.AvaloniaList`1.Add(T item)
+   at Mav.Controls.MavDataTable.AddColumn(String header, Func`2 valueSelector, Boolean isNumeric, Boolean isSortable, Func`2 cellTemplate, Nullable`1 width) in /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavDataTable.cs:line 572
+   at Mav.Tests.DataTableVirtualizationTests.CreateMutableHost(Int32 count) in /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/DataTableVirtualizationTests.cs:line 181
+   at Mav.Tests.DataTableVirtualizationTests.Adding_a_row_keeps_existing_row_controls_and_scroll() in /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/DataTableVirtualizationTests.cs:line 201
+   at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+   at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  Failed Mav.Tests.LocalizationTests.Format_uses_the_current_formatting_culture [2 ms]
+  Error Message:
+   System.InvalidOperationException : Unable to locate 'Avalonia.Platform.ICursorFactory'.
+  Stack Trace:
+     at Avalonia.LocatorExtensions.GetRequiredService[T](IAvaloniaDependencyResolver resolver)
+   at Mav.Primitives.MavInkSurface..ctor() in /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Primitives/MavInkSurface.cs:line 152
+   at Mav.Controls.MavNavigationDrawer.AppendItemVisual(Int32 idx, MavDrawerItem item) in /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavNavigationDrawer.cs:line 363
+   at Mav.Controls.MavNavigationDrawer.AddItem(String label, String icon, String badge, Action onClick) in /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavNavigationDrawer.cs:line 303
+   at Mav.ControlsGallery.Shell.MainView.RebuildNavigation() in /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/Shell/MainView.axaml.cs:line 67
+   at Mav.ControlsGallery.Shell.MainView.<>c.<.ctor>b__9_2(MainView view) in /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/Shell/MainView.axaml.cs:line 46
+   at Mav.MavLocalization.<>c__DisplayClass33_0`1.<Observe>g__OnChanged|1(Object sender, EventArgs e) in /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavLocalization.cs:line 288
+   at Mav.MavLocalization.NotifyChanged() in /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavLocalization.cs:line 325
+   at Mav.MavLocalization.set_Current(IMavLocalizationProvider value) in /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavLocalization.cs:line 187
+   at Mav.Tests.LocalizationTests.Format_uses_the_current_formatting_culture() in /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/LocalizationTests.cs:line 94
+   at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+   at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  Failed Mav.Tests.VirtualizationTests.Replacing_an_item_rebuilds_only_that_control [1 ms]
+  Error Message:
+   [Test Case Cleanup Failure (Mav.Tests.VirtualizationTests.Replacing_an_item_rebuilds_only_that_control)]: System.InvalidOperationException : The calling thread cannot access this object because a different thread owns it.
+  Stack Trace:
+     at Avalonia.Threading.Dispatcher.<VerifyAccess>g__ThrowVerifyAccess|17_0()
+   at Avalonia.Rendering.DefaultRenderLoop.Add(IRenderLoopTask i)
+   at Avalonia.Rendering.Composition.Server.ServerCompositor..ctor(IRenderLoop renderLoop, IPlatformGraphics platformGraphics, CompositionOptions options, BatchStreamObjectPool`1 batchObjectPool, BatchStreamMemoryPool batchMemoryPool)
+   at Avalonia.Rendering.Composition.Compositor..ctor(IRenderLoop loop, IPlatformGraphics gpu, Boolean useUiThreadForSynchronousCommits, ICompositorScheduler scheduler, Boolean reclaimBuffersImmediately, Dispatcher dispatcher, CompositionOptions options)
+   at Avalonia.Rendering.Composition.Compositor..ctor(IRenderLoop loop, IPlatformGraphics gpu, Boolean useUiThreadForSynchronousCommits)
+   at Avalonia.Rendering.Composition.Compositor..ctor(IPlatformGraphics gpu, Boolean useUiThreadForSynchronousCommits)
+   at Avalonia.Headless.AvaloniaHeadlessPlatform.Initialize(AvaloniaHeadlessPlatformOptions opts)
+   at Avalonia.Headless.AvaloniaHeadlessPlatformExtensions.<>c__DisplayClass0_0.<UseHeadless>b__0()
+   at Avalonia.AppBuilder.SetupUnsafe()
+   at Avalonia.Headless.HeadlessUnitTestSession.EnsureIsolatedApplication()
+   at Avalonia.Headless.HeadlessUnitTestSession.<>c__DisplayClass12_0`1.<DispatchCore>b__0()
+--- End of stack trace from previous location ---
+   at Avalonia.Headless.XUnit.AvaloniaTestRunner.Run(IXunitTest test, IMessageBus messageBus, Object[] constructorArguments, ExplicitOption explicitOption, ExceptionAggregator aggregator, CancellationTokenSource cancellationTokenSource, IReadOnlyCollection`1 beforeAfterAttributes, HeadlessUnitTestSession session)
+   at Avalonia.Headless.XUnit.AvaloniaTestRunner.Run(IXunitTest test, IMessageBus messageBus, Object[] constructorArguments, ExplicitOption explicitOption, ExceptionAggregator aggregator, CancellationTokenSource cancellationTokenSource, IReadOnlyCollection`1 beforeAfterAttributes, HeadlessUnitTestSession session)
+[xUnit.net 00:00:09.18]     Mav.Tests.LocalizationTests.SetCulture_updates_ui_culture_and_raises_changed [FAIL]
+  Failed Mav.Tests.LocalizationTests.SetCulture_updates_ui_culture_and_raises_changed [5 ms]
+  Error Message:
+   System.InvalidOperationException : Unable to locate 'Avalonia.Platform.ICursorFactory'.
+  Stack Trace:
+     at Avalonia.LocatorExtensions.GetRequiredService[T](IAvaloniaDependencyResolver resolver)
+   at Mav.Primitives.MavInkSurface..ctor() in /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Primitives/MavInkSurface.cs:line 152
+   at Mav.Controls.MavNavigationRail.RailCell..ctor(MavNavigationDestination dest, Action onClick) in /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavNavigation.cs:line 635
+   at Mav.Controls.MavNavigationRail.Rebuild() in /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavNavigation.cs:line 562
+   at Mav.Controls.MavNavigationRail.<.ctor>b__18_1(Object _, NotifyCollectionChangedEventArgs e) in /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavNavigation.cs:line 445
+   at Avalonia.Collections.AvaloniaList`1.Add(T item)
+   at Mav.Controls.MavNavigationRail.AddDestination(String label, String icon, String selectedIcon, String badge) in /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavNavigation.cs:line 541
+   at Mav.ControlsGallery.Shell.MainView.RebuildNavigation() in /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/Shell/MainView.axaml.cs:line 68
+   at Mav.ControlsGallery.Shell.MainView.<>c.<.ctor>b__9_2(MainView view) in /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/Shell/MainView.axaml.cs:line 46
+   at Mav.MavLocalization.<>c__DisplayClass33_0`1.<Observe>g__OnChanged|1(Object sender, EventArgs e) in /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavLocalization.cs:line 288
+   at Mav.MavLocalization.NotifyChanged() in /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavLocalization.cs:line 325
+   at Mav.MavLocalization.SetCulture(CultureInfo culture, Boolean setFormattingCulture) in /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavLocalization.cs:line 230
+   at Mav.Tests.LocalizationTests.SetCulture_updates_ui_culture_and_raises_changed() in /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/LocalizationTests.cs:line 118
+   at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+   at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
 
-Passed!  - Failed:     0, Passed:   264, Skipped:     0, Total:   264, Duration: 15 s - MavUI.Tests.dll (net10.0)
+Failed!  - Failed:     6, Passed:   259, Skipped:     0, Total:   265, Duration: 17 s - MavUI.Tests.dll (net10.0)
