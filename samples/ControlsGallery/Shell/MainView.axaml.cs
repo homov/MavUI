@@ -40,6 +40,12 @@ public partial class MainView : UserControl
         Page.AddAction(MavIcons.Info, ShowAbout, "About this gallery");
         Page.NavigationAction = OpenDrawer;
 
+        // A MavContentPage draws no app bar of its own: the navigation host does. Move the page into
+        // the host so the top bar, its navigation icon (menu on narrow windows) and actions appear.
+        if (Page.Parent is Panel owner)
+            owner.Children.Remove(Page);
+        Nav.SetRoot(Page);
+
         SizeChanged += (_, _) => UpdateAdaptive();
 
         // Navigation labels are plain strings, so the navigation is rebuilt on language changes.
@@ -95,6 +101,7 @@ public partial class MainView : UserControl
         Page.Subtitle = destination.Subtitle;
 
         Host.Content = _pages[index] ??= destination.Build();
+        Nav.RefreshChrome();
         SyncSelection();
 
         if (_modal?.IsOpen == true)
@@ -128,6 +135,7 @@ public partial class MainView : UserControl
         Grid.SetColumnSpan(Host, wide || medium ? 1 : 2);
 
         Page.NavigationIcon = wide || medium ? null : MavIcons.Menu;
+        Nav.RefreshChrome();
     }
 
     private void OpenDrawer()

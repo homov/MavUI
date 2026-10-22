@@ -107,6 +107,28 @@ public class ControlsGalleryShellTests
         }
     }
 
+    [AvaloniaFact]
+    public void Shell_hosts_its_page_in_a_navigation_page_with_app_bar()
+    {
+        var view = new MainView();
+        var window = new Window { Width = 500, Height = 800, Content = view };
+        window.Show();
+
+        try
+        {
+            // The app bar (navigation icon, title, actions) comes from the navigation host.
+            var host = view.GetVisualDescendants().OfType<MavNavigationPage>().Single();
+            Assert.NotNull(host.CurrentPage);
+            Assert.False(string.IsNullOrEmpty(host.CurrentPage!.Title));
+            Assert.Equal(3, host.CurrentPage.Actions.Count);
+            Assert.NotNull(host.CurrentPage.NavigationAction);
+        }
+        finally
+        {
+            window.Close();
+        }
+    }
+
     private static Panel OverlayHostOf(MainView view) =>
         view.GetVisualDescendants().OfType<Panel>().Single(p => p.Name == "OverlayHost");
 }

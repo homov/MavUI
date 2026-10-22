@@ -4,25 +4,31 @@
              x:Class="Mav.ControlsGallery.Shell.MainView"
              Background="{DynamicResource Md.Brush.Background}">
   <Grid>
-  <mav:MavContentPage x:Name="Page"
-                      Title="{mav:Loc Shell.Title, Fallback=Control Gallery}"
-                      Subtitle="{mav:Loc Shell.Subtitle, Fallback=Every Mav control\, grouped by purpose}">
-    <!-- Adaptive layout: permanent drawer (wide), rail (medium), modal drawer from the app bar (phone). -->
-    <Grid ColumnDefinitions="Auto,*">
-      <ContentControl x:Name="DrawerHost" Grid.Column="0" />
-      <mav:MavScrollViewer x:Name="RailScroll"
-                           Grid.Column="0"
-                           Width="88"
-                           HorizontalScrollBarVisibility="Disabled">
-        <ContentControl x:Name="RailHost" />
-      </mav:MavScrollViewer>
-      <ContentControl x:Name="Host"
-                      Grid.Column="1"
-                      HorizontalContentAlignment="Stretch"
-                      VerticalContentAlignment="Stretch" />
-    </Grid>
-  </mav:MavContentPage>
-  <!-- Overlay host: snackbars, dialogs and menus are added here when the top level has no overlay layer (browser, mobile). -->
-  <Panel x:Name="OverlayHost" />
+    <!-- App-bar host. It draws the top bar (navigation icon, title, actions) for Page
+         and routes the navigation click to Page.NavigationAction. -->
+    <mav:MavNavigationPage x:Name="Nav" />
+
+    <!-- Page: the adaptive layout (permanent drawer when wide, rail when medium,
+         modal drawer from the app bar when narrow). Moved into Nav in code-behind. -->
+    <mav:MavContentPage x:Name="Page"
+                        Title="{mav:Loc Shell.Title, Fallback=Control Gallery}"
+                        Subtitle="{mav:Loc Shell.Subtitle, Fallback=Every Mav control\, grouped by purpose}">
+      <Grid ColumnDefinitions="Auto,*">
+        <ContentControl x:Name="DrawerHost" Grid.Column="0" />
+        <mav:MavScrollViewer x:Name="RailScroll"
+                             Grid.Column="0"
+                             Width="88"
+                             HorizontalScrollBarVisibility="Disabled">
+          <ContentControl x:Name="RailHost" />
+        </mav:MavScrollViewer>
+        <ContentControl x:Name="Host"
+                        Grid.Column="1"
+                        HorizontalContentAlignment="Stretch"
+                        VerticalContentAlignment="Stretch" />
+      </Grid>
+    </mav:MavContentPage>
+
+    <!-- Overlay host: snackbars, dialogs and menus are added here when the top level has no overlay layer (browser, mobile). -->
+    <Panel x:Name="OverlayHost" />
   </Grid>
 </UserControl>
