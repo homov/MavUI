@@ -46,12 +46,14 @@ jobs:
 
       - name: Profile theme switch (only when commit message has [profile])
         if: contains(github.event.head_commit.message, '[profile]')
-        continue-on-error: true
         shell: bash
         run: |
+          mkdir -p ci/profile
+          exec > >(tee ci/profile/profile-log.txt) 2>&1
+          echo "pgrep: $(command -v pgrep || echo MISSING)"
           export PATH="$HOME/.dotnet/tools:$PATH"
           dotnet tool update -g dotnet-trace || dotnet tool install -g dotnet-trace
-          mkdir -p ci/profile
+          echo "dotnet-trace: $(command -v dotnet-trace || echo MISSING)"
           TRACE_JSON="$RUNNER_TEMP/theme.speedscope.json"
           # Run the test in the background, then attach dotnet-trace to its testhost process.
           # dotnet-trace owns the trace session, so the file is written cleanly.
@@ -64,13 +66,13 @@ jobs:
             [ -n "$PID" ] && break
             sleep 0.2
           done
-          echo "testhost pid: ${PID:-none}" | tee -a build.log
+          echo "testhost pid: ${PID:-none}"
           if [ -n "$PID" ]; then
             dotnet-trace collect -p "$PID" --profile cpu-sampling --format speedscope \
-              -o "$TRACE_JSON" --duration 00:01:00 2>&1 | tee -a build.log
+              -o "$TRACE_JSON" --duration 00:01:00
           fi
           wait "$TEST_PID" || true
-          cat "$RUNNER_TEMP/test.log" >> build.log
+          tail -5 "$RUNNER_TEMP/test.log"
           if [ -f "$TRACE_JSON" ]; then
             cp "$TRACE_JSON" ci/profile/theme.speedscope.json
             python3 tools/summarize_speedscope.py "$TRACE_JSON" 40 > ci/profile/theme-summary.txt
