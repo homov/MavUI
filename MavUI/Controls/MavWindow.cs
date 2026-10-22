@@ -6,17 +6,21 @@ using Avalonia.Controls.Templates;
 using Avalonia.Data;
 using Avalonia.Layout;
 using Avalonia.Media;
+using Mav.Theming;
 
 namespace Mav.Controls;
 
 /// <summary>
 /// Desktop window host with a built-in template. Use it instead of relying on an
-/// Avalonia theme for the window chrome; the Material page itself provides the
-/// visible surface. The template still includes the visual layer manager required
-/// by overlays, popups and the Mav overlay host.
+/// Avalonia theme for the window chrome. The window paints the theme surface behind
+/// its content, so the desktop never shows through; a <see cref="Window.Background"/>
+/// set by the caller is kept. The template still includes the visual layer manager
+/// required by overlays, popups and the Mav overlay host.
 /// </summary>
 public class MavWindow : Window
 {
+    private IBrush? _themeBackground;
+
     private static readonly IControlTemplate DefaultTemplate =
         new FuncControlTemplate<Window>((window, scope) =>
         {
@@ -57,7 +61,15 @@ public class MavWindow : Window
     /// <summary>Creates a window with the library chrome and theme.</summary>
     public MavWindow()
     {
-        Background = Brushes.Transparent;
+        // Runs now and on every theme change. The theme brush is replaced only while the window
+        // still uses it, so a Background chosen by the caller survives theme switches.
+        MavTheme.Observe(this, (self, theme) =>
+        {
+            var brush = MavTheme.BrushOf(theme.Color.Surface);
+            if (self.Background is null || ReferenceEquals(self.Background, self._themeBackground))
+                self.Background = brush;
+            self._themeBackground = brush;
+        });
         Template = DefaultTemplate;
     }
 }
