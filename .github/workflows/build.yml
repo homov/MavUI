@@ -68,7 +68,7 @@ jobs:
           done
           echo "testhost pid: ${PID:-none}"
           if [ -n "$PID" ]; then
-            dotnet-trace collect -p "$PID" --profile cpu-sampling --format speedscope \
+            dotnet-trace collect -p "$PID" --profile dotnet-sampled-thread-time --format speedscope \
               -o "$TRACE_JSON" --duration 00:01:00
           fi
           wait "$TEST_PID" || true
