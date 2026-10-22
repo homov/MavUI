@@ -1,7 +1,7 @@
 # Last build log
-commit: 34ab20dffbb9c4c90ecf4d4f903510c4e53de7f7
+commit: 8edc87019e7d16e23b96f90676353910761d8a74
 job status: success
-run: https://github.com/homov/MavUI/actions/runs/39801166505
+run: https://github.com/homov/MavUI/actions/runs/39802049817
 
   Md3.Avalonia -> /home/homo/github/actions-runner/_work/MavUI/MavUI/ref/Md3.Avalonia/bin/Release/net10.0/Md3.Avalonia.dll
 
@@ -9,4 +9,4 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:03.92
+Time Elapsed 00:00:03.82
