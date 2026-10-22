@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Windows SecureStorage backend for MavUI.Essentials, protected with DPAPI (CurrentUser scope).
+    EnableWindowsTargeting lets the project compile on non-Windows build agents; the DPAPI calls run only on Windows.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <SupportedOSPlatformVersion>10.0</SupportedOSPlatformVersion>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>Mav.Essentials.Windows</RootNamespace>
+    <AssemblyName>MavUI.Essentials.Windows</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MavUI.Essentials\MavUI.Essentials.csproj" />
+  </ItemGroup>
+
+</Project>
