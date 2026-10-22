@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Headless;
 using Avalonia.Headless.XUnit;
+using Avalonia.Skia;
 using Avalonia.Themes.Fluent;
 using Md3.Avalonia.Theming;
 

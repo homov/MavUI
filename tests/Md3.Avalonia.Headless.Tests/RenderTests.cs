@@ -5,6 +5,7 @@ using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Threading;
 using Avalonia.Headless.XUnit;
+using Xunit;
 using Md3.Avalonia.Controls;
 
 namespace Md3.Avalonia.Headless.Tests;
@@ -46,7 +47,8 @@ public class RenderTests
         };
 
         window.Show();
-        window.LayoutManager.ExecuteInitialLayoutPass();
+        window.Measure(new Size(width, height));
+        window.Arrange(new Rect(0, 0, width, height));
         Dispatcher.UIThread.RunJobs();
 
         var bitmap = window.CaptureRenderedFrame();
