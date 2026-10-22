@@ -80,21 +80,22 @@ public partial class FeedbackPage : UserControl
         return Row(dialogButton, sheetButton, sideButton);
     }
 
-    private static Control BuildMessages()
+    private Control BuildMessages()
     {
         var snack = new MavButton(MavLocalization.Get("Feedback.Snack.Show", "Show snackbar"), MavButtonVariant.Filled, MavIcons.Notifications);
         snack.Clicked += (_, _) => MavSnackbar.Show(
             MavLocalization.Get("Feedback.Snack.Deleted", "Item deleted"),
             MavLocalization.Get("Feedback.Snack.Undo", "Undo"),
             () => { },
-            duration: MavSnackbarDuration.Long);
+            duration: MavSnackbarDuration.Long,
+            anchor: this);
 
         var queue = new MavButton(MavLocalization.Get("Feedback.Snack.Queue", "Queue snackbars"), MavButtonVariant.Tonal, MavIcons.PlaylistAdd);
         queue.Clicked += (_, _) =>
         {
-            MavSnackbar.Enqueue(MavLocalization.Get("Feedback.Snack.Uploading", "Uploading photo…"), duration: MavSnackbarDuration.Short);
+            MavSnackbar.Enqueue(MavLocalization.Get("Feedback.Snack.Uploading", "Uploading photo…"), duration: MavSnackbarDuration.Short, anchor: this);
             MavSnackbar.Enqueue(MavLocalization.Get("Feedback.Snack.Complete", "Upload complete"),
-                MavLocalization.Get("Feedback.Snack.Undo", "Undo"), () => { }, duration: MavSnackbarDuration.Long);
+                MavLocalization.Get("Feedback.Snack.Undo", "Undo"), () => { }, duration: MavSnackbarDuration.Long, anchor: this);
         };
 
         var dismiss = new MavButton(MavLocalization.Get("Feedback.Snack.Dismiss", "Dismiss snackbar"), MavButtonVariant.Text, MavIcons.Close);
@@ -103,7 +104,7 @@ public partial class FeedbackPage : UserControl
         var indefinite = new MavButton(MavLocalization.Get("Feedback.Snack.Indefinite", "Indefinite snackbar"), MavButtonVariant.Outlined, MavIcons.HourglassBottom);
         indefinite.Clicked += (_, _) => MavSnackbar.Show(
             MavLocalization.Get("Feedback.Snack.IndefiniteText", "Indefinite snackbar — dismiss with ×"),
-            duration: MavSnackbarDuration.Indefinite);
+            duration: MavSnackbarDuration.Indefinite, anchor: this);
 
         var banner = new MavBanner
         {

@@ -4,6 +4,7 @@ using Avalonia.Headless.XUnit;
 using System.Linq;
 using Avalonia.Controls.Primitives;
 using Avalonia.VisualTree;
+using Mav.ControlsGallery.Pages;
 using Mav.ControlsGallery.Shell;
 using Mav.Controls;
 using Xunit;
@@ -39,11 +40,32 @@ public class ControlsGalleryShellTests
 
         try
         {
-            MavSnackbar.Show("Saved");
+            MavSnackbar.Show("Saved", anchor: view);
 
             var inHost = OverlayHostOf(view).Children.Count > 0;
             var inLayer = OverlayLayer.GetOverlayLayer(window) is { Children.Count: > 0 };
             Assert.True(inHost || inLayer, "Snackbar was not added to any overlay.");
+        }
+        finally
+        {
+            MavSnackbar.Dismiss();
+            window.Close();
+        }
+    }
+
+    [AvaloniaFact]
+    public void Feedback_page_snackbar_appears_when_anchored_to_the_page()
+    {
+        var page = new FeedbackPage();
+        var window = new Window { Width = 1200, Height = 900, Content = page };
+        window.Show();
+
+        try
+        {
+            MavSnackbar.Show("Saved", anchor: page);
+
+            Assert.True(OverlayLayer.GetOverlayLayer(window) is { Children.Count: > 0 },
+                "Snackbar anchored to the Feedback page was not added to the window overlay.");
         }
         finally
         {
