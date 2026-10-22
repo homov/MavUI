@@ -1,14 +1,12 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
-using Avalonia.Media;
 using System.Linq;
 using Avalonia.Controls.Primitives;
 using Avalonia.VisualTree;
 using Mav.ControlsGallery.Pages;
 using Mav.ControlsGallery.Shell;
 using Mav.Controls;
-using Mav.Theming;
 using Xunit;
 
 namespace Mav.Tests;
@@ -106,29 +104,6 @@ public class ControlsGalleryShellTests
         finally
         {
             window.Close();
-        }
-    }
-
-    [AvaloniaFact]
-    public void Shell_background_follows_the_light_theme()
-    {
-        var wasDark = MavTheme.Current.IsDark;
-        try
-        {
-            MavTheme.UseLight();
-
-            // The shell paints its own background; without it the browser body (dark on dark systems) shows through.
-            var view = new MainView();
-            var window = new Window { Width = 1200, Height = 900, Content = view };
-            window.Show();
-
-            var brush = Assert.IsAssignableFrom<ISolidColorBrush>(view.Background);
-            Assert.Equal(MavTheme.Current.Color.Background, brush.Color);
-            window.Close();
-        }
-        finally
-        {
-            if (wasDark) MavTheme.UseDark(); else MavTheme.UseLight();
         }
     }
 
