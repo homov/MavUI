@@ -1,21 +1,21 @@
 # Last build log
-commit: 828db2ec88e296d4b35082a1b8a2555ddd864708
-run: https://github.com/homov/MavUI/actions/runs/39845200037
+commit: d862986d01117f7d10a99b355525a38f85aa4c7f
+run: https://github.com/homov/MavUI/actions/runs/39845360474
 
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 263 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 261 ms).
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:07.45
+Time Elapsed 00:00:07.63
   Determining projects to restore...
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials.Linux/MavUI.Essentials.Linux.csproj (in 89 ms).
   Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 81 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials.Linux/MavUI.Essentials.Linux.csproj (in 88 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.csproj (in 187 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 203 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.csproj (in 193 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 209 ms).
   1 of 5 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
@@ -27,9 +27,9 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:04.27
+Time Elapsed 00:00:04.21
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 284 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 292 ms).
   2 of 3 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
@@ -39,9 +39,9 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.15
+Time Elapsed 00:00:02.12
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials.Windows/MavUI.Essentials.Windows.csproj (in 222 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials.Windows/MavUI.Essentials.Windows.csproj (in 221 ms).
   1 of 2 projects are up-to-date for restore.
   MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
   MavUI.Essentials.Windows -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials.Windows/bin/Release/net10.0-windows/MavUI.Essentials.Windows.dll
@@ -50,7 +50,7 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:01.39
+Time Elapsed 00:00:01.40
   Determining projects to restore...
   All projects are up-to-date for restore.
   MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
@@ -60,19 +60,11 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:01.04
+Time Elapsed 00:00:01.05
 Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/MavUI.Tests.dll (.NETCoreApp,Version=v10.0)
 VSTest version 18.0.2 (x64)
 
 Starting test execution, please wait...
 A total of 1 test files matched the specified pattern.
-[xUnit.net 00:00:06.43]     Mav.Tests.ControlsGalleryShellTests.Feedback_page_snackbar_appears_when_anchored_to_the_page [FAIL]
-  Failed Mav.Tests.ControlsGalleryShellTests.Feedback_page_snackbar_appears_when_anchored_to_the_page [12 ms]
-  Error Message:
-   Snackbar anchored to the Feedback page was not added to the window overlay.
-  Stack Trace:
-     at Mav.Tests.ControlsGalleryShellTests.Feedback_page_snackbar_appears_when_anchored_to_the_page() in /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/ControlsGalleryShellTests.cs:line 67
-   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
-   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
 
-Failed!  - Failed:     1, Passed:   262, Skipped:     0, Total:   263, Duration: 14 s - MavUI.Tests.dll (net10.0)
+Passed!  - Failed:     0, Passed:   263, Skipped:     0, Total:   263, Duration: 15 s - MavUI.Tests.dll (net10.0)
