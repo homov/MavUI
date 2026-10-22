@@ -66,7 +66,7 @@ migrated/
 │   │   ├── Services/            сессия, устройства, расписания, локации, настройки, язык, Wi-Fi-интерфейс
 │   │   ├── Pages/               XAML-страницы и их ViewModel (Login, Devices, Device, Schedule, Settings, ...)
 │   │   ├── Models/              доменные модели и маппинг из API
-│   │   ├── Localization/        по одному файлу на язык: En.cs, Uk.cs, Pl.cs, ...
+│   │   ├── Localization/        по одному файлу на язык: En.cs, Uk.cs
 │   │   └── Resources/           шрифты, изображения
 │   └── HC.Tests/                тесты (headless, Avalonia.Headless) и маппинг API
 └── docs/
