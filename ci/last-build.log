@@ -1,16 +1,16 @@
 # Last build log
-commit: 74fe922fa3d517d33b50bb6b0545f5815691667e
-run: https://github.com/homov/MavUI/actions/runs/39825420448
+commit: 3b628071d2b74be5839b0f02d7b1343ab96624f3
+run: https://github.com/homov/MavUI/actions/runs/39826000709
 
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Md3.Avalonia/Md3.Avalonia.csproj (in 826 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Md3.Avalonia/Md3.Avalonia.csproj (in 262 ms).
   Md3.Avalonia -> /home/homo/github/actions-runner/_work/MavUI/MavUI/Md3.Avalonia/bin/Release/net10.0/Md3.Avalonia.dll
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:08.29
+Time Elapsed 00:00:07.67
   Determining projects to restore...
   Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/Md3.Avalonia.Tests.csproj (in 264 ms).
   1 of 2 projects are up-to-date for restore.
@@ -21,9 +21,9 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.20
+Time Elapsed 00:00:02.07
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/Demo/Md3.Demo.csproj (in 265 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/Demo/Md3.Demo.csproj (in 268 ms).
   1 of 2 projects are up-to-date for restore.
   Md3.Avalonia -> /home/homo/github/actions-runner/_work/MavUI/MavUI/Md3.Avalonia/bin/Release/net10.0/Md3.Avalonia.dll
   Md3.Demo -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/Demo/bin/Release/net10.0/Md3.Demo.dll
@@ -32,9 +32,9 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.00
+Time Elapsed 00:00:01.99
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/Gallery/Md3.Gallery.csproj (in 264 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/Gallery/Md3.Gallery.csproj (in 266 ms).
   1 of 2 projects are up-to-date for restore.
   Md3.Avalonia -> /home/homo/github/actions-runner/_work/MavUI/MavUI/Md3.Avalonia/bin/Release/net10.0/Md3.Avalonia.dll
   Md3.Gallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/Gallery/bin/Release/net10.0/Md3.Gallery.dll
@@ -43,11 +43,11 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.01
+Time Elapsed 00:00:02.02
 Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/Md3.Avalonia.Tests.dll (.NETCoreApp,Version=v10.0)
 VSTest version 18.0.2 (x64)
 
 Starting test execution, please wait...
 A total of 1 test files matched the specified pattern.
 
-Passed!  - Failed:     0, Passed:   241, Skipped:     0, Total:   241, Duration: 14 s - Md3.Avalonia.Tests.dll (net10.0)
+Passed!  - Failed:     0, Passed:   243, Skipped:     0, Total:   243, Duration: 14 s - Md3.Avalonia.Tests.dll (net10.0)
