@@ -6,6 +6,8 @@ using Avalonia.Data;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Metadata;
+using Avalonia.VisualTree;
+using Mav.Platform;
 using Mav.Primitives;
 using Mav.Theming;
 
@@ -168,6 +170,7 @@ public class MavNavigationSuiteScaffold : MavContentView, IEnumerable<MavSuiteDe
     private readonly List<object> _rawItems = [];
     private readonly MavCollectionObserver _observer;
     private readonly Grid _root;
+    private readonly Panel _overlayHost;
     private readonly Border _topBarHost;
     private readonly Border _bodyHost;
     private readonly Border _fabHost;
@@ -274,13 +277,36 @@ public class MavNavigationSuiteScaffold : MavContentView, IEnumerable<MavSuiteDe
             RowDefinitions = new RowDefinitions("Auto,*,Auto"),
         };
 
-        Content = _root;
+        // Overlays shown from this scaffold go into a layer above the content. Registering it as an
+        // overlay host lets them appear where the window has no overlay layer (Android, browser).
+        _overlayHost = new Panel { IsHitTestVisible = false };
+        _overlayHost.Children.CollectionChanged += (_, _) =>
+            _overlayHost.IsHitTestVisible = _overlayHost.Children.Count > 0;
+
+        Content = new Panel
+        {
+            Children = { _root, _overlayHost },
+        };
 
         SizeChanged += (_, _) => UpdateLayoutMode();
         MavTheme.Observe(this, (self, theme) =>
         {
             self._root.Background = MavTheme.BrushOf(theme.Color.Surface);
         });
+    }
+
+    /// <summary>Registers the overlay layer of this scaffold while it is part of a visual tree.</summary>
+    protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        base.OnAttachedToVisualTree(e);
+        MavOverlay.RegisterHost(this, _overlayHost);
+    }
+
+    /// <summary>Removes the overlay host when the scaffold leaves the visual tree.</summary>
+    protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        base.OnDetachedFromVisualTree(e);
+        MavOverlay.UnregisterHost(this);
     }
 
     public int SelectedIndex
