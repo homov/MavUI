@@ -1,57 +1,30 @@
 # Last build log
-commit: 7affd4879cbb3f648ff875ff2a610247a6e20438
-run: https://github.com/homov/MavUI/actions/runs/39869458986
+commit: 6fb0db359cb6b2b528808acef4b8d42ca47b2f98
+run: https://github.com/homov/MavUI/actions/runs/39869578730
 
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 259 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 257 ms).
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:04.69
+Time Elapsed 00:00:04.90
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 230 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 234 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 230 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 222 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 223 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 228 ms).
   1 of 4 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
   MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
-  MavUI.Tests -> /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/MavUI.Tests.dll
+/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/ComponentBehaviorTests.cs(63,26): error CS0246: The type or namespace name 'List<>' could not be found (are you missing a using directive or an assembly reference?) [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj]
 
-Build succeeded.
+Build FAILED.
+
+/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/ComponentBehaviorTests.cs(63,26): error CS0246: The type or namespace name 'List<>' could not be found (are you missing a using directive or an assembly reference?) [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj]
     0 Warning(s)
-    0 Error(s)
+    1 Error(s)
 
-Time Elapsed 00:00:04.65
-  Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 280 ms).
-  2 of 3 projects are up-to-date for restore.
-  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
-  ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
-  ControlsGallery.Desktop -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/bin/Release/net10.0/ControlsGallery.Desktop.dll
-
-Build succeeded.
-    0 Warning(s)
-    0 Error(s)
-
-Time Elapsed 00:00:02.11
-  Determining projects to restore...
-  All projects are up-to-date for restore.
-  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0-windows/MavUI.Essentials.dll
-  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
-
-Build succeeded.
-    0 Warning(s)
-    0 Error(s)
-
-Time Elapsed 00:00:01.04
-Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/MavUI.Tests.dll (.NETCoreApp,Version=v10.0)
-VSTest version 18.0.2 (x64)
-
-Starting test execution, please wait...
-A total of 1 test files matched the specified pattern.
-
-Passed!  - Failed:     0, Passed:   274, Skipped:     0, Total:   274, Duration: 15 s - MavUI.Tests.dll (net10.0)
+Time Elapsed 00:00:04.41
