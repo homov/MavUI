@@ -1,2 +1,2 @@
-500 x MdButton attached, SyncAppResources (app.Resources writes) + RunJobs: median 24.74 ms
-500 x MdButton attached, RequestedThemeVariant flip + RunJobs: median 1.23 ms
+500 x MdButton attached, SyncAppResources (app.Resources writes) + RunJobs: median 9.11 ms
+500 x MdButton attached, RequestedThemeVariant flip + RunJobs: median 0.14 ms

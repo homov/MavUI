@@ -1,0 +1,3 @@
+pgrep: /usr/bin/pgrep
+Tool 'dotnet-trace' is already installed.
+dotnet-trace: /home/homo/.dotnet/tools/dotnet-trace
