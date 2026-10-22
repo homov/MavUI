@@ -2,8 +2,6 @@ using Avalonia;
 using Avalonia.Headless;
 using Avalonia.Headless.XUnit;
 
-[assembly: AvaloniaTestApplication(typeof(Mav.Tests.TestAppBuilder))]
-
 namespace Mav.Tests;
 
 public static class TestAppBuilder

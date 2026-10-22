@@ -1,19 +1,10 @@
-using Avalonia;
 using Avalonia.Media;
-using Avalonia.Media.Fonts;
-using Avalonia.Metadata;
-
-[assembly: XmlnsDefinition("https://where.it/mav", "Mav")]
-[assembly: XmlnsDefinition("https://where.it/mav", "Mav.Controls")]
-[assembly: XmlnsDefinition("https://where.it/mav", "Mav.Primitives")]
-[assembly: XmlnsDefinition("https://where.it/mav", "Mav.Theming")]
-[assembly: XmlnsDefinition("https://where.it/mav", "Mav.Platform")]
-[assembly: XmlnsPrefix("https://where.it/mav", "mav")]
 
 namespace Mav;
 
 /// <summary>
-/// Font registration helper and font family constants for Mav.
+/// Font family constants, typefaces and icon font resolution for Mav.
+/// Registration with the Avalonia app is done by <c>UseMav</c> in <c>MavAppBuilderExtensions</c>.
 /// Supports the classic Material Icons font, Material Symbols Rounded, and
 /// Pictogrammers Material Design Icons (10,800+ combined glyphs).
 /// </summary>
@@ -113,44 +104,4 @@ public static class MavFonts
 
     public static readonly Uri FontCollectionKey = new("fonts:MavFonts", UriKind.Absolute);
     public static readonly Uri FontCollectionSource = new("avares://MavUI/Resources/Fonts", UriKind.Absolute);
-
-    /// <summary>
-    /// Registers embedded Material Icons, Material Symbols Rounded, Material Design Icons,
-    /// and Roboto fonts with the Avalonia <see cref="AppBuilder"/>, and optionally configures <see cref="Theming.MavTheme"/>.
-    /// </summary>
-    public static AppBuilder UseMav(this AppBuilder builder, Action<Theming.MavThemeOptions>? configure = null)
-    {
-        Platform.MavOverlay.Initialize();
-        builder.ConfigureFonts(fontManager =>
-        {
-            fontManager.AddFontCollection(new EmbeddedFontCollection(
-                FontCollectionKey,
-                FontCollectionSource));
-        });
-
-        if (configure is not null)
-        {
-            builder.AfterSetup(_ => Theming.MavTheme.Configure(configure));
-        }
-
-        return builder;
-    }
-
-    public static AppBuilder UseMav(this AppBuilder builder, Theming.MavThemeOptions options)
-    {
-        ArgumentNullException.ThrowIfNull(options);
-        return builder.UseMav(opts =>
-        {
-            opts.SeedColor = options.SeedColor;
-            opts.UseSystemAccentColor = options.UseSystemAccentColor;
-            opts.Mode = options.Mode;
-            opts.SchemeVariant = options.SchemeVariant;
-            opts.Contrast = options.Contrast;
-            opts.Density = options.Density;
-            opts.Motion = options.Motion;
-            opts.ShapeScale = options.ShapeScale;
-            opts.CustomLightScheme = options.CustomLightScheme;
-            opts.CustomDarkScheme = options.CustomDarkScheme;
-        });
-    }
 }
