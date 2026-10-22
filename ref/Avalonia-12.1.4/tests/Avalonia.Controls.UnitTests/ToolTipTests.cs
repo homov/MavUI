@@ -1,0 +1,689 @@
+using System;
+using System.Collections.Generic;
+using System.Reactive;
+using System.Runtime.CompilerServices;
+using Avalonia.Controls.Primitives;
+using Avalonia.Data;
+using Avalonia.Input;
+using Avalonia.Input.Raw;
+using Avalonia.Platform;
+using Avalonia.Rendering;
+using Avalonia.Threading;
+using Avalonia.UnitTests;
+using Moq;
+using Xunit;
+
+namespace Avalonia.Controls.UnitTests
+{
+    public class ToolTipTests_Popup : ToolTipTests
+    {
+        protected override TestServices ConfigureServices(TestServices baseServices) => baseServices;
+
+        protected override void SetupWindowMock(Mock<IWindowImpl> windowImpl) { }
+
+        protected override void VerifyToolTipType(Control control)
+        {
+            var toolTip = control.GetValue(ToolTip.ToolTipProperty);
+            Assert.NotNull(toolTip);
+            Assert.IsType<PopupRoot>(toolTip.PopupHost);
+            Assert.Same(TopLevel.GetTopLevel(toolTip), toolTip.PopupHost);
+        }
+
+        [Fact]
+        public void Should_Not_Close_When_Pointer_Is_Over_ToolTip_Window_Without_Hit_Test_Result()
+        {
+            using var app = UnitTestApplication.Start(ConfigureServices(TestServices.FocusableWindow));
+
+            var target = new Decorator
+            {
+                [ToolTip.TipProperty] = "Tip",
+                [ToolTip.ShowDelayProperty] = 0
+            };
+
+            var scope = SetupWindow(target);
+
+            scope.MouseEnter(target);
+            AssertToolTipOpen(target);
+
+            var toolTip = Assert.IsType<ToolTip>(target.GetValue(ToolTip.ToolTipProperty));
+            var toolTipRoot = Assert.IsType<PopupRoot>(toolTip.PopupHost).GetInputRoot();
+            Assert.NotNull(toolTipRoot);
+
+            scope.SendRawPointerEvent(RawPointerEventType.Move, toolTipRoot, scope.GetPointerPosition(null));
+
+            AssertToolTipOpen(target);
+        }
+
+        [Fact]
+        public void Should_Not_Close_When_Leaving_Window_Right_After_ToolTip_Opened_Under_Pointer()
+        {
+            using var app = UnitTestApplication.Start(ConfigureServices(TestServices.FocusableWindow));
+
+            var target = new Decorator
+            {
+                [ToolTip.TipProperty] = "Tip",
+                [ToolTip.ShowDelayProperty] = 0
+            };
+
+            var scope = SetupWindow(target);
+
+            scope.MouseEnter(target);
+            AssertToolTipOpen(target);
+
+            // The pointer is still over the adorned control: this leave event is only caused by the tooltip window
+            // being displayed on top of it (macOS case).
+            scope.SendRawPointerEvent(RawPointerEventType.LeaveWindow, scope.Window.InputRoot, scope.GetPointerPosition(target));
+
+            AssertToolTipOpen(target);
+        }
+    }
+
+    public class ToolTipTests_Overlay : ToolTipTests, IDisposable
+    {
+        private readonly IDisposable _toolTipOpenSubscription;
+
+        public ToolTipTests_Overlay()
+        {
+            _toolTipOpenSubscription = ToolTip.IsOpenProperty.Changed.Subscribe(new AnonymousObserver<AvaloniaPropertyChangedEventArgs<bool>>(e =>
+            {
+                if (e.Sender is Visual visual && TopLevel.GetTopLevel(visual) is {} root)
+                    PopupOverlayLayer.GetPopupOverlayLayer(visual)?.Measure(root.ClientSize);
+            }));
+        }
+
+        public override void Dispose()
+        {
+            _toolTipOpenSubscription.Dispose();
+            base.Dispose();
+        }
+
+        protected override TestServices ConfigureServices(TestServices baseServices) =>
+            baseServices.With(windowingPlatform: new MockWindowingPlatform(popupImpl: window => null));
+
+        protected override void SetupWindowMock(Mock<IWindowImpl> windowImpl)
+        {
+            windowImpl.Setup(x => x.CreatePopup()).Returns(default(IPopupImpl));
+        }
+
+        protected override void VerifyToolTipType(Control control)
+        {
+            var toolTip = control.GetValue(ToolTip.ToolTipProperty);
+            Assert.NotNull(toolTip);
+            Assert.IsType<OverlayPopupHost>(toolTip.PopupHost);
+            Assert.Same(toolTip.VisualRoot, control.VisualRoot);
+        }
+    }
+
+    public abstract class ToolTipTests : ScopedTestBase
+    {
+        protected abstract TestServices ConfigureServices(TestServices baseServices);
+
+        protected abstract void SetupWindowMock(Mock<IWindowImpl> windowImpl);
+
+        protected abstract void VerifyToolTipType(Control control);
+
+        protected void AssertToolTipOpen(Control control)
+        {
+            Assert.True(ToolTip.GetIsOpen(control));
+            VerifyToolTipType(control);
+        }
+
+        private static readonly MouseDevice s_mouseDevice = new(new Pointer(0, PointerType.Mouse, true));
+
+        [Fact]
+        public void Should_Close_When_Control_Detaches()
+        {
+            using (UnitTestApplication.Start(ConfigureServices(TestServices.FocusableWindow)))
+            {
+                var panel = new Panel();
+
+                var target = new Decorator()
+                {
+                    [ToolTip.TipProperty] = "Tip",
+                    [ToolTip.ShowDelayProperty] = 0
+                };
+
+                panel.Children.Add(target);
+
+                SetupWindowAndActivateToolTip(panel, target);
+
+                AssertToolTipOpen(target);
+
+                panel.Children.Remove(target);
+
+                Assert.False(ToolTip.GetIsOpen(target));
+            }
+        }
+
+        [Fact]
+        public void Should_Close_When_Tip_Is_Opened_And_Detached_From_Visual_Tree()
+        {
+            using (UnitTestApplication.Start(ConfigureServices(TestServices.FocusableWindow)))
+            {
+                var target = new Decorator
+                {
+                    [!ToolTip.TipProperty] = new Binding("Tip"),
+                    [ToolTip.ShowDelayProperty] = 0,
+                };
+
+                var panel = new Panel();
+                panel.Children.Add(target);
+
+                var mouseEnter = SetupWindowAndGetMouseEnterAction(panel);
+
+                panel.DataContext = new ToolTipViewModel();
+
+                mouseEnter(target);
+
+                AssertToolTipOpen(target);
+
+                panel.Children.Remove(target);
+
+                Assert.False(ToolTip.GetIsOpen(target));
+            }
+        }
+
+        [Fact]
+        public void Should_Open_On_Pointer_Enter()
+        {
+            using (UnitTestApplication.Start(ConfigureServices(TestServices.FocusableWindow)))
+            {
+                var target = new Decorator()
+                {
+                    [ToolTip.TipProperty] = "Tip",
+                    [ToolTip.ShowDelayProperty] = 0
+                };
+
+                SetupWindowAndActivateToolTip(target);
+
+                AssertToolTipOpen(target);
+            }
+        }
+
+        [Fact]
+        public void Content_Should_Update_When_Tip_Property_Changes_And_Already_Open()
+        {
+            using (UnitTestApplication.Start(ConfigureServices(TestServices.FocusableWindow)))
+            {
+                var target = new Decorator()
+                {
+                    [ToolTip.TipProperty] = "Tip",
+                    [ToolTip.ShowDelayProperty] = 0
+                };
+
+                SetupWindowAndActivateToolTip(target);
+
+                AssertToolTipOpen(target);
+                Assert.Equal("Tip", target.GetValue(ToolTip.ToolTipProperty)?.Content);
+
+                ToolTip.SetTip(target, "Tip1");
+                Assert.Equal("Tip1", target.GetValue(ToolTip.ToolTipProperty)?.Content);
+            }
+        }
+
+        [Fact]
+        public void Should_Open_On_Pointer_Enter_With_Delay()
+        {
+            using (UnitTestApplication.Start(ConfigureServices(TestServices.FocusableWindow)))
+            {
+                var target = new Decorator()
+                {
+                    [ToolTip.TipProperty] = "Tip",
+                    [ToolTip.ShowDelayProperty] = 1
+                };
+
+                SetupWindowAndActivateToolTip(target);
+
+                var timer = Assert.Single(Dispatcher.SnapshotTimersForUnitTests());
+                Assert.Equal(TimeSpan.FromMilliseconds(1), timer.Interval);
+                Assert.False(ToolTip.GetIsOpen(target));
+
+                timer.ForceFire();
+
+                AssertToolTipOpen(target);
+            }
+        }
+
+        [Fact]
+        public void Open_Class_Should_Not_Initially_Be_Added()
+        {
+            using (UnitTestApplication.Start(ConfigureServices(TestServices.StyledWindow)))
+            {
+                var toolTip = new ToolTip();
+                var window = new Window();
+
+                var decorator = new Decorator()
+                {
+                    [ToolTip.TipProperty] = toolTip
+                };
+
+                window.Content = decorator;
+
+                window.ApplyStyling();
+                window.ApplyTemplate();
+                window.Presenter!.ApplyTemplate();
+
+                Assert.DoesNotContain(":open", toolTip.Classes);
+            }
+        }
+
+        [Fact]
+        public void Setting_IsOpen_Should_Add_Open_Class()
+        {
+            using (UnitTestApplication.Start(ConfigureServices(TestServices.StyledWindow)))
+            {
+                var toolTip = new ToolTip();
+                var window = new Window();
+
+                var decorator = new Decorator()
+                {
+                    [ToolTip.TipProperty] = toolTip
+                };
+
+                window.Content = decorator;
+
+                window.ApplyStyling();
+                window.ApplyTemplate();
+                window.Presenter!.ApplyTemplate();
+
+                ToolTip.SetIsOpen(decorator, true);
+
+                Assert.Contains(":open", toolTip.Classes);
+                VerifyToolTipType(decorator);
+            }
+        }
+
+        [Fact]
+        public void Clearing_IsOpen_Should_Remove_Open_Class()
+        {
+            using (UnitTestApplication.Start(ConfigureServices(TestServices.StyledWindow)))
+            {
+                var toolTip = new ToolTip();
+
+                var windowImpl = MockWindowingPlatform.CreateWindowMock();
+                SetupWindowMock(windowImpl);
+                var window = new Window(windowImpl.Object);
+    
+                var decorator = new Decorator()
+                {
+                    [ToolTip.TipProperty] = toolTip
+                };
+
+                window.Content = decorator;
+
+                window.ApplyStyling();
+                window.ApplyTemplate();
+                window.Presenter!.ApplyTemplate();
+
+                ToolTip.SetIsOpen(decorator, true);
+                AssertToolTipOpen(decorator);
+                ToolTip.SetIsOpen(decorator, false);
+
+                Assert.DoesNotContain(":open", toolTip.Classes);
+            }
+        }
+
+        [Fact]
+        public void Should_Close_On_Null_Tip()
+        {
+            using (UnitTestApplication.Start(ConfigureServices(TestServices.FocusableWindow)))
+            {
+                var target = new Decorator()
+                {
+                    [ToolTip.TipProperty] = "Tip",
+                    [ToolTip.ShowDelayProperty] = 0
+                };
+
+                SetupWindowAndActivateToolTip(target);
+
+                AssertToolTipOpen(target);
+
+                target[ToolTip.TipProperty] = null;
+
+                Assert.False(ToolTip.GetIsOpen(target));
+            }
+        }
+
+        [Fact]
+        public void Should_Not_Close_When_Pointer_Is_Moved_Over_ToolTip()
+        {
+            using (UnitTestApplication.Start(ConfigureServices(TestServices.FocusableWindow)))
+            {
+                var target = new Decorator()
+                {
+                    [ToolTip.TipProperty] = "Tip",
+                    [ToolTip.ShowDelayProperty] = 0
+                };
+
+                var mouseEnter = SetupWindowAndGetMouseEnterAction(target);
+
+                mouseEnter(target);
+
+                AssertToolTipOpen(target);
+
+                var tooltip = Assert.IsType<ToolTip>(target.GetValue(ToolTip.ToolTipProperty));
+
+                mouseEnter(tooltip);
+
+                AssertToolTipOpen(target);
+            }
+        }
+
+        [Fact]
+        public void Should_Not_Close_When_Pointer_Is_Moved_From_ToolTip_To_Original_Control()
+        {
+            using (UnitTestApplication.Start(ConfigureServices(TestServices.FocusableWindow)))
+            {
+                var target = new Decorator()
+                {
+                    [ToolTip.TipProperty] = "Tip",
+                    [ToolTip.ShowDelayProperty] = 0
+                };
+
+                var mouseEnter = SetupWindowAndGetMouseEnterAction(target);
+
+                mouseEnter(target);
+                AssertToolTipOpen(target);
+
+                var tooltip = Assert.IsType<ToolTip>(target.GetValue(ToolTip.ToolTipProperty));
+                mouseEnter(tooltip);
+
+                AssertToolTipOpen(target);
+
+                mouseEnter(target);
+
+                AssertToolTipOpen(target);
+            }
+        }
+
+        [Fact]
+        public void Should_Close_When_Pointer_Is_Moved_From_ToolTip_To_Another_Control()
+        {
+            using (UnitTestApplication.Start(ConfigureServices(TestServices.FocusableWindow)))
+            {
+                var target = new Decorator()
+                {
+                    [ToolTip.TipProperty] = "Tip",
+                    [ToolTip.ShowDelayProperty] = 0
+                };
+
+                var other = new Decorator();
+
+                var panel = new StackPanel
+                {
+                    Children = { target, other }
+                };
+
+                var mouseEnter = SetupWindowAndGetMouseEnterAction(panel);
+
+                mouseEnter(target);
+                AssertToolTipOpen(target);
+
+                var tooltip = Assert.IsType<ToolTip>(target.GetValue(ToolTip.ToolTipProperty));
+                mouseEnter(tooltip);
+
+                AssertToolTipOpen(target);
+
+                mouseEnter(other);
+
+                Assert.False(ToolTip.GetIsOpen(target));
+            }
+        }
+
+        [Fact]
+        public void New_ToolTip_Replaces_Other_ToolTip_Immediately()
+        {
+            using var app = UnitTestApplication.Start(ConfigureServices(TestServices.FocusableWindow));
+            
+            var target = new Decorator()
+            {
+                [ToolTip.TipProperty] = "Tip",
+                [ToolTip.ShowDelayProperty] = 0
+            };
+
+            var other = new Decorator()
+            {
+                [ToolTip.TipProperty] = "Tip",
+                [ToolTip.ShowDelayProperty] = (int) TimeSpan.FromHours(1).TotalMilliseconds,
+            };
+
+            var panel = new StackPanel
+            {
+                Children = { target, other }
+            };
+
+            var mouseEnter = SetupWindowAndGetMouseEnterAction(panel);
+            
+            mouseEnter(other);
+            Assert.False(ToolTip.GetIsOpen(other)); // long delay
+
+            mouseEnter(target);
+            AssertToolTipOpen(target); // no delay
+
+            mouseEnter(other);
+            Assert.True(ToolTip.GetIsOpen(other)); // delay skipped, a tooltip was already open
+
+            // Now disable the between-show system
+
+            mouseEnter(target);
+            AssertToolTipOpen(target);
+
+            ToolTip.SetBetweenShowDelay(other, -1);
+
+            mouseEnter(other);
+            Assert.False(ToolTip.GetIsOpen(other));
+        }
+
+        [Fact]
+        public void ToolTip_Events_Order_Is_Defined()
+        {
+            using var app = UnitTestApplication.Start(ConfigureServices(TestServices.FocusableWindow));
+
+            var tip = new ToolTip() { Content = "Tip" };
+            var target = new Decorator()
+            {
+                [ToolTip.TipProperty] = tip,
+                [ToolTip.ShowDelayProperty] = 0
+            };
+
+            var eventsOrder = new List<(string eventName, object? sender, object? source)>();
+
+            ToolTip.AddToolTipOpeningHandler(target,
+                (sender, args) => eventsOrder.Add(("Opening", sender, args.Source)));
+            ToolTip.AddToolTipClosingHandler(target,
+                (sender, args) => eventsOrder.Add(("Closing", sender, args.Source)));
+
+            SetupWindowAndActivateToolTip(target);
+
+            AssertToolTipOpen(target);
+
+            target[ToolTip.TipProperty] = null;
+
+            Assert.False(ToolTip.GetIsOpen(target));
+
+            Assert.Equal(
+                new[]
+                {
+                    ("Opening", (object?)target, (object?)target),
+                    ("Closing", target, target)
+                },
+                eventsOrder);
+        }
+        
+        [Fact]
+        public void ToolTip_Is_Not_Opened_If_Opening_Event_Handled()
+        {
+            using var app = UnitTestApplication.Start(ConfigureServices(TestServices.FocusableWindow));
+
+            var tip = new ToolTip() { Content = "Tip" };
+            var target = new Decorator()
+            {
+                [ToolTip.TipProperty] = tip,
+                [ToolTip.ShowDelayProperty] = 0
+            };
+
+            ToolTip.AddToolTipOpeningHandler(target,
+                (sender, args) => args.Cancel = true);
+
+            SetupWindowAndActivateToolTip(target);
+
+            Assert.False(ToolTip.GetIsOpen(target));
+        }
+
+        [Fact]
+        public void ToolTip_Can_Be_Replaced_On_The_Fly_Via_Opening_Event()
+        {
+            using var app = UnitTestApplication.Start(ConfigureServices(TestServices.FocusableWindow));
+
+            var tip1 = new ToolTip() { Content = "Hi" };
+            var tip2 = new ToolTip() { Content = "Bye" };
+            var target = new Decorator()
+            {
+                [ToolTip.TipProperty] = tip1,
+                [ToolTip.ShowDelayProperty] = 0
+            };
+
+            ToolTip.AddToolTipOpeningHandler(target,
+                (sender, args) => target[ToolTip.TipProperty] = tip2);
+
+            SetupWindowAndActivateToolTip(target);
+
+            AssertToolTipOpen(target);
+
+            target[ToolTip.TipProperty] = null;
+
+            Assert.False(ToolTip.GetIsOpen(target));
+        }
+
+        [Fact]
+        public void Should_Close_When_Pointer_Leaves_Window()
+        {
+            using (UnitTestApplication.Start(TestServices.FocusableWindow))
+            {
+                var target = new Decorator()
+                {
+                    [ToolTip.TipProperty] = "Tip",
+                    [ToolTip.ShowDelayProperty] = 0
+                };
+
+                var mouseEnter = SetupWindowAndGetMouseEnterAction(target);
+
+                mouseEnter(target);
+                AssertToolTipOpen(target);
+
+                var topLevel = TopLevel.GetTopLevel(target);
+                topLevel!.PlatformImpl!.Input!(new RawPointerEventArgs(s_mouseDevice, (ulong)DateTime.Now.Ticks, topLevel.InputRoot,
+                    RawPointerEventType.LeaveWindow, default(RawPointerPoint), RawInputModifiers.None));
+
+                Dispatcher.UIThread.RunJobs(null, TestContext.Current.CancellationToken);
+
+                Assert.False(ToolTip.GetIsOpen(target));
+            }
+        }
+
+        protected ToolTipTestScope SetupWindow(Control windowContent, [CallerMemberName] string? testName = null)
+        {
+            var windowImpl = MockWindowingPlatform.CreateWindowMock();
+            SetupWindowMock(windowImpl);
+
+            var hitTesterMock = new Mock<IHitTester>();
+
+            var window = new Window(windowImpl.Object)
+            {
+                HitTesterOverride = hitTesterMock.Object,
+                Content = windowContent,
+                Title = testName,
+            };
+
+            window.ApplyStyling();
+            window.ApplyTemplate();
+            window.Presenter!.ApplyTemplate();
+            window.Show();
+
+            Assert.True(windowContent.IsAttachedToVisualTree);
+            Assert.True(windowContent.IsMeasureValid);
+            Assert.True(windowContent.IsVisible);
+
+            return new ToolTipTestScope(
+                window,
+                windowImpl,
+                (point, control) => hitTesterMock
+                    .Setup(m => m.HitTestFirst(point, It.IsAny<Visual>(), It.IsAny<Func<Visual, bool>>()))
+                    .Returns(control));
+        }
+
+        private Action<Control?> SetupWindowAndGetMouseEnterAction(Control windowContent, [CallerMemberName] string? testName = null)
+            => SetupWindow(windowContent, testName).MouseEnter;
+
+        private void SetupWindowAndActivateToolTip(Control windowContent, Control? targetOverride = null, [CallerMemberName] string? testName = null)
+            => SetupWindowAndGetMouseEnterAction(windowContent, testName)(targetOverride ?? windowContent);
+
+        protected sealed class ToolTipTestScope(Window window, Mock<IWindowImpl> windowImpl, Action<Point, Control?> setupHitTest)
+        {
+            private readonly Dictionary<Control, int> _controlIds = new();
+            private IInputRoot? _lastRoot;
+
+            public Window Window { get; } = window;
+
+            /// <summary>
+            /// Returns a pointer position which hit tests to <paramref name="control"/>, or to nothing when it's null.
+            /// </summary>
+            public Point GetPointerPosition(Control? control)
+            {
+                Point point;
+
+                if (control == null)
+                {
+                    point = default;
+                }
+                else
+                {
+                    if (!_controlIds.TryGetValue(control, out int id))
+                    {
+                        id = _controlIds[control] = _controlIds.Count;
+                    }
+                    point = new Point(id, int.MaxValue);
+                }
+
+                setupHitTest(point, control);
+
+                return point;
+            }
+
+            /// <summary>
+            /// Moves the pointer over <paramref name="control"/>, leaving the previous root if it changed.
+            /// </summary>
+            public void MouseEnter(Control? control)
+            {
+                var point = GetPointerPosition(control);
+                var root = control?.GetInputRoot() ?? Window.InputRoot;
+                var timestamp = (ulong)DateTime.Now.Ticks;
+
+                windowImpl.Object.Input!(new RawPointerEventArgs(s_mouseDevice, timestamp, root,
+                        RawPointerEventType.Move, point, RawInputModifiers.None));
+
+                if (_lastRoot != null && _lastRoot != root)
+                {
+                    ((PresentationSource)_lastRoot)?.PlatformImpl?.Input?.Invoke(new RawPointerEventArgs(s_mouseDevice, timestamp,
+                        _lastRoot, RawPointerEventType.LeaveWindow, new Point(-1,-1), RawInputModifiers.None));
+                }
+
+                _lastRoot = root;
+
+                Assert.True(control == null || control.IsPointerOver);
+            }
+
+            /// <summary>
+            /// Sends a raw pointer event, as a platform backend would do.
+            /// </summary>
+            public void SendRawPointerEvent(RawPointerEventType type, IInputRoot root, Point position)
+                => windowImpl.Object.Input!(new RawPointerEventArgs(
+                    s_mouseDevice, (ulong)DateTime.Now.Ticks, root, type, position, RawInputModifiers.None));
+        }
+    }
+
+    internal class ToolTipViewModel
+    {
+        public string Tip => "Tip";
+    }
+}
