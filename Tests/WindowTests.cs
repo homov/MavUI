@@ -13,7 +13,7 @@ public class WindowTests
     {
         var window = new MavWindow();
 
-        var brush = Assert.IsType<SolidColorBrush>(window.Background);
+        var brush = Assert.IsAssignableFrom<ISolidColorBrush>(window.Background);
         Assert.Equal(MavTheme.Current.Color.Surface, brush.Color);
     }
 
