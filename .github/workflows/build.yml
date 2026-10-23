@@ -43,6 +43,7 @@ jobs:
           dotnet build migrated/HC/HC/HC.csproj -c Release -f net10.0 2>&1 | tee -a build.log
           dotnet build migrated/HC/HC/HC.csproj -c Release -f net10.0-windows 2>&1 | tee -a build.log
           dotnet build migrated/HC/HC.Tests/HC.Tests.csproj -c Release 2>&1 | tee -a build.log
+          dotnet build Tests/MavUI.VisualTests/MavUI.VisualTests.csproj -c Release 2>&1 | tee -a build.log
           
 
       - name: Run tests
@@ -50,14 +51,19 @@ jobs:
         env:
           # The HC headless tests write their screen outlines here; the annotation step reads them.
           HC_UI_REPORT_DIR: ${{ github.workspace }}/ui-report
+          # The gallery visual tests put their PNGs and gallery.txt next to them.
+          MAV_SHOT_DIR: ${{ github.workspace }}/ui-report
         run: |
           set -o pipefail
-          # Both suites run even if the first one fails; the step fails at the end.
+          # All three suites run even if one of them fails; the step fails at the end.
           status=0
           dotnet test Tests/MavUI.Tests.csproj -c Release --no-build \
             --logger "trx;LogFileName=mavui.trx" --results-directory "$GITHUB_WORKSPACE/test-results" 2>&1 | tee -a build.log || status=1
           dotnet test migrated/HC/HC.Tests/HC.Tests.csproj -c Release --no-build \
             --logger "trx;LogFileName=hc.trx" --results-directory "$GITHUB_WORKSPACE/test-results" 2>&1 | tee -a build.log || status=1
+          # Gallery screenshots: real drawing on Skia, so the frames can be captured as PNG.
+          dotnet test Tests/MavUI.VisualTests/MavUI.VisualTests.csproj -c Release --no-build \
+            --logger "trx;LogFileName=gallery.trx" --results-directory "$GITHUB_WORKSPACE/test-results" 2>&1 | tee -a build.log || status=1
           exit $status
 
       - name: Annotate test results and UI reports (readable through the Checks API)

@@ -89,6 +89,19 @@ public partial class MainView : UserControl
         UpdateAdaptive();
     }
 
+    /// <summary>
+    /// Opens the destination with the given key ("Overview", "Actions", …). Used by deep links and by the
+    /// visual tests, which screenshot every destination through the real shell.
+    /// </summary>
+    public bool Open(string key)
+    {
+        var index = Array.FindIndex(GalleryDestinations.All, d => d.Key == key);
+        if (index < 0)
+            return false;
+        Select(index);
+        return true;
+    }
+
     private void Select(int index)
     {
         if (index < 0 || index >= GalleryDestinations.All.Length)

@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Visual (screenshot) tests for the ControlsGallery, next to the logic tests in Tests/MavUI.Tests.
+    They need real drawing: the headless platform with Skia renders a frame, which a drawing-less
+    headless app does not. Keeping them in their own assembly also keeps the fast suite fast.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <IsPackable>false</IsPackable>
+    <RootNamespace>Mav.VisualTests</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Headless.XUnit" Version="12.1.4" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageReference Include="xunit.v3" Version="3.2.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\MavUI\MavUI.csproj" />
+    <ProjectReference Include="..\..\samples\ControlsGallery\ControlsGallery\ControlsGallery.csproj" />
+  </ItemGroup>
+
+</Project>
