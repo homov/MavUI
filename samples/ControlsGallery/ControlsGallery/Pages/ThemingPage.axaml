@@ -86,20 +86,18 @@
             <StackPanel Spacing="10">
               <mav:MavLabel Role="TitleMedium" Text="MavTypeRole" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Type.CardBody, Fallback=Every role rendered with its own style.}" />
-              <!-- Not wrapped into one line: each role needs the full row width to show its size. -->
-              <StackPanel Spacing="8">
-                <mav:MavItems ItemsSource="{x:Static pages:ThemingPage.TypeScale}">
-                  <mav:MavItems.Spacing>2</mav:MavItems.Spacing>
-                  <mav:MavItems.ItemTemplate>
-                    <DataTemplate x:DataType="pages:ThemeSample">
-                      <StackPanel>
-                        <mav:MavLabel Role="LabelSmall" Secondary="True" Text="{Binding Name}" />
-                        <mav:MavLabel Role="{Binding Role}" Text="The quick brown fox" TextWrapping="Wrap" />
-                      </StackPanel>
-                    </DataTemplate>
-                  </mav:MavItems.ItemTemplate>
-                </mav:MavItems>
-              </StackPanel>
+              <!-- One role per full-width row: side by side the big roles overlapped each other. -->
+              <mav:MavItems Orientation="Vertical" ItemsSource="{x:Static pages:ThemingPage.TypeScale}">
+                <mav:MavItems.Spacing>8</mav:MavItems.Spacing>
+                <mav:MavItems.ItemTemplate>
+                  <DataTemplate x:DataType="pages:ThemeSample">
+                    <StackPanel>
+                      <mav:MavLabel Role="LabelSmall" Secondary="True" Text="{Binding Name}" />
+                      <mav:MavLabel Role="{Binding Role}" Text="The quick brown fox" TextWrapping="Wrap" />
+                    </StackPanel>
+                  </DataTemplate>
+                </mav:MavItems.ItemTemplate>
+              </mav:MavItems>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="new MavLabel { Role = MavTypeRole.TitleLarge }" />
             </StackPanel>
           </mav:MavCard>
@@ -144,7 +142,7 @@
             <StackPanel Spacing="10">
               <mav:MavLabel Role="TitleMedium" Text="MavAccessibility.ContrastRatio" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Contrast.CardBody, Fallback=Ratios are computed from the current scheme.}" />
-              <mav:MavItems x:Name="ContrastItems">
+              <mav:MavItems x:Name="ContrastItems" Orientation="Vertical">
                 <mav:MavItems.Spacing>6</mav:MavItems.Spacing>
                 <mav:MavItems.ItemTemplate>
                   <DataTemplate x:DataType="x:String">

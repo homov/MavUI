@@ -40,6 +40,13 @@ public class MavItems : Panel
     public static readonly StyledProperty<bool> WrapProperty =
         AvaloniaProperty.Register<MavItems, bool>(nameof(Wrap));
 
+    /// <summary>
+    /// <see cref="Orientation.Horizontal"/> (default) puts the items side by side;
+    /// <see cref="Orientation.Vertical"/> gives every item its own full-width row.
+    /// </summary>
+    public static readonly StyledProperty<Orientation> OrientationProperty =
+        AvaloniaProperty.Register<MavItems, Orientation>(nameof(Orientation));
+
     private INotifyCollectionChanged? _observed;
     private readonly List<Control> _built = [];
 
@@ -49,6 +56,7 @@ public class MavItems : Panel
         ItemTemplateProperty.Changed.AddClassHandler<MavItems>((items, _) => items.Rebuild());
         SpacingProperty.Changed.AddClassHandler<MavItems>((items, _) => items.InvalidateMeasure());
         WrapProperty.Changed.AddClassHandler<MavItems>((items, _) => items.InvalidateMeasure());
+        OrientationProperty.Changed.AddClassHandler<MavItems>((items, _) => items.InvalidateMeasure());
     }
 
     /// <inheritdoc cref="ItemsSourceProperty" />
@@ -77,6 +85,13 @@ public class MavItems : Panel
     {
         get => GetValue(WrapProperty);
         set => SetValue(WrapProperty, value);
+    }
+
+    /// <inheritdoc cref="OrientationProperty" />
+    public Orientation Orientation
+    {
+        get => GetValue(OrientationProperty);
+        set => SetValue(OrientationProperty, value);
     }
 
     /// <summary>Rebuilds the children from <see cref="ItemsSource"/>.</summary>
@@ -147,6 +162,21 @@ public class MavItems : Panel
         if (Children.Count == 0)
             return default;
 
+        if (Orientation == Orientation.Vertical)
+        {
+            var width = 0.0;
+            var height = 0.0;
+            foreach (var child in Children)
+            {
+                child.Measure(new Size(availableSize.Width, double.PositiveInfinity));
+                width = Math.Max(width, child.DesiredSize.Width);
+                height += child.DesiredSize.Height;
+            }
+
+            height += spacing * (Children.Count - 1);
+            return new Size(double.IsInfinity(availableSize.Width) ? width : Math.Min(availableSize.Width, width), height);
+        }
+
         if (!Wrap)
         {
             var width = 0.0;
@@ -174,6 +204,18 @@ public class MavItems : Panel
     protected override Size ArrangeOverride(Size finalSize)
     {
         var spacing = Math.Max(0, Spacing);
+        if (Orientation == Orientation.Vertical)
+        {
+            var y = 0.0;
+            foreach (var child in Children)
+            {
+                child.Arrange(new Rect(0, y, finalSize.Width, child.DesiredSize.Height));
+                y += child.DesiredSize.Height + spacing;
+            }
+
+            return finalSize;
+        }
+
         if (!Wrap)
         {
             var x = 0.0;

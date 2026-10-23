@@ -68,6 +68,27 @@ public class ItemsHostTests
     }
 
     [AvaloniaFact]
+    public void Vertical_gives_every_item_a_full_width_row()
+    {
+        var items = new MavItems
+        {
+            Orientation = Avalonia.Layout.Orientation.Vertical,
+            Spacing = 5,
+            ItemTemplate = new FuncDataTemplate<string>((_, _) => new Border { Height = 20 }),
+            ItemsSource = Enumerable.Range(0, 3).Select(i => i.ToString()).ToArray(),
+        };
+        var window = new Window { Width = 300, Height = 400, Content = items };
+        window.Show();
+        Dispatcher.UIThread.RunJobs();
+
+        Assert.Equal(new Avalonia.Point(0, 0), items.Children[0].Bounds.Position);
+        Assert.Equal(new Avalonia.Point(0, 25), items.Children[1].Bounds.Position);
+        Assert.Equal(new Avalonia.Point(0, 50), items.Children[2].Bounds.Position);
+        Assert.All(items.Children, child => Assert.Equal(300, child.Bounds.Width));
+        window.Close();
+    }
+
+    [AvaloniaFact]
     public void Wraps_items_at_the_available_width()
     {
         var items = new MavItems
