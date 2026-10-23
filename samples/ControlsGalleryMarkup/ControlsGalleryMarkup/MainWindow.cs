@@ -24,6 +24,7 @@ public sealed class MainWindow : MavWindow
         ("Actions", "Actions", "Buttons, FABs and action groups", MavIcons.SmartButton, () => ActionsPage.Build()),
         ("Inputs", "Inputs", "Text fields, validation and forms", MavIcons.Edit, () => InputsPage.Build()),
         ("Selection", "Selection", "Toggles, sliders, chips and value pickers", MavIcons.CheckBox, () => SelectionPage.Build()),
+        ("Pickers", "Pickers", "Date, time and color selection", MavIcons.CalendarMonth, () => PickersPage.Build()),
     ];
 
     private int _selected;
