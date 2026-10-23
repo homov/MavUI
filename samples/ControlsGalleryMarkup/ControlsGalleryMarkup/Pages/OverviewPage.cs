@@ -120,7 +120,7 @@ public static class OverviewPage
             .Child(new TextBlock()
                 .Text(role.ToString())
                 .FontSize(11)
-                .Foreground(MavTheme.BrushOf(on)))
+                .Foreground(MavTheme.BrushOf(on)));
         return LayoutableMarkup.Margin(border, new Thickness(0, 0, 8, 8));
     }
 
