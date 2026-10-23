@@ -47,10 +47,10 @@ public class ShapeScaleTests
     public void A_card_follows_the_scale()
     {
         WithScale(MavShapeScale.Compact, () =>
-            Assert.Equal(8.6, new MavCard().CornerRadius.TopLeft, 3));
+            Assert.Equal(8.6, new MavCard().CornerRadius, 3));
 
         WithScale(MavShapeScale.Expressive, () =>
-            Assert.Equal(15.4, new MavCard().CornerRadius.TopLeft, 3));
+            Assert.Equal(15.4, new MavCard().CornerRadius, 3));
     }
 
     [AvaloniaFact]
@@ -58,18 +58,18 @@ public class ShapeScaleTests
     {
         var card = new MavCard();
         WithScale(MavShapeScale.Expressive, () =>
-            Assert.Equal(15.4, card.CornerRadius.TopLeft, 3));
+            Assert.Equal(15.4, card.CornerRadius, 3));
         WithScale(MavShapeScale.Standard, () =>
-            Assert.Equal(12, card.CornerRadius.TopLeft, 3));
+            Assert.Equal(12, card.CornerRadius, 3));
     }
 
     [AvaloniaFact]
     public void An_explicit_radius_opts_out_of_the_scale()
     {
         var card = new MavCard { CardRadius = 4 };
-        Assert.Equal(4, card.CornerRadius.TopLeft);
+        Assert.Equal(4, card.CornerRadius);
 
         WithScale(MavShapeScale.Expressive, () =>
-            Assert.Equal(4, card.CornerRadius.TopLeft));
+            Assert.Equal(4, card.CornerRadius));
     }
 }
