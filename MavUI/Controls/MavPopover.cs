@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Presenters;
 using Avalonia.Data;
 using Avalonia.Layout;
 using Avalonia.Media;
@@ -19,8 +20,8 @@ public class MavPopover : Control
     public static readonly StyledProperty<string?> TitleProperty =
         AvaloniaProperty.Register<MavPopover, string?>(nameof(Title));
 
-    public static readonly StyledProperty<Control?> ContentProperty =
-        AvaloniaProperty.Register<MavPopover, Control?>(nameof(Content));
+    public static readonly StyledProperty<object?> ContentProperty =
+        AvaloniaProperty.Register<MavPopover, object?>(nameof(Content));
 
     public static readonly StyledProperty<MavPopoverPlacement> PlacementProperty =
         AvaloniaProperty.Register<MavPopover, MavPopoverPlacement>(nameof(Placement), MavPopoverPlacement.Auto);
@@ -43,7 +44,7 @@ public class MavPopover : Control
     static MavPopover()
     {
         ContentProperty.Changed.AddClassHandler<MavPopover>((p, e) =>
-            MavVisualTreeHelpers.AttachLogicalChild(p, e.GetNewValue<Control?>()));
+            MavVisualTreeHelpers.AttachLogicalChild(p, e.GetNewValue<object?>() as Control));
         IsOpenProperty.Changed.AddClassHandler<MavPopover>((p, e) =>
         {
             if (p._syncingIsOpen) return;
@@ -60,8 +61,9 @@ public class MavPopover : Control
         set => SetValue(TitleProperty, value);
     }
 
+    /// <summary>The popover body. Any object is accepted, as in Avalonia's ContentControl.</summary>
     [Content]
-    public Control? Content
+    public object? Content
     {
         get => GetValue(ContentProperty);
         set => SetValue(ContentProperty, value);
@@ -100,7 +102,7 @@ public class MavPopover : Control
     }
 
     /// <summary>Creates a popover with optional content, title and placement.</summary>
-    public MavPopover(Control? content = null, string? title = null, MavPopoverPlacement placement = MavPopoverPlacement.Auto)
+    public MavPopover(object? content = null, string? title = null, MavPopoverPlacement placement = MavPopoverPlacement.Auto)
     {
         MinWidth = 180;
         MaxWidth = 320;
@@ -126,7 +128,8 @@ public class MavPopover : Control
         var t = MavTheme.Current;
         var c = t.Color;
 
-        MavVisualTreeHelpers.DetachFromParent(Content);
+        if (Content is Control content)
+            MavVisualTreeHelpers.DetachFromParent(content);
 
         var bodyStack = new StackPanel
         {
@@ -146,7 +149,7 @@ public class MavPopover : Control
             bodyStack.Children.Add(titleLbl);
         }
 
-        bodyStack.Children.Add(Content);
+        bodyStack.Children.Add(new ContentPresenter { Content = Content });
 
         var bodyHost = new MavScrollViewer
         {
