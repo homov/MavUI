@@ -69,7 +69,7 @@
                 <mav:MavItems.ItemTemplate>
                   <DataTemplate x:DataType="pages:ThemeSample">
                     <Border Width="132" Height="64" CornerRadius="12" Padding="10" Margin="0,0,8,8" Background="{Binding Background}">
-                      <TextBlock Text="{Binding Name}" FontSize="11" TextWrapping="Wrap" Foreground="{Binding Foreground}" />
+                      <TextBlock Text="{Binding Label}" FontSize="11" TextWrapping="Wrap" Foreground="{Binding Foreground}" />
                     </Border>
                   </DataTemplate>
                 </mav:MavItems.ItemTemplate>
@@ -92,7 +92,7 @@
                 <mav:MavItems.ItemTemplate>
                   <DataTemplate x:DataType="pages:ThemeSample">
                     <StackPanel>
-                      <mav:MavLabel Role="LabelSmall" Secondary="True" Text="{Binding Name}" />
+                      <mav:MavLabel Role="LabelSmall" Secondary="True" Text="{Binding Label}" />
                       <mav:MavLabel Role="{Binding Role}" Text="The quick brown fox" TextWrapping="Wrap" />
                     </StackPanel>
                   </DataTemplate>

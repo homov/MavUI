@@ -49,7 +49,7 @@ public partial class ThemingPage : UserControl
         {
             var color = MavTheme.ColorOf(role);
             var on = MavAccessibility.RelativeLuminance(color) >= 0.5 ? Colors.Black : Colors.White;
-            return new ThemeSample(SplitWords(role.ToString()))
+            return new ThemeSample(role.ToString())
             {
                 Background = MavTheme.BrushOf(color),
                 Foreground = MavTheme.BrushOf(on),
@@ -104,10 +104,6 @@ public partial class ThemingPage : UserControl
             }).ToList();
         }
     }
-
-    /// <summary>"SurfaceContainerHigh" becomes "Surface Container High", so long role names wrap inside their swatch.</summary>
-    private static string SplitWords(string name) =>
-        System.Text.RegularExpressions.Regex.Replace(name, "(?<=[a-z])(?=[A-Z])", " ");
 
     public ThemingPage()
     {

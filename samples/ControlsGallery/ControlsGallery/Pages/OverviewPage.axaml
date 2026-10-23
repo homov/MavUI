@@ -93,12 +93,14 @@
           <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Overview.Typography.Title, Fallback=Typography}" />
           <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap"
                         Text="{mav:Loc Overview.Typography.Body, Fallback=15 MD3 type roles from DisplayLarge to LabelSmall.}" />
-          <mav:MavItems ItemsSource="{Binding TypeRoles}">
-            <mav:MavItems.Spacing>4</mav:MavItems.Spacing>
+          <mav:MavItems Orientation="Vertical" ItemsSource="{Binding TypeRoles}">
+            <mav:MavItems.Spacing>10</mav:MavItems.Spacing>
             <mav:MavItems.ItemTemplate>
               <DataTemplate x:DataType="mav:MavTypeRole">
-                <mav:MavLabel Role="{Binding}" TextWrapping="Wrap"
-                              Text="{Binding StringFormat='{}{0} — The quick brown fox'}" />
+                <StackPanel>
+                  <mav:MavLabel Role="LabelSmall" Secondary="True" Text="{Binding}" />
+                  <mav:MavLabel Role="{Binding}" Text="The quick brown fox" TextWrapping="Wrap" />
+                </StackPanel>
               </DataTemplate>
             </mav:MavItems.ItemTemplate>
           </mav:MavItems>
@@ -114,7 +116,8 @@
               <DataTemplate x:DataType="pages:RoleSwatch">
                 <Border Width="132" Height="64" CornerRadius="12" Padding="10" Margin="0,0,8,8"
                         Background="{Binding Background}">
-                  <TextBlock Text="{Binding Name}" FontSize="11" Foreground="{Binding Foreground}" />
+                  <TextBlock Text="{Binding Label}" FontSize="11" TextWrapping="Wrap"
+                             Foreground="{Binding Foreground}" />
                 </Border>
               </DataTemplate>
             </mav:MavItems.ItemTemplate>

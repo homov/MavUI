@@ -11,6 +11,9 @@ namespace Mav.ControlsGallery.Pages;
 /// </summary>
 public sealed record ThemeSample(string Name)
 {
+    /// <summary>Readable form of <see cref="Name"/>: "SurfaceContainerHigh" -> "Surface Container High".</summary>
+    public string Label => RoleName.SplitWords(Name);
+
     public IBrush? Background { get; init; }
 
     public IBrush? Foreground { get; init; }
