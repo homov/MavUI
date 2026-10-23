@@ -3,6 +3,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Headless;
 using Avalonia.VisualTree;
+using Xunit;
 
 namespace Hc.Tests.Ui;
 
@@ -42,7 +43,8 @@ internal static class ScreenDump
         Directory.CreateDirectory(ReportFolder);
         var path = Path.Combine(ReportFolder, name + ".png");
         using var frame = window.CaptureRenderedFrame();
-        frame?.Save(path);
+        Assert.True(frame is not null, $"CaptureRenderedFrame returned no frame for {name}.");
+        frame!.Save(path);
         return path;
     }
 
