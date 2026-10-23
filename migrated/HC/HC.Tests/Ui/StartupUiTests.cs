@@ -10,6 +10,7 @@ using Xunit;
 namespace Hc.Tests.Ui;
 
 /// <summary>Runs the real shell in a headless window: checks what the user sees after launch.</summary>
+[Collection("HC UI")]
 public class StartupUiTests
 {
     [AvaloniaFact]

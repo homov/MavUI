@@ -22,8 +22,8 @@ public static class HcTestAppBuilder
 /// Keeps the tests away from the machine's real data and from the production cloud.
 /// - Preferences and secure storage are replaced before the app reads them: the runner's own sign-in must not
 ///   leak into the tests (autologin, shown email).
-/// - The cloud address points at a closed local port, so a test that forgets its fake server fails fast.
-/// HC_API_BASE can still be set explicitly.
+/// - The cloud address points at the local <see cref="StubCloud"/>, so no test reaches the real server.
+/// HC_API_BASE can still be set explicitly; the UI tests then need that address to be the stub.
 /// </summary>
 internal static class TestEnvironment
 {
@@ -34,7 +34,8 @@ internal static class TestEnvironment
         MavPreferences.SetDefault(new JsonFilePreferences(folder));
         MavSecureStorage.SetDefault(new FakeSecureStorage());
 
+        StubCloud.StartForRun();
         if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("HC_API_BASE")))
-            Environment.SetEnvironmentVariable("HC_API_BASE", "http://127.0.0.1:9/stinexapiv1");
+            Environment.SetEnvironmentVariable("HC_API_BASE", StubCloud.Instance.BaseUrl);
     }
 }
