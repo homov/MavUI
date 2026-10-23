@@ -16,7 +16,7 @@
 | `HeatController.Android` | Wi-Fi: `WifiNetworkService`, `WiFiService` | Только Android: подключение к сети устройства, suggestions, настройки Wi-Fi |
 | Локализация | 8 файлов `.resx` по 142 строки | cs, de, hu, it, pl, ro, uk + en по умолчанию. Русского нет. В миграции только en и uk |
 | ТЗ | `support/ТЗ.docx` (15.04.2024), `support/ТЗ_25_07_v_2.pdf` (25.07.2024) | 9 пунктов в первом, 5 разделов во втором |
-| API-спеки | `support/API.yaml`, `support/API_Doc_2.yaml` | OpenAPI 3.0.2, около 45 операций |
+| API-спеки | `support/API.yaml`, `support/API_Doc_2.yaml` | **Не используются** (решение пользователя: `API.yaml` неполный и неверный). Источник контракта — рабочий код `ref/HeatController6/src/HeatCeram.Api` (`ICloudClient.cs`, `Models/`) и ТЗ |
 
 Прочие находки, которые влияют на миграцию:
 
@@ -215,7 +215,7 @@ migrated/
 * Проверка: окно открывается на Desktop, сборка Android проходит.
 
 **Этап 2. Cloud API**
-* `Api/Cloud`: Refit-интерфейс по `API.yaml` / `API_Doc_2.yaml`, модели `System.Text.Json`.
+* `Services/Cloud`: Refit-интерфейс по рабочему коду `ref` (`ICloudClient.cs`), модели `System.Text.Json` (контракт из `ref/.../Models/`, не из OpenAPI-спек).
 * Один `HttpClient` на время жизни приложения (вместо 35 создаваемых). Обработка `Cookie` через один `CookieContainer`.
 * Проверка сертификата: без изменений, с комментарием.
 * Параметр `language` для `user_authorization`, `user_registration`, `user_validation`, `user_password_restoration`, `password_restoration_validate`, `error_codes` (ТЗ 2025, раздел 3). Работает и без ТЗ: если язык пустой, сервер отдаёт EN.
