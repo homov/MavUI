@@ -15,7 +15,7 @@ jobs:
     # Runs on the user's own Linux machine (self-hosted runner).
     runs-on: [self-hosted, linux]
     timeout-minutes: 45
-    # contents: write is only for the screenshots branch (see "Publish screenshots").
+    # contents: write is only for the ci/reports branch (see "Publish screenshots and build log").
     permissions:
       contents: write
 
@@ -72,10 +72,13 @@ jobs:
         shell: bash
         run: python3 ci/scripts/test_annotations.py "$GITHUB_WORKSPACE/test-results" "$GITHUB_WORKSPACE/ui-report"
 
-      # Screenshots are too big for annotations (a job carries ~300 KB of notice text and the gallery
-      # alone makes 1.7 MB). They are force-pushed to the single `ci/screenshots` branch instead:
-      # one commit, no history, every run replaces it. tools/read_screenshots.py fetches them back.
-      - name: Publish screenshots to the ci/screenshots branch
+      # The run artifacts cannot be downloaded from an agent sandbox: GitHub answers the archive
+      # request with a signed link to productionresultssa*.blob.core.windows.net, and that host is
+      # outside the sandbox allowlist (TLS reset). Annotations are no better: a job carries ~300 KB
+      # of notice text, the gallery alone makes 1.7 MB. So the reports are force-pushed to the single
+      # `ci/reports` branch: one commit, no history, every run replaces it.
+      # tools/read_screenshots.py copies them out through api.github.com and verifies SHA256SUMS.
+      - name: Publish screenshots and build log to the ci/reports branch
         if: always()
         shell: bash
         env:
@@ -90,19 +93,20 @@ jobs:
           rm -rf "$work"; mkdir -p "$work"
           cp ui-report/*.png "$work"/
           cp ui-report/*.txt "$work"/ 2>/dev/null || true
+          [ -f build.log ] && cp build.log "$work"/
           # Manifest next to the images: size and sha256, so a reader can verify what it downloaded.
-          ( cd "$work" && sha256sum *.png > SHA256SUMS.txt )
-          printf 'Screenshots of run %s (%s), branch %s.\nRead them with tools/read_screenshots.py.\n' \
+          ( cd "$work" && sha256sum *.png build.log > SHA256SUMS.txt 2>/dev/null || sha256sum *.png > SHA256SUMS.txt )
+          printf 'CI reports of run %s (%s), branch %s.\nScreenshots (PNG), screen outlines (*.txt) and build.log.\nRead them with tools/read_screenshots.py.\n' \
             "$GITHUB_RUN_ID" "${GITHUB_SHA:0:8}" "$GITHUB_REF_NAME" > "$work/README.md"
           cd "$work"
-          git init -q -b ci/screenshots
+          git init -q -b ci/reports
           git add -A
           git -c user.name="mav-ci" -c user.email="mav-ci@users.noreply.github.com" \
-            commit -q -m "Screenshots of run $GITHUB_RUN_ID (${GITHUB_SHA:0:8}): $count image(s)"
+            commit -q -m "Reports of run $GITHUB_RUN_ID (${GITHUB_SHA:0:8}): $count image(s)"
           # A push failure must not hide the test result: report it as a warning and keep going.
           if ! git push --force --quiet \
-              "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" ci/screenshots; then
-            echo "::warning title=Screenshots not published::git push to ci/screenshots failed (contents: write?)"
+              "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" ci/reports; then
+            echo "::warning title=Reports not published::git push to ci/reports failed (contents: write?)"
           fi
 
       - name: Build Android and Browser targets (manual runs or commit message contains [heads])

@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
-"""Fetches the screenshots of a CI run back into the workspace.
+"""Fetches the screenshots and the build log of a CI run back into the workspace.
 
-The self-hosted runner cannot hand artifacts to an agent sandbox (the download redirects to
-blob.core.windows.net, which is blocked) and annotations only carry a few hundred KB. So CI
-force-pushes the images to the single `ci/screenshots` branch, one commit per run, and this script
-copies them out through the GitHub API and verifies them against the SHA256SUMS file.
+Why not the run artifacts: `gh run download` (or any GET of the artifact zip) is answered with a
+signed link to productionresultssa*.blob.core.windows.net, and that host is outside the sandbox
+allowlist — the TLS handshake is reset, so the bytes never arrive. Annotations only carry ~300 KB
+of notice text per job, and the gallery alone makes 1.7 MB. So CI force-pushes the reports to the
+single `ci/reports` branch, one commit per run, and this script copies them out through
+api.github.com and verifies every file against SHA256SUMS.
 
-    python3 tools/read_screenshots.py                     # newest run in the ci/screenshots branch
+    python3 tools/read_screenshots.py                     # newest reports in ci/reports
     python3 tools/read_screenshots.py --list
-    python3 tools/read_screenshots.py --run 40035783119   # only if that run is the one on the branch
+    python3 tools/read_screenshots.py --run 40036005969   # only if that run is the one on the branch
     python3 tools/read_screenshots.py --out /tmp/shots
 
-Old runs (before the branch existed) kept the images as base64 annotations; --annotations reads
+Runs from before the branch existed kept the images as base64 annotations; --annotations reads
 those from the check run instead.
 
 Requires `gh` (authenticated) and network access to api.github.com.
@@ -27,7 +29,7 @@ import re
 import subprocess
 import sys
 
-BRANCH = "ci/screenshots"
+BRANCH = "ci/reports"
 PART_RE = re.compile(r"^PNG (.+) (\d+)/(\d+)$")
 REPO = os.environ.get("GITHUB_REPOSITORY") or None
 
@@ -167,14 +169,15 @@ def read_branch(run_id: int | None, out: str, list_only: bool) -> int:
 
     failures = 0
     for entry in files:
-        if not (entry["path"].endswith(".png") or entry["path"].endswith(".txt")):
+        # Everything the branch holds except the bookkeeping files themselves.
+        if entry["path"] in ("SHA256SUMS.txt", "README.md"):
             continue
         raw = blob(entry["path"])
         problem = ""
         expected = re.search(rf"^([0-9a-f]{{64}}) +{re.escape(entry['path'])}$", checksums, re.MULTILINE)
         if expected and hashlib.sha256(raw).hexdigest() != expected.group(1):
             problem = "sha256 mismatch"
-        elif expected is None and entry["path"].endswith(".png"):
+        elif expected is None and entry["path"] != "gallery.txt":
             problem = "missing from SHA256SUMS"
         with open(os.path.join(out, entry["path"]), "wb") as handle:
             handle.write(raw)
@@ -188,7 +191,7 @@ def read_branch(run_id: int | None, out: str, list_only: bool) -> int:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--run", type=int, help="expected run id (checked against the branch message)")
-    parser.add_argument("--out", help="output folder; default ci/screenshots/run-<id>")
+    parser.add_argument("--out", help="output folder; default ci/reports")
     parser.add_argument("--list", action="store_true", help="only list what is published")
     parser.add_argument("--annotations", action="store_true",
                         help="read the base64 annotations of an old run instead of the branch")
@@ -197,12 +200,12 @@ def main() -> int:
     if args.annotations:
         if args.run is None:
             sys.exit("--annotations needs --run <id>")
-        out = args.out or os.path.join("ci", "screenshots", f"run-{args.run}")
+        out = args.out or os.path.join("ci", "reports", f"run-{args.run}")
         return read_annotations(args.run, out)
 
     if args.run is not None:
         print(f"run {args.run}  {run_info(args.run).get('displayTitle')}")
-    out = args.out or os.path.join("ci", "screenshots", "latest")
+    out = args.out or os.path.join("ci", "reports")
     return read_branch(args.run, out, args.list)
 
 
