@@ -51,36 +51,53 @@
 
 ## 3. Структура целевого проекта
 
+Раскладка повторяет принятую в .NET MAUI: `Platforms/<цель>/` для кода и ресурсов одной платформы, `Resources/` для общих ассетов, остальное общее. Один проект, две цели: `net10.0` (Windows, быстрый визуальный тест) и `net10.0-android`. Android собирается только при `IncludeAndroid=true` (CI, ветка `[heads]`), поэтому обычная сборка не требует Android-workload.
+
 ```
 migrated/
 ├── HC/
 │   ├── HC.sln
-│   ├── HC/                      один проект (Android + Windows)
-│   │   ├── HC.csproj            TFM: net10.0-android; net10.0; Avalonia; ProjectReference MavUI, MavUI.Essentials
-│   │   ├── Program.cs           Desktop-вход: окно ~390x844 dp (телефон) для быстрого визуального теста
-│   │   ├── Android/             MainActivity, манифест, иконки, Wi-Fi-реализация (только Android)
-│   │   ├── App.axaml(.cs)       корень приложения, тема MavTheme
-│   │   ├── Api/
-│   │   │   ├── Cloud/           ICloudApi (Refit), модели запросов/ответов, ошибки
-│   │   │   └── Local/           ILocalDeviceApi (Refit, 10.10.10.1:10893)
-│   │   ├── Services/            сессия, устройства, расписания, локации, настройки, язык, Wi-Fi-интерфейс
-│   │   ├── Pages/               XAML-страницы и их ViewModel (Login, Devices, Device, Schedule, Settings, ...)
-│   │   ├── Models/              доменные модели и маппинг из API
-│   │   ├── Localization/        по одному файлу на язык: En.cs, Uk.cs
-│   │   └── Resources/           шрифты, изображения
-│   └── HC.Tests/                тесты (headless, Avalonia.Headless) и маппинг API
+│   └── HC/                          один проект
+│       ├── HC.csproj                TFM: net10.0 (+ net10.0-android при IncludeAndroid); ProjectReference MavUI
+│       ├── App.axaml(.cs)           общее приложение; хосты переопределяют CreateRoot / CreateDesktopWindow
+│       ├── HcAppBuilderExtensions.cs  UseHcDefaults: тема MavTheme (seed #3E94FF), логирование
+│       ├── Config/ApiEndpoints.cs   адреса API и таймауты; облако по умолчанию продакшен, переопределяется HC_API_BASE
+│       ├── Platforms/
+│       │   ├── Android/             MainActivity, AndroidManifest.xml, Resources/ (styles, цвета, network_security_config), Services/
+│       │   └── Windows/             Program.cs (вход), WindowsApp.cs, PreviewWindow.axaml (390x844 dp), Services/
+│       ├── Resources/
+│       │   ├── Fonts/               шрифты (пока пусто, см. NOTES.md)
+│       │   ├── Images/              изображения
+│       │   ├── Raw/                 сырые файлы
+│       │   └── Styles/AppStyles.axaml  общие стили приложения
+│       ├── Services/
+│       │   ├── Cloud/               облачный API (Refit), этап 2
+│       │   ├── Local/               локальный API устройства 10.10.10.1:10893, этап 3
+│       │   └── Wifi/                IWifiProvisioning; реализации в Platforms/
+│       ├── Pages/
+│       │   ├── Shell/               MainView (навигация), StartPage
+│       │   ├── Account/ Groups/ Devices/ Device/ Schedule/ Settings/   страницы по функциям (XAML + ViewModel)
+│       │   └── Models/              модели страниц и данных (решение пользователя: модели в Pages/)
+│       ├── Localization/            HcLocalization.cs (провайдер), En.cs, Uk.cs (по одному файлу на язык)
+│       ├── Controls/                собственные контролы приложения
+│       └── Converters/              конвертеры XAML
+├── HC.Tests/                        тесты (этап 10), Avalonia.Headless
 └── docs/
-    ├── PLAN.md                  этот документ
-    ├── NOTES.md                 заметки (открытые вопросы, решения)
-    └── API_MAPPING.md           соответствие операций API и методов сервисов
+    ├── PLAN.md                      этот документ
+    ├── NOTES.md                     заметки (открытые вопросы, решения)
+    └── API_MAPPING.md               соответствие операций API и методов сервисов (этап 2)
 ```
 
-Требования, которые следуют из ваших правил:
+Что следует из правил проекта:
 
-* Namespace корня: `Hc`. Например, `Hc.Api.Cloud`, `Hc.Services`, `Hc.Pages`.
-* Сервисы в `Services/`, страницы и модели в `Pages/` и `Models/`.
-* Облачный и локальный API разделены по своим сервисам: `Services/CloudService` (облако) и `Services/LocalDeviceService` (локальный API устройства).
-* Локализация: `Localization/`, по одному файлу на язык.
+* Namespace корня: `Hc`. Например, `Hc.Services.Cloud`, `Hc.Pages.Shell`, `Hc.Platforms.Android`.
+* Сервисы в `Services/`, страницы и их модели в `Pages/`, модели в `Pages/Models/`.
+* Облачный и локальный API разделены по своим сервисам: `Services/Cloud` и `Services/Local`.
+* Локализация в `Localization/`, по одному файлу на язык (en, uk). Английский строки для XAML — это fallback в самом XAML.
+* Пустые папки хранятся через `.gitkeep`.
+* Сборка проверена CI: Windows на каждом коммите, Android при `[heads]`.
+* Android: `ApplicationId` `com.melask.heatceram` (из `ref`, но без суффикса `.old`). Нужно подтвердить: обновление должно идти на тот же идентификатор, что и в магазине.
+* Android-манифест: cleartext HTTP разрешён только для `10.10.10.1` через `network_security_config` (в `ref` cleartext был разрешён для всего приложения).
 
 ---
 
