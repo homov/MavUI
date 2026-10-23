@@ -26,8 +26,8 @@ public class MavExpansionPanel : MavContentView
     public static readonly StyledProperty<bool> IsExpandedProperty =
         AvaloniaProperty.Register<MavExpansionPanel, bool>(nameof(IsExpanded));
 
-    public static readonly StyledProperty<Control?> BodyProperty =
-        AvaloniaProperty.Register<MavExpansionPanel, Control?>(nameof(Body));
+    public static new readonly StyledProperty<object?> ContentProperty =
+        AvaloniaProperty.Register<MavExpansionPanel, object?>(nameof(Content));
 
     private readonly MavSurface _card;
     private readonly MavInkSurface _header;
@@ -37,6 +37,7 @@ public class MavExpansionPanel : MavContentView
     private readonly MavIcon _chevron;
     private readonly MavDivider _divider;
     private readonly Border _bodyHost;
+    private readonly ContentPresenter _bodyPresenter;
 
     public event EventHandler<bool>? ExpandedChanged;
 
@@ -46,12 +47,7 @@ public class MavExpansionPanel : MavContentView
         SubtitleProperty.Changed.AddClassHandler<MavExpansionPanel>((p, _) => p.Sync());
         LeadingIconProperty.Changed.AddClassHandler<MavExpansionPanel>((p, _) => p.Sync());
         IsExpandedProperty.Changed.AddClassHandler<MavExpansionPanel>((p, e) => p.OnExpandedChanged(e.GetNewValue<bool>()));
-        BodyProperty.Changed.AddClassHandler<MavExpansionPanel>((p, e) =>
-        {
-            var body = e.GetNewValue<Control?>();
-            MavVisualTreeHelpers.DetachFromParent(body);
-            p._bodyHost.Child = body;
-        });
+        ContentProperty.Changed.AddClassHandler<MavExpansionPanel>((p, e) => p.SetContent(e.GetNewValue<object?>()));
     }
 
     /// <summary>Creates an empty expansion panel.</summary>
@@ -63,7 +59,7 @@ public class MavExpansionPanel : MavContentView
     public MavExpansionPanel(
         string title = "",
         string? subtitle = null,
-        Control? body = null,
+        object? content = null,
         bool isExpanded = false,
         string? leadingIcon = null)
     {
@@ -104,11 +100,12 @@ public class MavExpansionPanel : MavContentView
         _header.Clicked += (_, _) => IsExpanded = !IsExpanded;
 
         _divider = new MavDivider { IsVisible = isExpanded };
+        _bodyPresenter = new ContentPresenter();
         _bodyHost = new Border
         {
             Padding = new Thickness(16, 12, 16, 16),
             IsVisible = isExpanded,
-            Child = body,
+            Child = _bodyPresenter,
         };
 
         var stack = new StackPanel { Orientation = Orientation.Vertical };
@@ -129,7 +126,7 @@ public class MavExpansionPanel : MavContentView
         Title = title;
         Subtitle = subtitle;
         LeadingIcon = leadingIcon;
-        if (body is not null) Body = body;
+        if (content is not null) Content = content;
         if (isExpanded)
         {
             _chevron.SetRotation(180);
@@ -170,17 +167,19 @@ public class MavExpansionPanel : MavContentView
         set => SetValue(IsExpandedProperty, value);
     }
 
+    /// <summary>The panel body, shown when expanded. Any object is accepted, as in Avalonia's ContentControl.</summary>
     [Content]
-    public Control? Body
+    public new object? Content
     {
-        get => GetValue(BodyProperty);
-        set => SetValue(BodyProperty, value);
+        get => GetValue(ContentProperty);
+        set => SetValue(ContentProperty, value);
     }
 
-    public new Control? Content
+    private void SetContent(object? content)
     {
-        get => Body;
-        set => Body = value;
+        if (content is Control control)
+            MavVisualTreeHelpers.DetachFromParent(control);
+        _bodyPresenter.Content = content;
     }
 
     private void Sync()

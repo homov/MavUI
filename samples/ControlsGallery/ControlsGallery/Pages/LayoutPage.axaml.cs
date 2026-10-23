@@ -93,8 +93,8 @@ public partial class LayoutPage : UserControl
         };
 
         var list = new MavExpansionPanelList { SingleExpand = true };
-        list.AddPanel(new MavExpansionPanel { Header = "Install", Body = new MavLabel { Text = "dotnet add package Mav" } });
-        list.AddPanel(new MavExpansionPanel { Header = "Theme", Body = new MavLabel { Text = "MavTheme.Configure(seed: ...)" } });
+        list.AddPanel(new MavExpansionPanel { Header = "Install", Content = new MavLabel { Text = "dotnet add package Mav" } });
+        list.AddPanel(new MavExpansionPanel { Header = "Theme", Content = new MavLabel { Text = "MavTheme.Configure(seed: ...)" } });
 
         var settings = new MavSettingsCard
         {

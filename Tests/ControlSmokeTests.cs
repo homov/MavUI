@@ -101,7 +101,7 @@ public class ControlSmokeTests
     {
         var root = new StackPanel { Spacing = 8 };
         root.Children.Add(new MavCard(MavCardVariant.Outlined, new MavLabel { Text = "Body" }));
-        root.Children.Add(new MavExpansionPanel { Header = "Panel", IsExpanded = true, Body = new MavLabel { Text = "X" } });
+        root.Children.Add(new MavExpansionPanel { Header = "Panel", IsExpanded = true, Content = new MavLabel { Text = "X" } });
         root.Children.Add(new MavSplitView { Pane = new MavLabel { Text = "Pane" }, DetailContent = new MavLabel { Text = "Detail" } });
         root.Children.Add(new MavAvatar { Initials = "SS" });
         root.Children.Add(new MavBadgedBox(new MavButton("X"), "1"));

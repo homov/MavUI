@@ -172,7 +172,7 @@ public partial class FeedbackPage : UserControl
         var refresh = new MavRefreshIndicator
         {
             Height = 220,
-            Body = new MavScrollViewer { Content = refreshBody },
+            Content = new MavScrollViewer { Content = refreshBody },
             RefreshHandler = async () => await Task.Delay(900),
         };
 

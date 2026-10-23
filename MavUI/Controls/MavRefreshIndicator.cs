@@ -48,11 +48,12 @@ public class MavRefreshIndicator : MavContentView
     public static readonly StyledProperty<object?> CommandParameterProperty =
         AvaloniaProperty.Register<MavRefreshIndicator, object?>(nameof(CommandParameter));
 
-    public static readonly StyledProperty<Control?> BodyProperty =
-        AvaloniaProperty.Register<MavRefreshIndicator, Control?>(nameof(Body));
+    public static new readonly StyledProperty<object?> ContentProperty =
+        AvaloniaProperty.Register<MavRefreshIndicator, object?>(nameof(Content));
 
     private readonly Grid _root;
     private readonly Border _bodyHost;
+    private readonly ContentPresenter _bodyPresenter;
     private readonly Border _indicatorHost;
     private readonly MavSurface _pill;
     private readonly MavCircularProgress _pullSpinner;
@@ -74,12 +75,7 @@ public class MavRefreshIndicator : MavContentView
         StatusTextProperty.Changed.AddClassHandler<MavRefreshIndicator>((r, _) => r.UpdateVisualState());
         ArmedTextProperty.Changed.AddClassHandler<MavRefreshIndicator>((r, _) => r.UpdateVisualState());
         RefreshingTextProperty.Changed.AddClassHandler<MavRefreshIndicator>((r, _) => r.UpdateVisualState());
-        BodyProperty.Changed.AddClassHandler<MavRefreshIndicator>((r, e) =>
-        {
-            var body = e.GetNewValue<Control?>();
-            MavVisualTreeHelpers.DetachFromParent(body);
-            r._bodyHost.Child = body;
-        });
+        ContentProperty.Changed.AddClassHandler<MavRefreshIndicator>((r, e) => r.SetContent(e.GetNewValue<object?>()));
     }
 
     /// <summary>Creates a refresh indicator without content.</summary>
@@ -88,16 +84,18 @@ public class MavRefreshIndicator : MavContentView
     }
 
     /// <summary>Creates a pull-to-refresh indicator around <paramref name="content"/>.</summary>
-    public MavRefreshIndicator(Control? content = null)
+    public MavRefreshIndicator(object? content = null)
     {
         HorizontalAlignment = HorizontalAlignment.Stretch;
         VerticalAlignment = VerticalAlignment.Stretch;
 
+        _bodyPresenter = new ContentPresenter();
         _bodyHost = new Border
         {
             HorizontalAlignment = HorizontalAlignment.Stretch,
             VerticalAlignment = VerticalAlignment.Stretch,
             Background = Brushes.Transparent,
+            Child = _bodyPresenter,
         };
 
         _pullSpinner = new MavCircularProgress(26, indeterminate: false, value: 0)
@@ -169,7 +167,7 @@ public class MavRefreshIndicator : MavContentView
 
         base.Content = _root;
         if (content is not null)
-            Body = content;
+            Content = content;
 
         AddHandler(PointerPressedEvent, OnPullPressed, RoutingStrategies.Tunnel, handledEventsToo: true);
         AddHandler(PointerMovedEvent, OnPullMoved, RoutingStrategies.Tunnel, handledEventsToo: true);
@@ -179,17 +177,19 @@ public class MavRefreshIndicator : MavContentView
         MavTheme.Observe(this, (self, theme) => self.ApplyTheme(theme));
     }
 
+    /// <summary>The scrollable content. Any object is accepted, as in Avalonia's ContentControl.</summary>
     [Content]
-    public Control? Body
+    public new object? Content
     {
-        get => GetValue(BodyProperty);
-        set => SetValue(BodyProperty, value);
+        get => GetValue(ContentProperty);
+        set => SetValue(ContentProperty, value);
     }
 
-    public new Control? Content
+    private void SetContent(object? content)
     {
-        get => Body;
-        set => Body = value;
+        if (content is Control control)
+            MavVisualTreeHelpers.DetachFromParent(control);
+        _bodyPresenter.Content = content;
     }
 
     public bool IsRefreshing
