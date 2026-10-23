@@ -2,6 +2,7 @@ using System.Text;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Headless;
+using Avalonia.Media.Imaging;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
 using Xunit;
@@ -58,7 +59,8 @@ internal static class Shots
 
         Directory.CreateDirectory(Folder);
         var path = Path.Combine(Folder, name + ".png");
-        frame!.Save(path);
+        // PNG is what every reader expects; the options overload is the non-obsolete one in 12.1.
+        frame!.Save(path, PngBitmapEncoderOptions.Default);
 
         var size = new FileInfo(path).Length;
         // A frame that was never drawn saves as a nearly uniform image a few hundred bytes big.

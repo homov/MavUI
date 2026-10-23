@@ -2,6 +2,7 @@ using System.Reflection;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Headless;
+using Avalonia.Media.Imaging;
 using Avalonia.VisualTree;
 using Xunit;
 
@@ -47,7 +48,8 @@ internal static class ScreenDump
             AvaloniaHeadlessPlatform.ForceRenderTimerTick();
         using var frame = window.CaptureRenderedFrame();
         Assert.True(frame is not null, $"CaptureRenderedFrame returned no frame for {name}.");
-        frame!.Save(path);
+        // PngBitmapEncoderOptions: the overload with an int? quality is obsolete in Avalonia 12.1.
+        frame!.Save(path, PngBitmapEncoderOptions.Default);
         return path;
     }
 
