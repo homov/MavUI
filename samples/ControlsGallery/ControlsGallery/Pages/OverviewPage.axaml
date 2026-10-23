@@ -71,24 +71,24 @@
                            Command="{x:Static pages:OverviewCommands.ContrastHigh}" />
           </WrapPanel>
           <WrapPanel>
-            <mav:MavButton Variant="Text" Margin="0,0,8,8"
+            <mav:MavButton x:Name="DensityComfortableButton" Variant="Text" Margin="0,0,8,8"
                            Text="{mav:Loc Overview.Density.Comfortable, Fallback=Comfortable}"
                            Command="{x:Static pages:OverviewCommands.DensityComfortable}" />
-            <mav:MavButton Variant="Text" Margin="0,0,8,8"
+            <mav:MavButton x:Name="DensityCompactButton" Variant="Text" Margin="0,0,8,8"
                            Text="{mav:Loc Overview.Density.Compact, Fallback=Compact}"
                            Command="{x:Static pages:OverviewCommands.DensityCompact}" />
-            <mav:MavButton Variant="Text" Margin="0,0,8,8"
+            <mav:MavButton x:Name="DensityDenseButton" Variant="Text" Margin="0,0,8,8"
                            Text="{mav:Loc Overview.Density.Dense, Fallback=Dense}"
                            Command="{x:Static pages:OverviewCommands.DensityDense}" />
           </WrapPanel>
           <WrapPanel>
-            <mav:MavButton Variant="Outlined" Margin="0,0,8,8"
+            <mav:MavButton x:Name="MotionExpressiveButton" Variant="Outlined" Margin="0,0,8,8"
                            Text="{mav:Loc Overview.Motion.Expressive, Fallback=Expressive motion}"
                            Command="{x:Static pages:OverviewCommands.MotionExpressive}" />
-            <mav:MavButton Variant="Outlined" Margin="0,0,8,8"
+            <mav:MavButton x:Name="MotionStandardButton" Variant="Outlined" Margin="0,0,8,8"
                            Text="{mav:Loc Overview.Motion.Standard, Fallback=Standard}"
                            Command="{x:Static pages:OverviewCommands.MotionStandard}" />
-            <mav:MavButton Variant="Outlined" Margin="0,0,8,8"
+            <mav:MavButton x:Name="MotionReducedButton" Variant="Outlined" Margin="0,0,8,8"
                            Text="{mav:Loc Overview.Motion.Reduced, Fallback=Reduced}"
                            Command="{x:Static pages:OverviewCommands.MotionReduced}" />
           </WrapPanel>

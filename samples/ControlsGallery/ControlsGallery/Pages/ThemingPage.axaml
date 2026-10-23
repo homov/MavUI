@@ -37,15 +37,15 @@
                 </WrapPanel>
                   <pages:SchemeVariantPicker />
                 <WrapPanel>
-                  <mav:MavButton Variant="Text" Text="{mav:Loc Overview.Density.Comfortable, Fallback=Comfortable}" Command="{x:Static pages:ThemingPage.SetDensity}" CommandParameter="{x:Static mav:MavDensity.Comfortable}" Margin="0,0,8,8" />
-                  <mav:MavButton Variant="Text" Text="{mav:Loc Overview.Density.Compact, Fallback=Compact}" Command="{x:Static pages:ThemingPage.SetDensity}" CommandParameter="{x:Static mav:MavDensity.Compact}" Margin="0,0,8,8" />
-                  <mav:MavButton Variant="Text" Text="{mav:Loc Overview.Density.Dense, Fallback=Dense}" Command="{x:Static pages:ThemingPage.SetDensity}" CommandParameter="{x:Static mav:MavDensity.Dense}" Margin="0,0,8,8" />
+                  <mav:MavButton x:Name="DensityComfortableButton" Variant="Text" Text="{mav:Loc Overview.Density.Comfortable, Fallback=Comfortable}" Command="{x:Static pages:ThemingPage.SetDensity}" CommandParameter="{x:Static mav:MavDensity.Comfortable}" Margin="0,0,8,8" />
+                  <mav:MavButton x:Name="DensityCompactButton" Variant="Text" Text="{mav:Loc Overview.Density.Compact, Fallback=Compact}" Command="{x:Static pages:ThemingPage.SetDensity}" CommandParameter="{x:Static mav:MavDensity.Compact}" Margin="0,0,8,8" />
+                  <mav:MavButton x:Name="DensityDenseButton" Variant="Text" Text="{mav:Loc Overview.Density.Dense, Fallback=Dense}" Command="{x:Static pages:ThemingPage.SetDensity}" CommandParameter="{x:Static mav:MavDensity.Dense}" Margin="0,0,8,8" />
                 </WrapPanel>
                 <WrapPanel>
-                  <mav:MavButton Variant="Outlined" Text="{mav:Loc Theming.Motion.Expressive, Fallback=Motion: Expressive}" Command="{x:Static pages:ThemingPage.SetMotion}" CommandParameter="{x:Static mav:MavMotionScheme.Expressive}" Margin="0,0,8,8" />
-                  <mav:MavButton Variant="Outlined" Text="{mav:Loc Overview.Motion.Standard, Fallback=Standard}" Command="{x:Static pages:ThemingPage.SetMotion}" CommandParameter="{x:Static mav:MavMotionScheme.Standard}" Margin="0,0,8,8" />
-                  <mav:MavButton Variant="Outlined" Text="{mav:Loc Overview.Motion.Reduced, Fallback=Reduced}" Command="{x:Static pages:ThemingPage.SetMotion}" CommandParameter="{x:Static mav:MavMotionScheme.Reduced}" Margin="0,0,8,8" />
-                  <mav:MavButton Variant="Outlined" Text="{mav:Loc Theming.Motion.None, Fallback=None}" Command="{x:Static pages:ThemingPage.SetMotion}" CommandParameter="{x:Static mav:MavMotionScheme.None}" Margin="0,0,8,8" />
+                  <mav:MavButton x:Name="MotionExpressiveButton" Variant="Outlined" Text="{mav:Loc Theming.Motion.Expressive, Fallback=Motion: Expressive}" Command="{x:Static pages:ThemingPage.SetMotion}" CommandParameter="{x:Static mav:MavMotionScheme.Expressive}" Margin="0,0,8,8" />
+                  <mav:MavButton x:Name="MotionStandardButton" Variant="Outlined" Text="{mav:Loc Overview.Motion.Standard, Fallback=Standard}" Command="{x:Static pages:ThemingPage.SetMotion}" CommandParameter="{x:Static mav:MavMotionScheme.Standard}" Margin="0,0,8,8" />
+                  <mav:MavButton x:Name="MotionReducedButton" Variant="Outlined" Text="{mav:Loc Overview.Motion.Reduced, Fallback=Reduced}" Command="{x:Static pages:ThemingPage.SetMotion}" CommandParameter="{x:Static mav:MavMotionScheme.Reduced}" Margin="0,0,8,8" />
+                  <mav:MavButton x:Name="MotionNoneButton" Variant="Outlined" Text="{mav:Loc Theming.Motion.None, Fallback=None}" Command="{x:Static pages:ThemingPage.SetMotion}" CommandParameter="{x:Static mav:MavMotionScheme.None}" Margin="0,0,8,8" />
                 </WrapPanel>
                 <WrapPanel>
                   <mav:MavButton Variant="Tonal" Text="{mav:Loc Theming.Shape.Compact, Fallback=Shape: Compact}" Command="{x:Static pages:ThemingPage.SetShape}" CommandParameter="{x:Static mav:MavShapeScale.Compact}" Margin="0,0,8,8" />

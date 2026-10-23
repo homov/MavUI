@@ -140,5 +140,12 @@ public partial class ThemingPage : UserControl
         ContrastStandardButton.Variant = ChoiceButtonStyle.Of(MavTheme.Contrast == MavContrast.Standard, MavButtonVariant.Tonal);
         ContrastMediumButton.Variant = ChoiceButtonStyle.Of(MavTheme.Contrast == MavContrast.Medium, MavButtonVariant.Tonal);
         ContrastHighButton.Variant = ChoiceButtonStyle.Of(MavTheme.Contrast == MavContrast.High, MavButtonVariant.Tonal);
+        DensityComfortableButton.Variant = ChoiceButtonStyle.Of(MavTheme.Density == MavDensity.Comfortable, MavButtonVariant.Text);
+        DensityCompactButton.Variant = ChoiceButtonStyle.Of(MavTheme.Density == MavDensity.Compact, MavButtonVariant.Text);
+        DensityDenseButton.Variant = ChoiceButtonStyle.Of(MavTheme.Density == MavDensity.Dense, MavButtonVariant.Text);
+        MotionExpressiveButton.Variant = ChoiceButtonStyle.Of(MavTheme.Motion == MavMotionScheme.Expressive, MavButtonVariant.Outlined);
+        MotionStandardButton.Variant = ChoiceButtonStyle.Of(MavTheme.Motion == MavMotionScheme.Standard, MavButtonVariant.Outlined);
+        MotionReducedButton.Variant = ChoiceButtonStyle.Of(MavTheme.Motion == MavMotionScheme.Reduced, MavButtonVariant.Outlined);
+        MotionNoneButton.Variant = ChoiceButtonStyle.Of(MavTheme.Motion == MavMotionScheme.None, MavButtonVariant.Outlined);
     }
 }

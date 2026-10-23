@@ -41,14 +41,8 @@ public static class OverviewPage
             SeedRow(),
             SchemeVariantRow(),
             ContrastRow(),
-            Row(
-                Button("Overview.Density.Comfortable", "Comfortable", MavButtonVariant.Text, null, () => MavTheme.Configure(density: MavDensity.Comfortable)),
-                Button("Overview.Density.Compact", "Compact", MavButtonVariant.Text, null, () => MavTheme.Configure(density: MavDensity.Compact)),
-                Button("Overview.Density.Dense", "Dense", MavButtonVariant.Text, null, () => MavTheme.Configure(density: MavDensity.Dense))),
-            Row(
-                Button("Overview.Motion.Expressive", "Expressive motion", MavButtonVariant.Outlined, null, () => MavTheme.Configure(motion: MavMotionScheme.Expressive)),
-                Button("Overview.Motion.Standard", "Standard", MavButtonVariant.Outlined, null, () => MavTheme.Configure(motion: MavMotionScheme.Standard)),
-                Button("Overview.Motion.Reduced", "Reduced", MavButtonVariant.Outlined, null, () => MavTheme.Configure(motion: MavMotionScheme.Reduced)))),
+            DensityRow(),
+            MotionRow()),
         Section(
             "Overview.Typography.Title", "Typography",
             "Overview.Typography.Body", "15 MD3 type roles from DisplayLarge to LabelSmall.",

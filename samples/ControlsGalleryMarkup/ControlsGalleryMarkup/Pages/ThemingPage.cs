@@ -36,15 +36,8 @@ public static class ThemingPage
                     SeedRow(),
                     ContrastRow(),
                     SchemeVariantRow(),
-                    Row(
-                        Button("Overview.Density.Comfortable", "Comfortable", MavButtonVariant.Text, null, () => MavTheme.Configure(density: MavDensity.Comfortable)),
-                        Button("Overview.Density.Compact", "Compact", MavButtonVariant.Text, null, () => MavTheme.Configure(density: MavDensity.Compact)),
-                        Button("Overview.Density.Dense", "Dense", MavButtonVariant.Text, null, () => MavTheme.Configure(density: MavDensity.Dense))),
-                    Row(
-                        Button("Theming.Motion.Expressive", "Motion: Expressive", MavButtonVariant.Outlined, null, () => MavTheme.Configure(motion: MavMotionScheme.Expressive)),
-                        Button("Overview.Motion.Standard", "Standard", MavButtonVariant.Outlined, null, () => MavTheme.Configure(motion: MavMotionScheme.Standard)),
-                        Button("Overview.Motion.Reduced", "Reduced", MavButtonVariant.Outlined, null, () => MavTheme.Configure(motion: MavMotionScheme.Reduced)),
-                        Button("Theming.Motion.None", "None", MavButtonVariant.Outlined, null, () => MavTheme.Configure(motion: MavMotionScheme.None))),
+                    DensityRow(),
+                    MotionRow(),
                     Row(
                         Button("Theming.Shape.Compact", "Shape: Compact", MavButtonVariant.Tonal, null, () => MavTheme.Configure(shapeScale: MavShapeScale.Compact)),
                         Button("Overview.Motion.Standard", "Standard", MavButtonVariant.Tonal, null, () => MavTheme.Configure(shapeScale: MavShapeScale.Standard)),

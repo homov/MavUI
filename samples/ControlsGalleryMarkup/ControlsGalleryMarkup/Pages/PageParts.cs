@@ -141,6 +141,31 @@ public static class PageParts
         contrast => MavTheme.Configure(contrast: contrast),
         MavButtonVariant.Tonal);
 
+    /// <summary>Comfortable, compact and dense buttons. The current density is highlighted and kept in sync with the theme.</summary>
+    public static Control DensityRow() => ChoiceRow(
+        new (MavDensity Value, string Key, string English, string? Icon)[]
+        {
+            (MavDensity.Comfortable, "Overview.Density.Comfortable", "Comfortable", null),
+            (MavDensity.Compact, "Overview.Density.Compact", "Compact", null),
+            (MavDensity.Dense, "Overview.Density.Dense", "Dense", null),
+        },
+        () => MavTheme.Density,
+        density => MavTheme.Configure(density: density),
+        MavButtonVariant.Text);
+
+    /// <summary>Motion scheme buttons. The current scheme is highlighted and kept in sync with the theme.</summary>
+    public static Control MotionRow() => ChoiceRow(
+        new (MavMotionScheme Value, string Key, string English, string? Icon)[]
+        {
+            (MavMotionScheme.Expressive, "Overview.Motion.Expressive", "Expressive", null),
+            (MavMotionScheme.Standard, "Overview.Motion.Standard", "Standard", null),
+            (MavMotionScheme.Reduced, "Overview.Motion.Reduced", "Reduced", null),
+            (MavMotionScheme.None, "Theming.Motion.None", "None", null),
+        },
+        () => MavTheme.Motion,
+        motion => MavTheme.Configure(motion: motion),
+        MavButtonVariant.Outlined);
+
     /// <summary>A row of buttons for one choice of a theme setting; the chosen value is filled and kept in sync with the theme.</summary>
     private static Control ChoiceRow<T>(
         (T Value, string Key, string English, string? Icon)[] choices,
