@@ -12,25 +12,27 @@ public static class SelectionPage
 {
     public static Control Build()
     {
-        var roles = new MavRadioGroup();
-        roles.AddOption(L("Selection.Role.Admin", "Admin"), "admin", selected: true);
-        roles.AddOption(L("Selection.Role.Editor", "Editor"), "editor");
-        roles.AddOption(L("Selection.Role.Viewer", "Viewer"), "viewer");
+        var roles = new MavRadioGroup().Choices(
+            (L("Selection.Role.Admin", "Admin"), "admin", true),
+            (L("Selection.Role.Editor", "Editor"), "editor", false),
+            (L("Selection.Role.Viewer", "Viewer"), "viewer", false));
 
-        var single = new MavSegmentedButton();
-        single.AddSegment(L("Selection.Segment.Day", "Day"), selected: true);
-        single.AddSegment(L("Selection.Segment.Week", "Week"));
-        single.AddSegment(L("Selection.Segment.Month", "Month"));
+        var single = new MavSegmentedButton()
+            .AddSegment(L("Selection.Segment.Day", "Day"), selected: true)
+            .AddSegment(L("Selection.Segment.Week", "Week"))
+            .AddSegment(L("Selection.Segment.Month", "Month"));
 
-        var multi = new MavSegmentedButton().MultiSelect(true);
-        multi.AddSegment("Bold", MavIcons.FormatBold, selected: true);
-        multi.AddSegment("Italic", MavIcons.FormatItalic);
-        multi.AddSegment("Underline", MavIcons.FormatUnderlined);
+        var multi = new MavSegmentedButton()
+            .MultiSelect(true)
+            .AddSegment("Bold", MavIcons.FormatBold, selected: true)
+            .AddSegment("Italic", MavIcons.FormatItalic)
+            .AddSegment("Underline", MavIcons.FormatUnderlined);
 
-        var chips = new MavChipGroup().SingleSelection(true);
-        chips.AddChip(L("Selection.Chip.Design", "Design"), MavChipKind.Filter, MavIcons.Palette, selected: true);
-        chips.AddChip(L("Selection.Chip.Engineering", "Engineering"), MavChipKind.Filter, MavIcons.Code);
-        chips.AddChip(L("Selection.Chip.Research", "Research"), MavChipKind.Filter, MavIcons.Science);
+        var chips = new MavChipGroup()
+            .SingleSelection(true)
+            .AddChip(L("Selection.Chip.Design", "Design"), MavChipKind.Filter, MavIcons.Palette, selected: true)
+            .AddChip(L("Selection.Chip.Engineering", "Engineering"), MavChipKind.Filter, MavIcons.Code)
+            .AddChip(L("Selection.Chip.Research", "Research"), MavChipKind.Filter, MavIcons.Science);
 
         var roleSelect = new MavSelect()
             .Label(L("Selection.Select.Role", "Role"))
@@ -91,5 +93,13 @@ public static class SelectionPage
                         new MavChip("Suggestion", MavChipKind.Suggestion, null)),
                     chips,
                     Row(roleSelect, cityCombo, new MavRatingBar().Value(4.5).MaxRating(5).AllowHalf(true)))));
+    }
+
+    /// <summary>Adds radio options (label, value, selected) and returns the group for chaining.</summary>
+    private static MavRadioGroup Choices(this MavRadioGroup group, params (string Label, string Value, bool Selected)[] options)
+    {
+        foreach (var option in options)
+            group.AddOption(option.Label, option.Value, option.Selected);
+        return group;
     }
 }

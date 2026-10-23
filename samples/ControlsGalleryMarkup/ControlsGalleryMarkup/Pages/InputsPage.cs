@@ -1,3 +1,4 @@
+using System;
 using Avalonia.Controls;
 using Avalonia.Media;
 using Mav;
@@ -46,20 +47,21 @@ public static class InputsPage
             .Value(4)
             .Suffix(L("Inputs.Number.Suffix", "people"));
 
-        var tags = new MavTagInput(L("Inputs.Tags.Label", "Tags"));
-        tags.AddTag("material").AddTag("avalonia");
-        var search = new MavSearchBar(L("Inputs.Search.Placeholder", "Search the gallery"));
-        search.AttachSearchView(new[] { "MavButton", "MavCard", "MavDataTable", "MavDialog" });
+        var tags = new MavTagInput(L("Inputs.Tags.Label", "Tags"))
+            .AddTag("material")
+            .AddTag("avalonia");
+        var search = new MavSearchBar(L("Inputs.Search.Placeholder", "Search the gallery"))
+            .AttachSuggestions("MavButton", "MavCard", "MavDataTable", "MavDialog");
 
         var nameField = new MavTextField(L("Inputs.Form.Name", "Full name"), MavTextFieldVariant.Outlined);
         var emailField = new MavTextField(L("Inputs.Field.Email", "Email"), MavTextFieldVariant.Outlined);
         var cityField = new MavTextField(L("Inputs.Form.City", "City"), MavTextFieldVariant.Outlined);
 
-        // MavFormValidator is not a control, so it has no generated fluent methods.
-        var validator = new MavFormValidator { ValidateOnChange = true };
-        validator.Field(nameField).Required().MinLength(2);
-        validator.Field(emailField).Required().Email();
-        validator.Field(cityField).Required();
+        // MavFormValidator is not a control, so it has no generated fluent methods. It validates on change by default.
+        var validator = new MavFormValidator()
+            .Rule(nameField, r => r.Required().MinLength(2))
+            .Rule(emailField, r => r.Required().Email())
+            .Rule(cityField, r => r.Required());
 
         var status = new MavLabel(L("Inputs.Form.Status", "Submit to validate"), MavTypeRole.BodySmall)
             .Secondary(true)
@@ -101,5 +103,19 @@ public static class InputsPage
                     "Inputs.Validation.Card.Body", "Fluent rules: Required, MinLength, MaxLength, Email, Numeric, Pattern, Matches and Must.",
                     "validator.Field(email).Required().Email() · validator.Validate() · validator.Errors",
                     Plain(new StackPanel().Spacing(10).Children(nameField, emailField, cityField, submit, status)))));
+    }
+
+    /// <summary>Adds validation rules for one field and returns the validator for chaining.</summary>
+    private static MavFormValidator Rule(this MavFormValidator validator, MavTextField field, Func<MavFieldRuleBuilder, MavFieldRuleBuilder> rules)
+    {
+        rules(validator.Field(field));
+        return validator;
+    }
+
+    /// <summary>Shows search suggestions and returns the search bar for chaining.</summary>
+    private static MavSearchBar AttachSuggestions(this MavSearchBar bar, params string[] suggestions)
+    {
+        bar.AttachSearchView(suggestions);
+        return bar;
     }
 }

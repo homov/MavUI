@@ -95,39 +95,33 @@ public static class ActionsPage
     private static T StartAligned<T>(T control) where T : Control =>
         control.HorizontalAlignment(HorizontalAlignment.Left);
 
-    private static MavButtonGroup StandardGroup()
-    {
-        var group = new MavButtonGroup(MavButtonGroupKind.Standard);
-        group.AddButton(new MavButton("Day", MavButtonVariant.Outlined));
-        group.AddButton(new MavButton("Week", MavButtonVariant.Outlined));
-        group.AddButton(new MavButton("Month", MavButtonVariant.Outlined));
-        return group;
-    }
+    private static MavButtonGroup StandardGroup() =>
+        new MavButtonGroup(MavButtonGroupKind.Standard)
+            .AddButton(new MavButton("Day", MavButtonVariant.Outlined))
+            .AddButton(new MavButton("Week", MavButtonVariant.Outlined))
+            .AddButton(new MavButton("Month", MavButtonVariant.Outlined));
 
-    private static MavButtonGroup ConnectedGroup()
-    {
-        var group = new MavButtonGroup(MavButtonGroupKind.Connected);
-        group.AddButton(new MavButton("Bold", MavButtonVariant.Tonal, MavIcons.FormatBold));
-        group.AddButton(new MavButton("Italic", MavButtonVariant.Tonal, MavIcons.FormatItalic));
-        group.AddButton(new MavButton("Underline", MavButtonVariant.Tonal, MavIcons.FormatUnderlined));
-        return group;
-    }
+    private static MavButtonGroup ConnectedGroup() =>
+        new MavButtonGroup(MavButtonGroupKind.Connected)
+            .AddButton(new MavButton("Bold", MavButtonVariant.Tonal, MavIcons.FormatBold))
+            .AddButton(new MavButton("Italic", MavButtonVariant.Tonal, MavIcons.FormatItalic))
+            .AddButton(new MavButton("Underline", MavButtonVariant.Tonal, MavIcons.FormatUnderlined));
 
-    private static MavSplitButton SplitButton()
-    {
-        var split = new MavSplitButton("Save");
-        split.Menu = new MavMenu()
+    private static MavSplitButton SplitButton() =>
+        new MavSplitButton("Save").AttachMenu(new MavMenu()
             .AddItem("Save as draft", MavIcons.Description, onSelected: () => { })
-            .AddItem("Save and close", MavIcons.Close, onSelected: () => { });
-        return split;
-    }
+            .AddItem("Save and close", MavIcons.Close, onSelected: () => { }));
 
-    private static MavFabMenu FabMenu()
+    private static MavFabMenu FabMenu() =>
+        new MavFabMenu()
+            .AddItem("New document", MavIcons.NoteAdd, () => { })
+            .AddItem("Upload", MavIcons.Upload, () => { })
+            .AddItem("Scan", MavIcons.DocumentScanner, () => { });
+
+    /// <summary>Sets the menu of a split button and returns it for chaining.</summary>
+    private static MavSplitButton AttachMenu(this MavSplitButton split, MavMenu menu)
     {
-        var menu = new MavFabMenu();
-        menu.AddItem("New document", MavIcons.NoteAdd, () => { });
-        menu.AddItem("Upload", MavIcons.Upload, () => { });
-        menu.AddItem("Scan", MavIcons.DocumentScanner, () => { });
-        return menu;
+        split.Menu = menu;
+        return split;
     }
 }
