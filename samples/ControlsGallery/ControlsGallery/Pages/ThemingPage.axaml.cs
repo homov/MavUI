@@ -71,7 +71,11 @@ public partial class ThemingPage : UserControl
                 ("None", shape.None), ("ExtraSmall", shape.ExtraSmall), ("Small", shape.Small),
                 ("Medium", shape.Medium), ("Large", shape.Large), ("LargeIncreased", shape.LargeIncreased),
                 ("ExtraLarge", shape.ExtraLarge), ("Full", shape.Full),
-            }.Select(s => new ThemeSample(s.Item1) { Corner = new CornerRadius(s.Item2) }).ToList();
+            }.Select(s => new ThemeSample(s.Item1)
+            {
+                Corner = new CornerRadius(s.Item2),
+                Detail = $"{s.Item2:0.#} px",
+            }).ToList();
         }
     }
 
@@ -125,6 +129,8 @@ public partial class ThemingPage : UserControl
         ColorItems.ItemsSource = ColorSwatches;
         ShapeItems.ItemsSource = ShapeSamples;
         ContrastItems.ItemsSource = ContrastLines;
+        RefreshShapeSummary();
+        RefreshShapePreview();
         SeedIndigoRadio.IsChecked = MavTheme.SeedColor == MavColors.Indigo;
         SeedPurpleRadio.IsChecked = MavTheme.SeedColor == MavColors.Purple;
         SeedBlueRadio.IsChecked = MavTheme.SeedColor == MavColors.Blue;
@@ -134,6 +140,53 @@ public partial class ThemingPage : UserControl
         SeedRoseRadio.IsChecked = MavTheme.SeedColor == MavColors.Rose;
         SeedSlateRadio.IsChecked = MavTheme.SeedColor == MavColors.Slate;
         HighlightChoices();
+    }
+
+    /// <summary>Explains the three shape buttons in numbers, for the scale that is active right now.</summary>
+    private void RefreshShapeSummary()
+    {
+        var shape = MavTheme.Current.Shape;
+        var mode = MavTheme.ShapeScaleMode;
+        ShapeSummary.Text = MavLocalization.Format(
+            "Theming.Shape.Summary",
+            "Shape scale multiplies every corner radius: Compact ×0.72, Standard ×1.0, Expressive ×1.28. " +
+            "Current {0} — cards {1:0.#} px, chips {2:0.#} px, text fields {3:0.#} px.",
+            mode,
+            shape.Medium,
+            shape.Small,
+            shape.ExtraSmall);
+    }
+
+    /// <summary>Real controls whose corner radius comes from the shape tokens, rebuilt for the current scale.</summary>
+    private void RefreshShapePreview()
+    {
+        var shape = MavTheme.Current.Shape;
+        ShapePreview.Children.Clear();
+
+        void Add(Control control, double margin)
+        {
+            control.Margin = new Thickness(0, 0, margin, 8);
+            ShapePreview.Children.Add(control);
+        }
+
+        Add(new MavCard
+        {
+            Variant = MavCardVariant.Outlined,
+            CardPadding = new Thickness(12, 10),
+            Child = new MavLabel
+            {
+                Text = $"MavCard · {shape.Medium:0.#} px",
+                Role = MavTypeRole.LabelMedium,
+            },
+        }, 12);
+
+        Add(new MavChip($"MavChip · {shape.Small:0.#} px"), 12);
+
+        Add(new MavInfoBar(
+            title: MavLocalization.Get("Theming.Shape.Preview.InfoBar", "MavInfoBar"),
+            message: $"{shape.Medium:0.#} px",
+            severity: MavInfoBarSeverity.Info,
+            isClosable: false), 12);
     }
 
     private void HighlightChoices()

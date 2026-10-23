@@ -14,6 +14,9 @@ public sealed record ThemeSample(string Name)
     /// <summary>Readable form of <see cref="Name"/>: "SurfaceContainerHigh" -> "Surface Container High".</summary>
     public string Label => RoleName.SplitWords(Name);
 
+    /// <summary>Second, smaller line of text, e.g. the radius in px for a shape sample.</summary>
+    public string? Detail { get; init; }
+
     public IBrush? Background { get; init; }
 
     public IBrush? Foreground { get; init; }

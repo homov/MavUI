@@ -52,6 +52,9 @@
                   <mav:MavButton x:Name="ShapeStandardButton" Variant="Tonal" Text="{mav:Loc Overview.Motion.Standard, Fallback=Standard}" Command="{x:Static pages:ThemingPage.SetShape}" CommandParameter="{x:Static mav:MavShapeScale.Standard}" Margin="0,0,8,8" />
                   <mav:MavButton x:Name="ShapeExpressiveButton" Variant="Tonal" Text="{mav:Loc Theming.Shape.Expressive, Fallback=Expressive}" Command="{x:Static pages:ThemingPage.SetShape}" CommandParameter="{x:Static mav:MavShapeScale.Expressive}" Margin="0,0,8,8" />
                 </WrapPanel>
+                <!-- What the three buttons do, in numbers; the text is filled in by RefreshShapeSummary(). -->
+                <mav:MavLabel x:Name="ShapeSummary" Role="LabelSmall" Secondary="True" TextWrapping="Wrap"
+                              Text="Shape scale multiplies every corner radius: Compact ×0.72, Standard ×1.0, Expressive ×1.28. Current ×1.0 — cards 12 px, chips 8 px, dialogs 28 px." />
               </StackPanel>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavTheme.Configure(seed, mode, schemeVariant, contrast, density, motion, shapeScale)" />
             </StackPanel>
@@ -111,11 +114,16 @@
               <mav:MavLabel Role="TitleMedium" Text="MavShape and MavSurface.Elevation" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Shape.CardBody, Fallback=Shape tokens follow MavShapeScale; elevation uses two-layer shadows.}" />
               <StackPanel Spacing="8">
+                <mav:MavLabel Role="LabelSmall" Secondary="True" Text="Real controls, so the current scale is visible on them:" />
+                <WrapPanel x:Name="ShapePreview" />
                 <mav:MavItems Wrap="True" x:Name="ShapeItems">
                   <mav:MavItems.ItemTemplate>
                     <DataTemplate x:DataType="pages:ThemeSample">
                       <Border Width="120" Height="64" Margin="0,0,8,8" CornerRadius="{Binding Corner}" Background="{DynamicResource Md.Brush.SecondaryContainer}">
-                        <mav:MavLabel Text="{Binding Name}" Role="LabelSmall" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="2">
+                          <mav:MavLabel Text="{Binding Name}" Role="LabelSmall" HorizontalAlignment="Center" />
+                          <mav:MavLabel Text="{Binding Detail}" Role="LabelSmall" Secondary="True" HorizontalAlignment="Center" />
+                        </StackPanel>
                       </Border>
                     </DataTemplate>
                   </mav:MavItems.ItemTemplate>

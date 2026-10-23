@@ -15,8 +15,13 @@ public class MavCard : MavInkSurface
     public static readonly StyledProperty<MavCardVariant> VariantProperty =
         AvaloniaProperty.Register<MavCard, MavCardVariant>(nameof(Variant), MavCardVariant.Elevated);
 
+    /// <summary>
+    /// Corner radius. The default is <see cref="double.NaN"/>, which means "follow the theme":
+    /// <see cref="MavShapeTokens.Medium"/> scaled by <see cref="MavTheme.ShapeScaleMode"/>. Set a number
+    /// to pin the radius and opt out of the shape scale for this card.
+    /// </summary>
     public static readonly StyledProperty<double> CardRadiusProperty =
-        AvaloniaProperty.Register<MavCard, double>(nameof(CardRadius), 12.0);
+        AvaloniaProperty.Register<MavCard, double>(nameof(CardRadius), double.NaN);
 
     public static readonly StyledProperty<Thickness> CardPaddingProperty =
         AvaloniaProperty.Register<MavCard, Thickness>(nameof(CardPadding), new Thickness(16));
@@ -24,7 +29,12 @@ public class MavCard : MavInkSurface
     static MavCard()
     {
         VariantProperty.Changed.AddClassHandler<MavCard>((c, _) => c.ApplyTheme(MavTheme.Current));
-        CardRadiusProperty.Changed.AddClassHandler<MavCard>((c, e) => c.CornerRadius = e.GetNewValue<double>());
+        CardRadiusProperty.Changed.AddClassHandler<MavCard>((c, e) =>
+        {
+            var radius = e.GetNewValue<double>();
+            if (!double.IsNaN(radius))
+                c.CornerRadius = new CornerRadius(Math.Max(0, radius));
+        });
         CardPaddingProperty.Changed.AddClassHandler<MavCard>((c, e) => c.Padding = e.GetNewValue<Thickness>());
     }
 
@@ -36,7 +46,7 @@ public class MavCard : MavInkSurface
     /// <summary>Creates a card in the given <paramref name="variant"/>, with optional body content and interaction.</summary>
     public MavCard(MavCardVariant variant = MavCardVariant.Elevated, Control? body = null, bool interactive = false)
     {
-        CornerRadius = 12;
+        CornerRadius = MavTheme.Current.Shape.Medium;
         Padding = new Thickness(16);
         IsInteractive = interactive;
         if (body is not null)
@@ -87,7 +97,10 @@ public class MavCard : MavInkSurface
         StrokeThickness = strokeW;
         RippleColor = c.OnSurface;
         Elevation = elev;
-        CornerRadius = CardRadius;
+        // NaN means "follow the theme"; a number pins the radius (see CardRadius).
+        CornerRadius = double.IsNaN(CardRadius)
+            ? new CornerRadius(t.Shape.Medium)
+            : new CornerRadius(Math.Max(0, CardRadius));
         Padding = CardPadding;
     }
 }
