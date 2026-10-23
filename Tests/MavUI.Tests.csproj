@@ -8,6 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- Tests/MavUI.VisualTests is its own project (Skia + real drawing). The default items of
+         this project would otherwise compile its files too. -->
+    <Compile Remove="MavUI.VisualTests/**" />
+    <EmbeddedResource Remove="MavUI.VisualTests/**" />
+    <AvaloniaResource Remove="MavUI.VisualTests/**" />
+    <None Remove="MavUI.VisualTests/**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Avalonia.Headless.XUnit" Version="12.1.4" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
     <PackageReference Include="xunit.v3" Version="3.2.2" />
