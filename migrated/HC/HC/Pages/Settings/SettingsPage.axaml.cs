@@ -16,7 +16,7 @@ public partial class SettingsPage : AccountPage
 {
     private static readonly string[] ThemeNames = [ThemeService.SystemName, ThemeService.LightName, ThemeService.DarkName];
 
-    private IReadOnlyList<string> _zones = [];
+    private List<string> _zones = [];
 
     public SettingsPage()
     {
