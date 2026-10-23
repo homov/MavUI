@@ -57,7 +57,7 @@ public static class SelectionPage
                     "MavSwitch, MavCheckBox, MavRadioButton and MavRadioGroup",
                     "Selection.Toggles.Card.Body", "Selection controls expose IsToggled/IsChecked and raise Toggled/CheckedChanged; all support keyboard Space/Enter.",
                     "MavSwitch.IsToggled · MavCheckBox.IsThreeState · MavRadioButton.Label · MavRadioGroup.AddOption",
-                    AdaptiveWrap(260,
+                    Adaptive(260,
                         Plain(new StackPanel().Spacing(10).Children(
                             new MavSwitch().IsToggled(true).ShowIcons(true)
                                 .OnIcon(MavIcons.Notifications)

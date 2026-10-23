@@ -89,7 +89,7 @@ public static class InputsPage
                     "MavTextArea, MavPinInput, MavNumberBox, MavTagInput and MavSearchBar",
                     "Inputs.Other.Card.Body", "Multi-line editor, OTP cells, numeric stepper, tag entry and a search bar with a search view.",
                     "MavTextArea · MavPinInput · MavNumberBox · MavTagInput · MavSearchBar.AttachSearchView",
-                    AdaptiveWrap(300,
+                    Adaptive(300,
                         Plain(notes),
                         Plain(new StackPanel().Spacing(8).Children(pin, seats)),
                         Plain(new StackPanel().Spacing(8).Children(tags, search))))),

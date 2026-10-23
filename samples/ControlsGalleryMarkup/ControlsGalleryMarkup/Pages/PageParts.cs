@@ -49,9 +49,9 @@ public static class PageParts
     public static Control Row(params Control[] content) =>
         new WrapPanel().Children(content.Select(Gap).ToArray());
 
-    /// <summary>Wrapping grid whose items are at least <paramref name="minItemWidth"/> wide (the AdaptiveWrap of the AXAML gallery).</summary>
-    public static Control AdaptiveWrap(double minItemWidth, params Control[] content) =>
-        new WrapPanel().ItemWidth(minItemWidth).Children(content.Select(Gap).ToArray());
+    /// <summary>Equal columns no narrower than <paramref name="minItemWidth"/>, so the cards fill the width as the window grows.</summary>
+    public static Control Adaptive(double minItemWidth, params Control[] content) =>
+        new AdaptiveWrap().MinItemWidth(minItemWidth).Children(content);
 
     /// <summary>Disables a control.</summary>
     public static T Disabled<T>(T control) where T : Control =>
