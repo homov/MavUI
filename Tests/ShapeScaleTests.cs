@@ -1,3 +1,4 @@
+using System;
 using Avalonia;
 using Avalonia.Headless.XUnit;
 using Mav.Controls;
