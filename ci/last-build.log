@@ -1,20 +1,20 @@
 # Last build log
-commit: 61e73ab37b0dc479b65622c0460f576e0d1ec094
-run: https://github.com/homov/MavUI/actions/runs/39878453475
+commit: 4bdcbe4e078743812270b9375af58f971fa11a0d
+run: https://github.com/homov/MavUI/actions/runs/39878882723
 
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 261 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 260 ms).
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:04.85
+Time Elapsed 00:00:04.87
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 224 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 224 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 229 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 228 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 223 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 223 ms).
   1 of 4 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
@@ -25,9 +25,9 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:04.61
+Time Elapsed 00:00:04.68
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 279 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 283 ms).
   2 of 3 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
@@ -37,7 +37,7 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.11
+Time Elapsed 00:00:02.12
   Determining projects to restore...
   All projects are up-to-date for restore.
   MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0-windows/MavUI.Essentials.dll
@@ -49,7 +49,7 @@ Build succeeded.
 
 Time Elapsed 00:00:01.02
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/HC.csproj (in 264 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/HC.csproj (in 269 ms).
   1 of 2 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   HC -> /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/bin/Release/net10.0/HC.dll
@@ -58,9 +58,9 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:01.50
+Time Elapsed 00:00:01.54
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj (in 298 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj (in 304 ms).
   2 of 3 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   HC -> /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/bin/Release/net10.0/HC.dll
@@ -70,14 +70,14 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.21
+Time Elapsed 00:00:02.18
 Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/MavUI.Tests.dll (.NETCoreApp,Version=v10.0)
 VSTest version 18.0.2 (x64)
 
 Starting test execution, please wait...
 A total of 1 test files matched the specified pattern.
 
-Passed!  - Failed:     0, Passed:   330, Skipped:     0, Total:   330, Duration: 15 s - MavUI.Tests.dll (net10.0)
+Passed!  - Failed:     0, Passed:   330, Skipped:     0, Total:   330, Duration: 17 s - MavUI.Tests.dll (net10.0)
 Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/bin/Release/net10.0/HC.Tests.dll (.NETCoreApp,Version=v10.0)
 VSTest version 18.0.2 (x64)
 
