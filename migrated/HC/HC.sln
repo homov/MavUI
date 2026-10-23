@@ -4,6 +4,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HC", "HC\HC.csproj", "{B9D0
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HC.Tests", "HC.Tests\HC.Tests.csproj", "{73F5F496-BA56-4B8B-9BE1-81342FC55BE8}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MavUI", "..\..\MavUI\MavUI.csproj", "{E23EC47C-254F-476B-AC66-B567652D333D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MavUI.Essentials", "..\..\MavUI.Essentials\MavUI.Essentials.csproj", "{9CA4D21B-72D9-477D-8EC1-19DF974359F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{73F5F496-BA56-4B8B-9BE1-81342FC55BE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73F5F496-BA56-4B8B-9BE1-81342FC55BE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73F5F496-BA56-4B8B-9BE1-81342FC55BE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E23EC47C-254F-476B-AC66-B567652D333D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E23EC47C-254F-476B-AC66-B567652D333D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E23EC47C-254F-476B-AC66-B567652D333D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E23EC47C-254F-476B-AC66-B567652D333D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CA4D21B-72D9-477D-8EC1-19DF974359F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CA4D21B-72D9-477D-8EC1-19DF974359F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CA4D21B-72D9-477D-8EC1-19DF974359F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CA4D21B-72D9-477D-8EC1-19DF974359F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

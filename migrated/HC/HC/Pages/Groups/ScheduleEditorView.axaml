@@ -1,0 +1,14 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mav="https://where.it/mav"
+             x:Class="Hc.Pages.Groups.ScheduleEditorView">
+  <StackPanel Spacing="12">
+    <mav:MavSelect x:Name="TypeSelect" Variant="Outlined"
+                   Label="{mav:Loc schedule.type, Fallback=Control}" />
+    <mav:MavSegmentedButton x:Name="DaySegments" />
+    <mav:MavNumberBox x:Name="DefaultValueBox" Label="{mav:Loc schedule.value, Fallback=Value}" />
+    <StackPanel x:Name="IntervalHost" Spacing="8" />
+    <mav:MavButton x:Name="AddIntervalButton" Variant="Outlined" HorizontalAlignment="Stretch"
+                   Text="{mav:Loc schedule.interval.add, Fallback=Add interval}" />
+  </StackPanel>
+</UserControl>

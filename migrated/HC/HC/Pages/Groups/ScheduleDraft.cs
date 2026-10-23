@@ -47,9 +47,26 @@ public sealed class ScheduleDraft
     /// <summary>Whether the type has a value (everything except time).</summary>
     public bool HasValue => Type != Time;
 
-    public int MinimumValue => Type == Manual ? 0 : 8;
+    private int? _minTemperature, _maxTemperature, _minHumidity, _maxHumidity;
 
-    public int MaximumValue => Type == Manual ? 60 : 32;
+    /// <summary>Lowest value the editor accepts: the device type's limit, or the old app's default.</summary>
+    public int MinimumValue => Type == Humidity
+        ? _minHumidity ?? 8
+        : _minTemperature ?? (Type == Manual ? 0 : 8);
+
+    /// <summary>Highest value the editor accepts: the device type's limit, or the old app's default.</summary>
+    public int MaximumValue => Type == Humidity
+        ? _maxHumidity ?? 32
+        : _maxTemperature ?? (Type == Manual ? 60 : 32);
+
+    /// <summary>Sets the limits of the device type. Null (no device) keeps the defaults.</summary>
+    public void SetLimits(DeviceTypeInfo? deviceType)
+    {
+        _minTemperature = deviceType?.MinTemperature;
+        _maxTemperature = deviceType?.MaxTemperature;
+        _minHumidity = deviceType?.MinHumidity;
+        _maxHumidity = deviceType?.MaxHumidity;
+    }
 
     /// <summary>Reads a schedule from the server. A null schedule gives the default for the manual type.</summary>
     public static ScheduleDraft From(ScheduleInfo? info)
