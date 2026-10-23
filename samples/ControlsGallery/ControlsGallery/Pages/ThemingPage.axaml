@@ -16,9 +16,9 @@
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Controls.CardBody, Fallback=Seed color\, mode\, contrast\, density\, motion and shape scale.}" />
               <StackPanel Spacing="8">
                 <WrapPanel>
-                  <mav:MavButton Variant="Outlined" Icon="{x:Static mav:MavIcons.LightMode}" Text="{mav:Loc Overview.Mode.Light, Fallback=Light}" Command="{x:Static pages:ThemingPage.ModeLight}" CommandParameter="{x:Static }" Margin="0,0,8,8" />
-                  <mav:MavButton Variant="Outlined" Icon="{x:Static mav:MavIcons.DarkMode}" Text="{mav:Loc Overview.Mode.Dark, Fallback=Dark}" Command="{x:Static pages:ThemingPage.ModeDark}" CommandParameter="{x:Static }" Margin="0,0,8,8" />
-                  <mav:MavButton Variant="Outlined" Icon="{x:Static mav:MavIcons.SettingsBrightness}" Text="{mav:Loc Overview.Mode.System, Fallback=System}" Command="{x:Static pages:ThemingPage.ModeSystem}" CommandParameter="{x:Static }" Margin="0,0,8,8" />
+                  <mav:MavButton Variant="Outlined" Icon="{x:Static mav:MavIcons.LightMode}" Text="{mav:Loc Overview.Mode.Light, Fallback=Light}" Command="{x:Static pages:ThemingPage.ModeLight}" Margin="0,0,8,8" />
+                  <mav:MavButton Variant="Outlined" Icon="{x:Static mav:MavIcons.DarkMode}" Text="{mav:Loc Overview.Mode.Dark, Fallback=Dark}" Command="{x:Static pages:ThemingPage.ModeDark}" Margin="0,0,8,8" />
+                  <mav:MavButton Variant="Outlined" Icon="{x:Static mav:MavIcons.SettingsBrightness}" Text="{mav:Loc Overview.Mode.System, Fallback=System}" Command="{x:Static pages:ThemingPage.ModeSystem}" Margin="0,0,8,8" />
                 </WrapPanel>
                 <WrapPanel>
                   <mav:MavRadioButton GroupName="Seed" Label="{mav:Loc Overview.Seed.Indigo, Fallback=Indigo}" IsChecked="True" Command="{x:Static pages:ThemingPage.SetSeed}" CommandParameter="{x:Static mav:MavColors.Indigo}" Margin="0,0,16,8" />
