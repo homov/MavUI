@@ -64,7 +64,7 @@
             <StackPanel Spacing="10">
               <mav:MavLabel Role="TitleMedium" Text="MavColorRole" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Colors.CardBody, Fallback=Each swatch shows the role name over its own color.}" />
-              <ItemsControl ItemsSource="{x:Static pages:ThemingPage.ColorSwatches}">
+              <ItemsControl x:Name="ColorItems">
                 <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                   <DataTemplate x:DataType="pages:ThemeSample">
@@ -107,7 +107,7 @@
               <mav:MavLabel Role="TitleMedium" Text="MavShape and MavSurface.Elevation" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Shape.CardBody, Fallback=Shape tokens follow MavShapeScale; elevation uses two-layer shadows.}" />
               <StackPanel Spacing="8">
-                <ItemsControl ItemsSource="{x:Static pages:ThemingPage.ShapeSamples}">
+                <ItemsControl x:Name="ShapeItems">
                   <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
                   <ItemsControl.ItemTemplate>
                     <DataTemplate x:DataType="pages:ThemeSample">
@@ -140,7 +140,7 @@
             <StackPanel Spacing="10">
               <mav:MavLabel Role="TitleMedium" Text="MavAccessibility.ContrastRatio" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Contrast.CardBody, Fallback=Ratios are computed from the current scheme.}" />
-              <ItemsControl ItemsSource="{x:Static pages:ThemingPage.ContrastLines}">
+              <ItemsControl x:Name="ContrastItems">
                 <ItemsControl.ItemsPanel><ItemsPanelTemplate><StackPanel Spacing="6" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                   <DataTemplate x:DataType="x:String">

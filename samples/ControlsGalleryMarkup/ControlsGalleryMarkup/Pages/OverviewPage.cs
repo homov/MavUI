@@ -1,3 +1,4 @@
+using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Layout;
@@ -109,47 +110,39 @@ public static class OverviewPage
     private static Control ColorSwatches() =>
         new WrapPanel().Children(Roles.Select(role => Swatch(role)).ToArray());
 
-    private static Control Swatch(MavColorRole role)
-    {
-        var color = MavTheme.ColorOf(role);
-        var on = MavAccessibility.RelativeLuminance(color) >= 0.5 ? Colors.Black : Colors.White;
-        var border = new Border()
-            .Sized(132, 64)
-            .CornerRadius(new CornerRadius(12))
-            .Padding(10)
-            .Background(MavTheme.BrushOf(color))
-            .Child(new TextBlock()
-                .Text(role.ToString())
-                .FontSize(11)
-                .Foreground(MavTheme.BrushOf(on)));
-        return border.Margin(new Thickness(0, 0, 8, 8));
-    }
+    private static Control Swatch(MavColorRole role) => ColorSwatch(role, role.ToString());
 
     private static Control ShapeSamples()
     {
-        var shape = MavTheme.Current.Shape;
-        var brush = MavTheme.BrushOf(MavTheme.ColorOf(MavColorRole.PrimaryContainer));
-        var radii = new (string Name, double Radius)[]
+        var radii = new (string Name, Func<MavShapeTokens, double> Radius)[]
         {
-            ("ExtraSmall", shape.ExtraSmall), ("Small", shape.Small), ("Medium", shape.Medium),
-            ("Large", shape.Large), ("ExtraLarge", shape.ExtraLarge), ("Full", shape.Full),
+            ("ExtraSmall", s => s.ExtraSmall), ("Small", s => s.Small), ("Medium", s => s.Medium),
+            ("Large", s => s.Large), ("ExtraLarge", s => s.ExtraLarge), ("Full", s => s.Full),
         };
-
-        return Row(radii.Select(item => (Control)new Border()
-            .Sized(120, 64)
-            .CornerRadius(new CornerRadius(item.Radius))
-            .Background(brush)
-            .Child(Centered(new MavLabel(item.Name, MavTypeRole.LabelSmall)))).ToArray());
+        return Row(radii.Select(item =>
+        {
+            var border = new Border()
+                .Sized(120, 64)
+                .Child(Centered(new MavLabel(item.Name, MavTypeRole.LabelSmall)));
+            // Radius and fill are re-read on every theme change.
+            MavTheme.Observe(border, (b, theme) =>
+            {
+                b.CornerRadius = new CornerRadius(item.Radius(theme.Shape));
+                b.Background = MavTheme.BrushOf(theme.Color.Get(MavColorRole.PrimaryContainer));
+            });
+            return (Control)border;
+        }).ToArray());
     }
 
-    private static Control ElevationSamples()
-    {
-        var fill = MavTheme.ColorOf(MavColorRole.SurfaceContainerLow);
-        return Row(Enumerable.Range(0, 6).Select(level => (Control)new MavSurface()
-            .Sized(120, 72)
-            .Radius(12)
-            .Elevation(level)
-            .FillColor(fill)
-            .Child(Centered(new MavLabel(MavLocalization.Format("Overview.Elevation.Level", "Level {0}", level), MavTypeRole.LabelSmall)))).ToArray());
-    }
+    private static Control ElevationSamples() =>
+        Row(Enumerable.Range(0, 6).Select(level =>
+        {
+            var surface = new MavSurface()
+                .Sized(120, 72)
+                .Radius(12)
+                .Elevation(level)
+                .Child(Centered(new MavLabel(MavLocalization.Format("Overview.Elevation.Level", "Level {0}", level), MavTypeRole.LabelSmall)));
+            MavTheme.Observe(surface, (s, theme) => s.FillColor = theme.Color.Get(MavColorRole.SurfaceContainerLow));
+            return (Control)surface;
+        }).ToArray());
 }

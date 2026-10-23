@@ -13,15 +13,27 @@ public partial class OverviewPage : UserControl
     {
         InitializeComponent();
         DataContext = this;
+        // Swatches and shape samples are computed from the current theme, so they are rebuilt on every change.
+        AttachedToVisualTree += (_, _) =>
+        {
+            MavTheme.Changed -= OnThemeChanged;
+            MavTheme.Changed += OnThemeChanged;
+            RefreshThemed();
+        };
+        DetachedFromVisualTree += (_, _) => MavTheme.Changed -= OnThemeChanged;
+    }
+
+    private void OnThemeChanged(object? sender, MavTheme theme) => RefreshThemed();
+
+    private void RefreshThemed()
+    {
+        SwatchItems.ItemsSource = BuildSwatches();
+        ShapeItems.ItemsSource = BuildShapeSamples();
     }
 
     public IReadOnlyList<MavTypeRole> TypeRoles { get; } = Enum.GetValues<MavTypeRole>();
 
     public IReadOnlyList<SeedChoice> SeedColors { get; } = BuildSeeds();
-
-    public IReadOnlyList<RoleSwatch> Swatches { get; } = BuildSwatches();
-
-    public IReadOnlyList<ShapeSample> ShapeSamples { get; } = BuildShapeSamples();
 
     public IReadOnlyList<ElevationSample> ElevationSamples { get; } = BuildElevationSamples();
 
@@ -62,26 +74,23 @@ public partial class OverviewPage : UserControl
     private static IReadOnlyList<ShapeSample> BuildShapeSamples()
     {
         var shape = MavTheme.Current.Shape;
-        var brush = MavTheme.BrushOf(MavTheme.ColorOf(MavColorRole.PrimaryContainer));
         return
         [
-            new("ExtraSmall", new CornerRadius(shape.ExtraSmall), brush),
-            new("Small", new CornerRadius(shape.Small), brush),
-            new("Medium", new CornerRadius(shape.Medium), brush),
-            new("Large", new CornerRadius(shape.Large), brush),
-            new("ExtraLarge", new CornerRadius(shape.ExtraLarge), brush),
-            new("Full", new CornerRadius(shape.Full), brush),
+            new("ExtraSmall", new CornerRadius(shape.ExtraSmall)),
+            new("Small", new CornerRadius(shape.Small)),
+            new("Medium", new CornerRadius(shape.Medium)),
+            new("Large", new CornerRadius(shape.Large)),
+            new("ExtraLarge", new CornerRadius(shape.ExtraLarge)),
+            new("Full", new CornerRadius(shape.Full)),
         ];
     }
 
     private static IReadOnlyList<ElevationSample> BuildElevationSamples()
     {
-        var fill = MavTheme.ColorOf(MavColorRole.SurfaceContainerLow);
         return Enumerable.Range(0, 6)
             .Select(level => new ElevationSample(
                 MavLocalization.Format("Overview.Elevation.Level", "Level {0}", level),
-                level,
-                fill))
+                level))
             .ToList();
     }
 }

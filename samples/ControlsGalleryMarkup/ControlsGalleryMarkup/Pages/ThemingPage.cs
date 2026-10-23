@@ -1,4 +1,5 @@
 using System.Globalization;
+using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Avalonia;
@@ -127,21 +128,9 @@ public static class ThemingPage
 
     /// <summary>Colour swatches for every colour role; the text colour is chosen for contrast.</summary>
     private static Control ColorSwatches() =>
-        Row(Enum.GetValues<MavColorRole>().Select(role =>
-        {
-            var color = MavTheme.ColorOf(role);
-            var on = MavAccessibility.RelativeLuminance(color) >= 0.5 ? Colors.Black : Colors.White;
-            return (Control)new Border()
-                .Sized(132, 64)
-                .CornerRadius(new CornerRadius(12))
-                .Padding(10)
-                .Background(MavTheme.BrushOf(color))
-                .Child(new TextBlock()
-                    .Text(SplitWords(role.ToString()))
-                    .FontSize(11)
-                    .TextWrapping(TextWrapping.Wrap)
-                    .Foreground(MavTheme.BrushOf(on)));
-        }).ToArray());
+        Row(Enum.GetValues<MavColorRole>()
+            .Select(role => ColorSwatch(role, SplitWords(role.ToString())))
+            .ToArray());
 
     /// <summary>One sample per type role, each rendered with its own style.</summary>
     private static Control TypeScale() =>
@@ -149,24 +138,25 @@ public static class ThemingPage
             .Select(role => (Control)new MavLabel(role.ToString(), role))
             .ToArray());
 
-    /// <summary>Corner radius samples from the current shape scale.</summary>
+    /// <summary>Corner radius samples from the current shape scale. Each radius and fill is re-read on theme change.</summary>
     private static Control ShapeSamples()
     {
-        var shape = MavTheme.Current.Shape;
-        var radii = new (string Name, double Radius)[]
+        var radii = new (string Name, Func<MavShapeTokens, double> Radius)[]
         {
-            ("None", shape.None), ("ExtraSmall", shape.ExtraSmall), ("Small", shape.Small),
-            ("Medium", shape.Medium), ("Large", shape.Large), ("LargeIncreased", shape.LargeIncreased),
-            ("ExtraLarge", shape.ExtraLarge), ("Full", shape.Full),
+            ("None", s => s.None), ("ExtraSmall", s => s.ExtraSmall), ("Small", s => s.Small),
+            ("Medium", s => s.Medium), ("Large", s => s.Large), ("LargeIncreased", s => s.LargeIncreased),
+            ("ExtraLarge", s => s.ExtraLarge), ("Full", s => s.Full),
         };
         return Row(radii.Select(item =>
         {
             var border = new Border()
                 .Sized(120, 64)
-                .CornerRadius(new CornerRadius(item.Radius))
                 .Child(Centered(new MavLabel(item.Name, MavTypeRole.LabelSmall)));
-            // The fill follows the theme: Observe re-applies it on every theme change.
-            MavTheme.Observe(border, (b, theme) => b.Background = MavTheme.BrushOf(theme.Color.Get(MavColorRole.SecondaryContainer)));
+            MavTheme.Observe(border, (b, theme) =>
+            {
+                b.CornerRadius = new CornerRadius(item.Radius(theme.Shape));
+                b.Background = MavTheme.BrushOf(theme.Color.Get(MavColorRole.SecondaryContainer));
+            });
             return (Control)border;
         }).ToArray());
     }
@@ -186,7 +176,7 @@ public static class ThemingPage
         }).ToArray());
     }
 
-    /// <summary>Contrast ratios of the main role pairs, with WCAG verdicts.</summary>
+    /// <summary>Contrast ratios of the main role pairs, with WCAG verdicts. Each line is recomputed on theme change.</summary>
     private static Control ContrastLines()
     {
         var pairs = new (string Name, MavColorRole Foreground, MavColorRole Background)[]
@@ -199,10 +189,17 @@ public static class ThemingPage
         };
         return Stack(6, pairs.Select(p =>
         {
-            var ratio = MavAccessibility.ContrastRatio(MavTheme.ColorOf(p.Foreground), MavTheme.ColorOf(p.Background));
-            var verdict = ratio >= 4.5 ? "✓ AA" : ratio >= 3 ? "✓ AA large" : "—";
-            return (Control)new MavLabel($"{p.Name}: {ratio.ToString("F2", CultureInfo.InvariantCulture)}:1 {verdict}", MavTypeRole.BodySmall);
+            var line = new MavLabel(string.Empty, MavTypeRole.BodySmall);
+            MavTheme.Observe(line, (l, theme) => l.Text = ContrastText(p.Name, p.Foreground, p.Background, theme));
+            return (Control)line;
         }).ToArray());
+    }
+
+    private static string ContrastText(string name, MavColorRole foreground, MavColorRole background, MavTheme theme)
+    {
+        var ratio = MavAccessibility.ContrastRatio(theme.Color.Get(foreground), theme.Color.Get(background));
+        var verdict = ratio >= 4.5 ? "✓ AA" : ratio >= 3 ? "✓ AA large" : "—";
+        return $"{name}: {ratio.ToString("F2", CultureInfo.InvariantCulture)}:1 {verdict}";
     }
 
     /// <summary>"SurfaceContainerHigh" becomes "Surface Container High", so long role names wrap inside their swatch.</summary>

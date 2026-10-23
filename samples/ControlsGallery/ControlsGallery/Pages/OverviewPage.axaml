@@ -118,7 +118,7 @@
           <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Overview.Color.Title, Fallback=Color roles}" />
           <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap"
                         Text="{mav:Loc Overview.Color.Body, Fallback=Role-based colors from MavTheme.ColorOf / MavTheme.BrushOf; they follow the current scheme.}" />
-          <ItemsControl ItemsSource="{Binding Swatches}">
+          <ItemsControl x:Name="SwatchItems">
               <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                   <WrapPanel />
@@ -140,7 +140,7 @@
           <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Overview.Shape.Title, Fallback=Shape and elevation}" />
           <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap"
                         Text="{mav:Loc Overview.Shape.Body, Fallback=Shape tokens scale with MavShapeScale; elevation uses two-layer MD3 shadows.}" />
-          <ItemsControl ItemsSource="{Binding ShapeSamples}">
+          <ItemsControl x:Name="ShapeItems">
               <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                   <WrapPanel />
@@ -149,7 +149,7 @@
             <ItemsControl.ItemTemplate>
               <DataTemplate x:DataType="pages:ShapeSample">
                 <Border Width="120" Height="64" Margin="0,0,8,8"
-                        CornerRadius="{Binding Radius}" Background="{Binding Background}">
+                        CornerRadius="{Binding Radius}" Background="{DynamicResource Md.Brush.PrimaryContainer}">
                   <mav:MavLabel Role="LabelSmall" Text="{Binding Name}"
                                 HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </Border>
@@ -165,7 +165,7 @@
             <ItemsControl.ItemTemplate>
               <DataTemplate x:DataType="pages:ElevationSample">
                 <mav:MavSurface Width="120" Height="72" Margin="0,0,8,8" Radius="12"
-                                Elevation="{Binding Elevation}" FillColor="{Binding Fill}">
+                                Elevation="{Binding Elevation}" FillColor="{DynamicResource Md.Color.SurfaceContainerLow}">
                   <mav:MavSurface.Child>
                     <mav:MavLabel Role="LabelSmall" Text="{Binding Text}"
                                   HorizontalAlignment="Center" VerticalAlignment="Center" />

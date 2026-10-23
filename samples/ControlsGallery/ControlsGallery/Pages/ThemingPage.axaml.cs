@@ -112,5 +112,22 @@ public partial class ThemingPage : UserControl
     public ThemingPage()
     {
         InitializeComponent();
+        // Swatches, radii and contrast ratios are computed from the current theme, so they are rebuilt on every change.
+        AttachedToVisualTree += (_, _) =>
+        {
+            MavTheme.Changed -= OnThemeChanged;
+            MavTheme.Changed += OnThemeChanged;
+            RefreshThemed();
+        };
+        DetachedFromVisualTree += (_, _) => MavTheme.Changed -= OnThemeChanged;
+    }
+
+    private void OnThemeChanged(object? sender, MavTheme theme) => RefreshThemed();
+
+    private void RefreshThemed()
+    {
+        ColorItems.ItemsSource = ColorSwatches;
+        ShapeItems.ItemsSource = ShapeSamples;
+        ContrastItems.ItemsSource = ContrastLines;
     }
 }

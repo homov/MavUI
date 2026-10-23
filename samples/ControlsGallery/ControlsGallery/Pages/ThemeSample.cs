@@ -15,8 +15,6 @@ public sealed record ThemeSample(string Name)
 
     public IBrush? Foreground { get; init; }
 
-    public Color Fill { get; init; }
-
     public MavTypeRole Role { get; init; }
 
     public CornerRadius Corner { get; init; }

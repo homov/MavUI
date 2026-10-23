@@ -68,6 +68,24 @@ public static class PageParts
         return height is double h ? control.Height(h) : control;
     }
 
+    /// <summary>
+    /// Colour swatch for one colour role. The fill and the text colour are re-applied on every theme change
+    /// through <see cref="MavTheme.Observe{T}"/>, so the swatch keeps showing the current role colour.
+    /// </summary>
+    public static Control ColorSwatch(MavColorRole role, string text)
+    {
+        var label = new TextBlock().Text(text).FontSize(11).TextWrapping(TextWrapping.Wrap);
+        var swatch = new Border().Sized(132, 64).CornerRadius(new CornerRadius(12)).Padding(10).Child(label);
+        MavTheme.Observe(swatch, (b, theme) =>
+        {
+            var color = theme.Color.Get(role);
+            var on = MavAccessibility.RelativeLuminance(color) >= 0.5 ? Colors.Black : Colors.White;
+            b.Background = MavTheme.BrushOf(color);
+            label.Foreground = MavTheme.BrushOf(on);
+        });
+        return swatch.Margin(new Thickness(0, 0, 8, 8));
+    }
+
     /// <summary>Gap of 8 dp after a wrapped item.</summary>
     private static Control Gap(Control control) =>
         control.Margin(new Thickness(0, 0, 8, 8));
