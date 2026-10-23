@@ -28,7 +28,9 @@ public sealed class MainWindow : MavWindow
                         new MavButton("Inputs", MavButtonVariant.Text)
                             .OnClicked(() => Show(InputsPage.Build())),
                         new MavButton("Actions", MavButtonVariant.Text)
-                            .OnClicked(() => Show(ActionsPage.Build()))),
+                            .OnClicked(() => Show(ActionsPage.Build())),
+                        new MavButton("Selection", MavButtonVariant.Text)
+                            .OnClicked(() => Show(SelectionPage.Build()))),
                 _page.GridColumn(1));
 
         Show(OverviewPage.Build());
