@@ -24,7 +24,7 @@ public class TreeViewTests
     private static HashSet<Mav.Primitives.MavInkSurface> Pills(MavTreeView tree) =>
         tree.GetVisualDescendants()
             .OfType<Mav.Primitives.MavInkSurface>()
-            .Where(surface => surface.Content is Grid)
+            .Where(surface => surface.Child is Grid)
             .ToHashSet();
 
     private static Mav.Primitives.MavInkSurface PillFor(MavTreeView tree, string text) =>

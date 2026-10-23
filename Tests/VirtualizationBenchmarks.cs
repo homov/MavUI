@@ -65,7 +65,7 @@ public class VirtualizationBenchmarks
 
         var realized = table.GetVisualDescendants()
             .OfType<Mav.Primitives.MavInkSurface>()
-            .Count(s => s.Content is Grid);
+            .Count(s => s.Child is Grid);
         _output.WriteLine(
             $"MavDataTable: 1000 rows, body 300 -> {realized} realized, " +
             $"first layout {sw.Elapsed.TotalMilliseconds:F1} ms");

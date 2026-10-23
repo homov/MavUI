@@ -18,7 +18,7 @@ public class OverlayHitTestTests
         var button = new MavButton("Target");
         var page = new MavContentPage("Root")
         {
-            Content = new StackPanel { Margin = new Thickness(40), Children = { button } },
+            Child = new StackPanel { Margin = new Thickness(40), Children = { button } },
         };
         var navigation = new MavNavigationPage(page);
         var window = new Window { Width = 480, Height = 640, Content = navigation };
