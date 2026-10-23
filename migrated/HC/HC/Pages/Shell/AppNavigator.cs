@@ -18,5 +18,8 @@ public sealed class AppNavigator(MavNavigationPage navigation)
 
     public void Push(MavContentPage page) => navigation.Push(page);
 
+    /// <summary>Returns to the previous page.</summary>
+    public void Pop() => navigation.Pop();
+
     public void Replace(MavContentPage page) => navigation.Replace(page);
 }

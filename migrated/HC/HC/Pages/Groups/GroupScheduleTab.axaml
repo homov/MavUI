@@ -1,0 +1,13 @@
+<UserControl xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" d:DesignWidth="390" d:DesignHeight="844" xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mav="https://where.it/mav"
+             xmlns:groups="clr-namespace:Hc.Pages.Groups"
+             x:Class="Hc.Pages.Groups.GroupScheduleTab">
+  <mav:MavScrollViewer>
+    <StackPanel Margin="16" Spacing="12">
+      <groups:ScheduleEditorView x:Name="Editor" />
+      <mav:MavButton x:Name="Save" Variant="Filled" HorizontalAlignment="Stretch"
+                     Text="{mav:Loc schedule.save, Fallback=Save}" />
+    </StackPanel>
+  </mav:MavScrollViewer>
+</UserControl>

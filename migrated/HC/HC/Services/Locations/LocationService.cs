@@ -30,6 +30,13 @@ public sealed class LocationService(CloudClient cloud)
         CloudResults.Require(response);
     }
 
+    /// <summary>Sets the group's sensor. Null means "without sensor": the field is not sent, as the old app did.</summary>
+    public async Task SetSensorAsync(string groupId, string? sensorId, CancellationToken ct = default)
+    {
+        var response = await cloud.SetGroupSensor(new SetGroupSensorRequest(groupId, sensorId), ct).ConfigureAwait(false);
+        CloudResults.Require(response);
+    }
+
     /// <summary>Removes a group.</summary>
     public async Task RemoveAsync(string groupId, CancellationToken ct = default)
     {

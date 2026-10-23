@@ -97,5 +97,13 @@ internal static class En
         ["home.signout"] = "Sign out",
         ["device.group.controlled"] = "The device is controlled by the group schedule",
         ["device.schedule.none"] = "This device has no schedule.",
+        ["group.tab.schedule"] = "Schedule",
+        ["group.tab.properties"] = "Properties",
+        ["group.name"] = "Group name",
+        ["group.sensor"] = "Sensor",
+        ["group.sensor.none"] = "Without sensor",
+        ["group.delete"] = "Delete group",
+        ["group.delete.confirm"] = "Delete group. Proceed?",
+        ["common.confirmation"] = "Confirmation",
     };
 }

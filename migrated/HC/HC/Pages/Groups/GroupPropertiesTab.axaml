@@ -1,0 +1,17 @@
+<UserControl xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" d:DesignWidth="390" d:DesignHeight="844" xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mav="https://where.it/mav"
+             x:Class="Hc.Pages.Groups.GroupPropertiesTab">
+  <mav:MavScrollViewer>
+    <StackPanel Margin="16" Spacing="12">
+      <mav:MavTextField x:Name="NameField" Variant="Outlined"
+                        Label="{mav:Loc group.name, Fallback=Group name}" />
+      <mav:MavSelect x:Name="SensorSelect" Variant="Outlined"
+                     Label="{mav:Loc group.sensor, Fallback=Sensor}" />
+      <mav:MavButton x:Name="Save" Variant="Filled" HorizontalAlignment="Stretch"
+                     Text="{mav:Loc schedule.save, Fallback=Save}" />
+      <mav:MavButton x:Name="Delete" Variant="Outlined" HorizontalAlignment="Stretch"
+                     Text="{mav:Loc group.delete, Fallback=Delete group}" />
+    </StackPanel>
+  </mav:MavScrollViewer>
+</UserControl>

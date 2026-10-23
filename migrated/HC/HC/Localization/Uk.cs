@@ -97,5 +97,13 @@ internal static class Uk
         ["home.signout"] = "Вийти",
         ["device.group.controlled"] = "Пристрій керується за груповим розкладом",
         ["device.schedule.none"] = "У цього пристрою немає розкладу.",
+        ["group.tab.schedule"] = "Розклад",
+        ["group.tab.properties"] = "Властивості",
+        ["group.name"] = "Ім'я групи",
+        ["group.sensor"] = "Датчик",
+        ["group.sensor.none"] = "Без датчика",
+        ["group.delete"] = "Вилучити групу",
+        ["group.delete.confirm"] = "Видалити групу. Продовжити?",
+        ["common.confirmation"] = "Підтвердіть",
     };
 }

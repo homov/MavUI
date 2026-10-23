@@ -33,8 +33,13 @@ public partial class HomePage : MavContentPage
     /// <summary>Navigation of the app. Set before the page is shown.</summary>
     public required AppNavigator Navigator { get; init; }
 
-    private void OnGroupSelected(object? sender, Hc.Models.Cloud.UserGroupInfo group) =>
-        Navigator.Push(new GroupPage { Navigator = Navigator, Group = group });
+    private void OnGroupSelected(object? sender, Hc.Models.Cloud.UserGroupInfo group)
+    {
+        var page = new GroupPage { Navigator = Navigator, Group = group };
+        // Renaming, changing the sensor or removing the group changes the list behind the page.
+        page.GroupChanged += (_, _) => _ = _groups.ReloadAsync();
+        Navigator.Push(page);
+    }
 
     private void OnDeviceSelected(object? sender, Hc.Models.Cloud.UserDeviceInfo device) =>
         Navigator.Push(new Hc.Pages.Devices.DevicePage { Navigator = Navigator, Device = device });

@@ -50,7 +50,7 @@ public record SetGroupNameRequest(
 
 public record SetGroupSensorRequest(
     string GroupId,
-    string SensorId);
+    string? SensorId);
 
 public record ScheduleRequest(
     string ScheduleId);
