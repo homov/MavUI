@@ -3,13 +3,6 @@
              xmlns:mav="https://where.it/mav"
              xmlns:pages="clr-namespace:Mav.ControlsGallery.Pages"
              x:Class="Mav.ControlsGallery.Pages.LayoutPage">
-  <UserControl.Resources>
-    <mav:MavWindow x:Key="DemoWindow" Title="MavWindow demo" Width="520" Height="360">
-      <mav:MavCard Variant="Filled">
-        <mav:MavLabel Margin="24" TextWrapping="Wrap" Text="{mav:Loc Layout.Window.Body, Fallback=This is a second MavWindow with its own overlay layer.}" />
-      </mav:MavCard>
-    </mav:MavWindow>
-  </UserControl.Resources>
   <mav:MavScrollViewer>
     <Border Padding="20,16,20,40">
       <StackPanel Spacing="18">
@@ -174,7 +167,7 @@
               <WrapPanel>
                 <mav:MavButton IsVisible="{x:Static pages:LayoutPage.IsDesktop}" Variant="Filled" Icon="{x:Static mav:MavIcons.Window}"
                                Text="{mav:Loc Layout.Window.Open, Fallback=Open a new window}"
-                               Command="{x:Static pages:LayoutPage.ShowWindow}" CommandParameter="{StaticResource DemoWindow}" Margin="0,0,8,8" />
+                               Command="{x:Static pages:LayoutPage.ShowWindow}" Margin="0,0,8,8" />
                 <mav:MavLabel IsVisible="{x:Static pages:LayoutPage.IsUnsupportedPlatform}" TextWrapping="Wrap"
                               Text="{mav:Loc Layout.Window.Unsupported, Fallback=MavWindow is a desktop-only TopLevel and is not available on this platform.}" />
               </WrapPanel>

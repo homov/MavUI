@@ -70,4 +70,32 @@ public class ControlsGalleryPagesTests
 
         Assert.True(failures.Count == 0, string.Join(Environment.NewLine, failures));
     }
+
+    [AvaloniaFact]
+    public void No_page_builds_a_window_before_it_is_asked_to()
+    {
+        // A browser build has no windowing platform: constructing a Window throws there
+        // ("Browser doesn't support windowing platform"), even when it only sits in XAML
+        // resources and is never shown. The Layout page used to declare its demo window in
+        // UserControl.Resources, so merely opening that page threw on the web.
+        var previous = MavLocalization.Current;
+        MavLocalization.Current = GalleryStrings.Instance;
+        try
+        {
+            foreach (var (name, create) in Pages())
+            {
+                var page = create();
+                foreach (var key in page.Resources.Keys)
+                {
+                    Assert.False(
+                        page.Resources[key] is Window,
+                        $"{name} builds a Window while loading; create it on demand instead");
+                }
+            }
+        }
+        finally
+        {
+            MavLocalization.Current = previous;
+        }
+    }
 }

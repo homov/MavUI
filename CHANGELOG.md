@@ -93,6 +93,11 @@ sandbox (their signed link points at Azure blob storage, which is outside the al
 - Closing snackbar/tooltip/search/dialog/popover overlays externally (top-level close,
   page teardown or direct handle disposal) now clears their active handles, timers and
   open state instead of leaving stale static/instance references.
+- The gallery's Layout page no longer throws on the web. Its `MavWindow` demo used to sit in
+  `UserControl.Resources`, so every load of the page built a `Window`; a browser build has no
+  windowing platform and throws "Browser doesn't support windowing platform" for that. The
+  window is now created per click and only when `IsDesktop`. A test walks every page's resources
+  and fails if a page builds a `Window` while loading.
 
 ## [0.1.0] — 2026-10-22
 

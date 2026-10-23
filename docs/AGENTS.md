@@ -1707,6 +1707,13 @@ channels work, both documented in `docs/NOTES.md` → «Скриншоты: ка
   `localStorage`.
 * Caution: JS calls such as `JSImport("globalThis.window.localStorage...")` can work in Debug and
   fail in published builds. Verify with a Release publish before relying on them.
+* There is no windowing platform in the browser: **constructing** a `Window`/`MavWindow` throws
+  `Browser doesn't support windowing platform. In order to display a single-view content, set
+  ISingleViewApplicationLifetime.MainView.` Showing it is not required — the constructor already
+  fails. Never declare a window in XAML resources (`UserControl.Resources`) or build one at page
+  load: the object is created eagerly and the whole page dies on the web. Create windows inside the
+  click handler and only when `!OperatingSystem.IsBrowser()`; `Tests/ControlsGalleryPagesTests`
+  guards the gallery pages against this.
 
 ### 9.4 Desktop automation
 
