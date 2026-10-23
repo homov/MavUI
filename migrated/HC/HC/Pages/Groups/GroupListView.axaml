@@ -3,7 +3,7 @@
              xmlns:mav="https://where.it/mav"
              x:Class="Hc.Pages.Groups.GroupListView">
   <mav:MavRefreshIndicator x:Name="Refresh">
-    <mav:MavRefreshIndicator.Body>
+    <mav:MavRefreshIndicator.Content>
       <mav:MavScrollViewer>
         <StackPanel Margin="16" Spacing="12">
           <mav:MavLinearProgress x:Name="Progress" IsIndeterminate="True" IsVisible="False" />
@@ -14,6 +14,6 @@
           <StackPanel x:Name="ListHost" Spacing="12" />
         </StackPanel>
       </mav:MavScrollViewer>
-    </mav:MavRefreshIndicator.Body>
+    </mav:MavRefreshIndicator.Content>
   </mav:MavRefreshIndicator>
 </UserControl>
