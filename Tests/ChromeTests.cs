@@ -1,4 +1,8 @@
+using System.Linq;
+using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
+using Avalonia.Threading;
+using Avalonia.VisualTree;
 using Mav;
 using Mav.Controls;
 using Mav.Theming;
@@ -37,6 +41,31 @@ public class ChromeTests
         var tabs = new MavTabs();
         tabs.AddTab("One", icon: MavIcons.Home);
         Assert.NotNull(tabs);
+    }
+
+    /// <summary>
+    /// Seen in the CI screenshots: the tab body stopped at its own desired height, so a page inside
+    /// MavTabs left the rest of the window blank instead of filling it.
+    /// </summary>
+    [AvaloniaFact]
+    public void MavTabs_content_fills_the_remaining_height()
+    {
+        var body = new Border();
+        var tabs = new MavTabs();
+        tabs.AddTab("Groups", icon: MavIcons.Home, content: body);
+        var window = new Window { Width = 390, Height = 700, Content = tabs };
+        window.Show();
+        try
+        {
+            Dispatcher.UIThread.RunJobs();
+            var bar = tabs.GetVisualDescendants().OfType<MavSurface>().First();
+            Assert.True(body.Bounds.Height > 500,
+                $"The tab body is {body.Bounds.Height:0}px high inside a 700px window (bar {bar.Bounds.Height:0}px).");
+        }
+        finally
+        {
+            window.Close();
+        }
     }
 
     [AvaloniaFact]

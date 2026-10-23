@@ -60,6 +60,8 @@ All notable changes to **Mav**.
 
 ### Fixed
 
+- `MavTabs` gives its content the remaining height (bar, divider and a star row) instead of
+  stopping at the content's desired size, which left a blank area under short pages.
 - `MavTextField` and `MavTextArea` keep their floating label in the right place when text is set
   before the control is shown (a prefilled sign-in form, a dialog built offline). Without a top
   level there is no frame clock, so the state is applied at once and re-checked on attach instead

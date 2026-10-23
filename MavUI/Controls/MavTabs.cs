@@ -94,10 +94,16 @@ public class MavTabs : MavContentView, IEnumerable<MavTabItem>
             IsVisible = false,
         };
 
-        var root = new StackPanel { Orientation = Orientation.Vertical };
+        // Rows: tab bar, divider, content. The star row lets the page body fill the height it was
+        // given instead of stopping at its own desired height (the empty state used to sit in a
+        // short box with the rest of the window left blank).
+        var root = new Grid { RowDefinitions = new RowDefinitions("Auto,Auto,*") };
+        var divider = new MavDivider();
         root.Children.Add(_barSurface);
-        root.Children.Add(new MavDivider());
+        root.Children.Add(divider);
         root.Children.Add(_contentHost);
+        Grid.SetRow(divider, 1);
+        Grid.SetRow(_contentHost, 2);
 
         Child = root;
         Variant = variant;
