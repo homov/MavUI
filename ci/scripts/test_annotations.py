@@ -8,6 +8,7 @@ usage: test_annotations.py <trx-folder> <ui-report-folder>
 - Every failed test becomes an ::error annotation with its message and the start of the stack trace.
 - Every TRX file gets a ::notice with the outcome counts.
 - Every UI report file (*.txt, written by the headless tests) is split into ::notice annotations.
+- Every PNG screenshot is written as base64 in numbered ::notice parts (k/N).
 The script never fails the step: it only reports.
 """
 import glob
@@ -72,6 +73,20 @@ def report_ui(folder: str, limit: int = 3000) -> None:
             print(f"::notice title={title(f'UI {name} ({part})')}::{esc(chr(10).join(chunk))}")
 
 
+def report_png(folder: str, limit: int = 3500) -> None:
+    """Writes each PNG as base64 in numbered notices (k/N). Joined in order, the text decodes to the same PNG."""
+    import base64
+
+    for path in sorted(glob.glob(os.path.join(folder, "*.png"))):
+        with open(path, "rb") as handle:
+            encoded = base64.b64encode(handle.read()).decode("ascii")
+        name = os.path.splitext(os.path.basename(path))[0]
+        parts = [encoded[i:i + limit] for i in range(0, len(encoded), limit)] or [""]
+        print(f"::notice title={title(f'PNG {name} size')}::{len(parts)} parts, {len(encoded)} base64 characters")
+        for number, part in enumerate(parts, 1):
+            print(f"::notice title={title(f'PNG {name} {number}/{len(parts)}')}::{part}")
+
+
 def main() -> int:
     trx_folder = sys.argv[1] if len(sys.argv) > 1 else "test-results"
     ui_folder = sys.argv[2] if len(sys.argv) > 2 else "ui-report"
@@ -81,6 +96,7 @@ def main() -> int:
         print(f"::notice title=No test results::{esc(trx_folder)} does not exist")
     if os.path.isdir(ui_folder):
         report_ui(ui_folder)
+        report_png(ui_folder)
     return 0
 
 

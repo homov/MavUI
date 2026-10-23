@@ -1,6 +1,7 @@
 using System.Reflection;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Headless;
 using Avalonia.VisualTree;
 
 namespace Hc.Tests.Ui;
@@ -35,6 +36,16 @@ internal static class ScreenDump
         return path;
     }
 
+    /// <summary>Saves the rendered window as PNG. The CI turns the file into base64 annotations.</summary>
+    public static string Capture(Window window, string name)
+    {
+        Directory.CreateDirectory(ReportFolder);
+        var path = Path.Combine(ReportFolder, name + ".png");
+        using var frame = window.CaptureRenderedFrame();
+        frame?.Save(path);
+        return path;
+    }
+
     private static void Walk(Visual visual, int depth, List<string> lines)
     {
         if (visual is Control { IsVisible: true } control)
@@ -58,7 +69,8 @@ internal static class ScreenDump
     private static bool IsInput(Control control)
     {
         var type = control.GetType().Name;
-        return control is TextBox || type.Contains("TextField") || type.Contains("Entry") || type.Contains("PasswordBox");
+        return control is TextBox || type.Contains("TextField") || type.Contains("Entry") || type.Contains("PasswordBox")
+               || type == "TextPresenter" || type == "TextEditor";
     }
 
     private static string? ReadText(Control control)

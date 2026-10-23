@@ -32,6 +32,7 @@ public class SignInUiTests
 
             var banner = Find<MavBanner>(window, "ErrorBanner")!;
             ScreenDump.Write(window, "sign-in-error");
+            ScreenDump.Capture(window, "sign-in-error");
             Assert.False(string.IsNullOrWhiteSpace(banner.Message));
             Assert.NotNull(Find<LoginPage>(window));
             Assert.Null(Find<HomePage>(window));
@@ -57,6 +58,7 @@ public class SignInUiTests
             WaitFor(() => Find<HomePage>(window) is not null, "the home page");
 
             ScreenDump.Write(window, "home");
+            ScreenDump.Capture(window, "home");
             Assert.Null(Find<LoginPage>(window));
             Assert.True(StubCloud.Instance.SignInWasSent(StubCloud.KnownEmail));
         }

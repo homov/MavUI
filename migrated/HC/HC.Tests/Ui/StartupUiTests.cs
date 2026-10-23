@@ -23,6 +23,7 @@ public class StartupUiTests
             Settle();
 
             var report = ScreenDump.Write(window, "startup");
+            ScreenDump.Capture(window, "startup");
             Assert.True(File.Exists(report));
 
             var pages = window.GetVisualDescendants().ToList();
