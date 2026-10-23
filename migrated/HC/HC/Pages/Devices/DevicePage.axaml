@@ -3,7 +3,7 @@
                     xmlns:mav="https://where.it/mav"
                     xmlns:groups="clr-namespace:Hc.Pages.Groups"
                     x:Class="Hc.Pages.Devices.DevicePage">
-  <mav:MavContentPage.Content>
+  <mav:MavContentPage.Child>
     <mav:MavScrollViewer>
       <StackPanel Margin="16" Spacing="12">
         <mav:MavLinearProgress x:Name="Progress" IsIndeterminate="True" IsVisible="False" />
@@ -14,5 +14,5 @@
                        Text="{mav:Loc schedule.save, Fallback=Save}" />
       </StackPanel>
     </mav:MavScrollViewer>
-  </mav:MavContentPage.Content>
+  </mav:MavContentPage.Child>
 </mav:MavContentPage>

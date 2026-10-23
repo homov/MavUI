@@ -3,7 +3,7 @@
                     xmlns:mav="https://where.it/mav"
                     x:Class="Hc.Pages.Account.RegisterPage"
                     Title="{mav:Loc auth.register.title, Fallback=Create account}">
-  <mav:MavContentPage.Content>
+  <mav:MavContentPage.Child>
     <mav:MavScrollViewer>
       <StackPanel Margin="20,24,20,40" Spacing="16" MaxWidth="480">
         <mav:MavTextField x:Name="EmailField" Variant="Outlined"
@@ -20,5 +20,5 @@
                        Text="{mav:Loc auth.register.button, Fallback=Create account}" />
       </StackPanel>
     </mav:MavScrollViewer>
-  </mav:MavContentPage.Content>
+  </mav:MavContentPage.Child>
 </mav:MavContentPage>

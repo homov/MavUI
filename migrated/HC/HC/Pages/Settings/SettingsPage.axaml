@@ -3,7 +3,7 @@
                     xmlns:mav="https://where.it/mav"
                     x:Class="Hc.Pages.Settings.SettingsPage"
                     Title="{mav:Loc settings.title, Fallback=Settings}">
-  <mav:MavContentPage.Content>
+  <mav:MavContentPage.Child>
     <mav:MavScrollViewer>
       <StackPanel Margin="20,24,20,40" Spacing="16" MaxWidth="480">
         <mav:MavBanner x:Name="ErrorBanner" Icon="{x:Static mav:MavIcons.Error}" IsVisible="False" />
@@ -18,5 +18,5 @@
         <StackPanel x:Name="AccountRows" Spacing="8" />
       </StackPanel>
     </mav:MavScrollViewer>
-  </mav:MavContentPage.Content>
+  </mav:MavContentPage.Child>
 </mav:MavContentPage>

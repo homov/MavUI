@@ -3,7 +3,7 @@
                     xmlns:mav="https://where.it/mav"
                     x:Class="Hc.Pages.Account.LoginPage"
                     Title="{mav:Loc auth.signin.title, Fallback=Sign in}">
-  <mav:MavContentPage.Content>
+  <mav:MavContentPage.Child>
     <mav:MavScrollViewer>
       <StackPanel Margin="20,24,20,40" Spacing="16" MaxWidth="480">
         <mav:MavTextField x:Name="EmailField" Variant="Outlined"
@@ -23,5 +23,5 @@
                        Text="{mav:Loc auth.restore.link, Fallback=Forgot password}" />
       </StackPanel>
     </mav:MavScrollViewer>
-  </mav:MavContentPage.Content>
+  </mav:MavContentPage.Child>
 </mav:MavContentPage>

@@ -2,11 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:mav="https://where.it/mav"
                     x:Class="Hc.Pages.Groups.GroupPage">
-  <mav:MavContentPage.Content>
+  <mav:MavContentPage.Child>
     <Grid RowDefinitions="Auto,Auto,*">
       <mav:MavLinearProgress x:Name="Progress" IsIndeterminate="True" IsVisible="False" />
       <mav:MavBanner x:Name="ErrorBanner" Margin="16,8,16,0" Icon="{x:Static mav:MavIcons.Error}" IsVisible="False" />
       <mav:MavTabs x:Name="Tabs" Grid.Row="2" />
     </Grid>
-  </mav:MavContentPage.Content>
+  </mav:MavContentPage.Child>
 </mav:MavContentPage>
