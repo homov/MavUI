@@ -151,15 +151,16 @@ public partial class ThemingPage : UserControl
         var mode = MavTheme.ShapeScaleMode;
         ShapeSummary.Text = MavLocalization.Format(
             "Theming.Shape.Summary",
-            "Shape scale multiplies every corner radius: Compact ×{0:0.0#}, Standard ×{1:0.0#}, Expressive ×{2:0.0#}. " +
-            "Current {3} — cards {4:0.#} px, chips {5:0.#} px, text fields {6:0.#} px.",
+            "Shape scale multiplies the corner radius tokens: Compact ×{0:0.0#}, Standard ×{1:0.0#}, Expressive ×{2:0.0#}. " +
+            "Current {3} — cards {4:0.#} px, chips {5:0.#} px, settings cards {6:0.#} px. " +
+            "Buttons keep their pill and text fields keep 4 px.",
             Multiplier(MavShapeScale.Compact),
             Multiplier(MavShapeScale.Standard),
             Multiplier(MavShapeScale.Expressive),
             MavLocalization.Get($"Theming.Shape.Scale.{mode}", mode.ToString()),
             shape.Medium,
             shape.Small,
-            shape.ExtraSmall);
+            shape.Large);
     }
 
     private static double Multiplier(MavShapeScale scale) => new MavShapeTokens(scale).ScaleMultiplier;

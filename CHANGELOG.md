@@ -36,7 +36,8 @@ sandbox (their signed link points at Azure blob storage, which is outside the al
   "the theme's `Shape.Medium`"; set a number to pin the radius on that card. Before, the card
   hard-coded 12 px, so `MavShapeScale.Compact`/`Expressive` had no visible effect on it.
 - The gallery's Theming page explains the shape scale instead of just offering three buttons:
-  a summary line with the multiplier and the resulting card/chip/field radii, the same card
+  a summary line with the multiplier and the resulting card/chip/settings-card radii (plus which
+  controls deliberately keep theirs: buttons stay pills, text fields stay 4 px), the same card
   drawn at all three scales side by side (the active one filled), live `MavCard`, `MavChip` and
   `MavInfoBar` controls, and each radius tile labelled with its pixel value.
 
