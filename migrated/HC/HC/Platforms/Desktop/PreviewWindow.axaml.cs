@@ -1,6 +1,6 @@
 using Mav.Controls;
 
-namespace Hc.Platforms.Windows;
+namespace Hc.Platforms.Desktop;
 
 public partial class PreviewWindow : MavWindow
 {

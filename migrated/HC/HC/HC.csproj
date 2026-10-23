@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <!--
-    One cross-platform app: Windows (desktop, fast development and visual checks) and Android.
+    One cross-platform app: Desktop (net10.0, fast development and visual checks) and Android.
     Android is built only when IncludeAndroid=true (CI runs it on [heads] commits), so a plain
     build needs no Android workload. Folder layout follows .NET MAUI: Platforms/<Target>/ holds
     platform-only code, Resources/ holds shared assets, the rest is shared.
@@ -50,8 +50,8 @@
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
     <PackageReference Include="Avalonia.Desktop" Version="12.1.4" />
-    <Compile Include="Platforms\Windows\**\*.cs" />
-    <AvaloniaXaml Include="Platforms\Windows\**\*.axaml" />
+    <Compile Include="Platforms\Desktop\**\*.cs" />
+    <AvaloniaXaml Include="Platforms\Desktop\**\*.axaml" />
   </ItemGroup>
 
   <!-- Android-only sources, resources and packages. Nothing here is compiled for net10.0. -->

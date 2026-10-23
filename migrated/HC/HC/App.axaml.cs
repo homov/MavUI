@@ -38,6 +38,6 @@ public partial class App : global::Avalonia.Application
     /// <summary>Root for single-view hosts (Android). Platform hosts may wrap it.</summary>
     protected virtual Control CreateRoot() => new MainView();
 
-    /// <summary>Window for desktop hosts. Windows uses the phone-sized preview window.</summary>
+    /// <summary>Window for desktop hosts. Desktop uses the phone-sized preview window.</summary>
     protected virtual Window CreateDesktopWindow() => new Window { Content = CreateRoot() };
 }

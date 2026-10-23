@@ -5,6 +5,6 @@ namespace Hc.Services.Wifi;
 /// </summary>
 public interface IWifiProvisioning
 {
-    /// <summary>False on platforms where the wizard is hidden (Windows).</summary>
+    /// <summary>False on platforms where the wizard is hidden (Desktop).</summary>
     bool IsSupported { get; }
 }
