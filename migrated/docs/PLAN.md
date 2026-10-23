@@ -263,10 +263,10 @@ migrated/
 * 2025: раздел 1 (пределы), раздел 2 (влажность), раздел 4 (`antifreeze mod` только для `control_type = temperature`), раздел 5 (`control_type` — массив, внешний датчик).
 
 **Этап 10. Проверка и документация**
-* Тесты: ViewModel и сервисы на `Avalonia.Headless`, маппинг API, шифрование пароля.
-* Ручная проверка на Desktop (визуально, размер телефона) и на Android-устройстве (вы).
-* `API_MAPPING.md`: все операции API → методы сервисов.
-* Обновление `migrated/docs/NOTES.md`.
+* Тесты (сделано): сервисы и маппинг API, шифрование пароля, правила страниц (`DevicePageRulesTests`), расписание (`ScheduleDraftTests`). CI: HC.Tests 55/55. `Avalonia.Headless` для страниц не подключён; визуальную проверку делает человек.
+* Проверено (сделано): все 35 облачных и 5 локальных операций есть в `API_MAPPING.md` (сверка с `CloudClient` и `LocalDeviceClient`).
+* Ручная проверка на Desktop (визуально, размер 390×844) и на Android-устройстве — **ждёт пользователя**. Android-сборка выключена (`-p:IncludeAndroid=true`).
+* `migrated/docs/NOTES.md`: обновляется по ходу этапов.
 
 ---
 
