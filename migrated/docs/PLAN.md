@@ -227,7 +227,7 @@ migrated/
   * Windows: по решению из раздела 2 (п. 3).
 * Мастер добавления устройства (3 шага + ошибка) в `Pages/Device/AddDevice/`. На Windows скрыт (раздел 2, п. 3).
 
-**Этап 4. Сервисы и состояние**
+**Этап 4. Сервисы и состояние** — выполнен в коде, проверка CI (см. лог)
 * `SessionService` (логин, автологин, выход). Пароль в `MavSecureStorage`, email и настройки — в `MavPreferences`.
 * `DeviceService`, `LocationService`, `ScheduleService`, `SettingsService`, `LanguageService`, `ThemeService`.
 * Исправление «Cannot access a disposed object»: один клиент, без `Dispose` в середине запроса (ТЗ 2024, п. 4).

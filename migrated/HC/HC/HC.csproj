@@ -42,6 +42,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\MavUI\MavUI.csproj" />
+    <ProjectReference Include="..\..\..\MavUI.Essentials\MavUI.Essentials.csproj" />
   </ItemGroup>
 
   <!-- Platform folders are compiled only for their own target. -->
