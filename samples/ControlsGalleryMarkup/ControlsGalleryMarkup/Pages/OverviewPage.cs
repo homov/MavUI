@@ -113,8 +113,7 @@ public static class OverviewPage
         var color = MavTheme.ColorOf(role);
         var on = MavAccessibility.RelativeLuminance(color) >= 0.5 ? Colors.Black : Colors.White;
         return new Border()
-            .Width(132)
-            .Height(64)
+            .Sized(132, 64)
             .CornerRadius(new CornerRadius(12))
             .Padding(10)
             .Background(MavTheme.BrushOf(color))
@@ -136,8 +135,7 @@ public static class OverviewPage
         };
 
         return Row(radii.Select(item => (Control)new Border()
-            .Width(120)
-            .Height(64)
+            .Sized(120, 64)
             .CornerRadius(new CornerRadius(item.Radius))
             .Background(brush)
             .Child(Centered(new MavLabel(item.Name, MavTypeRole.LabelSmall)))).ToArray());
@@ -147,8 +145,7 @@ public static class OverviewPage
     {
         var fill = MavTheme.ColorOf(MavColorRole.SurfaceContainerLow);
         return Row(Enumerable.Range(0, 6).Select(level => (Control)new MavSurface()
-            .Width(120)
-            .Height(72)
+            .Sized(120, 72)
             .Radius(12)
             .Elevation(level)
             .FillColor(fill)

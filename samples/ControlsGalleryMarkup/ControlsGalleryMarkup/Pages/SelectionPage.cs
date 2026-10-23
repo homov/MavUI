@@ -34,7 +34,7 @@ public static class SelectionPage
 
         var roleSelect = new MavSelect()
             .Label(L("Selection.Select.Role", "Role"))
-            .Width(220)
+            .Sized(220)
             .ItemsSource(new[]
             {
                 L("Selection.Role.Admin", "Admin"),
@@ -45,7 +45,7 @@ public static class SelectionPage
 
         var cityCombo = new MavComboBox()
             .Label(L("Selection.Combo.City", "City"))
-            .Width(220)
+            .Sized(220)
             .ItemsSource(new[] { "Berlin", "London", "Tokyo" })
             .Text("Berlin");
 

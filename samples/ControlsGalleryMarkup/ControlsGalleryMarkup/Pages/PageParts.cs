@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Mav;
@@ -69,6 +70,18 @@ public static class PageParts
     {
         LayoutableMarkup.HorizontalAlignment(control, HorizontalAlignment.Center);
         return LayoutableMarkup.VerticalAlignment(control, VerticalAlignment.Center);
+    }
+
+    /// <summary>
+    /// Sets the size. <c>Width</c> has a generated overload for <c>ColumnDefinition</c> (GridLength), so the
+    /// fluent <c>.Width(120)</c> binds to the wrong type (CS1503). The explicit <c>LayoutableMarkup</c> calls avoid that.
+    /// </summary>
+    public static T Sized<T>(this T control, double width, double? height = null) where T : Control
+    {
+        LayoutableMarkup.Width(control, width);
+        if (height is double h)
+            LayoutableMarkup.Height(control, h);
+        return control;
     }
 
     /// <summary>Gap of 8 dp after a wrapped item.</summary>
