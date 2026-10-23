@@ -153,30 +153,37 @@ public static class ThemingPage
     private static Control ShapeSamples()
     {
         var shape = MavTheme.Current.Shape;
-        var brush = MavTheme.BrushOf(MavTheme.ColorOf(MavColorRole.SecondaryContainer));
         var radii = new (string Name, double Radius)[]
         {
             ("None", shape.None), ("ExtraSmall", shape.ExtraSmall), ("Small", shape.Small),
             ("Medium", shape.Medium), ("Large", shape.Large), ("LargeIncreased", shape.LargeIncreased),
             ("ExtraLarge", shape.ExtraLarge), ("Full", shape.Full),
         };
-        return Row(radii.Select(item => (Control)new Border()
-            .Sized(120, 64)
-            .CornerRadius(new CornerRadius(item.Radius))
-            .Background(brush)
-            .Child(Centered(new MavLabel(item.Name, MavTypeRole.LabelSmall)))).ToArray());
+        return Row(radii.Select(item =>
+        {
+            var border = new Border()
+                .Sized(120, 64)
+                .CornerRadius(new CornerRadius(item.Radius))
+                .Child(Centered(new MavLabel(item.Name, MavTypeRole.LabelSmall)));
+            // The fill follows the theme: Observe re-applies it on every theme change.
+            MavTheme.Observe(border, (b, theme) => b.Background = MavTheme.BrushOf(theme.Color.Get(MavColorRole.SecondaryContainer)));
+            return (Control)border;
+        }).ToArray());
     }
 
     /// <summary>Elevation levels 0 to 5, with localized labels.</summary>
     private static Control ElevationSamples()
     {
-        var fill = MavTheme.ColorOf(MavColorRole.SurfaceContainerLow);
-        return Row(Enumerable.Range(0, 6).Select(level => (Control)new MavSurface()
-            .Sized(120, 72)
-            .Radius(12)
-            .Elevation(level)
-            .FillColor(fill)
-            .Child(Centered(new MavLabel(MavLocalization.Format("Overview.Elevation.Level", "Level {0}", level), MavTypeRole.LabelSmall)))).ToArray());
+        return Row(Enumerable.Range(0, 6).Select(level =>
+        {
+            var surface = new MavSurface()
+                .Sized(120, 72)
+                .Radius(12)
+                .Elevation(level)
+                .Child(Centered(new MavLabel(MavLocalization.Format("Overview.Elevation.Level", "Level {0}", level), MavTypeRole.LabelSmall)));
+            MavTheme.Observe(surface, (s, theme) => s.FillColor = theme.Color.Get(MavColorRole.SurfaceContainerLow));
+            return (Control)surface;
+        }).ToArray());
     }
 
     /// <summary>Contrast ratios of the main role pairs, with WCAG verdicts.</summary>

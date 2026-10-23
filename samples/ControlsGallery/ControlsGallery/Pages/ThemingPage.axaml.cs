@@ -66,13 +66,12 @@ public partial class ThemingPage : UserControl
         get
         {
             var shape = MavTheme.Current.Shape;
-            var brush = MavTheme.BrushOf(MavTheme.ColorOf(MavColorRole.SecondaryContainer));
             return new[]
             {
                 ("None", shape.None), ("ExtraSmall", shape.ExtraSmall), ("Small", shape.Small),
                 ("Medium", shape.Medium), ("Large", shape.Large), ("LargeIncreased", shape.LargeIncreased),
                 ("ExtraLarge", shape.ExtraLarge), ("Full", shape.Full),
-            }.Select(s => new ThemeSample(s.Item1) { Corner = new CornerRadius(s.Item2), Background = brush }).ToList();
+            }.Select(s => new ThemeSample(s.Item1) { Corner = new CornerRadius(s.Item2) }).ToList();
         }
     }
 
@@ -82,7 +81,6 @@ public partial class ThemingPage : UserControl
             MavLocalization.Format("Overview.Elevation.Level", "Level {0}", level))
         {
             Elevation = level,
-            Fill = MavTheme.ColorOf(MavColorRole.SurfaceContainerLow),
         }).ToList();
 
     /// <summary>Contrast ratios of the main role pairs, with WCAG verdicts.</summary>
