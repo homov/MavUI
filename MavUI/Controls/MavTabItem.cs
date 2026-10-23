@@ -26,8 +26,8 @@ public sealed class MavTabItem : Control
     public static readonly StyledProperty<string?> BadgeTextProperty =
         AvaloniaProperty.Register<MavTabItem, string?>(nameof(BadgeText));
 
-    public static readonly StyledProperty<Control?> ContentProperty =
-        AvaloniaProperty.Register<MavTabItem, Control?>(nameof(Content));
+    public static readonly StyledProperty<object?> ContentProperty =
+        AvaloniaProperty.Register<MavTabItem, object?>(nameof(Content));
 
     internal event EventHandler? ItemChanged;
 
@@ -38,7 +38,7 @@ public sealed class MavTabItem : Control
         BadgeTextProperty.Changed.AddClassHandler<MavTabItem>((i, _) => i.ItemChanged?.Invoke(i, EventArgs.Empty));
         ContentProperty.Changed.AddClassHandler<MavTabItem>((i, e) =>
         {
-            MavVisualTreeHelpers.AttachLogicalChild(i, e.GetNewValue<Control?>());
+            MavVisualTreeHelpers.AttachLogicalChild(i, e.GetNewValue<object?>() as Control);
             i.ItemChanged?.Invoke(i, EventArgs.Empty);
         });
     }
@@ -61,8 +61,9 @@ public sealed class MavTabItem : Control
         set => SetValue(BadgeTextProperty, value);
     }
 
+    /// <summary>The item content. Any object is accepted; the host shows it through a ContentPresenter when it is not a control.</summary>
     [Content]
-    public Control? Content
+    public object? Content
     {
         get => GetValue(ContentProperty);
         set => SetValue(ContentProperty, value);
@@ -78,7 +79,7 @@ public sealed class MavTabItem : Control
         string text,
         string? icon = null,
         string? badgeText = null,
-        Control? content = null)
+        object? content = null)
     {
         Text = text;
         Icon = icon;

@@ -333,7 +333,7 @@ public class MavStepper : MavContentView, IEnumerable<MavStep>
     {
         _bodyHost.Child = null;
         foreach (var step in _steps)
-            MavVisualTreeHelpers.DetachFromParent(step.Content);
+            MavVisualTreeHelpers.DetachFromParent(step.Content as Control);
         _stepsHost.Children.Clear();
         var t = MavTheme.Current;
         var c = t.Color;
@@ -383,7 +383,7 @@ public class MavStepper : MavContentView, IEnumerable<MavStep>
             _stepsHost.Children.Add(headerGrid);
 
             var activeContent = CurrentStep >= 0 && CurrentStep < _steps.Count
-                ? _steps[CurrentStep].Content
+                ? MavVisualTreeHelpers.ToView(_steps[CurrentStep].Content)
                 : null;
             MavVisualTreeHelpers.DetachFromParent(activeContent);
             _bodyHost.Child = activeContent;
@@ -440,7 +440,7 @@ public class MavStepper : MavContentView, IEnumerable<MavStep>
                             Spacing = 10,
                             Margin = new Thickness(12, 4, 0, 12),
                         };
-                        if (_steps[i].Content is { } stepContent)
+                        if (MavVisualTreeHelpers.ToView(_steps[i].Content) is { } stepContent)
                         {
                             MavVisualTreeHelpers.DetachFromParent(stepContent);
                             stepCol.Children.Add(stepContent);

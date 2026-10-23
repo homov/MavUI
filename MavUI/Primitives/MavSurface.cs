@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 using System.Reflection;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Templates;
 using Avalonia.Media;
 using Avalonia.VisualTree;
@@ -203,6 +204,14 @@ namespace Mav.Primitives
         /// <summary>
         /// Removes the control from its current parent so it can be attached elsewhere.
         /// </summary>
+        /// <summary>Returns the content as a control: a control as is, any other object wrapped in a ContentPresenter.</summary>
+        public static Control? ToView(object? content) => content switch
+        {
+            null => null,
+            Control control => control,
+            _ => new ContentPresenter { Content = content },
+        };
+
         public static void DetachFromParent(Control? control)
         {
             if (control is null) return;

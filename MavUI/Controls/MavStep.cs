@@ -23,8 +23,8 @@ public sealed class MavStep : Control
     public static readonly StyledProperty<string?> SubtitleProperty =
         AvaloniaProperty.Register<MavStep, string?>(nameof(Subtitle));
 
-    public static readonly StyledProperty<Control?> ContentProperty =
-        AvaloniaProperty.Register<MavStep, Control?>(nameof(Content));
+    public static readonly StyledProperty<object?> ContentProperty =
+        AvaloniaProperty.Register<MavStep, object?>(nameof(Content));
 
     public static readonly StyledProperty<MavStepState?> StateOverrideProperty =
         AvaloniaProperty.Register<MavStep, MavStepState?>(nameof(StateOverride));
@@ -40,7 +40,7 @@ public sealed class MavStep : Control
         SubtitleProperty.Changed.AddClassHandler<MavStep>((s, _) => s.StepItemChanged?.Invoke(s, EventArgs.Empty));
         ContentProperty.Changed.AddClassHandler<MavStep>((s, e) =>
         {
-            MavVisualTreeHelpers.AttachLogicalChild(s, e.GetNewValue<Control?>());
+            MavVisualTreeHelpers.AttachLogicalChild(s, e.GetNewValue<object?>() as Control);
             s.StepItemChanged?.Invoke(s, EventArgs.Empty);
         });
         StateOverrideProperty.Changed.AddClassHandler<MavStep>((s, _) => s.StepItemChanged?.Invoke(s, EventArgs.Empty));
@@ -55,7 +55,7 @@ public sealed class MavStep : Control
     public MavStep(
         string title,
         string? subtitle = null,
-        Control? content = null,
+        object? content = null,
         MavStepState? stateOverride = null)
     {
         Title = title;
@@ -82,8 +82,9 @@ public sealed class MavStep : Control
         set => SetValue(IsOptionalProperty, value);
     }
 
+    /// <summary>The item content. Any object is accepted; the host shows it through a ContentPresenter when it is not a control.</summary>
     [Content]
-    public Control? Content
+    public object? Content
     {
         get => GetValue(ContentProperty);
         set => SetValue(ContentProperty, value);

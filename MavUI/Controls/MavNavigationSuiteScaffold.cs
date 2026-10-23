@@ -419,7 +419,7 @@ public class MavNavigationSuiteScaffold : MavContentView, IEnumerable<MavSuiteDe
         }
 
         if (SelectedIndex >= 0 && SelectedIndex < _destinations.Count &&
-            _destinations[SelectedIndex].Content is { } destContent)
+            MavVisualTreeHelpers.ToView(_destinations[SelectedIndex].Content) is { } destContent)
         {
             _bodyHost.Child = null;
             MavVisualTreeHelpers.DetachFromParent(destContent);

@@ -16,20 +16,21 @@ namespace Mav.Controls;
 /// <summary>Destination shown by a <see cref="MavNavigationSuiteScaffold"/>.</summary>
 public sealed class MavSuiteDestination : MavNavigationItemBase
 {
-    public static readonly StyledProperty<Control?> ContentProperty =
-        AvaloniaProperty.Register<MavSuiteDestination, Control?>(nameof(Content));
+    public static readonly StyledProperty<object?> ContentProperty =
+        AvaloniaProperty.Register<MavSuiteDestination, object?>(nameof(Content));
 
     static MavSuiteDestination()
     {
         ContentProperty.Changed.AddClassHandler<MavSuiteDestination>((d, e) =>
         {
-            MavVisualTreeHelpers.AttachLogicalChild(d, e.GetNewValue<Control?>());
+            MavVisualTreeHelpers.AttachLogicalChild(d, e.GetNewValue<object?>() as Control);
             d.OnItemChanged();
         });
     }
 
+    /// <summary>The item content. Any object is accepted; the host shows it through a ContentPresenter when it is not a control.</summary>
     [Content]
-    public Control? Content
+    public object? Content
     {
         get => GetValue(ContentProperty);
         set => SetValue(ContentProperty, value);
@@ -46,7 +47,7 @@ public sealed class MavSuiteDestination : MavNavigationItemBase
         string icon,
         string? selectedIcon = null,
         string? badgeText = null,
-        Control? content = null)
+        object? content = null)
     {
         Label = label;
         Icon = icon;

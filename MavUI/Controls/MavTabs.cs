@@ -303,7 +303,7 @@ public class MavTabs : MavContentView, IEnumerable<MavTabItem>
         }
 
         _contentHost.Child = null;
-        if (SelectedIndex >= 0 && SelectedIndex < _tabs.Count && _tabs[SelectedIndex].Content is { } view)
+        if (SelectedIndex >= 0 && SelectedIndex < _tabs.Count && MavVisualTreeHelpers.ToView(_tabs[SelectedIndex].Content) is { } view)
         {
             MavVisualTreeHelpers.DetachFromParent(view);
             _contentHost.Child = view;
