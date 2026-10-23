@@ -55,7 +55,7 @@ public partial class LayoutPage : UserControl
             Radius = 16,
             Elevation = 2,
             FillColor = MavTheme.ColorOf(MavColorRole.SurfaceContainerHigh),
-            Content = new MavLabel
+            Child = new MavLabel
             {
                 Text = "MavSurface",
                 HorizontalAlignment = HorizontalAlignment.Center,

@@ -200,7 +200,7 @@ public partial class ThemingPage : UserControl
                 Radius = 12,
                 Elevation = level,
                 FillColor = MavTheme.ColorOf(MavColorRole.SurfaceContainerLow),
-                Content = new MavLabel
+                Child = new MavLabel
                 {
                     Text = MavLocalization.Format("Overview.Elevation.Level", "Level {0}", level),
                     Role = MavTypeRole.LabelSmall,

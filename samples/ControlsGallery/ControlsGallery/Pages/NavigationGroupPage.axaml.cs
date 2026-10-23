@@ -210,7 +210,7 @@ public partial class NavigationGroupPage : UserControl
 
         var root = new MavContentPage(MavLocalization.Get("Nav.Demo.PageStack", "Page stack"));
         root.AddAction(MavIcons.MoreVert, () => { });
-        root.Content = new StackPanel
+        root.Child = new StackPanel
         {
             Spacing = 12,
             Margin = new Thickness(16),
@@ -229,7 +229,7 @@ public partial class NavigationGroupPage : UserControl
         var nested = new MavNavigationPage(root);
         var details = new MavContentPage(MavLocalization.Get("Nav.Demo.Details", "Details"))
         {
-            Content = new MavLabel
+            Child = new MavLabel
             {
                 Text = MavLocalization.Get("Nav.Demo.DetailsHint", "Details page. The app bar back arrow pops the stack."),
                 Margin = new Thickness(16),
