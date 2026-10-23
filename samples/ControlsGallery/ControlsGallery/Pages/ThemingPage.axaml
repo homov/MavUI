@@ -86,14 +86,20 @@
             <StackPanel Spacing="10">
               <mav:MavLabel Role="TitleMedium" Text="MavTypeRole" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Type.CardBody, Fallback=Every role rendered with its own style.}" />
-              <mav:MavItems ItemsSource="{x:Static pages:ThemingPage.TypeScale}">
-                <mav:MavItems.Spacing>2</mav:MavItems.Spacing>
-                <mav:MavItems.ItemTemplate>
-                  <DataTemplate x:DataType="pages:ThemeSample">
-                    <mav:MavLabel Role="{Binding Role}" Text="{Binding Name}" />
-                  </DataTemplate>
-                </mav:MavItems.ItemTemplate>
-              </mav:MavItems>
+              <!-- Not wrapped into one line: each role needs the full row width to show its size. -->
+              <StackPanel Spacing="8">
+                <mav:MavItems ItemsSource="{x:Static pages:ThemingPage.TypeScale}">
+                  <mav:MavItems.Spacing>2</mav:MavItems.Spacing>
+                  <mav:MavItems.ItemTemplate>
+                    <DataTemplate x:DataType="pages:ThemeSample">
+                      <StackPanel>
+                        <mav:MavLabel Role="LabelSmall" Secondary="True" Text="{Binding Name}" />
+                        <mav:MavLabel Role="{Binding Role}" Text="The quick brown fox" TextWrapping="Wrap" />
+                      </StackPanel>
+                    </DataTemplate>
+                  </mav:MavItems.ItemTemplate>
+                </mav:MavItems>
+              </StackPanel>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="new MavLabel { Role = MavTypeRole.TitleLarge }" />
             </StackPanel>
           </mav:MavCard>
@@ -142,7 +148,7 @@
                 <mav:MavItems.Spacing>6</mav:MavItems.Spacing>
                 <mav:MavItems.ItemTemplate>
                   <DataTemplate x:DataType="x:String">
-                    <mav:MavLabel Role="BodySmall" Text="{Binding}" />
+                    <mav:MavLabel Role="BodySmall" Text="{Binding}" TextWrapping="Wrap" />
                   </DataTemplate>
                 </mav:MavItems.ItemTemplate>
               </mav:MavItems>
