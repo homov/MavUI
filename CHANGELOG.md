@@ -15,6 +15,15 @@ All notable changes to **Mav**.
 
 ## [Unreleased]
 
+### Added
+
+- `MavItems`: a theme-free items host. The library ships no Avalonia theme, so a plain
+  `ItemsControl` (a templated control) builds no `ItemsPresenter` and draws nothing; `MavItems`
+  is a `Panel` that builds one control per item from `ItemTemplate`, follows
+  `INotifyCollectionChanged` and lays items out in a line or in wrapping rows (`Wrap`, `Spacing`).
+  The gallery now uses it for colour swatches, the type scale, shape/elevation samples, the
+  contrast list and the palette buttons, which were all rendered empty before.
+
 _Tooling (not part of the library API):_ `Tests/MavUI.VisualTests` renders every ControlsGallery
 destination, three shell widths and a dark theme frame on headless Skia, checks that no visible
 control leaves the window and publishes the PNGs with `build.log` to the `ci/reports` branch;

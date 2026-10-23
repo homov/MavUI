@@ -1635,6 +1635,11 @@ Commit-message tags:
   `python3 tools/linux/mavui.py start --window 400x800 --safe-area 24,48 --keyboard 300`.
   `shot --out <path>` writes a screenshot to the given path. Clicks use window-relative pixels of
   the **client area**.
+For collections of data-built controls use `MavItems`, not `ItemsControl`: a templated control
+without the (absent) Avalonia theme has no template, so it silently shows nothing.
+`MavItems { ItemsSource = …, ItemTemplate = new FuncDataTemplate<T>(…), Wrap = true, Spacing = 4 }`
+lays the built controls out itself.
+
 * Windows: `tools/win/mavui.ps1` — `-Action start|stop|shot|click|key|wheel|info`, `-EnvWindow`,
   `-EnvSafeArea`, `-EnvKeyboard`.
 

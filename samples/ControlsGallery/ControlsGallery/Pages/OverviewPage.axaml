@@ -43,20 +43,15 @@
                            Text="{mav:Loc Overview.Mode.System, Fallback=System}"
                            Command="{x:Static pages:OverviewCommands.UseSystem}" />
           </WrapPanel>
-          <ItemsControl x:Name="SeedItems">
-              <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                  <WrapPanel />
-                </ItemsPanelTemplate>
-              </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
+          <mav:MavItems Wrap="True" x:Name="SeedItems">
+            <mav:MavItems.ItemTemplate>
               <DataTemplate x:DataType="pages:SeedChoice">
                 <mav:MavRadioButton GroupName="Seed" Label="{Binding Name}" IsChecked="{Binding IsSelected}"
                                     CommandParameter="{Binding Color}" Margin="0,0,16,8"
                                     Command="{x:Static pages:OverviewCommands.SetSeed}" />
               </DataTemplate>
-            </ItemsControl.ItemTemplate>
-          </ItemsControl>
+            </mav:MavItems.ItemTemplate>
+          </mav:MavItems>
           <pages:SchemeVariantPicker />
           <WrapPanel>
             <mav:MavButton x:Name="ContrastStandardButton" Variant="Tonal" Margin="0,0,8,8"
@@ -98,19 +93,15 @@
           <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Overview.Typography.Title, Fallback=Typography}" />
           <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap"
                         Text="{mav:Loc Overview.Typography.Body, Fallback=15 MD3 type roles from DisplayLarge to LabelSmall.}" />
-          <ItemsControl ItemsSource="{Binding TypeRoles}">
-            <ItemsControl.ItemsPanel>
-              <ItemsPanelTemplate>
-                <StackPanel Spacing="4" />
-              </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
+          <mav:MavItems ItemsSource="{Binding TypeRoles}">
+            <mav:MavItems.Spacing>4</mav:MavItems.Spacing>
+            <mav:MavItems.ItemTemplate>
               <DataTemplate x:DataType="mav:MavTypeRole">
                 <mav:MavLabel Role="{Binding}" TextWrapping="Wrap"
                               Text="{Binding StringFormat='{}{0} — The quick brown fox'}" />
               </DataTemplate>
-            </ItemsControl.ItemTemplate>
-          </ItemsControl>
+            </mav:MavItems.ItemTemplate>
+          </mav:MavItems>
         </StackPanel>
 
         <!-- Color roles -->
@@ -118,21 +109,16 @@
           <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Overview.Color.Title, Fallback=Color roles}" />
           <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap"
                         Text="{mav:Loc Overview.Color.Body, Fallback=Role-based colors from MavTheme.ColorOf / MavTheme.BrushOf; they follow the current scheme.}" />
-          <ItemsControl x:Name="SwatchItems">
-              <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                  <WrapPanel />
-                </ItemsPanelTemplate>
-              </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
+          <mav:MavItems Wrap="True" x:Name="SwatchItems">
+            <mav:MavItems.ItemTemplate>
               <DataTemplate x:DataType="pages:RoleSwatch">
                 <Border Width="132" Height="64" CornerRadius="12" Padding="10" Margin="0,0,8,8"
                         Background="{Binding Background}">
                   <TextBlock Text="{Binding Name}" FontSize="11" Foreground="{Binding Foreground}" />
                 </Border>
               </DataTemplate>
-            </ItemsControl.ItemTemplate>
-          </ItemsControl>
+            </mav:MavItems.ItemTemplate>
+          </mav:MavItems>
         </StackPanel>
 
         <!-- Shape and elevation -->
@@ -140,13 +126,8 @@
           <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Overview.Shape.Title, Fallback=Shape and elevation}" />
           <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap"
                         Text="{mav:Loc Overview.Shape.Body, Fallback=Shape tokens scale with MavShapeScale; elevation uses two-layer MD3 shadows.}" />
-          <ItemsControl x:Name="ShapeItems">
-              <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                  <WrapPanel />
-                </ItemsPanelTemplate>
-              </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
+          <mav:MavItems Wrap="True" x:Name="ShapeItems">
+            <mav:MavItems.ItemTemplate>
               <DataTemplate x:DataType="pages:ShapeSample">
                 <Border Width="120" Height="64" Margin="0,0,8,8"
                         CornerRadius="{Binding Radius}" Background="{DynamicResource Md.Brush.PrimaryContainer}">
@@ -154,15 +135,10 @@
                                 HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </Border>
               </DataTemplate>
-            </ItemsControl.ItemTemplate>
-          </ItemsControl>
-          <ItemsControl ItemsSource="{Binding ElevationSamples}">
-              <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                  <WrapPanel />
-                </ItemsPanelTemplate>
-              </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
+            </mav:MavItems.ItemTemplate>
+          </mav:MavItems>
+          <mav:MavItems Wrap="True" ItemsSource="{Binding ElevationSamples}">
+            <mav:MavItems.ItemTemplate>
               <DataTemplate x:DataType="pages:ElevationSample">
                 <mav:MavSurface Width="120" Height="72" Margin="0,0,8,8" Radius="12"
                                 Elevation="{Binding Elevation}" FillColor="{DynamicResource Md.Color.SurfaceContainerLow}">
@@ -172,8 +148,8 @@
                   </mav:MavSurface.Child>
                 </mav:MavSurface>
               </DataTemplate>
-            </ItemsControl.ItemTemplate>
-          </ItemsControl>
+            </mav:MavItems.ItemTemplate>
+          </mav:MavItems>
         </StackPanel>
 
         <!-- Motion -->

@@ -65,16 +65,15 @@
             <StackPanel Spacing="10">
               <mav:MavLabel Role="TitleMedium" Text="MavColorRole" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Colors.CardBody, Fallback=Each swatch shows the role name over its own color.}" />
-              <ItemsControl x:Name="ColorItems">
-                <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
+              <mav:MavItems Wrap="True" x:Name="ColorItems">
+                <mav:MavItems.ItemTemplate>
                   <DataTemplate x:DataType="pages:ThemeSample">
                     <Border Width="132" Height="64" CornerRadius="12" Padding="10" Margin="0,0,8,8" Background="{Binding Background}">
                       <TextBlock Text="{Binding Name}" FontSize="11" TextWrapping="Wrap" Foreground="{Binding Foreground}" />
                     </Border>
                   </DataTemplate>
-                </ItemsControl.ItemTemplate>
-              </ItemsControl>
+                </mav:MavItems.ItemTemplate>
+              </mav:MavItems>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavTheme.ColorOf(role) · MavTheme.BrushOf(color)" />
             </StackPanel>
           </mav:MavCard>
@@ -87,14 +86,14 @@
             <StackPanel Spacing="10">
               <mav:MavLabel Role="TitleMedium" Text="MavTypeRole" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Type.CardBody, Fallback=Every role rendered with its own style.}" />
-              <ItemsControl ItemsSource="{x:Static pages:ThemingPage.TypeScale}">
-                <ItemsControl.ItemsPanel><ItemsPanelTemplate><StackPanel Spacing="2" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
+              <mav:MavItems ItemsSource="{x:Static pages:ThemingPage.TypeScale}">
+                <mav:MavItems.Spacing>2</mav:MavItems.Spacing>
+                <mav:MavItems.ItemTemplate>
                   <DataTemplate x:DataType="pages:ThemeSample">
                     <mav:MavLabel Role="{Binding Role}" Text="{Binding Name}" />
                   </DataTemplate>
-                </ItemsControl.ItemTemplate>
-              </ItemsControl>
+                </mav:MavItems.ItemTemplate>
+              </mav:MavItems>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="new MavLabel { Role = MavTypeRole.TitleLarge }" />
             </StackPanel>
           </mav:MavCard>
@@ -108,26 +107,24 @@
               <mav:MavLabel Role="TitleMedium" Text="MavShape and MavSurface.Elevation" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Shape.CardBody, Fallback=Shape tokens follow MavShapeScale; elevation uses two-layer shadows.}" />
               <StackPanel Spacing="8">
-                <ItemsControl x:Name="ShapeItems">
-                  <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
-                  <ItemsControl.ItemTemplate>
+                <mav:MavItems Wrap="True" x:Name="ShapeItems">
+                  <mav:MavItems.ItemTemplate>
                     <DataTemplate x:DataType="pages:ThemeSample">
                       <Border Width="120" Height="64" Margin="0,0,8,8" CornerRadius="{Binding Corner}" Background="{DynamicResource Md.Brush.SecondaryContainer}">
                         <mav:MavLabel Text="{Binding Name}" Role="LabelSmall" HorizontalAlignment="Center" VerticalAlignment="Center" />
                       </Border>
                     </DataTemplate>
-                  </ItemsControl.ItemTemplate>
-                </ItemsControl>
-                <ItemsControl ItemsSource="{x:Static pages:ThemingPage.ElevationSamples}">
-                  <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
-                  <ItemsControl.ItemTemplate>
+                  </mav:MavItems.ItemTemplate>
+                </mav:MavItems>
+                <mav:MavItems Wrap="True" ItemsSource="{x:Static pages:ThemingPage.ElevationSamples}">
+                  <mav:MavItems.ItemTemplate>
                     <DataTemplate x:DataType="pages:ThemeSample">
                       <mav:MavSurface Width="120" Height="72" Margin="0,0,8,8" Radius="12" Elevation="{Binding Elevation}" FillColor="{DynamicResource Md.Color.SurfaceContainerLow}">
                         <mav:MavLabel Text="{Binding Name}" Role="LabelSmall" HorizontalAlignment="Center" VerticalAlignment="Center" />
                       </mav:MavSurface>
                     </DataTemplate>
-                  </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                  </mav:MavItems.ItemTemplate>
+                </mav:MavItems>
               </StackPanel>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavTheme.Current.Shape · MavSurface.Elevation" />
             </StackPanel>
@@ -141,14 +138,14 @@
             <StackPanel Spacing="10">
               <mav:MavLabel Role="TitleMedium" Text="MavAccessibility.ContrastRatio" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Contrast.CardBody, Fallback=Ratios are computed from the current scheme.}" />
-              <ItemsControl x:Name="ContrastItems">
-                <ItemsControl.ItemsPanel><ItemsPanelTemplate><StackPanel Spacing="6" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
+              <mav:MavItems x:Name="ContrastItems">
+                <mav:MavItems.Spacing>6</mav:MavItems.Spacing>
+                <mav:MavItems.ItemTemplate>
                   <DataTemplate x:DataType="x:String">
                     <mav:MavLabel Role="BodySmall" Text="{Binding}" />
                   </DataTemplate>
-                </ItemsControl.ItemTemplate>
-              </ItemsControl>
+                </mav:MavItems.ItemTemplate>
+              </mav:MavItems>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavAccessibility.ContrastRatio(foreground, background)" />
             </StackPanel>
           </mav:MavCard>

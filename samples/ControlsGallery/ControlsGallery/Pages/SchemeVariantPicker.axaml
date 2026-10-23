@@ -3,18 +3,13 @@
              xmlns:mav="https://where.it/mav"
              xmlns:pages="clr-namespace:Mav.ControlsGallery.Pages"
              x:Class="Mav.ControlsGallery.Pages.SchemeVariantPicker">
-  <ItemsControl x:Name="Choices">
-    <ItemsControl.ItemsPanel>
-      <ItemsPanelTemplate>
-        <WrapPanel />
-      </ItemsPanelTemplate>
-    </ItemsControl.ItemsPanel>
-    <ItemsControl.ItemTemplate>
+  <mav:MavItems Wrap="True" x:Name="Choices">
+    <mav:MavItems.ItemTemplate>
       <DataTemplate x:DataType="pages:SchemeVariantChoice">
         <mav:MavButton Variant="{Binding ButtonVariant}" Text="{Binding Label}" Margin="0,0,8,8"
                        Command="{x:Static pages:SchemeVariantPicker.Select}"
                        CommandParameter="{Binding Variant}" />
       </DataTemplate>
-    </ItemsControl.ItemTemplate>
-  </ItemsControl>
+    </mav:MavItems.ItemTemplate>
+  </mav:MavItems>
 </UserControl>

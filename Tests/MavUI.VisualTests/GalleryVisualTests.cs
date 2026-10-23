@@ -95,12 +95,22 @@ public class GalleryVisualTests
                     failures.Add($"{key}: the page needs {wanted:0} px, the capture stopped at {grew:0} px, "
                                  + $"so {scroller.Extent.Height - scroller.Viewport.Height:0} px are not in the image.");
 
-                // 4. A gallery page never scrolls sideways: wrapped text must fit the width.
+                // 4. Every item host on the page must have built its items. Avalonia's ItemsControl
+                //    draws nothing without a theme, and that is how swatches, type scale and palette
+                //    buttons silently disappeared from these very screenshots.
+                var hosts = page.GetVisualDescendants().OfType<MavItems>().ToList();
+                var empty = hosts.Where(host => host.Children.Count == 0).Select(host =>
+                    string.IsNullOrEmpty(host.Name) ? nameof(MavItems) : $"{nameof(MavItems)} #{host.Name}").ToList();
+                if (empty.Count > 0)
+                    failures.Add($"{key}: {empty.Count} item host(s) built no children: {string.Join(", ", empty)}");
+                var built = hosts.Sum(host => host.Children.Count);
+
+                // 5. A gallery page never scrolls sideways: wrapped text must fit the width.
                 if (extent.Width > viewport.Width + 1)
                     failures.Add($"{key}: content is {extent.Width:0} px wide in a {viewport.Width:0} px viewport "
                                  + "(horizontal scrolling).");
 
-                // 5. And nothing may stick out of the window itself.
+                // 6. And nothing may stick out of the window itself.
                 window.Height = ViewportHeight;
                 Shots.Settle(3);
                 var overflow = Shots.FindHorizontalOverflow(shell.View, ViewportWidth);
@@ -111,7 +121,8 @@ public class GalleryVisualTests
                 Shots.Note($"page-{key}.png  {topSize / 1024.0:0.0} KB  " +
                            $"extent {extent.Height:0}x{extent.Width:0}  viewport {viewport.Height:0}x{viewport.Width:0}  " +
                            $"scrolls={needsScrolling}  " +
-                           $"full {grew:0}x{ViewportWidth:0}px {fullSize / 1024.0:0.0} KB  fits={fits}");
+                           $"full {grew:0}x{ViewportWidth:0}px {fullSize / 1024.0:0.0} KB  fits={fits}  " +
+                           $"items {hosts.Count} host(s)/{built} child(ren)");
             }
             catch (Exception error)
             {
