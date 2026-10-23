@@ -42,7 +42,7 @@ public static class FeedbackPage
                             new MavSideSheet()
                                 .Title(L("Feedback.Side.Title", "Details"))
                                 .Placement(MavSideSheetPlacement.End)
-                                .Content(new MavLabel(L("Feedback.Side.Body", "Side sheet content on tablet and desktop.")))))))),
+                                .Content(new MavLabel(L("Feedback.Side.Body", "Side sheet content on tablet and desktop."))))))),
             Section(
                 "Feedback.Messages.Title", "Messages and status",
                 "Feedback.Messages.Body", "Snackbars, banners, info bars and an empty state.",
@@ -117,7 +117,7 @@ public static class FeedbackPage
                                 new MavSparkline(new double[] { 3, 7, 4, 9, 12, 8, 15, 11, 17 }, MavSparklineKind.Line),
                                 new MavSparkline(new double[] { 5, 9, 3, 12, 7, 10 }, MavSparklineKind.Bar),
                                 new MavSparkline(new double[] { 70 }, MavSparklineKind.Donut, "70%")))
-                            .Margin(new Thickness(0, 0, 8, 8)))));
+                            .Margin(new Thickness(0, 0, 8, 8))))));
 
     /// <summary>Snackbar buttons. Each one anchors its snackbar to itself, as the AXAML version did with CommandParameter.</summary>
     private static Control[] Snackbars()
