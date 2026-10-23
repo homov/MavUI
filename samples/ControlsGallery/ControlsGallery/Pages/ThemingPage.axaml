@@ -16,9 +16,9 @@
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Controls.CardBody, Fallback=Seed color\, mode\, palette\, contrast\, density\, motion and shape scale.}" />
               <StackPanel Spacing="8">
                 <WrapPanel>
-                  <mav:MavButton Variant="Outlined" Icon="{x:Static mav:MavIcons.LightMode}" Text="{mav:Loc Overview.Mode.Light, Fallback=Light}" Command="{x:Static pages:ThemingPage.ModeLight}" Margin="0,0,8,8" />
-                  <mav:MavButton Variant="Outlined" Icon="{x:Static mav:MavIcons.DarkMode}" Text="{mav:Loc Overview.Mode.Dark, Fallback=Dark}" Command="{x:Static pages:ThemingPage.ModeDark}" Margin="0,0,8,8" />
-                  <mav:MavButton Variant="Outlined" Icon="{x:Static mav:MavIcons.SettingsBrightness}" Text="{mav:Loc Overview.Mode.System, Fallback=System}" Command="{x:Static pages:ThemingPage.ModeSystem}" Margin="0,0,8,8" />
+                  <mav:MavButton x:Name="ModeLightButton" Variant="Outlined" Icon="{x:Static mav:MavIcons.LightMode}" Text="{mav:Loc Overview.Mode.Light, Fallback=Light}" Command="{x:Static pages:ThemingPage.ModeLight}" Margin="0,0,8,8" />
+                  <mav:MavButton x:Name="ModeDarkButton" Variant="Outlined" Icon="{x:Static mav:MavIcons.DarkMode}" Text="{mav:Loc Overview.Mode.Dark, Fallback=Dark}" Command="{x:Static pages:ThemingPage.ModeDark}" Margin="0,0,8,8" />
+                  <mav:MavButton x:Name="ModeSystemButton" Variant="Outlined" Icon="{x:Static mav:MavIcons.SettingsBrightness}" Text="{mav:Loc Overview.Mode.System, Fallback=System}" Command="{x:Static pages:ThemingPage.ModeSystem}" Margin="0,0,8,8" />
                 </WrapPanel>
                 <WrapPanel>
                   <mav:MavRadioButton GroupName="Seed" Label="{mav:Loc Overview.Seed.Indigo, Fallback=Indigo}" IsChecked="True" Command="{x:Static pages:ThemingPage.SetSeed}" CommandParameter="{x:Static mav:MavColors.Indigo}" Margin="0,0,16,8" />
@@ -31,9 +31,9 @@
                   <mav:MavRadioButton GroupName="Seed" Label="{mav:Loc Overview.Seed.Slate, Fallback=Slate}" Command="{x:Static pages:ThemingPage.SetSeed}" CommandParameter="{x:Static mav:MavColors.Slate}" Margin="0,0,16,8" />
                 </WrapPanel>
                 <WrapPanel>
-                  <mav:MavButton Variant="Tonal" Text="{mav:Loc Theming.Contrast.Standard, Fallback=Contrast: Standard}" Command="{x:Static pages:ThemingPage.SetContrast}" CommandParameter="{x:Static mav:MavContrast.Standard}" Margin="0,0,8,8" />
-                  <mav:MavButton Variant="Tonal" Text="{mav:Loc Overview.Contrast.Medium, Fallback=Medium}" Command="{x:Static pages:ThemingPage.SetContrast}" CommandParameter="{x:Static mav:MavContrast.Medium}" Margin="0,0,8,8" />
-                  <mav:MavButton Variant="Tonal" Text="{mav:Loc Overview.Contrast.High, Fallback=High}" Command="{x:Static pages:ThemingPage.SetContrast}" CommandParameter="{x:Static mav:MavContrast.High}" Margin="0,0,8,8" />
+                  <mav:MavButton x:Name="ContrastStandardButton" Variant="Tonal" Text="{mav:Loc Theming.Contrast.Standard, Fallback=Contrast: Standard}" Command="{x:Static pages:ThemingPage.SetContrast}" CommandParameter="{x:Static mav:MavContrast.Standard}" Margin="0,0,8,8" />
+                  <mav:MavButton x:Name="ContrastMediumButton" Variant="Tonal" Text="{mav:Loc Overview.Contrast.Medium, Fallback=Medium}" Command="{x:Static pages:ThemingPage.SetContrast}" CommandParameter="{x:Static mav:MavContrast.Medium}" Margin="0,0,8,8" />
+                  <mav:MavButton x:Name="ContrastHighButton" Variant="Tonal" Text="{mav:Loc Overview.Contrast.High, Fallback=High}" Command="{x:Static pages:ThemingPage.SetContrast}" CommandParameter="{x:Static mav:MavContrast.High}" Margin="0,0,8,8" />
                 </WrapPanel>
                   <pages:SchemeVariantPicker />
                 <WrapPanel>

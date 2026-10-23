@@ -3,6 +3,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
 using Mav;
+using Mav.Controls;
 using Mav.Theming;
 
 namespace Mav.ControlsGallery.Pages;
@@ -29,6 +30,17 @@ public partial class OverviewPage : UserControl
     {
         SwatchItems.ItemsSource = BuildSwatches();
         ShapeItems.ItemsSource = BuildShapeSamples();
+        HighlightChoices();
+    }
+
+    private void HighlightChoices()
+    {
+        ModeLightButton.Variant = ChoiceButtonStyle.Of(MavTheme.Mode == MavThemeMode.Light, MavButtonVariant.Outlined);
+        ModeDarkButton.Variant = ChoiceButtonStyle.Of(MavTheme.Mode == MavThemeMode.Dark, MavButtonVariant.Outlined);
+        ModeSystemButton.Variant = ChoiceButtonStyle.Of(MavTheme.Mode == MavThemeMode.System, MavButtonVariant.Outlined);
+        ContrastStandardButton.Variant = ChoiceButtonStyle.Of(MavTheme.Contrast == MavContrast.Standard, MavButtonVariant.Tonal);
+        ContrastMediumButton.Variant = ChoiceButtonStyle.Of(MavTheme.Contrast == MavContrast.Medium, MavButtonVariant.Tonal);
+        ContrastHighButton.Variant = ChoiceButtonStyle.Of(MavTheme.Contrast == MavContrast.High, MavButtonVariant.Tonal);
     }
 
     public IReadOnlyList<MavTypeRole> TypeRoles { get; } = Enum.GetValues<MavTypeRole>();

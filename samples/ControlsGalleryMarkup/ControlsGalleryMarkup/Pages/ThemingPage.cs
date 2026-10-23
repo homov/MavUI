@@ -32,15 +32,9 @@ public static class ThemingPage
                 "Theming.Controls.CardBody", "Seed color, mode, palette, contrast, density, motion and shape scale.",
                 "MavTheme.Configure(seed, mode, schemeVariant, contrast, density, motion, shapeScale)",
                 Stack(8,
-                    Row(
-                        Button("Overview.Mode.Light", "Light", MavButtonVariant.Outlined, MavIcons.LightMode, () => MavTheme.UseLight()),
-                        Button("Overview.Mode.Dark", "Dark", MavButtonVariant.Outlined, MavIcons.DarkMode, () => MavTheme.UseDark()),
-                        Button("Overview.Mode.System", "System", MavButtonVariant.Outlined, MavIcons.SettingsBrightness, () => MavTheme.UseSystemMode())),
+                    ModeRow(),
                     SeedRow(),
-                    Row(
-                        Button("Theming.Contrast.Standard", "Contrast: Standard", MavButtonVariant.Tonal, null, () => MavTheme.Configure(contrast: MavContrast.Standard)),
-                        Button("Overview.Contrast.Medium", "Medium", MavButtonVariant.Tonal, null, () => MavTheme.Configure(contrast: MavContrast.Medium)),
-                        Button("Overview.Contrast.High", "High", MavButtonVariant.Tonal, null, () => MavTheme.Configure(contrast: MavContrast.High))),
+                    ContrastRow(),
                     SchemeVariantRow(),
                     Row(
                         Button("Overview.Density.Comfortable", "Comfortable", MavButtonVariant.Text, null, () => MavTheme.Configure(density: MavDensity.Comfortable)),

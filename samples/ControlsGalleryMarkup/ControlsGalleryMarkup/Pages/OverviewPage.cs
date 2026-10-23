@@ -37,16 +37,10 @@ public static class OverviewPage
         Section(
             "Overview.Theme.Title", "Theme",
             "Overview.Theme.Body", "Mode, seed color, contrast, density, motion and shape scale are global; change them and every control updates.",
-            Row(
-                Button("Overview.Mode.Light", "Light", MavButtonVariant.Outlined, MavIcons.LightMode, () => MavTheme.UseLight()),
-                Button("Overview.Mode.Dark", "Dark", MavButtonVariant.Outlined, MavIcons.DarkMode, () => MavTheme.UseDark()),
-                Button("Overview.Mode.System", "System", MavButtonVariant.Outlined, MavIcons.SettingsBrightness, () => MavTheme.UseSystemMode())),
+            ModeRow(),
             SeedRow(),
             SchemeVariantRow(),
-            Row(
-                Button("Overview.Contrast.Standard", "Standard contrast", MavButtonVariant.Tonal, null, () => MavTheme.Configure(contrast: MavContrast.Standard)),
-                Button("Overview.Contrast.Medium", "Medium", MavButtonVariant.Tonal, null, () => MavTheme.Configure(contrast: MavContrast.Medium)),
-                Button("Overview.Contrast.High", "High", MavButtonVariant.Tonal, null, () => MavTheme.Configure(contrast: MavContrast.High))),
+            ContrastRow(),
             Row(
                 Button("Overview.Density.Comfortable", "Comfortable", MavButtonVariant.Text, null, () => MavTheme.Configure(density: MavDensity.Comfortable)),
                 Button("Overview.Density.Compact", "Compact", MavButtonVariant.Text, null, () => MavTheme.Configure(density: MavDensity.Compact)),

@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -5,6 +8,7 @@ using Avalonia.Layout;
 using Avalonia.Media;
 using Mav;
 using Mav.Controls;
+using Mav.Primitives;
 using Mav.Theming;
 
 namespace Mav.ControlsGalleryMarkup.Pages;
@@ -112,6 +116,45 @@ public static class PageParts
             return (Control)button;
         }).ToArray());
     }
+
+    /// <summary>Light, dark and system mode buttons. The current mode is filled and re-highlighted on every theme change.</summary>
+    public static Control ModeRow() => ChoiceRow(
+        new (MavThemeMode Value, string Key, string English, string? Icon)[]
+        {
+            (MavThemeMode.Light, "Overview.Mode.Light", "Light", MavIcons.LightMode),
+            (MavThemeMode.Dark, "Overview.Mode.Dark", "Dark", MavIcons.DarkMode),
+            (MavThemeMode.System, "Overview.Mode.System", "System", MavIcons.SettingsBrightness),
+        },
+        () => MavTheme.Mode,
+        mode => MavTheme.Configure(mode: mode),
+        MavButtonVariant.Outlined);
+
+    /// <summary>Standard, medium and high contrast buttons. The current level is filled and re-highlighted on every theme change.</summary>
+    public static Control ContrastRow() => ChoiceRow(
+        new (MavContrast Value, string Key, string English, string? Icon)[]
+        {
+            (MavContrast.Standard, "Theming.Contrast.Standard", "Contrast: Standard", null),
+            (MavContrast.Medium, "Overview.Contrast.Medium", "Medium", null),
+            (MavContrast.High, "Overview.Contrast.High", "High", null),
+        },
+        () => MavTheme.Contrast,
+        contrast => MavTheme.Configure(contrast: contrast),
+        MavButtonVariant.Tonal);
+
+    /// <summary>A row of buttons for one choice of a theme setting; the chosen value is filled and kept in sync with the theme.</summary>
+    private static Control ChoiceRow<T>(
+        (T Value, string Key, string English, string? Icon)[] choices,
+        Func<T> current,
+        Action<T> apply,
+        MavButtonVariant baseVariant) =>
+        Row(choices.Select(choice =>
+        {
+            var button = new MavButton(L(choice.Key, choice.English), baseVariant, choice.Icon);
+            button.OnClicked(() => apply(choice.Value));
+            MavTheme.Observe(button, (b, _) =>
+                b.Variant = EqualityComparer<T>.Default.Equals(current(), choice.Value) ? MavButtonVariant.Filled : baseVariant);
+            return (Control)button;
+        }).ToArray());
 
     /// <summary>Gap of 8 dp after a wrapped item.</summary>
     private static Control Gap(Control control) =>

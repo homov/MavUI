@@ -129,5 +129,16 @@ public partial class ThemingPage : UserControl
         ColorItems.ItemsSource = ColorSwatches;
         ShapeItems.ItemsSource = ShapeSamples;
         ContrastItems.ItemsSource = ContrastLines;
+        HighlightChoices();
+    }
+
+    private void HighlightChoices()
+    {
+        ModeLightButton.Variant = ChoiceButtonStyle.Of(MavTheme.Mode == MavThemeMode.Light, MavButtonVariant.Outlined);
+        ModeDarkButton.Variant = ChoiceButtonStyle.Of(MavTheme.Mode == MavThemeMode.Dark, MavButtonVariant.Outlined);
+        ModeSystemButton.Variant = ChoiceButtonStyle.Of(MavTheme.Mode == MavThemeMode.System, MavButtonVariant.Outlined);
+        ContrastStandardButton.Variant = ChoiceButtonStyle.Of(MavTheme.Contrast == MavContrast.Standard, MavButtonVariant.Tonal);
+        ContrastMediumButton.Variant = ChoiceButtonStyle.Of(MavTheme.Contrast == MavContrast.Medium, MavButtonVariant.Tonal);
+        ContrastHighButton.Variant = ChoiceButtonStyle.Of(MavTheme.Contrast == MavContrast.High, MavButtonVariant.Tonal);
     }
 }

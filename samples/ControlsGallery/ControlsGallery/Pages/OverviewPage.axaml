@@ -33,13 +33,13 @@
           <mav:MavLabel Role="BodyMedium" Secondary="True" TextWrapping="Wrap"
                         Text="{mav:Loc Overview.Theme.Body, Fallback=Mode\, seed color\, contrast\, density\, motion and shape scale are global; change them and every control updates.}" />
           <WrapPanel>
-            <mav:MavButton Variant="Outlined" Icon="{x:Static mav:MavIcons.LightMode}" Margin="0,0,8,8"
+            <mav:MavButton x:Name="ModeLightButton" Variant="Outlined" Icon="{x:Static mav:MavIcons.LightMode}" Margin="0,0,8,8"
                            Text="{mav:Loc Overview.Mode.Light, Fallback=Light}"
                            Command="{x:Static pages:OverviewCommands.UseLight}" />
-            <mav:MavButton Variant="Outlined" Icon="{x:Static mav:MavIcons.DarkMode}" Margin="0,0,8,8"
+            <mav:MavButton x:Name="ModeDarkButton" Variant="Outlined" Icon="{x:Static mav:MavIcons.DarkMode}" Margin="0,0,8,8"
                            Text="{mav:Loc Overview.Mode.Dark, Fallback=Dark}"
                            Command="{x:Static pages:OverviewCommands.UseDark}" />
-            <mav:MavButton Variant="Outlined" Icon="{x:Static mav:MavIcons.SettingsBrightness}" Margin="0,0,8,8"
+            <mav:MavButton x:Name="ModeSystemButton" Variant="Outlined" Icon="{x:Static mav:MavIcons.SettingsBrightness}" Margin="0,0,8,8"
                            Text="{mav:Loc Overview.Mode.System, Fallback=System}"
                            Command="{x:Static pages:OverviewCommands.UseSystem}" />
           </WrapPanel>
@@ -60,13 +60,13 @@
           </ItemsControl>
           <pages:SchemeVariantPicker />
           <WrapPanel>
-            <mav:MavButton Variant="Tonal" Margin="0,0,8,8"
+            <mav:MavButton x:Name="ContrastStandardButton" Variant="Tonal" Margin="0,0,8,8"
                            Text="{mav:Loc Overview.Contrast.Standard, Fallback=Standard contrast}"
                            Command="{x:Static pages:OverviewCommands.ContrastStandard}" />
-            <mav:MavButton Variant="Tonal" Margin="0,0,8,8"
+            <mav:MavButton x:Name="ContrastMediumButton" Variant="Tonal" Margin="0,0,8,8"
                            Text="{mav:Loc Overview.Contrast.Medium, Fallback=Medium}"
                            Command="{x:Static pages:OverviewCommands.ContrastMedium}" />
-            <mav:MavButton Variant="Tonal" Margin="0,0,8,8"
+            <mav:MavButton x:Name="ContrastHighButton" Variant="Tonal" Margin="0,0,8,8"
                            Text="{mav:Loc Overview.Contrast.High, Fallback=High}"
                            Command="{x:Static pages:OverviewCommands.ContrastHigh}" />
           </WrapPanel>
