@@ -8,7 +8,7 @@ usage: test_annotations.py <trx-folder> <ui-report-folder>
 - Every failed test becomes an ::error annotation with its message and the start of the stack trace.
 - Every TRX file gets a ::notice with the outcome counts.
 - Every UI report file (*.txt, written by the headless tests) is split into ::notice annotations.
-- Every PNG screenshot is written as base64 in numbered ::notice parts (k/N).
+- With --png: every PNG screenshot is written as base64 in numbered ::notice parts (k/N), in its own step.
 The script never fails the step: it only reports.
 """
 import glob
@@ -73,7 +73,7 @@ def report_ui(folder: str, limit: int = 3000) -> None:
             print(f"::notice title={title(f'UI {name} ({part})')}::{esc(chr(10).join(chunk))}")
 
 
-def report_png(folder: str, limit: int = 3500) -> None:
+def report_png(folder: str, limit: int = 12000) -> None:
     """Writes each PNG as base64 in numbered notices (k/N). Joined in order, the text decodes to the same PNG."""
     import base64
 
@@ -88,6 +88,10 @@ def report_png(folder: str, limit: int = 3500) -> None:
 
 
 def main() -> int:
+    # --png: screenshots only. GitHub keeps only a few notices per step, so they run in their own step.
+    if len(sys.argv) > 2 and sys.argv[1] == "--png":
+        report_png(sys.argv[2])
+        return 0
     trx_folder = sys.argv[1] if len(sys.argv) > 1 else "test-results"
     ui_folder = sys.argv[2] if len(sys.argv) > 2 else "ui-report"
     if os.path.isdir(trx_folder):

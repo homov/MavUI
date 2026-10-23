@@ -65,6 +65,11 @@ jobs:
         shell: bash
         run: python3 ci/scripts/test_annotations.py "$GITHUB_WORKSPACE/test-results" "$GITHUB_WORKSPACE/ui-report"
 
+      - name: Annotate screenshots as base64 (readable through the Checks API)
+        if: always()
+        shell: bash
+        run: python3 ci/scripts/test_annotations.py --png "$GITHUB_WORKSPACE/ui-report"
+
       - name: Build Android and Browser targets (manual runs or commit message contains [heads])
         if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[heads]')
         shell: bash
