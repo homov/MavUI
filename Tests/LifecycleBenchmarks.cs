@@ -111,7 +111,7 @@ public class LifecycleBenchmarks
         for (int i = 0; i < ControlsPerKind; i++)
         {
             var button = new MavButton { Text = $"B{i}" };
-            var card = new MavCard { Body = new global::Avalonia.Controls.TextBlock { Text = $"C{i}" } };
+            var card = new MavCard { Child = new global::Avalonia.Controls.TextBlock { Text = $"C{i}" } };
             var field = new MavTextField { Label = $"F{i}" };
             var slider = new MavSlider(0, 100, i % 100, 0);
 

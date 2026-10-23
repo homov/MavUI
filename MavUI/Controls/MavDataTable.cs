@@ -1552,7 +1552,7 @@ public class MavDataTable : MavContentView, IEnumerable<MavDataColumn>
             Margin = new Thickness(0),
             CardPadding = new Thickness(16),
         };
-        card.BackgroundColor = isSelected
+        card.FillColor = isSelected
             ? c.SecondaryContainer.WithAlpha(0.45f)
             : c.Surface;
         card.Clicked += (_, _) => ActivateRow(rowItem);
@@ -1563,7 +1563,7 @@ public class MavDataTable : MavContentView, IEnumerable<MavDataColumn>
             Surface = card,
             ApplySelection = selected =>
             {
-                card.BackgroundColor = selected
+                card.FillColor = selected
                     ? c.SecondaryContainer.WithAlpha(0.45f)
                     : c.Surface;
                 if (check is not null)

@@ -43,7 +43,7 @@ public class ThemeSwitchBreakdownBenchmarks
         var kinds = new (string Name, Func<Control> Create)[]
         {
             ("MavButton", () => new MavButton { Text = "x" }),
-            ("MavCard", () => new MavCard { Body = new global::Avalonia.Controls.TextBlock { Text = "x" } }),
+            ("MavCard", () => new MavCard { Child = new global::Avalonia.Controls.TextBlock { Text = "x" } }),
             ("MavTextField", () => new MavTextField { Label = "x" }),
             ("MavSlider", () => new MavSlider(0, 100, 50, 0)),
         };
