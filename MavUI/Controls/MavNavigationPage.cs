@@ -54,6 +54,11 @@ public class MavNavigationPage : MavContentView
     private IInsetsManager? _insetsManager;
     private Thickness _safeAreaInsets;
     private readonly GoBackNavigationCommand _goBackCommand;
+    private readonly PushNavigationCommand _pushCommand;
+
+    /// <summary>Identifies the <see cref="RootPage"/> property.</summary>
+    public static readonly StyledProperty<MavContentPage?> RootPageProperty =
+        AvaloniaProperty.Register<MavNavigationPage, MavContentPage?>(nameof(RootPage));
 
     static MavNavigationPage()
     {
@@ -63,6 +68,11 @@ public class MavNavigationPage : MavContentView
             p.ApplySafeAreaInsets();
         });
         SafeAreaOverrideProperty.Changed.AddClassHandler<MavNavigationPage>((p, _) => p.ApplySafeAreaInsets());
+        RootPageProperty.Changed.AddClassHandler<MavNavigationPage>((p, e) =>
+        {
+            if (e.NewValue is MavContentPage root)
+                p.SetRoot(root);
+        });
     }
 
     /// <summary>Creates an empty navigation page host.</summary>
@@ -138,6 +148,7 @@ public class MavNavigationPage : MavContentView
 
         Child = _root;
         _goBackCommand = new GoBackNavigationCommand(this);
+        _pushCommand = new PushNavigationCommand(this);
         MavTheme.Observe(this, (self, theme) => self.ApplyTheme(theme));
     }
 
@@ -208,6 +219,16 @@ public class MavNavigationPage : MavContentView
     /// <see cref="TryGoBack"/>.
     /// </summary>
     public ICommand GoBackCommand => _goBackCommand;
+
+    /// <summary>The root page. Setting it replaces the stack with that page, so it can be declared in AXAML.</summary>
+    public MavContentPage? RootPage
+    {
+        get => GetValue(RootPageProperty);
+        set => SetValue(RootPageProperty, value);
+    }
+
+    /// <summary>Pushes the page passed as the command parameter. Use it from AXAML with a page resource.</summary>
+    public ICommand PushCommand => _pushCommand;
 
     /// <summary>Replaces the whole stack with <paramref name="page"/> as the new root.</summary>
     public void SetRoot(MavContentPage page)
@@ -630,6 +651,25 @@ public class MavNavigationPage : MavContentView
     private void ApplyTheme(MavTheme theme)
     {
         Background = MavTheme.BrushOf(theme.Color.Background);
+    }
+
+    private sealed class PushNavigationCommand(MavNavigationPage owner) : ICommand
+    {
+        public event EventHandler? CanExecuteChanged
+        {
+            add { }
+            remove { }
+        }
+
+        /// <summary>Returns true when the parameter is a page.</summary>
+        public bool CanExecute(object? parameter) => parameter is MavContentPage;
+
+        /// <summary>Pushes the page parameter onto the stack.</summary>
+        public void Execute(object? parameter)
+        {
+            if (parameter is MavContentPage page)
+                owner.Push(page);
+        }
     }
 
     private sealed class GoBackNavigationCommand(MavNavigationPage owner) : ICommand

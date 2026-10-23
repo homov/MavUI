@@ -2,6 +2,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mav="https://where.it/mav"
              x:Class="Mav.ControlsGallery.Pages.NavigationGroupPage">
+  <UserControl.Resources>
+    <mav:MavContentPage x:Key="DetailsPage" Title="{mav:Loc Nav.Demo.Details, Fallback=Details}">
+      <mav:MavLabel Margin="16" TextWrapping="Wrap" Text="{mav:Loc Nav.Demo.DetailsHint, Fallback=Details page. The app bar back arrow pops the stack.}" />
+    </mav:MavContentPage>
+  </UserControl.Resources>
   <mav:MavScrollViewer>
     <Border Padding="20,16,20,40">
       <StackPanel Spacing="18">
@@ -15,7 +20,29 @@
               <mav:MavLabel Role="TitleMedium" Text="MavTopAppBar and MavBottomAppBar" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap"
                             Text="{mav:Loc Nav.Bars.AppBars.Card.Body, Fallback=Small\, center-aligned and large top bars plus the bottom bar with a docked FAB and actions.}" />
-              <StackPanel x:Name="AppBarsHost" Spacing="8" />
+              <StackPanel Spacing="8">
+                <Border MaxWidth="420">
+                  <mav:MavTopAppBar Title="{mav:Loc Nav.Demo.Inbox, Fallback=Inbox}" Subtitle="{mav:Loc Nav.Demo.Messages, Fallback=12 messages}"
+                                    NavigationIcon="{x:Static mav:MavIcons.Menu}" Variant="Small">
+                    <mav:MavIconButton Icon="{x:Static mav:MavIcons.Search}" />
+                    <mav:MavIconButton Icon="{x:Static mav:MavIcons.MoreVert}" />
+                  </mav:MavTopAppBar>
+                </Border>
+                <Border MaxWidth="420">
+                  <mav:MavTopAppBar Title="{mav:Loc Nav.Demo.Photos, Fallback=Photos}" NavigationIcon="{x:Static mav:MavIcons.ArrowBack}" Variant="CenterAligned">
+                    <mav:MavIconButton Icon="{x:Static mav:MavIcons.Share}" />
+                  </mav:MavTopAppBar>
+                </Border>
+                <Border MaxWidth="420">
+                  <mav:MavTopAppBar Title="{mav:Loc Nav.Demo.Library, Fallback=Library}" NavigationIcon="{x:Static mav:MavIcons.Menu}" Variant="Large" />
+                </Border>
+                <Border MaxWidth="420">
+                  <mav:MavBottomAppBar>
+                    <mav:MavIconButton Icon="{x:Static mav:MavIcons.Search}" />
+                    <mav:MavIconButton Icon="{x:Static mav:MavIcons.Settings}" />
+                  </mav:MavBottomAppBar>
+                </Border>
+              </StackPanel>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap"
                             Text="MavTopAppBar(title) · Variant · AddAction · SafeAreaPadding · MavBottomAppBar(fabIcon, onFabClick)" />
             </StackPanel>
@@ -31,7 +58,46 @@
               <mav:MavLabel Role="TitleMedium" Text="MavNavigationBar, MavNavigationRail, MavNavigationDrawer and MavModalNavigationDrawer" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap"
                             Text="{mav:Loc Nav.Bars.Structures.Card.Body, Fallback=Bottom navigation\, side rail\, permanent drawer and modal drawer. The gallery shell uses all three adaptively.}" />
-              <StackPanel x:Name="StructuresHost" Spacing="8" />
+              <StackPanel Spacing="8">
+                <Border MaxWidth="420">
+                  <mav:MavNavigationBar>
+                    <mav:MavNavigationDestination Label="{mav:Loc Nav.Demo.Home, Fallback=Home}" Icon="{x:Static mav:MavIcons.Home}" />
+                    <mav:MavNavigationDestination Label="{mav:Loc Nav.Demo.Explore, Fallback=Explore}" Icon="{x:Static mav:MavIcons.Explore}" />
+                    <mav:MavNavigationDestination Label="{mav:Loc Nav.Demo.Saved, Fallback=Saved}" Icon="{x:Static mav:MavIcons.Bookmark}" />
+                    <mav:MavNavigationDestination Label="{mav:Loc Nav.Demo.Profile, Fallback=Profile}" Icon="{x:Static mav:MavIcons.Person}" />
+                  </mav:MavNavigationBar>
+                </Border>
+                <StackPanel Spacing="8">
+                  <mav:MavButton Variant="Outlined" Icon="{x:Static mav:MavIcons.MenuOpen}" Text="{mav:Loc Nav.Demo.OpenModal, Fallback=Open modal drawer}" HorizontalAlignment="Left">
+                    <mav:MavFlyout.ModalDrawer>
+                      <mav:MavModalNavigationDrawer Title="{mav:Loc Nav.Demo.ModalDrawer, Fallback=Modal drawer}" DrawerWidth="280">
+                        <mav:MavDrawerItem Label="{mav:Loc Nav.Demo.Inbox, Fallback=Inbox}" Icon="{x:Static mav:MavIcons.Inbox}" />
+                        <mav:MavDrawerItem Label="{mav:Loc Nav.Demo.Starred, Fallback=Starred}" Icon="{x:Static mav:MavIcons.Star}" />
+                        <mav:MavDrawerItem Label="{mav:Loc Nav.Demo.Sent, Fallback=Sent}" Icon="{x:Static mav:MavIcons.Send}" />
+                      </mav:MavModalNavigationDrawer>
+                    </mav:MavFlyout.ModalDrawer>
+                  </mav:MavButton>
+                  <WrapPanel>
+                    <Border Width="96" Height="380" Margin="0,0,8,8">
+                      <mav:MavNavigationRail>
+                        <mav:MavNavigationRail.Header><mav:MavAvatar Initials="MD" /></mav:MavNavigationRail.Header>
+                        <mav:MavNavigationDestination Label="{mav:Loc Nav.Demo.Home, Fallback=Home}" Icon="{x:Static mav:MavIcons.Home}" />
+                        <mav:MavNavigationDestination Label="{mav:Loc Nav.Demo.Explore, Fallback=Explore}" Icon="{x:Static mav:MavIcons.Explore}" />
+                        <mav:MavNavigationDestination Label="{mav:Loc Nav.Demo.Saved, Fallback=Saved}" Icon="{x:Static mav:MavIcons.Bookmark}" />
+                        <mav:MavNavigationDestination Label="{mav:Loc Nav.Demo.Profile, Fallback=Profile}" Icon="{x:Static mav:MavIcons.Person}" />
+                      </mav:MavNavigationRail>
+                    </Border>
+                    <Border Width="280" Height="380" Margin="0,0,8,8">
+                      <mav:MavNavigationDrawer Title="{mav:Loc Nav.Demo.Workspace, Fallback=Workspace}" DrawerWidth="260">
+                        <mav:MavDrawerItem Label="{mav:Loc Nav.Demo.Inbox, Fallback=Inbox}" Icon="{x:Static mav:MavIcons.Inbox}" BadgeText="12" />
+                        <mav:MavDrawerItem Label="{mav:Loc Nav.Demo.Starred, Fallback=Starred}" Icon="{x:Static mav:MavIcons.Star}" />
+                        <mav:MavDrawerItem Label="{mav:Loc Nav.Demo.Sent, Fallback=Sent}" Icon="{x:Static mav:MavIcons.Send}" />
+                        <mav:MavDrawerItem Label="{mav:Loc Nav.Demo.Trash, Fallback=Trash}" Icon="{x:Static mav:MavIcons.Delete}" />
+                      </mav:MavNavigationDrawer>
+                    </Border>
+                  </WrapPanel>
+                </StackPanel>
+              </StackPanel>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap"
                             Text="AddDestination(...) · AddItem(...) · SelectedIndex · Modal drawer Show(anchor)" />
             </StackPanel>
@@ -47,7 +113,46 @@
               <mav:MavLabel Role="TitleMedium" Text="MavTabs, MavBreadcrumbBar, MavPagination and MavStepper" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap"
                             Text="{mav:Loc Nav.Bars.Tabs.Card.Body, Fallback=Tabs switch panels\, breadcrumbs show a trail\, pagination moves through pages and the stepper tracks a flow.}" />
-              <StackPanel x:Name="TabsHost" Spacing="8" />
+              <StackPanel Spacing="8">
+                <mav:MavCard Variant="Outlined">
+                  <mav:MavTabs>
+                    <mav:MavTabItem Text="{mav:Loc Nav.Demo.Overview, Fallback=Overview}" Icon="{x:Static mav:MavIcons.Dashboard}">
+                      <mav:MavTabItem.Content><mav:MavLabel Text="{mav:Loc Nav.Demo.OverviewTab, Fallback=Overview tab content}" /></mav:MavTabItem.Content>
+                    </mav:MavTabItem>
+                    <mav:MavTabItem Text="{mav:Loc Nav.Demo.Activity, Fallback=Activity}" Icon="{x:Static mav:MavIcons.Timeline}" BadgeText="3">
+                      <mav:MavTabItem.Content><mav:MavLabel Text="{mav:Loc Nav.Demo.ActivityTab, Fallback=Activity tab content}" /></mav:MavTabItem.Content>
+                    </mav:MavTabItem>
+                    <mav:MavTabItem Text="{mav:Loc Nav.Demo.Settings, Fallback=Settings}" Icon="{x:Static mav:MavIcons.Settings}">
+                      <mav:MavTabItem.Content><mav:MavLabel Text="{mav:Loc Nav.Demo.SettingsTab, Fallback=Settings tab content}" /></mav:MavTabItem.Content>
+                    </mav:MavTabItem>
+                  </mav:MavTabs>
+                </mav:MavCard>
+                <mav:MavCard Variant="Outlined">
+                  <mav:MavBreadcrumbBar>
+                    <mav:MavBreadcrumbItem Text="{mav:Loc Nav.Demo.Home, Fallback=Home}" />
+                    <mav:MavBreadcrumbItem Text="{mav:Loc Nav.Demo.Projects, Fallback=Projects}" />
+                    <mav:MavBreadcrumbItem Text="Mav" />
+                  </mav:MavBreadcrumbBar>
+                </mav:MavCard>
+                <mav:MavCard Variant="Outlined">
+                  <mav:MavPagination TotalPages="12" CurrentPage="4" />
+                </mav:MavCard>
+                <mav:MavCard Variant="Outlined">
+                  <Border Height="260">
+                    <mav:MavStepper CurrentStep="1">
+                      <mav:MavStep Title="{mav:Loc Nav.Demo.Account, Fallback=Account}" Subtitle="{mav:Loc Nav.Demo.AccountSub, Fallback=Email and password}">
+                        <mav:MavStep.Content><mav:MavLabel Text="{mav:Loc Nav.Demo.AccountTab, Fallback=Account details}" /></mav:MavStep.Content>
+                      </mav:MavStep>
+                      <mav:MavStep Title="{mav:Loc Nav.Demo.Profile, Fallback=Profile}" Subtitle="{mav:Loc Nav.Demo.ProfileSub, Fallback=Name and avatar}">
+                        <mav:MavStep.Content><mav:MavLabel Text="{mav:Loc Nav.Demo.ProfileTab, Fallback=Profile details}" /></mav:MavStep.Content>
+                      </mav:MavStep>
+                      <mav:MavStep Title="{mav:Loc Nav.Demo.Done, Fallback=Done}" Subtitle="{mav:Loc Nav.Demo.DoneSub, Fallback=Review and finish}">
+                        <mav:MavStep.Content><mav:MavLabel Text="{mav:Loc Nav.Demo.Review, Fallback=Review}" /></mav:MavStep.Content>
+                      </mav:MavStep>
+                    </mav:MavStepper>
+                  </Border>
+                </mav:MavCard>
+              </StackPanel>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap"
                             Text="tabs.AddTab(text, icon, badge, content) · breadcrumbs.SetPath(...) · MavPagination.TotalPages · MavStepper.AddStep(...)" />
             </StackPanel>
@@ -63,7 +168,24 @@
               <mav:MavLabel Role="TitleMedium" Text="MavToolbar and MavContextualActionBar" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap"
                             Text="{mav:Loc Nav.Bars.Toolbars.Card.Body, Fallback=A floating toolbar for editor actions and a contextual bar that appears while items are selected.}" />
-              <StackPanel x:Name="ToolbarsHost" Spacing="8" />
+              <StackPanel Spacing="8">
+                <Border MaxWidth="420">
+                  <mav:MavToolbar Variant="Floating" ColorStyle="Standard" Orientation="Horizontal">
+                    <mav:MavIconButton Icon="{x:Static mav:MavIcons.FormatBold}" />
+                    <mav:MavIconButton Icon="{x:Static mav:MavIcons.FormatItalic}" />
+                    <mav:MavIconButton Icon="{x:Static mav:MavIcons.FormatUnderlined}" />
+                    <mav:MavDivider IsVertical="True" />
+                    <mav:MavIconButton Icon="{x:Static mav:MavIcons.Link}" />
+                  </mav:MavToolbar>
+                </Border>
+                <Border MaxWidth="480">
+                  <mav:MavContextualActionBar SelectedCount="3">
+                    <mav:MavIconButton Icon="{x:Static mav:MavIcons.Delete}" mav:MavTooltip.Text="{mav:Loc Nav.Demo.Delete, Fallback=Delete}" />
+                    <mav:MavIconButton Icon="{x:Static mav:MavIcons.Share}" mav:MavTooltip.Text="{mav:Loc Nav.Demo.Share, Fallback=Share}" />
+                    <mav:MavButton Variant="Tonal" Size="Small" Icon="{x:Static mav:MavIcons.Archive}" Text="{mav:Loc Nav.Demo.Archive, Fallback=Archive}" />
+                  </mav:MavContextualActionBar>
+                </Border>
+              </StackPanel>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap"
                             Text="toolbar.AddAction(icon) · AddControl · contextual.AddAction/AddButton" />
             </StackPanel>
@@ -79,7 +201,36 @@
               <mav:MavLabel Role="TitleMedium" Text="MavNavigationSuiteScaffold and MavNavigationPage" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap"
                             Text="{mav:Loc Nav.Bars.Scaffold.Card.Body, Fallback=The suite scaffold adapts its navigation to width; the nested page stack demonstrates MavContentPage and push/pop.}" />
-              <StackPanel x:Name="ScaffoldHost" Spacing="8" />
+              <Border Height="380">
+                <mav:MavNavigationSuiteScaffold>
+                  <mav:MavNavigationSuiteScaffold.TopAppBar>
+                    <mav:MavTopAppBar Title="{mav:Loc Nav.Demo.Adaptive, Fallback=Adaptive}" />
+                  </mav:MavNavigationSuiteScaffold.TopAppBar>
+                  <mav:MavNavigationSuiteScaffold.Body>
+                    <mav:MavLabel Text="{mav:Loc Nav.Demo.Resize, Fallback=Resize the window: bar → rail → drawer.}" Margin="24" />
+                  </mav:MavNavigationSuiteScaffold.Body>
+                  <mav:MavSuiteDestination Label="{mav:Loc Nav.Demo.Home, Fallback=Home}" Icon="{x:Static mav:MavIcons.Home}" SelectedIcon="{x:Static mav:MavIcons.Home}" />
+                  <mav:MavSuiteDestination Label="{mav:Loc Nav.Demo.Search, Fallback=Search}" Icon="{x:Static mav:MavIcons.Search}" SelectedIcon="{x:Static mav:MavIcons.Search}" />
+                  <mav:MavSuiteDestination Label="{mav:Loc Nav.Demo.Profile, Fallback=Profile}" Icon="{x:Static mav:MavIcons.Person}" SelectedIcon="{x:Static mav:MavIcons.Person}" />
+                </mav:MavNavigationSuiteScaffold>
+              </Border>
+              <Border Height="320">
+                <mav:MavNavigationPage x:Name="PageStack">
+                  <mav:MavNavigationPage.RootPage>
+                    <mav:MavContentPage Title="{mav:Loc Nav.Demo.PageStack, Fallback=Page stack}">
+                      <mav:MavContentPage.PageActions>
+                        <mav:MavPageAction Icon="{x:Static mav:MavIcons.MoreVert}" />
+                      </mav:MavContentPage.PageActions>
+                      <StackPanel Spacing="12" Margin="16">
+                        <mav:MavLabel Role="TitleMedium" Text="{mav:Loc Nav.Demo.RootPage, Fallback=Root page}" />
+                        <mav:MavLabel TextWrapping="Wrap" Text="{mav:Loc Nav.Demo.RootHint, Fallback=Root page. Push another page with the button.}" />
+                        <mav:MavButton Variant="Filled" Icon="{x:Static mav:MavIcons.ChevronRight}" Text="{mav:Loc Nav.Demo.Push, Fallback=Push details}"
+                                       Command="{Binding #PageStack.PushCommand}" CommandParameter="{StaticResource DetailsPage}" />
+                      </StackPanel>
+                    </mav:MavContentPage>
+                  </mav:MavNavigationPage.RootPage>
+                </mav:MavNavigationPage>
+              </Border>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap"
                             Text="MavNavigationSuiteScaffold.AddDestination(...) · new MavNavigationPage(root) · Push/Pop" />
             </StackPanel>

@@ -50,6 +50,13 @@ public class MavModalNavigationDrawer : Control
     {
     }
 
+    /// <summary>Width of the drawer panel. Settable from AXAML.</summary>
+    public double DrawerWidth
+    {
+        get => _drawer.DrawerWidth;
+        set => _drawer.DrawerWidth = value;
+    }
+
     /// <summary>Creates a modal navigation drawer with an optional title and width.</summary>
     public MavModalNavigationDrawer(string? title = null, double width = 300)
     {

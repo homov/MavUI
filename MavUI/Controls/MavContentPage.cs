@@ -1,4 +1,5 @@
 using Avalonia;
+using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Layout;
 using Mav.Platform;
@@ -12,7 +13,8 @@ namespace Mav.Controls;
 /// </summary>
 public class MavContentPage : MavContentView
 {
-    private readonly List<MavPageAction> _actions = [];
+    /// <summary>The app bar actions of this page. Declare them in AXAML as children of this property.</summary>
+    public AvaloniaList<MavPageAction> PageActions { get; } = new();
 
     public static readonly StyledProperty<string> TitleProperty =
         AvaloniaProperty.Register<MavContentPage, string>(nameof(Title), string.Empty);
@@ -87,7 +89,7 @@ public class MavContentPage : MavContentView
         set => SetValue(AppBarVariantProperty, value);
     }
 
-    public IReadOnlyList<MavPageAction> Actions => _actions;
+    public IReadOnlyList<MavPageAction> Actions => PageActions;
 
     public Control? BottomBar { get; set; }
 
@@ -116,14 +118,14 @@ public class MavContentPage : MavContentView
             OnClick = onClick,
             Tooltip = tooltip,
         };
-        _actions.Add(action);
+        PageActions.Add(action);
         return action;
     }
 
     /// <summary>
     /// Removes all page actions.
     /// </summary>
-    public void ClearActions() => _actions.Clear();
+    public void ClearActions() => PageActions.Clear();
 
     /// <summary>
     /// Called before the host pops the page. Return <c>true</c> when the page
