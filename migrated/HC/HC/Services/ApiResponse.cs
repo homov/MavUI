@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace Hc.Services.Cloud;
+namespace Hc.Services;
 
 /// <summary>
 /// Result of a cloud call. HTTP errors and network failures are returned here instead of thrown,

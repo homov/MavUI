@@ -221,7 +221,7 @@ migrated/
 * Тесты: `PasswordEncrypter` даёт тот же результат, что и исходный код (эталонные значения снимаем из `ref`). Маппинг ответов на модели.
 
 **Этап 3. Local API и Wi-Fi**
-* `Api/Local`: `ILocalDeviceApi` (`/dev_id`, `/dev_ver`, `/scan`, `/data`, `/user_id`), один клиент с таймаутом 5 с.
+* `Services/Local`: `LocalDeviceClient` (`/dev_id`, `/dev_ver`, `/scan`, `/data`, `/user_id`), один клиент с таймаутом 5 с; `DeviceSetupService` — шаги мастера с устройством. Тесты есть. Подключение к точке доступа на Android — отложено (сборка Android выключена).
 * Интерфейс `IWifiProvisioning`:
   * Android: `WifiManager` (подключение, suggestions) — перенос `WifiNetworkService`, очистка;
   * Windows: по решению из раздела 2 (п. 3).

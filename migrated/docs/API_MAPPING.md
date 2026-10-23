@@ -63,3 +63,22 @@
 Все модели лежат в `Models/Cloud/`. Поля JSON совпадают с сервером (`JsonPropertyName`). Вычисляемые
 свойства (`ImageUrl`, `Formatted*`, `Has*`) в DTO не переносятся: их место — слой ViewModel.
 Расписание: `ScheduleInfo.FromTemperature` (тип `manual`) и `FromHumidity` (тип `humidity`).
+
+## Локальный API устройства
+
+Точка доступа устройства: `http://10.10.10.1:10893/` (только открытый HTTP, таймаут 5 с). Клиент: `LocalDeviceClient`.
+Оркестрация шагов мастера: `DeviceSetupService`. Ответы — простой текст. Успех подтверждается словом `accepted`.
+
+| Метод | Маршрут | Параметры | Ответ | Тест |
+|---|---|---|---|---|
+| `GetDeviceIdAsync` | `dev_id` | — | id устройства (также проверка связи) | да |
+| `GetDeviceModelAsync` | `dev_ver` | — | модель (для картинки) | да |
+| `ScanNetworksAsync` | `scan` | — | имена сетей через запятую → `ParseNetworks` | да |
+| `SetUserIdAsync` | `user_id` | `id` | `accepted` | да |
+| `SetWifiCredentialsAsync` | `data` | `ssid`, `password` | `accepted` | да |
+
+Порядок привязки (как в `ref`): `user_id`, затем `data`. Пароль не отправляется, если аккаунт отклонён.
+Ожидание появления устройства в облаке (60 с, опрос раз в секунду, задание имени и группы) — этап 6.
+
+Не перенесено: подключение телефона к точке доступа `HeatCeram` (Android, этап 3 на платформе).
+Пока Android-сборка выключена, эта часть не проверяется.
