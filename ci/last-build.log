@@ -1,117 +1,45 @@
 # Last build log
-commit: 9ee07a6591d137ba9d21356d9fd43240e4c74e80
-run: https://github.com/homov/MavUI/actions/runs/39986732911
+commit: 915b64c04329f05887b9999d3ea53383aa566966
+run: https://github.com/homov/MavUI/actions/runs/39988083944
 
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 674 ms).
-  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 263 ms).
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavBottomSheet.cs(169,17): error CS0117: 'MavScrollViewer' does not contain a definition for 'Child' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavCalendarGrid.cs(180,13): error CS0117: 'MavScrollViewer' does not contain a definition for 'Child' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Platform/MavTextContextFlyout.cs(87,13): error CS0117: 'MavScrollViewer' does not contain a definition for 'Child' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Platform/MavNativeEditor.cs(74,17): error CS0117: 'MavScrollViewer' does not contain a definition for 'Child' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Platform/MavNativeEntry.cs(80,17): error CS0117: 'MavScrollViewer' does not contain a definition for 'Child' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavChipGroup.cs(119,13): error CS0117: 'MavScrollViewer' does not contain a definition for 'Child' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavDatePicker.cs(301,13): error CS0117: 'MavScrollViewer' does not contain a definition for 'Child' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavTimePicker.cs(404,17): error CS0117: 'MavScrollViewer' does not contain a definition for 'Child' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavComboBox.cs(437,17): error CS0117: 'MavScrollViewer' does not contain a definition for 'Child' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavDialog.cs(312,13): error CS0117: 'MavScrollViewer' does not contain a definition for 'Child' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavDialog.cs(525,13): error CS0117: 'MavScrollViewer' does not contain a definition for 'Child' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavMenu.cs(216,13): error CS0117: 'MavScrollViewer' does not contain a definition for 'Child' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavNavigationDrawer.cs(113,13): error CS0117: 'MavScrollViewer' does not contain a definition for 'Child' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavNavigationPage.cs(627,28): error CS1061: 'ContentControl' does not contain a definition for 'Child' and no accessible extension method 'Child' accepting a first argument of type 'ContentControl' could be found (are you missing a using directive or an assembly reference?) [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavSearchView.cs(344,44): error CS0117: 'MavScrollViewer' does not contain a definition for 'Child' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavSideSheet.cs(211,17): error CS0117: 'MavScrollViewer' does not contain a definition for 'Child' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
 
-Build succeeded.
+Build FAILED.
+
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavBottomSheet.cs(169,17): error CS0117: 'MavScrollViewer' does not contain a definition for 'Child' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavCalendarGrid.cs(180,13): error CS0117: 'MavScrollViewer' does not contain a definition for 'Child' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Platform/MavTextContextFlyout.cs(87,13): error CS0117: 'MavScrollViewer' does not contain a definition for 'Child' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Platform/MavNativeEditor.cs(74,17): error CS0117: 'MavScrollViewer' does not contain a definition for 'Child' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Platform/MavNativeEntry.cs(80,17): error CS0117: 'MavScrollViewer' does not contain a definition for 'Child' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavChipGroup.cs(119,13): error CS0117: 'MavScrollViewer' does not contain a definition for 'Child' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavDatePicker.cs(301,13): error CS0117: 'MavScrollViewer' does not contain a definition for 'Child' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavTimePicker.cs(404,17): error CS0117: 'MavScrollViewer' does not contain a definition for 'Child' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavComboBox.cs(437,17): error CS0117: 'MavScrollViewer' does not contain a definition for 'Child' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavDialog.cs(312,13): error CS0117: 'MavScrollViewer' does not contain a definition for 'Child' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavDialog.cs(525,13): error CS0117: 'MavScrollViewer' does not contain a definition for 'Child' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavMenu.cs(216,13): error CS0117: 'MavScrollViewer' does not contain a definition for 'Child' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavNavigationDrawer.cs(113,13): error CS0117: 'MavScrollViewer' does not contain a definition for 'Child' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavNavigationPage.cs(627,28): error CS1061: 'ContentControl' does not contain a definition for 'Child' and no accessible extension method 'Child' accepting a first argument of type 'ContentControl' could be found (are you missing a using directive or an assembly reference?) [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavSearchView.cs(344,44): error CS0117: 'MavScrollViewer' does not contain a definition for 'Child' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavSideSheet.cs(211,17): error CS0117: 'MavScrollViewer' does not contain a definition for 'Child' [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
     0 Warning(s)
-    0 Error(s)
+    16 Error(s)
 
-Time Elapsed 00:00:05.29
-  Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 223 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 223 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 228 ms).
-  1 of 4 projects are up-to-date for restore.
-  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
-  ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
-  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
-  MavUI.Tests -> /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/MavUI.Tests.dll
-
-Build succeeded.
-    0 Warning(s)
-    0 Error(s)
-
-Time Elapsed 00:00:04.60
-  Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 278 ms).
-  2 of 3 projects are up-to-date for restore.
-  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
-  ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
-  ControlsGallery.Desktop -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/bin/Release/net10.0/ControlsGallery.Desktop.dll
-
-Build succeeded.
-    0 Warning(s)
-    0 Error(s)
-
-Time Elapsed 00:00:02.15
-  Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/markup/src/AMarkup.Controls/AMarkup.Controls.csproj (in 245 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/markup/src/AMarkup.Generators/AMarkup.Generators.csproj (in 245 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj (in 245 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup.Desktop/ControlsGalleryMarkup.Desktop.csproj (in 245 ms).
-  1 of 5 projects are up-to-date for restore.
-  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
-  AMarkup.Controls -> /home/homo/github/actions-runner/_work/MavUI/MavUI/markup/src/AMarkup.Controls/bin/Release/net10.0/AMarkup.Controls.dll
-  AMarkup.Generators -> /home/homo/github/actions-runner/_work/MavUI/MavUI/markup/src/AMarkup.Generators/bin/Release/net10.0/AMarkup.Generators.dll
-  ControlsGalleryMarkup -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/bin/Release/net10.0/Mav.ControlsGalleryMarkup.dll
-  ControlsGalleryMarkup.Desktop -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup.Desktop/bin/Release/net10.0/ControlsGalleryMarkup.Desktop.dll
-
-Build succeeded.
-    0 Warning(s)
-    0 Error(s)
-
-Time Elapsed 00:00:12.85
-  Determining projects to restore...
-  All projects are up-to-date for restore.
-  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
-  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0-windows/MavUI.Essentials.dll
-
-Build succeeded.
-    0 Warning(s)
-    0 Error(s)
-
-Time Elapsed 00:00:01.03
-  Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/HC.csproj (in 285 ms).
-  2 of 3 projects are up-to-date for restore.
-  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
-  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
-  HC -> /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/bin/Release/net10.0/HC.dll
-
-Build succeeded.
-    0 Warning(s)
-    0 Error(s)
-
-Time Elapsed 00:00:02.87
-  Determining projects to restore...
-  All projects are up-to-date for restore.
-  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
-  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0-windows/MavUI.Essentials.dll
-  HC -> /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/bin/Release/net10.0-windows/HC.dll
-
-Build succeeded.
-    0 Warning(s)
-    0 Error(s)
-
-Time Elapsed 00:00:02.55
-  Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj (in 307 ms).
-  3 of 4 projects are up-to-date for restore.
-  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
-  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
-  HC -> /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/bin/Release/net10.0/HC.dll
-  HC.Tests -> /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/bin/Release/net10.0/HC.Tests.dll
-
-Build succeeded.
-    0 Warning(s)
-    0 Error(s)
-
-Time Elapsed 00:00:02.70
-Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/MavUI.Tests.dll (.NETCoreApp,Version=v10.0)
-VSTest version 18.0.2 (x64)
-
-Starting test execution, please wait...
-A total of 1 test files matched the specified pattern.
-
-Passed!  - Failed:     0, Passed:   330, Skipped:     0, Total:   330, Duration: 15 s - MavUI.Tests.dll (net10.0)
-Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/bin/Release/net10.0/HC.Tests.dll (.NETCoreApp,Version=v10.0)
-VSTest version 18.0.2 (x64)
-
-Starting test execution, please wait...
-A total of 1 test files matched the specified pattern.
-
-Passed!  - Failed:     0, Passed:    57, Skipped:     0, Total:    57, Duration: 97 ms - HC.Tests.dll (net10.0)
+Time Elapsed 00:00:06.89
