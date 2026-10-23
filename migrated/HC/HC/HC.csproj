@@ -1,0 +1,63 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    One cross-platform app: Windows (desktop, fast development and visual checks) and Android.
+    Android is built only when IncludeAndroid=true (CI runs it on [heads] commits), so a plain
+    build needs no Android workload. Folder layout follows .NET MAUI: Platforms/<Target>/ holds
+    platform-only code, Resources/ holds shared assets, the rest is shared.
+  -->
+
+  <PropertyGroup>
+    <TargetFrameworks>net10.0</TargetFrameworks>
+    <TargetFrameworks Condition="'$(IncludeAndroid)' == 'true'">$(TargetFrameworks);net10.0-android</TargetFrameworks>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Hc</RootNamespace>
+    <AssemblyName>HC</AssemblyName>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net10.0'">
+    <OutputType>WinExe</OutputType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net10.0-android'">
+    <SupportedOSPlatformVersion>23.0</SupportedOSPlatformVersion>
+    <ApplicationId>com.melask.heatceram</ApplicationId>
+    <ApplicationVersion>1</ApplicationVersion>
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <AndroidPackageFormat>apk</AndroidPackageFormat>
+    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+    <AndroidManifest>Platforms\Android\AndroidManifest.xml</AndroidManifest>
+    <EnableDefaultAndroidResourceItems>false</EnableDefaultAndroidResourceItems>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="12.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\MavUI\MavUI.csproj" />
+  </ItemGroup>
+
+  <!-- Platform folders are compiled only for their own target. -->
+  <ItemGroup>
+    <Compile Remove="Platforms\**" />
+    <AvaloniaXaml Remove="Platforms\**" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
+    <PackageReference Include="Avalonia.Desktop" Version="12.1.4" />
+    <Compile Include="Platforms\Windows\**\*.cs" />
+    <AvaloniaXaml Include="Platforms\Windows\**\*.axaml" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net10.0-android'">
+    <PackageReference Include="Avalonia.Android" Version="12.1.4" />
+    <Compile Include="Platforms\Android\**\*.cs" />
+    <AndroidResource Include="Platforms\Android\Resources\**\*" />
+  </ItemGroup>
+
+</Project>

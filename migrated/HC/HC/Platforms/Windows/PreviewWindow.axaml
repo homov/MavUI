@@ -1,0 +1,12 @@
+<mav:MavWindow xmlns="https://github.com/avaloniaui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:mav="https://where.it/mav"
+               xmlns:shell="clr-namespace:Hc.Pages.Shell"
+               x:Class="Hc.Platforms.Windows.PreviewWindow"
+               Title="HC (preview 390 × 844)"
+               Width="390"
+               Height="844"
+               MinWidth="360"
+               MinHeight="640">
+  <shell:MainView />
+</mav:MavWindow>

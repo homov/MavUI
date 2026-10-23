@@ -1,0 +1,6 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mav="https://where.it/mav"
+             x:Class="Hc.Pages.Shell.MainView">
+  <mav:MavNavigationPage x:Name="Navigation" />
+</UserControl>

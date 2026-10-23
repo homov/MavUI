@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Cloud API is HTTPS only. The local device API uses plain HTTP on its access point address. -->
+<network-security-config>
+  <base-config cleartextTrafficPermitted="false" />
+  <domain-config cleartextTrafficPermitted="true">
+    <domain includeSubdomains="false">10.10.10.1</domain>
+  </domain-config>
+</network-security-config>

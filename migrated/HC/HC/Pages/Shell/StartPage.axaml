@@ -1,0 +1,9 @@
+<mav:MavContentPage xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mav="https://where.it/mav"
+                    x:Class="Hc.Pages.Shell.StartPage"
+                    Title="HC">
+  <mav:MavContentPage.Content>
+    <mav:MavLabel Text="HC" HorizontalAlignment="Center" VerticalAlignment="Center" />
+  </mav:MavContentPage.Content>
+</mav:MavContentPage>
