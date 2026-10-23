@@ -1,9 +1,9 @@
 # Last build log
-commit: c126b561ab3eb8e655baf0051e9219415c48a897
-run: https://github.com/homov/MavUI/actions/runs/39880457796
+commit: 0887b390e6dc9dbe790fb2ba5b1eef6e177173cc
+run: https://github.com/homov/MavUI/actions/runs/39880912551
 
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 263 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 262 ms).
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
 
 Build succeeded.
@@ -12,9 +12,9 @@ Build succeeded.
 
 Time Elapsed 00:00:04.87
   Determining projects to restore...
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 224 ms).
   Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 229 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 225 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 225 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 224 ms).
   1 of 4 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
@@ -37,7 +37,7 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.12
+Time Elapsed 00:00:02.10
   Determining projects to restore...
   All projects are up-to-date for restore.
   MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0-windows/MavUI.Essentials.dll
@@ -47,9 +47,9 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:01.03
+Time Elapsed 00:00:01.04
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/HC.csproj (in 266 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/HC.csproj (in 261 ms).
   1 of 2 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   HC -> /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/bin/Release/net10.0/HC.dll
@@ -58,51 +58,63 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.12
+Time Elapsed 00:00:02.01
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj (in 301 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj (in 298 ms).
   2 of 3 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   HC -> /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/bin/Release/net10.0/HC.dll
-/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/CloudApiContractTests.cs(91,30): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/CloudApiContractTests.cs(126,30): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
 /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/CloudApiContractTests.cs(61,15): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/CloudApiContractTests.cs(111,15): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/LocalDeviceTests.cs(70,30): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/CloudApiContractTests.cs(91,30): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/LocalDeviceTests.cs(60,71): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
 /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/CloudApiContractTests.cs(45,30): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
 /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/CloudApiContractTests.cs(75,30): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/CloudApiContractTests.cs(126,30): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/LocalDeviceTests.cs(102,71): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
 /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/CloudApiContractTests.cs(136,30): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
 /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/CloudApiContractTests.cs(148,30): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/CloudApiContractTests.cs(111,15): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
 /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/CloudApiContractTests.cs(158,30): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/LocalDeviceTests.cs(114,71): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
 /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/CloudApiContractTests.cs(173,30): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/LocalDeviceTests.cs(50,26): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/LocalDeviceTests.cs(81,15): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
   HC.Tests -> /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/bin/Release/net10.0/HC.Tests.dll
 
 Build succeeded.
 
-/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/CloudApiContractTests.cs(91,30): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/CloudApiContractTests.cs(126,30): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
 /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/CloudApiContractTests.cs(61,15): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/CloudApiContractTests.cs(111,15): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/LocalDeviceTests.cs(70,30): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/CloudApiContractTests.cs(91,30): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/LocalDeviceTests.cs(60,71): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
 /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/CloudApiContractTests.cs(45,30): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
 /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/CloudApiContractTests.cs(75,30): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/CloudApiContractTests.cs(126,30): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/LocalDeviceTests.cs(102,71): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
 /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/CloudApiContractTests.cs(136,30): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
 /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/CloudApiContractTests.cs(148,30): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/CloudApiContractTests.cs(111,15): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
 /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/CloudApiContractTests.cs(158,30): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/LocalDeviceTests.cs(114,71): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
 /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/CloudApiContractTests.cs(173,30): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
-    10 Warning(s)
+/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/LocalDeviceTests.cs(50,26): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/LocalDeviceTests.cs(81,15): warning xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken to allow test cancellation to be more responsive. (https://xunit.net/xunit.analyzers/rules/xUnit1051) [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj]
+    16 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.21
+Time Elapsed 00:00:02.22
 Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/MavUI.Tests.dll (.NETCoreApp,Version=v10.0)
 VSTest version 18.0.2 (x64)
 
 Starting test execution, please wait...
 A total of 1 test files matched the specified pattern.
 
-Passed!  - Failed:     0, Passed:   330, Skipped:     0, Total:   330, Duration: 15 s - MavUI.Tests.dll (net10.0)
+Passed!  - Failed:     0, Passed:   330, Skipped:     0, Total:   330, Duration: 16 s - MavUI.Tests.dll (net10.0)
 Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/bin/Release/net10.0/HC.Tests.dll (.NETCoreApp,Version=v10.0)
 VSTest version 18.0.2 (x64)
 
 Starting test execution, please wait...
 A total of 1 test files matched the specified pattern.
 
-Passed!  - Failed:     0, Passed:    15, Skipped:     0, Total:    15, Duration: 115 ms - HC.Tests.dll (net10.0)
+Passed!  - Failed:     0, Passed:    22, Skipped:     0, Total:    22, Duration: 102 ms - HC.Tests.dll (net10.0)
