@@ -66,7 +66,8 @@ internal static class MarkupEmitter
         sb.Append("    /// <summary>Sets <c>").Append(typeName).Append('.').Append(member.Name).AppendLine("</c>.</summary>");
         AppendHeader(sb, member, signature, "(this " + signature.Self + " control, " + member.ValueType + " value)");
         sb.AppendLine("    {");
-        sb.Append("        control.SetValue(").Append(signature.Owner).Append('.').Append(member.FieldName).AppendLine(", value);");
+        // The non-generic overload avoids nullable-annotation mismatches in generic arguments (for example ITemplate<Panel?>).
+        sb.Append("        control.SetValue((global::Avalonia.AvaloniaProperty)").Append(signature.Owner).Append('.').Append(member.FieldName).AppendLine(", value);");
         sb.AppendLine("        return control;");
         sb.AppendLine("    }");
     }
@@ -77,7 +78,7 @@ internal static class MarkupEmitter
         AppendHeader(sb, member, signature,
             "(this " + signature.Self + " control, global::System.Action<" + signature.Self + ", " + member.ValueType + "> handler)");
         sb.AppendLine("    {");
-        sb.Append("        control.").Append(member.Name).AppendLine(" += (_, e) => handler(control, e);");
+        sb.Append("        control.").Append(member.Name).AppendLine(" += (_, e) => handler(control, e!);");
         sb.AppendLine("        return control;");
         sb.AppendLine("    }");
     }

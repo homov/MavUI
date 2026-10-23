@@ -1,6 +1,8 @@
+using System;
 using System.Reflection;
 using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
+using Avalonia.Layout;
 using Mav.Controls;
 using Mav.Markup;
 using Xunit;
