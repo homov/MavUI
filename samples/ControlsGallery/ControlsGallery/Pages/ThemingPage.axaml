@@ -115,10 +115,10 @@
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Shape.CardBody, Fallback=Shape tokens follow MavShapeScale; elevation uses two-layer shadows.}" />
               <StackPanel Spacing="8">
                 <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap"
-                              Text="The same card corner at all three scales, side by side. The active one is filled:" />
+                              Text="{mav:Loc Theming.Shape.Compare, Fallback=The same card corner at all three scales, side by side. The active one is filled:}" />
                 <WrapPanel x:Name="ShapeComparison" />
                 <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap"
-                              Text="Real controls that read the current scale from the theme:" />
+                              Text="{mav:Loc Theming.Shape.Live, Fallback=Real controls that read the current scale from the theme:}" />
                 <WrapPanel x:Name="ShapePreview" />
                 <mav:MavItems Wrap="True" x:Name="ShapeItems">
                   <mav:MavItems.ItemTemplate>

@@ -151,12 +151,12 @@ public partial class ThemingPage : UserControl
         var mode = MavTheme.ShapeScaleMode;
         ShapeSummary.Text = MavLocalization.Format(
             "Theming.Shape.Summary",
-            "Shape scale multiplies every corner radius: Compact ×{0}, Standard ×{1}, Expressive ×{2}. " +
+            "Shape scale multiplies every corner radius: Compact ×{0:0.0#}, Standard ×{1:0.0#}, Expressive ×{2:0.0#}. " +
             "Current {3} — cards {4:0.#} px, chips {5:0.#} px, text fields {6:0.#} px.",
             Multiplier(MavShapeScale.Compact),
             Multiplier(MavShapeScale.Standard),
             Multiplier(MavShapeScale.Expressive),
-            mode,
+            MavLocalization.Get($"Theming.Shape.Scale.{mode}", mode.ToString()),
             shape.Medium,
             shape.Small,
             shape.ExtraSmall);
@@ -198,7 +198,7 @@ public partial class ThemingPage : UserControl
                         },
                         new MavLabel
                         {
-                            Text = $"×{tokens.ScaleMultiplier:0.##} → {tokens.Medium:0.#} px",
+                            Text = $"×{tokens.ScaleMultiplier:0.0#} → {tokens.Medium:0.#} px",
                             Role = MavTypeRole.LabelSmall,
                             Secondary = true,
                             HorizontalAlignment = HorizontalAlignment.Center,
