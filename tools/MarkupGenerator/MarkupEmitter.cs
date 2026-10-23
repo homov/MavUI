@@ -7,6 +7,20 @@ namespace Mav.MarkupGenerator;
 /// <summary>Writes the source text of one generated <c>&lt;Type&gt;Markup</c> class.</summary>
 internal static class MarkupEmitter
 {
+    /// <summary>
+    /// C# keywords. A setter whose lower-case name is a keyword gets an <c>@</c> prefix, for example <c>@default</c>.
+    /// </summary>
+    private static readonly HashSet<string> Keywords = new(new[]
+    {
+        "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char", "checked", "class", "const",
+        "continue", "decimal", "default", "delegate", "do", "double", "else", "enum", "event", "explicit", "extern",
+        "false", "finally", "fixed", "float", "for", "foreach", "goto", "if", "implicit", "in", "int", "interface",
+        "internal", "is", "lock", "long", "namespace", "new", "null", "object", "operator", "out", "override",
+        "params", "private", "protected", "public", "readonly", "ref", "return", "sbyte", "sealed", "short",
+        "sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "true", "try", "typeof",
+        "uint", "ulong", "unchecked", "unsafe", "ushort", "using", "virtual", "void", "volatile", "while",
+    });
+
     public static string Emit(INamedTypeSymbol type, IReadOnlyList<MarkupMember> members)
     {
         var owner = type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
@@ -36,10 +50,20 @@ internal static class MarkupEmitter
         return sb.ToString();
     }
 
+    /// <summary>
+    /// Method name for a member: the CLR name with a lower-case first letter, so that it never clashes with the
+    /// property of the same name (C# does not call an extension method when the instance has a member with that name).
+    /// </summary>
+    public static string MethodName(string memberName)
+    {
+        var name = char.ToLowerInvariant(memberName[0]) + memberName.Substring(1);
+        return Keywords.Contains(name) ? "@" + name : name;
+    }
+
     private static void AppendProperty(StringBuilder sb, string typeName, string owner, MarkupMember member)
     {
         sb.Append("    /// <summary>Sets <c>").Append(typeName).Append('.').Append(member.Name).AppendLine("</c>.</summary>");
-        sb.Append("    public static TControl With").Append(member.Name)
+        sb.Append("    public static TControl ").Append(MethodName(member.Name))
             .Append("<TControl>(this TControl control, ").Append(member.ValueType).AppendLine(" value)");
         sb.Append("        where TControl : ").AppendLine(owner);
         sb.AppendLine("    {");
@@ -51,7 +75,7 @@ internal static class MarkupEmitter
     private static void AppendEvent(StringBuilder sb, string typeName, string owner, MarkupMember member)
     {
         sb.Append("    /// <summary>Subscribes to <c>").Append(typeName).Append('.').Append(member.Name).AppendLine("</c>.</summary>");
-        sb.Append("    public static TControl With").Append(member.Name)
+        sb.Append("    public static TControl ").Append(MethodName(member.Name))
             .Append("<TControl>(this TControl control, global::System.Action<TControl, ").Append(member.ValueType)
             .AppendLine("> handler)");
         sb.Append("        where TControl : ").AppendLine(owner);
