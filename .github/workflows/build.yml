@@ -16,7 +16,7 @@ jobs:
     runs-on: [self-hosted, linux]
     timeout-minutes: 45
     permissions:
-      contents: write   # to publish ci/last-build.log back to the branch
+      contents: read
 
     steps:
       - name: Checkout
@@ -143,32 +143,3 @@ jobs:
           name: build-log
           path: build.log
           if-no-files-found: ignore
-
-      - name: Publish build log to branch
-        if: always()
-        env:
-          BRANCH: ${{ github.ref_name }}
-        run: |
-          set -u
-          if [ ! -f build.log ]; then echo "build.log was not produced" > build.log; fi
-          mkdir -p ci
-          {
-            echo "# Last build log"
-            echo "commit: ${GITHUB_SHA}"
-            echo "run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
-            echo
-            cat build.log
-          } > ci/last-build.log
-          git config user.name "mavui-ci"
-          git config user.email "mavui-ci@users.noreply.github.com"
-          git switch -C "$BRANCH" "$GITHUB_SHA"
-          git add -A ci
-          if git diff --cached --quiet; then echo "No log changes"; exit 0; fi
-          git commit -m "ci: update build log [skip ci]"
-          for i in 1 2 3; do
-            if git pull --rebase -X theirs origin "$BRANCH" && git push origin "HEAD:$BRANCH"; then
-              exit 0
-            fi
-            sleep 3
-          done
-          exit 1
