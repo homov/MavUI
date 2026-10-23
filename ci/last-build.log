@@ -1,20 +1,20 @@
 # Last build log
-commit: d63e661f87428d6186ef1404ff18321333fe3264
-run: https://github.com/homov/MavUI/actions/runs/39884838103
+commit: 9c16498c5cefbfda4d44492f1d07bc1da3b7c426
+run: https://github.com/homov/MavUI/actions/runs/39885237538
 
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 261 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 556 ms).
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:04.82
+Time Elapsed 00:00:05.14
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 229 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 224 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 224 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 223 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 223 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 227 ms).
   1 of 4 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
@@ -25,9 +25,9 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:04.60
+Time Elapsed 00:00:04.64
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 292 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 280 ms).
   2 of 3 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
@@ -47,43 +47,18 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:01.05
+Time Elapsed 00:00:01.01
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/HC.csproj (in 280 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/HC.csproj (in 274 ms).
   2 of 3 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
-  HC -> /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/bin/Release/net10.0/HC.dll
+/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/Pages/Settings/SettingsPage.axaml.cs(156,48): error CS1929: 'IReadOnlyList<string>' does not contain a definition for 'IndexOf' and the best extension method overload 'MemoryExtensions.IndexOf<string>(ReadOnlySpan<string>, string)' requires a receiver of type 'System.ReadOnlySpan<string>' [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/HC.csproj::TargetFramework=net10.0]
 
-Build succeeded.
+Build FAILED.
+
+/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/Pages/Settings/SettingsPage.axaml.cs(156,48): error CS1929: 'IReadOnlyList<string>' does not contain a definition for 'IndexOf' and the best extension method overload 'MemoryExtensions.IndexOf<string>(ReadOnlySpan<string>, string)' requires a receiver of type 'System.ReadOnlySpan<string>' [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/HC.csproj::TargetFramework=net10.0]
     0 Warning(s)
-    0 Error(s)
+    1 Error(s)
 
-Time Elapsed 00:00:02.45
-  Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj (in 295 ms).
-  3 of 4 projects are up-to-date for restore.
-  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
-  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
-  HC -> /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/bin/Release/net10.0/HC.dll
-  HC.Tests -> /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/bin/Release/net10.0/HC.Tests.dll
-
-Build succeeded.
-    0 Warning(s)
-    0 Error(s)
-
-Time Elapsed 00:00:02.08
-Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/MavUI.Tests.dll (.NETCoreApp,Version=v10.0)
-VSTest version 18.0.2 (x64)
-
-Starting test execution, please wait...
-A total of 1 test files matched the specified pattern.
-
-Passed!  - Failed:     0, Passed:   330, Skipped:     0, Total:   330, Duration: 14 s - MavUI.Tests.dll (net10.0)
-Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/bin/Release/net10.0/HC.Tests.dll (.NETCoreApp,Version=v10.0)
-VSTest version 18.0.2 (x64)
-
-Starting test execution, please wait...
-A total of 1 test files matched the specified pattern.
-
-Passed!  - Failed:     0, Passed:    41, Skipped:     0, Total:    41, Duration: 88 ms - HC.Tests.dll (net10.0)
+Time Elapsed 00:00:01.17
