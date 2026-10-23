@@ -1,5 +1,6 @@
 using System;
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
 using Mav.Controls;
 using Mav.Theming;
@@ -56,11 +57,18 @@ public class ShapeScaleTests
     [AvaloniaFact]
     public void A_card_re_rounds_when_the_scale_changes()
     {
+        // A card only listens for theme changes while it is in the tree, so the
+        // live behaviour of the gallery pages is what this test pins down.
         var card = new MavCard();
+        var window = new Window { Content = card };
+        window.Show();
+
         WithScale(MavShapeScale.Expressive, () =>
             Assert.Equal(15.4, card.CornerRadius, 3));
         WithScale(MavShapeScale.Standard, () =>
             Assert.Equal(12, card.CornerRadius, 3));
+
+        window.Close();
     }
 
     [AvaloniaFact]
