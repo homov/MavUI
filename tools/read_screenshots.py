@@ -138,10 +138,27 @@ def branch_files(tree_sha: str) -> list[dict]:
     return [entry for entry in data["tree"] if entry["type"] == "blob"]
 
 
-def blob(path: str) -> bytes:
-    """Reads one file of the branch. The contents API returns base64 for files up to 1 MB."""
+def blob(path: str, out_path: str) -> bytes:
+    """Reads one file of the branch into out_path and returns its bytes.
+
+    The contents API returns base64 for files up to 1 MB; above that it returns an empty string,
+    so fall back to the blob API, which streams the raw bytes (still api.github.com, no size cap).
+    """
     data = gh_json("api", f"repos/{repo_name()}/contents/{path}?ref={BRANCH}")
-    return base64.b64decode(data["content"])
+    content = data.get("content") or ""
+    if content:
+        raw = base64.b64decode(content)
+    else:
+        result = subprocess.run(
+            ["gh", "api", "-H", "Accept: application/vnd.github.raw",
+             f"repos/{repo_name()}/git/blobs/{data['sha']}"],
+            capture_output=True)
+        if result.returncode != 0:
+            sys.exit(f"gh api blob {path} failed:\n{result.stderr.decode('utf-8', 'replace').strip()}")
+        raw = result.stdout
+    with open(out_path, "wb") as handle:
+        handle.write(raw)
+    return raw
 
 
 def read_branch(run_id: int | None, out: str, list_only: bool) -> int:
@@ -165,22 +182,23 @@ def read_branch(run_id: int | None, out: str, list_only: bool) -> int:
     os.makedirs(out, exist_ok=True)
     checksums = ""
     if any(f["path"] == "SHA256SUMS.txt" for f in files):
-        checksums = blob("SHA256SUMS.txt").decode("utf-8", "replace")
+        checksums = blob("SHA256SUMS.txt", os.path.join(out, "SHA256SUMS.txt")).decode("utf-8", "replace")
 
     failures = 0
     for entry in files:
         # Everything the branch holds except the bookkeeping files themselves.
         if entry["path"] in ("SHA256SUMS.txt", "README.md"):
             continue
-        raw = blob(entry["path"])
+        target = os.path.join(out, entry["path"])
+        raw = blob(entry["path"], target)
         problem = ""
         expected = re.search(rf"^([0-9a-f]{{64}}) +{re.escape(entry['path'])}$", checksums, re.MULTILINE)
         if expected and hashlib.sha256(raw).hexdigest() != expected.group(1):
             problem = "sha256 mismatch"
         elif expected is None and entry["path"] != "gallery.txt":
             problem = "missing from SHA256SUMS"
-        with open(os.path.join(out, entry["path"]), "wb") as handle:
-            handle.write(raw)
+        if len(raw) != entry["size"]:
+            problem = problem or f'size {len(raw)} != {entry["size"]}'
         print(f"  wrote {entry['path']}  {len(raw)} bytes  {problem or 'ok'}")
         failures += 1 if problem else 0
 
