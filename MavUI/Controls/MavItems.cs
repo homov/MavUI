@@ -206,11 +206,11 @@ public class MavItems : Panel
         var spacing = Math.Max(0, Spacing);
         if (Orientation == Orientation.Vertical)
         {
-            var y = 0.0;
+            var rowTop = 0.0;
             foreach (var child in Children)
             {
-                child.Arrange(new Rect(0, y, finalSize.Width, child.DesiredSize.Height));
-                y += child.DesiredSize.Height + spacing;
+                child.Arrange(new Rect(0, rowTop, finalSize.Width, child.DesiredSize.Height));
+                rowTop += child.DesiredSize.Height + spacing;
             }
 
             return finalSize;
