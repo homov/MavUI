@@ -1,20 +1,20 @@
 # Last build log
-commit: 890525781569a035691d6265ee01ef4574592397
-run: https://github.com/homov/MavUI/actions/runs/39970908793
+commit: 8db0e6c169ca254f9802a4bddfaa183626192785
+run: https://github.com/homov/MavUI/actions/runs/39971433018
 
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 263 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 260 ms).
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:07.43
+Time Elapsed 00:00:07.67
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 237 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 237 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 242 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 221 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 221 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 226 ms).
   1 of 4 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
@@ -25,9 +25,9 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:04.84
+Time Elapsed 00:00:04.89
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 279 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 280 ms).
   2 of 3 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
@@ -37,22 +37,126 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.17
+Time Elapsed 00:00:02.14
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/markup/src/AMarkup.Controls/AMarkup.Controls.csproj (in 236 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj (in 236 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup.Desktop/ControlsGalleryMarkup.Desktop.csproj (in 236 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/markup/src/AMarkup.Generators/AMarkup.Generators.csproj (in 3.2 sec).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/markup/src/AMarkup.Generators/AMarkup.Generators.csproj (in 247 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/markup/src/AMarkup.Controls/AMarkup.Controls.csproj (in 247 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj (in 247 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup.Desktop/ControlsGalleryMarkup.Desktop.csproj (in 247 ms).
   1 of 5 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   AMarkup.Controls -> /home/homo/github/actions-runner/_work/MavUI/MavUI/markup/src/AMarkup.Controls/bin/Release/net10.0/AMarkup.Controls.dll
   AMarkup.Generators -> /home/homo/github/actions-runner/_work/MavUI/MavUI/markup/src/AMarkup.Generators/bin/Release/net10.0/AMarkup.Generators.dll
-/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Controls.MavSwipeActionMarkup.g.cs(458,59): error CS0111: Type 'MavSwipeActionMarkup' already defines a member called 'OnTriggered' with the same parameter types [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Platform.MavNativeEditorMarkup.g.cs(50,45): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Platform.MavNativeEditorMarkup.g.cs(65,38): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Platform.MavNativeEntryMarkup.g.cs(74,45): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Platform.MavNativeEntryMarkup.g.cs(97,38): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Primitives.MavSurfaceMarkup.g.cs(48,94): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Primitives.MavSurfaceMarkup.g.cs(63,46): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Theming.MavThemeStyleMarkup.g.cs(210,38): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Primitives.MavSurfaceMarkup.g.cs(272,86): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Primitives.MavSurfaceMarkup.g.cs(287,38): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Primitives.MavContentViewMarkup.g.cs(42,44): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Primitives.MavInkSurfaceMarkup.g.cs(42,46): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Primitives.MavIconMarkup.g.cs(48,79): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Primitives.MavIconMarkup.g.cs(63,34): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Primitives.MavInkSurfaceMarkup.g.cs(529,89): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Primitives.MavInkSurfaceMarkup.g.cs(544,38): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Primitives.MavInkSurfaceMarkup.g.cs(683,91): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Primitives.MavInkSurfaceMarkup.g.cs(698,40): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Controls.MavColorPickerMarkup.g.cs(48,92): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Controls.MavColorPickerMarkup.g.cs(63,42): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Primitives.MavInkSurfaceMarkup.g.cs(837,91): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Primitives.MavInkSurfaceMarkup.g.cs(852,40): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Controls.MavLabelMarkup.g.cs(330,38): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+  ControlsGalleryMarkup -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/bin/Release/net10.0/Mav.ControlsGalleryMarkup.dll
+  ControlsGalleryMarkup.Desktop -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup.Desktop/bin/Release/net10.0/ControlsGalleryMarkup.Desktop.dll
 
-Build FAILED.
+Build succeeded.
 
-/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Controls.MavSwipeActionMarkup.g.cs(458,59): error CS0111: Type 'MavSwipeActionMarkup' already defines a member called 'OnTriggered' with the same parameter types [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Platform.MavNativeEditorMarkup.g.cs(50,45): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Platform.MavNativeEditorMarkup.g.cs(65,38): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Platform.MavNativeEntryMarkup.g.cs(74,45): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Platform.MavNativeEntryMarkup.g.cs(97,38): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Primitives.MavSurfaceMarkup.g.cs(48,94): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Primitives.MavSurfaceMarkup.g.cs(63,46): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Theming.MavThemeStyleMarkup.g.cs(210,38): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Primitives.MavSurfaceMarkup.g.cs(272,86): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Primitives.MavSurfaceMarkup.g.cs(287,38): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Primitives.MavContentViewMarkup.g.cs(42,44): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Primitives.MavInkSurfaceMarkup.g.cs(42,46): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Primitives.MavIconMarkup.g.cs(48,79): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Primitives.MavIconMarkup.g.cs(63,34): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Primitives.MavInkSurfaceMarkup.g.cs(529,89): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Primitives.MavInkSurfaceMarkup.g.cs(544,38): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Primitives.MavInkSurfaceMarkup.g.cs(683,91): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Primitives.MavInkSurfaceMarkup.g.cs(698,40): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Controls.MavColorPickerMarkup.g.cs(48,92): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Controls.MavColorPickerMarkup.g.cs(63,42): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Primitives.MavInkSurfaceMarkup.g.cs(837,91): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Primitives.MavInkSurfaceMarkup.g.cs(852,40): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/obj/Release/net10.0/AMarkup.Generators/AMarkup.Generators.AvaloniaPropertyExtensionGenerator/Mav.Controls.MavLabelMarkup.g.cs(330,38): warning CS8605: Unboxing a possibly null value. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+    22 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:07.96
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0-windows/MavUI.Essentials.dll
+  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
+
+Build succeeded.
     0 Warning(s)
-    1 Error(s)
+    0 Error(s)
 
-Time Elapsed 00:00:08.93
+Time Elapsed 00:00:01.00
+  Determining projects to restore...
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/HC.csproj (in 282 ms).
+  2 of 3 projects are up-to-date for restore.
+  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
+  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
+  HC -> /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/bin/Release/net10.0/HC.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.58
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
+  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0-windows/MavUI.Essentials.dll
+  HC -> /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/bin/Release/net10.0-windows/HC.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.49
+  Determining projects to restore...
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj (in 303 ms).
+  3 of 4 projects are up-to-date for restore.
+  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
+  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
+  HC -> /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/bin/Release/net10.0/HC.dll
+  HC.Tests -> /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/bin/Release/net10.0/HC.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.50
+Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/MavUI.Tests.dll (.NETCoreApp,Version=v10.0)
+VSTest version 18.0.2 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:   330, Skipped:     0, Total:   330, Duration: 15 s - MavUI.Tests.dll (net10.0)
+Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/bin/Release/net10.0/HC.Tests.dll (.NETCoreApp,Version=v10.0)
+VSTest version 18.0.2 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:    57, Skipped:     0, Total:    57, Duration: 99 ms - HC.Tests.dll (net10.0)
