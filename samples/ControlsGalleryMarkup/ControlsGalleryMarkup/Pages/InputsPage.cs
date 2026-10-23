@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using Avalonia.Media;
 using Mav;
 using Mav.Controls;
 using Mav.Theming;
@@ -11,52 +12,39 @@ public static class InputsPage
 {
     public static Control Build()
     {
-        var name = new MavTextField(L("Inputs.Field.Name", "Name"), MavTextFieldVariant.Outlined, null, MavIcons.Person)
-        {
-            Text = "Ada Lovelace",
-        };
-        var email = new MavTextField(
-            L("Inputs.Field.Email", "Email"), MavTextFieldVariant.Filled, null, MavIcons.Email,
-            L("Inputs.Field.Email.Support", "We never share it"))
-        {
-            Text = "ada@example.com",
-        };
-        var password = new MavTextField(L("Inputs.Field.Password", "Password"), MavTextFieldVariant.Outlined, null, MavIcons.Lock)
-        {
-            Text = "password",
-            IsPassword = true,
-            ShowClearButton = true,
-        };
+        var name = new MavTextField(L("Inputs.Field.Name", "Name"), MavTextFieldVariant.Outlined)
+            .LeadingIcon(MavIcons.Person)
+            .Text("Ada Lovelace");
+        var email = new MavTextField(L("Inputs.Field.Email", "Email"), MavTextFieldVariant.Filled)
+            .LeadingIcon(MavIcons.Email)
+            .SupportingText(L("Inputs.Field.Email.Support", "We never share it"))
+            .Text("ada@example.com");
+        var password = new MavTextField(L("Inputs.Field.Password", "Password"), MavTextFieldVariant.Outlined)
+            .LeadingIcon(MavIcons.Lock)
+            .Text("password")
+            .IsPassword(true)
+            .ShowClearButton(true);
         var apiKey = new MavTextField(L("Inputs.Field.ApiKey", "API key"), MavTextFieldVariant.Outlined)
-        {
-            Text = "abc",
-            ErrorText = L("Inputs.Field.ApiKey.Error", "The key must be 32 characters"),
-        };
+            .Text("abc")
+            .ErrorText(L("Inputs.Field.ApiKey.Error", "The key must be 32 characters"));
         var code = new MavTextField(L("Inputs.Field.Code", "Code"), MavTextFieldVariant.Outlined)
-        {
-            Text = "MD3",
-            MaxLength = 12,
-            ShowCounter = true,
-        };
+            .Text("MD3")
+            .MaxLength(12)
+            .ShowCounter(true);
 
-        var notes = new MavTextArea(
-            L("Inputs.Area.Label", "Notes"), MavTextFieldVariant.Outlined,
-            L("Inputs.Area.Placeholder", "Write a release note…"),
-            L("Inputs.Area.Support", "Markdown is supported by the host app"))
-        {
-            Text = "The gallery shows every control.",
-            MinBoxHeight = 96,
-        };
+        var notes = new MavTextArea(L("Inputs.Area.Label", "Notes"), MavTextFieldVariant.Outlined)
+            .Placeholder(L("Inputs.Area.Placeholder", "Write a release note…"))
+            .SupportingText(L("Inputs.Area.Support", "Markdown is supported by the host app"))
+            .Text("The gallery shows every control.")
+            .MinBoxHeight(96);
 
-        var pin = new MavPinInput(6) { Code = "1234" };
-        var seats = new MavNumberBox
-        {
-            Label = L("Inputs.Number.Label", "Seats"),
-            Minimum = 1,
-            Maximum = 20,
-            Value = 4,
-            Suffix = L("Inputs.Number.Suffix", "people"),
-        };
+        var pin = new MavPinInput(6).Code("1234");
+        var seats = new MavNumberBox()
+            .Label(L("Inputs.Number.Label", "Seats"))
+            .Minimum(1)
+            .Maximum(20)
+            .Value(4)
+            .Suffix(L("Inputs.Number.Suffix", "people"));
 
         var tags = new MavTagInput(L("Inputs.Tags.Label", "Tags"));
         tags.AddTag("material").AddTag("avalonia");
@@ -67,6 +55,7 @@ public static class InputsPage
         var emailField = new MavTextField(L("Inputs.Field.Email", "Email"), MavTextFieldVariant.Outlined);
         var cityField = new MavTextField(L("Inputs.Form.City", "City"), MavTextFieldVariant.Outlined);
 
+        // MavFormValidator is not a control, so it has no generated fluent methods.
         var validator = new MavFormValidator { ValidateOnChange = true };
         validator.Field(nameField).Required().MinLength(2);
         validator.Field(emailField).Required().Email();
@@ -74,7 +63,7 @@ public static class InputsPage
 
         var status = new MavLabel(L("Inputs.Form.Status", "Submit to validate"), MavTypeRole.BodySmall)
             .Secondary(true)
-            .TextWrapping(Avalonia.Media.TextWrapping.Wrap);
+            .TextWrapping(TextWrapping.Wrap);
         var submit = new MavButton(L("Inputs.Form.Validate", "Validate"), MavButtonVariant.Filled, MavIcons.Check)
             .OnClicked(() =>
             {

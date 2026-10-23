@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Layout;
 using Mav;
@@ -23,13 +22,14 @@ public static class ActionsPage
                 counter.Text = MavLocalization.Format("Actions.Click.Counter.Value", "Clicks: {0}", clicks);
             });
 
-        var loading = new MavButton(L("Actions.Loading", "Loading"), MavButtonVariant.Filled, MavIcons.Download);
-        loading.Clicked += async (_, _) =>
-        {
-            loading.IsLoading = true;
-            await Task.Delay(1200);
-            loading.IsLoading = false;
-        };
+        MavButton? loading = null;
+        loading = new MavButton(L("Actions.Loading", "Loading"), MavButtonVariant.Filled, MavIcons.Download)
+            .OnClicked(async () =>
+            {
+                loading!.IsLoading = true;
+                await Task.Delay(1200);
+                loading.IsLoading = false;
+            });
 
         return Page(
             Section(
@@ -69,7 +69,7 @@ public static class ActionsPage
                         new MavIconButton(MavIcons.Add, MavIconButtonVariant.Filled),
                         new MavIconButton(MavIcons.Edit, MavIconButtonVariant.Tonal),
                         new MavIconButton(MavIcons.Delete, MavIconButtonVariant.Outlined),
-                        new MavIconButton(MavIcons.Favorite, MavIconButtonVariant.Standard, isToggle: true) { SelectedIcon = MavIcons.Favorite })),
+                        new MavIconButton(MavIcons.Favorite, MavIconButtonVariant.Standard, isToggle: true).SelectedIcon(MavIcons.Favorite))),
                 Card(
                     "MavFab and MavExtendedFab",
                     "Actions.Fab.Card.Body", "Floating action buttons in small, regular and large sizes, with primary, secondary, tertiary or surface color.",
@@ -79,7 +79,7 @@ public static class ActionsPage
                         new MavFab(MavIcons.Add, MavFabSize.Regular, MavFabColor.Secondary),
                         new MavFab(MavIcons.Add, MavFabSize.Large, MavFabColor.Tertiary),
                         new MavFab(MavIcons.Edit, MavFabSize.Regular, MavFabColor.Surface)),
-                    new MavExtendedFab("Compose", MavIcons.Edit) { HorizontalAlignment = HorizontalAlignment.Left })),
+                    StartAligned(new MavExtendedFab("Compose", MavIcons.Edit)))),
             Section(
                 "Actions.Groups.Section", "Action groups",
                 "Actions.Groups.Section.Body", "Connected groups, split buttons and an expanding FAB menu.",
@@ -90,6 +90,13 @@ public static class ActionsPage
                     Row(StandardGroup(), ConnectedGroup()),
                     Row(SplitButton(), FabMenu()))));
     }
+
+    /// <summary>
+    /// Left alignment. <c>HorizontalAlignment</c> is also a property of <c>Layoutable</c>, so the generated
+    /// extension is called by its class name (see <see cref="PageParts.Centered{T}"/>).
+    /// </summary>
+    private static T StartAligned<T>(T control) where T : Control =>
+        LayoutableMarkup.HorizontalAlignment(control, HorizontalAlignment.Left);
 
     private static MavButtonGroup StandardGroup()
     {

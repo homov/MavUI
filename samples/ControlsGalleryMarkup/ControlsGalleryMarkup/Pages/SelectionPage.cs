@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using Avalonia.Media;
 using Mav;
 using Mav.Controls;
 using Mav.Theming;
@@ -21,28 +22,32 @@ public static class SelectionPage
         single.AddSegment(L("Selection.Segment.Week", "Week"));
         single.AddSegment(L("Selection.Segment.Month", "Month"));
 
-        var multi = new MavSegmentedButton(multiSelect: true);
+        var multi = new MavSegmentedButton().MultiSelect(true);
         multi.AddSegment("Bold", MavIcons.FormatBold, selected: true);
         multi.AddSegment("Italic", MavIcons.FormatItalic);
         multi.AddSegment("Underline", MavIcons.FormatUnderlined);
 
-        var chips = new MavChipGroup(singleSelection: true);
+        var chips = new MavChipGroup().SingleSelection(true);
         chips.AddChip(L("Selection.Chip.Design", "Design"), MavChipKind.Filter, MavIcons.Palette, selected: true);
         chips.AddChip(L("Selection.Chip.Engineering", "Engineering"), MavChipKind.Filter, MavIcons.Code);
         chips.AddChip(L("Selection.Chip.Research", "Research"), MavChipKind.Filter, MavIcons.Science);
 
-        var roleSelect = new MavSelect { Label = L("Selection.Select.Role", "Role"), Width = 220 };
-        roleSelect.ItemsSource = new[]
-        {
-            L("Selection.Role.Admin", "Admin"),
-            L("Selection.Role.Editor", "Editor"),
-            L("Selection.Role.Viewer", "Viewer"),
-        };
-        roleSelect.SelectedIndex = 1;
+        var roleSelect = new MavSelect()
+            .Label(L("Selection.Select.Role", "Role"))
+            .Width(220)
+            .ItemsSource(new[]
+            {
+                L("Selection.Role.Admin", "Admin"),
+                L("Selection.Role.Editor", "Editor"),
+                L("Selection.Role.Viewer", "Viewer"),
+            })
+            .SelectedIndex(1);
 
-        var cityCombo = new MavComboBox { Label = L("Selection.Combo.City", "City"), Width = 220 };
-        cityCombo.ItemsSource = new[] { "Berlin", "London", "Tokyo" };
-        cityCombo.Text = "Berlin";
+        var cityCombo = new MavComboBox()
+            .Label(L("Selection.Combo.City", "City"))
+            .Width(220)
+            .ItemsSource(new[] { "Berlin", "London", "Tokyo" })
+            .Text("Berlin");
 
         return Page(
             Section(
@@ -54,12 +59,14 @@ public static class SelectionPage
                     "MavSwitch.IsToggled · MavCheckBox.IsThreeState · MavRadioButton.Label · MavRadioGroup.AddOption",
                     AdaptiveWrap(260,
                         Plain(new StackPanel().Spacing(10).Children(
-                            new MavSwitch(true, true) { OnIcon = MavIcons.Notifications, OffIcon = MavIcons.NotificationsOff },
-                            new MavCheckBox(L("Selection.Check.Terms", "Accept terms"), true),
-                            new MavCheckBox(L("Selection.Check.Three", "Three-state"), false, true) { IsThreeState = true }))),
+                            new MavSwitch().IsToggled(true).ShowIcons(true)
+                                .OnIcon(MavIcons.Notifications)
+                                .OffIcon(MavIcons.NotificationsOff),
+                            new MavCheckBox().Label(L("Selection.Check.Terms", "Accept terms")).IsChecked(true),
+                            new MavCheckBox().Label(L("Selection.Check.Three", "Three-state")).IsIndeterminate(true).IsThreeState(true))),
                         Plain(new StackPanel().Spacing(10).Children(
                             roles,
-                            new MavRadioButton(L("Selection.Radio.Standalone", "Standalone radio"), true))))),
+                            new MavRadioButton().Label(L("Selection.Radio.Standalone", "Standalone radio")).IsChecked(true)))))),
             Section(
                 "Selection.Sliders.Section", "Sliders and segmented buttons",
                 "Selection.Sliders.Section.Body", "Continuous, ranged and segmented value selection.",
@@ -67,9 +74,9 @@ public static class SelectionPage
                     "MavSlider, MavRangeSlider and MavSegmentedButton",
                     "Selection.Sliders.Card.Body", "Sliders support steps, divisions, value indicators and keyboard arrows; segmented buttons can be single or multi-select.",
                     "MavSlider.Value · MavRangeSlider.StartValue/EndValue · MavSegmentedButton.MultiSelect",
-                    new MavSlider { Minimum = 0, Maximum = 100, Value = 64, ShowValueIndicator = true },
-                    new MavRangeSlider(0, 100, 20, 80),
-                    Row(Tight(single), Tight(multi)))),
+                    new MavSlider().Minimum(0).Maximum(100).Value(64).ShowValueIndicator(true),
+                    new MavRangeSlider().Minimum(0).Maximum(100).StartValue(20).EndValue(80),
+                    Row(single, multi))),
             Section(
                 "Selection.Chips.Section", "Chips and dropdowns",
                 "Selection.Chips.Section.Body", "Chips for filters, assist and input; chip groups, select, combo box and rating.",
@@ -79,10 +86,10 @@ public static class SelectionPage
                     "MavChip.Kind · MavChipGroup.SingleSelection · MavSelect.Options · MavComboBox.Items · MavRatingBar.AllowHalf",
                     Row(
                         new MavChip("Assist", MavChipKind.Assist, MavIcons.TipsAndUpdates),
-                        new MavChip("Filter", MavChipKind.Filter, null) { IsSelected = true },
+                        new MavChip("Filter", MavChipKind.Filter, null).IsSelected(true),
                         new MavChip("Input", MavChipKind.Input, MavIcons.Close),
                         new MavChip("Suggestion", MavChipKind.Suggestion, null)),
                     chips,
-                    Row(roleSelect, cityCombo, new MavRatingBar(4.5, 5, true)))));
+                    Row(roleSelect, cityCombo, new MavRatingBar().Value(4.5).MaxRating(5).AllowHalf(true)))));
     }
 }

@@ -1,6 +1,5 @@
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Layout;
 using Avalonia.Media;
 using Mav;
 using Mav.Controls;
@@ -91,13 +90,10 @@ public static class OverviewPage
     private static Control Button(string key, string english, MavButtonVariant variant, string? icon, Action onClick) =>
         new MavButton(L(key, english), variant, icon).OnClicked(onClick);
 
-    private static Control SeedRow()
-    {
-        var chips = Seeds.Select(seed => (Control)Tight(new MavChip(
+    private static Control SeedRow() =>
+        Row(Seeds.Select(seed => (Control)new MavChip(
                 L("Overview.Seed." + seed.Name, seed.Name), MavChipKind.Filter, MavIcons.Circle)
-            .OnClicked(() => MavTheme.Configure(seed: seed.Color))));
-        return Row(chips.ToArray());
-    }
+            .OnClicked(() => MavTheme.Configure(seed: seed.Color))).ToArray());
 
     private static Control Duration(string key, string english) =>
         new MavChip(L(key, english), MavChipKind.Assist, null);
@@ -109,30 +105,24 @@ public static class OverviewPage
                     .TextWrapping(TextWrapping.Wrap))
                 .ToArray());
 
-    private static Control ColorSwatches()
-    {
-        var panel = new WrapPanel();
-        foreach (var role in Roles)
-        {
-            var color = MavTheme.ColorOf(role);
-            var on = MavAccessibility.RelativeLuminance(color) >= 0.5 ? Colors.Black : Colors.White;
-            panel.Children.Add(Tight(new Border
-            {
-                Width = 132,
-                Height = 64,
-                CornerRadius = new CornerRadius(12),
-                Padding = new Thickness(10),
-                Background = MavTheme.BrushOf(color),
-                Child = new TextBlock
-                {
-                    Text = role.ToString(),
-                    FontSize = 11,
-                    Foreground = MavTheme.BrushOf(on),
-                },
-            }));
-        }
+    private static Control ColorSwatches() =>
+        new WrapPanel().Children(Roles.Select(role => Swatch(role)).ToArray());
 
-        return panel;
+    private static Control Swatch(MavColorRole role)
+    {
+        var color = MavTheme.ColorOf(role);
+        var on = MavAccessibility.RelativeLuminance(color) >= 0.5 ? Colors.Black : Colors.White;
+        return new Border()
+            .Width(132)
+            .Height(64)
+            .CornerRadius(new CornerRadius(12))
+            .Padding(10)
+            .Background(MavTheme.BrushOf(color))
+            .Child(new TextBlock()
+                .Text(role.ToString())
+                .FontSize(11)
+                .Foreground(MavTheme.BrushOf(on)))
+            .Margin(new Thickness(0, 0, 8, 8));
     }
 
     private static Control ShapeSamples()
@@ -145,35 +135,23 @@ public static class OverviewPage
             ("Large", shape.Large), ("ExtraLarge", shape.ExtraLarge), ("Full", shape.Full),
         };
 
-        return Row(radii.Select(item => (Control)Tight(new Border
-        {
-            Width = 120,
-            Height = 64,
-            CornerRadius = new CornerRadius(item.Radius),
-            Background = brush,
-            Child = new MavLabel(item.Name, MavTypeRole.LabelSmall)
-            {
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center,
-            },
-        })).ToArray());
+        return Row(radii.Select(item => (Control)new Border()
+            .Width(120)
+            .Height(64)
+            .CornerRadius(new CornerRadius(item.Radius))
+            .Background(brush)
+            .Child(Centered(new MavLabel(item.Name, MavTypeRole.LabelSmall)))).ToArray());
     }
 
     private static Control ElevationSamples()
     {
         var fill = MavTheme.ColorOf(MavColorRole.SurfaceContainerLow);
-        return Row(Enumerable.Range(0, 6).Select(level => (Control)Tight(new MavSurface
-        {
-            Width = 120,
-            Height = 72,
-            Radius = 12,
-            Elevation = level,
-            FillColor = fill,
-            Content = new MavLabel(MavLocalization.Format("Overview.Elevation.Level", "Level {0}", level), MavTypeRole.LabelSmall)
-            {
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center,
-            },
-        })).ToArray());
+        return Row(Enumerable.Range(0, 6).Select(level => (Control)new MavSurface()
+            .Width(120)
+            .Height(72)
+            .Radius(12)
+            .Elevation(level)
+            .FillColor(fill)
+            .Content(Centered(new MavLabel(MavLocalization.Format("Overview.Elevation.Level", "Level {0}", level), MavTypeRole.LabelSmall)))).ToArray());
     }
 }

@@ -52,7 +52,7 @@ public sealed class MainWindow : MavWindow
                 }));
         }
 
-        var toolbar = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 4 };
+        var toolbar = new StackPanel().Orientation(Orientation.Horizontal).Spacing(4);
         toolbar.Children.Add(new MavIconButton(MavIcons.DarkMode).OnClicked(() => MavTheme.ToggleDark()));
         toolbar.Children.Add(new MavIconButton(MavIcons.Globe).OnClicked(() => ToggleLanguage()));
 
@@ -64,11 +64,7 @@ public sealed class MainWindow : MavWindow
         var body = new DockPanel();
         DockPanel.SetDock(header, Dock.Top);
         body.Children.Add(header);
-        body.Children.Add(new Border
-        {
-            Padding = new Avalonia.Thickness(24, 8, 24, 0),
-            Child = Destinations[_selected].Build(),
-        });
+        body.Children.Add(new Border().Padding(24, 8, 24, 0).Child(Destinations[_selected].Build()));
 
         var grid = new Grid().Cols("220, *");
         grid.Children.Add(navigation);
