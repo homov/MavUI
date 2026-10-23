@@ -8,6 +8,6 @@ public partial class MainView : UserControl
     public MainView()
     {
         InitializeComponent();
-        Navigation.SetRoot(new StartPage(new AppNavigator(Navigation)));
+        Navigation.SetRoot(new StartPage { Navigator = new AppNavigator(Navigation) });
     }
 }

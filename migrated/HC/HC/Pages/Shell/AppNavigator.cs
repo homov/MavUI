@@ -10,10 +10,10 @@ namespace Hc.Pages.Shell;
 public sealed class AppNavigator(MavNavigationPage navigation)
 {
     /// <summary>Resets the stack to the sign-in form.</summary>
-    public void ShowSignIn() => navigation.SetRoot(new LoginPage(this));
+    public void ShowSignIn() => navigation.SetRoot(new LoginPage { Navigator = this });
 
     /// <summary>Resets the stack to the signed-in home page.</summary>
-    public void ShowHome() => navigation.SetRoot(new HomePage(this));
+    public void ShowHome() => navigation.SetRoot(new HomePage { Navigator = this });
 
     public void Push(MavContentPage page) => navigation.Push(page);
 

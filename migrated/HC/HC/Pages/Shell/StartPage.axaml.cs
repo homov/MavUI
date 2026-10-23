@@ -9,15 +9,16 @@ namespace Hc.Pages.Shell;
 /// </summary>
 public partial class StartPage : MavContentPage
 {
-    private readonly AppNavigator _navigator;
     private bool _started;
 
-    public StartPage(AppNavigator navigator)
+    public StartPage()
     {
         InitializeComponent();
-        _navigator = navigator;
         Loaded += OnLoaded;
     }
+
+    /// <summary>Navigation of the app. Set before the page is shown.</summary>
+    public required AppNavigator Navigator { get; init; }
 
     private async void OnLoaded(object? sender, EventArgs e)
     {
@@ -36,8 +37,8 @@ public partial class StartPage : MavContentPage
         }
 
         if (signedIn)
-            _navigator.ShowHome();
+            Navigator.ShowHome();
         else
-            _navigator.ShowSignIn();
+            Navigator.ShowSignIn();
     }
 }

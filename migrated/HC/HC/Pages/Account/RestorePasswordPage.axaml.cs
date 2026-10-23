@@ -7,13 +7,11 @@ namespace Hc.Pages.Account;
 /// <summary>Asks the server to send a reset code. The code page then sets the new password.</summary>
 public partial class RestorePasswordPage : AccountPage
 {
-    private readonly AppNavigator _navigator;
     private readonly MavFormValidator _validator = new();
 
-    public RestorePasswordPage(AppNavigator navigator)
+    public RestorePasswordPage()
     {
         InitializeComponent();
-        _navigator = navigator;
 
         _validator.Field(EmailField).Required(Tr("validation.required")).Email(Tr("validation.email"));
 
@@ -30,7 +28,7 @@ public partial class RestorePasswordPage : AccountPage
         await RunAsync(SendButton, ErrorBanner, async () =>
         {
             await AppServices.Default.Account.RequestPasswordResetAsync(email);
-            _navigator.Push(new CodeEntryPage(_navigator, email, AccountCodePurpose.RestorePassword));
+            Navigator.Push(new CodeEntryPage { Navigator = Navigator, Email = email, Purpose = AccountCodePurpose.RestorePassword });
         });
     }
 }

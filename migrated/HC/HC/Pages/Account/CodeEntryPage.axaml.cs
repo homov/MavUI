@@ -1,4 +1,3 @@
-using Hc.Pages.Shell;
 using Hc.Services;
 using Mav.Controls;
 
@@ -10,28 +9,42 @@ namespace Hc.Pages.Account;
 /// </summary>
 public partial class CodeEntryPage : AccountPage
 {
-    private readonly AppNavigator _navigator;
-    private readonly string _email;
-    private readonly AccountCodePurpose _purpose;
     private readonly MavFormValidator _validator = new();
+    private string _email = string.Empty;
+    private AccountCodePurpose _purpose;
 
-    public CodeEntryPage(AppNavigator navigator, string email, AccountCodePurpose purpose)
+    public CodeEntryPage()
     {
         InitializeComponent();
-        _navigator = navigator;
-        _email = email;
-        _purpose = purpose;
-
-        HintLabel.Text = string.Format(Tr("auth.code.hint"), email);
-        var isReset = purpose == AccountCodePurpose.RestorePassword;
-        NewPasswordField.IsVisible = isReset;
-        ConfirmButton.Text = Tr(isReset ? "auth.code.reset" : "auth.code.confirm");
-
-        _validator.Field(CodeInput).Required(Tr("validation.code")).Pattern(@"^\d{4}$", Tr("validation.code"));
-        if (isReset)
-            _validator.Field(NewPasswordField).Required(Tr("validation.required"));
-
         ConfirmButton.Clicked += OnConfirm;
+    }
+
+    /// <summary>The address the code was sent to. Shown in the hint.</summary>
+    public required string Email
+    {
+        get => _email;
+        init
+        {
+            _email = value;
+            HintLabel.Text = string.Format(Tr("auth.code.hint"), value);
+        }
+    }
+
+    /// <summary>Decides what the code confirms. Sets the password field and the field rules.</summary>
+    public required AccountCodePurpose Purpose
+    {
+        get => _purpose;
+        init
+        {
+            _purpose = value;
+            var isReset = value == AccountCodePurpose.RestorePassword;
+            NewPasswordField.IsVisible = isReset;
+            ConfirmButton.Text = Tr(isReset ? "auth.code.reset" : "auth.code.confirm");
+
+            _validator.Field(CodeInput).Required(Tr("validation.code")).Pattern(@"^\d{4}$", Tr("validation.code"));
+            if (isReset)
+                _validator.Field(NewPasswordField).Required(Tr("validation.required"));
+        }
     }
 
     private async void OnConfirm(object? sender, EventArgs e)
@@ -49,7 +62,7 @@ public partial class CodeEntryPage : AccountPage
             else
                 await AppServices.Default.Account.ResetPasswordAsync(_email, password, code);
 
-            _navigator.ShowSignIn();
+            Navigator.ShowSignIn();
         });
     }
 }

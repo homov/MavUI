@@ -1,4 +1,5 @@
 using Hc.Pages.Models;
+using Hc.Pages.Shell;
 using Mav;
 using Mav.Controls;
 
@@ -11,6 +12,9 @@ namespace Hc.Pages.Account;
 /// </summary>
 public abstract class AccountPage : MavContentPage
 {
+    /// <summary>Navigation of the app. Set by the page that opens this one, before it is shown.</summary>
+    public required AppNavigator Navigator { get; init; }
+
     /// <summary>Runs one cloud call. A failure is shown in <paramref name="banner"/>; the page does not crash.</summary>
     protected static async Task RunAsync(MavButton button, MavBanner banner, Func<Task> action)
     {
