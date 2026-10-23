@@ -26,6 +26,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- Generates the C# markup layer (Mav.Markup, <Type>Markup classes) at build time. -->
+    <ProjectReference Include="..\tools\MarkupGenerator\MarkupGenerator.csproj"
+                      OutputItemType="Analyzer"
+                      ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Avalonia" Version="12.1.4" />
   </ItemGroup>
 

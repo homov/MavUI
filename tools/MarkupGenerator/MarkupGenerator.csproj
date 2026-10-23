@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Roslyn source generator for the C# markup layer (namespace Mav.Markup).
+    MavUI references this project as an analyzer, so the generated <Type>Markup classes are produced on every
+    build from the symbols of MavUI and Avalonia. Nothing generated is stored in git.
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <IsRoslynComponent>true</IsRoslynComponent>
+    <RootNamespace>Mav.MarkupGenerator</RootNamespace>
+    <AssemblyName>Mav.MarkupGenerator</AssemblyName>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.12.0" PrivateAssets="all" />
+  </ItemGroup>
+
+</Project>
