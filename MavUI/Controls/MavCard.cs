@@ -33,7 +33,7 @@ public class MavCard : MavInkSurface
         {
             var radius = e.GetNewValue<double>();
             if (!double.IsNaN(radius))
-                c.CornerRadius = new CornerRadius(Math.Max(0, radius));
+                c.CornerRadius = Math.Max(0, radius);
         });
         CardPaddingProperty.Changed.AddClassHandler<MavCard>((c, e) => c.Padding = e.GetNewValue<Thickness>());
     }
@@ -98,9 +98,7 @@ public class MavCard : MavInkSurface
         RippleColor = c.OnSurface;
         Elevation = elev;
         // NaN means "follow the theme"; a number pins the radius (see CardRadius).
-        CornerRadius = double.IsNaN(CardRadius)
-            ? new CornerRadius(t.Shape.Medium)
-            : new CornerRadius(Math.Max(0, CardRadius));
+        CornerRadius = double.IsNaN(CardRadius) ? t.Shape.Medium : Math.Max(0, CardRadius);
         Padding = CardPadding;
     }
 }
