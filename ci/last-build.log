@@ -1,20 +1,20 @@
 # Last build log
-commit: 8a4ff4ed4e6d436595633821851a8f3f2a4983ba
-run: https://github.com/homov/MavUI/actions/runs/39977401663
+commit: fe21502e5e0e2568771ca897984bf72c6979dbbf
+run: https://github.com/homov/MavUI/actions/runs/39978479415
 
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 259 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 262 ms).
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:04.86
+Time Elapsed 00:00:04.82
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 222 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 226 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 222 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 228 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 223 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 223 ms).
   1 of 4 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
@@ -25,9 +25,9 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:04.82
+Time Elapsed 00:00:04.63
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 278 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 279 ms).
   2 of 3 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
@@ -37,24 +37,24 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.08
+Time Elapsed 00:00:02.10
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup.Desktop/ControlsGalleryMarkup.Desktop.csproj (in 252 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj (in 252 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/markup/src/AMarkup.Controls/AMarkup.Controls.csproj (in 252 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/markup/src/AMarkup.Generators/AMarkup.Generators.csproj (in 252 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/markup/src/AMarkup.Controls/AMarkup.Controls.csproj (in 249 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/markup/src/AMarkup.Generators/AMarkup.Generators.csproj (in 249 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj (in 249 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup.Desktop/ControlsGalleryMarkup.Desktop.csproj (in 249 ms).
   1 of 5 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   AMarkup.Controls -> /home/homo/github/actions-runner/_work/MavUI/MavUI/markup/src/AMarkup.Controls/bin/Release/net10.0/AMarkup.Controls.dll
   AMarkup.Generators -> /home/homo/github/actions-runner/_work/MavUI/MavUI/markup/src/AMarkup.Generators/bin/Release/net10.0/AMarkup.Generators.dll
-/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/Pages/ActionsPage.cs(40,78): error CS0311: The type 'Mav.Controls.MavButton' cannot be used as type parameter 'T' in the generic type or method 'NativeMenuItemMarkup.IsEnabled<T>(T, bool)'. There is no implicit reference conversion from 'Mav.Controls.MavButton' to 'Avalonia.Controls.NativeMenuItem'. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/Pages/ActionsPage.cs(55,66): error CS1955: Non-invocable member 'Layoutable.HorizontalAlignment' cannot be used like a method. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/Pages/InputsPage.cs(113,118): error CS1026: ) expected [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/Pages/SelectionPage.cs(85,81): error CS1026: ) expected [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
 
 Build FAILED.
 
-/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/Pages/ActionsPage.cs(40,78): error CS0311: The type 'Mav.Controls.MavButton' cannot be used as type parameter 'T' in the generic type or method 'NativeMenuItemMarkup.IsEnabled<T>(T, bool)'. There is no implicit reference conversion from 'Mav.Controls.MavButton' to 'Avalonia.Controls.NativeMenuItem'. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/Pages/ActionsPage.cs(55,66): error CS1955: Non-invocable member 'Layoutable.HorizontalAlignment' cannot be used like a method. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/Pages/InputsPage.cs(113,118): error CS1026: ) expected [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/Pages/SelectionPage.cs(85,81): error CS1026: ) expected [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
     0 Warning(s)
     2 Error(s)
 
-Time Elapsed 00:00:06.66
+Time Elapsed 00:00:05.38
