@@ -142,4 +142,31 @@ public class SessionServiceTests : IDisposable
         Assert.Null(await _secrets.GetAsync(SessionService.PasswordKey));
         Assert.Equal("user@example.com", session.Email);
     }
+
+    [Fact]
+    public async Task Login_WithoutRememberMe_WorksWhenSecureStorageIsUnavailable()
+    {
+        var session = new SessionService(
+            TestCloud.Create(ScriptedHandler.Json("""{"state":"ok","uuid":"u-1"}""")),
+            _prefs.Preferences,
+            new UnavailableSecureStorage());
+
+        await session.LoginAsync("user@example.com", "pw", rememberMe: false, TestContext.Current.CancellationToken);
+
+        Assert.True(session.IsSignedIn);
+        Assert.False(session.AutologinEnabled);
+        session.SignOut();
+        Assert.False(session.IsSignedIn);
+    }
+
+    private sealed class UnavailableSecureStorage : IMavSecureStorage
+    {
+        public Task<string?> GetAsync(string key) => throw new PlatformNotSupportedException("no secret-tool");
+
+        public Task SetAsync(string key, string value) => throw new PlatformNotSupportedException("no secret-tool");
+
+        public bool Remove(string key) => throw new PlatformNotSupportedException("no secret-tool");
+
+        public void RemoveAll() => throw new PlatformNotSupportedException("no secret-tool");
+    }
 }

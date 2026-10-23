@@ -43,8 +43,7 @@ public sealed class SessionService(CloudClient cloud, IMavPreferences preference
         }
         else
         {
-            secrets.Remove(PasswordKey);
-            preferences.Set(AutologinKey, false);
+            ForgetPassword();
         }
     }
 
@@ -74,8 +73,7 @@ public sealed class SessionService(CloudClient cloud, IMavPreferences preference
         catch (CloudRequestException)
         {
             // The server rejected the saved password: forget it so the user signs in again.
-            secrets.Remove(PasswordKey);
-            preferences.Set(AutologinKey, false);
+            ForgetPassword();
             return false;
         }
     }
@@ -84,8 +82,25 @@ public sealed class SessionService(CloudClient cloud, IMavPreferences preference
     public void SignOut()
     {
         UserId = null;
-        secrets.Remove(PasswordKey);
+        ForgetPassword();
+    }
+
+    /// <summary>
+    /// Turns autologin off and removes the saved password. Where secure storage is not available (for example no
+    /// secret-tool on Linux), there is nothing to remove, and that must not stop sign-in or sign-out. Autologin is
+    /// already off, so a leftover value is never used.
+    /// </summary>
+    private void ForgetPassword()
+    {
         preferences.Set(AutologinKey, false);
+        try
+        {
+            secrets.Remove(PasswordKey);
+        }
+        catch (Exception ex) when (ex is PlatformNotSupportedException or InvalidOperationException)
+        {
+            // Secure storage is unavailable: no password was saved through it.
+        }
     }
 
     private async Task SignInAsync(string email, string encryptedPassword, CancellationToken ct)
