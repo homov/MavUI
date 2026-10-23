@@ -19,7 +19,7 @@ public class AccountServiceTests : IDisposable
         settings.PreferredTimezone = "Europe/Kyiv";
         var service = new AccountService(TestCloud.Create(handler), settings, new LanguageService(settings));
 
-        await service.RegisterAsync("new@example.com", "pw");
+        await service.RegisterAsync("new@example.com", "pw", TestContext.Current.CancellationToken);
 
         var body = handler.Sent.Single().Body!;
         Assert.DoesNotContain("password=pw&", body);
@@ -34,7 +34,7 @@ public class AccountServiceTests : IDisposable
         var settings = new SettingsService(_prefs.Preferences);
         var service = new AccountService(TestCloud.Create(handler), settings, new LanguageService(settings));
 
-        await service.ResetPasswordAsync("user@example.com", "fresh", "1234");
+        await service.ResetPasswordAsync("user@example.com", "fresh", "1234", TestContext.Current.CancellationToken);
 
         var body = handler.Sent.Single().Body!;
         Assert.Contains("code=1234", body);

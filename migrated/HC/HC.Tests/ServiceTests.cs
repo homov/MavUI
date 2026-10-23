@@ -17,7 +17,7 @@ public class DeviceServiceTests
         HeatStateChangedArgs? raised = null;
         service.HeatStateChanged += (_, args) => raised = args;
 
-        await service.SetHeatStateAsync("dev-1", heatOn: true);
+        await service.SetHeatStateAsync("dev-1", heatOn: true, TestContext.Current.CancellationToken);
 
         Assert.Contains("state=true", handler.Sent.Single().Body);
         Assert.Equal(new HeatStateChangedArgs("dev-1", true), raised);
@@ -32,11 +32,11 @@ public class DeviceServiceTests
         var slow = new SlowHandler(firstSent, release);
         var service = new DeviceService(TestCloud.Create(slow));
 
-        var first = service.SetHeatStateAsync("dev-1", heatOn: true);
+        var first = service.SetHeatStateAsync("dev-1", heatOn: true, TestContext.Current.CancellationToken);
         await firstSent.Task;
 
         Assert.True(service.IsHeatStateBusy("dev-1"));
-        await Assert.ThrowsAsync<InvalidOperationException>(() => service.SetHeatStateAsync("dev-1", heatOn: false));
+        await Assert.ThrowsAsync<InvalidOperationException>(() => service.SetHeatStateAsync("dev-1", heatOn: false, TestContext.Current.CancellationToken));
         Assert.False(service.IsHeatStateBusy("dev-2"));
 
         release.SetResult();
@@ -49,7 +49,7 @@ public class DeviceServiceTests
     {
         var service = new DeviceService(TestCloud.Create(ScriptedHandler.Json("""{"state":"error","description":"offline device"}""")));
 
-        var ex = await Assert.ThrowsAsync<CloudRequestException>(() => service.SetHeatStateAsync("dev-1", heatOn: true));
+        var ex = await Assert.ThrowsAsync<CloudRequestException>(() => service.SetHeatStateAsync("dev-1", heatOn: true, TestContext.Current.CancellationToken));
 
         Assert.Equal(CloudErrorKind.Server, ex.Kind);
         Assert.False(service.IsHeatStateBusy("dev-1"));

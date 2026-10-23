@@ -25,7 +25,7 @@ public class SessionServiceTests : IDisposable
         var handler = ScriptedHandler.Json("""{"state":"ok","uuid":"u-1"}""");
         var session = Session(handler);
 
-        await session.LoginAsync("user@example.com", "my-secret", rememberMe: false);
+        await session.LoginAsync("user@example.com", "my-secret", rememberMe: false, TestContext.Current.CancellationToken);
 
         var body = handler.Sent.Single().Body!;
         Assert.DoesNotContain("my-secret", body);
@@ -39,7 +39,7 @@ public class SessionServiceTests : IDisposable
     {
         var session = Session(ScriptedHandler.Json("""{"state":"ok","uuid":"u-1"}"""));
 
-        await session.LoginAsync("user@example.com", "pw", rememberMe: true);
+        await session.LoginAsync("user@example.com", "pw", rememberMe: true, TestContext.Current.CancellationToken);
 
         Assert.Equal(PasswordEncrypter.Encrypt("pw"), await _secrets.GetAsync(SessionService.PasswordKey));
         Assert.True(session.AutologinEnabled);
@@ -52,7 +52,7 @@ public class SessionServiceTests : IDisposable
         await _secrets.SetAsync(SessionService.PasswordKey, "old");
         var session = Session(ScriptedHandler.Json("""{"state":"ok","uuid":"u-1"}"""));
 
-        await session.LoginAsync("user@example.com", "pw", rememberMe: false);
+        await session.LoginAsync("user@example.com", "pw", rememberMe: false, TestContext.Current.CancellationToken);
 
         Assert.Null(await _secrets.GetAsync(SessionService.PasswordKey));
         Assert.False(session.AutologinEnabled);
@@ -63,7 +63,7 @@ public class SessionServiceTests : IDisposable
     {
         var session = Session(ScriptedHandler.Json("""{"state":"error","description":"wrong password"}"""));
 
-        var ex = await Assert.ThrowsAsync<CloudRequestException>(() => session.LoginAsync("user@example.com", "bad", rememberMe: true));
+        var ex = await Assert.ThrowsAsync<CloudRequestException>(() => session.LoginAsync("user@example.com", "bad", rememberMe: true, TestContext.Current.CancellationToken));
 
         Assert.Equal(CloudErrorKind.Server, ex.Kind);
         Assert.Equal("wrong password", ex.Message);
@@ -81,7 +81,7 @@ public class SessionServiceTests : IDisposable
         var handler = ScriptedHandler.Json("""{"state":"ok","uuid":"u-2"}""");
         var session = Session(handler);
 
-        var ok = await session.TryAutoLoginAsync();
+        var ok = await session.TryAutoLoginAsync(TestContext.Current.CancellationToken);
 
         Assert.True(ok);
         Assert.Equal("u-2", session.UserId);
@@ -97,7 +97,7 @@ public class SessionServiceTests : IDisposable
         await _secrets.SetAsync(SessionService.PasswordKey, "stale");
         var session = Session(ScriptedHandler.Json("""{"state":"error","description":"authorization error"}"""));
 
-        var ok = await session.TryAutoLoginAsync();
+        var ok = await session.TryAutoLoginAsync(TestContext.Current.CancellationToken);
 
         Assert.False(ok);
         Assert.Null(await _secrets.GetAsync(SessionService.PasswordKey));
@@ -112,7 +112,7 @@ public class SessionServiceTests : IDisposable
         await _secrets.SetAsync(SessionService.PasswordKey, "kept");
         var session = Session(new ScriptedHandler((_, _) => throw new HttpRequestException("offline")));
 
-        var ok = await session.TryAutoLoginAsync();
+        var ok = await session.TryAutoLoginAsync(TestContext.Current.CancellationToken);
 
         Assert.False(ok);
         Assert.Equal("kept", await _secrets.GetAsync(SessionService.PasswordKey));
@@ -125,7 +125,7 @@ public class SessionServiceTests : IDisposable
         var handler = ScriptedHandler.Json("""{"state":"ok","uuid":"u-1"}""");
         var session = Session(handler);
 
-        Assert.False(await session.TryAutoLoginAsync());
+        Assert.False(await session.TryAutoLoginAsync(TestContext.Current.CancellationToken));
         Assert.Empty(handler.Sent);
     }
 
@@ -133,7 +133,7 @@ public class SessionServiceTests : IDisposable
     public async Task SignOut_ClearsSessionAndSavedPassword()
     {
         var session = Session(ScriptedHandler.Json("""{"state":"ok","uuid":"u-1"}"""));
-        await session.LoginAsync("user@example.com", "pw", rememberMe: true);
+        await session.LoginAsync("user@example.com", "pw", rememberMe: true, TestContext.Current.CancellationToken);
 
         session.SignOut();
 

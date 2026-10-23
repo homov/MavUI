@@ -42,7 +42,7 @@ public class CloudApiContractTests
     {
         var (client, handler) = Create("""{"state":"ok","uuid":"user-123"}""");
 
-        var response = await client.Login(new LoginRequest("user@example.com", "secret"));
+        var response = await client.Login(new LoginRequest("user@example.com", "secret"), TestContext.Current.CancellationToken);
 
         Assert.Equal("/stinexapiv1/user_authorization/", handler.Request!.RequestUri!.AbsolutePath);
         Assert.Contains("email=user%40example.com", handler.RequestBody);
@@ -58,7 +58,7 @@ public class CloudApiContractTests
     {
         var (client, handler) = Create("""{"state":"ok"}""");
 
-        await client.ChangePassword(new ChangePasswordRequest("a@b.c", "old", "new"));
+        await client.ChangePassword(new ChangePasswordRequest("a@b.c", "old", "new"), TestContext.Current.CancellationToken);
 
         Assert.Contains("new_password=new", handler.RequestBody);
     }
@@ -72,7 +72,7 @@ public class CloudApiContractTests
         """;
         var (client, _) = Create(json);
 
-        var response = await client.GetUserDevices();
+        var response = await client.GetUserDevices(TestContext.Current.CancellationToken);
 
         var device = Assert.Single(response.Content!.Devices);
         Assert.Equal("d1", device.DeviceId);
@@ -88,7 +88,7 @@ public class CloudApiContractTests
     {
         var (client, _) = Create("""{"state":"no_groups","groups":[]}""");
 
-        var response = await client.GetUserGroups();
+        var response = await client.GetUserGroups(TestContext.Current.CancellationToken);
 
         Assert.True(response.Content!.IsSuccess);
         Assert.Empty(response.Content.Groups);
@@ -108,7 +108,7 @@ public class CloudApiContractTests
             },
         };
 
-        await client.UpdateSchedule(schedule);
+        await client.UpdateSchedule(schedule, TestContext.Current.CancellationToken);
 
         Assert.Contains("\"schedule_id\":\"s1\"", handler.RequestBody);
         Assert.Contains("\"monday\"", handler.RequestBody);
@@ -123,7 +123,7 @@ public class CloudApiContractTests
     {
         var (client, _) = Create("""{"state":"ok","timezones":[{"Europe/Kyiv":"Europe/Kyiv"},{"UTC":"UTC"}]}""");
 
-        var response = await client.GetTimezones();
+        var response = await client.GetTimezones(TestContext.Current.CancellationToken);
 
         Assert.Equal(new[] { "Europe/Kyiv", "UTC" }, response.Content!.Names);
     }
@@ -133,7 +133,7 @@ public class CloudApiContractTests
     {
         var (client, handler) = Create("""{"state":"ok","device_id":"d7","device_name":"Bath","temp_panel":19}""");
 
-        var response = await client.GetDeviceInfo(new DeviceRequest("d7"));
+        var response = await client.GetDeviceInfo(new DeviceRequest("d7"), TestContext.Current.CancellationToken);
 
         Assert.Contains("device_id=d7", handler.RequestBody);
         Assert.Equal("Bath", response.Content!.DeviceName);
@@ -145,7 +145,7 @@ public class CloudApiContractTests
     {
         var (client, _) = Create("""{"state":"ok","errors":{"en":{"E1":"Sensor fault"},"uk":{"E1":"Збій датчика"}}}""");
 
-        var response = await client.GetAllErrorCodes();
+        var response = await client.GetAllErrorCodes(TestContext.Current.CancellationToken);
 
         Assert.Equal("Збій датчика", response.Content!.Errors["uk"]["E1"]);
     }
@@ -155,7 +155,7 @@ public class CloudApiContractTests
     {
         var (client, _) = Create("server down", HttpStatusCode.InternalServerError);
 
-        var response = await client.GetUserDevices();
+        var response = await client.GetUserDevices(TestContext.Current.CancellationToken);
 
         Assert.False(response.IsSuccessStatusCode);
         Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
@@ -170,7 +170,7 @@ public class CloudApiContractTests
         var http = new HttpClient(handler) { BaseAddress = new Uri("https://example.test/stinexapiv1/") };
         var client = new CloudClient(http);
 
-        var response = await client.GetUserDevices();
+        var response = await client.GetUserDevices(TestContext.Current.CancellationToken);
 
         Assert.False(response.IsSuccessStatusCode);
         Assert.Equal((HttpStatusCode)0, response.StatusCode);
@@ -197,7 +197,7 @@ public class CloudApiContractTests
     {
         var (client, _) = Create("this is not json");
 
-        var response = await client.Login(new LoginRequest("user@example.com", "secret"));
+        var response = await client.Login(new LoginRequest("user@example.com", "secret"), TestContext.Current.CancellationToken);
 
         Assert.False(response.IsSuccessStatusCode);
         Assert.NotEqual(0, (int)response.StatusCode);

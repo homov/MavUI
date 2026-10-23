@@ -47,7 +47,7 @@ public class LocalDeviceTests
     {
         var (setup, _) = Create((HttpStatusCode.OK, "SN-42"), (HttpStatusCode.OK, "HC-Pro"));
 
-        var info = await setup.ReadDeviceAsync();
+        var info = await setup.ReadDeviceAsync(TestContext.Current.CancellationToken);
 
         Assert.Equal(new LocalDeviceInfo("SN-42", "HC-Pro"), info);
     }
@@ -57,7 +57,7 @@ public class LocalDeviceTests
     {
         var (setup, _) = Create((HttpStatusCode.InternalServerError, "down"));
 
-        var ex = await Assert.ThrowsAsync<DeviceSetupException>(() => setup.ReadDeviceAsync());
+        var ex = await Assert.ThrowsAsync<DeviceSetupException>(() => setup.ReadDeviceAsync(TestContext.Current.CancellationToken));
 
         Assert.Equal(DeviceSetupError.Unreachable, ex.Reason);
     }
@@ -67,7 +67,7 @@ public class LocalDeviceTests
     {
         var (setup, handler) = Create((HttpStatusCode.OK, "Home,Office"));
 
-        var networks = await setup.ScanNetworksAsync();
+        var networks = await setup.ScanNetworksAsync(TestContext.Current.CancellationToken);
 
         Assert.Equal(new[] { "Home", "Office" }, networks);
         Assert.Equal("/scan", handler.Sent.Single().Route);
@@ -78,7 +78,7 @@ public class LocalDeviceTests
     {
         var (setup, handler) = Create((HttpStatusCode.OK, "accepted"), (HttpStatusCode.OK, "accepted"));
 
-        await setup.AttachToAccountAsync("user-1", "Home", "pa ss");
+        await setup.AttachToAccountAsync("user-1", "Home", "pa ss", TestContext.Current.CancellationToken);
 
         Assert.Collection(handler.Sent,
             first =>
@@ -99,7 +99,7 @@ public class LocalDeviceTests
     {
         var (setup, handler) = Create((HttpStatusCode.OK, "denied"));
 
-        var ex = await Assert.ThrowsAsync<DeviceSetupException>(() => setup.AttachToAccountAsync("user-1", "Home", "secret"));
+        var ex = await Assert.ThrowsAsync<DeviceSetupException>(() => setup.AttachToAccountAsync("user-1", "Home", "secret", TestContext.Current.CancellationToken));
 
         Assert.Equal(DeviceSetupError.Rejected, ex.Reason);
         Assert.Single(handler.Sent);
@@ -111,7 +111,7 @@ public class LocalDeviceTests
     {
         var (setup, _) = Create((HttpStatusCode.OK, "accepted"), (HttpStatusCode.OK, "wrong network"));
 
-        var ex = await Assert.ThrowsAsync<DeviceSetupException>(() => setup.AttachToAccountAsync("user-1", "Home", "bad"));
+        var ex = await Assert.ThrowsAsync<DeviceSetupException>(() => setup.AttachToAccountAsync("user-1", "Home", "bad", TestContext.Current.CancellationToken));
 
         Assert.Equal(DeviceSetupError.Rejected, ex.Reason);
     }
