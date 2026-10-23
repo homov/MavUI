@@ -86,7 +86,7 @@ public class MavTabs : MavContentView, IEnumerable<MavTabItem>
         _barSurface = new MavSurface
         {
             Radius = 0,
-            Content = _barHost,
+            Child = _barHost,
         };
 
         _contentHost = new Border
@@ -99,7 +99,7 @@ public class MavTabs : MavContentView, IEnumerable<MavTabItem>
         root.Children.Add(new MavDivider());
         root.Children.Add(_contentHost);
 
-        Content = root;
+        Child = root;
         Variant = variant;
         IsScrollable = scrollable;
 
@@ -411,11 +411,11 @@ public class MavTabs : MavContentView, IEnumerable<MavTabItem>
             {
                 CornerRadius = 0,
                 Padding = new Thickness(16, 0),
-                Content = cellGrid,
+                Child = cellGrid,
             };
             _surface.Clicked += (_, _) => onClick();
 
-            Content = _surface;
+            Child = _surface;
         }
 
         /// <summary>
