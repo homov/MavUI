@@ -49,30 +49,31 @@ git add docs/screenshots && git commit -m "docs: screenshot of the sign-in page"
 - путь `docs/screenshots/<дата>-<тема>-<before|after>.png`; имя без пробелов и кириллицы;
 - PNG или JPEG, до ~2 МБ (headless-кадр 390×844 весит 15–25 КБ);
 - коммиты, которые трогают только `docs/**`, **не запускают CI** (`paths-ignore`) — быстро и без раннера;
-- `ci/screenshots/` в `.gitignore`: это временная папка для выгрузки из CI, её не коммитят;
+- `ci/reports/` в `.gitignore`: это временная папка для выгрузки из CI, её не коммитят;
 - в тексте сообщения указать, что именно смотреть («метка Email наложена на текст»).
 
-### Канал 2 (для CI): base64-нотисы + `tools/read_screenshots.py`
+### Канал 2 (для CI): ветка `ci/reports` + `tools/read_screenshots.py`
 
-Headless-тесты HC сами пишут PNG в `ui-report/` (`ScreenDump.Capture`). CI отдаёт их аннотациями,
-скрипт собирает обратно:
+CI сам публикует отчёты прогона: все PNG, текстовые дампы экранов, `gallery.txt` и `build.log`
+(плюс `SHA256SUMS.txt`) force-push’ем в одну ветку `ci/reports` — один коммит, без истории.
 
 ```bash
-python3 tools/read_screenshots.py                  # последний прогон текущей ветки
-python3 tools/read_screenshots.py --list           # только список файлов и чанков
-python3 tools/read_screenshots.py --run 40034644563
-# -> ci/screenshots/run-<id>/*.png, размер и sha256 сверены с манифестом
+python3 tools/read_screenshots.py                     # последние отчёты -> ci/reports/
+python3 tools/read_screenshots.py --list              # список файлов и размеров
+python3 tools/read_screenshots.py --run 40036382515   # убедиться, что в ветке нужный прогон
+# -> ci/reports/*.png, *.txt, build.log; всё сверено с SHA256SUMS.txt
 ```
 
-Что читает скрипт: заголовки нотисов `PNG <имя> <k>/<N>` и манифест `PNG manifest`
-(`<имя>.png  <байты> bytes  <N> chunk(s)  sha256 <hex>`). Код выхода 1, если файл неполный,
-не совпал размер/sha256 или чанки не декодировались.
+Старые прогоны (до ветки) отдавали картинки base64-нотисами:
+`python3 tools/read_screenshots.py --annotations --run <id>`.
 
 ### Канал 3 (не работает): артефакты прогона
 
-`gh run download` из песочницы падает на редиректе: ссылка ведёт на
-`productionresultssa*.blob.core.windows.net`, и этот хост закрыт. Не тратить на это время,
-даже для `build-log`.
+`gh run download` и `gh api .../artifacts/<id>/zip` возвращают подписанную ссылку на
+`productionresultssa*.blob.core.windows.net`, а TLS к нему рвётся (`SSL_ERROR_SYSCALL`):
+в песочнице разрешены только `github.com`, `api.github.com`, `codeload`, npm и PyPI.
+Метаданные артефакта видны (`gh api repos/<repo>/actions/artifacts`), байты — нет.
+Не тратить время: нужное забирать из `ci/reports` (канал 2).
 
 ### Жёсткие лимиты GitHub (замерены, не менять наугад)
 
@@ -80,21 +81,22 @@ python3 tools/read_screenshots.py --run 40034644563
 |---|---|---|
 | длина текста одной аннотации | **4096** символов (обрезается молча) | `PNG_CHUNK = 4000` |
 | нотисов на шаг | **10** (11-й теряется) | `PNG_PER_STEP = 10` |
-| бюджет прогона | `PNG_BATCHES * 10` чанков ≈ 90 КБ | `PNG_BATCHES = 3` |
+| бюджет прогона | ~300 КБ текста на job (галерея — 1.7 МБ) | поэтому ветка, а не аннотации |
 
-Инвариант: **число шагов `Screenshots as base64 (batch k of N)` в `build.yml` должно быть равно
-`PNG_BATCHES`**. Если картинки перестали влезать, шаг печатает `::warning PNG budget exceeded`,
-а манифест помечает файл `SKIPPED over budget` — тогда поднять обе цифры сразу.
+Аннотациями пользуется только `--annotations` (чтение старых прогонов) и `report_ui` для
+текстовых дампов: `PNG_CHUNK = 4000`, `PNG_PER_STEP = 10`, `PNG_BATCHES = 3` в
+`ci/scripts/test_annotations.py`. Эти константы трогать не нужно — новые картинки идут в ветку.
 
-### Если картинка «не пришла»
+### Если отчётов нет
 
-1. `python3 tools/read_screenshots.py --list` — видно, сколько чанков дошло (`4/7` = обрезано).
-2. `4/7` или «missing» → прогон старый (до `647375c`, части по 12 000 символов) либо в `build.yml`
-   меньше batch-шагов, чем `PNG_BATCHES`.
-3. «no PNG annotations in this run» → тесты не дошли до `ScreenDump.Capture` (смотрит шаг
-   `Run tests`), или прогон был только по `docs/**` (workflow не запускался).
-4. Нотисы есть, sha256 не сходится → менять ничего не нужно, файл уже записан; просто взять
-   другой прогон или переснять картинку каналом 1.
+1. `python3 tools/read_screenshots.py --list` — что вообще лежит в ветке и от какого прогона.
+2. «the branch holds the screenshots of run X, not Y» → в ветке последний прогон; взять его или
+   прогнать нужную ветку заново.
+3. Пусто/нет ветки → смотреть шаг `Publish screenshots and build log` в прогоне; если он упал с
+   `Reports not published`, не хватает `contents: write`.
+4. Кадров нет, а шаг прошёл → тесты не дошли до `Capture` (смотреть шаг `Run tests`), либо прогон
+   был только по `docs/**` (workflow не запускался).
+5. «sha256 mismatch» → файл записан, но битый: скачать ещё раз, при повторе — переснять каналом 1.
 
 ### Что уже отснято и что ищем на скриншотах
 

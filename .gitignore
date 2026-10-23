@@ -30,8 +30,8 @@ ci/profile/theme.speedscope.json
 test-results/
 ui-report/
 
-# CI screenshots fetched by tools/read_screenshots.py
-ci/screenshots/
+# CI reports (screenshots, outlines, build.log) fetched by tools/read_screenshots.py
+ci/reports/
 
 # Python bytecode (tools run by hand and in CI)
 __pycache__/

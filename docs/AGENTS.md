@@ -1645,11 +1645,12 @@ are not reachable from an agent sandbox (`gh run download` redirects to a blocke
 channels work, both documented in `docs/NOTES.md` → «Скриншоты: как передать картинку агенту»:
 
 * a PNG committed under `docs/screenshots/` — no CI needed, use it for the user's own machine;
-* headless CI captures: `python3 tools/read_screenshots.py [--run <id>]` joins the base64
-  annotations of the check run into `ci/screenshots/run-<id>/` and verifies size and sha256.
-  When touching that pipeline, keep `PNG_BATCHES` in `ci/scripts/test_annotations.py` equal to the
-  number of `Screenshots as base64` steps in `.github/workflows/build.yml` (GitHub cuts an
-  annotation at 4096 characters and keeps 10 notices per step).
+* CI reports: `python3 tools/read_screenshots.py [--list] [--run <id>]` copies the screenshots,
+  screen outlines and `build.log` of the newest run out of the single `ci/reports` branch (CI
+  force-pushes them there, checksummed in `SHA256SUMS.txt`) into `ci/reports/`.
+  Run artifacts themselves are unreachable from a sandbox: the artifact zip redirects to
+  `productionresultssa*.blob.core.windows.net`, which is outside the allowlist. Annotations carry
+  only ~300 KB of text per job, so they are the fallback for old runs (`--annotations`).
 
 ---
 

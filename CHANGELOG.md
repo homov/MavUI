@@ -15,6 +15,12 @@ All notable changes to **Mav**.
 
 ## [Unreleased]
 
+_Tooling (not part of the library API):_ `Tests/MavUI.VisualTests` renders every ControlsGallery
+destination, three shell widths and a dark theme frame on headless Skia, checks that no visible
+control leaves the window and publishes the PNGs with `build.log` to the `ci/reports` branch;
+`tools/read_screenshots.py` fetches them back. Run artifacts are not downloadable from an agent
+sandbox (their signed link points at Azure blob storage, which is outside the allowlist).
+
 ### Changed
 
 - `MavNavigationDestination`, `MavSuiteDestination` and `MavDrawerItem` share a base class `MavNavigationItemBase` with `Label`, `Icon`, `SelectedIcon` and `BadgeText`. Public names are unchanged. `MavDrawerItem` now also refreshes when `SelectedIcon` changes.

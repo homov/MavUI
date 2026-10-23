@@ -95,7 +95,11 @@ jobs:
           cp ui-report/*.txt "$work"/ 2>/dev/null || true
           [ -f build.log ] && cp build.log "$work"/
           # Manifest next to the images: size and sha256, so a reader can verify what it downloaded.
-          ( cd "$work" && sha256sum *.png build.log > SHA256SUMS.txt 2>/dev/null || sha256sum *.png > SHA256SUMS.txt )
+          # Checksums of everything published except the checksum file itself.
+          ( cd "$work" && for f in *; do
+              [ "$f" = SHA256SUMS.txt ] && continue
+              [ -f "$f" ] && sha256sum "$f"
+            done > SHA256SUMS.txt )
           printf 'CI reports of run %s (%s), branch %s.\nScreenshots (PNG), screen outlines (*.txt) and build.log.\nRead them with tools/read_screenshots.py.\n' \
             "$GITHUB_RUN_ID" "${GITHUB_SHA:0:8}" "$GITHUB_REF_NAME" > "$work/README.md"
           cd "$work"
