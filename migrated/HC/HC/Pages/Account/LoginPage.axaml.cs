@@ -21,9 +21,15 @@ public partial class LoginPage : AccountPage
         _validator.Field(PasswordField).Required(Tr("validation.required"));
 
         SignInButton.Clicked += OnSignIn;
-        RegisterButton.Clicked += (_, _) => Navigator.Push(new RegisterPage { Navigator = Navigator });
-        RestoreButton.Clicked += (_, _) => Navigator.Push(new RestorePasswordPage { Navigator = Navigator });
+        RegisterButton.Clicked += OnRegister;
+        RestoreButton.Clicked += OnRestore;
     }
+
+    private void OnRegister(object? sender, EventArgs e) =>
+        Navigator.Push(new RegisterPage { Navigator = Navigator });
+
+    private void OnRestore(object? sender, EventArgs e) =>
+        Navigator.Push(new RestorePasswordPage { Navigator = Navigator });
 
     private async void OnSignIn(object? sender, EventArgs e)
     {

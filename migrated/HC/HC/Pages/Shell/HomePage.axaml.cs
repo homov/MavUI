@@ -9,11 +9,13 @@ public partial class HomePage : MavContentPage
     public HomePage()
     {
         InitializeComponent();
-        SignOutButton.Clicked += (_, _) =>
-        {
-            AppServices.Default.Session.SignOut();
-            Navigator.ShowSignIn();
-        };
+        SignOutButton.Clicked += OnSignOut;
+    }
+
+    private void OnSignOut(object? sender, EventArgs e)
+    {
+        AppServices.Default.Session.SignOut();
+        Navigator.ShowSignIn();
     }
 
     /// <summary>Navigation of the app. Set before the page is shown.</summary>
