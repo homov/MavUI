@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <!-- Keep AMarkup.Controls and the demo on the same Avalonia version. -->
+    <AvaloniaVersion>12.1.4</AvaloniaVersion>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Version>$(AvaloniaVersion)</Version>
+    <Nullable>enable</Nullable>
+    <LangVersion>14.0</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateAssemblyInfo>True</GenerateAssemblyInfo>
+    <IsPackable>false</IsPackable>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <!-- Snapshots are generated from Avalonia's public surface and intentionally
+         keep the original nullability annotations of the source assemblies. -->
+    <NoWarn>$(NoWarn);CS0618;CS8600;CS8605;CS8619;CS8620</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Generated/**/*.g.cs" />
+    <Compile Include="*.cs" />
+  </ItemGroup>
+
+</Project>
