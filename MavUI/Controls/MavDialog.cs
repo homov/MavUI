@@ -309,7 +309,7 @@ public class MavDialog : Control
 
         var bodyScroll = new MavScrollViewer
         {
-            Child = stack,
+            Content = stack,
             HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,
         };
         var content = new DockPanel();
@@ -522,7 +522,7 @@ public class MavDialog : Control
         var scroll = new MavScrollViewer
         {
             Padding = new Thickness(20, 16),
-            Child = content,
+            Content = content,
         };
         rootGrid.Add(scroll, 0, 2);
 

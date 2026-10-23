@@ -434,7 +434,7 @@ public class MavComboBox : MavContentView, IEnumerable<string>
             var scroll = new MavScrollViewer
             {
                 MaxHeight = 240,
-                Child = _dropdownStack,
+                Content = _dropdownStack,
             };
 
             var card = new MavSurface

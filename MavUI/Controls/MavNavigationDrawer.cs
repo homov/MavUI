@@ -110,7 +110,7 @@ public class MavNavigationDrawer : MavContentView, IEnumerable<MavDrawerItem>
 
         var scroll = new MavScrollViewer
         {
-            Child = _stack,
+            Content = _stack,
         };
 
         _drawerSurface = new MavSurface

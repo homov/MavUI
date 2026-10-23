@@ -213,7 +213,7 @@ public class MavMenu : Control, IEnumerable<MavMenuItem>
             MaxHeight = maxCardHeight,
             HorizontalScrollBarVisibility = global::Avalonia.Controls.Primitives.ScrollBarVisibility.Disabled,
             VerticalScrollBarVisibility = global::Avalonia.Controls.Primitives.ScrollBarVisibility.Auto,
-            Child = stack,
+            Content = stack,
         };
 
         return new MavSurface

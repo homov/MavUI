@@ -116,7 +116,7 @@ public class MavChipGroup : MavContentView, System.Collections.Generic.IEnumerab
         {
             HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
             VerticalScrollBarVisibility = ScrollBarVisibility.Disabled,
-            Child = _linePanel,
+            Content = _linePanel,
         };
 
         SingleSelection = singleSelection;

@@ -166,7 +166,7 @@ public class MavBottomSheet : Control
             {
                 MaxHeight = Math.Max(220, overlaySize.Height * 0.72),
                 Padding = new Thickness(24, 4, 24, 24),
-                Child = Body,
+                Content = Body,
             };
             _bodyScroll = scroll;
             stack.Children.Add(scroll);

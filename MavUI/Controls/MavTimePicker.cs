@@ -401,7 +401,7 @@ public class MavTimePicker : Control
 
             body = new MavScrollViewer
             {
-                Child = stack,
+                Content = stack,
                 HorizontalScrollBarVisibility = global::Avalonia.Controls.Primitives.ScrollBarVisibility.Disabled,
                 VerticalScrollBarVisibility = global::Avalonia.Controls.Primitives.ScrollBarVisibility.Auto,
             };

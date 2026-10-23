@@ -71,7 +71,7 @@ public class MavNativeEditor : TextBox
                 HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,
                 VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
                 IsScrollChainingEnabled = true,
-                Child = panel,
+                Content = panel,
             };
             scope.Register("PART_ScrollViewer", scroll);
             return scroll;

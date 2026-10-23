@@ -208,7 +208,7 @@ public class MavSideSheet : Control
             var scroll = new MavScrollViewer
             {
                 Padding = new Thickness(24, 8, 24, 16),
-                Child = Body,
+                Content = Body,
             };
             grid.Add(scroll, 0, 1);
         }

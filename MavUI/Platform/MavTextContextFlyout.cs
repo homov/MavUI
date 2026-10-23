@@ -84,7 +84,7 @@ public sealed class MavTextContextFlyout : PopupFlyoutBase
         _itemsPanel = new StackPanel();
         _scroll = new MavScrollViewer
         {
-            Child = _itemsPanel,
+            Content = _itemsPanel,
         };
         _surface = new MavSurface
         {

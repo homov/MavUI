@@ -298,7 +298,7 @@ public class MavDatePicker : Control
 
         var scroll = new MavScrollViewer
         {
-            Child = stack,
+            Content = stack,
             HorizontalScrollBarVisibility = global::Avalonia.Controls.Primitives.ScrollBarVisibility.Disabled,
             VerticalScrollBarVisibility = global::Avalonia.Controls.Primitives.ScrollBarVisibility.Auto,
         };

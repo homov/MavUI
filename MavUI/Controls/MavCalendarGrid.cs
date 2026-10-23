@@ -177,7 +177,7 @@ public class MavCalendarGrid : MavContentView
         {
             Height = 240,
             IsVisible = false,
-            Child = _yearGrid,
+            Content = _yearGrid,
         };
 
         monthBtn.Clicked += (_, _) =>
