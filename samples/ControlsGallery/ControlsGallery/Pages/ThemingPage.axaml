@@ -31,7 +31,7 @@
                   <mav:MavRadioButton GroupName="Seed" Label="{mav:Loc Overview.Seed.Slate, Fallback=Slate}" Command="{x:Static pages:ThemingPage.SetSeed}" CommandParameter="{x:Static mav:MavColors.Slate}" Margin="0,0,16,8" />
                 </WrapPanel>
                 <WrapPanel>
-                  <mav:MavButton Variant="Tonal" Text="{mav:Loc Theming.Contrast.Standard, Fallback="Contrast: Standard"}" Command="{x:Static pages:ThemingPage.SetContrast}" CommandParameter="{x:Static mav:MavContrast.Standard}" Margin="0,0,8,8" />
+                  <mav:MavButton Variant="Tonal" Text="{mav:Loc Theming.Contrast.Standard, Fallback=Contrast: Standard}" Command="{x:Static pages:ThemingPage.SetContrast}" CommandParameter="{x:Static mav:MavContrast.Standard}" Margin="0,0,8,8" />
                   <mav:MavButton Variant="Tonal" Text="{mav:Loc Overview.Contrast.Medium, Fallback=Medium}" Command="{x:Static pages:ThemingPage.SetContrast}" CommandParameter="{x:Static mav:MavContrast.Medium}" Margin="0,0,8,8" />
                   <mav:MavButton Variant="Tonal" Text="{mav:Loc Overview.Contrast.High, Fallback=High}" Command="{x:Static pages:ThemingPage.SetContrast}" CommandParameter="{x:Static mav:MavContrast.High}" Margin="0,0,8,8" />
                 </WrapPanel>
@@ -41,13 +41,13 @@
                   <mav:MavButton Variant="Text" Text="{mav:Loc Overview.Density.Dense, Fallback=Dense}" Command="{x:Static pages:ThemingPage.SetDensity}" CommandParameter="{x:Static mav:MavDensity.Dense}" Margin="0,0,8,8" />
                 </WrapPanel>
                 <WrapPanel>
-                  <mav:MavButton Variant="Outlined" Text="{mav:Loc Theming.Motion.Expressive, Fallback="Motion: Expressive"}" Command="{x:Static pages:ThemingPage.SetMotion}" CommandParameter="{x:Static mav:MavMotionScheme.Expressive}" Margin="0,0,8,8" />
+                  <mav:MavButton Variant="Outlined" Text="{mav:Loc Theming.Motion.Expressive, Fallback=Motion: Expressive}" Command="{x:Static pages:ThemingPage.SetMotion}" CommandParameter="{x:Static mav:MavMotionScheme.Expressive}" Margin="0,0,8,8" />
                   <mav:MavButton Variant="Outlined" Text="{mav:Loc Overview.Motion.Standard, Fallback=Standard}" Command="{x:Static pages:ThemingPage.SetMotion}" CommandParameter="{x:Static mav:MavMotionScheme.Standard}" Margin="0,0,8,8" />
                   <mav:MavButton Variant="Outlined" Text="{mav:Loc Overview.Motion.Reduced, Fallback=Reduced}" Command="{x:Static pages:ThemingPage.SetMotion}" CommandParameter="{x:Static mav:MavMotionScheme.Reduced}" Margin="0,0,8,8" />
                   <mav:MavButton Variant="Outlined" Text="{mav:Loc Theming.Motion.None, Fallback=None}" Command="{x:Static pages:ThemingPage.SetMotion}" CommandParameter="{x:Static mav:MavMotionScheme.None}" Margin="0,0,8,8" />
                 </WrapPanel>
                 <WrapPanel>
-                  <mav:MavButton Variant="Tonal" Text="{mav:Loc Theming.Shape.Compact, Fallback="Shape: Compact"}" Command="{x:Static pages:ThemingPage.SetShape}" CommandParameter="{x:Static mav:MavShapeScale.Compact}" Margin="0,0,8,8" />
+                  <mav:MavButton Variant="Tonal" Text="{mav:Loc Theming.Shape.Compact, Fallback=Shape: Compact}" Command="{x:Static pages:ThemingPage.SetShape}" CommandParameter="{x:Static mav:MavShapeScale.Compact}" Margin="0,0,8,8" />
                   <mav:MavButton Variant="Tonal" Text="{mav:Loc Overview.Motion.Standard, Fallback=Standard}" Command="{x:Static pages:ThemingPage.SetShape}" CommandParameter="{x:Static mav:MavShapeScale.Standard}" Margin="0,0,8,8" />
                   <mav:MavButton Variant="Tonal" Text="{mav:Loc Theming.Shape.Expressive, Fallback=Expressive}" Command="{x:Static pages:ThemingPage.SetShape}" CommandParameter="{x:Static mav:MavShapeScale.Expressive}" Margin="0,0,8,8" />
                 </WrapPanel>
