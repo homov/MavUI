@@ -1,4 +1,5 @@
 using System.Net;
+using Hc.Config;
 
 namespace Hc.Services.Cloud;
 
