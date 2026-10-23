@@ -102,14 +102,17 @@ public static class ThemingPage
     private static StackPanel Stack(double spacing, params Control[] items) =>
         new StackPanel().Spacing(spacing).Children(items);
 
-    /// <summary>Seed colors as a radio group; the first one is checked, as in the AXAML page.</summary>
+    /// <summary>Seed colors as a radio group. The checked radio follows the seed the theme uses.</summary>
     private static Control SeedRow() =>
-        Row(Seeds.Select((seed, index) => (Control)new MavRadioButton()
+        Row(Seeds.Select(seed =>
+        {
+            var radio = new MavRadioButton()
                 .Label(L("Overview.Seed." + seed.Name, seed.Name))
-                .GroupName("Seed")
-                .IsChecked(index == 0)
-                .OnCheckedChanged((_, on) => { if (on) MavTheme.Configure(seed: seed.Color); }))
-            .ToArray());
+                .GroupName("Seed");
+            radio.OnCheckedChanged((_, on) => { if (on) MavTheme.Configure(seed: seed.Color); });
+            MavTheme.Observe(radio, (r, _) => r.IsChecked = MavTheme.SeedColor == seed.Color);
+            return (Control)radio;
+        }).ToArray());
 
     /// <summary>Colour swatches for every colour role; the text colour is chosen for contrast.</summary>
     private static Control ColorSwatches() =>

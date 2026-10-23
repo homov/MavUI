@@ -21,14 +21,14 @@
                   <mav:MavButton x:Name="ModeSystemButton" Variant="Outlined" Icon="{x:Static mav:MavIcons.SettingsBrightness}" Text="{mav:Loc Overview.Mode.System, Fallback=System}" Command="{x:Static pages:ThemingPage.ModeSystem}" Margin="0,0,8,8" />
                 </WrapPanel>
                 <WrapPanel>
-                  <mav:MavRadioButton GroupName="Seed" Label="{mav:Loc Overview.Seed.Indigo, Fallback=Indigo}" IsChecked="True" Command="{x:Static pages:ThemingPage.SetSeed}" CommandParameter="{x:Static mav:MavColors.Indigo}" Margin="0,0,16,8" />
-                  <mav:MavRadioButton GroupName="Seed" Label="{mav:Loc Overview.Seed.Purple, Fallback=Purple}" Command="{x:Static pages:ThemingPage.SetSeed}" CommandParameter="{x:Static mav:MavColors.Purple}" Margin="0,0,16,8" />
-                  <mav:MavRadioButton GroupName="Seed" Label="{mav:Loc Overview.Seed.Blue, Fallback=Blue}" Command="{x:Static pages:ThemingPage.SetSeed}" CommandParameter="{x:Static mav:MavColors.Blue}" Margin="0,0,16,8" />
-                  <mav:MavRadioButton GroupName="Seed" Label="{mav:Loc Overview.Seed.Teal, Fallback=Teal}" Command="{x:Static pages:ThemingPage.SetSeed}" CommandParameter="{x:Static mav:MavColors.Teal}" Margin="0,0,16,8" />
-                  <mav:MavRadioButton GroupName="Seed" Label="{mav:Loc Overview.Seed.Green, Fallback=Green}" Command="{x:Static pages:ThemingPage.SetSeed}" CommandParameter="{x:Static mav:MavColors.Green}" Margin="0,0,16,8" />
-                  <mav:MavRadioButton GroupName="Seed" Label="{mav:Loc Overview.Seed.Orange, Fallback=Orange}" Command="{x:Static pages:ThemingPage.SetSeed}" CommandParameter="{x:Static mav:MavColors.Orange}" Margin="0,0,16,8" />
-                  <mav:MavRadioButton GroupName="Seed" Label="{mav:Loc Overview.Seed.Rose, Fallback=Rose}" Command="{x:Static pages:ThemingPage.SetSeed}" CommandParameter="{x:Static mav:MavColors.Rose}" Margin="0,0,16,8" />
-                  <mav:MavRadioButton GroupName="Seed" Label="{mav:Loc Overview.Seed.Slate, Fallback=Slate}" Command="{x:Static pages:ThemingPage.SetSeed}" CommandParameter="{x:Static mav:MavColors.Slate}" Margin="0,0,16,8" />
+                  <mav:MavRadioButton x:Name="SeedIndigoRadio" GroupName="Seed" Label="{mav:Loc Overview.Seed.Indigo, Fallback=Indigo}" Command="{x:Static pages:ThemingPage.SetSeed}" CommandParameter="{x:Static mav:MavColors.Indigo}" Margin="0,0,16,8" />
+                  <mav:MavRadioButton x:Name="SeedPurpleRadio" GroupName="Seed" Label="{mav:Loc Overview.Seed.Purple, Fallback=Purple}" Command="{x:Static pages:ThemingPage.SetSeed}" CommandParameter="{x:Static mav:MavColors.Purple}" Margin="0,0,16,8" />
+                  <mav:MavRadioButton x:Name="SeedBlueRadio" GroupName="Seed" Label="{mav:Loc Overview.Seed.Blue, Fallback=Blue}" Command="{x:Static pages:ThemingPage.SetSeed}" CommandParameter="{x:Static mav:MavColors.Blue}" Margin="0,0,16,8" />
+                  <mav:MavRadioButton x:Name="SeedTealRadio" GroupName="Seed" Label="{mav:Loc Overview.Seed.Teal, Fallback=Teal}" Command="{x:Static pages:ThemingPage.SetSeed}" CommandParameter="{x:Static mav:MavColors.Teal}" Margin="0,0,16,8" />
+                  <mav:MavRadioButton x:Name="SeedGreenRadio" GroupName="Seed" Label="{mav:Loc Overview.Seed.Green, Fallback=Green}" Command="{x:Static pages:ThemingPage.SetSeed}" CommandParameter="{x:Static mav:MavColors.Green}" Margin="0,0,16,8" />
+                  <mav:MavRadioButton x:Name="SeedOrangeRadio" GroupName="Seed" Label="{mav:Loc Overview.Seed.Orange, Fallback=Orange}" Command="{x:Static pages:ThemingPage.SetSeed}" CommandParameter="{x:Static mav:MavColors.Orange}" Margin="0,0,16,8" />
+                  <mav:MavRadioButton x:Name="SeedRoseRadio" GroupName="Seed" Label="{mav:Loc Overview.Seed.Rose, Fallback=Rose}" Command="{x:Static pages:ThemingPage.SetSeed}" CommandParameter="{x:Static mav:MavColors.Rose}" Margin="0,0,16,8" />
+                  <mav:MavRadioButton x:Name="SeedSlateRadio" GroupName="Seed" Label="{mav:Loc Overview.Seed.Slate, Fallback=Slate}" Command="{x:Static pages:ThemingPage.SetSeed}" CommandParameter="{x:Static mav:MavColors.Slate}" Margin="0,0,16,8" />
                 </WrapPanel>
                 <WrapPanel>
                   <mav:MavButton x:Name="ContrastStandardButton" Variant="Tonal" Text="{mav:Loc Theming.Contrast.Standard, Fallback=Contrast: Standard}" Command="{x:Static pages:ThemingPage.SetContrast}" CommandParameter="{x:Static mav:MavContrast.Standard}" Margin="0,0,8,8" />

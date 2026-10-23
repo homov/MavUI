@@ -129,6 +129,14 @@ public partial class ThemingPage : UserControl
         ColorItems.ItemsSource = ColorSwatches;
         ShapeItems.ItemsSource = ShapeSamples;
         ContrastItems.ItemsSource = ContrastLines;
+        SeedIndigoRadio.IsChecked = MavTheme.SeedColor == MavColors.Indigo;
+        SeedPurpleRadio.IsChecked = MavTheme.SeedColor == MavColors.Purple;
+        SeedBlueRadio.IsChecked = MavTheme.SeedColor == MavColors.Blue;
+        SeedTealRadio.IsChecked = MavTheme.SeedColor == MavColors.Teal;
+        SeedGreenRadio.IsChecked = MavTheme.SeedColor == MavColors.Green;
+        SeedOrangeRadio.IsChecked = MavTheme.SeedColor == MavColors.Orange;
+        SeedRoseRadio.IsChecked = MavTheme.SeedColor == MavColors.Rose;
+        SeedSlateRadio.IsChecked = MavTheme.SeedColor == MavColors.Slate;
         HighlightChoices();
     }
 
