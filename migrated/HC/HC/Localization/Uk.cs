@@ -38,6 +38,12 @@ internal static class Uk
         ["auth.error.storage"] = "Збереження пароля недоступне на цій системі. Увійдіть без опції «Запам'ятати».",
         ["auth.error.generic"] = "Щось пішло не так. Спробуйте ще раз.",
 
+        ["home.tab.groups"] = "Групи",
+        ["home.tab.devices"] = "Пристрої",
+        ["home.refresh"] = "Оновити",
+        ["groups.empty.title"] = "Груп немає",
+        ["devices.empty.title"] = "Пристроїв немає",
+
         ["home.title"] = "HC",
         ["home.placeholder"] = "Групи та пристрої з'являться тут.",
         ["home.signout"] = "Вийти",

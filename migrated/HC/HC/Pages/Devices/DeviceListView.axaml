@@ -1,0 +1,15 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mav="https://where.it/mav"
+             x:Class="Hc.Pages.Devices.DeviceListView">
+  <mav:MavScrollViewer>
+    <StackPanel Margin="16" Spacing="12">
+      <mav:MavLinearProgress x:Name="Progress" IsIndeterminate="True" IsVisible="False" />
+      <mav:MavBanner x:Name="ErrorBanner" Icon="{x:Static mav:MavIcons.Error}" IsVisible="False" />
+      <mav:MavEmptyState x:Name="EmptyState" IsVisible="False"
+                         Icon="{x:Static mav:MavIcons.Devices}"
+                         Title="{mav:Loc devices.empty.title, Fallback=No devices}" />
+      <StackPanel x:Name="ListHost" Spacing="12" />
+    </StackPanel>
+  </mav:MavScrollViewer>
+</UserControl>

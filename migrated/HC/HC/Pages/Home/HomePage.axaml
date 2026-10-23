@@ -1,0 +1,9 @@
+<mav:MavContentPage xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mav="https://where.it/mav"
+                    x:Class="Hc.Pages.Home.HomePage"
+                    Title="{mav:Loc home.title, Fallback=HC}">
+  <mav:MavContentPage.Content>
+    <mav:MavTabs x:Name="Tabs" />
+  </mav:MavContentPage.Content>
+</mav:MavContentPage>

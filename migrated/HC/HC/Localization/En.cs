@@ -38,6 +38,12 @@ internal static class En
         ["auth.error.storage"] = "Saving the password is not available on this system. Sign in without Remember me.",
         ["auth.error.generic"] = "Something went wrong. Try again.",
 
+        ["home.tab.groups"] = "Groups",
+        ["home.tab.devices"] = "Devices",
+        ["home.refresh"] = "Refresh",
+        ["groups.empty.title"] = "No groups",
+        ["devices.empty.title"] = "No devices",
+
         ["home.title"] = "HC",
         ["home.placeholder"] = "Groups and devices will appear here.",
         ["home.signout"] = "Sign out",

@@ -1,4 +1,5 @@
 using Hc.Pages.Account;
+using Hc.Pages.Home;
 using Mav.Controls;
 
 namespace Hc.Pages.Shell;
