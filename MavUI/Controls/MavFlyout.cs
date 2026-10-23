@@ -33,6 +33,9 @@ public static class MavFlyout
     public static readonly AttachedProperty<MavModalNavigationDrawer?> ModalDrawerProperty =
         AvaloniaProperty.RegisterAttached<Control, MavModalNavigationDrawer?>("ModalDrawer", typeof(MavFlyout));
 
+    public static readonly AttachedProperty<MavSearchView?> SearchViewProperty =
+        AvaloniaProperty.RegisterAttached<Control, MavSearchView?>("SearchView", typeof(MavFlyout));
+
     private static readonly AttachedProperty<bool> IsTriggerWiredProperty =
         AvaloniaProperty.RegisterAttached<Control, bool>("IsTriggerWired", typeof(MavFlyout));
 
@@ -71,6 +74,11 @@ public static class MavFlyout
         ModalDrawerProperty.Changed.AddClassHandler<Control>((c, e) =>
         {
             MavVisualTreeHelpers.AttachLogicalChild(c, e.GetNewValue<MavModalNavigationDrawer?>());
+            EnsureTriggerWired(c);
+        });
+        SearchViewProperty.Changed.AddClassHandler<Control>((c, e) =>
+        {
+            MavVisualTreeHelpers.AttachLogicalChild(c, e.GetNewValue<MavSearchView?>());
             EnsureTriggerWired(c);
         });
     }
@@ -138,6 +146,16 @@ public static class MavFlyout
     /// </summary>
     public static void SetModalDrawer(Control element, MavModalNavigationDrawer? value) => element.SetValue(ModalDrawerProperty, value);
 
+    /// <summary>
+    /// Gets the search view opened by the element.
+    /// </summary>
+    public static MavSearchView? GetSearchView(Control element) => element.GetValue(SearchViewProperty);
+
+    /// <summary>
+    /// Sets the search view opened by the element.
+    /// </summary>
+    public static void SetSearchView(Control element, MavSearchView? value) => element.SetValue(SearchViewProperty, value);
+
     private static void EnsureTriggerWired(Control control)
     {
         if (control.GetValue(IsTriggerWiredProperty))
@@ -195,5 +213,7 @@ public static class MavFlyout
 
         if (GetModalDrawer(anchor) is { } drawer)
             drawer.Show(anchor);
+        if (GetSearchView(anchor) is { } search)
+            search.Show(anchor);
     }
 }

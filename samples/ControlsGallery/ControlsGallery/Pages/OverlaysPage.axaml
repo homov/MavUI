@@ -13,7 +13,29 @@
             <StackPanel Spacing="10">
               <mav:MavLabel Role="TitleMedium" Text="MavMenu, MavMenuItem and MavPopover" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Overlays.Menus.CardBody, Fallback=Menus support icons\, trailing text\, dividers and nested submenus; popovers host custom content.}" />
-              <StackPanel x:Name="MenusHost" Spacing="10" />
+              <WrapPanel>
+                <mav:MavButton Variant="Outlined" Icon="{x:Static mav:MavIcons.MoreVert}" Text="{mav:Loc Overlays.Menu.Open, Fallback=Open menu}" Margin="0,0,8,8">
+                  <mav:MavFlyout.Menu>
+                    <mav:MavMenu>
+                      <mav:MavMenuItem Text="{mav:Loc Overlays.Menu.Rename, Fallback=Rename}" LeadingIcon="{x:Static mav:MavIcons.Edit}" />
+                      <mav:MavMenuItem Text="{mav:Loc Overlays.Menu.Duplicate, Fallback=Duplicate}" LeadingIcon="{x:Static mav:MavIcons.ContentCopy}" />
+                      <mav:MavMenuItem IsDivider="True" />
+                      <mav:MavMenuItem Text="{mav:Loc Overlays.Menu.MoveTo, Fallback=Move to}" LeadingIcon="{x:Static mav:MavIcons.DriveFileMove}">
+                        <mav:MavMenuItem Text="{mav:Loc Overlays.Menu.Archive, Fallback=Archive}" LeadingIcon="{x:Static mav:MavIcons.Archive}" />
+                        <mav:MavMenuItem Text="{mav:Loc Overlays.Menu.Trash, Fallback=Trash}" LeadingIcon="{x:Static mav:MavIcons.Delete}" />
+                      </mav:MavMenuItem>
+                      <mav:MavMenuItem Text="{mav:Loc Overlays.Menu.Delete, Fallback=Delete}" LeadingIcon="{x:Static mav:MavIcons.Delete}" />
+                    </mav:MavMenu>
+                  </mav:MavFlyout.Menu>
+                </mav:MavButton>
+                <mav:MavButton Variant="Outlined" Icon="{x:Static mav:MavIcons.OpenInNew}" Text="{mav:Loc Overlays.Popover.Open, Fallback=Open popover}" Margin="0,0,8,8">
+                  <mav:MavFlyout.Popover>
+                    <mav:MavPopover Title="{mav:Loc Overlays.Popover.Title, Fallback=Details}" Placement="Bottom">
+                      <mav:MavLabel TextWrapping="Wrap" Text="{mav:Loc Overlays.Popover.Body, Fallback=Any control can live in a popover. It clamps to the viewport and stays near its anchor.}" />
+                    </mav:MavPopover>
+                  </mav:MavFlyout.Popover>
+                </mav:MavButton>
+              </WrapPanel>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="menu.Show(anchor) · AddItem/AddSubmenu/AddDivider · new MavPopover { Content }.Show(anchor)" />
             </StackPanel>
           </mav:MavCard>
@@ -26,7 +48,16 @@
             <StackPanel Spacing="10">
               <mav:MavLabel Role="TitleMedium" Text="MavTooltip and MavRichTooltip" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Overlays.Tooltips.CardBody, Fallback=A global simple tooltip and a rich tooltip with a title\, body and optional action.}" />
-              <StackPanel x:Name="TooltipsHost" Spacing="10" />
+              <WrapPanel>
+                <mav:MavButton Variant="Tonal" Icon="{x:Static mav:MavIcons.Info}" Text="{mav:Loc Overlays.Tip.Hover, Fallback=Hover for tooltip}" mav:MavTooltip.Text="{mav:Loc Overlays.Tip.Text, Fallback=A simple MD3 tooltip}" Margin="0,0,8,8" />
+                <mav:MavButton Variant="Outlined" Icon="{x:Static mav:MavIcons.Keyboard}" Text="{mav:Loc Overlays.Tip.Rich, Fallback=Rich tooltip}" Margin="0,0,8,8">
+                  <mav:MavFlyout.RichTooltip>
+                    <mav:MavRichTooltip Subhead="{mav:Loc Overlays.Tip.ShortcutTitle, Fallback=Keyboard shortcut}"
+                                        Text="{mav:Loc Overlays.Tip.ShortcutText, Fallback=Ctrl+K opens the command palette.}"
+                                        ActionText="{mav:Loc Overlays.Tip.GotIt, Fallback=Got it}" />
+                  </mav:MavFlyout.RichTooltip>
+                </mav:MavButton>
+              </WrapPanel>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavTooltip.SetText(control, text) · MavRichTooltip.Show(anchor, title, text, actionText)" />
             </StackPanel>
           </mav:MavCard>
@@ -39,7 +70,13 @@
             <StackPanel Spacing="10">
               <mav:MavLabel Role="TitleMedium" Text="MavSearchView" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Overlays.Search.CardBody, Fallback=Full-screen or compact search with suggestions\, recent searches and result templates.}" />
-              <StackPanel x:Name="SearchHost" Spacing="10" />
+              <WrapPanel>
+                <mav:MavButton Variant="Filled" Icon="{x:Static mav:MavIcons.Search}" Text="{mav:Loc Overlays.Search.Open, Fallback=Open search view}" Margin="0,0,8,8">
+                  <mav:MavFlyout.SearchView>
+                    <mav:MavSearchView Placeholder="{mav:Loc Overlays.Search.Placeholder, Fallback=Search every control}" />
+                  </mav:MavFlyout.SearchView>
+                </mav:MavButton>
+              </WrapPanel>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="new MavSearchView { Suggestions }.Show(anchor) · QueryChanged · ResultSelected" />
             </StackPanel>
           </mav:MavCard>
@@ -52,7 +89,31 @@
             <StackPanel Spacing="10">
               <mav:MavLabel Role="TitleMedium" Text="MavFlyout" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Overlays.Flyouts.CardBody, Fallback=Attach a menu\, popover\, rich tooltip\, sheet\, dialog or modal drawer to any control declaratively.}" />
-              <StackPanel x:Name="FlyoutsHost" Spacing="10" />
+              <WrapPanel>
+                <mav:MavButton Variant="Outlined" Icon="{x:Static mav:MavIcons.Menu}" Text="{mav:Loc Overlays.Flyout.Menu, Fallback=Flyout menu}" Margin="0,0,8,8">
+                  <mav:MavFlyout.Menu>
+                    <mav:MavMenu>
+                      <mav:MavMenuItem Text="First" LeadingIcon="{x:Static mav:MavIcons.LooksOne}" />
+                      <mav:MavMenuItem Text="Second" LeadingIcon="{x:Static mav:MavIcons.LooksTwo}" />
+                    </mav:MavMenu>
+                  </mav:MavFlyout.Menu>
+                </mav:MavButton>
+                <mav:MavButton Variant="Outlined" Icon="{x:Static mav:MavIcons.Chat}" Text="{mav:Loc Overlays.Flyout.Dialog, Fallback=Flyout dialog}" Margin="0,0,8,8">
+                  <mav:MavFlyout.Dialog>
+                    <mav:MavDialog Title="{mav:Loc Overlays.Flyout.DialogTitle, Fallback=Declarative dialog}"
+                                   Message="{mav:Loc Overlays.Flyout.DialogMessage, Fallback=Opened by MavFlyout when the button is clicked.}"
+                                   ConfirmText="{mav:Loc Overlays.Flyout.Close, Fallback=Close}" />
+                  </mav:MavFlyout.Dialog>
+                </mav:MavButton>
+                <mav:MavButton Variant="Outlined" Icon="{x:Static mav:MavIcons.MenuOpen}" Text="{mav:Loc Overlays.Flyout.Drawer, Fallback=Flyout drawer}" Margin="0,0,8,8">
+                  <mav:MavFlyout.ModalDrawer>
+                    <mav:MavModalNavigationDrawer Title="{mav:Loc Overlays.Flyout.Drawer, Fallback=Flyout drawer}">
+                      <mav:MavDrawerItem Label="One" Icon="{x:Static mav:MavIcons.LooksOne}" />
+                      <mav:MavDrawerItem Label="Two" Icon="{x:Static mav:MavIcons.LooksTwo}" />
+                    </mav:MavModalNavigationDrawer>
+                  </mav:MavFlyout.ModalDrawer>
+                </mav:MavButton>
+              </WrapPanel>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavFlyout.SetMenu/SetPopover/SetDialog/SetBottomSheet/SetSideSheet/SetModalDrawer" />
             </StackPanel>
           </mav:MavCard>
