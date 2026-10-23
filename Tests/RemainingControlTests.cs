@@ -102,7 +102,7 @@ public class RemainingControlTests
         {
             Label = "Delete",
             IsDestructive = true,
-            OnTriggered = () => callbackRuns++,
+            TriggeredCallback = () => callbackRuns++,
         };
         action.Triggered += (_, _) => eventRuns++;
 

@@ -60,7 +60,7 @@ public sealed class MavSwipeAction : Control
         set => SetValue(IsDestructiveProperty, value);
     }
 
-    public Action? OnTriggered { get; set; }
+    public Action? TriggeredCallback { get; set; }
     public event EventHandler? Triggered;
     public event EventHandler? Clicked;
 
@@ -103,7 +103,7 @@ public sealed class MavSwipeAction : Control
     {
         Label = label;
         Icon = icon;
-        OnTriggered = onTriggered;
+        TriggeredCallback = onTriggered;
         BackgroundColor = backgroundColor;
         ForegroundColor = foregroundColor;
     }
@@ -116,7 +116,7 @@ public sealed class MavSwipeAction : Control
     /// <summary>Runs the action callback, used by the list when the swipe is confirmed.</summary>
     internal void Invoke()
     {
-        OnTriggered?.Invoke();
+        TriggeredCallback?.Invoke();
         Triggered?.Invoke(this, EventArgs.Empty);
         Clicked?.Invoke(this, EventArgs.Empty);
         if (Command is { } cmd && cmd.CanExecute(CommandParameter))

@@ -1163,7 +1163,7 @@ that bleeds past the viewport edges. `InitialRatio` is clamped to 15–85% and t
 |---|---|
 | `MavList` | vertical list (`StackPanel`). `AddItem(MavListItem)`, `AddSubheader`, `AddDivider`, `ItemsSource`, `ItemTemplate`, `ItemFactory`, `ShowDividers`, `DividerInsetStart`. |
 | `MavListItem` | list row. `Headline`, `SupportingText`, `Overline`, `LeadingIcon`, `TrailingIcon`, `TrailingText`, `LeadingView`, `TrailingView`, `IsSelected`, `IsInteractive`, `Command`, `Clicked`, `TrailingIconClicked`, `LeadingSwipeAction`, `TrailingSwipeAction`, `Lines` (`OneLine`/`TwoLine`/`ThreeLine`). |
-| `MavSwipeAction` | swipe action behind a row. `Label`, `Icon`, `IsDestructive`, `OnTriggered`/`Command`, `BackgroundColor`, `ForegroundColor`, `Triggered`. |
+| `MavSwipeAction` | swipe action behind a row. `Label`, `Icon`, `IsDestructive`, `TriggeredCallback`/`Command`, `BackgroundColor`, `ForegroundColor`, `Triggered`. |
 | `MavListSubheader` | section label. `Text`. |
 | `MavDataTable` | data grid with sorting/filter/pagination. `AddColumn(header, valueSelector, isNumeric, isSortable, cellTemplate, width)`, `Columns`, `ItemsSource`, `IsSelectable`, `SelectedItem`, `SelectedItems`, `SelectedItemsSource`, `FilterText`, `ShowPagination`, `PageSize`, `CurrentPage`, `AlternatingRowBackground`, `MaxBodyHeight`, `Layout` (`Auto`/`Table`/`Cards`), `CompactBreakpoint` (600), `IsCompact`, `EffectiveLayout`, `RowClicked`, `SelectionChanged`, `ClearSelection()`. Auto switches to cards on hosts narrower than `CompactBreakpoint`. |
 | `MavDataColumn` | column definition. `Header`, `PropertyName`/`BindingPath`, `ValueSelector`, `IsNumeric`, `IsSortable`, `CellTemplate`, `CellFactory`, `Width`. |
