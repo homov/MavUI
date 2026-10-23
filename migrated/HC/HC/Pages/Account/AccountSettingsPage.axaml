@@ -1,0 +1,16 @@
+<mav:MavContentPage xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mav="https://where.it/mav"
+                    x:Class="Hc.Pages.Account.AccountSettingsPage"
+                    Title="{mav:Loc account.settings.title, Fallback=Account}">
+  <mav:MavContentPage.Content>
+    <mav:MavScrollViewer>
+      <StackPanel Margin="20,24,20,40" Spacing="16" MaxWidth="480">
+        <mav:MavSelect x:Name="LanguageSelect" Variant="Outlined"
+                       Label="{mav:Loc account.settings.language, Fallback=Language}" />
+        <mav:MavButton x:Name="PasswordButton" Variant="Outlined" HorizontalAlignment="Stretch"
+                       Text="{mav:Loc password.change.title, Fallback=Change password}" />
+      </StackPanel>
+    </mav:MavScrollViewer>
+  </mav:MavContentPage.Content>
+</mav:MavContentPage>

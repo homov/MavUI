@@ -49,6 +49,15 @@ internal static class Uk
         ["schedule.humidity"] = "Вологість",
         ["schedule.unknown"] = "Невідомий",
 
+        ["home.settings"] = "Налаштування облікового запису",
+        ["account.settings.title"] = "Обліковий запис",
+        ["account.settings.language"] = "Мова",
+        ["password.change.title"] = "Змінити пароль",
+        ["password.change.hint"] = "Введіть поточний пароль і новий пароль.",
+        ["password.change.save"] = "Зберегти новий пароль",
+        ["password.field.current"] = "Поточний пароль",
+        ["password.field.repeat"] = "Повторіть новий пароль",
+
         ["home.title"] = "HC",
         ["home.placeholder"] = "Групи та пристрої з'являться тут.",
         ["home.signout"] = "Вийти",

@@ -40,4 +40,19 @@ public class AccountServiceTests : IDisposable
         Assert.Contains("code=1234", body);
         Assert.DoesNotContain("fresh", body);
     }
+
+    [Fact]
+    public async Task ChangePassword_SendsEmailAndEncryptedPasswordsOnly()
+    {
+        var handler = ScriptedHandler.Json("""{"state":"ok"}""");
+        var settings = new SettingsService(_prefs.Preferences);
+        var service = new AccountService(TestCloud.Create(handler), settings, new LanguageService(settings));
+
+        await service.ChangePasswordAsync("user@example.com", "secret-old", "secret-new", TestContext.Current.CancellationToken);
+
+        var body = handler.Sent.Single().Body!;
+        Assert.Contains("email=user%40example.com", body);
+        Assert.DoesNotContain("secret-old", body);
+        Assert.DoesNotContain("secret-new", body);
+    }
 }

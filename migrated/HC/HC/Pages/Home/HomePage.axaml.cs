@@ -1,3 +1,4 @@
+using Hc.Pages.Account;
 using Hc.Pages.Devices;
 using Hc.Pages.Groups;
 using Hc.Pages.Shell;
@@ -7,7 +8,7 @@ using Mav.Controls;
 
 namespace Hc.Pages.Home;
 
-/// <summary>Signed-in start page: two tabs, groups and devices. Each list refreshes by pulling down; sign-out is in the header.</summary>
+/// <summary>Signed-in start page: two tabs, groups and devices. Each list refreshes by pulling down; the header opens account settings and sign-out.</summary>
 public partial class HomePage : MavContentPage
 {
 
@@ -18,11 +19,14 @@ public partial class HomePage : MavContentPage
         Tabs.Add(MavLocalization.Get("home.tab.groups", "Groups"), MavIcons.Groups, content: new GroupListView());
         Tabs.Add(MavLocalization.Get("home.tab.devices", "Devices"), MavIcons.Devices, content: new DeviceListView());
 
+        AddAction(MavIcons.Settings, OnSettings, MavLocalization.Get("home.settings", "Account settings"));
         AddAction(MavIcons.Logout, OnSignOut, MavLocalization.Get("home.signout", "Sign out"));
     }
 
     /// <summary>Navigation of the app. Set before the page is shown.</summary>
     public required AppNavigator Navigator { get; init; }
+
+    private void OnSettings() => Navigator.Push(new AccountSettingsPage { Navigator = Navigator });
 
     private void OnSignOut()
     {

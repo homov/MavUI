@@ -23,6 +23,13 @@ public sealed class AccountService(CloudClient cloud, SettingsService settings, 
         CloudResults.Require(await cloud.ValidateEmail(new ValidateEmailRequest(email, code), ct).ConfigureAwait(false));
     }
 
+    /// <summary>Changes the password of a signed-in account. The server checks the current password.</summary>
+    public async Task ChangePasswordAsync(string email, string currentPassword, string newPassword, CancellationToken ct = default)
+    {
+        var request = new ChangePasswordRequest(email, PasswordEncrypter.Encrypt(currentPassword), PasswordEncrypter.Encrypt(newPassword));
+        CloudResults.Require(await cloud.ChangePassword(request, ct).ConfigureAwait(false));
+    }
+
     /// <summary>Asks the server to send a password reset code to the email.</summary>
     public async Task RequestPasswordResetAsync(string email, CancellationToken ct = default)
     {

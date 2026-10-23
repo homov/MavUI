@@ -49,6 +49,15 @@ internal static class En
         ["schedule.humidity"] = "Humidity",
         ["schedule.unknown"] = "Unknown",
 
+        ["home.settings"] = "Account settings",
+        ["account.settings.title"] = "Account",
+        ["account.settings.language"] = "Language",
+        ["password.change.title"] = "Change password",
+        ["password.change.hint"] = "Enter the current password and the new one.",
+        ["password.change.save"] = "Save new password",
+        ["password.field.current"] = "Current password",
+        ["password.field.repeat"] = "Repeat new password",
+
         ["home.title"] = "HC",
         ["home.placeholder"] = "Groups and devices will appear here.",
         ["home.signout"] = "Sign out",
