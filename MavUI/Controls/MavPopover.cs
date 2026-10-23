@@ -168,7 +168,7 @@ public class MavPopover : Control
             BorderStrokeThickness = 1,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
-            Content = bodyHost,
+            Child = bodyHost,
         };
 
         _anchor = anchor;

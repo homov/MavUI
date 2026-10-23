@@ -186,7 +186,7 @@ public class MavNavigationSuiteScaffold : MavContentView, IEnumerable<MavSuiteDe
         _overlayHost.Children.CollectionChanged += (_, _) =>
             _overlayHost.IsHitTestVisible = _overlayHost.Children.Count > 0;
 
-        Content = new Panel
+        Child = new Panel
         {
             Children = { _root, _overlayHost },
         };

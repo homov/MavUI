@@ -141,7 +141,7 @@ public class MavStepper : MavContentView, IEnumerable<MavStep>
         _root.Children.Add(_bodyHost);
         _root.Children.Add(_controlsRow);
 
-        Content = _root;
+        Child = _root;
         Orientation = orientation;
         ShowControls = showControls;
 
@@ -540,7 +540,7 @@ public class MavStepper : MavContentView, IEnumerable<MavStep>
             Radius = 14,
             FillColor = badgeBg,
             VerticalAlignment = VerticalAlignment.Center,
-            Content = badgeInner,
+            Child = badgeInner,
         };
 
         var titleLbl = new TextBlock
@@ -590,7 +590,7 @@ public class MavStepper : MavContentView, IEnumerable<MavStep>
             CornerRadius = 10,
             Padding = new Thickness(6, 4),
             IsInteractive = AllowStepTap,
-            Content = row,
+            Child = row,
         };
         var captured = index;
         hit.Clicked += (_, _) =>

@@ -250,7 +250,7 @@ public class MavDataTable : MavContentView, IEnumerable<MavDataColumn>
             },
         };
 
-        Content = _cardBorder;
+        Child = _cardBorder;
         MavTheme.Observe(this, (self, _) => self.RebuildTable());
 
         AttachedToVisualTree += (_, _) =>
@@ -1766,7 +1766,7 @@ public class MavDataTable : MavContentView, IEnumerable<MavDataColumn>
             FillColor = rowBg,
             RippleColor = c.OnSurface,
             Padding = new Thickness(0),
-            Content = rowGrid,
+            Child = rowGrid,
         };
         rowSurface.Clicked += (_, _) => ActivateRow(rowItem);
 

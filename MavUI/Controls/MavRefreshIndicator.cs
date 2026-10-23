@@ -145,7 +145,7 @@ public class MavRefreshIndicator : MavContentView
             VerticalAlignment = VerticalAlignment.Bottom,
             Margin = new Thickness(0, 0, 0, 6),
             Opacity = 0,
-            Content = pillRow,
+            Child = pillRow,
         };
 
         _indicatorHost = new Border

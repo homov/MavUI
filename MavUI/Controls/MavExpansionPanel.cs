@@ -96,7 +96,7 @@ public class MavExpansionPanel : MavContentView
             MinHeight = 56,
             CornerRadius = 12,
             Padding = new Thickness(16, 12),
-            Content = headerRow,
+            Child = headerRow,
         };
         _header.Clicked += (_, _) => IsExpanded = !IsExpanded;
 
@@ -119,7 +119,7 @@ public class MavExpansionPanel : MavContentView
             Radius = 12,
             BorderStrokeThickness = 1,
             ClipToBounds = true,
-            Content = stack,
+            Child = stack,
         };
 
         base.Child = _card;
