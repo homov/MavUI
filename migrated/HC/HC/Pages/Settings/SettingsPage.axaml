@@ -1,0 +1,22 @@
+<mav:MavContentPage xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mav="https://where.it/mav"
+                    x:Class="Hc.Pages.Settings.SettingsPage"
+                    Title="{mav:Loc settings.title, Fallback=Settings}">
+  <mav:MavContentPage.Content>
+    <mav:MavScrollViewer>
+      <StackPanel Margin="20,24,20,40" Spacing="16" MaxWidth="480">
+        <mav:MavBanner x:Name="ErrorBanner" Icon="{x:Static mav:MavIcons.Error}" IsVisible="False" />
+        <mav:MavLabel Role="TitleMedium" Text="{mav:Loc settings.section.app, Fallback=Application}" />
+        <mav:MavSelect x:Name="LanguageSelect" Variant="Outlined"
+                       Label="{mav:Loc settings.language, Fallback=Language}" />
+        <mav:MavSelect x:Name="ThemeSelect" Variant="Outlined"
+                       Label="{mav:Loc settings.theme, Fallback=Theme}" />
+        <mav:MavSelect x:Name="TimezoneSelect" Variant="Outlined"
+                       Label="{mav:Loc settings.timezone, Fallback=Time zone}" />
+        <mav:MavLabel Role="TitleMedium" Text="{mav:Loc settings.section.account, Fallback=Account}" />
+        <StackPanel x:Name="AccountRows" Spacing="8" />
+      </StackPanel>
+    </mav:MavScrollViewer>
+  </mav:MavContentPage.Content>
+</mav:MavContentPage>

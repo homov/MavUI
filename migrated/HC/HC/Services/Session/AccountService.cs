@@ -30,6 +30,26 @@ public sealed class AccountService(CloudClient cloud, SettingsService settings, 
         CloudResults.Require(await cloud.ChangePassword(request, ct).ConfigureAwait(false));
     }
 
+    /// <summary>Time zones the server accepts, sorted by name.</summary>
+    public async Task<IReadOnlyList<string>> GetTimezonesAsync(CancellationToken ct = default)
+    {
+        var response = await cloud.GetTimezones(ct).ConfigureAwait(false);
+        return CloudResults.Require(response).Names.Order(StringComparer.Ordinal).ToList();
+    }
+
+    /// <summary>Saves the time zone on the server, then on this device.</summary>
+    public async Task SetTimezoneAsync(string timezone, CancellationToken ct = default)
+    {
+        CloudResults.Require(await cloud.SetTimezone(new SetTimezoneRequest(timezone), ct).ConfigureAwait(false));
+        settings.PreferredTimezone = timezone;
+    }
+
+    /// <summary>Deletes the account on the server. The caller signs out locally.</summary>
+    public async Task DeleteAccountAsync(CancellationToken ct = default)
+    {
+        CloudResults.Require(await cloud.UserDelete(ct).ConfigureAwait(false));
+    }
+
     /// <summary>Asks the server to send a password reset code to the email.</summary>
     public async Task RequestPasswordResetAsync(string email, CancellationToken ct = default)
     {

@@ -15,11 +15,12 @@ public abstract class AccountPage : MavContentPage
     /// <summary>Navigation of the app. Set by the page that opens this one, before it is shown.</summary>
     public required AppNavigator Navigator { get; init; }
 
-    /// <summary>Runs one cloud call. A failure is shown in <paramref name="banner"/>; the page does not crash.</summary>
-    protected static async Task RunAsync(MavButton button, MavBanner banner, Func<Task> action)
+    /// <summary>Runs one cloud call. The button (if any) shows busy. A failure is shown in <paramref name="banner"/>; the page does not crash.</summary>
+    protected static async Task RunAsync(MavButton? button, MavBanner banner, Func<Task> action)
     {
         banner.Dismiss();
-        button.IsLoading = true;
+        if (button is not null)
+            button.IsLoading = true;
         try
         {
             await action();
@@ -35,7 +36,8 @@ public abstract class AccountPage : MavContentPage
         }
         finally
         {
-            button.IsLoading = false;
+            if (button is not null)
+                button.IsLoading = false;
         }
     }
 

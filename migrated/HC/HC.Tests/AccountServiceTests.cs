@@ -55,4 +55,17 @@ public class AccountServiceTests : IDisposable
         Assert.DoesNotContain("secret-old", body);
         Assert.DoesNotContain("secret-new", body);
     }
+
+    [Fact]
+    public async Task SetTimezone_SendsToServerAndSavesLocally()
+    {
+        var handler = ScriptedHandler.Json("""{"state":"ok"}""");
+        var settings = new SettingsService(_prefs.Preferences);
+        var service = new AccountService(TestCloud.Create(handler), settings, new LanguageService(settings));
+
+        await service.SetTimezoneAsync("Europe/Kyiv", TestContext.Current.CancellationToken);
+
+        Assert.Contains("timezone=Europe%2FKyiv", handler.Sent.Single().Body!);
+        Assert.Equal("Europe/Kyiv", settings.PreferredTimezone);
+    }
 }
