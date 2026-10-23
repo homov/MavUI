@@ -20,6 +20,7 @@ public partial class DeviceListView : UserControl
     public DeviceListView()
     {
         InitializeComponent();
+        Refresh.RefreshHandler = ReloadAsync;
         Loaded += OnLoaded;
     }
 

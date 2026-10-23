@@ -7,31 +7,22 @@ using Mav.Controls;
 
 namespace Hc.Pages.Home;
 
-/// <summary>Signed-in start page: two tabs, groups and devices. Refresh reloads both; sign-out is in the header.</summary>
+/// <summary>Signed-in start page: two tabs, groups and devices. Each list refreshes by pulling down; sign-out is in the header.</summary>
 public partial class HomePage : MavContentPage
 {
-    private readonly GroupListView _groups = new();
-    private readonly DeviceListView _devices = new();
 
     public HomePage()
     {
         InitializeComponent();
 
-        Tabs.Add(MavLocalization.Get("home.tab.groups", "Groups"), MavIcons.Groups, content: _groups);
-        Tabs.Add(MavLocalization.Get("home.tab.devices", "Devices"), MavIcons.Devices, content: _devices);
+        Tabs.Add(MavLocalization.Get("home.tab.groups", "Groups"), MavIcons.Groups, content: new GroupListView());
+        Tabs.Add(MavLocalization.Get("home.tab.devices", "Devices"), MavIcons.Devices, content: new DeviceListView());
 
-        AddAction(MavIcons.Refresh, OnRefresh, MavLocalization.Get("home.refresh", "Refresh"));
         AddAction(MavIcons.Logout, OnSignOut, MavLocalization.Get("home.signout", "Sign out"));
     }
 
     /// <summary>Navigation of the app. Set before the page is shown.</summary>
     public required AppNavigator Navigator { get; init; }
-
-    private async void OnRefresh()
-    {
-        await _groups.ReloadAsync();
-        await _devices.ReloadAsync();
-    }
 
     private void OnSignOut()
     {

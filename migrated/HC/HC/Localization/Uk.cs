@@ -40,9 +40,14 @@ internal static class Uk
 
         ["home.tab.groups"] = "Групи",
         ["home.tab.devices"] = "Пристрої",
-        ["home.refresh"] = "Оновити",
         ["groups.empty.title"] = "Груп немає",
         ["devices.empty.title"] = "Пристроїв немає",
+
+        ["schedule.manual"] = "Ручне",
+        ["schedule.time"] = "Час",
+        ["schedule.temperature"] = "Температура",
+        ["schedule.humidity"] = "Вологість",
+        ["schedule.unknown"] = "Невідомий",
 
         ["home.title"] = "HC",
         ["home.placeholder"] = "Групи та пристрої з'являться тут.",

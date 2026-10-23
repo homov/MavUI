@@ -40,9 +40,14 @@ internal static class En
 
         ["home.tab.groups"] = "Groups",
         ["home.tab.devices"] = "Devices",
-        ["home.refresh"] = "Refresh",
         ["groups.empty.title"] = "No groups",
         ["devices.empty.title"] = "No devices",
+
+        ["schedule.manual"] = "Manual",
+        ["schedule.time"] = "Time",
+        ["schedule.temperature"] = "Temperature",
+        ["schedule.humidity"] = "Humidity",
+        ["schedule.unknown"] = "Unknown",
 
         ["home.title"] = "HC",
         ["home.placeholder"] = "Groups and devices will appear here.",
