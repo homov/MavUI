@@ -4,6 +4,7 @@ using Avalonia.Controls;
 using Avalonia.Layout;
 using Mav;
 using Mav.Controls;
+using Mav.Theming;
 using static Mav.ControlsGalleryMarkup.Pages.PageParts;
 
 namespace Mav.ControlsGalleryMarkup.Pages;

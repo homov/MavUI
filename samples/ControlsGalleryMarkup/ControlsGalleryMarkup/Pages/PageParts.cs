@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Media;
 using Mav;
 using Mav.Controls;
+using Mav.Theming;
 
 namespace Mav.ControlsGalleryMarkup.Pages;
 
