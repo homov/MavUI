@@ -28,9 +28,6 @@ public partial class ThemingPage : UserControl
     public static readonly GalleryCommand SetContrast =
         new(p => MavTheme.Configure(contrast: (MavContrast)p!));
 
-    public static readonly GalleryCommand SetVariant =
-        new(p => MavTheme.Configure(schemeVariant: (MavSchemeVariant)p!));
-
     public static readonly GalleryCommand SetDensity =
         new(p => MavTheme.Configure(density: (MavDensity)p!));
 

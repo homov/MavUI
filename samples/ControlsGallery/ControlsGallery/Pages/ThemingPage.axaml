@@ -35,17 +35,7 @@
                   <mav:MavButton Variant="Tonal" Text="{mav:Loc Overview.Contrast.Medium, Fallback=Medium}" Command="{x:Static pages:ThemingPage.SetContrast}" CommandParameter="{x:Static mav:MavContrast.Medium}" Margin="0,0,8,8" />
                   <mav:MavButton Variant="Tonal" Text="{mav:Loc Overview.Contrast.High, Fallback=High}" Command="{x:Static pages:ThemingPage.SetContrast}" CommandParameter="{x:Static mav:MavContrast.High}" Margin="0,0,8,8" />
                 </WrapPanel>
-                <WrapPanel>
-                  <mav:MavButton Variant="Outlined" Text="{mav:Loc Theming.Variant.TonalSpot, Fallback=Tonal spot}" Command="{x:Static pages:ThemingPage.SetVariant}" CommandParameter="{x:Static mav:MavSchemeVariant.TonalSpot}" Margin="0,0,8,8" />
-                  <mav:MavButton Variant="Outlined" Text="{mav:Loc Theming.Variant.Neutral, Fallback=Neutral}" Command="{x:Static pages:ThemingPage.SetVariant}" CommandParameter="{x:Static mav:MavSchemeVariant.Neutral}" Margin="0,0,8,8" />
-                  <mav:MavButton Variant="Outlined" Text="{mav:Loc Theming.Variant.Vibrant, Fallback=Vibrant}" Command="{x:Static pages:ThemingPage.SetVariant}" CommandParameter="{x:Static mav:MavSchemeVariant.Vibrant}" Margin="0,0,8,8" />
-                  <mav:MavButton Variant="Outlined" Text="{mav:Loc Theming.Variant.Expressive, Fallback=Expressive}" Command="{x:Static pages:ThemingPage.SetVariant}" CommandParameter="{x:Static mav:MavSchemeVariant.Expressive}" Margin="0,0,8,8" />
-                  <mav:MavButton Variant="Outlined" Text="{mav:Loc Theming.Variant.Monochrome, Fallback=Monochrome}" Command="{x:Static pages:ThemingPage.SetVariant}" CommandParameter="{x:Static mav:MavSchemeVariant.Monochrome}" Margin="0,0,8,8" />
-                  <mav:MavButton Variant="Outlined" Text="{mav:Loc Theming.Variant.Fidelity, Fallback=Fidelity}" Command="{x:Static pages:ThemingPage.SetVariant}" CommandParameter="{x:Static mav:MavSchemeVariant.Fidelity}" Margin="0,0,8,8" />
-                  <mav:MavButton Variant="Outlined" Text="{mav:Loc Theming.Variant.Content, Fallback=Content}" Command="{x:Static pages:ThemingPage.SetVariant}" CommandParameter="{x:Static mav:MavSchemeVariant.Content}" Margin="0,0,8,8" />
-                  <mav:MavButton Variant="Outlined" Text="{mav:Loc Theming.Variant.Rainbow, Fallback=Rainbow}" Command="{x:Static pages:ThemingPage.SetVariant}" CommandParameter="{x:Static mav:MavSchemeVariant.Rainbow}" Margin="0,0,8,8" />
-                  <mav:MavButton Variant="Outlined" Text="{mav:Loc Theming.Variant.FruitSalad, Fallback=Fruit salad}" Command="{x:Static pages:ThemingPage.SetVariant}" CommandParameter="{x:Static mav:MavSchemeVariant.FruitSalad}" Margin="0,0,8,8" />
-                </WrapPanel>
+                  <pages:SchemeVariantPicker />
                 <WrapPanel>
                   <mav:MavButton Variant="Text" Text="{mav:Loc Overview.Density.Comfortable, Fallback=Comfortable}" Command="{x:Static pages:ThemingPage.SetDensity}" CommandParameter="{x:Static mav:MavDensity.Comfortable}" Margin="0,0,8,8" />
                   <mav:MavButton Variant="Text" Text="{mav:Loc Overview.Density.Compact, Fallback=Compact}" Command="{x:Static pages:ThemingPage.SetDensity}" CommandParameter="{x:Static mav:MavDensity.Compact}" Margin="0,0,8,8" />

@@ -42,6 +42,7 @@ public static class OverviewPage
                 Button("Overview.Mode.Dark", "Dark", MavButtonVariant.Outlined, MavIcons.DarkMode, () => MavTheme.UseDark()),
                 Button("Overview.Mode.System", "System", MavButtonVariant.Outlined, MavIcons.SettingsBrightness, () => MavTheme.UseSystemMode())),
             SeedRow(),
+            SchemeVariantRow(),
             Row(
                 Button("Overview.Contrast.Standard", "Standard contrast", MavButtonVariant.Tonal, null, () => MavTheme.Configure(contrast: MavContrast.Standard)),
                 Button("Overview.Contrast.Medium", "Medium", MavButtonVariant.Tonal, null, () => MavTheme.Configure(contrast: MavContrast.Medium)),

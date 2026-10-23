@@ -86,6 +86,33 @@ public static class PageParts
         return swatch.Margin(new Thickness(0, 0, 8, 8));
     }
 
+    /// <summary>
+    /// Palette (scheme variant) buttons. The current variant is filled; the highlight is re-applied on every theme change.
+    /// </summary>
+    public static Control SchemeVariantRow()
+    {
+        var names = new (MavSchemeVariant Variant, string English)[]
+        {
+        (MavSchemeVariant.TonalSpot, "Tonal spot"),
+        (MavSchemeVariant.Neutral, "Neutral"),
+        (MavSchemeVariant.Vibrant, "Vibrant"),
+        (MavSchemeVariant.Expressive, "Expressive"),
+        (MavSchemeVariant.Monochrome, "Monochrome"),
+        (MavSchemeVariant.Fidelity, "Fidelity"),
+        (MavSchemeVariant.Content, "Content"),
+        (MavSchemeVariant.Rainbow, "Rainbow"),
+        (MavSchemeVariant.FruitSalad, "Fruit salad"),
+        };
+        return Row(names.Select(n =>
+        {
+            var button = new MavButton(L($"Theming.Variant.{n.Variant}", n.English), MavButtonVariant.Outlined, null);
+            button.OnClicked(() => MavTheme.Configure(schemeVariant: n.Variant));
+            MavTheme.Observe(button, (b, theme) =>
+                b.Variant = theme.SchemeVariant == n.Variant ? MavButtonVariant.Filled : MavButtonVariant.Outlined);
+            return (Control)button;
+        }).ToArray());
+    }
+
     /// <summary>Gap of 8 dp after a wrapped item.</summary>
     private static Control Gap(Control control) =>
         control.Margin(new Thickness(0, 0, 8, 8));
