@@ -1,7 +1,15 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mav="https://where.it/mav"
+             xmlns:pages="clr-namespace:Mav.ControlsGallery.Pages"
              x:Class="Mav.ControlsGallery.Pages.LayoutPage">
+  <UserControl.Resources>
+    <mav:MavWindow x:Key="DemoWindow" Title="MavWindow demo" Width="520" Height="360">
+      <mav:MavCard Variant="Filled">
+        <mav:MavLabel Margin="24" TextWrapping="Wrap" Text="{mav:Loc Layout.Window.Body, Fallback=This is a second MavWindow with its own overlay layer.}" />
+      </mav:MavCard>
+    </mav:MavWindow>
+  </UserControl.Resources>
   <mav:MavScrollViewer>
     <Border Padding="20,16,20,40">
       <StackPanel Spacing="18">
@@ -13,7 +21,27 @@
             <StackPanel Spacing="10">
               <mav:MavLabel Role="TitleMedium" Text="MavCard, MavSurface, MavLabel, MavDivider, MavBadge and MavBadgedBox" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Layout.Surfaces.CardBody, Fallback=MD3 surfaces with two-layer elevation\, typography-aware labels\, dividers and notification badges.}" />
-              <StackPanel x:Name="SurfacesHost" Spacing="10" />
+              <WrapPanel>
+                <mav:MavCard Variant="Elevated" Margin="0,0,8,8"><mav:MavLabel Text="Elevated card" /></mav:MavCard>
+                <mav:MavCard Variant="Filled" Margin="0,0,8,8"><mav:MavLabel Text="Filled card" /></mav:MavCard>
+                <mav:MavCard Variant="Outlined" Margin="0,0,8,8"><mav:MavLabel Text="Outlined card" /></mav:MavCard>
+                <mav:MavSurface Width="200" Height="88" Radius="16" Elevation="2" FillColor="{x:Static pages:LayoutPage.SurfaceContainerHigh}" Margin="0,0,8,8">
+                  <mav:MavLabel Text="MavSurface" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </mav:MavSurface>
+              </WrapPanel>
+              <StackPanel Spacing="8">
+                <mav:MavLabel Role="TitleLarge" Text="TitleLarge" />
+                <mav:MavLabel Role="BodyMedium" Secondary="True" Text="BodyMedium secondary" />
+                <mav:MavLabel Role="LabelLarge" ColorRole="Primary" Text="Label with primary color" />
+              </StackPanel>
+              <mav:MavDivider />
+              <WrapPanel>
+                <mav:MavDivider IsVertical="True" Height="32" Margin="0,0,8,8" />
+                <mav:MavBadge Text="3" Margin="0,0,8,8" />
+                <mav:MavBadgedBox BadgeText="5" Margin="0,0,8,8">
+                  <mav:MavIconButton Icon="{x:Static mav:MavIcons.Notifications}" />
+                </mav:MavBadgedBox>
+              </WrapPanel>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="new MavCard(variant, body) · MavSurface.Elevation · MavLabel.Role · MavBadge.Count" />
             </StackPanel>
           </mav:MavCard>
@@ -26,7 +54,28 @@
             <StackPanel Spacing="10">
               <mav:MavLabel Role="TitleMedium" Text="MavExpansionPanel, MavExpansionPanelList, MavSettingsCard and MavSettingsExpander" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Layout.Expandables.CardBody, Fallback=Progressive disclosure for details\, settings groups and compact forms.}" />
-              <StackPanel x:Name="ExpandablesHost" Spacing="10" />
+              <StackPanel Spacing="8">
+                <mav:MavExpansionPanel Header="Release notes" IsExpanded="True">
+                  <mav:MavLabel Text="Expansion panels keep secondary content out of the way until it is needed." TextWrapping="Wrap" />
+                </mav:MavExpansionPanel>
+                <mav:MavExpansionPanelList SingleExpand="True">
+                  <mav:MavExpansionPanel Header="Install"><mav:MavLabel Text="dotnet add package Mav" /></mav:MavExpansionPanel>
+                  <mav:MavExpansionPanel Header="Theme"><mav:MavLabel Text="MavTheme.Configure(seed: ...)" /></mav:MavExpansionPanel>
+                </mav:MavExpansionPanelList>
+                <mav:MavSettingsCard Header="Appearance" Title="Dark mode" Description="Follow the system theme or force a mode" Icon="{x:Static mav:MavIcons.DarkMode}">
+                  <mav:MavSettingsCard.ActionContent>
+                    <mav:MavSwitch IsToggled="{x:Static pages:LayoutPage.IsDarkMode}" ShowIcons="True" />
+                  </mav:MavSettingsCard.ActionContent>
+                </mav:MavSettingsCard>
+                <mav:MavSettingsExpander Header="Notifications" IsExpanded="True">
+                  <mav:MavListItem Headline="Email" SupportingText="Daily digest" LeadingIcon="{x:Static mav:MavIcons.Email}" IsInteractive="False">
+                    <mav:MavListItem.TrailingView><mav:MavSwitch IsToggled="True" /></mav:MavListItem.TrailingView>
+                  </mav:MavListItem>
+                  <mav:MavListItem Headline="Push" SupportingText="Mentions and replies" LeadingIcon="{x:Static mav:MavIcons.Notifications}" IsInteractive="False">
+                    <mav:MavListItem.TrailingView><mav:MavSwitch /></mav:MavListItem.TrailingView>
+                  </mav:MavListItem>
+                </mav:MavSettingsExpander>
+              </StackPanel>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavExpansionPanel.IsExpanded · MavExpansionPanelList.SingleExpand · MavSettingsCard.ActionContent" />
             </StackPanel>
           </mav:MavCard>
@@ -39,7 +88,48 @@
             <StackPanel Spacing="10">
               <mav:MavLabel Role="TitleMedium" Text="MavSplitView, MavCarousel and MavScrollViewer" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Layout.Responsive.CardBody, Fallback=Resizable master/detail\, swipeable carousel and the theme-independent scroll host.}" />
-              <StackPanel x:Name="ResponsiveHost" Spacing="10" />
+              <StackPanel Spacing="8">
+                <Border Height="260">
+                  <mav:MavSplitView PaneWidth="180" MinPaneWidth="140" MaxPaneWidth="320" IsResizable="True"
+                                    IsPaneOpen="{Binding #PaneToggle.IsSelected, Mode=TwoWay}">
+                    <mav:MavSplitView.Pane>
+                      <mav:MavCard Variant="Filled"><mav:MavLabel Text="Pane" /></mav:MavCard>
+                    </mav:MavSplitView.Pane>
+                    <mav:MavSplitView.DetailContent>
+                      <mav:MavCard Variant="Outlined">
+                        <StackPanel Spacing="8">
+                          <mav:MavLabel Text="Detail content" />
+                          <mav:MavButton x:Name="PaneToggle" Variant="Tonal" Icon="{x:Static mav:MavIcons.Menu}" IsToggle="True" IsSelected="True"
+                                         Text="{mav:Loc Layout.Split.Toggle, Fallback=Toggle pane}" />
+                        </StackPanel>
+                      </mav:MavCard>
+                    </mav:MavSplitView.DetailContent>
+                  </mav:MavSplitView>
+                </Border>
+                <mav:MavCarousel Height="220">
+                  <mav:MavCarouselItem Title="Material 3" Subtitle="Tonal palettes and shape" Icon="{x:Static mav:MavIcons.Palette}" />
+                  <mav:MavCarouselItem Title="Adaptive" Subtitle="Phone, tablet and desktop" Icon="{x:Static mav:MavIcons.Devices}" />
+                  <mav:MavCarouselItem Title="Pure C#" Subtitle="No AXAML templates" Icon="{x:Static mav:MavIcons.Code}" />
+                </mav:MavCarousel>
+                <mav:MavCard Variant="Outlined">
+                  <mav:MavScrollViewer Height="180">
+                    <StackPanel Spacing="8">
+                      <mav:MavLabel Text="Scrollable row 1" Role="BodyMedium" />
+                      <mav:MavLabel Text="Scrollable row 2" Role="BodyMedium" />
+                      <mav:MavLabel Text="Scrollable row 3" Role="BodyMedium" />
+                      <mav:MavLabel Text="Scrollable row 4" Role="BodyMedium" />
+                      <mav:MavLabel Text="Scrollable row 5" Role="BodyMedium" />
+                      <mav:MavLabel Text="Scrollable row 6" Role="BodyMedium" />
+                      <mav:MavLabel Text="Scrollable row 7" Role="BodyMedium" />
+                      <mav:MavLabel Text="Scrollable row 8" Role="BodyMedium" />
+                      <mav:MavLabel Text="Scrollable row 9" Role="BodyMedium" />
+                      <mav:MavLabel Text="Scrollable row 10" Role="BodyMedium" />
+                      <mav:MavLabel Text="Scrollable row 11" Role="BodyMedium" />
+                      <mav:MavLabel Text="Scrollable row 12" Role="BodyMedium" />
+                    </StackPanel>
+                  </mav:MavScrollViewer>
+                </mav:MavCard>
+              </StackPanel>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavSplitView.Pane/DetailContent · MavCarousel.AddItem(...) · MavScrollViewer.Content" />
             </StackPanel>
           </mav:MavCard>
@@ -52,7 +142,23 @@
             <StackPanel Spacing="10">
               <mav:MavLabel Role="TitleMedium" Text="MavAvatar, MavAvatarGroup, MavFileDropZone and MavChatBubble" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Layout.People.CardBody, Fallback=People and workspace widgets: avatars with presence\, overlapping groups\, file drops and chat bubbles.}" />
-              <StackPanel x:Name="PeopleHost" Spacing="10" />
+              <StackPanel Spacing="8">
+                <WrapPanel>
+                  <mav:MavAvatar Initials="AL" Size="48" Status="Online" Margin="0,0,8,8" />
+                  <mav:MavAvatarGroup Margin="0,0,8,8">
+                    <mav:MavAvatar Initials="AL" /><mav:MavAvatar Initials="GH" /><mav:MavAvatar Initials="AT" />
+                    <mav:MavAvatar Initials="KJ" /><mav:MavAvatar Initials="LT" /><mav:MavAvatar Initials="MH" />
+                  </mav:MavAvatarGroup>
+                </WrapPanel>
+                <Border MaxWidth="460">
+                  <mav:MavFileDropZone Title="Drop files here" Subtitle="or browse from the device" AllowMultiple="True">
+                    <mav:MavAttachedFile Name="design-spec.pdf" SizeBytes="248000" />
+                    <mav:MavAttachedFile Name="screenshot.png" SizeBytes="512000" />
+                  </mav:MavFileDropZone>
+                </Border>
+                <mav:MavChatBubble Text="The gallery builds on desktop, web and Android." IsOutgoing="False" SenderName="Ada" Timestamp="10:24" AvatarInitials="AL" />
+                <mav:MavChatBubble Text="I can see every control in one place." IsOutgoing="True" SenderName="You" Timestamp="10:26" AvatarInitials="YO" IsRead="True" />
+              </StackPanel>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavAvatar.Status · MavAvatarGroup.AddAvatar · MavFileDropZone.AddFile · MavChatBubble.IsOutgoing" />
             </StackPanel>
           </mav:MavCard>
@@ -65,7 +171,13 @@
             <StackPanel Spacing="10">
               <mav:MavLabel Role="TitleMedium" Text="MavWindow" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Layout.Window.CardBody, Fallback=Opens a secondary window; on web and Android it is not applicable.}" />
-              <StackPanel x:Name="WindowHost" Spacing="10" />
+              <WrapPanel>
+                <mav:MavButton IsVisible="{x:Static pages:LayoutPage.IsDesktop}" Variant="Filled" Icon="{x:Static mav:MavIcons.Window}"
+                               Text="{mav:Loc Layout.Window.Open, Fallback=Open a new window}"
+                               Command="{x:Static pages:LayoutPage.ShowWindow}" CommandParameter="{StaticResource DemoWindow}" Margin="0,0,8,8" />
+                <mav:MavLabel IsVisible="{x:Static pages:LayoutPage.IsUnsupportedPlatform}" TextWrapping="Wrap"
+                              Text="{mav:Loc Layout.Window.Unsupported, Fallback=MavWindow is a desktop-only TopLevel and is not available on this platform.}" />
+              </WrapPanel>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="new MavWindow { Content = ... }.Show()" />
             </StackPanel>
           </mav:MavCard>
@@ -78,7 +190,20 @@
             <StackPanel Spacing="10">
               <mav:MavLabel Role="TitleMedium" Text="MavSafeArea and MavKeyboardAvoidingHost" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Layout.Insets.CardBody, Fallback=Insets and IME handling used by MavNavigationPage on mobile; SimulatedInset/SimulatedKeyboardHeight preview them on desktop.}" />
-              <StackPanel x:Name="InsetsHost" Spacing="10" />
+              <pages:AdaptiveWrap MinItemWidth="300">
+                <Border>
+                  <mav:MavSafeArea Edges="All" SimulatedInset="16,24,16,24" BasePadding="8" Height="140"
+                                   Background="{x:Static pages:LayoutPage.SurfaceContainerLowBrush}">
+                    <mav:MavLabel Text="Content inside simulated safe-area insets" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                  </mav:MavSafeArea>
+                </Border>
+                <Border>
+                  <mav:MavKeyboardAvoidingHost SimulatedKeyboardHeight="120" Height="220"
+                                               Background="{x:Static pages:LayoutPage.SurfaceContainerLowBrush}">
+                    <mav:MavLabel Text="Content lifted above a simulated 120 dp keyboard" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                  </mav:MavKeyboardAvoidingHost>
+                </Border>
+              </pages:AdaptiveWrap>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavSafeArea.Edges/SimulatedInset · MavKeyboardAvoidingHost.SimulatedKeyboardHeight" />
             </StackPanel>
           </mav:MavCard>

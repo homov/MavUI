@@ -17,6 +17,11 @@ namespace Mav.Controls;
 /// <summary>File attached to a chat or form: name, size and an optional local path.</summary>
 public sealed record MavAttachedFile(string Name, long SizeBytes, string? Path = null)
 {
+    /// <summary>Creates an empty file entry, so the record can be declared in AXAML.</summary>
+    public MavAttachedFile() : this(string.Empty, 0)
+    {
+    }
+
     public string FormattedSize =>
         SizeBytes >= 1024 * 1024
             ? $"{SizeBytes / (1024.0 * 1024.0):0.0} MB"
