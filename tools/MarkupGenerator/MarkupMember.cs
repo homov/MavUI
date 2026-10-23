@@ -6,12 +6,13 @@ namespace Mav.MarkupGenerator;
 /// </summary>
 internal sealed class MarkupMember
 {
-    public MarkupMember(string name, string fieldName, string valueType, bool isEvent)
+    public MarkupMember(string name, string fieldName, string valueType, bool isEvent, bool isAttached = false)
     {
         Name = name;
         FieldName = fieldName;
         ValueType = valueType;
         IsEvent = isEvent;
+        IsAttached = isAttached;
     }
 
     public string Name { get; }
@@ -21,4 +22,7 @@ internal sealed class MarkupMember
     public string ValueType { get; }
 
     public bool IsEvent { get; }
+
+    /// <summary>True for an attached property such as <c>Grid.Row</c>; it is set on any <c>AvaloniaObject</c>.</summary>
+    public bool IsAttached { get; }
 }

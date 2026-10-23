@@ -27,7 +27,9 @@ internal static class MarkupEmitter
         foreach (var member in members)
         {
             sb.AppendLine();
-            if (member.IsEvent)
+            if (member.IsAttached)
+                AppendAttached(sb, type.Name, owner, member);
+            else if (member.IsEvent)
                 AppendEvent(sb, type.Name, signature, member);
             else
                 AppendProperty(sb, type.Name, signature, member);
@@ -45,6 +47,22 @@ internal static class MarkupEmitter
     public static string MethodName(MarkupMember member)
     {
         return member.IsEvent ? "On" + member.Name : member.Name;
+    }
+
+    /// <summary>
+    /// Attached property (for example <c>Grid.Row</c>). It is set on any element, so the receiver is any
+    /// <c>AvaloniaObject</c>; the method keeps the property name.
+    /// </summary>
+    private static void AppendAttached(StringBuilder sb, string typeName, string owner, MarkupMember member)
+    {
+        sb.Append("    /// <summary>Sets the attached <c>").Append(typeName).Append('.').Append(member.Name).AppendLine("</c> on the element.</summary>");
+        sb.Append("    public static TControl ").Append(member.Name)
+            .Append("<TControl>(this TControl control, ").Append(member.ValueType).AppendLine(" value)");
+        sb.AppendLine("        where TControl : global::Avalonia.AvaloniaObject");
+        sb.AppendLine("    {");
+        sb.Append("        control.SetValue((global::Avalonia.AvaloniaProperty)").Append(owner).Append('.').Append(member.FieldName).AppendLine(", value);");
+        sb.AppendLine("        return control;");
+        sb.AppendLine("    }");
     }
 
     private static void AppendProperty(StringBuilder sb, string typeName, Signature signature, MarkupMember member)

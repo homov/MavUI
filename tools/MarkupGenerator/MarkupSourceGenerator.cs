@@ -15,8 +15,11 @@ namespace Mav.MarkupGenerator;
 [Generator]
 public sealed class MarkupSourceGenerator : IIncrementalGenerator
 {
-    /// <summary>Avalonia base types whose own members get fluent setters (layout, input, templates, panels).</summary>
-    private static readonly string[] AvaloniaBaseTypes =
+    /// <summary>
+    /// Avalonia types whose own members get fluent setters: base types (input, layout, templates, panels) and the
+    /// layout controls used by the markup layer. A name that Avalonia does not have is skipped.
+    /// </summary>
+    private static readonly string[] AvaloniaTypes =
     {
         "Avalonia.StyledElement",
         "Avalonia.Visual",
@@ -28,6 +31,18 @@ public sealed class MarkupSourceGenerator : IIncrementalGenerator
         "Avalonia.Controls.Decorator",
         "Avalonia.Controls.Panel",
         "Avalonia.Controls.ItemsControl",
+        "Avalonia.Controls.Grid",
+        "Avalonia.Controls.StackPanel",
+        "Avalonia.Controls.DockPanel",
+        "Avalonia.Controls.WrapPanel",
+        "Avalonia.Controls.Primitives.UniformGrid",
+        "Avalonia.Controls.Canvas",
+        "Avalonia.Controls.Border",
+        "Avalonia.Controls.ScrollViewer",
+        "Avalonia.Controls.Viewbox",
+        "Avalonia.Controls.TextBlock",
+        "Avalonia.Controls.Image",
+        "Avalonia.Controls.Separator",
     };
 
     /// <summary>
@@ -50,12 +65,13 @@ public sealed class MarkupSourceGenerator : IIncrementalGenerator
     {
         var avaloniaObject = compilation.GetTypeByMetadataName("Avalonia.AvaloniaObject");
         var styledProperty = compilation.GetTypeByMetadataName("Avalonia.StyledProperty`1");
-        if (avaloniaObject is null || styledProperty is null)
+        var attachedProperty = compilation.GetTypeByMetadataName("Avalonia.AttachedProperty`1");
+        if (avaloniaObject is null || styledProperty is null || attachedProperty is null)
             return;
 
         var targets = new List<INamedTypeSymbol>();
         CollectOwnTypes(compilation.Assembly.GlobalNamespace, targets, avaloniaObject);
-        foreach (var name in AvaloniaBaseTypes)
+        foreach (var name in AvaloniaTypes)
         {
             var type = compilation.GetTypeByMetadataName(name);
             if (type is not null)
@@ -65,7 +81,7 @@ public sealed class MarkupSourceGenerator : IIncrementalGenerator
         var classNames = new HashSet<string>(StringComparer.Ordinal);
         foreach (var type in targets.OrderBy(t => t.ToDisplayString(), StringComparer.Ordinal))
         {
-            var members = CollectMembers(type, styledProperty);
+            var members = CollectMembers(type, styledProperty, attachedProperty);
             if (members.Count == 0 || !classNames.Add(type.Name))
                 continue;
 
@@ -106,7 +122,7 @@ public sealed class MarkupSourceGenerator : IIncrementalGenerator
         return false;
     }
 
-    private static List<MarkupMember> CollectMembers(INamedTypeSymbol type, INamedTypeSymbol styledProperty)
+    private static List<MarkupMember> CollectMembers(INamedTypeSymbol type, INamedTypeSymbol styledProperty, INamedTypeSymbol attachedProperty)
     {
         // A member that a base type already declares keeps its method there; the subclass must not repeat it,
         // or two extension methods with the same name would apply to the same instance.
@@ -125,7 +141,7 @@ public sealed class MarkupSourceGenerator : IIncrementalGenerator
         {
             MarkupMember? generated = null;
             if (member is IFieldSymbol field)
-                generated = PropertyOf(field, styledProperty, inherited);
+                generated = PropertyOf(field, styledProperty, attachedProperty, inherited);
             else if (member is IEventSymbol ev)
                 generated = EventOf(ev, inherited);
 
@@ -136,7 +152,7 @@ public sealed class MarkupSourceGenerator : IIncrementalGenerator
         return result;
     }
 
-    private static MarkupMember? PropertyOf(IFieldSymbol field, INamedTypeSymbol styledProperty, HashSet<string> inherited)
+    private static MarkupMember? PropertyOf(IFieldSymbol field, INamedTypeSymbol styledProperty, INamedTypeSymbol attachedProperty, HashSet<string> inherited)
     {
         if (!field.IsStatic || field.DeclaredAccessibility != Accessibility.Public)
             return null;
@@ -144,7 +160,10 @@ public sealed class MarkupSourceGenerator : IIncrementalGenerator
         if (field.Type is not INamedTypeSymbol fieldType || !fieldType.IsGenericType)
             return null;
 
-        if (!SymbolEqualityComparer.Default.Equals(fieldType.OriginalDefinition, styledProperty))
+        var definition = fieldType.OriginalDefinition;
+        var isStyled = SymbolEqualityComparer.Default.Equals(definition, styledProperty);
+        var isAttached = SymbolEqualityComparer.Default.Equals(definition, attachedProperty);
+        if (!isStyled && !isAttached)
             return null;
 
         if (field.Name.Length <= PropertySuffix.Length || !field.Name.EndsWith(PropertySuffix, StringComparison.Ordinal))
@@ -158,7 +177,7 @@ public sealed class MarkupSourceGenerator : IIncrementalGenerator
         if (!IsAccessible(valueType))
             return null;
 
-        return new MarkupMember(name, field.Name, valueType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat), isEvent: false);
+        return new MarkupMember(name, field.Name, valueType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat), isEvent: false, isAttached: isAttached);
     }
 
     private static MarkupMember? EventOf(IEventSymbol ev, HashSet<string> inherited)
