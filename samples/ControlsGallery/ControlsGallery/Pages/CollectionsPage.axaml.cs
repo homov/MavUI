@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using Mav.Controls;
 
 namespace Mav.ControlsGallery.Pages;
 
