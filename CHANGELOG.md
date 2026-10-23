@@ -60,6 +60,10 @@ All notable changes to **Mav**.
 
 ### Fixed
 
+- `MavTextField` and `MavTextArea` keep their floating label in the right place when text is set
+  before the control is shown (a prefilled sign-in form, a dialog built offline). Without a top
+  level there is no frame clock, so the state is applied at once and re-checked on attach instead
+  of leaving the label drawn on top of the text.
 - Closing snackbar/tooltip/search/dialog/popover overlays externally (top-level close,
   page teardown or direct handle disposal) now clears their active handles, timers and
   open state instead of leaving stale static/instance references.

@@ -1,4 +1,8 @@
+using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
+using Avalonia.Media;
+using Avalonia.Threading;
+using Avalonia.VisualTree;
 using Mav;
 using Mav.Controls;
 using Mav.Theming;
@@ -19,6 +23,32 @@ public class InputTests
         };
         Assert.Equal("wrong", field.Text);
         Assert.True(field.HasError);
+    }
+
+    /// <summary>
+    /// A field filled in before it is shown (a prefilled sign-in form) used to keep its label at the
+    /// rest position, drawn on top of the text, because the animation never ran without a frame clock.
+    /// </summary>
+    [AvaloniaFact]
+    public void MavTextField_floats_the_label_when_text_is_set_before_showing()
+    {
+        var field = new MavTextField("Email", MavTextFieldVariant.Outlined) { Text = "user@example.test" };
+        var window = new Window { Width = 390, Height = 200, Content = field };
+        window.Show();
+        try
+        {
+            Dispatcher.UIThread.RunJobs();
+
+            var label = field.GetVisualDescendants().OfType<TextBlock>().FirstOrDefault(t => t.Text == "Email");
+            Assert.NotNull(label);
+            // Floated label: 12px, above the top border. At rest: 16px, on the text baseline.
+            Assert.True(label!.FontSize < 13, $"The label stayed at {label.FontSize}px with text in the field.");
+            Assert.True(label.Margin.Top < 0, $"The label stayed at y={label.Margin.Top} with text in the field.");
+        }
+        finally
+        {
+            window.Close();
+        }
     }
 
     [AvaloniaFact]

@@ -42,7 +42,7 @@ def gh_json(*args: str):
 def repo_name() -> str:
     global REPO
     if REPO is None:
-        REPO = gh_json("repo", "view", "--json", "nameWithOwner", "--jq", ".nameWithOwner")
+        REPO = gh("repo", "view", "--json", "nameWithOwner", "--jq", ".nameWithOwner").strip()
     return REPO
 
 
@@ -110,7 +110,9 @@ def main() -> int:
     if args.run:
         info = run_info(args.run)
     else:
-        branch = args.branch or gh("rev-parse", "--abbrev-ref", "HEAD").strip()
+        branch = args.branch or subprocess.run(
+            ["git", "rev-parse", "--abbrev-ref", "HEAD"], capture_output=True, text=True
+        ).stdout.strip()
         info = latest_run(branch)
     run_id = info["databaseId"]
     print(f"run {run_id}  {info.get('headBranch')}  {str(info.get('headSha'))[:8]}  "

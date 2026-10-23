@@ -505,6 +505,13 @@ public class MavTextField : MavContentView
     /// </summary>
     public void Unfocus() => _entry.Unfocus();
 
+    /// <summary>Brings the label to its final position when the field is shown, without animating.</summary>
+    protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        base.OnAttachedToVisualTree(e);
+        SyncState(animate: false);
+    }
+
     /// <summary>Updates the field when a visual property changes.</summary>
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
@@ -650,7 +657,12 @@ public class MavTextField : MavContentView
         _floatingLabel.IsVisible = hasLabel;
 
         var target = floated ? 1.0 : 0.0;
-        if (animate && Math.Abs(_floatProgress - target) > 0.001)
+        // Animations are driven by the top level's frame clock. A field filled in before it is shown
+        // (a prefilled sign-in form, a form built for a dialog) has no clock yet, so animating there
+        // left the label at the rest position on top of the text. Snap to the target instead;
+        // OnAttachedToVisualTree re-runs this once the control is live.
+        var canAnimate = animate && TopLevel.GetTopLevel(this) is not null;
+        if (canAnimate && Math.Abs(_floatProgress - target) > 0.001)
         {
             MavMotion.Animate(this, "tf_float", _floatProgress, target, MavMotion.Short3, MavMotion.CubicOut, v =>
             {

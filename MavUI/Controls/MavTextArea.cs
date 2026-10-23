@@ -257,6 +257,13 @@ public class MavTextArea : MavContentView
     public MavNativeEditor InnerEditor => _editor;
 
     /// <summary>Shows or clears the validation message when the bound data validation state changes.</summary>
+    /// <summary>Brings the label to its final position when the text area is shown, without animating.</summary>
+    protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        base.OnAttachedToVisualTree(e);
+        SyncState(animate: false);
+    }
+
     protected override void UpdateDataValidation(AvaloniaProperty property, BindingValueType state, Exception? error)
     {
         base.UpdateDataValidation(property, state, error);
@@ -298,7 +305,9 @@ public class MavTextArea : MavContentView
         _editor.Placeholder = (!hasLabel || floated) ? (Placeholder ?? string.Empty) : string.Empty;
 
         var target = floated ? 1.0 : 0.0;
-        if (animate)
+        // Same rule as MavTextField: without a top level there is no frame clock, so a text area
+        // filled in before it is shown snaps to the right label position instead of staying at rest.
+        if (animate && TopLevel.GetTopLevel(this) is not null)
         {
             MavMotion.Animate(this, "ta_float", _floatProgress, target, MavMotion.Short3, MavMotion.CubicOut, v =>
             {
