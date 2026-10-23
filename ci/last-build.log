@@ -1,17 +1,28 @@
 # Last build log
-commit: 2b1aa611292885401beeb356207e007925e4837a
-run: https://github.com/homov/MavUI/actions/runs/40001199305
+commit: 2345d0858949ad26dd1e080984b8764afc938944
+run: https://github.com/homov/MavUI/actions/runs/40001271704
 
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 654 ms).
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavExpansionPanel.cs(40,22): error CS0246: The type or namespace name 'ContentPresenter' could not be found (are you missing a using directive or an assembly reference?) [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavRefreshIndicator.cs(56,22): error CS0246: The type or namespace name 'ContentPresenter' could not be found (are you missing a using directive or an assembly reference?) [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 269 ms).
+  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:07.40
+  Determining projects to restore...
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 217 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 217 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 222 ms).
+  1 of 4 projects are up-to-date for restore.
+  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/Pages/LayoutPage.axaml.cs(88,13): error CS0117: 'MavExpansionPanel' does not contain a definition for 'Body' [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj]
 
 Build FAILED.
 
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavExpansionPanel.cs(40,22): error CS0246: The type or namespace name 'ContentPresenter' could not be found (are you missing a using directive or an assembly reference?) [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavRefreshIndicator.cs(56,22): error CS0246: The type or namespace name 'ContentPresenter' could not be found (are you missing a using directive or an assembly reference?) [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/Pages/LayoutPage.axaml.cs(88,13): error CS0117: 'MavExpansionPanel' does not contain a definition for 'Body' [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj]
     0 Warning(s)
-    2 Error(s)
+    1 Error(s)
 
-Time Elapsed 00:00:03.96
+Time Elapsed 00:00:02.66
