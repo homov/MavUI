@@ -11,7 +11,7 @@ namespace Hc;
 /// <summary>
 /// Shared application for every target. Platform hosts subclass it and override the root factories.
 /// </summary>
-public partial class App : Application
+public partial class App : global::Avalonia.Application
 {
     public override void Initialize() => AvaloniaXamlLoader.Load(this);
 
