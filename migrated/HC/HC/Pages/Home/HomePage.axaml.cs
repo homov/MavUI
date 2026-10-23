@@ -8,15 +8,20 @@ using Mav.Controls;
 
 namespace Hc.Pages.Home;
 
-/// <summary>Signed-in start page: two tabs, groups and devices. Each list refreshes by pulling down; the header opens account settings and sign-out.</summary>
+/// <summary>
+/// Signed-in start page: two tabs, groups and devices. Each list refreshes by pulling down. The header opens the
+/// settings and signs out. Tapping a group opens its page.
+/// </summary>
 public partial class HomePage : MavContentPage
 {
+    private readonly GroupListView _groups = new();
 
     public HomePage()
     {
         InitializeComponent();
 
-        Tabs.Add(MavLocalization.Get("home.tab.groups", "Groups"), MavIcons.Groups, content: new GroupListView());
+        _groups.GroupSelected += OnGroupSelected;
+        Tabs.Add(MavLocalization.Get("home.tab.groups", "Groups"), MavIcons.Groups, content: _groups);
         Tabs.Add(MavLocalization.Get("home.tab.devices", "Devices"), MavIcons.Devices, content: new DeviceListView());
 
         AddAction(MavIcons.Settings, OnSettings, MavLocalization.Get("home.settings", "Settings"));
@@ -25,6 +30,9 @@ public partial class HomePage : MavContentPage
 
     /// <summary>Navigation of the app. Set before the page is shown.</summary>
     public required AppNavigator Navigator { get; init; }
+
+    private void OnGroupSelected(object? sender, Hc.Models.Cloud.UserGroupInfo group) =>
+        Navigator.Push(new GroupPage { Navigator = Navigator, Group = group });
 
     private void OnSettings() => Navigator.Push(new SettingsPage { Navigator = Navigator });
 

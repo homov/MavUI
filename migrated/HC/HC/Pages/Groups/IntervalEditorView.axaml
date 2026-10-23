@@ -1,0 +1,17 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mav="https://where.it/mav"
+             x:Class="Hc.Pages.Groups.IntervalEditorView">
+  <StackPanel Margin="16" Spacing="12">
+    <mav:MavNumberBox x:Name="StartBox" Minimum="0" Maximum="23"
+                      Label="{mav:Loc schedule.from, Fallback=From}" />
+    <mav:MavNumberBox x:Name="EndBox" Minimum="1" Maximum="24"
+                      Label="{mav:Loc schedule.to, Fallback=To}" />
+    <mav:MavNumberBox x:Name="ValueBox" Label="{mav:Loc schedule.value, Fallback=Value}" />
+    <mav:MavLabel x:Name="OnLabel" Text="{mav:Loc schedule.device.state, Fallback=Device on}" />
+    <mav:MavSwitch x:Name="OnSwitch" />
+    <mav:MavBanner x:Name="ErrorBanner" Icon="{x:Static mav:MavIcons.Error}" IsVisible="False" />
+    <mav:MavButton x:Name="ApplyButton" Variant="Filled" HorizontalAlignment="Stretch"
+                   Text="{mav:Loc schedule.apply, Fallback=Apply}" />
+  </StackPanel>
+</UserControl>

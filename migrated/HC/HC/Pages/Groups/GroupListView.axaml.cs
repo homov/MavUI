@@ -10,7 +10,8 @@ namespace Hc.Pages.Groups;
 
 /// <summary>
 /// The user's groups as a list: name and schedule type. The group only holds a schedule id, so the type is
-/// loaded per group. Pull down to refresh (<see cref="MavRefreshIndicator"/>).
+/// loaded per group. Pull down to refresh (<see cref="MavRefreshIndicator"/>). Tapping a group raises
+/// <see cref="GroupSelected"/>; the page that owns the list opens the group page.
 /// </summary>
 public partial class GroupListView : UserControl
 {
@@ -20,6 +21,9 @@ public partial class GroupListView : UserControl
         Refresh.RefreshHandler = ReloadAsync;
         Loaded += OnLoaded;
     }
+
+    /// <summary>A group was tapped.</summary>
+    public event EventHandler<UserGroupInfo>? GroupSelected;
 
     private async void OnLoaded(object? sender, RoutedEventArgs e) => await ReloadAsync();
 
@@ -31,9 +35,9 @@ public partial class GroupListView : UserControl
         try
         {
             var groups = await AppServices.Default.Locations.GetGroupsAsync();
-            var rows = new List<(string Name, string Schedule)>(groups.Count);
+            var rows = new List<(UserGroupInfo Group, string Schedule)>(groups.Count);
             foreach (var group in groups)
-                rows.Add((group.Name, await LoadScheduleNameAsync(group)));
+                rows.Add((group, await LoadScheduleNameAsync(group)));
 
             Render(rows);
         }
@@ -61,7 +65,7 @@ public partial class GroupListView : UserControl
         return ScheduleTypeNames.Localize(schedule?.ScheduleType);
     }
 
-    private void Render(IReadOnlyList<(string Name, string Schedule)> rows)
+    private void Render(IReadOnlyList<(UserGroupInfo Group, string Schedule)> rows)
     {
         ListHost.Children.Clear();
         EmptyState.IsVisible = rows.Count == 0;
@@ -69,8 +73,12 @@ public partial class GroupListView : UserControl
             return;
 
         var list = new MavList { ShowDividers = true };
-        foreach (var (name, schedule) in rows)
-            list.AddItem(new MavListItem(name, schedule, MavIcons.Groups));
+        foreach (var (group, schedule) in rows)
+        {
+            var item = new MavListItem(group.Name, schedule, MavIcons.Groups);
+            item.Clicked += (_, _) => GroupSelected?.Invoke(this, group);
+            list.AddItem(item);
+        }
 
         ListHost.Children.Add(new MavCard(MavCardVariant.Outlined, list));
     }
