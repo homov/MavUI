@@ -112,7 +112,7 @@ public static class OverviewPage
     {
         var color = MavTheme.ColorOf(role);
         var on = MavAccessibility.RelativeLuminance(color) >= 0.5 ? Colors.Black : Colors.White;
-        return new Border()
+        var border = new Border()
             .Sized(132, 64)
             .CornerRadius(new CornerRadius(12))
             .Padding(10)
@@ -121,7 +121,7 @@ public static class OverviewPage
                 .Text(role.ToString())
                 .FontSize(11)
                 .Foreground(MavTheme.BrushOf(on)))
-            .Margin(new Thickness(0, 0, 8, 8));
+        return LayoutableMarkup.Margin(border, new Thickness(0, 0, 8, 8));
     }
 
     private static Control ShapeSamples()

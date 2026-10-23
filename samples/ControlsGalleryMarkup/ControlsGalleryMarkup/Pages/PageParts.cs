@@ -86,7 +86,7 @@ public static class PageParts
 
     /// <summary>Gap of 8 dp after a wrapped item.</summary>
     private static Control Gap(Control control) =>
-        control.Margin(new Thickness(0, 0, 8, 8));
+        LayoutableMarkup.Margin(control, new Thickness(0, 0, 8, 8));
 
     private static Control Description(string key, string english, MavTypeRole role = MavTypeRole.BodyMedium) =>
         new MavLabel(L(key, english), role).Secondary(true).TextWrapping(TextWrapping.Wrap);
