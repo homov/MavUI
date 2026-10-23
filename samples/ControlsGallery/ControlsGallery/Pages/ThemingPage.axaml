@@ -1,6 +1,7 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mav="https://where.it/mav"
+             xmlns:pages="clr-namespace:Mav.ControlsGallery.Pages"
              x:Class="Mav.ControlsGallery.Pages.ThemingPage">
   <mav:MavScrollViewer>
     <Border Padding="20,16,20,40">
@@ -13,7 +14,44 @@
             <StackPanel Spacing="10">
               <mav:MavLabel Role="TitleMedium" Text="{mav:Loc Theming.Controls.Title, Fallback=Theme controls}" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Controls.CardBody, Fallback=Seed color\, mode\, contrast\, density\, motion and shape scale.}" />
-              <StackPanel x:Name="ConfigHost" Spacing="10" />
+              <StackPanel Spacing="8">
+                <WrapPanel>
+                  <mav:MavButton Variant="Outlined" Icon="{x:Static mav:MavIcons.LightMode}" Text="{mav:Loc Overview.Mode.Light, Fallback=Light}" Command="{x:Static pages:ThemingPage.ModeLight}" CommandParameter="{x:Static }" Margin="0,0,8,8" />
+                  <mav:MavButton Variant="Outlined" Icon="{x:Static mav:MavIcons.DarkMode}" Text="{mav:Loc Overview.Mode.Dark, Fallback=Dark}" Command="{x:Static pages:ThemingPage.ModeDark}" CommandParameter="{x:Static }" Margin="0,0,8,8" />
+                  <mav:MavButton Variant="Outlined" Icon="{x:Static mav:MavIcons.SettingsBrightness}" Text="{mav:Loc Overview.Mode.System, Fallback=System}" Command="{x:Static pages:ThemingPage.ModeSystem}" CommandParameter="{x:Static }" Margin="0,0,8,8" />
+                </WrapPanel>
+                <WrapPanel>
+                  <mav:MavRadioButton GroupName="Seed" Label="{mav:Loc Overview.Seed.Indigo, Fallback=Indigo}" IsChecked="True" Command="{x:Static pages:ThemingPage.SetSeed}" CommandParameter="{x:Static mav:MavColors.Indigo}" Margin="0,0,16,8" />
+                  <mav:MavRadioButton GroupName="Seed" Label="{mav:Loc Overview.Seed.Purple, Fallback=Purple}" Command="{x:Static pages:ThemingPage.SetSeed}" CommandParameter="{x:Static mav:MavColors.Purple}" Margin="0,0,16,8" />
+                  <mav:MavRadioButton GroupName="Seed" Label="{mav:Loc Overview.Seed.Blue, Fallback=Blue}" Command="{x:Static pages:ThemingPage.SetSeed}" CommandParameter="{x:Static mav:MavColors.Blue}" Margin="0,0,16,8" />
+                  <mav:MavRadioButton GroupName="Seed" Label="{mav:Loc Overview.Seed.Teal, Fallback=Teal}" Command="{x:Static pages:ThemingPage.SetSeed}" CommandParameter="{x:Static mav:MavColors.Teal}" Margin="0,0,16,8" />
+                  <mav:MavRadioButton GroupName="Seed" Label="{mav:Loc Overview.Seed.Green, Fallback=Green}" Command="{x:Static pages:ThemingPage.SetSeed}" CommandParameter="{x:Static mav:MavColors.Green}" Margin="0,0,16,8" />
+                  <mav:MavRadioButton GroupName="Seed" Label="{mav:Loc Overview.Seed.Orange, Fallback=Orange}" Command="{x:Static pages:ThemingPage.SetSeed}" CommandParameter="{x:Static mav:MavColors.Orange}" Margin="0,0,16,8" />
+                  <mav:MavRadioButton GroupName="Seed" Label="{mav:Loc Overview.Seed.Rose, Fallback=Rose}" Command="{x:Static pages:ThemingPage.SetSeed}" CommandParameter="{x:Static mav:MavColors.Rose}" Margin="0,0,16,8" />
+                  <mav:MavRadioButton GroupName="Seed" Label="{mav:Loc Overview.Seed.Slate, Fallback=Slate}" Command="{x:Static pages:ThemingPage.SetSeed}" CommandParameter="{x:Static mav:MavColors.Slate}" Margin="0,0,16,8" />
+                </WrapPanel>
+                <WrapPanel>
+                  <mav:MavButton Variant="Tonal" Text="{mav:Loc Theming.Contrast.Standard, Fallback="Contrast: Standard"}" Command="{x:Static pages:ThemingPage.SetContrast}" CommandParameter="{x:Static mav:MavContrast.Standard}" Margin="0,0,8,8" />
+                  <mav:MavButton Variant="Tonal" Text="{mav:Loc Overview.Contrast.Medium, Fallback=Medium}" Command="{x:Static pages:ThemingPage.SetContrast}" CommandParameter="{x:Static mav:MavContrast.Medium}" Margin="0,0,8,8" />
+                  <mav:MavButton Variant="Tonal" Text="{mav:Loc Overview.Contrast.High, Fallback=High}" Command="{x:Static pages:ThemingPage.SetContrast}" CommandParameter="{x:Static mav:MavContrast.High}" Margin="0,0,8,8" />
+                </WrapPanel>
+                <WrapPanel>
+                  <mav:MavButton Variant="Text" Text="{mav:Loc Overview.Density.Comfortable, Fallback=Comfortable}" Command="{x:Static pages:ThemingPage.SetDensity}" CommandParameter="{x:Static mav:MavDensity.Comfortable}" Margin="0,0,8,8" />
+                  <mav:MavButton Variant="Text" Text="{mav:Loc Overview.Density.Compact, Fallback=Compact}" Command="{x:Static pages:ThemingPage.SetDensity}" CommandParameter="{x:Static mav:MavDensity.Compact}" Margin="0,0,8,8" />
+                  <mav:MavButton Variant="Text" Text="{mav:Loc Overview.Density.Dense, Fallback=Dense}" Command="{x:Static pages:ThemingPage.SetDensity}" CommandParameter="{x:Static mav:MavDensity.Dense}" Margin="0,0,8,8" />
+                </WrapPanel>
+                <WrapPanel>
+                  <mav:MavButton Variant="Outlined" Text="{mav:Loc Theming.Motion.Expressive, Fallback="Motion: Expressive"}" Command="{x:Static pages:ThemingPage.SetMotion}" CommandParameter="{x:Static mav:MavMotionScheme.Expressive}" Margin="0,0,8,8" />
+                  <mav:MavButton Variant="Outlined" Text="{mav:Loc Overview.Motion.Standard, Fallback=Standard}" Command="{x:Static pages:ThemingPage.SetMotion}" CommandParameter="{x:Static mav:MavMotionScheme.Standard}" Margin="0,0,8,8" />
+                  <mav:MavButton Variant="Outlined" Text="{mav:Loc Overview.Motion.Reduced, Fallback=Reduced}" Command="{x:Static pages:ThemingPage.SetMotion}" CommandParameter="{x:Static mav:MavMotionScheme.Reduced}" Margin="0,0,8,8" />
+                  <mav:MavButton Variant="Outlined" Text="{mav:Loc Theming.Motion.None, Fallback=None}" Command="{x:Static pages:ThemingPage.SetMotion}" CommandParameter="{x:Static mav:MavMotionScheme.None}" Margin="0,0,8,8" />
+                </WrapPanel>
+                <WrapPanel>
+                  <mav:MavButton Variant="Tonal" Text="{mav:Loc Theming.Shape.Compact, Fallback="Shape: Compact"}" Command="{x:Static pages:ThemingPage.SetShape}" CommandParameter="{x:Static mav:MavShapeScale.Compact}" Margin="0,0,8,8" />
+                  <mav:MavButton Variant="Tonal" Text="{mav:Loc Overview.Motion.Standard, Fallback=Standard}" Command="{x:Static pages:ThemingPage.SetShape}" CommandParameter="{x:Static mav:MavShapeScale.Standard}" Margin="0,0,8,8" />
+                  <mav:MavButton Variant="Tonal" Text="{mav:Loc Theming.Shape.Expressive, Fallback=Expressive}" Command="{x:Static pages:ThemingPage.SetShape}" CommandParameter="{x:Static mav:MavShapeScale.Expressive}" Margin="0,0,8,8" />
+                </WrapPanel>
+              </StackPanel>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavTheme.Configure(seed, mode, contrast, density, motion, shapeScale)" />
             </StackPanel>
           </mav:MavCard>
@@ -26,7 +64,16 @@
             <StackPanel Spacing="10">
               <mav:MavLabel Role="TitleMedium" Text="MavColorRole" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Colors.CardBody, Fallback=Each swatch shows the role name over its own color.}" />
-              <StackPanel x:Name="ColorsHost" Spacing="10" />
+              <ItemsControl ItemsSource="{x:Static pages:ThemingPage.ColorSwatches}">
+                <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate x:DataType="pages:ThemeSample">
+                    <Border Width="132" Height="64" CornerRadius="12" Padding="10" Margin="0,0,8,8" Background="{Binding Background}">
+                      <TextBlock Text="{Binding Name}" FontSize="11" TextWrapping="Wrap" Foreground="{Binding Foreground}" />
+                    </Border>
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavTheme.ColorOf(role) · MavTheme.BrushOf(color)" />
             </StackPanel>
           </mav:MavCard>
@@ -39,7 +86,14 @@
             <StackPanel Spacing="10">
               <mav:MavLabel Role="TitleMedium" Text="MavTypeRole" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Type.CardBody, Fallback=Every role rendered with its own style.}" />
-              <StackPanel x:Name="TypeHost" Spacing="10" />
+              <ItemsControl ItemsSource="{x:Static pages:ThemingPage.TypeScale}">
+                <ItemsControl.ItemsPanel><ItemsPanelTemplate><StackPanel Spacing="2" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate x:DataType="pages:ThemeSample">
+                    <mav:MavLabel Role="{Binding Role}" Text="{Binding Name}" />
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="new MavLabel { Role = MavTypeRole.TitleLarge }" />
             </StackPanel>
           </mav:MavCard>
@@ -52,7 +106,28 @@
             <StackPanel Spacing="10">
               <mav:MavLabel Role="TitleMedium" Text="MavShape and MavSurface.Elevation" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Shape.CardBody, Fallback=Shape tokens follow MavShapeScale; elevation uses two-layer shadows.}" />
-              <StackPanel x:Name="ShapeHost" Spacing="10" />
+              <StackPanel Spacing="8">
+                <ItemsControl ItemsSource="{x:Static pages:ThemingPage.ShapeSamples}">
+                  <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                  <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="pages:ThemeSample">
+                      <Border Width="120" Height="64" Margin="0,0,8,8" CornerRadius="{Binding Corner}" Background="{Binding Background}">
+                        <mav:MavLabel Text="{Binding Name}" Role="LabelSmall" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                      </Border>
+                    </DataTemplate>
+                  </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <ItemsControl ItemsSource="{x:Static pages:ThemingPage.ElevationSamples}">
+                  <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                  <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="pages:ThemeSample">
+                      <mav:MavSurface Width="120" Height="72" Margin="0,0,8,8" Radius="12" Elevation="{Binding Elevation}" FillColor="{Binding Fill}">
+                        <mav:MavLabel Text="{Binding Name}" Role="LabelSmall" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                      </mav:MavSurface>
+                    </DataTemplate>
+                  </ItemsControl.ItemTemplate>
+                </ItemsControl>
+              </StackPanel>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavTheme.Current.Shape · MavSurface.Elevation" />
             </StackPanel>
           </mav:MavCard>
@@ -65,7 +140,14 @@
             <StackPanel Spacing="10">
               <mav:MavLabel Role="TitleMedium" Text="MavAccessibility.ContrastRatio" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Contrast.CardBody, Fallback=Ratios are computed from the current scheme.}" />
-              <StackPanel x:Name="ContrastHost" Spacing="10" />
+              <ItemsControl ItemsSource="{x:Static pages:ThemingPage.ContrastLines}">
+                <ItemsControl.ItemsPanel><ItemsPanelTemplate><StackPanel Spacing="6" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate x:DataType="x:String">
+                    <mav:MavLabel Role="BodySmall" Text="{Binding}" />
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavAccessibility.ContrastRatio(foreground, background)" />
             </StackPanel>
           </mav:MavCard>
@@ -78,7 +160,20 @@
             <StackPanel Spacing="10">
               <mav:MavLabel Role="TitleMedium" Text="{mav:Loc Theming.Language.Title, Fallback=Language switch}" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Language.CardBody, Fallback=The greeting and dialog labels use the same provider. The language buttons call SetCulture; attached texts update automatically\, without event handlers.}" />
-              <StackPanel x:Name="LocalizationHost" Spacing="10" />
+              <StackPanel Spacing="8">
+                <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Theming.Greeting, Fallback=Hello}" />
+                <WrapPanel>
+                  <mav:MavButton Variant="Outlined" Text="English" Command="{x:Static pages:ThemingPage.SetEnglish}" Margin="0,0,8,8" />
+                  <mav:MavButton Variant="Outlined" Text="Русский" Command="{x:Static pages:ThemingPage.SetRussian}" Margin="0,0,8,8" />
+                  <mav:MavButton Variant="Filled" Text="{mav:Loc Theming.Lang.OpenDialog, Fallback=Open dialog}" Margin="0,0,8,8">
+                    <mav:MavFlyout.Dialog>
+                      <mav:MavDialog Title="{mav:Loc Theming.Dialog.Title, Fallback=Delete project?}"
+                                     Message="{mav:Loc Theming.Dialog.Message, Fallback=This action cannot be undone.}"
+                                     DismissText="{x:Static mav:MavLocalization.Cancel}" />
+                    </mav:MavFlyout.Dialog>
+                  </mav:MavButton>
+                </WrapPanel>
+              </StackPanel>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavLocalization.SetCulture(new CultureInfo(&quot;ru-RU&quot;)) · {mav:Loc Key, Fallback=...}" />
             </StackPanel>
           </mav:MavCard>
