@@ -38,7 +38,7 @@
 | 3 | Wi-Fi-мастер на Windows | **Скрыт.** На Windows добавление устройства недоступно. Android-реализация переносится. |
 | 4 | Языки | **en и uk.** Остальные (cs, de, hu, it, pl, ro) не переносим. |
 | 5 | Android `ApplicationId` | **`com.melask.heatceram`** (без `.old`). |
-| 6 | Модели | **Модель лежит рядом со страницей**: `Pages/<Функция>/` содержит страницу и её модели. В `Pages/Models/` — базовые модели и модели, не привязанные к одной странице. |
+| 6 | Модели | **Все модели в корневой папке `Models/`** (решение пользователя). Модели API — в `Models/Cloud/` и `Models/Local/`. Модели страниц — в `Models/` (не в `Pages/`). |
 | 7 | Шрифты | **Roboto** (шрифт MavUI). Montserrat из `ref` не переносим. |
 | 8 | Cleartext HTTP | **Разрешён для всего приложения** (как в `ref`). |
 
@@ -80,9 +80,8 @@ migrated/
 │       │   └── Wifi/                IWifiProvisioning; реализации в Platforms/
 │       ├── Pages/
 │       │   ├── Shell/               MainView (навигация), StartPage
-│       │   ├── Account/ Groups/ Devices/ Device/ Schedule/ Settings/   страницы по функциям (XAML + ViewModel)
-│       │   └── Models/              базовые модели и модели, не привязанные к одной странице
-│       │                            (модели страницы лежат в её папке, например Pages/Devices/DeviceModel.cs)
+│       │   └── Account/ Groups/ Devices/ Device/ Schedule/ Settings/   страницы по функциям (XAML + ViewModel)
+│       ├── Models/                  все модели; API-модели в Models/Cloud и Models/Local
 │       ├── Localization/            HcLocalization.cs (провайдер), En.cs, Uk.cs (по одному файлу на язык)
 │       ├── Controls/                собственные контролы приложения
 │       └── Converters/              конвертеры XAML
@@ -96,7 +95,7 @@ migrated/
 Что следует из правил проекта:
 
 * Namespace корня: `Hc`. Например, `Hc.Services.Cloud`, `Hc.Pages.Shell`, `Hc.Platforms.Android`.
-* Сервисы в `Services/`. Страница и её модели — в одной папке `Pages/<Функция>/`. Базовые модели и общие — в `Pages/Models/`.
+* Сервисы в `Services/`. Модели всех типов — в корневой `Models/`, подпапки по источнику (`Cloud`, `Local`), страницы — в `Pages/<Функция>/`.
 * Облачный и локальный API разделены по своим сервисам: `Services/Cloud` и `Services/Local`.
 * Локализация в `Localization/`, по одному файлу на язык (en, uk). Английский строки для XAML — это fallback в самом XAML.
 * Пустые папки хранятся через `.gitkeep`.
