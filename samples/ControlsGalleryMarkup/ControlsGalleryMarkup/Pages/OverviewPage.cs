@@ -122,7 +122,7 @@ public static class OverviewPage
                 .Text(role.ToString())
                 .FontSize(11)
                 .Foreground(MavTheme.BrushOf(on)));
-        return LayoutableMarkup.Margin(border, new Thickness(0, 0, 8, 8));
+        return border.Margin(new Thickness(0, 0, 8, 8));
     }
 
     private static Control ShapeSamples()

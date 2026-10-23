@@ -91,12 +91,9 @@ public static class ActionsPage
                     Row(SplitButton(), FabMenu()))));
     }
 
-    /// <summary>
-    /// Left alignment. <c>HorizontalAlignment</c> is also a property of <c>Layoutable</c>, so the generated
-    /// extension is called by its class name (see <see cref="PageParts.Centered{T}"/>).
-    /// </summary>
+    /// <summary>Left alignment.</summary>
     private static T StartAligned<T>(T control) where T : Control =>
-        LayoutableMarkup.HorizontalAlignment(control, HorizontalAlignment.Left);
+        control.HorizontalAlignment(HorizontalAlignment.Left);
 
     private static MavButtonGroup StandardGroup()
     {

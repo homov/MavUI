@@ -11,9 +11,7 @@ namespace Mav.ControlsGalleryMarkup.Pages;
 
 /// <summary>
 /// Shared blocks of the gallery pages, laid out like the AXAML gallery. Everything is written with
-/// the generated fluent methods. Two properties clash with the generator (see <see cref="Disabled{T}"/>
-/// and <see cref="Centered{T}"/>), and those are called explicitly by their generated class name.
-/// Texts come from MavLocalization; the English argument is the fallback.
+/// the generated fluent methods. Texts come from MavLocalization; the English argument is the fallback.
 /// </summary>
 public static class PageParts
 {
@@ -55,38 +53,24 @@ public static class PageParts
     public static Control AdaptiveWrap(double minItemWidth, params Control[] content) =>
         new WrapPanel().ItemWidth(minItemWidth).Children(content.Select(Gap).ToArray());
 
-    /// <summary>
-    /// Disables a control. The generated <c>IsEnabled</c> extensions have one overload per control type,
-    /// and the compiler binds the wrong one for <c>MavButton</c> (CS0311). The explicit call avoids the choice.
-    /// </summary>
+    /// <summary>Disables a control.</summary>
     public static T Disabled<T>(T control) where T : Control =>
-        InputElementMarkup.IsEnabled(control, false);
+        control.IsEnabled(false);
 
-    /// <summary>
-    /// Centers a control both ways. <c>HorizontalAlignment</c> and <c>VerticalAlignment</c> are properties of
-    /// <c>Layoutable</c>, and a call written as <c>x.HorizontalAlignment(...)</c> binds to the property (CS1955).
-    /// </summary>
-    public static T Centered<T>(T control) where T : Control
-    {
-        LayoutableMarkup.HorizontalAlignment(control, HorizontalAlignment.Center);
-        return LayoutableMarkup.VerticalAlignment(control, VerticalAlignment.Center);
-    }
+    /// <summary>Centers a control both ways.</summary>
+    public static T Centered<T>(T control) where T : Control =>
+        control.HorizontalAlignment(HorizontalAlignment.Center).VerticalAlignment(VerticalAlignment.Center);
 
-    /// <summary>
-    /// Sets the size. <c>Width</c> has a generated overload for <c>ColumnDefinition</c> (GridLength), so the
-    /// fluent <c>.Width(120)</c> binds to the wrong type (CS1503). The explicit <c>LayoutableMarkup</c> calls avoid that.
-    /// </summary>
+    /// <summary>Sets the width and, when given, the height.</summary>
     public static T Sized<T>(this T control, double width, double? height = null) where T : Control
     {
-        LayoutableMarkup.Width(control, width);
-        if (height is double h)
-            LayoutableMarkup.Height(control, h);
-        return control;
+        control = control.Width(width);
+        return height is double h ? control.Height(h) : control;
     }
 
     /// <summary>Gap of 8 dp after a wrapped item.</summary>
     private static Control Gap(Control control) =>
-        LayoutableMarkup.Margin(control, new Thickness(0, 0, 8, 8));
+        control.Margin(new Thickness(0, 0, 8, 8));
 
     private static Control Description(string key, string english, MavTypeRole role = MavTypeRole.BodyMedium) =>
         new MavLabel(L(key, english), role).Secondary(true).TextWrapping(TextWrapping.Wrap);
