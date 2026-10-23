@@ -11,6 +11,8 @@
     <LangVersion>latest</LangVersion>
     <RootNamespace>Mav.ControlsGalleryMarkup</RootNamespace>
     <AssemblyName>Mav.ControlsGalleryMarkup</AssemblyName>
+    <!-- Generated fluent setters for nullable value types unbox without a check (same as AMarkup.Controls). -->
+    <NoWarn>$(NoWarn);CS8605</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
