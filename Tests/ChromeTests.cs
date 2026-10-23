@@ -58,9 +58,8 @@ public class ChromeTests
         try
         {
             Dispatcher.UIThread.RunJobs();
-            var bar = tabs.GetVisualDescendants().OfType<MavSurface>().First();
             Assert.True(body.Bounds.Height > 500,
-                $"The tab body is {body.Bounds.Height:0}px high inside a 700px window (bar {bar.Bounds.Height:0}px).");
+                $"The tab body is {body.Bounds.Height:0}px high inside a 700px window.");
         }
         finally
         {
