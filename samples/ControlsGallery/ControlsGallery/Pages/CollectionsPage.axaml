@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mav="https://where.it/mav"
              xmlns:pages="clr-namespace:Mav.ControlsGallery.Pages"
+             xmlns:avc="clr-namespace:Avalonia.Collections;assembly=Avalonia.Base"
              x:Class="Mav.ControlsGallery.Pages.CollectionsPage">
   <mav:MavScrollViewer>
     <Border Padding="20,16,20,40">
@@ -51,7 +52,7 @@
                 <mav:MavDataColumn Header="Role" PropertyName="Role" />
                 <mav:MavDataColumn Header="Score" PropertyName="Score" IsNumeric="True" />
                 <mav:MavDataTable.ItemsSource>
-                  <x:Array Type="{x:Type pages:PersonRow}">
+                  <avc:AvaloniaList x:TypeArguments="pages:PersonRow">
                     <pages:PersonRow Name="Ada Lovelace" Role="Admin" Score="98" />
                     <pages:PersonRow Name="Grace Hopper" Role="Editor" Score="95" />
                     <pages:PersonRow Name="Alan Turing" Role="Admin" Score="92" />
@@ -59,7 +60,7 @@
                     <pages:PersonRow Name="Linus Torvalds" Role="Editor" Score="88" />
                     <pages:PersonRow Name="Margaret Hamilton" Role="Admin" Score="96" />
                     <pages:PersonRow Name="Barbara Liskov" Role="Viewer" Score="94" />
-                  </x:Array>
+                  </avc:AvaloniaList>
                 </mav:MavDataTable.ItemsSource>
               </mav:MavDataTable>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="table.AddColumn(header, valueSelector, isNumeric) · Layout=Auto · ShowPagination · FilterText" />
