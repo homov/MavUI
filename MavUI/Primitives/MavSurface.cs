@@ -396,15 +396,6 @@ namespace Mav.Primitives
     /// </summary>
     public class MavContentView : Border
     {
-        public static readonly StyledProperty<Control?> ContentProperty =
-            ChildProperty.AddOwner<MavContentView>();
-
-        public Control? Content
-        {
-            get => Child;
-            set => Child = value;
-        }
-
         public Color BackgroundColor
         {
             get => (Background as ISolidColorBrush)?.Color ?? Colors.Transparent;

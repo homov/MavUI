@@ -313,7 +313,7 @@ public class MavFabMenu : MavContentView, IEnumerable<MavFabMenuItem>
         {
             child.FillColor = c.SecondaryContainer;
             child.RippleColor = c.OnSecondaryContainer;
-            if (child.Content is StackPanel row)
+            if (child.Child is StackPanel row)
             {
                 foreach (var el in row.Children)
                 {

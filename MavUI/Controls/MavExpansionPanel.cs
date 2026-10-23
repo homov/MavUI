@@ -27,7 +27,7 @@ public class MavExpansionPanel : MavContentView
     public static readonly StyledProperty<bool> IsExpandedProperty =
         AvaloniaProperty.Register<MavExpansionPanel, bool>(nameof(IsExpanded));
 
-    public static new readonly StyledProperty<object?> ContentProperty =
+    public static readonly StyledProperty<object?> ContentProperty =
         AvaloniaProperty.Register<MavExpansionPanel, object?>(nameof(Content));
 
     private readonly MavSurface _card;
@@ -122,7 +122,7 @@ public class MavExpansionPanel : MavContentView
             Content = stack,
         };
 
-        base.Content = _card;
+        base.Child = _card;
 
         Title = title;
         Subtitle = subtitle;
@@ -170,7 +170,7 @@ public class MavExpansionPanel : MavContentView
 
     /// <summary>The panel body, shown when expanded. Any object is accepted, as in Avalonia's ContentControl.</summary>
     [Content]
-    public new object? Content
+    public object? Content
     {
         get => GetValue(ContentProperty);
         set => SetValue(ContentProperty, value);

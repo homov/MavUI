@@ -153,15 +153,6 @@ public class MavInkSurface : Decorator
         UpdateInteractiveState();
     }
 
-    public static readonly StyledProperty<Control?> ContentProperty =
-        ChildProperty.AddOwner<MavInkSurface>();
-
-    public Control? Content
-    {
-        get => Child;
-        set => Child = value;
-    }
-
     public bool IsInteractive
     {
         get => _interactive;

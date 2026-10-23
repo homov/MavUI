@@ -223,7 +223,7 @@ public class MavPopover : Control
         var cardMaxWidth = Math.Max(cardMinWidth, Math.Min(MaxWidth, maxCardWidth));
         var bodyMaxHeight = Math.Max(64, maxCardHeight - Padding.Top - Padding.Bottom);
 
-        if (_card.Content is MavScrollViewer host)
+        if (_card.Child is MavScrollViewer host)
             host.MaxHeight = bodyMaxHeight;
         _card.MinWidth = cardMinWidth;
         _card.MaxWidth = cardMaxWidth;

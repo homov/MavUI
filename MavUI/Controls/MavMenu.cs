@@ -245,7 +245,7 @@ public class MavMenu : Control, IEnumerable<MavMenuItem>
 
         var maxCardWidth = Math.Max(120, Math.Min(320, viewportWidth - 16));
         var maxCardHeight = Math.Max(120, Math.Min(MaxHeight, viewportHeight - 16));
-        if (card.Content is MavScrollViewer scroll)
+        if (card.Child is MavScrollViewer scroll)
             scroll.MaxHeight = maxCardHeight;
 
         var minWidth = Math.Min(Math.Max(MinWidth, anchorBounds.Width), maxCardWidth);
@@ -258,7 +258,7 @@ public class MavMenu : Control, IEnumerable<MavMenuItem>
         // Measure the rows with the new caps so the edge clamp uses the width the card
         // will actually get (MinWidth alone is too small for long labels).
         var contentWidth = 0.0;
-        if (card.Content is MavScrollViewer { Content: Control rows })
+        if (card.Child is MavScrollViewer { Content: Control rows })
         {
             rows.Measure(new Size(Math.Max(64, maxCardWidth), double.PositiveInfinity));
             contentWidth = rows.DesiredSize.Width;

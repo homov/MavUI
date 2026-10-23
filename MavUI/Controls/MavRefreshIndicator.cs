@@ -49,7 +49,7 @@ public class MavRefreshIndicator : MavContentView
     public static readonly StyledProperty<object?> CommandParameterProperty =
         AvaloniaProperty.Register<MavRefreshIndicator, object?>(nameof(CommandParameter));
 
-    public static new readonly StyledProperty<object?> ContentProperty =
+    public static readonly StyledProperty<object?> ContentProperty =
         AvaloniaProperty.Register<MavRefreshIndicator, object?>(nameof(Content));
 
     private readonly Grid _root;
@@ -166,7 +166,7 @@ public class MavRefreshIndicator : MavContentView
         _root.Children.Add(_bodyHost);
         _root.Children.Add(_indicatorHost);
 
-        base.Content = _root;
+        base.Child = _root;
         if (content is not null)
             Content = content;
 
@@ -180,7 +180,7 @@ public class MavRefreshIndicator : MavContentView
 
     /// <summary>The scrollable content. Any object is accepted, as in Avalonia's ContentControl.</summary>
     [Content]
-    public new object? Content
+    public object? Content
     {
         get => GetValue(ContentProperty);
         set => SetValue(ContentProperty, value);

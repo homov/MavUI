@@ -500,7 +500,7 @@ public class MavComboBox : MavContentView, IEnumerable<string>
             0,
             0);
 
-        if (_dropdownCard.Content is MavScrollViewer scroll)
+        if (_dropdownCard.Child is MavScrollViewer scroll)
             scroll.MaxHeight = Math.Max(44, Math.Min(240, overlaySize.Height - insets.Bottom - top - 8));
     }
 
