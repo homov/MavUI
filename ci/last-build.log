@@ -1,28 +1,83 @@
 # Last build log
-commit: 2345d0858949ad26dd1e080984b8764afc938944
-run: https://github.com/homov/MavUI/actions/runs/40001271704
+commit: 50c5b35da691a5f7ea727ea58e7f288478acc20f
+run: https://github.com/homov/MavUI/actions/runs/40001356838
 
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 269 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 265 ms).
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:07.40
+Time Elapsed 00:00:07.73
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 217 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 217 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 222 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 229 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 223 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 223 ms).
   1 of 4 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
-/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/Pages/LayoutPage.axaml.cs(88,13): error CS0117: 'MavExpansionPanel' does not contain a definition for 'Body' [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj]
+  ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
+  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
+  MavUI.Tests -> /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/MavUI.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:04.78
+  Determining projects to restore...
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 275 ms).
+  2 of 3 projects are up-to-date for restore.
+  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
+  ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
+  ControlsGallery.Desktop -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/bin/Release/net10.0/ControlsGallery.Desktop.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.13
+  Determining projects to restore...
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup.Desktop/ControlsGalleryMarkup.Desktop.csproj (in 242 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/markup/src/AMarkup.Controls/AMarkup.Controls.csproj (in 242 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/markup/src/AMarkup.Generators/AMarkup.Generators.csproj (in 242 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj (in 242 ms).
+  1 of 5 projects are up-to-date for restore.
+  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
+  AMarkup.Controls -> /home/homo/github/actions-runner/_work/MavUI/MavUI/markup/src/AMarkup.Controls/bin/Release/net10.0/AMarkup.Controls.dll
+  AMarkup.Generators -> /home/homo/github/actions-runner/_work/MavUI/MavUI/markup/src/AMarkup.Generators/bin/Release/net10.0/AMarkup.Generators.dll
+  ControlsGalleryMarkup -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/bin/Release/net10.0/Mav.ControlsGalleryMarkup.dll
+  ControlsGalleryMarkup.Desktop -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup.Desktop/bin/Release/net10.0/ControlsGalleryMarkup.Desktop.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:07.78
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0-windows/MavUI.Essentials.dll
+  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.98
+  Determining projects to restore...
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/HC.csproj (in 277 ms).
+  2 of 3 projects are up-to-date for restore.
+  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
+  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
+/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/Pages/Devices/DeviceListView.axaml(5,4,5,4): Avalonia error AVLN2000: Unable to resolve suitable regular or attached property Body on type MavUI:Mav.Controls.MavRefreshIndicator Line 5, position 4. [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/HC.csproj::TargetFramework=net10.0]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/Pages/Groups/GroupListView.axaml(5,4,5,4): Avalonia error AVLN2000: Unable to resolve suitable regular or attached property Body on type MavUI:Mav.Controls.MavRefreshIndicator Line 5, position 4. [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/HC.csproj::TargetFramework=net10.0]
 
 Build FAILED.
 
-/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/Pages/LayoutPage.axaml.cs(88,13): error CS0117: 'MavExpansionPanel' does not contain a definition for 'Body' [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/Pages/Devices/DeviceListView.axaml(5,4,5,4): Avalonia error AVLN2000: Unable to resolve suitable regular or attached property Body on type MavUI:Mav.Controls.MavRefreshIndicator Line 5, position 4. [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/HC.csproj::TargetFramework=net10.0]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/Pages/Groups/GroupListView.axaml(5,4,5,4): Avalonia error AVLN2000: Unable to resolve suitable regular or attached property Body on type MavUI:Mav.Controls.MavRefreshIndicator Line 5, position 4. [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/HC.csproj::TargetFramework=net10.0]
     0 Warning(s)
-    1 Error(s)
+    2 Error(s)
 
-Time Elapsed 00:00:02.66
+Time Elapsed 00:00:01.80
