@@ -42,6 +42,9 @@ internal static class ScreenDump
     {
         Directory.CreateDirectory(ReportFolder);
         var path = Path.Combine(ReportFolder, name + ".png");
+        // Headless windows draw only on a render tick; force a few so the frame is ready.
+        for (var i = 0; i < 3; i++)
+            AvaloniaHeadlessPlatform.ForceRenderTimerTick();
         using var frame = window.CaptureRenderedFrame();
         Assert.True(frame is not null, $"CaptureRenderedFrame returned no frame for {name}.");
         frame!.Save(path);
