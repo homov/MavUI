@@ -81,9 +81,10 @@ public class ItemsHostTests
         Dispatcher.UIThread.RunJobs();
 
         // 100 px items in a 250 px box: two per row, three rows, 20 px each.
-        Assert.Equal(200, items.Children[0].Bounds.Y);
+        Assert.Equal(new Avalonia.Point(0, 0), items.Children[0].Bounds.Position);
         Assert.Equal(100, items.Children[1].Bounds.X);
-        Assert.Equal(250, items.Children[2].Bounds.X);
+        Assert.Equal(new Avalonia.Point(0, 20), items.Children[2].Bounds.Position);
+        Assert.Equal(new Avalonia.Point(0, 40), items.Children[4].Bounds.Position);
         window.Close();
     }
 }
