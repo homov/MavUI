@@ -1638,6 +1638,19 @@ Commit-message tags:
 * Windows: `tools/win/mavui.ps1` — `-Action start|stop|shot|click|key|wheel|info`, `-EnvWindow`,
   `-EnvSafeArea`, `-EnvKeyboard`.
 
+### Screenshots for review
+
+Visual checks are the fastest way to catch a layout bug, but the raw job log and the run artifacts
+are not reachable from an agent sandbox (`gh run download` redirects to a blocked host). Two
+channels work, both documented in `docs/NOTES.md` → «Скриншоты: как передать картинку агенту»:
+
+* a PNG committed under `docs/screenshots/` — no CI needed, use it for the user's own machine;
+* headless CI captures: `python3 tools/read_screenshots.py [--run <id>]` joins the base64
+  annotations of the check run into `ci/screenshots/run-<id>/` and verifies size and sha256.
+  When touching that pipeline, keep `PNG_BATCHES` in `ci/scripts/test_annotations.py` equal to the
+  number of `Screenshots as base64` steps in `.github/workflows/build.yml` (GitHub cuts an
+  annotation at 4096 characters and keeps 10 notices per step).
+
 ---
 
 ## 9. Platforms
