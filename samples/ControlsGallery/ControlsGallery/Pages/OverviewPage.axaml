@@ -166,10 +166,10 @@
               <DataTemplate x:DataType="pages:ElevationSample">
                 <mav:MavSurface Width="120" Height="72" Margin="0,0,8,8" Radius="12"
                                 Elevation="{Binding Elevation}" FillColor="{Binding Fill}">
-                  <mav:MavSurface.Content>
+                  <mav:MavSurface.Child>
                     <mav:MavLabel Role="LabelSmall" Text="{Binding Text}"
                                   HorizontalAlignment="Center" VerticalAlignment="Center" />
-                  </mav:MavSurface.Content>
+                  </mav:MavSurface.Child>
                 </mav:MavSurface>
               </DataTemplate>
             </ItemsControl.ItemTemplate>
