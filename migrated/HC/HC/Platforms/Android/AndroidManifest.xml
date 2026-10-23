@@ -10,7 +10,7 @@
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
   <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-  <!-- Cleartext HTTP is allowed only for the device's local access point (see network_security_config.xml). -->
+  <!-- Cleartext HTTP is allowed app-wide (see network_security_config.xml): the device API is plain HTTP. -->
   <application
       android:label="HC"
       android:theme="@style/HC.NoActionBar"

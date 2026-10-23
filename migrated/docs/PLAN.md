@@ -37,6 +37,10 @@
 | 2 | Пункты ТЗ 2024/2025 | **Пока не трогаем.** Этап 9 откладывается. Переносим текущий функционал. |
 | 3 | Wi-Fi-мастер на Windows | **Скрыт.** На Windows добавление устройства недоступно. Android-реализация переносится. |
 | 4 | Языки | **en и uk.** Остальные (cs, de, hu, it, pl, ro) не переносим. |
+| 5 | Android `ApplicationId` | **`com.melask.heatceram`** (без `.old`). |
+| 6 | Модели | **Модель лежит рядом со страницей**: `Pages/<Функция>/` содержит страницу и её модели. В `Pages/Models/` — базовые модели и модели, не привязанные к одной странице. |
+| 7 | Шрифты | **Roboto** (шрифт MavUI). Montserrat из `ref` не переносим. |
+| 8 | Cleartext HTTP | **Разрешён для всего приложения** (как в `ref`). |
 
 Допущения (без возражений пользователя, при необходимости уточним):
 
@@ -66,7 +70,7 @@ migrated/
 │       │   ├── Android/             MainActivity, AndroidManifest.xml, Resources/ (styles, цвета, network_security_config), Services/
 │       │   └── Windows/             Program.cs (вход), WindowsApp.cs, PreviewWindow.axaml (390x844 dp), Services/
 │       ├── Resources/
-│       │   ├── Fonts/               шрифты (пока пусто, см. NOTES.md)
+│       │   ├── Fonts/               шрифты (Roboto из MavUI; собственных шрифтов нет)
 │       │   ├── Images/              изображения
 │       │   ├── Raw/                 сырые файлы
 │       │   └── Styles/AppStyles.axaml  общие стили приложения
@@ -77,7 +81,8 @@ migrated/
 │       ├── Pages/
 │       │   ├── Shell/               MainView (навигация), StartPage
 │       │   ├── Account/ Groups/ Devices/ Device/ Schedule/ Settings/   страницы по функциям (XAML + ViewModel)
-│       │   └── Models/              модели страниц и данных (решение пользователя: модели в Pages/)
+│       │   └── Models/              базовые модели и модели, не привязанные к одной странице
+│       │                            (модели страницы лежат в её папке, например Pages/Devices/DeviceModel.cs)
 │       ├── Localization/            HcLocalization.cs (провайдер), En.cs, Uk.cs (по одному файлу на язык)
 │       ├── Controls/                собственные контролы приложения
 │       └── Converters/              конвертеры XAML
@@ -91,13 +96,13 @@ migrated/
 Что следует из правил проекта:
 
 * Namespace корня: `Hc`. Например, `Hc.Services.Cloud`, `Hc.Pages.Shell`, `Hc.Platforms.Android`.
-* Сервисы в `Services/`, страницы и их модели в `Pages/`, модели в `Pages/Models/`.
+* Сервисы в `Services/`. Страница и её модели — в одной папке `Pages/<Функция>/`. Базовые модели и общие — в `Pages/Models/`.
 * Облачный и локальный API разделены по своим сервисам: `Services/Cloud` и `Services/Local`.
 * Локализация в `Localization/`, по одному файлу на язык (en, uk). Английский строки для XAML — это fallback в самом XAML.
 * Пустые папки хранятся через `.gitkeep`.
 * Сборка проверена CI: Windows на каждом коммите, Android при `[heads]`.
 * Android: `ApplicationId` `com.melask.heatceram` (из `ref`, но без суффикса `.old`). Нужно подтвердить: обновление должно идти на тот же идентификатор, что и в магазине.
-* Android-манифест: cleartext HTTP разрешён только для `10.10.10.1` через `network_security_config` (в `ref` cleartext был разрешён для всего приложения).
+* Android: cleartext HTTP разрешён для всего приложения (решение пользователя, как в `ref`). Локальный API устройства — `http://10.10.10.1:10893`.
 
 ---
 

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Cloud API is HTTPS only. The local device API uses plain HTTP on its access point address. -->
+<!-- Cleartext HTTP is allowed for the whole app (decision of the project owner, as in the old app).
+     The local device API uses plain HTTP on 10.10.10.1:10893; the cloud API uses HTTPS. -->
 <network-security-config>
-  <base-config cleartextTrafficPermitted="false" />
-  <domain-config cleartextTrafficPermitted="true">
-    <domain includeSubdomains="false">10.10.10.1</domain>
-  </domain-config>
+  <base-config cleartextTrafficPermitted="true" />
 </network-security-config>
