@@ -142,7 +142,7 @@ public class MavRichTooltip : Control
             FillColor = c.SurfaceContainer,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
-            Content = stack,
+            Child = stack,
         };
 
         void Place()

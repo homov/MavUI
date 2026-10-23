@@ -98,7 +98,7 @@ public class MavSettingsExpander : MavContentView, System.Collections.Generic.IE
             Margin = new Thickness(0, 0, 16, 0),
             VerticalAlignment = VerticalAlignment.Center,
             IsVisible = !string.IsNullOrEmpty(icon),
-            Content = _iconView,
+            Child = _iconView,
         };
 
         _headerLbl = new TextBlock { Text = header, TextWrapping = TextWrapping.Wrap };
@@ -147,7 +147,7 @@ public class MavSettingsExpander : MavContentView, System.Collections.Generic.IE
         {
             MinHeight = 68,
             Padding = new Thickness(16, 14),
-            Content = headerRow,
+            Child = headerRow,
         };
         _headerSurface.Clicked += (_, _) => IsExpanded = !IsExpanded;
 
@@ -177,10 +177,10 @@ public class MavSettingsExpander : MavContentView, System.Collections.Generic.IE
             Radius = 16,
             BorderStrokeThickness = 1,
             ClipToBounds = true,
-            Content = rootCol,
+            Child = rootCol,
         };
 
-        Content = _container;
+        Child = _container;
 
         Header = header;
         if (description is not null) Description = description;

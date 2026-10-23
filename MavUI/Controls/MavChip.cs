@@ -160,7 +160,7 @@ public class MavChip : MavContentView
             MinHeight = 32,
             CornerRadius = 8,
             Padding = new Thickness(12, 0),
-            Content = row,
+            Child = row,
         };
         _surface.Clicked += (_, _) =>
         {
@@ -169,7 +169,7 @@ public class MavChip : MavContentView
             Clicked?.Invoke(this, EventArgs.Empty);
         };
 
-        Content = _surface;
+        Child = _surface;
         Text = text;
         Kind = kind;
         Icon = icon;

@@ -72,7 +72,7 @@ public class MavToolbar : MavContentView, IEnumerable<Control>
 
         _barSurface = new MavSurface
         {
-            Content = _itemsPanel,
+            Child = _itemsPanel,
         };
 
         _outerRow = new StackPanel
@@ -83,7 +83,7 @@ public class MavToolbar : MavContentView, IEnumerable<Control>
         };
         _outerRow.Children.Add(_barSurface);
 
-        Content = _outerRow;
+        Child = _outerRow;
 
         Variant = variant;
         ColorStyle = colorStyle;

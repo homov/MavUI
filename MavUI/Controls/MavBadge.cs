@@ -58,10 +58,10 @@ public class MavBadge : MavContentView
 
         _surface = new MavSurface
         {
-            Content = _label,
+            Child = _label,
         };
 
-        Content = _surface;
+        Child = _surface;
         if (text is not null) Text = text;
 
         Sync();

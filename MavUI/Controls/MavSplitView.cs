@@ -179,7 +179,7 @@ public class MavSplitView : MavContentView, IMavDraggableControl
             },
         };
 
-        Content = _outerBorder;
+        Child = _outerBorder;
 
         if (pane is not null) Pane = pane;
         if (detailContent is not null) DetailContent = detailContent;

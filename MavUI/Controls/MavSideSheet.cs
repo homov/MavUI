@@ -208,7 +208,7 @@ public class MavSideSheet : Control
             var scroll = new MavScrollViewer
             {
                 Padding = new Thickness(24, 8, 24, 16),
-                Content = Body,
+                Child = Body,
             };
             grid.Add(scroll, 0, 1);
         }
@@ -234,7 +234,7 @@ public class MavSideSheet : Control
             Elevation = 3,
             HorizontalAlignment = isEnd ? HorizontalAlignment.Right : HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Stretch,
-            Content = new MavSafeArea(grid, MavSafeAreaEdges.Vertical),
+            Child = new MavSafeArea(grid, MavSafeAreaEdges.Vertical),
         };
         if (isEnd)
             _panel.SetCornerRadii(28, 0, 28, 0);

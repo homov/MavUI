@@ -90,7 +90,7 @@ public class MavSegmentedButton : MavContentView, IEnumerable<MavSegment>
             MinHeight = 40,
         };
 
-        Content = _row;
+        Child = _row;
         MavTheme.Observe(this, (self, theme) => self.ApplyTheme(theme));
     }
 
@@ -551,11 +551,11 @@ public class MavSegmentedButton : MavContentView, IEnumerable<MavSegment>
             {
                 ClipToBounds = true,
                 Padding = new Thickness(16, 0),
-                Content = row,
+                Child = row,
             };
             _surface.Clicked += (_, _) => onClick();
 
-            Content = _surface;
+            Child = _surface;
         }
 
         /// <summary>

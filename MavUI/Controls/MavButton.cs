@@ -137,13 +137,13 @@ public class MavButton : MavContentView
         _row.Children.Add(_label);
         _row.Children.Add(_trailingIcon);
 
-        _surface = new MavInkSurface { Content = _row };
+        _surface = new MavInkSurface { Child = _row };
         _surface.Clicked += OnSurfaceClicked;
         _surface.Pressed += (_, _) => SetPressedMorph(true);
         _surface.Released += (_, _) => SetPressedMorph(false);
         _surface.Cancelled += (_, _) => SetPressedMorph(false);
 
-        Content = _surface;
+        Child = _surface;
 
         Variant = variant;
         Size = size;

@@ -341,7 +341,7 @@ public class MavSearchView : Control
         };
         rootGrid.Add(headerRow, 0, 0);
         rootGrid.Add(new MavDivider(), 0, 1);
-        rootGrid.Add(new MavScrollViewer { Content = resultsStack }, 0, 2);
+        rootGrid.Add(new MavScrollViewer { Child = resultsStack }, 0, 2);
 
         var effectiveAnchor = anchor ?? (this.Parent as Visual) ?? this;
         var topLevel = MavOverlay.ResolveTopLevel(effectiveAnchor);
@@ -353,7 +353,7 @@ public class MavSearchView : Control
             FillColor = c.SurfaceContainerHigh,
             HorizontalAlignment = IsFullScreen ? HorizontalAlignment.Stretch : HorizontalAlignment.Center,
             VerticalAlignment = IsFullScreen ? VerticalAlignment.Stretch : VerticalAlignment.Top,
-            Content = IsFullScreen ? new MavSafeArea(rootGrid, MavSafeAreaEdges.All) : rootGrid,
+            Child = IsFullScreen ? new MavSafeArea(rootGrid, MavSafeAreaEdges.All) : rootGrid,
         };
 
         // The card caps depend on the overlay size, the safe area and the soft keyboard,

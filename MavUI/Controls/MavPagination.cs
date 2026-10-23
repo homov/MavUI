@@ -67,7 +67,7 @@ public class MavPagination : MavContentView
             HorizontalAlignment = HorizontalAlignment.Center,
             VerticalAlignment = VerticalAlignment.Center,
         };
-        Content = _row;
+        Child = _row;
 
         TotalPages = Math.Max(1, totalPages);
         CurrentPage = Math.Clamp(currentPage, 1, TotalPages);
@@ -184,7 +184,7 @@ public class MavPagination : MavContentView
             FillColor = Colors.Transparent,
             RippleColor = c.OnSurface,
             IsEnabled = enabled,
-            Content = icon,
+            Child = icon,
         };
         surf.Clicked += (_, _) =>
         {
@@ -215,7 +215,7 @@ public class MavPagination : MavContentView
             StrokeThickness = isSelected ? 0 : 1,
             StrokeColor = c.OutlineVariant.WithAlpha(0.5f),
             RippleColor = isSelected ? c.OnPrimary : c.Primary,
-            Content = lbl,
+            Child = lbl,
         };
         surf.Clicked += (_, _) => CurrentPage = page;
         return surf;

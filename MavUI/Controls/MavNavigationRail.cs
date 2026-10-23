@@ -113,10 +113,10 @@ public class MavNavigationRail : MavContentView, IEnumerable<MavNavigationDestin
             Width = 80,
             Radius = 0,
             Padding = new Thickness(0, 8),
-            Content = col,
+            Child = col,
         };
 
-        Content = _rail;
+        Child = _rail;
         MavTheme.Observe(this, (self, theme) => self.ApplyTheme(theme));
     }
 
@@ -286,7 +286,7 @@ public class MavNavigationRail : MavContentView, IEnumerable<MavNavigationDestin
                 Height = 32,
                 CornerRadius = 16,
                 HorizontalAlignment = HorizontalAlignment.Center,
-                Content = iconNode,
+                Child = iconNode,
             };
             _pill.Clicked += (_, _) => onClick();
 
@@ -307,7 +307,7 @@ public class MavNavigationRail : MavContentView, IEnumerable<MavNavigationDestin
             stack.Children.Add(_pill);
             stack.Children.Add(_label);
 
-            Content = stack;
+            Child = stack;
         }
 
         /// <summary>

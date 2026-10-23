@@ -110,17 +110,17 @@ public class MavNavigationDrawer : MavContentView, IEnumerable<MavDrawerItem>
 
         var scroll = new MavScrollViewer
         {
-            Content = _stack,
+            Child = _stack,
         };
 
         _drawerSurface = new MavSurface
         {
             Width = width,
-            Content = new MavSafeArea(scroll, MavSafeAreaEdges.Vertical),
+            Child = new MavSafeArea(scroll, MavSafeAreaEdges.Vertical),
         };
         _drawerSurface.SetCornerRadii(0, 16, 0, 16);
 
-        Content = _drawerSurface;
+        Child = _drawerSurface;
         if (title is not null) Title = title;
         DrawerWidth = width;
         MavTheme.Observe(this, (self, theme) => self.ApplyTheme(theme));
@@ -265,7 +265,7 @@ public class MavNavigationDrawer : MavContentView, IEnumerable<MavDrawerItem>
             Height = 56,
             CornerRadius = 28,
             Padding = new Thickness(16, 0, 24, 0),
-            Content = row,
+            Child = row,
         };
         pill.Clicked += (_, _) =>
         {

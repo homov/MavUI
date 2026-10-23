@@ -101,7 +101,7 @@ public class MavCheckBox : MavContentView
         row.Children.Add(_box);
         row.Children.Add(_label);
 
-        Content = row;
+        Child = row;
 
         _animProgress = (isChecked || isIndeterminate) ? 1.0 : 0.0;
         if (label is not null) Label = label;

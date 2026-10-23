@@ -624,7 +624,7 @@ public class MavNavigationPage : MavContentView
         else if (page.Parent is Decorator decorator && ReferenceEquals(decorator.Child, page))
             decorator.Child = null;
         else if (page.Parent is ContentControl contentControl && ReferenceEquals(contentControl.Content, page))
-            contentControl.Content = null;
+            contentControl.Child = null;
     }
 
     private void ApplyTheme(MavTheme theme)

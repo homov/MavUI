@@ -119,7 +119,7 @@ public static class MavTooltip
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
             IsHitTestVisible = false,
-            Content = lbl,
+            Child = lbl,
         };
 
         void Place()

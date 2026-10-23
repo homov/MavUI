@@ -239,7 +239,7 @@ public class MavListItem : MavContentView, IMavDraggableControl
         {
             CornerRadius = 0,
             Padding = new Thickness(16, 12),
-            Content = row,
+            Child = row,
         };
         _surface.Clicked += (_, _) =>
         {
@@ -274,7 +274,7 @@ public class MavListItem : MavContentView, IMavDraggableControl
         root.Children.Add(itemLayer);
         root.Children.Add(_divider);
 
-        Content = root;
+        Child = root;
 
         Headline = headline;
         SupportingText = supportingText;

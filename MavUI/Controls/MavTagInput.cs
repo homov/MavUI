@@ -142,7 +142,7 @@ public class MavTagInput : MavContentView, IEnumerable<string>
             Radius = 12,
             Padding = new Thickness(10, 8),
             BorderStrokeThickness = 1,
-            Content = _wrap,
+            Child = _wrap,
         };
         _container.PointerPressed += (_, _) =>
         {
@@ -157,7 +157,7 @@ public class MavTagInput : MavContentView, IEnumerable<string>
         root.Children.Add(_label);
         root.Children.Add(_container);
 
-        Content = root;
+        Child = root;
 
         if (label is not null) Label = label;
         Placeholder = placeholder;

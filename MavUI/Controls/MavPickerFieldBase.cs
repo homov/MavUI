@@ -80,7 +80,7 @@ public abstract class MavPickerFieldBase : MavContentView
         var grid = new Grid();
         grid.Children.Add(Field);
         grid.Children.Add(tapOverlay);
-        Content = grid;
+        Child = grid;
 
         SetValue(LabelProperty, label);
         SetValue(VariantProperty, variant);

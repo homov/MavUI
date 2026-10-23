@@ -127,7 +127,7 @@ public class MavCalendarGrid : MavContentView
             Height = 36,
             CornerRadius = 18,
             Padding = new Thickness(12, 0, 8, 0),
-            Content = monthBtnRow,
+            Child = monthBtnRow,
         };
 
         _prevBtn = new MavIconButton(MavIcons.ChevronLeft);
@@ -177,7 +177,7 @@ public class MavCalendarGrid : MavContentView
         {
             Height = 240,
             IsVisible = false,
-            Content = _yearGrid,
+            Child = _yearGrid,
         };
 
         monthBtn.Clicked += (_, _) =>
@@ -201,7 +201,7 @@ public class MavCalendarGrid : MavContentView
         stack.Children.Add(_daysGrid);
         stack.Children.Add(_yearScroll);
 
-        Content = stack;
+        Child = stack;
         MavTheme.Observe(this, (self, theme) => self.ApplyTheme(theme));
     }
 
@@ -372,7 +372,7 @@ public class MavCalendarGrid : MavContentView
                 StrokeColor = isToday && !isEndpoint ? c.Primary : Colors.Transparent,
                 StrokeThickness = isToday && !isEndpoint ? 1 : 0,
                 RippleColor = isEndpoint ? c.OnPrimary : c.Primary,
-                Content = lbl,
+                Child = lbl,
             };
             var captured = dt;
             circle.Clicked += (_, _) => OnDayClicked(captured);
@@ -416,7 +416,7 @@ public class MavCalendarGrid : MavContentView
                 CornerRadius = 18,
                 FillColor = sel ? c.Primary : Colors.Transparent,
                 RippleColor = c.Primary,
-                Content = lbl,
+                Child = lbl,
             };
             var capturedYr = yr;
             pill.Clicked += (_, _) =>

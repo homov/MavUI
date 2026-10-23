@@ -67,7 +67,7 @@ public class MavBreadcrumbBar : MavContentView, IEnumerable<MavBreadcrumbItem>
             Orientation = Orientation.Horizontal,
             VerticalAlignment = VerticalAlignment.Center,
         };
-        Content = _panel;
+        Child = _panel;
         MavTheme.Observe(this, (self, _) => self.Rebuild());
     }
 
@@ -227,7 +227,7 @@ public class MavBreadcrumbBar : MavContentView, IEnumerable<MavBreadcrumbItem>
             FillColor = c.SurfaceContainerHigh,
             RippleColor = c.OnSurface,
             VerticalAlignment = VerticalAlignment.Center,
-            Content = lbl,
+            Child = lbl,
         };
         surf.Clicked += (_, _) =>
         {
@@ -275,7 +275,7 @@ public class MavBreadcrumbBar : MavContentView, IEnumerable<MavBreadcrumbItem>
             FillColor = isCurrent ? c.SecondaryContainer.WithAlpha(0.55f) : Colors.Transparent,
             RippleColor = c.Primary,
             VerticalAlignment = VerticalAlignment.Center,
-            Content = row,
+            Child = row,
         };
         var captured = index;
         surf.Clicked += (_, _) =>

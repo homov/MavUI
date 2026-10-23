@@ -112,7 +112,7 @@ public class MavFabMenu : MavContentView, IEnumerable<MavFabMenuItem>
             CornerRadius = 16,
             Elevation = 3,
             HorizontalAlignment = HorizontalAlignment.Right,
-            Content = _triggerIcon,
+            Child = _triggerIcon,
         };
         _trigger.Clicked += (_, _) => Toggle();
 
@@ -124,7 +124,7 @@ public class MavFabMenu : MavContentView, IEnumerable<MavFabMenuItem>
         root.Children.Add(_itemsHost);
         root.Children.Add(_trigger);
 
-        Content = root;
+        Child = root;
         MavTheme.Observe(this, (self, theme) => self.ApplyTheme(theme));
     }
 
@@ -257,7 +257,7 @@ public class MavFabMenu : MavContentView, IEnumerable<MavFabMenuItem>
             Padding = new Thickness(16, 0, 20, 0),
             Elevation = 2,
             HorizontalAlignment = HorizontalAlignment.Right,
-            Content = row,
+            Child = row,
         };
         pill.Clicked += (_, _) =>
         {

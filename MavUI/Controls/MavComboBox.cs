@@ -150,7 +150,7 @@ public class MavComboBox : MavContentView, IEnumerable<string>
 
         _field.InnerEntry.KeyDown += OnEntryKeyDown;
 
-        Content = _field;
+        Child = _field;
 
         if (items is not null)
             AddOptions(items);
@@ -434,7 +434,7 @@ public class MavComboBox : MavContentView, IEnumerable<string>
             var scroll = new MavScrollViewer
             {
                 MaxHeight = 240,
-                Content = _dropdownStack,
+                Child = _dropdownStack,
             };
 
             var card = new MavSurface
@@ -444,7 +444,7 @@ public class MavComboBox : MavContentView, IEnumerable<string>
                 FillColor = t.Color.SurfaceContainer,
                 HorizontalAlignment = HorizontalAlignment.Left,
                 VerticalAlignment = VerticalAlignment.Top,
-                Content = scroll,
+                Child = scroll,
             };
 
             _dropdownCard = card;
@@ -529,7 +529,7 @@ public class MavComboBox : MavContentView, IEnumerable<string>
                 Padding = new Thickness(16, 0),
                 FillColor = isSel ? theme.Color.SecondaryContainer : Colors.Transparent,
                 RippleColor = theme.Color.OnSurface,
-                Content = lbl,
+                Child = lbl,
             };
             row.Clicked += (_, _) => CommitSelection(itemText);
             _dropdownStack.Children.Add(row);

@@ -125,7 +125,7 @@ public class MavTimePicker : Control
             Height = 72,
             CornerRadius = 12,
             HorizontalAlignment = HorizontalAlignment.Stretch,
-            Content = hourEntry,
+            Child = hourEntry,
         };
         var minBox = new MavInkSurface
         {
@@ -134,7 +134,7 @@ public class MavTimePicker : Control
             Height = 72,
             CornerRadius = 12,
             HorizontalAlignment = HorizontalAlignment.Stretch,
-            Content = minEntry,
+            Child = minEntry,
         };
 
         var colon = new TextBlock
@@ -170,7 +170,7 @@ public class MavTimePicker : Control
             Height = 36,
             StrokeThickness = 1,
             StrokeColor = c.Outline,
-            Content = amLbl,
+            Child = amLbl,
         };
         amBtn.SetCornerRadii(8, 8, 0, 0);
 
@@ -181,7 +181,7 @@ public class MavTimePicker : Control
             Margin = new Thickness(0, -1, 0, 0),
             StrokeThickness = 1,
             StrokeColor = c.Outline,
-            Content = pmLbl,
+            Child = pmLbl,
         };
         pmBtn.SetCornerRadii(0, 0, 8, 8);
 
@@ -401,7 +401,7 @@ public class MavTimePicker : Control
 
             body = new MavScrollViewer
             {
-                Content = stack,
+                Child = stack,
                 HorizontalScrollBarVisibility = global::Avalonia.Controls.Primitives.ScrollBarVisibility.Disabled,
                 VerticalScrollBarVisibility = global::Avalonia.Controls.Primitives.ScrollBarVisibility.Auto,
             };
@@ -422,7 +422,7 @@ public class MavTimePicker : Control
             FillColor = c.SurfaceContainerHigh,
             HorizontalAlignment = HorizontalAlignment.Center,
             VerticalAlignment = VerticalAlignment.Center,
-            Content = content,
+            Child = content,
         };
 
         // Recompute the caps and safe-area margins whenever the viewport changes. The

@@ -142,10 +142,10 @@ public class MavBanner : MavContentView
             Radius = 12,
             BorderStrokeThickness = 1,
             Padding = new Thickness(16, 14, 16, 10),
-            Content = stack,
+            Child = stack,
         };
 
-        Content = _card;
+        Child = _card;
         Message = message;
         Icon = icon;
         if (primaryAction is not null) PrimaryActionText = primaryAction;

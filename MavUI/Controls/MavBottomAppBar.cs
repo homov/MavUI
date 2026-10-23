@@ -121,10 +121,10 @@ public class MavBottomAppBar : MavContentView
         {
             Radius = 0,
             Elevation = 2,
-            Content = grid,
+            Child = grid,
         };
 
-        Content = _surface;
+        Child = _surface;
         MavTheme.Observe(this, (self, theme) =>
         {
             self._surface.FillColor = theme.Color.SurfaceContainer;

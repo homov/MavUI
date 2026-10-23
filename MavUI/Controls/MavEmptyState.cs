@@ -94,7 +94,7 @@ public class MavEmptyState : MavContentView
             Radius = 24,
             HorizontalAlignment = HorizontalAlignment.Center,
             Margin = new Thickness(0, 0, 0, 8),
-            Content = _iconView,
+            Child = _iconView,
         };
 
         _titleLbl = new TextBlock
@@ -140,7 +140,7 @@ public class MavEmptyState : MavContentView
         col.Children.Add(_descLbl);
         col.Children.Add(_actionsRow);
 
-        Content = col;
+        Child = col;
 
         Title = title;
         Description = description;

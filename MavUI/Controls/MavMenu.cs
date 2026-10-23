@@ -213,7 +213,7 @@ public class MavMenu : Control, IEnumerable<MavMenuItem>
             MaxHeight = maxCardHeight,
             HorizontalScrollBarVisibility = global::Avalonia.Controls.Primitives.ScrollBarVisibility.Disabled,
             VerticalScrollBarVisibility = global::Avalonia.Controls.Primitives.ScrollBarVisibility.Auto,
-            Content = stack,
+            Child = stack,
         };
 
         return new MavSurface
@@ -224,7 +224,7 @@ public class MavMenu : Control, IEnumerable<MavMenuItem>
             FillColor = c.SurfaceContainer,
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
-            Content = scroll,
+            Child = scroll,
         };
     }
 
@@ -356,7 +356,7 @@ public class MavMenu : Control, IEnumerable<MavMenuItem>
             IsEnabled = item.IsEnabled,
             FillColor = item.IsSelected ? c.SecondaryContainer : Colors.Transparent,
             RippleColor = fg,
-            Content = rowGrid,
+            Child = rowGrid,
         };
 
         surface.Clicked += (_, _) =>

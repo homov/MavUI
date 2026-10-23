@@ -45,7 +45,7 @@ public class MavContentPage : MavContentView
     public MavContentPage(string title, Control? content = null) : this()
     {
         Title = title;
-        Content = content;
+        Child = content;
     }
 
     public string Title

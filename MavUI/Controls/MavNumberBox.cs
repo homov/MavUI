@@ -168,7 +168,7 @@ public class MavNumberBox : MavContentView
             Radius = 12,
             Padding = new Thickness(4, 2),
             BorderStrokeThickness = 1,
-            Content = row,
+            Child = row,
         };
 
         var root = new StackPanel
@@ -178,7 +178,7 @@ public class MavNumberBox : MavContentView
         root.Children.Add(_label);
         root.Children.Add(_box);
 
-        Content = root;
+        Child = root;
 
         Minimum = min;
         Maximum = max;

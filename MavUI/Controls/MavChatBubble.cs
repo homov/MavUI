@@ -130,7 +130,7 @@ public class MavChatBubble : MavContentView
         _outerRow.Add(_avatar, 0, 0);
         _outerRow.Add(_bubbleBorder, 1, 0);
 
-        Content = _outerRow;
+        Child = _outerRow;
 
         Text = text;
         IsOutgoing = isOutgoing;

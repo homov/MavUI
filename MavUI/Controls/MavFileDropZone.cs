@@ -121,7 +121,7 @@ public class MavFileDropZone : MavContentView
             CornerRadius = 16,
             StrokeThickness = 1.5,
             Padding = new Thickness(24, 20),
-            Content = promptStack,
+            Child = promptStack,
         };
         _dropSurface.Clicked += async (_, _) => await BrowseFilesAsync();
 
@@ -139,7 +139,7 @@ public class MavFileDropZone : MavContentView
             Children = { _dropSurface, _fileListStack },
         };
 
-        Content = root;
+        Child = root;
         if (title is not null) Title = title;
         if (subtitle is not null) Subtitle = subtitle;
         AllowMultiple = allowMultiple;
@@ -400,7 +400,7 @@ public class MavFileDropZone : MavContentView
                 FillColor = c.SurfaceContainerLow,
                 BorderStrokeColor = c.OutlineVariant,
                 BorderStrokeThickness = 1,
-                Content = row,
+                Child = row,
             };
             _fileListStack.Children.Add(pill);
         }

@@ -103,7 +103,7 @@ public class MavAvatar : MavContentView
             Height = size,
             Radius = size / 2.0,
             ClipToBounds = true,
-            Content = innerGrid,
+            Child = innerGrid,
         };
 
         _statusDot = new Border();
@@ -120,7 +120,7 @@ public class MavAvatar : MavContentView
         outerGrid.Children.Add(_surface);
         outerGrid.Children.Add(_statusRing);
 
-        Content = outerGrid;
+        Child = outerGrid;
         Initials = initials;
         Icon = icon;
         ImageSource = imageSource;

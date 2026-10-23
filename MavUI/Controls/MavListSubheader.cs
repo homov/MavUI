@@ -43,7 +43,7 @@ public class MavListSubheader : MavContentView
     {
         Padding = new Thickness(16, 12, 16, 4);
         _label = new TextBlock { Text = text };
-        Content = _label;
+        Child = _label;
         Text = text;
 
         MavTheme.Observe(this, (self, theme) =>

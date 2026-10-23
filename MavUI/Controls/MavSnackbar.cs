@@ -119,7 +119,7 @@ public static class MavSnackbar
                 CornerRadius = 18,
                 Padding = new Thickness(12, 0),
                 RippleColor = c.InversePrimary,
-                Content = actLbl,
+                Child = actLbl,
             };
             actBtn.Clicked += (_, _) =>
             {
@@ -157,7 +157,7 @@ public static class MavSnackbar
             FillColor = c.InverseSurface,
             HorizontalAlignment = HorizontalAlignment.Center,
             VerticalAlignment = VerticalAlignment.Bottom,
-            Content = row,
+            Child = row,
         };
 
         // Keep the bar clear of the gesture navigation bar and of the bottom app bar,

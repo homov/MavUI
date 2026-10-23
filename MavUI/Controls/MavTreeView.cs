@@ -107,7 +107,7 @@ public class MavTreeView : MavContentView, IEnumerable<MavTreeNode>
             Orientation = Orientation.Vertical,
             Spacing = 2,
         };
-        Content = _stack;
+        Child = _stack;
 
         MavTheme.Observe(this, (self, _) => self.Rebuild());
     }
@@ -599,7 +599,7 @@ public class MavTreeView : MavContentView, IEnumerable<MavTreeNode>
                 FillColor = Colors.Transparent,
                 RippleColor = c.OnSurface,
                 VerticalAlignment = VerticalAlignment.Center,
-                Content = chevron,
+                Child = chevron,
             };
             chevronBtn.Clicked += (_, _) =>
             {
@@ -685,7 +685,7 @@ public class MavTreeView : MavContentView, IEnumerable<MavTreeNode>
                 FillColor = isSelected ? c.Primary : c.SurfaceContainerHigh,
                 VerticalAlignment = VerticalAlignment.Center,
                 Margin = new Thickness(8, 0, 4, 0),
-                Content = badgeLbl,
+                Child = badgeLbl,
             };
             rowGrid.Add(badgePill, 4, 0);
         }
@@ -696,7 +696,7 @@ public class MavTreeView : MavContentView, IEnumerable<MavTreeNode>
             Padding = new Thickness(6, 2),
             FillColor = isSelected ? c.SecondaryContainer : Colors.Transparent,
             RippleColor = c.Primary,
-            Content = rowGrid,
+            Child = rowGrid,
         };
         pill.Clicked += (_, _) =>
         {

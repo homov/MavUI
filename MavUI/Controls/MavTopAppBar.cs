@@ -193,10 +193,10 @@ public class MavTopAppBar : MavContentView
         {
             Radius = 0,
             ClipToBounds = true,
-            Content = stack,
+            Child = stack,
         };
 
-        Content = _surface;
+        Child = _surface;
 
         Title = title;
         Variant = variant;

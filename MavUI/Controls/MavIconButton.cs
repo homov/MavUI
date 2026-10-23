@@ -96,7 +96,7 @@ public class MavIconButton : MavContentView
             Width = 40,
             Height = 40,
             CornerRadius = 20,
-            Content = _icon,
+            Child = _icon,
         };
         _surface.Clicked += (_, _) => RaiseClick();
 
@@ -108,7 +108,7 @@ public class MavIconButton : MavContentView
                 RaiseClick();
         };
 
-        Content = _surface;
+        Child = _surface;
         Icon = icon;
         Variant = variant;
         IsToggle = isToggle;

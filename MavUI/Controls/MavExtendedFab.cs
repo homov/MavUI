@@ -103,11 +103,11 @@ public class MavExtendedFab : MavContentView
             CornerRadius = 16,
             Elevation = 3,
             Padding = new Thickness(16, 0, 20, 0),
-            Content = row,
+            Child = row,
         };
         _surface.Clicked += (_, _) => Clicked?.Invoke(this, EventArgs.Empty);
 
-        Content = _surface;
+        Child = _surface;
         Text = text;
         Icon = icon;
         ColorScheme = color;

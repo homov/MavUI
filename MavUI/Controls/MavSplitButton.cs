@@ -106,11 +106,11 @@ public class MavSplitButton : MavContentView
         leadRow.Children.Add(_leadIcon);
         leadRow.Children.Add(_label);
 
-        _leading = new MavInkSurface { Content = leadRow };
+        _leading = new MavInkSurface { Child = leadRow };
         _leading.Clicked += (_, _) => Clicked?.Invoke(this, EventArgs.Empty);
 
         _arrowIcon = new MavIcon(MavIcons.KeyboardArrowDown, 20) { UseThemeDefaultColor = false };
-        _trailing = new MavInkSurface { Content = _arrowIcon };
+        _trailing = new MavInkSurface { Child = _arrowIcon };
         _trailing.Clicked += (_, _) =>
         {
             MenuClicked?.Invoke(this, EventArgs.Empty);
@@ -135,7 +135,7 @@ public class MavSplitButton : MavContentView
         host.Children.Add(_leading);
         host.Children.Add(_trailing);
 
-        Content = host;
+        Child = host;
         Text = text;
         Variant = variant;
         Icon = icon;

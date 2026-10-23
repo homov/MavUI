@@ -84,11 +84,11 @@ public sealed class MavTextContextFlyout : PopupFlyoutBase
         _itemsPanel = new StackPanel();
         _scroll = new MavScrollViewer
         {
-            Content = _itemsPanel,
+            Child = _itemsPanel,
         };
         _surface = new MavSurface
         {
-            Content = _scroll,
+            Child = _scroll,
         };
         _presenterRoot = new Border
         {
@@ -354,7 +354,7 @@ public sealed class MavTextContextFlyout : PopupFlyoutBase
             FillColor = Colors.Transparent,
             RippleColor = c.OnSurface,
             Focusable = false,
-            Content = new Border
+            Child = new Border
             {
                 Padding = new Thickness(13, 6),
                 Child = label,
@@ -419,7 +419,7 @@ public sealed class MavTextContextFlyout : PopupFlyoutBase
             RippleColor = c.OnSurface,
             IsInteractive = enabled,
             Focusable = false,
-            Content = row,
+            Child = row,
         };
         ink.Clicked += (_, _) =>
         {

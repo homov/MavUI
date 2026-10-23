@@ -58,7 +58,7 @@ public class MavTimeline : MavContentView, IEnumerable<MavTimelineItem>
             Orientation = Orientation.Vertical,
             Spacing = 0,
         };
-        Content = _stack;
+        Child = _stack;
 
         MavTheme.Observe(this, (self, _) => self.Rebuild());
     }
@@ -226,7 +226,7 @@ public class MavTimeline : MavContentView, IEnumerable<MavTimelineItem>
             BorderStrokeColor = nodeBorder,
             HorizontalAlignment = HorizontalAlignment.Center,
             VerticalAlignment = VerticalAlignment.Top,
-            Content = nodeContent,
+            Child = nodeContent,
         };
 
         var railGrid = new Grid
@@ -284,7 +284,7 @@ public class MavTimeline : MavContentView, IEnumerable<MavTimelineItem>
                 FillColor = c.SurfaceContainerHigh,
                 Margin = new Thickness(8, 0, 0, 0),
                 VerticalAlignment = VerticalAlignment.Center,
-                Content = timeLbl,
+                Child = timeLbl,
             };
             headerGrid.Add(timePill, 1, 0);
         }

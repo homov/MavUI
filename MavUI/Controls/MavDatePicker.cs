@@ -298,7 +298,7 @@ public class MavDatePicker : Control
 
         var scroll = new MavScrollViewer
         {
-            Content = stack,
+            Child = stack,
             HorizontalScrollBarVisibility = global::Avalonia.Controls.Primitives.ScrollBarVisibility.Disabled,
             VerticalScrollBarVisibility = global::Avalonia.Controls.Primitives.ScrollBarVisibility.Auto,
         };
@@ -317,7 +317,7 @@ public class MavDatePicker : Control
             FillColor = c.SurfaceContainerHigh,
             HorizontalAlignment = HorizontalAlignment.Center,
             VerticalAlignment = VerticalAlignment.Center,
-            Content = content,
+            Child = content,
         };
 
         void Reflow()

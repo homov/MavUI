@@ -99,10 +99,10 @@ public class MavContextualActionBar : MavContentView, IEnumerable<Control>
             Radius = 28,
             Elevation = 2,
             Padding = new Thickness(8, 4, 12, 4),
-            Content = row,
+            Child = row,
         };
 
-        Content = _bar;
+        Child = _bar;
         AutoHideWhenEmpty = autoHideWhenEmpty;
         SelectedCount = selectedCount;
 

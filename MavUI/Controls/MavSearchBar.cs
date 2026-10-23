@@ -182,7 +182,7 @@ public class MavSearchBar : MavContentView
             MinHeight = 56,
             Radius = 28,
             Padding = new Thickness(8, 0, 12, 0),
-            Content = row,
+            Child = row,
         };
         _pill.PointerPressed += (_, _) =>
         {
@@ -199,7 +199,7 @@ public class MavSearchBar : MavContentView
             }
         };
 
-        Content = _pill;
+        Child = _pill;
         Placeholder = placeholder;
         TrailingIcon = trailingIcon;
         SyncTrailing();

@@ -58,7 +58,7 @@ public class MavKeyboardAvoidingHost : MavContentView
         {
             var body = e.GetNewValue<Control?>();
             MavVisualTreeHelpers.DetachFromParent(body);
-            h.Content = body;
+            h.Child = body;
         });
     }
 

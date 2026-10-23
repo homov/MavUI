@@ -309,7 +309,7 @@ public class MavDialog : Control
 
         var bodyScroll = new MavScrollViewer
         {
-            Content = stack,
+            Child = stack,
             HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,
         };
         var content = new DockPanel();
@@ -326,7 +326,7 @@ public class MavDialog : Control
             Padding = new Thickness(24),
             HorizontalAlignment = HorizontalAlignment.Stretch,
             VerticalAlignment = VerticalAlignment.Center,
-            Content = content,
+            Child = content,
         };
         MavAutomation.SetName(card, Title);
         MavAutomation.SetHelpText(card, Message);
@@ -522,7 +522,7 @@ public class MavDialog : Control
         var scroll = new MavScrollViewer
         {
             Padding = new Thickness(20, 16),
-            Content = content,
+            Child = content,
         };
         rootGrid.Add(scroll, 0, 2);
 
@@ -530,7 +530,7 @@ public class MavDialog : Control
         {
             HorizontalAlignment = HorizontalAlignment.Stretch,
             VerticalAlignment = VerticalAlignment.Stretch,
-            Content = new MavSafeArea(rootGrid, MavSafeAreaEdges.All),
+            Child = new MavSafeArea(rootGrid, MavSafeAreaEdges.All),
         };
 
         MavTheme.Observe(surface, (surf, theme) =>

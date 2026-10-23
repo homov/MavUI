@@ -166,7 +166,7 @@ public class MavBottomSheet : Control
             {
                 MaxHeight = Math.Max(220, overlaySize.Height * 0.72),
                 Padding = new Thickness(24, 4, 24, 24),
-                Content = Body,
+                Child = Body,
             };
             _bodyScroll = scroll;
             stack.Children.Add(scroll);
@@ -178,7 +178,7 @@ public class MavBottomSheet : Control
             Elevation = 3,
             HorizontalAlignment = HorizontalAlignment.Stretch,
             VerticalAlignment = VerticalAlignment.Bottom,
-            Content = new MavSafeArea(stack, MavSafeAreaEdges.Bottom | MavSafeAreaEdges.Horizontal),
+            Child = new MavSafeArea(stack, MavSafeAreaEdges.Bottom | MavSafeAreaEdges.Horizontal),
         };
         _sheetCard.SetCornerRadii(28, 28, 0, 0);
         MavAutomation.SetName(_sheetCard, Title);

@@ -105,7 +105,7 @@ public class MavPinInput : MavContentView
             _entry.CursorPosition = _entry.Text?.Length ?? 0;
         };
 
-        Content = root;
+        Child = root;
 
         Length = Math.Clamp(length, 3, 8);
         IsMasked = masked;
@@ -200,7 +200,7 @@ public class MavPinInput : MavContentView
                 Height = 52,
                 Radius = 10,
                 BorderStrokeThickness = 1,
-                Content = lbl,
+                Child = lbl,
             };
 
             _cells.Add((box, lbl));

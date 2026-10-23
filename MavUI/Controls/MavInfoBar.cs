@@ -126,10 +126,10 @@ public class MavInfoBar : MavContentView
             Radius = 14,
             BorderStrokeThickness = 1,
             Padding = new Thickness(16, 12),
-            Content = row,
+            Child = row,
         };
 
-        Content = _card;
+        Child = _card;
 
         Title = title;
         Message = message;

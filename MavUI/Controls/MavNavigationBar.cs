@@ -69,9 +69,9 @@ public class MavNavigationBar : MavContentView, IEnumerable<MavNavigationDestina
         {
             Radius = 0,
             Elevation = 2,
-            Content = _row,
+            Child = _row,
         };
-        Content = _bar;
+        Child = _bar;
 
         MavTheme.Observe(this, (self, theme) => self.ApplyTheme(theme));
     }
@@ -244,7 +244,7 @@ public class MavNavigationBar : MavContentView, IEnumerable<MavNavigationDestina
                 Height = 32,
                 CornerRadius = 16,
                 HorizontalAlignment = HorizontalAlignment.Center,
-                Content = iconNode,
+                Child = iconNode,
             };
             _pill.Clicked += (_, _) => onClick();
 
@@ -275,7 +275,7 @@ public class MavNavigationBar : MavContentView, IEnumerable<MavNavigationDestina
             };
             tapBox.PointerReleased += (_, _) => onClick();
 
-            Content = tapBox;
+            Child = tapBox;
         }
 
         /// <summary>

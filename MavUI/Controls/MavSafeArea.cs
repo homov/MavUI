@@ -38,7 +38,7 @@ public class MavSafeArea : MavContentView
         {
             var body = e.GetNewValue<Control?>();
             MavVisualTreeHelpers.DetachFromParent(body);
-            s.Content = body;
+            s.Child = body;
         });
     }
 

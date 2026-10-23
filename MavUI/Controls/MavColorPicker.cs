@@ -116,7 +116,7 @@ public class MavColorPicker : MavContentView, IMavDraggableControl
             Radius = 16,
             Padding = new Thickness(16, 10),
             BorderStrokeThickness = 1,
-            Content = previewInfoCol,
+            Child = previewInfoCol,
         };
 
         _hueBar = new HueSpectrumBar
@@ -211,7 +211,7 @@ public class MavColorPicker : MavContentView, IMavDraggableControl
         root.Children.Add(_hexField);
         root.Children.Add(_swatchesPanel);
 
-        Content = root;
+        Child = root;
 
         var startColor = initialColor ?? Color.FromRgb(0x67, 0x50, 0xA4);
         SelectedColor = startColor;
@@ -394,7 +394,7 @@ public class MavColorPicker : MavContentView, IMavDraggableControl
                 FillColor = preset,
                 StrokeThickness = 1,
                 RippleColor = Colors.White,
-                Content = checkIcon,
+                Child = checkIcon,
             };
             var captured = preset;
             swatch.Clicked += (_, _) => SelectedColor = captured;

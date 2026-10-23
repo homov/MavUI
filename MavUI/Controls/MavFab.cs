@@ -65,11 +65,11 @@ public class MavFab : MavContentView
         _surface = new MavInkSurface
         {
             Elevation = 3,
-            Content = _icon,
+            Child = _icon,
         };
         _surface.Clicked += (_, _) => Clicked?.Invoke(this, EventArgs.Empty);
 
-        Content = _surface;
+        Child = _surface;
         Icon = icon;
         Size = size;
         ColorScheme = color;

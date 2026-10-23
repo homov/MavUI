@@ -59,7 +59,7 @@ public class MavAvatarGroup : MavContentView, IEnumerable<MavAvatar>
             Rebuild();
         };
         _canvas = new Canvas();
-        Content = _canvas;
+        Child = _canvas;
         MaxDisplayed = maxDisplayed;
         AvatarSize = avatarSize;
         MavTheme.Observe(this, (self, _) => self.Rebuild());

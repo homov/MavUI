@@ -90,7 +90,7 @@ public class MavSettingsCard : MavContentView
             Margin = new Thickness(0, 0, 16, 0),
             VerticalAlignment = VerticalAlignment.Center,
             IsVisible = false,
-            Content = _iconView,
+            Child = _iconView,
         };
 
         _headerLbl = new TextBlock
@@ -143,7 +143,7 @@ public class MavSettingsCard : MavContentView
             CornerRadius = 16,
             Padding = new Thickness(16, 14),
             StrokeThickness = 1,
-            Content = row,
+            Child = row,
         };
         _surface.Clicked += (_, _) =>
         {
@@ -151,7 +151,7 @@ public class MavSettingsCard : MavContentView
                 Clicked?.Invoke(this, EventArgs.Empty);
         };
 
-        Content = _surface;
+        Child = _surface;
 
         Header = header;
         Description = description;

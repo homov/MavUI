@@ -94,7 +94,7 @@ public class MavRadioButton : MavContentView
         row.Children.Add(_glyph);
         row.Children.Add(_label);
 
-        Content = row;
+        Child = row;
 
         _dotProgress = isChecked ? 1.0 : 0.0;
         if (label is not null) Label = label;

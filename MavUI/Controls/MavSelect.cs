@@ -129,7 +129,7 @@ public class MavSelect : MavContentView, IEnumerable<string>
         _menu = new MavMenu();
         _menu.Closed += (_, _) => UpdateTrailingIcon();
 
-        Content = tapBox;
+        Child = tapBox;
 
         if (options is not null)
         {

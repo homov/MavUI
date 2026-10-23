@@ -173,7 +173,7 @@ public class MavTextArea : MavContentView
         root.Children.Add(_fieldBox);
         root.Children.Add(_footerRow);
 
-        Content = root;
+        Child = root;
 
         Variant = variant;
         Label = label;
