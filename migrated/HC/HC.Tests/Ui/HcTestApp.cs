@@ -15,7 +15,8 @@ public static class HcTestAppBuilder
     public static AppBuilder BuildAvaloniaApp() =>
         AppBuilder.Configure<App>()
             .UseHcDefaults()
-            .UseHeadless(new AvaloniaHeadlessPlatformOptions());
+            // Real drawing, so CaptureRenderedFrame returns the screen (needed for the PNG screenshots).
+            .UseHeadless(new AvaloniaHeadlessPlatformOptions { UseHeadlessDrawing = false });
 }
 
 /// <summary>
