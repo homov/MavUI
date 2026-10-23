@@ -22,11 +22,11 @@ public partial class RestorePasswordPage : AccountPage
 
         if (!FormRules.IsValidEmail(email))
         {
-            ShowError(ErrorLabel, Tr("auth.error.email"));
+            ShowError(ErrorBar, Tr("auth.error.email"));
             return;
         }
 
-        await RunAsync(SendButton, ErrorLabel, async () =>
+        await RunAsync(SendButton, ErrorBar, async () =>
         {
             await AppServices.Default.Account.RequestPasswordResetAsync(email);
             _navigator.Push(new CodeEntryPage(_navigator, email, AccountCodePurpose.RestorePassword));

@@ -9,6 +9,8 @@ internal static class En
 
         ["startup.checking"] = "Signing you in...",
 
+        ["error.title"] = "Error",
+
         ["auth.signin.title"] = "Sign in",
         ["auth.signin.button"] = "Sign in",
         ["auth.register.link"] = "Create account",

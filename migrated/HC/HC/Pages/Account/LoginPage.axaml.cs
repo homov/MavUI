@@ -30,17 +30,17 @@ public partial class LoginPage : AccountPage
 
         if (!FormRules.IsValidEmail(email))
         {
-            ShowError(ErrorLabel, Tr("auth.error.email"));
+            ShowError(ErrorBar, Tr("auth.error.email"));
             return;
         }
 
         if (password.Length == 0)
         {
-            ShowError(ErrorLabel, Tr("auth.error.password"));
+            ShowError(ErrorBar, Tr("auth.error.password"));
             return;
         }
 
-        await RunAsync(SignInButton, ErrorLabel, async () =>
+        await RunAsync(SignInButton, ErrorBar, async () =>
         {
             await AppServices.Default.Session.LoginAsync(email, password, RememberBox.IsChecked);
             _navigator.ShowHome();

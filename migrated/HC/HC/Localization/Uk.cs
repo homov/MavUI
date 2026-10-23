@@ -9,6 +9,8 @@ internal static class Uk
 
         ["startup.checking"] = "Виконуємо вхід...",
 
+        ["error.title"] = "Помилка",
+
         ["auth.signin.title"] = "Вхід",
         ["auth.signin.button"] = "Увійти",
         ["auth.register.link"] = "Створити акаунт",

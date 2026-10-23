@@ -33,18 +33,18 @@ public partial class CodeEntryPage : AccountPage
         var code = CodeInput.Code ?? string.Empty;
         if (!FormRules.IsValidCode(code))
         {
-            ShowError(ErrorLabel, Tr("auth.error.code"));
+            ShowError(ErrorBar, Tr("auth.error.code"));
             return;
         }
 
         var password = NewPasswordField.Text ?? string.Empty;
         if (_purpose == AccountCodePurpose.RestorePassword && password.Length == 0)
         {
-            ShowError(ErrorLabel, Tr("auth.error.password"));
+            ShowError(ErrorBar, Tr("auth.error.password"));
             return;
         }
 
-        await RunAsync(ConfirmButton, ErrorLabel, async () =>
+        await RunAsync(ConfirmButton, ErrorBar, async () =>
         {
             if (_purpose == AccountCodePurpose.ConfirmEmail)
                 await AppServices.Default.Account.ConfirmEmailAsync(_email, code);

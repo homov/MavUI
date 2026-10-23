@@ -23,23 +23,23 @@ public partial class RegisterPage : AccountPage
 
         if (!FormRules.IsValidEmail(email))
         {
-            ShowError(ErrorLabel, Tr("auth.error.email"));
+            ShowError(ErrorBar, Tr("auth.error.email"));
             return;
         }
 
         if (password.Length == 0)
         {
-            ShowError(ErrorLabel, Tr("auth.error.password"));
+            ShowError(ErrorBar, Tr("auth.error.password"));
             return;
         }
 
         if (password != RepeatField.Text)
         {
-            ShowError(ErrorLabel, Tr("auth.error.mismatch"));
+            ShowError(ErrorBar, Tr("auth.error.mismatch"));
             return;
         }
 
-        await RunAsync(CreateButton, ErrorLabel, async () =>
+        await RunAsync(CreateButton, ErrorBar, async () =>
         {
             await AppServices.Default.Account.RegisterAsync(email, password);
             _navigator.Push(new CodeEntryPage(_navigator, email, AccountCodePurpose.ConfirmEmail));

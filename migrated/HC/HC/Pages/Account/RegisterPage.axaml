@@ -15,7 +15,8 @@
         <mav:MavTextField x:Name="RepeatField" Variant="Outlined" IsPassword="True"
                           Label="{mav:Loc auth.field.password2, Fallback=Repeat password}"
                           LeadingIcon="{x:Static mav:MavIcons.Lock}" />
-        <mav:MavLabel x:Name="ErrorLabel" Role="BodyMedium" IsVisible="False" TextWrapping="Wrap" />
+        <mav:MavInfoBar x:Name="ErrorBar" Severity="Error" IsOpen="False" IsClosable="True"
+                        Title="{mav:Loc error.title, Fallback=Error}" />
         <mav:MavButton x:Name="CreateButton" Variant="Filled" HorizontalAlignment="Stretch"
                        Text="{mav:Loc auth.register.button, Fallback=Create account}" />
       </StackPanel>
