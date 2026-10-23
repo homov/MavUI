@@ -14,8 +14,7 @@
                           LeadingIcon="{x:Static mav:MavIcons.Lock}" />
         <mav:MavCheckBox x:Name="RememberBox"
                          Label="{mav:Loc auth.field.remember, Fallback=Remember me on this device}" />
-        <mav:MavInfoBar x:Name="ErrorBar" Severity="Error" IsOpen="False" IsClosable="True"
-                        Title="{mav:Loc error.title, Fallback=Error}" />
+        <mav:MavBanner x:Name="ErrorBanner" Icon="{x:Static mav:MavIcons.Error}" IsVisible="False" />
         <mav:MavButton x:Name="SignInButton" Variant="Filled" HorizontalAlignment="Stretch"
                        Text="{mav:Loc auth.signin.button, Fallback=Sign in}" />
         <mav:MavButton x:Name="RegisterButton" Variant="Text" HorizontalAlignment="Stretch"

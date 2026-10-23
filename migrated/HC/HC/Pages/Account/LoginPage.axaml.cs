@@ -1,6 +1,6 @@
-using Hc.Pages.Models;
 using Hc.Pages.Shell;
 using Hc.Services;
+using Mav.Controls;
 
 namespace Hc.Pages.Account;
 
@@ -8,6 +8,7 @@ namespace Hc.Pages.Account;
 public partial class LoginPage : AccountPage
 {
     private readonly AppNavigator _navigator;
+    private readonly MavFormValidator _validator = new();
 
     public LoginPage(AppNavigator navigator)
     {
@@ -18,6 +19,9 @@ public partial class LoginPage : AccountPage
         EmailField.Text = session.Email;
         RememberBox.IsChecked = session.AutologinEnabled;
 
+        _validator.Field(EmailField).Required(Tr("validation.required")).Email(Tr("validation.email"));
+        _validator.Field(PasswordField).Required(Tr("validation.required"));
+
         SignInButton.Clicked += OnSignIn;
         RegisterButton.Clicked += (_, _) => _navigator.Push(new RegisterPage(_navigator));
         RestoreButton.Clicked += (_, _) => _navigator.Push(new RestorePasswordPage(_navigator));
@@ -25,22 +29,13 @@ public partial class LoginPage : AccountPage
 
     private async void OnSignIn(object? sender, EventArgs e)
     {
+        if (!_validator.Validate())
+            return;
+
         var email = EmailField.Text.Trim();
         var password = PasswordField.Text ?? string.Empty;
 
-        if (!FormRules.IsValidEmail(email))
-        {
-            ShowError(ErrorBar, Tr("auth.error.email"));
-            return;
-        }
-
-        if (password.Length == 0)
-        {
-            ShowError(ErrorBar, Tr("auth.error.password"));
-            return;
-        }
-
-        await RunAsync(SignInButton, ErrorBar, async () =>
+        await RunAsync(SignInButton, ErrorBanner, async () =>
         {
             await AppServices.Default.Session.LoginAsync(email, password, RememberBox.IsChecked);
             _navigator.ShowHome();

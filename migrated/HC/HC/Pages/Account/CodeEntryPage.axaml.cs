@@ -1,6 +1,6 @@
-using Hc.Pages.Models;
 using Hc.Pages.Shell;
 using Hc.Services;
+using Mav.Controls;
 
 namespace Hc.Pages.Account;
 
@@ -13,6 +13,7 @@ public partial class CodeEntryPage : AccountPage
     private readonly AppNavigator _navigator;
     private readonly string _email;
     private readonly AccountCodePurpose _purpose;
+    private readonly MavFormValidator _validator = new();
 
     public CodeEntryPage(AppNavigator navigator, string email, AccountCodePurpose purpose)
     {
@@ -25,26 +26,23 @@ public partial class CodeEntryPage : AccountPage
         var isReset = purpose == AccountCodePurpose.RestorePassword;
         NewPasswordField.IsVisible = isReset;
         ConfirmButton.Text = Tr(isReset ? "auth.code.reset" : "auth.code.confirm");
+
+        _validator.Field(CodeInput).Required(Tr("validation.code")).Pattern(@"^\d{4}$", Tr("validation.code"));
+        if (isReset)
+            _validator.Field(NewPasswordField).Required(Tr("validation.required"));
+
         ConfirmButton.Clicked += OnConfirm;
     }
 
     private async void OnConfirm(object? sender, EventArgs e)
     {
-        var code = CodeInput.Code ?? string.Empty;
-        if (!FormRules.IsValidCode(code))
-        {
-            ShowError(ErrorBar, Tr("auth.error.code"));
+        if (!_validator.Validate())
             return;
-        }
 
+        var code = CodeInput.Code;
         var password = NewPasswordField.Text ?? string.Empty;
-        if (_purpose == AccountCodePurpose.RestorePassword && password.Length == 0)
-        {
-            ShowError(ErrorBar, Tr("auth.error.password"));
-            return;
-        }
 
-        await RunAsync(ConfirmButton, ErrorBar, async () =>
+        await RunAsync(ConfirmButton, ErrorBanner, async () =>
         {
             if (_purpose == AccountCodePurpose.ConfirmEmail)
                 await AppServices.Default.Account.ConfirmEmailAsync(_email, code);

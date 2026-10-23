@@ -5,14 +5,16 @@ using Mav.Controls;
 namespace Hc.Pages.Account;
 
 /// <summary>
-/// Base for the account pages. Runs one server action while its button shows a busy state; a failure is shown
-/// in the form's <see cref="MavInfoBar"/> (error severity) instead of crashing the page.
+/// Base for the account pages. Field rules are checked with <see cref="MavFormValidator"/> (errors appear under
+/// the fields). Server calls run here: the button shows a busy state, and a failed call shows its message in the
+/// form's <see cref="MavBanner"/>.
 /// </summary>
 public abstract class AccountPage : MavContentPage
 {
-    protected static async Task RunAsync(MavButton button, MavInfoBar error, Func<Task> action)
+    /// <summary>Runs one cloud call. A failure is shown in <paramref name="banner"/>; the page does not crash.</summary>
+    protected static async Task RunAsync(MavButton button, MavBanner banner, Func<Task> action)
     {
-        error.IsOpen = false;
+        banner.Dismiss();
         button.IsLoading = true;
         try
         {
@@ -24,8 +26,8 @@ public abstract class AccountPage : MavContentPage
         }
         catch (Exception ex)
         {
-            error.Message = ErrorText.From(ex);
-            error.IsOpen = true;
+            banner.Message = ErrorText.From(ex);
+            banner.Show();
         }
         finally
         {
@@ -35,11 +37,4 @@ public abstract class AccountPage : MavContentPage
 
     /// <summary>Localized text by key; the fallback is used only when the key is missing.</summary>
     protected static string Tr(string key, string? fallback = null) => MavLocalization.Get(key, fallback ?? key);
-
-    /// <summary>Shows a validation message in the form's error bar.</summary>
-    protected static void ShowError(MavInfoBar error, string text)
-    {
-        error.Message = text;
-        error.IsOpen = true;
-    }
 }

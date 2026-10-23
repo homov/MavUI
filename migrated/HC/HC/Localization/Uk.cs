@@ -9,7 +9,10 @@ internal static class Uk
 
         ["startup.checking"] = "Виконуємо вхід...",
 
-        ["error.title"] = "Помилка",
+        ["validation.required"] = "Обов'язкове поле",
+        ["validation.email"] = "Введіть коректну електронну пошту",
+        ["validation.mismatch"] = "Паролі не збігаються",
+        ["validation.code"] = "Введіть 4-значний код",
 
         ["auth.signin.title"] = "Вхід",
         ["auth.signin.button"] = "Увійти",
@@ -29,10 +32,6 @@ internal static class Uk
         ["auth.code.confirm"] = "Підтвердити",
         ["auth.code.reset"] = "Встановити новий пароль",
 
-        ["auth.error.email"] = "Введіть коректну електронну пошту",
-        ["auth.error.password"] = "Введіть пароль",
-        ["auth.error.mismatch"] = "Паролі не збігаються",
-        ["auth.error.code"] = "Введіть 4-значний код",
         ["auth.error.transport"] = "Немає зв'язку з сервером. Перевірте мережу і спробуйте ще раз.",
         ["auth.error.http"] = "Сервер повернув помилку. Спробуйте пізніше.",
         ["auth.error.auth"] = "Сесія завершилась. Увійдіть знову.",

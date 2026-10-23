@@ -9,7 +9,10 @@ internal static class En
 
         ["startup.checking"] = "Signing you in...",
 
-        ["error.title"] = "Error",
+        ["validation.required"] = "This field is required",
+        ["validation.email"] = "Enter a valid email",
+        ["validation.mismatch"] = "Passwords do not match",
+        ["validation.code"] = "Enter the 4-digit code",
 
         ["auth.signin.title"] = "Sign in",
         ["auth.signin.button"] = "Sign in",
@@ -29,10 +32,6 @@ internal static class En
         ["auth.code.confirm"] = "Confirm",
         ["auth.code.reset"] = "Set new password",
 
-        ["auth.error.email"] = "Enter a valid email",
-        ["auth.error.password"] = "Enter the password",
-        ["auth.error.mismatch"] = "Passwords do not match",
-        ["auth.error.code"] = "Enter the 4-digit code",
         ["auth.error.transport"] = "No connection to the server. Check the network and try again.",
         ["auth.error.http"] = "The server returned an error. Try again later.",
         ["auth.error.auth"] = "Your session has expired. Sign in again.",

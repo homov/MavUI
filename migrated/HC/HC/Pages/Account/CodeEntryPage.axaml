@@ -11,8 +11,7 @@
         <mav:MavTextField x:Name="NewPasswordField" Variant="Outlined" IsPassword="True" IsVisible="False"
                           Label="{mav:Loc auth.field.newpassword, Fallback=New password}"
                           LeadingIcon="{x:Static mav:MavIcons.Lock}" />
-        <mav:MavInfoBar x:Name="ErrorBar" Severity="Error" IsOpen="False" IsClosable="True"
-                        Title="{mav:Loc error.title, Fallback=Error}" />
+        <mav:MavBanner x:Name="ErrorBanner" Icon="{x:Static mav:MavIcons.Error}" IsVisible="False" />
         <mav:MavButton x:Name="ConfirmButton" Variant="Filled" HorizontalAlignment="Stretch" />
       </StackPanel>
     </mav:MavScrollViewer>
