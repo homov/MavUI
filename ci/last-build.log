@@ -1,20 +1,20 @@
 # Last build log
-commit: e18304bfd93f0118624505dbc3ce734a1fcfd23a
-run: https://github.com/homov/MavUI/actions/runs/39982361683
+commit: e3baef66346bbde7f41a6ee187a73aeba68e6e68
+run: https://github.com/homov/MavUI/actions/runs/39982798997
 
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 563 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 259 ms).
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:07.94
+Time Elapsed 00:00:07.58
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 227 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 222 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 222 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 221 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 221 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 226 ms).
   1 of 4 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
@@ -25,7 +25,7 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:04.88
+Time Elapsed 00:00:04.83
   Determining projects to restore...
   Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 281 ms).
   2 of 3 projects are up-to-date for restore.
@@ -37,32 +37,22 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.09
+Time Elapsed 00:00:02.15
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup.Desktop/ControlsGalleryMarkup.Desktop.csproj (in 250 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/markup/src/AMarkup.Controls/AMarkup.Controls.csproj (in 250 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj (in 250 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/markup/src/AMarkup.Generators/AMarkup.Generators.csproj (in 250 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/markup/src/AMarkup.Controls/AMarkup.Controls.csproj (in 249 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/markup/src/AMarkup.Generators/AMarkup.Generators.csproj (in 249 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj (in 249 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup.Desktop/ControlsGalleryMarkup.Desktop.csproj (in 249 ms).
   1 of 5 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   AMarkup.Controls -> /home/homo/github/actions-runner/_work/MavUI/MavUI/markup/src/AMarkup.Controls/bin/Release/net10.0/AMarkup.Controls.dll
   AMarkup.Generators -> /home/homo/github/actions-runner/_work/MavUI/MavUI/markup/src/AMarkup.Generators/bin/Release/net10.0/AMarkup.Generators.dll
-/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/Pages/PageParts.cs(62,9): error CS0103: The name 'InputElementMarkup' does not exist in the current context [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/Pages/SelectionPage.cs(37,20): error CS1503: Argument 2: cannot convert from 'int' to 'Avalonia.Controls.GridLength' [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/Pages/SelectionPage.cs(48,20): error CS1503: Argument 2: cannot convert from 'int' to 'Avalonia.Controls.GridLength' [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/Pages/OverviewPage.cs(116,20): error CS1503: Argument 2: cannot convert from 'int' to 'Avalonia.Controls.GridLength' [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/Pages/OverviewPage.cs(139,20): error CS1503: Argument 2: cannot convert from 'int' to 'Avalonia.Controls.GridLength' [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/Pages/OverviewPage.cs(150,20): error CS1503: Argument 2: cannot convert from 'int' to 'Avalonia.Controls.GridLength' [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/Pages/OverviewPage.cs(124,14): error CS1955: Non-invocable member 'Layoutable.Margin' cannot be used like a method. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
 
 Build FAILED.
 
-/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/Pages/PageParts.cs(62,9): error CS0103: The name 'InputElementMarkup' does not exist in the current context [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/Pages/SelectionPage.cs(37,20): error CS1503: Argument 2: cannot convert from 'int' to 'Avalonia.Controls.GridLength' [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/Pages/SelectionPage.cs(48,20): error CS1503: Argument 2: cannot convert from 'int' to 'Avalonia.Controls.GridLength' [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/Pages/OverviewPage.cs(116,20): error CS1503: Argument 2: cannot convert from 'int' to 'Avalonia.Controls.GridLength' [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/Pages/OverviewPage.cs(139,20): error CS1503: Argument 2: cannot convert from 'int' to 'Avalonia.Controls.GridLength' [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/Pages/OverviewPage.cs(150,20): error CS1503: Argument 2: cannot convert from 'int' to 'Avalonia.Controls.GridLength' [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/Pages/OverviewPage.cs(124,14): error CS1955: Non-invocable member 'Layoutable.Margin' cannot be used like a method. [/home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj]
     0 Warning(s)
-    6 Error(s)
+    1 Error(s)
 
-Time Elapsed 00:00:06.97
+Time Elapsed 00:00:06.82
