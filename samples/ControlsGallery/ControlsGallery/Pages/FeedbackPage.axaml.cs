@@ -1,4 +1,6 @@
 using Avalonia;
+using System.Threading.Tasks;
+using Avalonia;
 using Avalonia.Controls;
 using Mav;
 using Mav.Controls;
@@ -33,8 +35,8 @@ public partial class FeedbackPage : UserControl
         duration: MavSnackbarDuration.Indefinite,
         anchor: (Visual)p!));
 
-    /// <summary>Refresh command; the demo refresh completes immediately (Command cannot await a Task).</summary>
-    public static readonly GalleryCommand RefreshRows = new(_ => { });
+    /// <summary>Refresh command; the indicator stays busy until the task completes.</summary>
+    public static readonly MavAsyncCommand RefreshRows = new(() => Task.Delay(900));
 
     public FeedbackPage()
     {

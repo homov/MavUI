@@ -407,19 +407,28 @@ public class MavRefreshIndicator : MavContentView
     {
         RefreshRequested?.Invoke(this, EventArgs.Empty);
 
+        var pending = new System.Collections.Generic.List<Task>();
         if (Command?.CanExecute(CommandParameter) == true)
-            Command.Execute(CommandParameter);
+        {
+            if (Command is MavAsyncCommand asyncCommand)
+                pending.Add(asyncCommand.ExecuteAsync(CommandParameter));
+            else
+                Command.Execute(CommandParameter);
+        }
 
         if (RefreshHandler is not null)
+            pending.Add(RefreshHandler());
+
+        if (pending.Count == 0)
+            return;
+
+        try
         {
-            try
-            {
-                await RefreshHandler();
-            }
-            finally
-            {
-                IsRefreshing = false;
-            }
+            await Task.WhenAll(pending);
+        }
+        finally
+        {
+            IsRefreshing = false;
         }
     }
 

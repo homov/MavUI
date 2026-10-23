@@ -50,7 +50,11 @@ internal static class RuFeedback
         ("Feedback.Empty.Title", "Проектов пока нет"),
         ("Feedback.Empty.Description", "Создайте проект или импортируйте его из шаблона."),
         ("Feedback.Empty.Action", "Создать проект"),
-        ("Feedback.Refresh.Row", "Строка для обновления {0}"),
+        ("Feedback.Refresh.Row1", "Строка для обновления 1"),
+        ("Feedback.Refresh.Row2", "Строка для обновления 2"),
+        ("Feedback.Refresh.Row3", "Строка для обновления 3"),
+        ("Feedback.Refresh.Row4", "Строка для обновления 4"),
+        ("Feedback.Refresh.Row5", "Строка для обновления 5"),
         ("Feedback.Refresh.Hint", "Потяните вниз, чтобы обновить"),
     ];
 }

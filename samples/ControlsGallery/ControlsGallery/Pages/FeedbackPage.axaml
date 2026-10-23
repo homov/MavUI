@@ -128,11 +128,11 @@
                   <mav:MavRefreshIndicator Height="220" Command="{x:Static pages:FeedbackPage.RefreshRows}">
                     <mav:MavScrollViewer>
                       <StackPanel Spacing="8">
-                        <mav:MavListItem Headline="Refreshable row 1" SupportingText="{mav:Loc Feedback.Refresh.Hint, Fallback=Pull down to refresh}" LeadingIcon="{x:Static mav:MavIcons.Refresh}" />
-          <mav:MavListItem Headline="Refreshable row 2" SupportingText="{mav:Loc Feedback.Refresh.Hint, Fallback=Pull down to refresh}" LeadingIcon="{x:Static mav:MavIcons.Refresh}" />
-          <mav:MavListItem Headline="Refreshable row 3" SupportingText="{mav:Loc Feedback.Refresh.Hint, Fallback=Pull down to refresh}" LeadingIcon="{x:Static mav:MavIcons.Refresh}" />
-          <mav:MavListItem Headline="Refreshable row 4" SupportingText="{mav:Loc Feedback.Refresh.Hint, Fallback=Pull down to refresh}" LeadingIcon="{x:Static mav:MavIcons.Refresh}" />
-          <mav:MavListItem Headline="Refreshable row 5" SupportingText="{mav:Loc Feedback.Refresh.Hint, Fallback=Pull down to refresh}" LeadingIcon="{x:Static mav:MavIcons.Refresh}" />
+                        <mav:MavListItem Headline="{mav:Loc Feedback.Refresh.Row1, Fallback=Refreshable row 1}" SupportingText="{mav:Loc Feedback.Refresh.Hint, Fallback=Pull down to refresh}" LeadingIcon="{x:Static mav:MavIcons.Refresh}" />
+          <mav:MavListItem Headline="{mav:Loc Feedback.Refresh.Row2, Fallback=Refreshable row 2}" SupportingText="{mav:Loc Feedback.Refresh.Hint, Fallback=Pull down to refresh}" LeadingIcon="{x:Static mav:MavIcons.Refresh}" />
+          <mav:MavListItem Headline="{mav:Loc Feedback.Refresh.Row3, Fallback=Refreshable row 3}" SupportingText="{mav:Loc Feedback.Refresh.Hint, Fallback=Pull down to refresh}" LeadingIcon="{x:Static mav:MavIcons.Refresh}" />
+          <mav:MavListItem Headline="{mav:Loc Feedback.Refresh.Row4, Fallback=Refreshable row 4}" SupportingText="{mav:Loc Feedback.Refresh.Hint, Fallback=Pull down to refresh}" LeadingIcon="{x:Static mav:MavIcons.Refresh}" />
+          <mav:MavListItem Headline="{mav:Loc Feedback.Refresh.Row5, Fallback=Refreshable row 5}" SupportingText="{mav:Loc Feedback.Refresh.Hint, Fallback=Pull down to refresh}" LeadingIcon="{x:Static mav:MavIcons.Refresh}" />
                       </StackPanel>
                     </mav:MavScrollViewer>
                   </mav:MavRefreshIndicator>
