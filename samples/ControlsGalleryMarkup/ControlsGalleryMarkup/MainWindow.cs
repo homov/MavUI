@@ -86,7 +86,7 @@ public sealed class MainWindow : MavWindow
             .VerticalContentAlignment(VerticalAlignment.Stretch);
 
         var body = new Grid().Cols("Auto, *").Children(_drawerHost, _railScroll, _host);
-        _page.Content(body);
+        _page.Content = body;
 
         _nav = new MavNavigationPage();
         _nav.SetRoot(_page);
