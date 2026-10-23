@@ -82,6 +82,6 @@ public static class SelectionPage
                         new MavChip("Input", MavChipKind.Input, MavIcons.Close),
                         new MavChip("Suggestion", MavChipKind.Suggestion, null)),
                     chips,
-                    Row(roleSelect, cityCombo, new MavRatingBar(4.5, 5, true))));
+                    Row(roleSelect, cityCombo, new MavRatingBar(4.5, 5, true)))));
     }
 }

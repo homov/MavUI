@@ -102,7 +102,7 @@ public static class InputsPage
                     AdaptiveWrap(300,
                         Plain(notes),
                         Plain(new StackPanel().Spacing(8).Children(pin, seats)),
-                        Plain(new StackPanel().Spacing(8).Children(tags, search)))),
+                        Plain(new StackPanel().Spacing(8).Children(tags, search))))),
             Section(
                 "Inputs.Validation.Section", "Validation",
                 "Inputs.Validation.Section.Body", "MavFormValidator wires rules to fields and writes ErrorText/HasError.",
