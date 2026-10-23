@@ -1,7 +1,7 @@
-Build() alone (scheme generation): median 0.07 ms
-switch, 0 controls: median 0.17 ms
-switch, 500 x MavButton: median 81.47 ms (net of empty: 81.30 ms, per control 162.6 us)
-switch, 500 x MavCard: median 11.27 ms (net of empty: 11.09 ms, per control 22.2 us)
-switch, 500 x MavTextField: median 99.05 ms (net of empty: 98.87 ms, per control 197.7 us)
-switch, 500 x MavSlider: median 0.56 ms (net of empty: 0.39 ms, per control 0.8 us)
-switch, 500 x MavButton detached (not in visual tree): median 0.07 ms
+Build() alone (scheme generation): median 0.08 ms
+switch, 0 controls: median 0.15 ms
+switch, 500 x MavButton: median 23.02 ms (net of empty: 22.88 ms, per control 45.8 us)
+switch, 500 x MavCard: median 2.38 ms (net of empty: 2.23 ms, per control 4.5 us)
+switch, 500 x MavTextField: median 114.89 ms (net of empty: 114.75 ms, per control 229.5 us)
+switch, 500 x MavSlider: median 0.61 ms (net of empty: 0.46 ms, per control 0.9 us)
+switch, 500 x MavButton detached (not in visual tree): median 0.13 ms
