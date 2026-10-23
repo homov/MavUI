@@ -54,14 +54,14 @@ public partial class FeedbackPage : UserControl
         var sheet = new MavBottomSheet
         {
             Title = MavLocalization.Get("Feedback.Sheet.Title", "Filters"),
-            Body = new MavLabel { Text = MavLocalization.Get("Feedback.Sheet.Body", "Sheet content: filters, choices, actions.") },
+            Content = new MavLabel { Text = MavLocalization.Get("Feedback.Sheet.Body", "Sheet content: filters, choices, actions.") },
             ShowDragHandle = true,
         };
 
         var side = new MavSideSheet
         {
             Title = MavLocalization.Get("Feedback.Side.Title", "Details"),
-            Body = new MavLabel { Text = MavLocalization.Get("Feedback.Side.Body", "Side sheet content on tablet and desktop.") },
+            Content = new MavLabel { Text = MavLocalization.Get("Feedback.Side.Body", "Side sheet content on tablet and desktop.") },
             Placement = MavSideSheetPlacement.End,
         };
 
