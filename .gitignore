@@ -27,3 +27,5 @@ Thumbs.db
 ci/profile/*.nettrace
 ci/profile/*.speedscope.json
 ci/profile/theme.speedscope.json
+test-results/
+ui-report/
