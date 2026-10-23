@@ -82,9 +82,16 @@ public static class OverviewPage
         new MavButton(L(key, english), variant, icon).OnClicked(onClick);
 
     private static Control SeedRow() =>
-        Row(Seeds.Select(seed => (Control)new MavChip(
-                L("Overview.Seed." + seed.Name, seed.Name), MavChipKind.Filter, MavIcons.Circle)
-            .OnClicked(() => MavTheme.Configure(seed: seed.Color))).ToArray());
+        Row(Seeds.Select(seed =>
+        {
+            var radio = new MavRadioButton()
+                .Label(L("Overview.Seed." + seed.Name, seed.Name))
+                .GroupName("Seed");
+            radio.OnCheckedChanged((_, on) => { if (on) MavTheme.Configure(seed: seed.Color); });
+            // The checked radio follows the seed the theme uses, including changes made elsewhere.
+            MavTheme.Observe(radio, (r, _) => r.IsChecked = MavTheme.SeedColor == seed.Color);
+            return (Control)radio;
+        }).ToArray());
 
     private static Control Duration(string key, string english) =>
         new MavChip(L(key, english), MavChipKind.Assist, null);

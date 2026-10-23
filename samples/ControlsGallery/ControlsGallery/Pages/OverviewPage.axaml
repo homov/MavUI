@@ -43,7 +43,7 @@
                            Text="{mav:Loc Overview.Mode.System, Fallback=System}"
                            Command="{x:Static pages:OverviewCommands.UseSystem}" />
           </WrapPanel>
-          <ItemsControl ItemsSource="{Binding SeedColors}">
+          <ItemsControl x:Name="SeedItems">
               <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                   <WrapPanel />
@@ -51,10 +51,9 @@
               </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
               <DataTemplate x:DataType="pages:SeedChoice">
-                <mav:MavChip Kind="Filter" Icon="{x:Static mav:MavIcons.Circle}" Margin="0,0,8,8"
-                             Text="{Binding Name}"
-                             CommandParameter="{Binding Color}"
-                             Command="{x:Static pages:OverviewCommands.SetSeed}" />
+                <mav:MavRadioButton GroupName="Seed" Label="{Binding Name}" IsChecked="{Binding IsSelected}"
+                                    CommandParameter="{Binding Color}" Margin="0,0,16,8"
+                                    Command="{x:Static pages:OverviewCommands.SetSeed}" />
               </DataTemplate>
             </ItemsControl.ItemTemplate>
           </ItemsControl>

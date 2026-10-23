@@ -28,6 +28,7 @@ public partial class OverviewPage : UserControl
 
     private void RefreshThemed()
     {
+        SeedItems.ItemsSource = BuildSeeds();
         SwatchItems.ItemsSource = BuildSwatches();
         ShapeItems.ItemsSource = BuildShapeSamples();
         HighlightChoices();
@@ -51,8 +52,6 @@ public partial class OverviewPage : UserControl
 
     public IReadOnlyList<MavTypeRole> TypeRoles { get; } = Enum.GetValues<MavTypeRole>();
 
-    public IReadOnlyList<SeedChoice> SeedColors { get; } = BuildSeeds();
-
     public IReadOnlyList<ElevationSample> ElevationSamples { get; } = BuildElevationSamples();
 
     private static IReadOnlyList<SeedChoice> BuildSeeds()
@@ -64,7 +63,7 @@ public partial class OverviewPage : UserControl
             ("Rose", MavColors.Rose),
         };
         return seeds
-            .Select(s => new SeedChoice(MavLocalization.Get("Overview.Seed." + s.Name, s.Name), s.Color))
+            .Select(s => new SeedChoice(MavLocalization.Get("Overview.Seed." + s.Name, s.Name), s.Color, MavTheme.SeedColor == s.Color))
             .ToList();
     }
 
