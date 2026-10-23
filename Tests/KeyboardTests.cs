@@ -20,7 +20,7 @@ public class KeyboardTests
         var page = new MavContentPage("Root")
         {
             FloatingActionButton = new MavFab(MavIcons.Add),
-            Content = new Border { Height = 2000 },
+            Child = new Border { Height = 2000 },
         };
         var navigation = new MavNavigationPage(page);
         var window = new Window
@@ -56,7 +56,7 @@ public class KeyboardTests
     {
         var page = new MavContentPage("Root")
         {
-            Content = new Border { Height = 2000 },
+            Child = new Border { Height = 2000 },
         };
         var navigation = new MavNavigationPage(page);
         var window = new Window
@@ -104,7 +104,7 @@ public class KeyboardTests
             SimulatedKeyboardHeight = 120,
             Child = new Border(),
         };
-        page.Content = preview;
+        page.Child = preview;
         for (var i = 0; i < 3; i++)
             Dispatcher.UIThread.RunJobs();
         MavOverlay.GetOverlaySize(preview);
@@ -112,7 +112,7 @@ public class KeyboardTests
             Dispatcher.UIThread.RunJobs();
         Assert.True(MavOverlay.GetOverlaySize(preview).Height < 700);
 
-        page.Content = new Border();
+        page.Child = new Border();
         for (var i = 0; i < 3; i++)
             Dispatcher.UIThread.RunJobs();
 
@@ -140,10 +140,10 @@ public class KeyboardTests
             SimulatedKeyboardHeight = 120,
             Child = new Border(),
         };
-        page.Content = preview;
+        page.Child = preview;
         Dispatcher.UIThread.RunJobs();
 
-        page.Content = new Border();
+        page.Child = new Border();
         for (var i = 0; i < 3; i++)
             Dispatcher.UIThread.RunJobs();
 
@@ -191,7 +191,7 @@ public class KeyboardTests
         {
             VerticalAlignment = VerticalAlignment.Bottom,
         };
-        page.Content = field;
+        page.Child = field;
         Dispatcher.UIThread.RunJobs();
 
         var popover = new MavPopover(new Border { Height = 120 }, "Details");

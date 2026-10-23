@@ -84,7 +84,7 @@ public class DataTableVirtualizationTests
     private static int RowCount(MavDataTable table) =>
         table.GetVisualDescendants()
             .OfType<MavInkSurface>()
-            .Count(s => s.Content is Grid); // rows host a Grid; icon buttons host an MavIcon
+            .Count(s => s.Child is Grid); // rows host a Grid; icon buttons host an MavIcon
 
     [AvaloniaFact]
     public void Large_table_renders_a_chunk_instead_of_every_row()
@@ -122,7 +122,7 @@ public class DataTableVirtualizationTests
 
         var rowSurface = table.GetVisualDescendants()
             .OfType<MavInkSurface>()
-            .First(surface => surface.Content is Grid);
+            .First(surface => surface.Child is Grid);
 
         table.SelectedItem = ((System.Collections.IEnumerable)table.ItemsSource!).Cast<object>().ElementAt(300);
         Dispatcher.UIThread.RunJobs();
@@ -192,7 +192,7 @@ public class DataTableVirtualizationTests
     private static HashSet<MavInkSurface> RowSurfaces(MavDataTable table) =>
         table.GetVisualDescendants()
             .OfType<MavInkSurface>()
-            .Where(s => s.Content is Grid)
+            .Where(s => s.Child is Grid)
             .ToHashSet();
 
     [AvaloniaFact]

@@ -31,7 +31,7 @@ public class FeedbackTests
     public void Indefinite_snackbar_has_a_close_button()
     {
         var anchor = new MavButton("Anchor");
-        var page = new MavContentPage("Root") { Content = anchor };
+        var page = new MavContentPage("Root") { Child = anchor };
         var navigation = new MavNavigationPage(page);
         var window = new Window { Width = 400, Height = 600, Content = navigation };
         window.Show();
