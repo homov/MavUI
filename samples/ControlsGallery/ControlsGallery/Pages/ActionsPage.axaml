@@ -95,12 +95,29 @@
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap"
                             Text="{mav:Loc Actions.Groups.Card.Body, Fallback=Group related actions\, pair a primary action with a menu\, or expand a FAB into labeled actions.}" />
               <WrapPanel>
-                <mav:MavButtonGroup x:Name="StandardGroup" Kind="Standard" Margin="0,0,8,8" />
-                <mav:MavButtonGroup x:Name="ConnectedGroup" Kind="Connected" Margin="0,0,8,8" />
+                <mav:MavButtonGroup Kind="Standard" Margin="0,0,8,8">
+                  <mav:MavButton Variant="Outlined" Text="Day" />
+                  <mav:MavButton Variant="Outlined" Text="Week" />
+                  <mav:MavButton Variant="Outlined" Text="Month" />
+                </mav:MavButtonGroup>
+                <mav:MavButtonGroup Kind="Connected" Margin="0,0,8,8">
+                  <mav:MavButton Variant="Tonal" Text="Bold" Icon="{x:Static mav:MavIcons.FormatBold}" />
+                  <mav:MavButton Variant="Tonal" Text="Italic" Icon="{x:Static mav:MavIcons.FormatItalic}" />
+                  <mav:MavButton Variant="Tonal" Text="Underline" Icon="{x:Static mav:MavIcons.FormatUnderlined}" />
+                </mav:MavButtonGroup>
               </WrapPanel>
               <WrapPanel>
-                <mav:MavSplitButton x:Name="SplitButton" Text="Save" Margin="0,0,8,8" />
-                <mav:MavFabMenu x:Name="FabMenu" Margin="0,0,8,8" />
+                <mav:MavSplitButton Text="Save" Margin="0,0,8,8">
+                  <mav:MavMenu>
+                    <mav:MavMenuItem Text="Save as draft" LeadingIcon="{x:Static mav:MavIcons.Description}" />
+                    <mav:MavMenuItem Text="Save and close" LeadingIcon="{x:Static mav:MavIcons.Close}" />
+                  </mav:MavMenu>
+                </mav:MavSplitButton>
+                <mav:MavFabMenu Margin="0,0,8,8">
+                  <mav:MavFabMenuItem Label="New document" Icon="{x:Static mav:MavIcons.NoteAdd}" />
+                  <mav:MavFabMenuItem Label="Upload" Icon="{x:Static mav:MavIcons.Upload}" />
+                  <mav:MavFabMenuItem Label="Scan" Icon="{x:Static mav:MavIcons.DocumentScanner}" />
+                </mav:MavFabMenu>
               </WrapPanel>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap"
                             Text="MavButtonGroup.Kind · MavSplitButton.Menu · MavFabMenu.AddItem(label, icon, action)" />

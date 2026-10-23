@@ -24,21 +24,5 @@ public partial class ActionsPage : UserControl
             await Task.Delay(1200);
             LoadingButton.IsLoading = false;
         };
-
-        StandardGroup.AddButton(new MavButton("Day", MavButtonVariant.Outlined));
-        StandardGroup.AddButton(new MavButton("Week", MavButtonVariant.Outlined));
-        StandardGroup.AddButton(new MavButton("Month", MavButtonVariant.Outlined));
-
-        ConnectedGroup.AddButton(new MavButton("Bold", MavButtonVariant.Tonal, MavIcons.FormatBold));
-        ConnectedGroup.AddButton(new MavButton("Italic", MavButtonVariant.Tonal, MavIcons.FormatItalic));
-        ConnectedGroup.AddButton(new MavButton("Underline", MavButtonVariant.Tonal, MavIcons.FormatUnderlined));
-
-        SplitButton.Menu = new MavMenu()
-            .AddItem("Save as draft", MavIcons.Description, onSelected: () => { })
-            .AddItem("Save and close", MavIcons.Close, onSelected: () => { });
-
-        FabMenu.AddItem("New document", MavIcons.NoteAdd, () => { });
-        FabMenu.AddItem("Upload", MavIcons.Upload, () => { });
-        FabMenu.AddItem("Scan", MavIcons.DocumentScanner, () => { });
     }
 }
