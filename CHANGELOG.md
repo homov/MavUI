@@ -32,6 +32,14 @@ sandbox (their signed link points at Azure blob storage, which is outside the al
 
 ### Changed
 
+- `MavCard` follows the shape scale. `CardRadius` now defaults to `double.NaN`, meaning
+  "the theme's `Shape.Medium`"; set a number to pin the radius on that card. Before, the card
+  hard-coded 12 px, so `MavShapeScale.Compact`/`Expressive` had no visible effect on it.
+- The gallery's Theming page explains the shape scale instead of just offering three buttons:
+  a summary line with the multiplier and the resulting card/chip/field radii, the same card
+  drawn at all three scales side by side (the active one filled), live `MavCard`, `MavChip` and
+  `MavInfoBar` controls, and each radius tile labelled with its pixel value.
+
 - `MavNavigationDestination`, `MavSuiteDestination` and `MavDrawerItem` share a base class `MavNavigationItemBase` with `Label`, `Icon`, `SelectedIcon` and `BadgeText`. Public names are unchanged. `MavDrawerItem` now also refreshes when `SelectedIcon` changes.
 
 - Incremental `CollectionChanged` handling in `MavList` and `MavDataTable`: `Add`, `Remove`,

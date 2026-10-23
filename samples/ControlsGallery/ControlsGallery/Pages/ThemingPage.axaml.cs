@@ -2,6 +2,7 @@ using System.Globalization;
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Layout;
 using Avalonia.Media;
 using Mav;
 using Mav.Controls;
@@ -130,6 +131,7 @@ public partial class ThemingPage : UserControl
         ShapeItems.ItemsSource = ShapeSamples;
         ContrastItems.ItemsSource = ContrastLines;
         RefreshShapeSummary();
+        RefreshShapeComparison();
         RefreshShapePreview();
         SeedIndigoRadio.IsChecked = MavTheme.SeedColor == MavColors.Indigo;
         SeedPurpleRadio.IsChecked = MavTheme.SeedColor == MavColors.Purple;
@@ -149,12 +151,62 @@ public partial class ThemingPage : UserControl
         var mode = MavTheme.ShapeScaleMode;
         ShapeSummary.Text = MavLocalization.Format(
             "Theming.Shape.Summary",
-            "Shape scale multiplies every corner radius: Compact ×0.72, Standard ×1.0, Expressive ×1.28. " +
-            "Current {0} — cards {1:0.#} px, chips {2:0.#} px, text fields {3:0.#} px.",
+            "Shape scale multiplies every corner radius: Compact ×{0}, Standard ×{1}, Expressive ×{2}. " +
+            "Current {3} — cards {4:0.#} px, chips {5:0.#} px, text fields {6:0.#} px.",
+            Multiplier(MavShapeScale.Compact),
+            Multiplier(MavShapeScale.Standard),
+            Multiplier(MavShapeScale.Expressive),
             mode,
             shape.Medium,
             shape.Small,
             shape.ExtraSmall);
+    }
+
+    private static double Multiplier(MavShapeScale scale) => new MavShapeTokens(scale).ScaleMultiplier;
+
+    /// <summary>
+    /// The same card drawn at each of the three scales at once, so the difference is visible
+    /// without pressing anything. The radius is pinned on purpose: these cards show all three
+    /// scales at the same time, while the row below shows the live one.
+    /// </summary>
+    private void RefreshShapeComparison()
+    {
+        ShapeComparison.Children.Clear();
+        var active = MavTheme.ShapeScaleMode;
+        foreach (var mode in new[] { MavShapeScale.Compact, MavShapeScale.Standard, MavShapeScale.Expressive })
+        {
+            var tokens = new MavShapeTokens(mode);
+            ShapeComparison.Children.Add(new MavCard
+            {
+                Variant = mode == active ? MavCardVariant.Filled : MavCardVariant.Outlined,
+                CardRadius = tokens.Medium,
+                Width = 150,
+                Height = 80,
+                Margin = new Thickness(0, 0, 12, 8),
+                CardPadding = new Thickness(10),
+                Child = new StackPanel
+                {
+                    Spacing = 2,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Children =
+                    {
+                        new MavLabel
+                        {
+                            Text = mode.ToString(),
+                            Role = MavTypeRole.LabelMedium,
+                            HorizontalAlignment = HorizontalAlignment.Center,
+                        },
+                        new MavLabel
+                        {
+                            Text = $"×{tokens.ScaleMultiplier:0.##} → {tokens.Medium:0.#} px",
+                            Role = MavTypeRole.LabelSmall,
+                            Secondary = true,
+                            HorizontalAlignment = HorizontalAlignment.Center,
+                        },
+                    },
+                },
+            });
+        }
     }
 
     /// <summary>Real controls whose corner radius comes from the shape tokens, rebuilt for the current scale.</summary>
