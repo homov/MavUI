@@ -3,6 +3,7 @@ using Avalonia;
 using Avalonia.Headless;
 using Avalonia.Headless.XUnit;
 using Hc;
+using Mav.Essentials;
 
 [assembly: AvaloniaTestApplication(typeof(Hc.Tests.Ui.HcTestAppBuilder))]
 
@@ -18,14 +19,21 @@ public static class HcTestAppBuilder
 }
 
 /// <summary>
-/// Keeps every test away from the production cloud. The address points at a closed local port, so a test
-/// that forgets to use a fake server fails fast instead of calling the real API. Set HC_API_BASE to override.
+/// Keeps the tests away from the machine's real data and from the production cloud.
+/// - Preferences and secure storage are replaced before the app reads them: the runner's own sign-in must not
+///   leak into the tests (autologin, shown email).
+/// - The cloud address points at a closed local port, so a test that forgets its fake server fails fast.
+/// HC_API_BASE can still be set explicitly.
 /// </summary>
 internal static class TestEnvironment
 {
     [ModuleInitializer]
     internal static void Initialize()
     {
+        var folder = Path.Combine(Path.GetTempPath(), "hc-ui-tests-" + Guid.NewGuid().ToString("N"));
+        MavPreferences.SetDefault(new JsonFilePreferences(folder));
+        MavSecureStorage.SetDefault(new FakeSecureStorage());
+
         if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("HC_API_BASE")))
             Environment.SetEnvironmentVariable("HC_API_BASE", "http://127.0.0.1:9/stinexapiv1");
     }

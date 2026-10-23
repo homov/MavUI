@@ -40,6 +40,9 @@ internal static class ScreenDump
         if (visual is Control { IsVisible: true } control)
         {
             var text = ReadText(control);
+            // Typed values are never written out: the annotations are visible to everyone who can read the checks.
+            if (text is { Length: > 0 } && IsInput(control))
+                text = $"<{text.Length} chars hidden>";
             var bounds = control.Bounds;
             var name = string.IsNullOrEmpty(control.Name) ? string.Empty : " #" + control.Name;
             var shown = text is null ? string.Empty : $" \"{text.Replace("\r", " ").Replace("\n", " ")}\"";
@@ -50,6 +53,12 @@ internal static class ScreenDump
 
         foreach (var child in visual.GetVisualChildren())
             Walk(child, depth, lines);
+    }
+
+    private static bool IsInput(Control control)
+    {
+        var type = control.GetType().Name;
+        return control is TextBox || type.Contains("TextField") || type.Contains("Entry") || type.Contains("PasswordBox");
     }
 
     private static string? ReadText(Control control)
