@@ -116,6 +116,12 @@ public interface ICloudApi
     [Post("/get_device_types/")]
     Task<ApiResponse<GetDeviceTypesResponse>> GetDeviceTypes();
 
+    [Post("/get_device_info_by_id/")]
+    Task<ApiResponse<UserDeviceInfo>> GetDeviceInfo([Body(BodySerializationMethod.UrlEncoded)] DeviceRequest request);
+
     [Post("/error_codes/")]
     Task<ApiResponse<ErrorCodesResponse>> GetErrorCodes([Body(BodySerializationMethod.UrlEncoded)] ErrorCodesRequest request);
+
+    [Post("/get_all_error_codes/")]
+    Task<ApiResponse<AllErrorCodesResponse>> GetAllErrorCodes();
 }

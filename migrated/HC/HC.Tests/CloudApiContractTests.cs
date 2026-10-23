@@ -44,12 +44,12 @@ public class CloudApiContractTests
     {
         var (api, handler) = Create("""{"state":"ok","uuid":"user-123"}""");
 
-        var response = await api.Login(new LoginRequest("user@example.com", "secret", "uk"));
+        var response = await api.Login(new LoginRequest("user@example.com", "secret"));
 
         Assert.Equal("/stinexapiv1/user_authorization/", handler.Request!.RequestUri!.AbsolutePath);
         Assert.Contains("email=user%40example.com", handler.RequestBody);
         Assert.Contains("password=secret", handler.RequestBody);
-        Assert.Contains("language=uk", handler.RequestBody);
+        Assert.DoesNotContain("language", handler.RequestBody);
         Assert.True(response.IsSuccessStatusCode);
         Assert.Equal("user-123", response.Content!.UserId);
         Assert.True(response.Content.IsSuccess);
@@ -118,6 +118,47 @@ public class CloudApiContractTests
         Assert.DoesNotContain("reciver", handler.RequestBody);
         Assert.DoesNotContain("\"p\"", handler.RequestBody);
         Assert.DoesNotContain("\"s\"", handler.RequestBody);
+    }
+
+    [Fact]
+    public async Task GetDeviceInfo_ParsesSingleDevice()
+    {
+        var (api, handler) = Create("""{"state":"ok","device_id":"d7","device_name":"Bath","temp_panel":19}""");
+
+        var response = await api.GetDeviceInfo(new DeviceRequest("d7"));
+
+        Assert.Contains("device_id=d7", handler.RequestBody);
+        Assert.Equal("Bath", response.Content!.DeviceName);
+        Assert.Equal(19f, response.Content.PanelTemperature);
+    }
+
+    [Fact]
+    public async Task GetAllErrorCodes_ParsesNestedDictionary()
+    {
+        var (api, _) = Create("""{"state":"ok","errors":{"en":{"E1":"Sensor fault"},"uk":{"E1":"Збій датчика"}}}""");
+
+        var response = await api.GetAllErrorCodes();
+
+        Assert.Equal("Збій датчика", response.Content!.Errors["uk"]["E1"]);
+    }
+
+    [Fact]
+    public void FromTemperature_BuildsManualScheduleForEveryDay()
+    {
+        var schedule = ScheduleInfo.FromTemperature(22.7f);
+
+        Assert.Equal("manual", schedule.ScheduleType);
+        Assert.Equal(7, schedule.Week!.Count);
+        Assert.All(WeekDays.All, day => Assert.Equal(22f, schedule.Week[day].Single().Temperature));
+    }
+
+    [Fact]
+    public void FromHumidity_BuildsHumidityScheduleForEveryDay()
+    {
+        var schedule = ScheduleInfo.FromHumidity(55.9f);
+
+        Assert.Equal("humidity", schedule.ScheduleType);
+        Assert.All(WeekDays.All, day => Assert.Equal(55f, schedule.Week![day].Single().Humidity));
     }
 
     [Fact]

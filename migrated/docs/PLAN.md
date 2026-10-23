@@ -16,7 +16,7 @@
 | `HeatController.Android` | Wi-Fi: `WifiNetworkService`, `WiFiService` | Только Android: подключение к сети устройства, suggestions, настройки Wi-Fi |
 | Локализация | 8 файлов `.resx` по 142 строки | cs, de, hu, it, pl, ro, uk + en по умолчанию. Русского нет. В миграции только en и uk |
 | ТЗ | `support/ТЗ.docx` (15.04.2024), `support/ТЗ_25_07_v_2.pdf` (25.07.2024) | 9 пунктов в первом, 5 разделов во втором |
-| API-спеки | `support/API.yaml`, `support/API_Doc_2.yaml` | **Не используются** (решение пользователя: `API.yaml` неполный и неверный). Источник контракта — рабочий код `ref/HeatController6/src/HeatCeram.Api` (`ICloudClient.cs`, `Models/`) и ТЗ |
+| API-спеки | `support/API.yaml`, `support/API_Doc_2.yaml` | **Не используются** (решение пользователя: `API.yaml` неполный и неверный). Источник контракта — рабочий код: `ref/HC.Api` (актуальная реализация пользователя, дополнена) и `ref/HeatController6/src/HeatCeram.Api` (старая). ТЗ — отдельно |
 
 Прочие находки, которые влияют на миграцию:
 

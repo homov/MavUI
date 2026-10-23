@@ -21,6 +21,26 @@ public class ScheduleInfo
     [JsonPropertyName("schedule")]
     public Dictionary<string, List<HourRecord>>? Week { get; set; }
 
+    /// <summary>
+    /// A schedule that keeps one temperature all week ("manual" type, hour 0 of every day).
+    /// The value is truncated to a whole degree, as the old app did.
+    /// </summary>
+    public static ScheduleInfo FromTemperature(float value) =>
+        Constant("manual", new HourRecord { Hour = 0, Temperature = (int)value });
+
+    /// <summary>A schedule that keeps one humidity all week ("humidity" type). The value is truncated to a whole number.</summary>
+    public static ScheduleInfo FromHumidity(float value) =>
+        Constant("humidity", new HourRecord { Hour = 0, Humidity = (int)value });
+
+    private static ScheduleInfo Constant(string type, HourRecord record)
+    {
+        var week = new Dictionary<string, List<HourRecord>>();
+        foreach (var day in WeekDays.All)
+            week[day] = [record];
+
+        return new ScheduleInfo { ScheduleType = type, Week = week };
+    }
+
     /// <summary>Receiver of the schedule (returned by get_schedule_by_id).</summary>
     [JsonPropertyName("reciver_id")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -64,4 +84,6 @@ public static class WeekDays
     public const string Friday = "friday";
     public const string Saturday = "saturday";
     public const string Sunday = "sunday";
+
+    public static readonly string[] All = [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday];
 }

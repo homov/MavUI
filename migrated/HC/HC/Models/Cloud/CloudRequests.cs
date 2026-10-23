@@ -7,8 +7,7 @@ namespace Hc.Models.Cloud;
 
 public record LoginRequest(
     [property: AliasAs("email")] string Email,
-    [property: AliasAs("password")] string Password,
-    [property: AliasAs("language")] string Language);
+    [property: AliasAs("password")] string Password);
 
 public record RegisterRequest(
     [property: AliasAs("email")] string Email,

@@ -137,3 +137,10 @@ public class ErrorCodesResponse : BaseResponse
     [JsonPropertyName("errors")]
     public Dictionary<string, string> Errors { get; set; } = [];
 }
+
+public class AllErrorCodesResponse : BaseResponse
+{
+    /// <summary>Language to (error code to message). Used for an offline dictionary of messages.</summary>
+    [JsonPropertyName("errors")]
+    public Dictionary<string, Dictionary<string, string>> Errors { get; set; } = [];
+}
