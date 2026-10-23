@@ -7,20 +7,6 @@ namespace Mav.MarkupGenerator;
 /// <summary>Writes the source text of one generated <c>&lt;Type&gt;Markup</c> class.</summary>
 internal static class MarkupEmitter
 {
-    /// <summary>
-    /// C# keywords. A setter whose lower-case name is a keyword gets an <c>@</c> prefix, for example <c>@default</c>.
-    /// </summary>
-    private static readonly HashSet<string> Keywords = new(new[]
-    {
-        "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char", "checked", "class", "const",
-        "continue", "decimal", "default", "delegate", "do", "double", "else", "enum", "event", "explicit", "extern",
-        "false", "finally", "fixed", "float", "for", "foreach", "goto", "if", "implicit", "in", "int", "interface",
-        "internal", "is", "lock", "long", "namespace", "new", "null", "object", "operator", "out", "override",
-        "params", "private", "protected", "public", "readonly", "ref", "return", "sbyte", "sealed", "short",
-        "sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "true", "try", "typeof",
-        "uint", "ulong", "unchecked", "unsafe", "ushort", "using", "virtual", "void", "volatile", "while",
-    });
-
     public static string Emit(INamedTypeSymbol type, IReadOnlyList<MarkupMember> members)
     {
         var owner = type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
@@ -52,13 +38,13 @@ internal static class MarkupEmitter
     }
 
     /// <summary>
-    /// Method name for a member: the CLR name with a lower-case first letter, so that it never clashes with the
-    /// property of the same name (C# does not call an extension method when the instance has a member with that name).
+    /// Method name for a member. A property keeps its own name (<c>Text(...)</c>): C# still resolves an extension
+    /// method when the instance has a non-invocable property with the same name (the same pattern as <c>List.Count()</c>).
+    /// An event gets the <c>On</c> prefix (<c>OnClicked(...)</c>).
     /// </summary>
-    public static string MethodName(string memberName)
+    public static string MethodName(MarkupMember member)
     {
-        var name = char.ToLowerInvariant(memberName[0]) + memberName.Substring(1);
-        return Keywords.Contains(name) ? "@" + name : name;
+        return member.IsEvent ? "On" + member.Name : member.Name;
     }
 
     private static void AppendProperty(StringBuilder sb, string typeName, Signature signature, MarkupMember member)
@@ -86,7 +72,7 @@ internal static class MarkupEmitter
     /// <summary>Writes the signature line(s). Non-sealed owners use a type parameter; sealed owners use the type itself.</summary>
     private static void AppendHeader(StringBuilder sb, MarkupMember member, Signature signature, string parameters)
     {
-        sb.Append("    public static ").Append(signature.Self).Append(' ').Append(MethodName(member.Name));
+        sb.Append("    public static ").Append(signature.Self).Append(' ').Append(MethodName(member));
         sb.Append(signature.Generic).Append(parameters).AppendLine();
         if (signature.Where is not null)
             sb.Append("        where TControl : ").AppendLine(signature.Where);

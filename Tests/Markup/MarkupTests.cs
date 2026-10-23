@@ -12,9 +12,9 @@ namespace Mav.Tests;
 public class MarkupTests
 {
     [AvaloniaFact]
-    public void Generated_property_setter_matches_clr_property()
+    public void GeneratedPropertySetterMatchesClrProperty()
     {
-        var viaMarkup = new MavButton().text("Save").width(120);
+        var viaMarkup = new MavButton().Text("Save").Width(120);
         var viaProperties = new MavButton { Text = "Save", Width = 120 };
 
         Assert.Equal(viaProperties.Text, viaMarkup.Text);
@@ -22,19 +22,19 @@ public class MarkupTests
     }
 
     [AvaloniaFact]
-    public void Inherited_property_setter_comes_from_base_markup()
+    public void InheritedPropertySetterComesFromBaseMarkup()
     {
-        var button = new MavButton().isEnabled(false);
+        var button = new MavButton().IsEnabled(false);
 
         Assert.False(button.IsEnabled);
     }
 
     [AvaloniaFact]
-    public void Generated_event_setter_subscribes_to_the_event()
+    public void GeneratedEventSetterSubscribesToTheEvent()
     {
         var button = new MavButton();
         var raised = 0;
-        button.clicked((sender, _) =>
+        button.OnClicked((sender, _) =>
         {
             Assert.Same(button, sender);
             raised++;
@@ -46,19 +46,19 @@ public class MarkupTests
     }
 
     [AvaloniaFact]
-    public void name_sets_the_name()
+    public void NameSetsTheName()
     {
-        var border = new Border().name("frame");
+        var border = new Border().Name("frame");
 
         Assert.Equal("frame", border.Name);
     }
 
     [AvaloniaFact]
-    public void children_adds_children_in_order()
+    public void ChildrenAddsChildrenInOrder()
     {
         var first = new Border();
         var second = new Border();
-        var panel = new StackPanel().children(first, second);
+        var panel = new StackPanel().Children(first, second);
 
         Assert.Equal(2, panel.Children.Count);
         Assert.Same(first, panel.Children[0]);
@@ -66,34 +66,34 @@ public class MarkupTests
     }
 
     [AvaloniaFact]
-    public void content_sets_content()
+    public void ContentSetsContent()
     {
-        var control = new ContentControl().content("hello");
+        var control = new ContentControl().Content("hello");
 
         Assert.Equal("hello", control.Content);
     }
 
     [AvaloniaFact]
-    public void child_sets_decorator_child()
+    public void ChildSetsDecoratorChild()
     {
         var child = new Border();
-        var border = new Border().child(child);
+        var border = new Border().Child(child);
 
         Assert.Same(child, border.Child);
     }
 
     [AvaloniaFact]
-    public void items_adds_items()
+    public void ItemsAddsItems()
     {
-        var control = new ItemsControl().items(new object[] { "a", "b" });
+        var control = new ItemsControl().Items(new object[] { "a", "b" });
 
         Assert.Equal(2, control.ItemCount);
     }
 
     [AvaloniaFact]
-    public void property_sets_any_styled_property()
+    public void PropertySetsAnyStyledProperty()
     {
-        var button = new MavButton().property(Layoutable.WidthProperty, 64.0);
+        var button = new MavButton().Property(Layoutable.WidthProperty, 64.0);
 
         Assert.Equal(64, button.Width);
     }

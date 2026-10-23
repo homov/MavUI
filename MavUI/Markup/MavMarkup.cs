@@ -1,27 +1,27 @@
+using System.Collections;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data;
-using System.Collections;
 
 namespace Mav.Markup;
 
 /// <summary>
 /// Hand-written fluent helpers of the C# markup layer. Setters for each control's properties and events are generated
 /// (see <c>tools/MarkupGenerator</c>); this class holds the helpers that are not tied to one control.
-/// Methods use a lower-case first letter, for example <c>new MavButton().text("Save").width(120)</c>.
+/// Example: <c>new MavButton().Text("Save").Width(120)</c>.
 /// </summary>
 public static class MavMarkup
 {
     /// <summary>Sets any styled property.</summary>
-    public static TControl property<TControl, TValue>(this TControl control, StyledProperty<TValue> property, TValue value)
+    public static TControl Property<TControl, TValue>(this TControl control, StyledProperty<TValue> property, TValue value)
         where TControl : AvaloniaObject
     {
         control.SetValue(property, value);
         return control;
     }
 
-    /// <summary>Binds a property to a binding, for example <c>new Binding("Title")</c>; the expression is discarded.</summary>
-    public static TControl binding<TControl>(this TControl control, AvaloniaProperty property, BindingBase binding)
+    /// <summary>Binds a property to a binding, for example <c>new Binding("Title")</c>. The binding expression is not kept.</summary>
+    public static TControl Binding<TControl>(this TControl control, AvaloniaProperty property, BindingBase binding)
         where TControl : AvaloniaObject
     {
         control.Bind(property, binding);
@@ -29,7 +29,7 @@ public static class MavMarkup
     }
 
     /// <summary>Sets the name of the element.</summary>
-    public static TControl name<TControl>(this TControl control, string name)
+    public static TControl Name<TControl>(this TControl control, string name)
         where TControl : StyledElement
     {
         control.Name = name;
@@ -37,7 +37,7 @@ public static class MavMarkup
     }
 
     /// <summary>Adds children to a panel, in the given order.</summary>
-    public static TPanel children<TPanel>(this TPanel panel, params Control[] children)
+    public static TPanel Children<TPanel>(this TPanel panel, params Control[] children)
         where TPanel : Panel
     {
         foreach (var child in children)
@@ -46,7 +46,7 @@ public static class MavMarkup
     }
 
     /// <summary>Adds items to an items control. Do not combine with an items source.</summary>
-    public static TControl items<TControl>(this TControl control, IEnumerable items)
+    public static TControl Items<TControl>(this TControl control, IEnumerable items)
         where TControl : ItemsControl
     {
         foreach (var item in items)
@@ -55,7 +55,7 @@ public static class MavMarkup
     }
 
     /// <summary>Sets the content of a content control.</summary>
-    public static TControl content<TControl>(this TControl control, object? content)
+    public static TControl Content<TControl>(this TControl control, object? content)
         where TControl : ContentControl
     {
         control.Content = content;
@@ -63,7 +63,7 @@ public static class MavMarkup
     }
 
     /// <summary>Sets the child of a decorator such as a border.</summary>
-    public static TDecorator child<TDecorator>(this TDecorator decorator, Control? child)
+    public static TDecorator Child<TDecorator>(this TDecorator decorator, Control? child)
         where TDecorator : Decorator
     {
         decorator.Child = child;
