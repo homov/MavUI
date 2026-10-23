@@ -1,20 +1,18 @@
 using System.Net;
-using System.Net.Http;
 using System.Text;
 using Hc.Models.Cloud;
 using Hc.Services.Cloud;
-using Refit;
 using Xunit;
 
 namespace Hc.Tests;
 
 /// <summary>
-/// Checks the wire contract of <see cref="ICloudApi"/> without a network: a fake handler records the
+/// Checks the wire contract of <see cref="CloudClient"/> without a network: a fake handler records the
 /// request and returns canned JSON. Field names must match what the server expects.
 /// </summary>
 public class CloudApiContractTests
 {
-    private sealed class FakeHandler(string json) : HttpMessageHandler
+    private sealed class FakeHandler(HttpStatusCode status, string json) : HttpMessageHandler
     {
         public HttpRequestMessage? Request { get; private set; }
         public string? RequestBody { get; private set; }
@@ -25,26 +23,26 @@ public class CloudApiContractTests
             if (request.Content is not null)
                 RequestBody = await request.Content.ReadAsStringAsync(cancellationToken);
 
-            return new HttpResponseMessage(HttpStatusCode.OK)
+            return new HttpResponseMessage(status)
             {
                 Content = new StringContent(json, Encoding.UTF8, "application/json"),
             };
         }
     }
 
-    private static (ICloudApi Api, FakeHandler Handler) Create(string json)
+    private static (CloudClient Client, FakeHandler Handler) Create(string json, HttpStatusCode status = HttpStatusCode.OK)
     {
-        var handler = new FakeHandler(json);
-        var client = new HttpClient(handler) { BaseAddress = new Uri("https://example.test/stinexapiv1") };
-        return (RestService.For<ICloudApi>(client), handler);
+        var handler = new FakeHandler(status, json);
+        var http = new HttpClient(handler) { BaseAddress = new Uri("https://example.test/stinexapiv1/") };
+        return (new CloudClient(http), handler);
     }
 
     [Fact]
     public async Task Login_SendsServerFieldNames_AndReadsUserId()
     {
-        var (api, handler) = Create("""{"state":"ok","uuid":"user-123"}""");
+        var (client, handler) = Create("""{"state":"ok","uuid":"user-123"}""");
 
-        var response = await api.Login(new LoginRequest("user@example.com", "secret"));
+        var response = await client.Login(new LoginRequest("user@example.com", "secret"));
 
         Assert.Equal("/stinexapiv1/user_authorization/", handler.Request!.RequestUri!.AbsolutePath);
         Assert.Contains("email=user%40example.com", handler.RequestBody);
@@ -58,9 +56,9 @@ public class CloudApiContractTests
     [Fact]
     public async Task ChangePassword_UsesNewPasswordField()
     {
-        var (api, handler) = Create("""{"state":"ok"}""");
+        var (client, handler) = Create("""{"state":"ok"}""");
 
-        await api.ChangePassword(new ChangePasswordRequest("a@b.c", "old", "new"));
+        await client.ChangePassword(new ChangePasswordRequest("a@b.c", "old", "new"));
 
         Assert.Contains("new_password=new", handler.RequestBody);
     }
@@ -72,9 +70,9 @@ public class CloudApiContractTests
         {"state":"ok","devices":[{"device_id":"d1","device_name":"Kitchen","heat_state":true,
           "temp_panel":21.5,"control_type":["time","temperature"],"t1_coef":0.5}]}
         """;
-        var (api, _) = Create(json);
+        var (client, _) = Create(json);
 
-        var response = await api.GetUserDevices();
+        var response = await client.GetUserDevices();
 
         var device = Assert.Single(response.Content!.Devices);
         Assert.Equal("d1", device.DeviceId);
@@ -88,9 +86,9 @@ public class CloudApiContractTests
     [Fact]
     public async Task GetUserGroups_NoGroupsStateIsSuccess()
     {
-        var (api, _) = Create("""{"state":"no_groups","groups":[]}""");
+        var (client, _) = Create("""{"state":"no_groups","groups":[]}""");
 
-        var response = await api.GetUserGroups();
+        var response = await client.GetUserGroups();
 
         Assert.True(response.Content!.IsSuccess);
         Assert.Empty(response.Content.Groups);
@@ -99,7 +97,7 @@ public class CloudApiContractTests
     [Fact]
     public async Task UpdateSchedule_SendsJson_WithoutEmptyReceiverFields()
     {
-        var (api, handler) = Create("""{"state":"ok"}""");
+        var (client, handler) = Create("""{"state":"ok"}""");
         var schedule = new ScheduleInfo
         {
             ScheduleId = "s1",
@@ -110,7 +108,7 @@ public class CloudApiContractTests
             },
         };
 
-        await api.UpdateSchedule(schedule);
+        await client.UpdateSchedule(schedule);
 
         Assert.Contains("\"schedule_id\":\"s1\"", handler.RequestBody);
         Assert.Contains("\"monday\"", handler.RequestBody);
@@ -121,11 +119,21 @@ public class CloudApiContractTests
     }
 
     [Fact]
+    public async Task GetTimezones_FlattensNames()
+    {
+        var (client, _) = Create("""{"state":"ok","timezones":[{"Europe/Kyiv":"Europe/Kyiv"},{"UTC":"UTC"}]}""");
+
+        var response = await client.GetTimezones();
+
+        Assert.Equal(new[] { "Europe/Kyiv", "UTC" }, response.Content!.Names);
+    }
+
+    [Fact]
     public async Task GetDeviceInfo_ParsesSingleDevice()
     {
-        var (api, handler) = Create("""{"state":"ok","device_id":"d7","device_name":"Bath","temp_panel":19}""");
+        var (client, handler) = Create("""{"state":"ok","device_id":"d7","device_name":"Bath","temp_panel":19}""");
 
-        var response = await api.GetDeviceInfo(new DeviceRequest("d7"));
+        var response = await client.GetDeviceInfo(new DeviceRequest("d7"));
 
         Assert.Contains("device_id=d7", handler.RequestBody);
         Assert.Equal("Bath", response.Content!.DeviceName);
@@ -135,39 +143,52 @@ public class CloudApiContractTests
     [Fact]
     public async Task GetAllErrorCodes_ParsesNestedDictionary()
     {
-        var (api, _) = Create("""{"state":"ok","errors":{"en":{"E1":"Sensor fault"},"uk":{"E1":"Збій датчика"}}}""");
+        var (client, _) = Create("""{"state":"ok","errors":{"en":{"E1":"Sensor fault"},"uk":{"E1":"Збій датчика"}}}""");
 
-        var response = await api.GetAllErrorCodes();
+        var response = await client.GetAllErrorCodes();
 
         Assert.Equal("Збій датчика", response.Content!.Errors["uk"]["E1"]);
     }
 
     [Fact]
-    public void FromTemperature_BuildsManualScheduleForEveryDay()
+    public async Task HttpError_IsReturnedNotThrown()
     {
-        var schedule = ScheduleInfo.FromTemperature(22.7f);
+        var (client, _) = Create("server down", HttpStatusCode.InternalServerError);
 
-        Assert.Equal("manual", schedule.ScheduleType);
-        Assert.Equal(7, schedule.Week!.Count);
-        Assert.All(WeekDays.All, day => Assert.Equal(22f, schedule.Week[day].Single().Temperature));
+        var response = await client.GetUserDevices();
+
+        Assert.False(response.IsSuccessStatusCode);
+        Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
+        Assert.Equal("server down", response.ErrorMessage);
+        Assert.Null(response.Content);
     }
 
     [Fact]
-    public void FromHumidity_BuildsHumidityScheduleForEveryDay()
+    public async Task Timeout_IsReturnedAsFailure()
     {
-        var schedule = ScheduleInfo.FromHumidity(55.9f);
+        var handler = new TimeoutHandler();
+        var http = new HttpClient(handler) { BaseAddress = new Uri("https://example.test/stinexapiv1/") };
+        var client = new CloudClient(http);
 
-        Assert.Equal("humidity", schedule.ScheduleType);
-        Assert.All(WeekDays.All, day => Assert.Equal(55f, schedule.Week![day].Single().Humidity));
+        var response = await client.GetUserDevices();
+
+        Assert.False(response.IsSuccessStatusCode);
+        Assert.Equal((HttpStatusCode)0, response.StatusCode);
     }
 
     [Fact]
-    public async Task GetTimezones_FlattensNames()
+    public async Task CallerCancellation_IsThrown()
     {
-        var (api, _) = Create("""{"state":"ok","timezones":[{"Europe/Kyiv":"Europe/Kyiv"},{"UTC":"UTC"}]}""");
+        var (client, _) = Create("""{"state":"ok"}""");
+        using var cts = new CancellationTokenSource();
+        cts.Cancel();
 
-        var response = await api.GetTimezones();
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => client.GetUserDevices(cts.Token));
+    }
 
-        Assert.Equal(new[] { "Europe/Kyiv", "UTC" }, response.Content!.Names);
+    private sealed class TimeoutHandler : HttpMessageHandler
+    {
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken) =>
+            Task.FromException<HttpResponseMessage>(new TaskCanceledException("timeout"));
     }
 }

@@ -214,7 +214,7 @@ migrated/
 * Проверка: окно открывается на Desktop, сборка Android проходит.
 
 **Этап 2. Cloud API**
-* `Services/Cloud`: Refit-интерфейс по рабочему коду `ref` (`ICloudClient.cs`), модели `System.Text.Json` (контракт из `ref/.../Models/`, не из OpenAPI-спек).
+* `Services/Cloud`: собственный клиент `CloudClient` (без Refit) по `ref/HC.Api`. AOT обязателен: JSON через source generation (`CloudJsonContext`), формы строятся явно. Запросы идут по одному (очередь сохраняем). Контракт — код, не OpenAPI-спеки.
 * Один `HttpClient` на время жизни приложения (вместо 35 создаваемых). Обработка `Cookie` через один `CookieContainer`.
 * Проверка сертификата: без изменений, с комментарием.
 * Параметр `language` для `user_authorization`, `user_registration`, `user_validation`, `user_password_restoration`, `password_restoration_validate`, `error_codes` (ТЗ 2025, раздел 3). Работает и без ТЗ: если язык пустой, сервер отдаёт EN.

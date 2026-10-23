@@ -30,7 +30,8 @@ public static class CloudHttpClient
 
         return new HttpClient(handler)
         {
-            BaseAddress = new Uri(baseUrl),
+            // The trailing slash is required: routes in CloudClient are relative ("user_authorization/").
+            BaseAddress = new Uri(baseUrl.TrimEnd('/') + "/"),
             Timeout = ApiEndpoints.CloudTimeout,
         };
     }
