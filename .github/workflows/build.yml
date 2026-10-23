@@ -15,8 +15,9 @@ jobs:
     # Runs on the user's own Linux machine (self-hosted runner).
     runs-on: [self-hosted, linux]
     timeout-minutes: 45
+    # contents: write is only for the screenshots branch (see "Publish screenshots").
     permissions:
-      contents: read
+      contents: write
 
     steps:
       - name: Checkout
@@ -71,29 +72,38 @@ jobs:
         shell: bash
         run: python3 ci/scripts/test_annotations.py "$GITHUB_WORKSPACE/test-results" "$GITHUB_WORKSPACE/ui-report"
 
-      # Screenshots travel as base64 notices. GitHub cuts a message at 4096 characters and keeps
-      # 10 notices per step, so the manifest comes first and the bytes follow in 3 batches of
-      # 10 chunks (PNG_BATCHES in test_annotations.py must stay equal to the number of steps).
-      # tools/read_screenshots.py joins them back into PNG files.
-      - name: Screenshot manifest (base64 index, readable through the Checks API)
+      # Screenshots are too big for annotations (a job carries ~300 KB of notice text and the gallery
+      # alone makes 1.7 MB). They are force-pushed to the single `ci/screenshots` branch instead:
+      # one commit, no history, every run replaces it. tools/read_screenshots.py fetches them back.
+      - name: Publish screenshots to the ci/screenshots branch
         if: always()
         shell: bash
-        run: python3 ci/scripts/test_annotations.py --png-manifest "$GITHUB_WORKSPACE/ui-report"
-
-      - name: Screenshots as base64 (batch 1 of 3)
-        if: always()
-        shell: bash
-        run: python3 ci/scripts/test_annotations.py --png-batch 0 "$GITHUB_WORKSPACE/ui-report"
-
-      - name: Screenshots as base64 (batch 2 of 3)
-        if: always()
-        shell: bash
-        run: python3 ci/scripts/test_annotations.py --png-batch 1 "$GITHUB_WORKSPACE/ui-report"
-
-      - name: Screenshots as base64 (batch 3 of 3)
-        if: always()
-        shell: bash
-        run: python3 ci/scripts/test_annotations.py --png-batch 2 "$GITHUB_WORKSPACE/ui-report"
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -uo pipefail
+          [ -d ui-report ] || { echo "no ui-report folder"; exit 0; }
+          count=$(find ui-report -maxdepth 1 -name '*.png' | wc -l)
+          echo "screenshots: $count"
+          [ "$count" -gt 0 ] || { echo "nothing to publish"; exit 0; }
+          work="$RUNNER_TEMP/shots-$GITHUB_RUN_ID"
+          rm -rf "$work"; mkdir -p "$work"
+          cp ui-report/*.png "$work"/
+          cp ui-report/*.txt "$work"/ 2>/dev/null || true
+          # Manifest next to the images: size and sha256, so a reader can verify what it downloaded.
+          ( cd "$work" && sha256sum *.png > SHA256SUMS.txt )
+          printf 'Screenshots of run %s (%s), branch %s.\nRead them with tools/read_screenshots.py.\n' \
+            "$GITHUB_RUN_ID" "${GITHUB_SHA:0:8}" "$GITHUB_REF_NAME" > "$work/README.md"
+          cd "$work"
+          git init -q -b ci/screenshots
+          git add -A
+          git -c user.name="mav-ci" -c user.email="mav-ci@users.noreply.github.com" \
+            commit -q -m "Screenshots of run $GITHUB_RUN_ID (${GITHUB_SHA:0:8}): $count image(s)"
+          # A push failure must not hide the test result: report it as a warning and keep going.
+          if ! git push --force --quiet \
+              "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" ci/screenshots; then
+            echo "::warning title=Screenshots not published::git push to ci/screenshots failed (contents: write?)"
+          fi
 
       - name: Build Android and Browser targets (manual runs or commit message contains [heads])
         if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[heads]')
