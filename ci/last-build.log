@@ -1,20 +1,20 @@
 # Last build log
-commit: 50c5b35da691a5f7ea727ea58e7f288478acc20f
-run: https://github.com/homov/MavUI/actions/runs/40001356838
+commit: 9d16aa46d735d924aff4eaf48dc5e5f7dbe27d00
+run: https://github.com/homov/MavUI/actions/runs/40001489799
 
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 265 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 256 ms).
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:07.73
+Time Elapsed 00:00:07.26
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 229 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 223 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 223 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 218 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 218 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 222 ms).
   1 of 4 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
@@ -25,9 +25,9 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:04.78
+Time Elapsed 00:00:04.99
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 275 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 280 ms).
   2 of 3 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
@@ -37,12 +37,12 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.13
+Time Elapsed 00:00:02.12
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup.Desktop/ControlsGalleryMarkup.Desktop.csproj (in 242 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/markup/src/AMarkup.Controls/AMarkup.Controls.csproj (in 242 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/markup/src/AMarkup.Generators/AMarkup.Generators.csproj (in 242 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj (in 242 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup.Desktop/ControlsGalleryMarkup.Desktop.csproj (in 246 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/markup/src/AMarkup.Generators/AMarkup.Generators.csproj (in 246 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/markup/src/AMarkup.Controls/AMarkup.Controls.csproj (in 246 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGalleryMarkup/ControlsGalleryMarkup/ControlsGalleryMarkup.csproj (in 246 ms).
   1 of 5 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   AMarkup.Controls -> /home/homo/github/actions-runner/_work/MavUI/MavUI/markup/src/AMarkup.Controls/bin/Release/net10.0/AMarkup.Controls.dll
@@ -54,7 +54,7 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:07.78
+Time Elapsed 00:00:07.82
   Determining projects to restore...
   All projects are up-to-date for restore.
   MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0-windows/MavUI.Essentials.dll
@@ -64,20 +64,54 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:00.98
+Time Elapsed 00:00:00.99
   Determining projects to restore...
   Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/HC.csproj (in 277 ms).
   2 of 3 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
-/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/Pages/Devices/DeviceListView.axaml(5,4,5,4): Avalonia error AVLN2000: Unable to resolve suitable regular or attached property Body on type MavUI:Mav.Controls.MavRefreshIndicator Line 5, position 4. [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/HC.csproj::TargetFramework=net10.0]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/Pages/Groups/GroupListView.axaml(5,4,5,4): Avalonia error AVLN2000: Unable to resolve suitable regular or attached property Body on type MavUI:Mav.Controls.MavRefreshIndicator Line 5, position 4. [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/HC.csproj::TargetFramework=net10.0]
+  HC -> /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/bin/Release/net10.0/HC.dll
 
-Build FAILED.
-
-/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/Pages/Devices/DeviceListView.axaml(5,4,5,4): Avalonia error AVLN2000: Unable to resolve suitable regular or attached property Body on type MavUI:Mav.Controls.MavRefreshIndicator Line 5, position 4. [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/HC.csproj::TargetFramework=net10.0]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/Pages/Groups/GroupListView.axaml(5,4,5,4): Avalonia error AVLN2000: Unable to resolve suitable regular or attached property Body on type MavUI:Mav.Controls.MavRefreshIndicator Line 5, position 4. [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/HC.csproj::TargetFramework=net10.0]
+Build succeeded.
     0 Warning(s)
-    2 Error(s)
+    0 Error(s)
 
-Time Elapsed 00:00:01.80
+Time Elapsed 00:00:02.54
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
+  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0-windows/MavUI.Essentials.dll
+  HC -> /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/bin/Release/net10.0-windows/HC.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.44
+  Determining projects to restore...
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj (in 300 ms).
+  3 of 4 projects are up-to-date for restore.
+  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
+  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
+  HC -> /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/bin/Release/net10.0/HC.dll
+  HC.Tests -> /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/bin/Release/net10.0/HC.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.14
+Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/MavUI.Tests.dll (.NETCoreApp,Version=v10.0)
+VSTest version 18.0.2 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:   330, Skipped:     0, Total:   330, Duration: 14 s - MavUI.Tests.dll (net10.0)
+Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/bin/Release/net10.0/HC.Tests.dll (.NETCoreApp,Version=v10.0)
+VSTest version 18.0.2 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:    57, Skipped:     0, Total:    57, Duration: 94 ms - HC.Tests.dll (net10.0)
