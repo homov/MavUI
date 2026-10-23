@@ -29,8 +29,8 @@ public static class ThemingPage
             "Theming.Config.Body", "All theme changes are global and rebuild the palette immediately.",
             Card(
                 L("Theming.Controls.Title", "Theme controls"),
-                "Theming.Controls.CardBody", "Seed color, mode, contrast, density, motion and shape scale.",
-                "MavTheme.Configure(seed, mode, contrast, density, motion, shapeScale)",
+                "Theming.Controls.CardBody", "Seed color, mode, palette, contrast, density, motion and shape scale.",
+                "MavTheme.Configure(seed, mode, schemeVariant, contrast, density, motion, shapeScale)",
                 Stack(8,
                     Row(
                         Button("Overview.Mode.Light", "Light", MavButtonVariant.Outlined, MavIcons.LightMode, () => MavTheme.UseLight()),
@@ -41,6 +41,16 @@ public static class ThemingPage
                         Button("Theming.Contrast.Standard", "Contrast: Standard", MavButtonVariant.Tonal, null, () => MavTheme.Configure(contrast: MavContrast.Standard)),
                         Button("Overview.Contrast.Medium", "Medium", MavButtonVariant.Tonal, null, () => MavTheme.Configure(contrast: MavContrast.Medium)),
                         Button("Overview.Contrast.High", "High", MavButtonVariant.Tonal, null, () => MavTheme.Configure(contrast: MavContrast.High))),
+                    Row(
+                        Button("Theming.Variant.TonalSpot", "Tonal spot", MavButtonVariant.Outlined, null, () => MavTheme.Configure(schemeVariant: MavSchemeVariant.TonalSpot)),
+                        Button("Theming.Variant.Neutral", "Neutral", MavButtonVariant.Outlined, null, () => MavTheme.Configure(schemeVariant: MavSchemeVariant.Neutral)),
+                        Button("Theming.Variant.Vibrant", "Vibrant", MavButtonVariant.Outlined, null, () => MavTheme.Configure(schemeVariant: MavSchemeVariant.Vibrant)),
+                        Button("Theming.Variant.Expressive", "Expressive", MavButtonVariant.Outlined, null, () => MavTheme.Configure(schemeVariant: MavSchemeVariant.Expressive)),
+                        Button("Theming.Variant.Monochrome", "Monochrome", MavButtonVariant.Outlined, null, () => MavTheme.Configure(schemeVariant: MavSchemeVariant.Monochrome)),
+                        Button("Theming.Variant.Fidelity", "Fidelity", MavButtonVariant.Outlined, null, () => MavTheme.Configure(schemeVariant: MavSchemeVariant.Fidelity)),
+                        Button("Theming.Variant.Content", "Content", MavButtonVariant.Outlined, null, () => MavTheme.Configure(schemeVariant: MavSchemeVariant.Content)),
+                        Button("Theming.Variant.Rainbow", "Rainbow", MavButtonVariant.Outlined, null, () => MavTheme.Configure(schemeVariant: MavSchemeVariant.Rainbow)),
+                        Button("Theming.Variant.FruitSalad", "Fruit salad", MavButtonVariant.Outlined, null, () => MavTheme.Configure(schemeVariant: MavSchemeVariant.FruitSalad))),
                     Row(
                         Button("Overview.Density.Comfortable", "Comfortable", MavButtonVariant.Text, null, () => MavTheme.Configure(density: MavDensity.Comfortable)),
                         Button("Overview.Density.Compact", "Compact", MavButtonVariant.Text, null, () => MavTheme.Configure(density: MavDensity.Compact)),

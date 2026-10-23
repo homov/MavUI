@@ -4,6 +4,15 @@ internal static class RuTheming
 {
     public static readonly (string Key, string Value)[] Items =
     [
+        ("Theming.Variant.TonalSpot", "Тональная точка"),
+        ("Theming.Variant.Neutral", "Нейтральная"),
+        ("Theming.Variant.Vibrant", "Яркая"),
+        ("Theming.Variant.Expressive", "Выразительная"),
+        ("Theming.Variant.Monochrome", "Монохромная"),
+        ("Theming.Variant.Fidelity", "Точная"),
+        ("Theming.Variant.Content", "Содержательная"),
+        ("Theming.Variant.Rainbow", "Радуга"),
+        ("Theming.Variant.FruitSalad", "Фруктовый салат"),
         ("Theming.Contrast.Standard", "Контраст: стандартный"),
         ("Theming.Motion.Expressive", "Движение: выразительное"),
         ("Theming.Motion.None", "Без анимации"),
@@ -21,7 +30,7 @@ internal static class RuTheming
         ("Theming.Contrast.Body", "Коэффициенты WCAG 2.1 для типовых пар ролей через MavAccessibility."),
         ("Theming.Contrast.CardBody", "Коэффициенты вычисляются по текущей схеме."),
         ("Theming.Contrast.Title", "Контраст"),
-        ("Theming.Controls.CardBody", "Цвет-основа, режим, контраст, плотность, движение и масштаб форм."),
+        ("Theming.Controls.CardBody", "Цвет-основа, режим, тип палитры, контраст, плотность, движение и масштаб форм."),
         ("Theming.Controls.Title", "Управление темой"),
         ("Theming.Language.CardBody", "Приветствие и подписи диалогов используют тот же провайдер. Кнопки языка вызывают SetCulture; привязанные тексты обновляются автоматически, без обработчиков событий."),
         ("Theming.Language.Title", "Смена языка"),
