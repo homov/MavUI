@@ -38,10 +38,7 @@ public static class ThemingPage
                     SchemeVariantRow(),
                     DensityRow(),
                     MotionRow(),
-                    Row(
-                        Button("Theming.Shape.Compact", "Shape: Compact", MavButtonVariant.Tonal, null, () => MavTheme.Configure(shapeScale: MavShapeScale.Compact)),
-                        Button("Overview.Motion.Standard", "Standard", MavButtonVariant.Tonal, null, () => MavTheme.Configure(shapeScale: MavShapeScale.Standard)),
-                        Button("Theming.Shape.Expressive", "Expressive", MavButtonVariant.Tonal, null, () => MavTheme.Configure(shapeScale: MavShapeScale.Expressive)))))),
+                    ShapeRow()))),
         Section(
             "Theming.Colors.Title", "Color roles",
             "Theming.Colors.Body", "Every MD3 color role for the current scheme.",

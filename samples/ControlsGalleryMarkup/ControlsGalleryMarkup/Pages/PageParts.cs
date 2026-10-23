@@ -166,6 +166,18 @@ public static class PageParts
         motion => MavTheme.Configure(motion: motion),
         MavButtonVariant.Outlined);
 
+    /// <summary>Compact, standard and expressive shape buttons. The current shape scale is highlighted and kept in sync with the theme.</summary>
+    public static Control ShapeRow() => ChoiceRow(
+        new (MavShapeScale Value, string Key, string English, string? Icon)[]
+        {
+            (MavShapeScale.Compact, "Theming.Shape.Compact", "Shape: Compact", null),
+            (MavShapeScale.Standard, "Overview.Motion.Standard", "Standard", null),
+            (MavShapeScale.Expressive, "Theming.Shape.Expressive", "Expressive", null),
+        },
+        () => MavTheme.ShapeScaleMode,
+        scale => MavTheme.Configure(shapeScale: scale),
+        MavButtonVariant.Tonal);
+
     /// <summary>A row of buttons for one choice of a theme setting; the chosen value is filled and kept in sync with the theme.</summary>
     private static Control ChoiceRow<T>(
         (T Value, string Key, string English, string? Icon)[] choices,

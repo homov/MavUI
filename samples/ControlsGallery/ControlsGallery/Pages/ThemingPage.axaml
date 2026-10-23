@@ -48,9 +48,9 @@
                   <mav:MavButton x:Name="MotionNoneButton" Variant="Outlined" Text="{mav:Loc Theming.Motion.None, Fallback=None}" Command="{x:Static pages:ThemingPage.SetMotion}" CommandParameter="{x:Static mav:MavMotionScheme.None}" Margin="0,0,8,8" />
                 </WrapPanel>
                 <WrapPanel>
-                  <mav:MavButton Variant="Tonal" Text="{mav:Loc Theming.Shape.Compact, Fallback=Shape: Compact}" Command="{x:Static pages:ThemingPage.SetShape}" CommandParameter="{x:Static mav:MavShapeScale.Compact}" Margin="0,0,8,8" />
-                  <mav:MavButton Variant="Tonal" Text="{mav:Loc Overview.Motion.Standard, Fallback=Standard}" Command="{x:Static pages:ThemingPage.SetShape}" CommandParameter="{x:Static mav:MavShapeScale.Standard}" Margin="0,0,8,8" />
-                  <mav:MavButton Variant="Tonal" Text="{mav:Loc Theming.Shape.Expressive, Fallback=Expressive}" Command="{x:Static pages:ThemingPage.SetShape}" CommandParameter="{x:Static mav:MavShapeScale.Expressive}" Margin="0,0,8,8" />
+                  <mav:MavButton x:Name="ShapeCompactButton" Variant="Tonal" Text="{mav:Loc Theming.Shape.Compact, Fallback=Shape: Compact}" Command="{x:Static pages:ThemingPage.SetShape}" CommandParameter="{x:Static mav:MavShapeScale.Compact}" Margin="0,0,8,8" />
+                  <mav:MavButton x:Name="ShapeStandardButton" Variant="Tonal" Text="{mav:Loc Overview.Motion.Standard, Fallback=Standard}" Command="{x:Static pages:ThemingPage.SetShape}" CommandParameter="{x:Static mav:MavShapeScale.Standard}" Margin="0,0,8,8" />
+                  <mav:MavButton x:Name="ShapeExpressiveButton" Variant="Tonal" Text="{mav:Loc Theming.Shape.Expressive, Fallback=Expressive}" Command="{x:Static pages:ThemingPage.SetShape}" CommandParameter="{x:Static mav:MavShapeScale.Expressive}" Margin="0,0,8,8" />
                 </WrapPanel>
               </StackPanel>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavTheme.Configure(seed, mode, schemeVariant, contrast, density, motion, shapeScale)" />

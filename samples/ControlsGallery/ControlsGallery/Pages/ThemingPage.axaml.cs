@@ -147,5 +147,8 @@ public partial class ThemingPage : UserControl
         MotionStandardButton.Variant = ChoiceButtonStyle.Of(MavTheme.Motion == MavMotionScheme.Standard, MavButtonVariant.Outlined);
         MotionReducedButton.Variant = ChoiceButtonStyle.Of(MavTheme.Motion == MavMotionScheme.Reduced, MavButtonVariant.Outlined);
         MotionNoneButton.Variant = ChoiceButtonStyle.Of(MavTheme.Motion == MavMotionScheme.None, MavButtonVariant.Outlined);
+        ShapeCompactButton.Variant = ChoiceButtonStyle.Of(MavTheme.ShapeScaleMode == MavShapeScale.Compact, MavButtonVariant.Tonal);
+        ShapeStandardButton.Variant = ChoiceButtonStyle.Of(MavTheme.ShapeScaleMode == MavShapeScale.Standard, MavButtonVariant.Tonal);
+        ShapeExpressiveButton.Variant = ChoiceButtonStyle.Of(MavTheme.ShapeScaleMode == MavShapeScale.Expressive, MavButtonVariant.Tonal);
     }
 }
