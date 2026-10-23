@@ -26,6 +26,7 @@ public sealed class MainWindow : MavWindow
         ("Selection", "Selection", "Toggles, sliders, chips and value pickers", MavIcons.CheckBox, () => SelectionPage.Build()),
         ("Pickers", "Pickers", "Date, time and color selection", MavIcons.CalendarMonth, () => PickersPage.Build()),
         ("Navigation", "Navigation", "App bars, tabs, drawers, steps and pagination", MavIcons.Navigation, () => NavigationGroupPage.Build()),
+        ("Layout", "Layout", "Cards, containers, avatars and responsive layout", MavIcons.Dashboard, () => LayoutPage.Build()),
     ];
 
     private int _selected;
