@@ -308,7 +308,7 @@ public class NavigationTests
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
         };
-        root.Content = anchor;
+        root.Child = anchor;
         Dispatcher.UIThread.RunJobs();
 
         var menu = new MavMenu { MinWidth = 420 };
@@ -338,7 +338,7 @@ public class NavigationTests
             HorizontalAlignment = HorizontalAlignment.Right,
             VerticalAlignment = VerticalAlignment.Bottom,
         };
-        root.Content = anchor;
+        root.Child = anchor;
         Dispatcher.UIThread.RunJobs();
 
         var menu = new MavMenu();
@@ -380,7 +380,7 @@ public class NavigationTests
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
         };
-        root.Content = anchor;
+        root.Child = anchor;
         Dispatcher.UIThread.RunJobs();
 
         var popover = new MavPopover(new Border { Width = 800, Height = 40 }, "Details");
@@ -521,7 +521,7 @@ public class NavigationTests
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
         };
-        root.Content = anchor;
+        root.Child = anchor;
         Dispatcher.UIThread.RunJobs();
 
         var body = new TextBlock
@@ -556,7 +556,7 @@ public class NavigationTests
             HorizontalAlignment = HorizontalAlignment.Right,
             VerticalAlignment = VerticalAlignment.Top,
         };
-        root.Content = anchor;
+        root.Child = anchor;
         Dispatcher.UIThread.RunJobs();
 
         var body = new StackPanel
@@ -594,7 +594,7 @@ public class NavigationTests
             HorizontalAlignment = HorizontalAlignment.Right,
             VerticalAlignment = VerticalAlignment.Top,
         };
-        root.Content = anchor;
+        root.Child = anchor;
         Dispatcher.UIThread.RunJobs();
 
         var menu = new MavMenu();
@@ -627,7 +627,7 @@ public class NavigationTests
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
         };
-        root.Content = anchor;
+        root.Child = anchor;
         Dispatcher.UIThread.RunJobs();
 
         var search = new MavSearchView
@@ -701,7 +701,7 @@ public class NavigationTests
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
         };
-        root.Content = anchor;
+        root.Child = anchor;
         Dispatcher.UIThread.RunJobs();
 
         _ = MavColorPicker.PickAsync(anchor);

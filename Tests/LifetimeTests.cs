@@ -55,7 +55,7 @@ public class LifetimeTests
         var rootsBefore = StaticListCount("OverlayRoots");
 
         var anchor = new MavButton("Anchor");
-        var page = new MavContentPage("Root") { Content = anchor };
+        var page = new MavContentPage("Root") { Child = anchor };
         var navigation = new MavNavigationPage(page);
         var window = new Window { Width = 480, Height = 640, Content = navigation };
         window.Show();
@@ -79,7 +79,7 @@ public class LifetimeTests
     public void Closing_an_overlay_releases_content_and_invokes_onClosed_once()
     {
         var anchor = new MavButton("Anchor");
-        var page = new MavContentPage("Root") { Content = anchor };
+        var page = new MavContentPage("Root") { Child = anchor };
         var window = new Window
         {
             Width = 480,
@@ -112,7 +112,7 @@ public class LifetimeTests
     public void Externally_closed_indefinite_snackbar_clears_static_state_and_queue()
     {
         var anchor = new MavButton("Anchor");
-        var page = new MavContentPage("Root") { Content = anchor };
+        var page = new MavContentPage("Root") { Child = anchor };
         var window = new Window
         {
             Width = 480,
@@ -153,7 +153,7 @@ public class LifetimeTests
     public void Closing_a_window_clears_an_active_snackbar()
     {
         var anchor = new MavButton("Anchor");
-        var page = new MavContentPage("Root") { Content = anchor };
+        var page = new MavContentPage("Root") { Child = anchor };
         var window = new Window
         {
             Width = 480,
@@ -179,7 +179,7 @@ public class LifetimeTests
     public void Externally_closed_tooltip_clears_static_handle()
     {
         var anchor = new MavButton("Anchor");
-        var page = new MavContentPage("Root") { Content = anchor };
+        var page = new MavContentPage("Root") { Child = anchor };
         var window = new Window
         {
             Width = 480,
@@ -555,7 +555,7 @@ public class LifetimeTests
     private static int RowCount(MavDataTable table) =>
         table.GetVisualDescendants()
             .OfType<MavInkSurface>()
-            .Count(surface => surface.Content is Grid);
+            .Count(surface => surface.Child is Grid);
 
     private static void CollectGarbage()
     {
