@@ -20,6 +20,7 @@ public partial class ScheduleEditorView : UserControl
 
     private ScheduleDraft _draft = ScheduleDraft.From(null);
     private int _day;
+    private string[] _types = ScheduleDraft.Types;
 
     /// <summary>While the controls are filled, their change events do not change the schedule.</summary>
     private bool _rendering;
@@ -40,10 +41,14 @@ public partial class ScheduleEditorView : UserControl
     /// <summary>The schedule being edited. The page reads it to save.</summary>
     public ScheduleDraft Draft => _draft;
 
-    /// <summary>Shows a schedule in the editor.</summary>
-    public void Show(ScheduleDraft draft)
+    /// <summary>
+    /// Shows a schedule in the editor. <paramref name="types"/> limits the types offered (a device offers only
+    /// the types its control supports); null offers all of them.
+    /// </summary>
+    public void Show(ScheduleDraft draft, IReadOnlyList<string>? types = null)
     {
         _draft = draft;
+        _types = types is null ? ScheduleDraft.Types : types.ToArray();
         Render();
     }
 
@@ -53,9 +58,9 @@ public partial class ScheduleEditorView : UserControl
         try
         {
             TypeSelect.Options.Clear();
-            foreach (var type in ScheduleDraft.Types)
+            foreach (var type in _types)
                 TypeSelect.AddOption(ScheduleTypeNames.Localize(type));
-            TypeSelect.SelectedIndex = Array.IndexOf(ScheduleDraft.Types, _draft.Type);
+            TypeSelect.SelectedIndex = Array.IndexOf(_types, _draft.Type);
 
             DaySegments.IsVisible = _draft.HasIntervals;
             DaySegments.SelectedIndex = _day;
@@ -109,10 +114,10 @@ public partial class ScheduleEditorView : UserControl
 
     private void OnTypeChanged(object? sender, int index)
     {
-        if (_rendering || index < 0 || index >= ScheduleDraft.Types.Length)
+        if (_rendering || index < 0 || index >= _types.Length)
             return;
 
-        _draft.SetType(ScheduleDraft.Types[index]);
+        _draft.SetType(_types[index]);
         Render();
     }
 

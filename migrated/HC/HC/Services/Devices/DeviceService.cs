@@ -31,6 +31,13 @@ public sealed class DeviceService(CloudClient cloud)
         return CloudResults.Require(response).Devices;
     }
 
+    /// <summary>Device types with their limits (the old app's get_device_types).</summary>
+    public async Task<IReadOnlyList<DeviceTypeInfo>> GetDeviceTypesAsync(CancellationToken ct = default)
+    {
+        var response = await cloud.GetDeviceTypes(ct).ConfigureAwait(false);
+        return CloudResults.Require(response).DeviceTypes;
+    }
+
     public async Task<UserDeviceInfo> GetDeviceAsync(string deviceId, CancellationToken ct = default)
     {
         var response = await cloud.GetDeviceInfo(new DeviceRequest(deviceId), ct).ConfigureAwait(false);

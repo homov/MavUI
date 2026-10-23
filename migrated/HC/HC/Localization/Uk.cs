@@ -95,5 +95,7 @@ internal static class Uk
         ["home.title"] = "HC",
         ["home.placeholder"] = "Групи та пристрої з'являться тут.",
         ["home.signout"] = "Вийти",
+        ["device.group.controlled"] = "Пристрій керується за груповим розкладом",
+        ["device.schedule.none"] = "У цього пристрою немає розкладу.",
     };
 }

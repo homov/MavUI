@@ -15,14 +15,16 @@ namespace Hc.Pages.Home;
 public partial class HomePage : MavContentPage
 {
     private readonly GroupListView _groups = new();
+    private readonly DeviceListView _devices = new();
 
     public HomePage()
     {
         InitializeComponent();
 
         _groups.GroupSelected += OnGroupSelected;
+        _devices.DeviceSelected += OnDeviceSelected;
         Tabs.Add(MavLocalization.Get("home.tab.groups", "Groups"), MavIcons.Groups, content: _groups);
-        Tabs.Add(MavLocalization.Get("home.tab.devices", "Devices"), MavIcons.Devices, content: new DeviceListView());
+        Tabs.Add(MavLocalization.Get("home.tab.devices", "Devices"), MavIcons.Devices, content: _devices);
 
         AddAction(MavIcons.Settings, OnSettings, MavLocalization.Get("home.settings", "Settings"));
         AddAction(MavIcons.Logout, OnSignOut, MavLocalization.Get("home.signout", "Sign out"));
@@ -33,6 +35,9 @@ public partial class HomePage : MavContentPage
 
     private void OnGroupSelected(object? sender, Hc.Models.Cloud.UserGroupInfo group) =>
         Navigator.Push(new GroupPage { Navigator = Navigator, Group = group });
+
+    private void OnDeviceSelected(object? sender, Hc.Models.Cloud.UserDeviceInfo device) =>
+        Navigator.Push(new Hc.Pages.Devices.DevicePage { Navigator = Navigator, Device = device });
 
     private void OnSettings() => Navigator.Push(new SettingsPage { Navigator = Navigator });
 

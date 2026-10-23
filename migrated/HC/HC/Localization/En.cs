@@ -95,5 +95,7 @@ internal static class En
         ["home.title"] = "HC",
         ["home.placeholder"] = "Groups and devices will appear here.",
         ["home.signout"] = "Sign out",
+        ["device.group.controlled"] = "The device is controlled by the group schedule",
+        ["device.schedule.none"] = "This device has no schedule.",
     };
 }

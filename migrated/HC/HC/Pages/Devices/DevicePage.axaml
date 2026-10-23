@@ -1,0 +1,18 @@
+<mav:MavContentPage xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mav="https://where.it/mav"
+                    xmlns:groups="clr-namespace:Hc.Pages.Groups"
+                    x:Class="Hc.Pages.Devices.DevicePage">
+  <mav:MavContentPage.Content>
+    <mav:MavScrollViewer>
+      <StackPanel Margin="16" Spacing="12">
+        <mav:MavLinearProgress x:Name="Progress" IsIndeterminate="True" IsVisible="False" />
+        <mav:MavBanner x:Name="ErrorBanner" Icon="{x:Static mav:MavIcons.Error}" IsVisible="False" />
+        <mav:MavBanner x:Name="InfoBanner" Icon="{x:Static mav:MavIcons.Schedule}" IsVisible="False" />
+        <groups:ScheduleEditorView x:Name="Editor" IsVisible="False" />
+        <mav:MavButton x:Name="SaveButton" Variant="Filled" HorizontalAlignment="Stretch" IsVisible="False"
+                       Text="{mav:Loc schedule.save, Fallback=Save}" />
+      </StackPanel>
+    </mav:MavScrollViewer>
+  </mav:MavContentPage.Content>
+</mav:MavContentPage>

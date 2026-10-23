@@ -17,6 +17,9 @@ public partial class DeviceListView : UserControl
     /// <summary>Value of <c>OnlineStatus</c> that means the device is connected (as in the cloud API).</summary>
     public const string OnlineValue = "online";
 
+    /// <summary>Raised when a device is tapped. The page that owns the list opens the device page.</summary>
+    public event EventHandler<UserDeviceInfo>? DeviceSelected;
+
     public DeviceListView()
     {
         InitializeComponent();
@@ -67,7 +70,9 @@ public partial class DeviceListView : UserControl
                 ? groups.FirstOrDefault(g => g.GroupId == groupId)?.Name
                 : null;
             var icon = device.OnlineStatus == OnlineValue ? MavIcons.Wifi : MavIcons.WifiOff;
-            list.AddItem(new MavListItem(device.DeviceName, groupName, icon));
+            var item = new MavListItem(device.DeviceName, groupName, icon);
+            item.Clicked += (_, _) => DeviceSelected?.Invoke(this, device);
+            list.AddItem(item);
         }
 
         ListHost.Children.Add(new MavCard(MavCardVariant.Outlined, list));
