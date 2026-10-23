@@ -28,6 +28,7 @@ public sealed class MainWindow : MavWindow
         ("Navigation", "Navigation", "App bars, tabs, drawers, steps and pagination", MavIcons.Navigation, () => NavigationGroupPage.Build()),
         ("Layout", "Layout", "Cards, containers, avatars and responsive layout", MavIcons.Dashboard, () => LayoutPage.Build()),
         ("Collections", "Collections", "Lists, tables, trees and timelines", MavIcons.List, () => CollectionsPage.Build()),
+        ("Feedback", "Feedback", "Dialogs, sheets, banners, progress and status", MavIcons.Feedback, () => FeedbackPage.Build()),
     ];
 
     private int _selected;
