@@ -26,6 +26,11 @@
     <PackageId>MavUI.Essentials</PackageId>
   </PropertyGroup>
 
+  <!-- MavEssentials.Initialize registers DPAPI for this target only; the WINDOWS symbol selects that branch. -->
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net10.0-windows'">
+    <DefineConstants>$(DefineConstants);WINDOWS</DefineConstants>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(TargetFramework)' == 'net10.0-browser'">
     <DefineConstants>$(DefineConstants);BROWSER</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>

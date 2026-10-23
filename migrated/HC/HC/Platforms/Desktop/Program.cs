@@ -1,6 +1,5 @@
 using Avalonia;
 using Mav.Essentials;
-using Mav.Essentials.Linux;
 
 namespace Hc.Platforms.Desktop;
 
@@ -10,9 +9,8 @@ internal static class Program
     [STAThread]
     public static void Main(string[] args)
     {
-        // Secrets (saved password) go to the desktop keyring through secret-tool on Linux.
-        if (OperatingSystem.IsLinux())
-            MavSecureStorage.SetDefault(new LibsecretSecureStorage());
+        // Secrets (saved password): DPAPI on Windows, the desktop keyring (secret-tool) on Linux.
+        MavEssentials.Initialize();
 
         BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
     }

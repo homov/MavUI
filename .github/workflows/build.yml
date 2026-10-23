@@ -40,6 +40,7 @@ jobs:
           dotnet build samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj -c Release 2>&1 | tee -a build.log
           dotnet build MavUI.Essentials/MavUI.Essentials.csproj -c Release 2>&1 | tee -a build.log
           dotnet build migrated/HC/HC/HC.csproj -c Release -f net10.0 2>&1 | tee -a build.log
+          dotnet build migrated/HC/HC/HC.csproj -c Release -f net10.0-windows 2>&1 | tee -a build.log
           dotnet build migrated/HC/HC.Tests/HC.Tests.csproj -c Release 2>&1 | tee -a build.log
           
 

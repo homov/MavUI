@@ -8,7 +8,7 @@
   -->
 
   <PropertyGroup>
-    <TargetFrameworks>net10.0</TargetFrameworks>
+    <TargetFrameworks>net10.0;net10.0-windows</TargetFrameworks>
     <TargetFrameworks Condition="'$(IncludeAndroid)' == 'true'">$(TargetFrameworks);net10.0-android</TargetFrameworks>
     <OutputType>Exe</OutputType>
     <RootNamespace>Hc</RootNamespace>
@@ -19,9 +19,11 @@
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
     <!-- The cloud client is AOT-compatible; analyzer warnings in the CI log show what is not. -->
     <IsAotCompatible>true</IsAotCompatible>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net10.0'">
+  <!-- Desktop: net10.0 (Linux and Windows) and net10.0-windows (DPAPI secrets). Both are WinExe-style desktop apps. -->
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net10.0' Or '$(TargetFramework)' == 'net10.0-windows'">
     <OutputType>WinExe</OutputType>
   </PropertyGroup>
 
@@ -51,13 +53,13 @@
     <AvaloniaXaml Remove="Platforms\**" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net10.0' Or '$(TargetFramework)' == 'net10.0-windows'">
     <PackageReference Include="Avalonia.Desktop" Version="12.1.4" />
     <Compile Include="Platforms\Desktop\**\*.cs" />
     <AvaloniaXaml Include="Platforms\Desktop\**\*.axaml" />
   </ItemGroup>
 
-  <!-- Android-only sources, resources and packages. Nothing here is compiled for net10.0. -->
+  <!-- Android-only sources, resources and packages. Nothing here is compiled for the desktop targets. -->
   <ItemGroup Condition="'$(TargetFramework)' == 'net10.0-android'">
     <PackageReference Include="Avalonia.Android" Version="12.1.4" />
     <Compile Include="Platforms\Android\**\*.cs" />
