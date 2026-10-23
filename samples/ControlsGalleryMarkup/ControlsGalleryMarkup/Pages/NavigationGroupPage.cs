@@ -42,7 +42,7 @@ public static class NavigationGroupPage
                         Bounded(new MavTopAppBar(L("Nav.Demo.Library", "Library"), MavTopAppBarVariant.Large, MavIcons.Menu)),
                         Bounded(new MavBottomAppBar()
                             .AddAction(MavIcons.Search)
-                            .AddAction(MavIcons.Settings)))))),
+                            .AddAction(MavIcons.Settings))))),
             Section(
                 "Nav.Bars.Structures.Section", "Bars, rails and drawers",
                 "Nav.Bars.Structures.Section.Body", "The same destinations adapt from a bottom bar to a rail and a drawer.",
@@ -75,7 +75,7 @@ public static class NavigationGroupPage
                                         .AddItem(L("Nav.Demo.Inbox", "Inbox"), MavIcons.Inbox, "12")
                                         .AddItem(L("Nav.Demo.Starred", "Starred"), MavIcons.Star)
                                         .AddItem(L("Nav.Demo.Sent", "Sent"), MavIcons.Send)
-                                        .AddItem(L("Nav.Demo.Trash", "Trash"), MavIcons.Delete)))))))),
+                                        .AddItem(L("Nav.Demo.Trash", "Trash"), MavIcons.Delete))))))),
             Section(
                 "Nav.Bars.Tabs.Section", "Tabs, breadcrumbs and steps",
                 "Nav.Bars.Tabs.Section.Body", "Secondary navigation and progress through a flow.",
@@ -104,7 +104,7 @@ public static class NavigationGroupPage
                                     new MavLabel(L("Nav.Demo.ProfileTab", "Profile details")))
                                 .AddStep(L("Nav.Demo.Done", "Done"), L("Nav.Demo.DoneSub", "Review and finish"),
                                     new MavLabel(L("Nav.Demo.Review", "Review")))
-                                .CurrentStep(1))))))),
+                                .CurrentStep(1)))))),
             Section(
                 "Nav.Bars.Toolbars.Section", "Toolbars and contextual actions",
                 "Nav.Bars.Toolbars.Section.Body", "Floating/docked toolbars and a contextual action bar.",
@@ -139,7 +139,7 @@ public static class NavigationGroupPage
                             .AddDestination(L("Nav.Demo.Home", "Home"), MavIcons.Home, MavIcons.Home)
                             .AddDestination(L("Nav.Demo.Search", "Search"), MavIcons.Search, MavIcons.Search)
                             .AddDestination(L("Nav.Demo.Profile", "Profile"), MavIcons.Person, MavIcons.Person)),
-                    new Border().Height(320).Child(stack))))));
+                    new Border().Height(320).Child(stack))));
     }
 
     private static MavContentPage DetailsPage() =>
