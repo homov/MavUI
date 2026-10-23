@@ -65,10 +65,29 @@ jobs:
         shell: bash
         run: python3 ci/scripts/test_annotations.py "$GITHUB_WORKSPACE/test-results" "$GITHUB_WORKSPACE/ui-report"
 
-      - name: Annotate screenshots as base64 (readable through the Checks API)
+      # Screenshots travel as base64 notices. GitHub cuts a message at 4096 characters and keeps
+      # 10 notices per step, so the manifest comes first and the bytes follow in 3 batches of
+      # 10 chunks (PNG_BATCHES in test_annotations.py must stay equal to the number of steps).
+      # tools/read_screenshots.py joins them back into PNG files.
+      - name: Screenshot manifest (base64 index, readable through the Checks API)
         if: always()
         shell: bash
-        run: python3 ci/scripts/test_annotations.py --png "$GITHUB_WORKSPACE/ui-report"
+        run: python3 ci/scripts/test_annotations.py --png-manifest "$GITHUB_WORKSPACE/ui-report"
+
+      - name: Screenshots as base64 (batch 1 of 3)
+        if: always()
+        shell: bash
+        run: python3 ci/scripts/test_annotations.py --png-batch 0 "$GITHUB_WORKSPACE/ui-report"
+
+      - name: Screenshots as base64 (batch 2 of 3)
+        if: always()
+        shell: bash
+        run: python3 ci/scripts/test_annotations.py --png-batch 1 "$GITHUB_WORKSPACE/ui-report"
+
+      - name: Screenshots as base64 (batch 3 of 3)
+        if: always()
+        shell: bash
+        run: python3 ci/scripts/test_annotations.py --png-batch 2 "$GITHUB_WORKSPACE/ui-report"
 
       - name: Build Android and Browser targets (manual runs or commit message contains [heads])
         if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[heads]')
