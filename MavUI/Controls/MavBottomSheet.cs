@@ -19,8 +19,8 @@ public class MavBottomSheet : Control
     public static readonly StyledProperty<string?> TitleProperty =
         AvaloniaProperty.Register<MavBottomSheet, string?>(nameof(Title));
 
-    public static readonly StyledProperty<Control?> BodyProperty =
-        AvaloniaProperty.Register<MavBottomSheet, Control?>(nameof(Body));
+    public static readonly StyledProperty<object?> ContentProperty =
+        AvaloniaProperty.Register<MavBottomSheet, object?>(nameof(Content));
 
     public static readonly StyledProperty<bool> ShowDragHandleProperty =
         AvaloniaProperty.Register<MavBottomSheet, bool>(nameof(ShowDragHandle), true);
@@ -40,8 +40,8 @@ public class MavBottomSheet : Control
 
     static MavBottomSheet()
     {
-        BodyProperty.Changed.AddClassHandler<MavBottomSheet>((s, e) =>
-            MavVisualTreeHelpers.AttachLogicalChild(s, e.GetNewValue<Control?>()));
+        ContentProperty.Changed.AddClassHandler<MavBottomSheet>((s, e) =>
+            MavVisualTreeHelpers.AttachLogicalChild(s, e.GetNewValue<object?>() as Control));
         IsOpenProperty.Changed.AddClassHandler<MavBottomSheet>((s, e) =>
         {
             if (s._syncingIsOpen) return;
@@ -64,11 +64,12 @@ public class MavBottomSheet : Control
         set => SetValue(TitleProperty, value);
     }
 
+    /// <summary>The body content. Any object is accepted; non-control values are shown through a ContentPresenter.</summary>
     [Content]
-    public Control? Body
+    public object? Content
     {
-        get => GetValue(BodyProperty);
-        set => SetValue(BodyProperty, value);
+        get => GetValue(ContentProperty);
+        set => SetValue(ContentProperty, value);
     }
 
     public bool ShowDragHandle
@@ -159,14 +160,14 @@ public class MavBottomSheet : Control
             stack.Children.Add(dragArea);
         }
 
-        if (Body is not null)
+        if (MavVisualTreeHelpers.ToView(Content) is { } bodyView)
         {
-            MavVisualTreeHelpers.DetachFromParent(Body);
+            MavVisualTreeHelpers.DetachFromParent(bodyView);
             var scroll = new MavScrollViewer
             {
                 MaxHeight = Math.Max(220, overlaySize.Height * 0.72),
                 Padding = new Thickness(24, 4, 24, 24),
-                Content = Body,
+                Content = bodyView,
             };
             _bodyScroll = scroll;
             stack.Children.Add(scroll);
@@ -281,7 +282,7 @@ public class MavBottomSheet : Control
         var sheet = new MavBottomSheet
         {
             Title = title,
-            Body = body,
+            Content = body,
             ShowDragHandle = showDragHandle,
         };
         sheet.Show(anchor);

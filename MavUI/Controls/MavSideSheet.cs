@@ -23,8 +23,8 @@ public class MavSideSheet : Control
     public static readonly StyledProperty<string?> TitleProperty =
         AvaloniaProperty.Register<MavSideSheet, string?>(nameof(Title));
 
-    public static readonly StyledProperty<Control?> BodyProperty =
-        AvaloniaProperty.Register<MavSideSheet, Control?>(nameof(Body));
+    public static readonly StyledProperty<object?> ContentProperty =
+        AvaloniaProperty.Register<MavSideSheet, object?>(nameof(Content));
 
     public static readonly StyledProperty<Control?> FooterProperty =
         AvaloniaProperty.Register<MavSideSheet, Control?>(nameof(Footer));
@@ -59,8 +59,8 @@ public class MavSideSheet : Control
 
     static MavSideSheet()
     {
-        BodyProperty.Changed.AddClassHandler<MavSideSheet>((s, e) =>
-            MavVisualTreeHelpers.AttachLogicalChild(s, e.GetNewValue<Control?>()));
+        ContentProperty.Changed.AddClassHandler<MavSideSheet>((s, e) =>
+            MavVisualTreeHelpers.AttachLogicalChild(s, e.GetNewValue<object?>() as Control));
         FooterProperty.Changed.AddClassHandler<MavSideSheet>((s, e) =>
             MavVisualTreeHelpers.AttachLogicalChild(s, e.GetNewValue<Control?>()));
         IsOpenProperty.Changed.AddClassHandler<MavSideSheet>((s, e) =>
@@ -79,11 +79,12 @@ public class MavSideSheet : Control
         set => SetValue(TitleProperty, value);
     }
 
+    /// <summary>The body content. Any object is accepted; non-control values are shown through a ContentPresenter.</summary>
     [Content]
-    public Control? Body
+    public object? Content
     {
-        get => GetValue(BodyProperty);
-        set => SetValue(BodyProperty, value);
+        get => GetValue(ContentProperty);
+        set => SetValue(ContentProperty, value);
     }
 
     public Control? Footer
@@ -202,13 +203,13 @@ public class MavSideSheet : Control
         };
         grid.Add(header, 0, 0);
 
-        if (Body is not null)
+        if (MavVisualTreeHelpers.ToView(Content) is { } bodyView)
         {
-            MavVisualTreeHelpers.DetachFromParent(Body);
+            MavVisualTreeHelpers.DetachFromParent(bodyView);
             var scroll = new MavScrollViewer
             {
                 Padding = new Thickness(24, 8, 24, 16),
-                Content = Body,
+                Content = bodyView,
             };
             grid.Add(scroll, 0, 1);
         }
@@ -334,7 +335,7 @@ public class MavSideSheet : Control
         var sheet = new MavSideSheet
         {
             Title = title,
-            Body = body,
+            Content = body,
             Footer = footer,
             Placement = placement,
         };

@@ -45,7 +45,7 @@ public class OverlayScenarioTests
 
             Assert.True(MavOverlay.HasActiveOverlay);
             Assert.Equal("Share", sheet.Title);
-            Assert.Same(body, sheet.Body);
+            Assert.Same(body, sheet.Content);
         }
         finally
         {

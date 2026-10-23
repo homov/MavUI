@@ -27,8 +27,8 @@ public class MavDialog : Control
     public static readonly StyledProperty<string?> MessageProperty =
         AvaloniaProperty.Register<MavDialog, string?>(nameof(Message));
 
-    public static readonly StyledProperty<Control?> BodyProperty =
-        AvaloniaProperty.Register<MavDialog, Control?>(nameof(Body));
+    public static readonly StyledProperty<object?> ContentProperty =
+        AvaloniaProperty.Register<MavDialog, object?>(nameof(Content));
 
     public static readonly StyledProperty<string?> ConfirmTextProperty =
         AvaloniaProperty.Register<MavDialog, string?>(nameof(ConfirmText));
@@ -68,8 +68,8 @@ public class MavDialog : Control
 
     static MavDialog()
     {
-        BodyProperty.Changed.AddClassHandler<MavDialog>((d, e) =>
-            MavVisualTreeHelpers.AttachLogicalChild(d, e.GetNewValue<Control?>()));
+        ContentProperty.Changed.AddClassHandler<MavDialog>((d, e) =>
+            MavVisualTreeHelpers.AttachLogicalChild(d, e.GetNewValue<object?>() as Control));
         IsOpenProperty.Changed.AddClassHandler<MavDialog>((d, e) =>
         {
             if (d._syncingIsOpen) return;
@@ -116,11 +116,12 @@ public class MavDialog : Control
         set => Message = value;
     }
 
+    /// <summary>The body content. Any object is accepted; non-control values are shown through a ContentPresenter.</summary>
     [Content]
-    public Control? Body
+    public object? Content
     {
-        get => GetValue(BodyProperty);
-        set => SetValue(BodyProperty, value);
+        get => GetValue(ContentProperty);
+        set => SetValue(ContentProperty, value);
     }
 
     public string? ConfirmText
@@ -253,10 +254,10 @@ public class MavDialog : Control
             stack.Children.Add(msgLbl);
         }
 
-        if (Body is not null)
+        if (MavVisualTreeHelpers.ToView(Content) is { } bodyView)
         {
-            MavVisualTreeHelpers.DetachFromParent(Body);
-            stack.Children.Add(Body);
+            MavVisualTreeHelpers.DetachFromParent(bodyView);
+            stack.Children.Add(bodyView);
         }
 
         var actionsRow = new Grid

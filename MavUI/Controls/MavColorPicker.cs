@@ -266,7 +266,7 @@ public class MavColorPicker : MavContentView, IMavDraggableControl
         {
             Icon = MavIcons.Palette,
             Title = title,
-            Body = picker,
+            Content = picker,
             ConfirmText = MavLocalization.Select,
             DismissText = MavLocalization.Cancel,
         };

@@ -51,7 +51,7 @@ public class ContainerTests
     [AvaloniaFact]
     public void MavSafeArea_edges()
     {
-        var safe = new MavSafeArea { Edges = MavSafeAreaEdges.Top, Body = new MavLabel { Text = "x" } };
+        var safe = new MavSafeArea { Edges = MavSafeAreaEdges.Top, Child = new MavLabel { Text = "x" } };
         Assert.Equal(MavSafeAreaEdges.Top, safe.Edges);
     }
 

@@ -106,7 +106,7 @@ public class ControlSmokeTests
         root.Children.Add(new MavAvatar { Initials = "SS" });
         root.Children.Add(new MavBadgedBox(new MavButton("X"), "1"));
         root.Children.Add(new MavDivider());
-        root.Children.Add(new MavSafeArea { Edges = MavSafeAreaEdges.All, Body = new MavLabel { Text = "Safe" } });
+        root.Children.Add(new MavSafeArea { Edges = MavSafeAreaEdges.All, Child = new MavLabel { Text = "Safe" } });
         Assert.True(root.Children.Count > 0);
     }
 

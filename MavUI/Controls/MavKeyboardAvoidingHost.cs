@@ -29,9 +29,6 @@ public class MavKeyboardAvoidingHost : MavContentView
     public static readonly StyledProperty<double> SimulatedKeyboardHeightProperty =
         AvaloniaProperty.Register<MavKeyboardAvoidingHost, double>(nameof(SimulatedKeyboardHeight), 0.0);
 
-    public static readonly StyledProperty<Control?> BodyProperty =
-        AvaloniaProperty.Register<MavKeyboardAvoidingHost, Control?>(nameof(Body));
-
     private IInputPane? _inputPane;
     private WeakReference<Control>? _lastFocused;
     private double _keyboardHeight;
@@ -54,12 +51,6 @@ public class MavKeyboardAvoidingHost : MavContentView
             // Also lift overlays (dialogs, sheets, popovers, search view) in previews.
             SyncOverlayKeyboardHeight();
         });
-        BodyProperty.Changed.AddClassHandler<MavKeyboardAvoidingHost>((h, e) =>
-        {
-            var body = e.GetNewValue<Control?>();
-            MavVisualTreeHelpers.DetachFromParent(body);
-            h.Child = body;
-        });
     }
 
     /// <summary>Creates a host without content.</summary>
@@ -71,16 +62,9 @@ public class MavKeyboardAvoidingHost : MavContentView
     public MavKeyboardAvoidingHost(Control? content = null)
     {
         if (content is not null)
-            Body = content;
+            Child = content;
 
         AddHandler(GotFocusEvent, OnDescendantGotFocus, RoutingStrategies.Bubble, true);
-    }
-
-    [Content]
-    public Control? Body
-    {
-        get => GetValue(BodyProperty) ?? Content;
-        set => SetValue(BodyProperty, value);
     }
 
     public double ExtraBottomSpacing

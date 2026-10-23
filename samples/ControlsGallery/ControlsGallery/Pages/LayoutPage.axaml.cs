@@ -211,7 +211,7 @@ public partial class LayoutPage : UserControl
             Edges = MavSafeAreaEdges.All,
             SimulatedInset = new Thickness(16, 24, 16, 24),
             BasePadding = new Thickness(8),
-            Body = new MavLabel
+            Child = new MavLabel
             {
                 Text = "Content inside simulated safe-area insets",
                 HorizontalAlignment = HorizontalAlignment.Center,
@@ -224,7 +224,7 @@ public partial class LayoutPage : UserControl
         var keyboard = new MavKeyboardAvoidingHost
         {
             SimulatedKeyboardHeight = 120,
-            Body = new MavLabel
+            Child = new MavLabel
             {
                 Text = "Content lifted above a simulated 120 dp keyboard",
                 HorizontalAlignment = HorizontalAlignment.Center,

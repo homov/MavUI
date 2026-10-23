@@ -102,7 +102,7 @@ public class KeyboardTests
         var preview = new MavKeyboardAvoidingHost
         {
             SimulatedKeyboardHeight = 120,
-            Body = new Border(),
+            Child = new Border(),
         };
         page.Content = preview;
         for (var i = 0; i < 3; i++)
@@ -138,7 +138,7 @@ public class KeyboardTests
         var preview = new MavKeyboardAvoidingHost
         {
             SimulatedKeyboardHeight = 120,
-            Body = new Border(),
+            Child = new Border(),
         };
         page.Content = preview;
         Dispatcher.UIThread.RunJobs();

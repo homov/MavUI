@@ -21,9 +21,6 @@ public class MavSafeArea : MavContentView
     public static readonly StyledProperty<Thickness?> SimulatedInsetProperty =
         AvaloniaProperty.Register<MavSafeArea, Thickness?>(nameof(SimulatedInset));
 
-    public static readonly StyledProperty<Control?> BodyProperty =
-        AvaloniaProperty.Register<MavSafeArea, Control?>(nameof(Body));
-
     private IInsetsManager? _insetsManager;
     private Thickness _appliedInset;
 
@@ -34,12 +31,6 @@ public class MavSafeArea : MavContentView
         EdgesProperty.Changed.AddClassHandler<MavSafeArea>((s, _) => s.RefreshInsets());
         BasePaddingProperty.Changed.AddClassHandler<MavSafeArea>((s, _) => s.RefreshInsets());
         SimulatedInsetProperty.Changed.AddClassHandler<MavSafeArea>((s, _) => s.RefreshInsets());
-        BodyProperty.Changed.AddClassHandler<MavSafeArea>((s, e) =>
-        {
-            var body = e.GetNewValue<Control?>();
-            MavVisualTreeHelpers.DetachFromParent(body);
-            s.Child = body;
-        });
     }
 
     /// <summary>Creates a safe area without content that applies to all edges.</summary>
@@ -52,14 +43,7 @@ public class MavSafeArea : MavContentView
     {
         Edges = edges;
         if (content is not null)
-            Body = content;
-    }
-
-    [Content]
-    public Control? Body
-    {
-        get => GetValue(BodyProperty) ?? Content;
-        set => SetValue(BodyProperty, value);
+            Child = content;
     }
 
     public MavSafeAreaEdges Edges
