@@ -1,20 +1,20 @@
 # Last build log
-commit: 5eeea3cc0aeda286a0150e3b7f898bc286c71a15
-run: https://github.com/homov/MavUI/actions/runs/39877985814
+commit: 398783e1af9e5548b5116967d2c23490ea2ca1a6
+run: https://github.com/homov/MavUI/actions/runs/39878366721
 
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 266 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 261 ms).
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:07.59
+Time Elapsed 00:00:04.77
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 228 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 232 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 228 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 223 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 223 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 229 ms).
   1 of 4 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
@@ -25,9 +25,9 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:04.87
+Time Elapsed 00:00:04.79
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 279 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 280 ms).
   2 of 3 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
@@ -37,7 +37,7 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.17
+Time Elapsed 00:00:02.11
   Determining projects to restore...
   All projects are up-to-date for restore.
   MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0-windows/MavUI.Essentials.dll
@@ -47,22 +47,19 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:01.04
+Time Elapsed 00:00:01.03
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/HC.csproj (in 269 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/HC.csproj (in 266 ms).
   1 of 2 projects are up-to-date for restore.
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
-  HC -> /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/bin/Release/net10.0/HC.dll
+/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/Services/Cloud/CloudHttpClient.cs(12,72): error CS0103: The name 'ApiEndpoints' does not exist in the current context [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/HC.csproj::TargetFramework=net10.0]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/Services/Cloud/CloudHttpClient.cs(33,23): error CS0103: The name 'ApiEndpoints' does not exist in the current context [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/HC.csproj::TargetFramework=net10.0]
 
-Build succeeded.
+Build FAILED.
+
+/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/Services/Cloud/CloudHttpClient.cs(12,72): error CS0103: The name 'ApiEndpoints' does not exist in the current context [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/HC.csproj::TargetFramework=net10.0]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/Services/Cloud/CloudHttpClient.cs(33,23): error CS0103: The name 'ApiEndpoints' does not exist in the current context [/home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/HC.csproj::TargetFramework=net10.0]
     0 Warning(s)
-    0 Error(s)
+    2 Error(s)
 
-Time Elapsed 00:00:01.48
-Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/MavUI.Tests.dll (.NETCoreApp,Version=v10.0)
-VSTest version 18.0.2 (x64)
-
-Starting test execution, please wait...
-A total of 1 test files matched the specified pattern.
-
-Passed!  - Failed:     0, Passed:   330, Skipped:     0, Total:   330, Duration: 15 s - MavUI.Tests.dll (net10.0)
+Time Elapsed 00:00:00.54
