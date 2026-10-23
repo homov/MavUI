@@ -1,1 +1,1 @@
-phases, 500 x MavButton attached: synchronous Mode set (apply of all controls) median 12.67 ms; deferred RunJobs (layout/render) median 9.91 ms
+phases, 500 x MavButton attached: synchronous Mode set (apply of all controls) median 12.70 ms; deferred RunJobs (layout/render) median 12.93 ms

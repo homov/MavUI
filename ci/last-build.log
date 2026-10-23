@@ -1,48 +1,107 @@
 # Last build log
-commit: d01f2ed2355a72e872ab42f96d7db6c240782825
-run: https://github.com/homov/MavUI/actions/runs/39965727340
+commit: e6ef52499f24ac50fa49372031e5ad56009b58c2
+run: https://github.com/homov/MavUI/actions/runs/39966136762
 
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 281 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/tools/MarkupGenerator/MarkupGenerator.csproj (in 281 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/tools/MarkupGenerator/MarkupGenerator.csproj (in 237 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 237 ms).
   MarkupGenerator -> /home/homo/github/actions-runner/_work/MavUI/MavUI/tools/MarkupGenerator/bin/Release/netstandard2.0/Mav.MarkupGenerator.dll
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/obj/Release/net10.0/Mav.MarkupGenerator/Mav.MarkupGenerator.MarkupSourceGenerator/MavTreeViewMarkup.g.cs(72,67): warning CS8604: Possible null reference argument for parameter 'arg2' in 'void Action<TControl, MavTreeNode>.Invoke(TControl arg1, MavTreeNode arg2)'. [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/obj/Release/net10.0/Mav.MarkupGenerator/Mav.MarkupGenerator.MarkupSourceGenerator/MavSelectMarkup.g.cs(96,69): warning CS8604: Possible null reference argument for parameter 'arg2' in 'void Action<TControl, object>.Invoke(TControl arg1, object arg2)'. [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/obj/Release/net10.0/Mav.MarkupGenerator/Mav.MarkupGenerator.MarkupSourceGenerator/MavComboBoxMarkup.g.cs(104,67): warning CS8604: Possible null reference argument for parameter 'arg2' in 'void Action<TControl, string>.Invoke(TControl arg1, string arg2)'. [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/obj/Release/net10.0/Mav.MarkupGenerator/Mav.MarkupGenerator.MarkupSourceGenerator/ItemsControlMarkup.g.cs(24,26): warning CS8620: Argument of type 'StyledProperty<ITemplate<Panel?>>' cannot be used for parameter 'property' of type 'StyledProperty<ITemplate<Panel>>' in 'IDisposable? AvaloniaObject.SetValue<ITemplate<Panel>>(StyledProperty<ITemplate<Panel>> property, ITemplate<Panel> value, BindingPriority priority = BindingPriority.LocalValue)' due to differences in the nullability of reference types. [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
 
 Build succeeded.
-
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/obj/Release/net10.0/Mav.MarkupGenerator/Mav.MarkupGenerator.MarkupSourceGenerator/MavTreeViewMarkup.g.cs(72,67): warning CS8604: Possible null reference argument for parameter 'arg2' in 'void Action<TControl, MavTreeNode>.Invoke(TControl arg1, MavTreeNode arg2)'. [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/obj/Release/net10.0/Mav.MarkupGenerator/Mav.MarkupGenerator.MarkupSourceGenerator/MavSelectMarkup.g.cs(96,69): warning CS8604: Possible null reference argument for parameter 'arg2' in 'void Action<TControl, object>.Invoke(TControl arg1, object arg2)'. [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/obj/Release/net10.0/Mav.MarkupGenerator/Mav.MarkupGenerator.MarkupSourceGenerator/MavComboBoxMarkup.g.cs(104,67): warning CS8604: Possible null reference argument for parameter 'arg2' in 'void Action<TControl, string>.Invoke(TControl arg1, string arg2)'. [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/obj/Release/net10.0/Mav.MarkupGenerator/Mav.MarkupGenerator.MarkupSourceGenerator/ItemsControlMarkup.g.cs(24,26): warning CS8620: Argument of type 'StyledProperty<ITemplate<Panel?>>' cannot be used for parameter 'property' of type 'StyledProperty<ITemplate<Panel>>' in 'IDisposable? AvaloniaObject.SetValue<ITemplate<Panel>>(StyledProperty<ITemplate<Panel>> property, ITemplate<Panel> value, BindingPriority priority = BindingPriority.LocalValue)' due to differences in the nullability of reference types. [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
-    4 Warning(s)
+    0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:10.05
+Time Elapsed 00:00:08.67
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 228 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 228 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 263 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 216 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 216 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 221 ms).
   2 of 5 projects are up-to-date for restore.
   MarkupGenerator -> /home/homo/github/actions-runner/_work/MavUI/MavUI/tools/MarkupGenerator/bin/Release/netstandard2.0/Mav.MarkupGenerator.dll
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
   ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
   MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
-/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/Markup/MarkupTests.cs(94,47): error CS0103: The name 'Layoutable' does not exist in the current context [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/Markup/MarkupTests.cs(104,24): error CS0246: The type or namespace name 'Delegate' could not be found (are you missing a using directive or an assembly reference?) [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/Markup/MarkupTests.cs(104,23): error CS0030: Cannot convert type 'object' to 'Delegate?' [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/Markup/MarkupTests.cs(105,40): error CS0103: The name 'EventArgs' does not exist in the current context [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj]
+  MavUI.Tests -> /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/MavUI.Tests.dll
 
-Build FAILED.
-
-/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/Markup/MarkupTests.cs(94,47): error CS0103: The name 'Layoutable' does not exist in the current context [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/Markup/MarkupTests.cs(104,24): error CS0246: The type or namespace name 'Delegate' could not be found (are you missing a using directive or an assembly reference?) [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/Markup/MarkupTests.cs(104,23): error CS0030: Cannot convert type 'object' to 'Delegate?' [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj]
-/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/Markup/MarkupTests.cs(105,40): error CS0103: The name 'EventArgs' does not exist in the current context [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj]
+Build succeeded.
     0 Warning(s)
-    4 Error(s)
+    0 Error(s)
 
-Time Elapsed 00:00:04.87
+Time Elapsed 00:00:04.70
+  Determining projects to restore...
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 290 ms).
+  3 of 4 projects are up-to-date for restore.
+  MarkupGenerator -> /home/homo/github/actions-runner/_work/MavUI/MavUI/tools/MarkupGenerator/bin/Release/netstandard2.0/Mav.MarkupGenerator.dll
+  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
+  ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
+  ControlsGallery.Desktop -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/bin/Release/net10.0/ControlsGallery.Desktop.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.36
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0-windows/MavUI.Essentials.dll
+  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.03
+  Determining projects to restore...
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/HC.csproj (in 306 ms).
+  3 of 4 projects are up-to-date for restore.
+  MarkupGenerator -> /home/homo/github/actions-runner/_work/MavUI/MavUI/tools/MarkupGenerator/bin/Release/netstandard2.0/Mav.MarkupGenerator.dll
+  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
+  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
+  HC -> /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/bin/Release/net10.0/HC.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.96
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  MarkupGenerator -> /home/homo/github/actions-runner/_work/MavUI/MavUI/tools/MarkupGenerator/bin/Release/netstandard2.0/Mav.MarkupGenerator.dll
+  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
+  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0-windows/MavUI.Essentials.dll
+  HC -> /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/bin/Release/net10.0-windows/HC.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.63
+  Determining projects to restore...
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj (in 311 ms).
+  4 of 5 projects are up-to-date for restore.
+  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
+  MarkupGenerator -> /home/homo/github/actions-runner/_work/MavUI/MavUI/tools/MarkupGenerator/bin/Release/netstandard2.0/Mav.MarkupGenerator.dll
+  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
+  HC -> /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/bin/Release/net10.0/HC.dll
+  HC.Tests -> /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/bin/Release/net10.0/HC.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.68
+Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/MavUI.Tests.dll (.NETCoreApp,Version=v10.0)
+VSTest version 18.0.2 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:   339, Skipped:     0, Total:   339, Duration: 15 s - MavUI.Tests.dll (net10.0)
+Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/bin/Release/net10.0/HC.Tests.dll (.NETCoreApp,Version=v10.0)
+VSTest version 18.0.2 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:    57, Skipped:     0, Total:    57, Duration: 92 ms - HC.Tests.dll (net10.0)
