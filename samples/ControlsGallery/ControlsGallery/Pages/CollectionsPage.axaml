@@ -1,6 +1,7 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mav="https://where.it/mav"
+             xmlns:pages="clr-namespace:Mav.ControlsGallery.Pages"
              x:Class="Mav.ControlsGallery.Pages.CollectionsPage">
   <mav:MavScrollViewer>
     <Border Padding="20,16,20,40">
@@ -13,7 +14,26 @@
             <StackPanel Spacing="10">
               <mav:MavLabel Role="TitleMedium" Text="MavList, MavListItem, MavListSubheader and MavSwipeAction" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Collections.Lists.CardBody, Fallback=A vertical list with dividers\, two-line rows\, trailing text\, selection and swipe actions.}" />
-              <StackPanel x:Name="ListsHost" Spacing="10" />
+              <StackPanel Spacing="8">
+                <mav:MavCard Variant="Outlined">
+                  <mav:MavList ShowDividers="True">
+                    <mav:MavListSubheader Text="Today" />
+                    <mav:MavListItem Headline="Design review" SupportingText="10:30 – 11:15" LeadingIcon="{x:Static mav:MavIcons.Event}" TrailingIcon="{x:Static mav:MavIcons.ChevronRight}" />
+                    <mav:MavListItem Headline="Release planning" SupportingText="12:00 – 13:00" LeadingIcon="{x:Static mav:MavIcons.Groups}" TrailingText="2h" />
+                    <mav:MavListItem Headline="Swipe me" SupportingText="Leading archive / trailing delete" LeadingIcon="{x:Static mav:MavIcons.Swipe}" TrailingIcon="{x:Static mav:MavIcons.ChevronRight}">
+                      <mav:MavListItem.LeadingSwipeAction>
+                        <mav:MavSwipeAction Label="Archive" Icon="{x:Static mav:MavIcons.Archive}" Command="{x:Static pages:CollectionsPage.ArchiveSwipe}" CommandParameter="{Binding #SwipeStatus}" />
+                      </mav:MavListItem.LeadingSwipeAction>
+                      <mav:MavListItem.TrailingSwipeAction>
+                        <mav:MavSwipeAction Label="Delete" Icon="{x:Static mav:MavIcons.Delete}" Command="{x:Static pages:CollectionsPage.DeleteSwipe}" CommandParameter="{Binding #SwipeStatus}" />
+                      </mav:MavListItem.TrailingSwipeAction>
+                    </mav:MavListItem>
+                    <mav:MavDivider />
+                    <mav:MavListItem Headline="Selected row" SupportingText="IsSelected + IsInteractive" LeadingIcon="{x:Static mav:MavIcons.CheckCircle}" IsSelected="True" IsInteractive="True" />
+                  </mav:MavList>
+                </mav:MavCard>
+                <mav:MavLabel x:Name="SwipeStatus" Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Collections.Lists.Hint, Fallback=Swipe a row left or right on touch\, or drag with the pointer.}" />
+              </StackPanel>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="list.AddItem(new MavListItem(...)) · ShowDividers · LeadingSwipeAction/TrailingSwipeAction" />
             </StackPanel>
           </mav:MavCard>
@@ -26,7 +46,22 @@
             <StackPanel Spacing="10">
               <mav:MavLabel Role="TitleMedium" Text="MavDataTable and MavDataColumn" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Collections.Table.CardBody, Fallback=Sort by clicking a header\, filter with FilterText\, select rows and page through data. Under 600 dp the same table becomes cards.}" />
-              <StackPanel x:Name="TableHost" Spacing="10" />
+              <mav:MavDataTable IsSelectable="True" ShowPagination="True" PageSize="4" AlternatingRowBackground="True">
+                <mav:MavDataColumn Header="Name" PropertyName="Name" />
+                <mav:MavDataColumn Header="Role" PropertyName="Role" />
+                <mav:MavDataColumn Header="Score" PropertyName="Score" IsNumeric="True" />
+                <mav:MavDataTable.ItemsSource>
+                  <x:Array Type="{x:Type pages:PersonRow}">
+                    <pages:PersonRow Name="Ada Lovelace" Role="Admin" Score="98" />
+                    <pages:PersonRow Name="Grace Hopper" Role="Editor" Score="95" />
+                    <pages:PersonRow Name="Alan Turing" Role="Admin" Score="92" />
+                    <pages:PersonRow Name="Katherine Johnson" Role="Viewer" Score="90" />
+                    <pages:PersonRow Name="Linus Torvalds" Role="Editor" Score="88" />
+                    <pages:PersonRow Name="Margaret Hamilton" Role="Admin" Score="96" />
+                    <pages:PersonRow Name="Barbara Liskov" Role="Viewer" Score="94" />
+                  </x:Array>
+                </mav:MavDataTable.ItemsSource>
+              </mav:MavDataTable>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="table.AddColumn(header, valueSelector, isNumeric) · Layout=Auto · ShowPagination · FilterText" />
             </StackPanel>
           </mav:MavCard>
@@ -39,7 +74,30 @@
             <StackPanel Spacing="10">
               <mav:MavLabel Role="TitleMedium" Text="MavTreeView, MavTreeNode and MavTimeline" />
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Collections.Tree.CardBody, Fallback=Expandable tree with cascading checkboxes and a vertical timeline with statuses.}" />
-              <StackPanel x:Name="TreeHost" Spacing="10" />
+              <pages:AdaptiveWrap MinItemWidth="300">
+                <mav:MavCard Variant="Outlined" Margin="0,0,8,8">
+                  <mav:MavTreeView ShowCheckBoxes="True" CascadeCheckBoxes="True">
+                    <mav:MavTreeNode Text="Mav">
+                      <mav:MavTreeNode Text="Controls" />
+                      <mav:MavTreeNode Text="Theming" />
+                      <mav:MavTreeNode Text="Demo" />
+                    </mav:MavTreeNode>
+                    <mav:MavTreeNode Text="Demos">
+                      <mav:MavTreeNode Text="Desktop" />
+                      <mav:MavTreeNode Text="Browser" />
+                      <mav:MavTreeNode Text="Android" />
+                    </mav:MavTreeNode>
+                  </mav:MavTreeView>
+                </mav:MavCard>
+                <mav:MavCard Variant="Outlined" Margin="0,0,8,8">
+                  <mav:MavTimeline>
+                    <mav:MavTimelineItem Title="Created" Description="Initial page stack" Timestamp="09:00" Icon="{x:Static mav:MavIcons.AddCircle}" Status="Completed" />
+                    <mav:MavTimelineItem Title="Reviewed" Description="Overlay + accessibility pass" Timestamp="11:30" Icon="{x:Static mav:MavIcons.RateReview}" Status="Completed" />
+                    <mav:MavTimelineItem Title="Shipped" Description="NuGet package" Timestamp="14:00" Icon="{x:Static mav:MavIcons.Publish}" Status="Active" />
+                    <mav:MavTimelineItem Title="Next" Description="Write more tests" Timestamp="—" Icon="{x:Static mav:MavIcons.Pending}" Status="Pending" />
+                  </mav:MavTimeline>
+                </mav:MavCard>
+              </pages:AdaptiveWrap>
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavTreeView.ShowCheckBoxes · MavTreeNode.Add(...) · MavTimeline.Add(...)" />
             </StackPanel>
           </mav:MavCard>
