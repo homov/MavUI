@@ -37,13 +37,14 @@ internal static class MarkupEmitter
         sb.Append("public static class ").Append(type.Name).AppendLine("Markup");
         sb.AppendLine("{");
 
+        var signature = Signature.For(type, owner);
         foreach (var member in members)
         {
             sb.AppendLine();
             if (member.IsEvent)
-                AppendEvent(sb, type.Name, owner, member);
+                AppendEvent(sb, type.Name, signature, member);
             else
-                AppendProperty(sb, type.Name, owner, member);
+                AppendProperty(sb, type.Name, signature, member);
         }
 
         sb.AppendLine("}");
@@ -60,28 +61,67 @@ internal static class MarkupEmitter
         return Keywords.Contains(name) ? "@" + name : name;
     }
 
-    private static void AppendProperty(StringBuilder sb, string typeName, string owner, MarkupMember member)
+    private static void AppendProperty(StringBuilder sb, string typeName, Signature signature, MarkupMember member)
     {
         sb.Append("    /// <summary>Sets <c>").Append(typeName).Append('.').Append(member.Name).AppendLine("</c>.</summary>");
-        sb.Append("    public static TControl ").Append(MethodName(member.Name))
-            .Append("<TControl>(this TControl control, ").Append(member.ValueType).AppendLine(" value)");
-        sb.Append("        where TControl : ").AppendLine(owner);
+        AppendHeader(sb, member, signature, "(this " + signature.Self + " control, " + member.ValueType + " value)");
         sb.AppendLine("    {");
-        sb.Append("        control.SetValue(").Append(owner).Append('.').Append(member.FieldName).AppendLine(", value);");
+        sb.Append("        control.SetValue(").Append(signature.Owner).Append('.').Append(member.FieldName).AppendLine(", value);");
         sb.AppendLine("        return control;");
         sb.AppendLine("    }");
     }
 
-    private static void AppendEvent(StringBuilder sb, string typeName, string owner, MarkupMember member)
+    private static void AppendEvent(StringBuilder sb, string typeName, Signature signature, MarkupMember member)
     {
         sb.Append("    /// <summary>Subscribes to <c>").Append(typeName).Append('.').Append(member.Name).AppendLine("</c>.</summary>");
-        sb.Append("    public static TControl ").Append(MethodName(member.Name))
-            .Append("<TControl>(this TControl control, global::System.Action<TControl, ").Append(member.ValueType)
-            .AppendLine("> handler)");
-        sb.Append("        where TControl : ").AppendLine(owner);
+        AppendHeader(sb, member, signature,
+            "(this " + signature.Self + " control, global::System.Action<" + signature.Self + ", " + member.ValueType + "> handler)");
         sb.AppendLine("    {");
         sb.Append("        control.").Append(member.Name).AppendLine(" += (_, e) => handler(control, e);");
         sb.AppendLine("        return control;");
         sb.AppendLine("    }");
+    }
+
+    /// <summary>Writes the signature line(s). Non-sealed owners use a type parameter; sealed owners use the type itself.</summary>
+    private static void AppendHeader(StringBuilder sb, MarkupMember member, Signature signature, string parameters)
+    {
+        sb.Append("    public static ").Append(signature.Self).Append(' ').Append(MethodName(member.Name));
+        sb.Append(signature.Generic).Append(parameters).AppendLine();
+        if (signature.Where is not null)
+            sb.Append("        where TControl : ").AppendLine(signature.Where);
+    }
+
+    /// <summary>
+    /// How the extension methods name the receiver. A sealed class cannot be a generic constraint (CS0701), so its
+    /// methods take the class itself and return it.
+    /// </summary>
+    private sealed class Signature
+    {
+        private Signature(string owner, string self, string generic, string? where)
+        {
+            Owner = owner;
+            Self = self;
+            Generic = generic;
+            Where = where;
+        }
+
+        /// <summary>Fully qualified owner type, used to reach its static property fields.</summary>
+        public string Owner { get; }
+
+        /// <summary>Receiver and return type: <c>TControl</c> or the sealed owner type.</summary>
+        public string Self { get; }
+
+        /// <summary>Type parameter list: <c>&lt;TControl&gt;</c> or empty.</summary>
+        public string Generic { get; }
+
+        /// <summary>Constraint type, or null when the method has no type parameter.</summary>
+        public string? Where { get; }
+
+        public static Signature For(INamedTypeSymbol type, string owner)
+        {
+            return type.IsSealed
+                ? new Signature(owner, owner, string.Empty, null)
+                : new Signature(owner, "TControl", "<TControl>", owner);
+        }
     }
 }

@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data;
+using System.Collections;
 
 namespace Mav.Markup;
 
@@ -19,8 +20,8 @@ public static class MavMarkup
         return control;
     }
 
-    /// <summary>Binds a property to a binding, for example <c>new Binding("Title")</c>.</summary>
-    public static TControl binding<TControl>(this TControl control, AvaloniaProperty property, IBinding binding)
+    /// <summary>Binds a property to a binding, for example <c>new Binding("Title")</c>; the expression is discarded.</summary>
+    public static TControl binding<TControl>(this TControl control, AvaloniaProperty property, BindingBase binding)
         where TControl : AvaloniaObject
     {
         control.Bind(property, binding);
