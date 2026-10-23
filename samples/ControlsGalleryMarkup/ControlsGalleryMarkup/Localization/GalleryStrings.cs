@@ -47,5 +47,6 @@ public sealed class GalleryStrings : IMavLocalizationProvider
         RuLayout.Items,
         RuCollections.Items,
         RuFeedback.Items,
+        RuOverlays.Items,
     ];
 }

@@ -29,6 +29,7 @@ public sealed class MainWindow : MavWindow
         ("Layout", "Layout", "Cards, containers, avatars and responsive layout", MavIcons.Dashboard, () => LayoutPage.Build()),
         ("Collections", "Collections", "Lists, tables, trees and timelines", MavIcons.List, () => CollectionsPage.Build()),
         ("Feedback", "Feedback", "Dialogs, sheets, banners, progress and status", MavIcons.Feedback, () => FeedbackPage.Build()),
+        ("Overlays", "Overlays", "Menus, popovers, tooltips and search", MavIcons.Layers, () => OverlaysPage.Build()),
     ];
 
     private int _selected;
