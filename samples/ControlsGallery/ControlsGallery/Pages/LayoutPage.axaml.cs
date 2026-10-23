@@ -85,7 +85,7 @@ public partial class LayoutPage : UserControl
         {
             Header = "Release notes",
             IsExpanded = true,
-            Body = new MavLabel
+            Content = new MavLabel
             {
                 Text = "Expansion panels keep secondary content out of the way until it is needed.",
                 TextWrapping = TextWrapping.Wrap,
