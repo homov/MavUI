@@ -19,6 +19,7 @@ public sealed class AppServices
         CloudClient cloud,
         DeviceSetupService deviceSetup,
         SessionService session,
+        AccountService account,
         DeviceService devices,
         LocationService locations,
         ScheduleService schedules,
@@ -29,6 +30,7 @@ public sealed class AppServices
         Cloud = cloud;
         DeviceSetup = deviceSetup;
         Session = session;
+        Account = account;
         Devices = devices;
         Locations = locations;
         Schedules = schedules;
@@ -40,6 +42,7 @@ public sealed class AppServices
     public CloudClient Cloud { get; }
     public DeviceSetupService DeviceSetup { get; }
     public SessionService Session { get; }
+    public AccountService Account { get; }
     public DeviceService Devices { get; }
     public LocationService Locations { get; }
     public ScheduleService Schedules { get; }
@@ -62,15 +65,17 @@ public sealed class AppServices
         IMavSecureStorage secrets)
     {
         var settings = new SettingsService(preferences);
+        var language = new LanguageService(settings);
         return new AppServices(
             cloud: cloud,
             deviceSetup: new DeviceSetupService(localDevice),
             session: new SessionService(cloud, preferences, secrets),
+            account: new AccountService(cloud, settings, language),
             devices: new DeviceService(cloud),
             locations: new LocationService(cloud),
             schedules: new ScheduleService(cloud),
             settings: settings,
-            language: new LanguageService(settings),
+            language: language,
             theme: new ThemeService(settings));
     }
 }

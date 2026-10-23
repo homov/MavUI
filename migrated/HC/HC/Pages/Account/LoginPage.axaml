@@ -1,0 +1,27 @@
+<mav:MavContentPage xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mav="https://where.it/mav"
+                    x:Class="Hc.Pages.Account.LoginPage"
+                    Title="{mav:Loc auth.signin.title, Fallback=Sign in}">
+  <mav:MavContentPage.Content>
+    <mav:MavScrollViewer>
+      <StackPanel Margin="20,24,20,40" Spacing="16" MaxWidth="480">
+        <mav:MavTextField x:Name="EmailField" Variant="Outlined"
+                          Label="{mav:Loc auth.field.email, Fallback=Email}"
+                          LeadingIcon="{x:Static mav:MavIcons.Email}" />
+        <mav:MavTextField x:Name="PasswordField" Variant="Outlined" IsPassword="True"
+                          Label="{mav:Loc auth.field.password, Fallback=Password}"
+                          LeadingIcon="{x:Static mav:MavIcons.Lock}" />
+        <mav:MavCheckBox x:Name="RememberBox"
+                         Label="{mav:Loc auth.field.remember, Fallback=Remember me on this device}" />
+        <mav:MavLabel x:Name="ErrorLabel" Role="BodyMedium" IsVisible="False" TextWrapping="Wrap" />
+        <mav:MavButton x:Name="SignInButton" Variant="Filled" HorizontalAlignment="Stretch"
+                       Text="{mav:Loc auth.signin.button, Fallback=Sign in}" />
+        <mav:MavButton x:Name="RegisterButton" Variant="Text" HorizontalAlignment="Stretch"
+                       Text="{mav:Loc auth.register.link, Fallback=Create account}" />
+        <mav:MavButton x:Name="RestoreButton" Variant="Text" HorizontalAlignment="Stretch"
+                       Text="{mav:Loc auth.restore.link, Fallback=Forgot password}" />
+      </StackPanel>
+    </mav:MavScrollViewer>
+  </mav:MavContentPage.Content>
+</mav:MavContentPage>

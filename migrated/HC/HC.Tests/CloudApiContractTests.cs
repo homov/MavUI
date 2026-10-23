@@ -191,4 +191,16 @@ public class CloudApiContractTests
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken) =>
             Task.FromException<HttpResponseMessage>(new TaskCanceledException("timeout"));
     }
+
+    [Fact]
+    public async Task MalformedJson_IsReportedAsHttpFormatError_NotAsLostConnection()
+    {
+        var (client, _) = Create("this is not json");
+
+        var response = await client.Login(new LoginRequest("user@example.com", "secret"));
+
+        Assert.False(response.IsSuccessStatusCode);
+        Assert.NotEqual(0, (int)response.StatusCode);
+        Assert.Equal("Unexpected response format", response.ErrorMessage);
+    }
 }

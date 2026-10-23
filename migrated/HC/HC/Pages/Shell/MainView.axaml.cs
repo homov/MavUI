@@ -2,12 +2,12 @@ using Avalonia.Controls;
 
 namespace Hc.Pages.Shell;
 
-/// <summary>Shell: owns the page stack. The real start page (login or device list) is set in stage 5.</summary>
+/// <summary>Shell: owns the page stack. Starts on the start page, which decides between home and sign-in.</summary>
 public partial class MainView : UserControl
 {
     public MainView()
     {
         InitializeComponent();
-        Navigation.SetRoot(new StartPage());
+        Navigation.SetRoot(new StartPage(new AppNavigator(Navigation)));
     }
 }

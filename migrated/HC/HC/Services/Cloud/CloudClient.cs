@@ -164,11 +164,28 @@ public sealed class CloudClient(HttpClient http)
             if (!response.IsSuccessStatusCode)
                 return new ApiResponse<T> { StatusCode = response.StatusCode, IsSuccessStatusCode = false, ErrorMessage = body };
 
+            T? parsed;
+            try
+            {
+                parsed = JsonSerializer.Deserialize(body, typeInfo);
+            }
+            catch (JsonException)
+            {
+                // The server answered 200 with something that is not its JSON. That is a format error,
+                // not a lost connection, so the status stays as the server sent it.
+                return new ApiResponse<T>
+                {
+                    StatusCode = response.StatusCode,
+                    IsSuccessStatusCode = false,
+                    ErrorMessage = "Unexpected response format",
+                };
+            }
+
             return new ApiResponse<T>
             {
                 StatusCode = response.StatusCode,
                 IsSuccessStatusCode = true,
-                Content = JsonSerializer.Deserialize(body, typeInfo),
+                Content = parsed,
             };
         }
         // Cancellation requested by the caller propagates. A timeout also surfaces as an OperationCanceledException,

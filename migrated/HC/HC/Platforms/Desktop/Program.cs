@@ -1,4 +1,6 @@
 using Avalonia;
+using Mav.Essentials;
+using Mav.Essentials.Linux;
 
 namespace Hc.Platforms.Desktop;
 
@@ -6,7 +8,14 @@ namespace Hc.Platforms.Desktop;
 internal static class Program
 {
     [STAThread]
-    public static void Main(string[] args) => BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
+    public static void Main(string[] args)
+    {
+        // Secrets (saved password) go to the desktop keyring through secret-tool on Linux.
+        if (OperatingSystem.IsLinux())
+            MavSecureStorage.SetDefault(new LibsecretSecureStorage());
+
+        BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
+    }
 
     public static AppBuilder BuildAvaloniaApp() =>
         AppBuilder.Configure<DesktopApp>()

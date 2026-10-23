@@ -4,6 +4,10 @@
                     x:Class="Hc.Pages.Shell.StartPage"
                     Title="HC">
   <mav:MavContentPage.Content>
-    <mav:MavLabel Text="HC" HorizontalAlignment="Center" VerticalAlignment="Center" />
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="16" Margin="24">
+      <mav:MavLinearProgress IsIndeterminate="True" Width="200" />
+      <mav:MavLabel Role="BodyMedium" HorizontalAlignment="Center"
+                    Text="{mav:Loc startup.checking, Fallback=Signing you in...}" />
+    </StackPanel>
   </mav:MavContentPage.Content>
 </mav:MavContentPage>
