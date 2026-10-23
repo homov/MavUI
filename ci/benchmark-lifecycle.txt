@@ -1,1 +1,1 @@
-controls=500, theme subscribers: baseline=2, while shown=1127, after close=2; controls still alive after GC=0
+controls=500, theme subscribers: baseline=0, while shown=1125, after close=0; controls still alive after GC=0
