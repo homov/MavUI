@@ -150,6 +150,6 @@ public static class OverviewPage
             .Radius(12)
             .Elevation(level)
             .FillColor(fill)
-            .Content(Centered(new MavLabel(MavLocalization.Format("Overview.Elevation.Level", "Level {0}", level), MavTypeRole.LabelSmall)))).ToArray());
+            .Child(Centered(new MavLabel(MavLocalization.Format("Overview.Elevation.Level", "Level {0}", level), MavTypeRole.LabelSmall)))).ToArray());
     }
 }
