@@ -1,2 +1,2 @@
-500 x MavButton attached, SyncAppResources (app.Resources writes) + RunJobs: median 25.64 ms
-500 x MavButton attached, RequestedThemeVariant flip + RunJobs: median 1.08 ms
+500 x MavButton attached, SyncAppResources (app.Resources writes) + RunJobs: median 7.89 ms
+500 x MavButton attached, RequestedThemeVariant flip + RunJobs: median 0.18 ms

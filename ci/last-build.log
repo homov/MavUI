@@ -1,10 +1,10 @@
 # Last build log
-commit: 12df0826835b82983060453f6f09f0ea6a060930
-run: https://github.com/homov/MavUI/actions/runs/39967302893
+commit: a7929e669cdfd3738af6d179fcaed4fef462a47a
+run: https://github.com/homov/MavUI/actions/runs/39968163485
 
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 234 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/tools/MarkupGenerator/MarkupGenerator.csproj (in 234 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/tools/MarkupGenerator/MarkupGenerator.csproj (in 235 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 235 ms).
   MarkupGenerator -> /home/homo/github/actions-runner/_work/MavUI/MavUI/tools/MarkupGenerator/bin/Release/netstandard2.0/Mav.MarkupGenerator.dll
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
 
@@ -12,11 +12,11 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:08.36
+Time Elapsed 00:00:08.43
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 224 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 216 ms).
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 216 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 218 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 212 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 212 ms).
   2 of 5 projects are up-to-date for restore.
   MarkupGenerator -> /home/homo/github/actions-runner/_work/MavUI/MavUI/tools/MarkupGenerator/bin/Release/netstandard2.0/Mav.MarkupGenerator.dll
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
@@ -28,9 +28,9 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:04.70
+Time Elapsed 00:00:04.59
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 280 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 273 ms).
   3 of 4 projects are up-to-date for restore.
   MarkupGenerator -> /home/homo/github/actions-runner/_work/MavUI/MavUI/tools/MarkupGenerator/bin/Release/netstandard2.0/Mav.MarkupGenerator.dll
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
@@ -41,7 +41,7 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.21
+Time Elapsed 00:00:02.29
   Determining projects to restore...
   All projects are up-to-date for restore.
   MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0-windows/MavUI.Essentials.dll
@@ -51,9 +51,9 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:01.01
+Time Elapsed 00:00:01.02
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/HC.csproj (in 305 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/HC.csproj (in 302 ms).
   3 of 4 projects are up-to-date for restore.
   MarkupGenerator -> /home/homo/github/actions-runner/_work/MavUI/MavUI/tools/MarkupGenerator/bin/Release/netstandard2.0/Mav.MarkupGenerator.dll
   MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
@@ -64,7 +64,7 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.85
+Time Elapsed 00:00:02.77
   Determining projects to restore...
   All projects are up-to-date for restore.
   MarkupGenerator -> /home/homo/github/actions-runner/_work/MavUI/MavUI/tools/MarkupGenerator/bin/Release/netstandard2.0/Mav.MarkupGenerator.dll
@@ -76,9 +76,9 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.58
+Time Elapsed 00:00:02.53
   Determining projects to restore...
-  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj (in 309 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj (in 311 ms).
   4 of 5 projects are up-to-date for restore.
   MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
   MarkupGenerator -> /home/homo/github/actions-runner/_work/MavUI/MavUI/tools/MarkupGenerator/bin/Release/netstandard2.0/Mav.MarkupGenerator.dll
@@ -90,18 +90,18 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.68
+Time Elapsed 00:00:02.76
 Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/MavUI.Tests.dll (.NETCoreApp,Version=v10.0)
 VSTest version 18.0.2 (x64)
 
 Starting test execution, please wait...
 A total of 1 test files matched the specified pattern.
 
-Passed!  - Failed:     0, Passed:   339, Skipped:     0, Total:   339, Duration: 16 s - MavUI.Tests.dll (net10.0)
+Passed!  - Failed:     0, Passed:   345, Skipped:     0, Total:   345, Duration: 15 s - MavUI.Tests.dll (net10.0)
 Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/bin/Release/net10.0/HC.Tests.dll (.NETCoreApp,Version=v10.0)
 VSTest version 18.0.2 (x64)
 
 Starting test execution, please wait...
 A total of 1 test files matched the specified pattern.
 
-Passed!  - Failed:     0, Passed:    57, Skipped:     0, Total:    57, Duration: 95 ms - HC.Tests.dll (net10.0)
+Passed!  - Failed:     0, Passed:    57, Skipped:     0, Total:    57, Duration: 94 ms - HC.Tests.dll (net10.0)
