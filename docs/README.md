@@ -1,10 +1,12 @@
-# Mav documentation
+# Документация Mav
 
-| Document | Contents |
+| Документ | Содержание |
 |---|---|
-| [AGENTS.md](AGENTS.md) | Library reference for developers and AI agents: rules, platform notes, overlays, localization, control catalogue, recipes, repository map, testing |
-| [NOTES.md](NOTES.md) | Open decisions and deferred work (e.g. Apple platforms) |
-| [gallery/README.md](gallery/README.md) | Control Gallery: groups, adaptive shell, how to run it on each platform |
-| [../CHANGELOG.md](../CHANGELOG.md) | Versions, notable changes and versioning policy |
+| [AGENTS.md](AGENTS.md) | Справочник по библиотеке (на английском): правила, платформы, оверлеи, локализация, каталог контролов, рецепты, тестирование |
+| [FLUTTER_MATERIAL_COVERAGE.md](FLUTTER_MATERIAL_COVERAGE.md) | Сравнение покрытия Flutter Material 3: матрица 28 компонентов, отличия API и сценариев, предложения по развитию |
+| [NOTES.md](NOTES.md) | Рабочие заметки и отложенные решения |
+| [CI.md](CI.md) | Сборка, проверка и отчёты CI |
+| [gallery/README.md](gallery/README.md) | Галерея контролов: группы, адаптивная оболочка, запуск на разных платформах |
+| [../CHANGELOG.md](../CHANGELOG.md) | Версии и существенные изменения |
 
-Project layout, build commands and CI behaviour are described in `AGENTS.md` §8.
+Структура проекта и команды сборки описаны в `AGENTS.md`, раздел 8.
