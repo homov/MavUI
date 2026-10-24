@@ -165,6 +165,48 @@ public class ControlsGalleryShellTests
     }
 
     [AvaloniaFact]
+    public void Changing_the_gallery_language_refreshes_the_open_page_and_navigation()
+    {
+        var previousProvider = MavLocalization.Current;
+        var previousCulture = MavLocalization.Culture;
+        var previousSystem = GalleryLanguage.SystemCulture;
+        var previousSelection = GalleryLanguage.Selected;
+        GalleryLanguage.SystemCulture = new CultureInfo("en-US");
+        MavLocalization.Current = GalleryStrings.Instance;
+        GalleryLanguage.Select(null);
+
+        var view = new MainView();
+        var window = new Window { Width = 800, Height = 900, Content = view };
+        window.Show();
+        try
+        {
+            var nav = view.GetVisualDescendants().OfType<MavNavigationPage>().Single();
+            Assert.Equal("Overview", nav.CurrentPage!.Title);
+
+            GalleryLanguage.Select(GalleryLanguage.Ukrainian);
+            Assert.Equal("Огляд", nav.CurrentPage.Title);
+            Assert.Contains(view.GetVisualDescendants().OfType<TextBlock>(),
+                label => label.Text == "Material Design 3 для Avalonia");
+
+            GalleryLanguage.Select(GalleryLanguage.German);
+            Assert.Equal("Übersicht", nav.CurrentPage.Title);
+            Assert.Contains(view.GetVisualDescendants().OfType<TextBlock>(),
+                label => label.Text == "Material Design 3 für Avalonia");
+
+            GalleryLanguage.Select(null);
+            Assert.Equal("Overview", nav.CurrentPage.Title);
+        }
+        finally
+        {
+            window.Close();
+            GalleryLanguage.SystemCulture = previousSystem;
+            GalleryLanguage.Select(previousSelection);
+            MavLocalization.Current = previousProvider;
+            MavLocalization.SetCulture(previousCulture);
+        }
+    }
+
+    [AvaloniaFact]
     public void Library_controls_strings_follow_the_picked_language()
     {
         var previousProvider = MavLocalization.Current;

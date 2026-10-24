@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
@@ -36,6 +35,8 @@ public class ControlsGalleryPagesTests
     public void Every_page_builds_and_lays_out_in_every_language()
     {
         var previous = MavLocalization.Current;
+        var previousCulture = MavLocalization.Culture;
+        var previousSystem = GalleryLanguage.SystemCulture;
         MavLocalization.Current = GalleryStrings.Instance;
         var previousSelection = GalleryLanguage.Selected;
 
@@ -51,10 +52,16 @@ public class ControlsGalleryPagesTests
                     {
                         var page = create();
                         var window = new Window { Width = 1200, Height = 900, Content = page };
-                        window.Show();
-                        page.Measure(new Size(1200, 900));
-                        page.Arrange(new Rect(0, 0, 1200, 900));
-                        window.Close();
+                        try
+                        {
+                            window.Show();
+                            page.Measure(new Size(1200, 900));
+                            page.Arrange(new Rect(0, 0, 1200, 900));
+                        }
+                        finally
+                        {
+                            window.Close();
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -65,8 +72,9 @@ public class ControlsGalleryPagesTests
         }
         finally
         {
+            GalleryLanguage.SystemCulture = previousSystem;
             GalleryLanguage.Select(previousSelection);
-            MavLocalization.SetCulture(new CultureInfo("en-US"));
+            MavLocalization.SetCulture(previousCulture);
             MavLocalization.Current = previous;
         }
 
