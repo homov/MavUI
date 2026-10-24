@@ -8,6 +8,7 @@ using global::Mav.Controls;
 using global::Mav.ControlsGallery.Localization;
 using global::Mav.ControlsGallery.Shell;
 using global::Mav.Primitives;
+using global::Mav.Platform;
 using global::Mav.Theming;
 
 namespace Mav.VisualTests;
@@ -174,6 +175,38 @@ public class GalleryVisualTests
                    $"{origin.X:0},{origin.Y:0} in the window  pillShaped={pills.Count}");
 
         Assert.True(failures.Count == 0, string.Join(Environment.NewLine, failures));
+    }
+
+    /// <summary>The globe in the app bar opens a menu with every language beside the tapped icon.</summary>
+    [AvaloniaFact]
+    public void App_bar_language_menu_opens_next_to_the_globe()
+    {
+        using var shell = OpenShell(420, 820, "Overview");
+        var nav = shell.View.GetVisualDescendants().OfType<MavNavigationPage>().First();
+        var globe = nav.GetVisualDescendants().OfType<MavTopAppBar>().First()
+            .Actions.OfType<MavIconButton>().Single(button => button.Icon == MavIcons.Globe);
+
+        try
+        {
+            nav.CurrentPage!.Actions.Single(action => action.Icon == MavIcons.Globe).OnClick?.Invoke();
+            Shots.Settle(3);
+
+            var text = shell.Window.GetVisualDescendants().OfType<TextBlock>()
+                .Where(label => label.IsVisible).Select(label => label.Text).ToArray();
+            foreach (var language in GalleryLanguage.All)
+                Assert.Contains(language.Name, text);
+            Assert.Contains("System", text);
+            Assert.True(MavOverlay.HasActiveOverlay, "The globe opened no menu in the overlay.");
+
+            var size = Shots.Capture(shell.Window, "language-menu-open");
+            var origin = globe.TranslatePoint(default, shell.Window) ?? default;
+            Shots.Note($"language-menu-open.png  420x820px  {size / 1024.0:0.0} KB  " +
+                       $"choices={GalleryLanguage.All.Count + 1}  globe={origin.X:0},{origin.Y:0}");
+        }
+        finally
+        {
+            while (MavOverlay.TryDismissTop()) { }
+        }
     }
 
     /// <summary>
