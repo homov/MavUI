@@ -1,5 +1,4 @@
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using Avalonia.Media;
 
 namespace Mav.ControlsGallery.Pages;
@@ -30,15 +29,5 @@ public sealed class SeedChoice(string name, Color color) : INotifyPropertyChange
             _isSelected = value;
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsSelected)));
         }
-    }
-
-    /// <summary>Marks the choice without raising a change when nothing moved.</summary>
-    public bool SetSelected(bool selected)
-    {
-        if (_isSelected == selected)
-            return false;
-
-        IsSelected = selected;
-        return true;
     }
 }
