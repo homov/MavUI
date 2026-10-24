@@ -403,7 +403,10 @@ public class MavFabMenu : MavContentView, IEnumerable<MavFabMenuItem>
         var overlaySize = MavOverlay.GetOverlaySize(_trigger);
         var insets = MavOverlay.SafeAreaOf(_trigger);
 
+        // Measure with no margin: DesiredSize contains the margin, so leaving the previous one in
+        // place would inflate the stack and drift it on every reposition.
         var availableWidth = Math.Max(80, overlaySize.Width - insets.Left - insets.Right - 16);
+        _itemsHost.Margin = default;
         _itemsHost.Measure(new Size(availableWidth, double.PositiveInfinity));
         var stack = _itemsHost.DesiredSize;
 

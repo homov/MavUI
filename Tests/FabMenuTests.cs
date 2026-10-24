@@ -59,36 +59,6 @@ public class FabMenuTests
         visual.TranslatePoint(default, relativeTo) ?? default;
 
     [AvaloniaFact]
-    public void Zzz_diagnostics()
-    {
-        var previousMotion = MavTheme.Motion;
-        MavTheme.Configure(motion: MavMotionScheme.None);
-        var (window, menu) = ShowMenu();
-        try
-        {
-            menu.Open();
-            LayOut(window);
-
-            var pills = menu.ItemsHost;
-            var overlayRoot = MavOverlay.EnsureOverlayRoot(menu)!;
-            Assert.Fail(
-                $"menuBounds={menu.Bounds} menuOrigin={Origin(menu, window)} " +
-                $"menuInOverlay={MavOverlay.BoundsInOverlay(menu, overlayRoot)} " +
-                $"overlaySize={MavOverlay.GetOverlaySize(menu)} insets={MavOverlay.SafeAreaOf(menu)} " +
-                $"overlayRootBounds={overlayRoot.Bounds} " +
-                $"pillsBounds={pills.Bounds} pillsDesired={pills.DesiredSize} pillsMargin={pills.Margin} " +
-                $"pillsOrigin={Origin(pills, window)} " +
-                $"pill0={((Control)pills.Children[0]).Bounds} pill0Desired={((Control)pills.Children[0]).DesiredSize}");
-        }
-        finally
-        {
-            while (MavOverlay.TryDismissTop()) { }
-            window.Close();
-            MavTheme.Configure(motion: previousMotion);
-        }
-    }
-
-    [AvaloniaFact]
     public void Opening_the_menu_keeps_the_fab_in_place()
     {
         var previousMotion = MavTheme.Motion;
