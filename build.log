@@ -1,0 +1,128 @@
+  Determining projects to restore...
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj (in 264 ms).
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavFabMenu.cs(51,18): warning CS0414: The field 'MavFabMenu._pendingOpen' is assigned but its value is never used [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
+
+Build succeeded.
+
+/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/Controls/MavFabMenu.cs(51,18): warning CS0414: The field 'MavFabMenu._pendingOpen' is assigned but its value is never used [/home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/MavUI.csproj]
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:04.81
+  Determining projects to restore...
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/ControlsGallery.csproj (in 220 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj (in 225 ms).
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/MavUI.Essentials.csproj (in 220 ms).
+  1 of 4 projects are up-to-date for restore.
+  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
+  ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
+  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
+/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/ControlsGalleryShellTests.cs(126,26): warning xUnit2031: Do not use a Where clause to filter before calling Assert.Single. Use the overload of Assert.Single that accepts a filtering function. (https://xunit.net/xunit.analyzers/rules/xUnit2031) [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/ControlsGalleryShellTests.cs(136,29): warning xUnit2031: Do not use a Where clause to filter before calling Assert.Single. Use the overload of Assert.Single that accepts a filtering function. (https://xunit.net/xunit.analyzers/rules/xUnit2031) [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/LayoutPageThemeTests.cs(66,9): warning xUnit2031: Do not use a Where clause to filter before calling Assert.Single. Use the overload of Assert.Single that accepts a filtering function. (https://xunit.net/xunit.analyzers/rules/xUnit2031) [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj]
+  MavUI.Tests -> /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/MavUI.Tests.dll
+
+Build succeeded.
+
+/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/ControlsGalleryShellTests.cs(126,26): warning xUnit2031: Do not use a Where clause to filter before calling Assert.Single. Use the overload of Assert.Single that accepts a filtering function. (https://xunit.net/xunit.analyzers/rules/xUnit2031) [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/ControlsGalleryShellTests.cs(136,29): warning xUnit2031: Do not use a Where clause to filter before calling Assert.Single. Use the overload of Assert.Single that accepts a filtering function. (https://xunit.net/xunit.analyzers/rules/xUnit2031) [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj]
+/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/LayoutPageThemeTests.cs(66,9): warning xUnit2031: Do not use a Where clause to filter before calling Assert.Single. Use the overload of Assert.Single that accepts a filtering function. (https://xunit.net/xunit.analyzers/rules/xUnit2031) [/home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.Tests.csproj]
+    3 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:05.74
+  Determining projects to restore...
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj (in 282 ms).
+  2 of 3 projects are up-to-date for restore.
+  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
+  ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
+  ControlsGallery.Desktop -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery.Desktop/bin/Release/net10.0/ControlsGallery.Desktop.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.13
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0-windows/MavUI.Essentials.dll
+  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.03
+  Determining projects to restore...
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/HC.csproj (in 287 ms).
+  2 of 3 projects are up-to-date for restore.
+  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
+  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
+  HC -> /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/bin/Release/net10.0/HC.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.69
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
+  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0-windows/MavUI.Essentials.dll
+  HC -> /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/bin/Release/net10.0-windows/HC.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.68
+  Determining projects to restore...
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/HC.Tests.csproj (in 312 ms).
+  3 of 4 projects are up-to-date for restore.
+  MavUI.Essentials -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI.Essentials/bin/Release/net10.0/MavUI.Essentials.dll
+  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
+  HC -> /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC/bin/Release/net10.0/HC.dll
+  HC.Tests -> /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/bin/Release/net10.0/HC.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.17
+  Determining projects to restore...
+  Restored /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.VisualTests/MavUI.VisualTests.csproj (in 278 ms).
+  2 of 3 projects are up-to-date for restore.
+  MavUI -> /home/homo/github/actions-runner/_work/MavUI/MavUI/MavUI/bin/Release/net10.0/MavUI.dll
+  ControlsGallery -> /home/homo/github/actions-runner/_work/MavUI/MavUI/samples/ControlsGallery/ControlsGallery/bin/Release/net10.0/Mav.ControlsGallery.dll
+  MavUI.VisualTests -> /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.VisualTests/bin/Release/net10.0/MavUI.VisualTests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.85
+Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/bin/Release/net10.0/MavUI.Tests.dll (.NETCoreApp,Version=v10.0)
+VSTest version 18.0.2 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+Results File: /home/homo/github/actions-runner/_work/MavUI/MavUI/test-results/mavui.trx
+
+Passed!  - Failed:     0, Passed:   359, Skipped:     0, Total:   359, Duration: 18 s - MavUI.Tests.dll (net10.0)
+Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/migrated/HC/HC.Tests/bin/Release/net10.0/HC.Tests.dll (.NETCoreApp,Version=v10.0)
+VSTest version 18.0.2 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+Results File: /home/homo/github/actions-runner/_work/MavUI/MavUI/test-results/hc.trx
+
+Passed!  - Failed:     0, Passed:    60, Skipped:     0, Total:    60, Duration: 2 s - HC.Tests.dll (net10.0)
+Test run for /home/homo/github/actions-runner/_work/MavUI/MavUI/Tests/MavUI.VisualTests/bin/Release/net10.0/MavUI.VisualTests.dll (.NETCoreApp,Version=v10.0)
+VSTest version 18.0.2 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+Results File: /home/homo/github/actions-runner/_work/MavUI/MavUI/test-results/gallery.trx
+
+Passed!  - Failed:     0, Passed:     6, Skipped:     0, Total:     6, Duration: 10 s - MavUI.VisualTests.dll (net10.0)

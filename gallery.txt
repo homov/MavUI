@@ -1,0 +1,24 @@
+﻿ControlsGallery visual tests. Size in px, PNG size in KB.
+page-NAME.png = first screen; page-NAME-full.png = the whole page at content height.
+shell-wide.png  1600x1000  131.6 KB  controls=388
+shell-medium.png  980x900  110.4 KB  controls=398
+shell-narrow.png  420x820  65.4 KB  controls=336
+page-Overview-dark.png  1280x900  118.3 KB  dark=True
+page-Overview.png  116.4 KB  extent 2257x1000  viewport 835x1000  scrolls=True  full 2322x1280px 250.6 KB  fits=True  items 6 host(s)/59 child(ren)
+page-Actions.png  112.2 KB  extent 1311x1000  viewport 835x1000  scrolls=True  full 1376x1280px 161.9 KB  fits=True  items 0 host(s)/0 child(ren)
+page-Inputs.png  99.5 KB  extent 1502x1000  viewport 835x1000  scrolls=True  full 1567x1280px 144.9 KB  fits=True  items 0 host(s)/0 child(ren)
+page-Selection.png  104.9 KB  extent 1175x1000  viewport 835x1000  scrolls=True  full 1240x1280px 143.9 KB  fits=True  items 0 host(s)/0 child(ren)
+page-Pickers.png  102.2 KB  extent 1380x1000  viewport 835x1000  scrolls=True  full 1445x1280px 156.5 KB  fits=True  items 0 host(s)/0 child(ren)
+page-Navigation.png  91.4 KB  extent 3304x1000  viewport 835x1000  scrolls=True  full 3369x1280px 258.2 KB  fits=True  items 0 host(s)/0 child(ren)
+page-Layout.png  95.9 KB  extent 3453x1000  viewport 835x1000  scrolls=True  full 3518x1280px 301.2 KB  fits=True  items 0 host(s)/0 child(ren)
+page-Collections.png  94.0 KB  extent 1734x1000  viewport 835x1000  scrolls=True  full 1799x1280px 164.8 KB  fits=True  items 0 host(s)/0 child(ren)
+page-Feedback.png  108.4 KB  extent 2510x1000  viewport 835x1000  scrolls=True  full 2575x1280px 243.0 KB  fits=True  items 0 host(s)/0 child(ren)
+page-Overlays.png  107.9 KB  extent 1018x1000  viewport 835x1000  scrolls=True  full 1083x1280px 125.1 KB  fits=True  items 0 host(s)/0 child(ren)
+page-Theming.png  114.0 KB  extent 3705x1000  viewport 835x1000  scrolls=True  full 3770x1280px 402.6 KB  fits=True  items 6 host(s)/92 child(ren)
+fab-menu-open.png  1280x900  116.9 KB  open=True  fab=56x56 at 421,732 in the window  pillShaped=6
+language-menu-open.png  420x820px  77.9 KB  choices=7  globe=312,8
+language-uk-theming-full.png  420x6240px  405,3 KB  fits=True  picker=7 buttons / 1 selected
+language-de-theming-full.png  420x6123px  401,9 KB  fits=True  picker=7 buttons / 1 selected
+language-fr-theming-full.png  420x6206px  404,2 KB  fits=True  picker=7 buttons / 1 selected
+language-it-theming-full.png  420x6144px  397,0 KB  fits=True  picker=7 buttons / 1 selected
+language-es-theming-full.png  420x6188px  400,5 KB  fits=True  picker=7 buttons / 1 selected
