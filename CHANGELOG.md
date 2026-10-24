@@ -84,6 +84,13 @@ sandbox (their signed link points at Azure blob storage, which is outside the al
 
 ### Fixed
 
+- `MavFabMenu` opens above its FAB without moving it. The action pills used to sit in a stack
+  above the trigger inside the control's own layout, so opening the menu made the control taller
+  and a parent that lays children out from the top (a column, a wrap panel, a card) pushed the FAB
+  down while the pills appeared where it used to be; inside a clipping container they were cut
+  off. The pills now float in the overlay: the FAB keeps its 56 px box, the stack is placed above
+  it (dropping below when there is no room above), right edges aligned, clamped to the safe area
+  and repositioned when the viewport changes; a tap outside closes it.
 - `MavTabs` gives its content the remaining height (bar, divider and a star row) instead of
   stopping at the content's desired size, which left a blank area under short pages.
 - `MavTextField` and `MavTextArea` keep their floating label in the right place when text is set

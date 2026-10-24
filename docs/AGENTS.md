@@ -941,7 +941,7 @@ Or use `MavSearchView` directly with `Suggestions`, `SuggestionsSource`, `Result
 | `MavExtendedFab` | FAB with label. `Text`, `Icon`, `IsExpanded`. |
 | `MavButtonGroup` | `StackPanel` of buttons. `Kind`/`Variant` (`Standard`/`Connected`), `MultiSelect`, `AddButton`, `SelectionChanged(int)`. |
 | `MavSplitButton` | primary action + menu arrow. `Menu` (`MavMenu`), `IsMenuOpen`, `MenuCommand`, `Clicked`, `MenuClicked`. |
-| `MavFabMenu` | FAB that expands into labeled actions. `AddItem(label, icon, onClick)`, `Open`/`Close`/`Toggle`, `ItemClicked`, `OpenChanged`. |
+| `MavFabMenu` | FAB that expands into labeled actions, drawn in the overlay above the FAB (below it when there is no room above) so the FAB keeps its place. `AddItem(label, icon, onClick)`, `Open`/`Close`/`Toggle`, `ItemClicked`, `OpenChanged`. |
 | `MavFabMenuItem` | action inside a FAB menu. `Label`, `Icon`, `OnClick`, `Clicked`, `Command`, `CommandParameter`. |
 
 ```csharp

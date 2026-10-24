@@ -119,6 +119,8 @@
                   <mav:MavFabMenuItem Label="Scan" Icon="{x:Static mav:MavIcons.DocumentScanner}" />
                 </mav:MavFabMenu>
               </WrapPanel>
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap"
+                            Text="{mav:Loc Actions.Groups.Fab.Body, Fallback=Tap the FAB: its actions open above the button and the button keeps its place.}" />
               <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap"
                             Text="MavButtonGroup.Kind · MavSplitButton.Menu · MavFabMenu.AddItem(label, icon, action)" />
             </StackPanel>
