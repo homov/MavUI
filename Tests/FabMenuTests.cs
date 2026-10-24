@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Layout;
 using Avalonia.Headless.XUnit;
 using Avalonia.Threading;
 using Mav;
@@ -20,14 +21,26 @@ public class FabMenuTests
 {
     private const double FabGap = 12;
 
+    private const double WindowSize = 420;
+
+    /// <summary>
+    /// The pills float in the overlay, whose host belongs to <see cref="MavNavigationPage"/>: the
+    /// menu is shown the way the gallery shows it, inside a page in a navigation host. The column
+    /// stacks its children from the top, like the gallery's wrap panel: with the pills in the
+    /// menu's own layout, opening moved the FAB down and left the pills where it used to be.
+    /// </summary>
     private static (Window Window, MavFabMenu Menu) ShowMenu()
     {
         var menu = new MavFabMenu()
             .AddItem("New document", MavIcons.NoteAdd)
             .AddItem("Upload", MavIcons.Upload);
-        var host = new Panel();
-        host.Children.Add(menu);
-        var window = new Window { Width = 420, Height = 420, Content = host };
+
+        var column = new StackPanel { Orientation = Orientation.Vertical, Spacing = 8 };
+        column.Children.Add(new TextBlock { Text = "Actions" });
+        column.Children.Add(menu);
+
+        var navigation = new MavNavigationPage(new MavContentPage("Root", column));
+        var window = new Window { Width = WindowSize, Height = WindowSize, Content = navigation };
         window.Show();
         LayOut(window);
         return (window, menu);
@@ -36,8 +49,8 @@ public class FabMenuTests
     private static void LayOut(Window window)
     {
         Dispatcher.UIThread.RunJobs();
-        window.Measure(new Size(420, 420));
-        window.Arrange(new Rect(0, 0, 420, 420));
+        window.Measure(new Size(WindowSize, WindowSize));
+        window.Arrange(new Rect(0, 0, WindowSize, WindowSize));
     }
 
     private static Point Origin(Visual visual, Visual relativeTo) =>
@@ -142,9 +155,12 @@ public class FabMenuTests
             var menu = new MavFabMenu().AddItem("Share", MavIcons.Share);
             menu.IsOpen = true;
 
-            var host = new Panel();
-            host.Children.Add(menu);
-            window = new Window { Width = 400, Height = 400, Content = host };
+            window = new Window
+            {
+                Width = WindowSize,
+                Height = WindowSize,
+                Content = new MavNavigationPage(new MavContentPage("Root", menu)),
+            };
             window.Show();
             LayOut(window);
 
