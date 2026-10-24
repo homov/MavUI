@@ -1,5 +1,9 @@
+using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 using Avalonia.Headless.XUnit;
 using Mav;
 using Mav.ControlsGallery.Localization;
@@ -9,171 +13,178 @@ using Xunit;
 namespace Mav.Tests;
 
 /// <summary>
-/// The galleries pick the language of the machine when nobody chose one, and let the user override
-/// it. English is not a table: every key carries its English text as a fallback, so the provider
-/// returns nothing for it.
+/// The demo follows the device language on launch, offers a manual override, and falls back to
+/// English for unsupported languages. English is already the AXAML fallback, not another table.
 /// </summary>
 public class GalleryLanguageTests
 {
-    private static void Reset()
+    private sealed class GalleryState : IDisposable
     {
-        GalleryLanguage.Select(null);
-        GalleryLanguage.SystemCulture = new CultureInfo("en-US");
-        MavLocalization.Current = GalleryStrings.Instance;
-        MavLocalization.SetCulture(new CultureInfo("en-US"));
-    }
+        private readonly IMavLocalizationProvider _provider = MavLocalization.Current;
+        private readonly CultureInfo _culture = MavLocalization.Culture;
+        private readonly CultureInfo _system = GalleryLanguage.SystemCulture;
+        private readonly GalleryLanguage? _selected = GalleryLanguage.Selected;
+        private readonly MavMotionScheme _motion = MavTheme.Motion;
 
-    [AvaloniaFact]
-    public void Without_a_choice_the_language_is_the_one_of_the_culture()
-    {
-        var previous = MavLocalization.Current;
-        try
+        public GalleryState()
         {
-            Reset();
-            GalleryLanguage.SystemCulture = new CultureInfo("uk-UA");
-
-            Assert.Same(GalleryLanguage.Ukrainian, GalleryLanguage.Resolve());
-            Assert.Same(GalleryLanguage.German, GalleryLanguage.Resolve(new CultureInfo("de-DE")));
-            Assert.Same(GalleryLanguage.French, GalleryLanguage.Resolve(new CultureInfo("fr-CA")));
-            Assert.Same(GalleryLanguage.Italian, GalleryLanguage.Resolve(new CultureInfo("it-IT")));
-            Assert.Same(GalleryLanguage.Spanish, GalleryLanguage.Resolve(new CultureInfo("es-MX")));
-
-            // A language the gallery has no table for falls back to English, not to a wrong one.
-            Assert.Same(GalleryLanguage.English, GalleryLanguage.Resolve(new CultureInfo("pl-PL")));
-            Assert.Same(GalleryLanguage.English, GalleryLanguage.Resolve(new CultureInfo("ja-JP")));
-        }
-        finally
-        {
-            MavLocalization.Current = previous;
-            Reset();
-        }
-    }
-
-    [AvaloniaFact]
-    public void A_picked_language_wins_over_the_culture()
-    {
-        var previous = MavLocalization.Current;
-        try
-        {
-            Reset();
-            GalleryLanguage.Select(GalleryLanguage.Italian);
-
-            Assert.Same(GalleryLanguage.Italian, GalleryLanguage.Resolve());
-            Assert.Same(GalleryLanguage.Italian, GalleryLanguage.Resolve(new CultureInfo("de-DE")));
-
-            // "System" gives the culture back its say.
+            GalleryLanguage.SystemCulture = new CultureInfo("en-US");
+            MavLocalization.Current = GalleryStrings.Instance;
             GalleryLanguage.Select(null);
-            Assert.Same(GalleryLanguage.German, GalleryLanguage.Resolve(new CultureInfo("de-AT")));
         }
-        finally
+
+        public void Dispose()
         {
-            MavLocalization.Current = previous;
-            Reset();
+            GalleryLanguage.SystemCulture = _system;
+            GalleryLanguage.Select(_selected);
+            MavLocalization.Current = _provider;
+            MavLocalization.SetCulture(_culture);
+            MavTheme.Configure(motion: _motion);
         }
     }
 
     [AvaloniaFact]
-    public void The_provider_answers_in_the_resolved_language()
+    public void Without_a_choice_the_language_is_the_one_of_the_device()
     {
-        var previous = MavLocalization.Current;
-        try
+        using var _ = new GalleryState();
+        GalleryLanguage.SystemCulture = new CultureInfo("uk-UA");
+        GalleryLanguage.Select(null);
+
+        Assert.Same(GalleryLanguage.Ukrainian, GalleryLanguage.Resolve());
+        Assert.Equal("uk-UA", CultureInfo.CurrentUICulture.Name);
+        Assert.Equal("Огляд", MavLocalization.Get("Nav.Overview.Label", "Overview"));
+        Assert.Same(GalleryLanguage.German, GalleryLanguage.FromCulture(new CultureInfo("de-DE")));
+        Assert.Same(GalleryLanguage.French, GalleryLanguage.FromCulture(new CultureInfo("fr-CA")));
+        Assert.Same(GalleryLanguage.Italian, GalleryLanguage.FromCulture(new CultureInfo("it-IT")));
+        Assert.Same(GalleryLanguage.Spanish, GalleryLanguage.FromCulture(new CultureInfo("es-MX")));
+
+        // Keep a regional format while the UI uses the language's table.
+        GalleryLanguage.SystemCulture = new CultureInfo("fr-CA");
+        GalleryLanguage.Select(null);
+        Assert.Equal("fr-CA", CultureInfo.CurrentUICulture.Name);
+        Assert.Equal("Vue d’ensemble", MavLocalization.Get("Nav.Overview.Label", "Overview"));
+    }
+
+    [AvaloniaFact]
+    public void Manual_selection_changes_all_ui_text_and_system_restores_the_device_language()
+    {
+        using var _ = new GalleryState();
+        GalleryLanguage.SystemCulture = new CultureInfo("de-AT");
+        GalleryLanguage.Select(null);
+        Assert.Equal("Übersicht", MavLocalization.Get("Nav.Overview.Label", "Overview"));
+
+        GalleryLanguage.Select(GalleryLanguage.Italian);
+        Assert.Same(GalleryLanguage.Italian, GalleryLanguage.Selected);
+        Assert.Equal("Panoramica", MavLocalization.Get("Nav.Overview.Label", "Overview"));
+        Assert.Equal("Annulla", MavLocalization.Cancel); // dialogs from the library, as used in the demo
+
+        GalleryLanguage.Select(GalleryLanguage.Spanish);
+        Assert.Equal("Resumen", MavLocalization.Get("Nav.Overview.Label", "Overview"));
+        Assert.Equal("Cancelar", MavLocalization.Cancel);
+
+        GalleryLanguage.Select(null);
+        Assert.Null(GalleryLanguage.Selected);
+        Assert.Same(GalleryLanguage.German, GalleryLanguage.Resolve());
+        Assert.Equal("de-AT", CultureInfo.CurrentUICulture.Name);
+        Assert.Equal("Übersicht", MavLocalization.Get("Nav.Overview.Label", "Overview"));
+    }
+
+    [AvaloniaFact]
+    public void Russian_and_other_unsupported_locales_use_english_ui_but_keep_their_formatting()
+    {
+        using var _ = new GalleryState();
+        foreach (var tag in new[] { "ru-RU", "pl-PL", "ja-JP" })
         {
-            Reset();
-            GalleryLanguage.Select(GalleryLanguage.Ukrainian);
-
-            Assert.Equal("Огляд", MavLocalization.Get("Nav.Overview.Label", "Overview"));
-            Assert.Equal("Скасувати", MavLocalization.Get(MavLocalization.Keys.Cancel, "Cancel"));
-
-            // English has no table: the fallback the AXAML was written with shows through.
-            GalleryLanguage.Select(GalleryLanguage.English);
+            GalleryLanguage.SystemCulture = new CultureInfo(tag);
+            GalleryLanguage.Select(null);
+            Assert.Same(GalleryLanguage.English, GalleryLanguage.Resolve());
+            Assert.Equal(tag, CultureInfo.CurrentUICulture.Name);
             Assert.Equal("Overview", MavLocalization.Get("Nav.Overview.Label", "Overview"));
-            Assert.Equal("Cancel", MavLocalization.Get(MavLocalization.Keys.Cancel, "Cancel"));
+            Assert.Equal("Cancel", MavLocalization.Cancel);
+        }
 
-            // A key no language knows keeps its fallback too.
-            GalleryLanguage.Select(GalleryLanguage.Ukrainian);
-            Assert.Equal("Not translated", MavLocalization.Get("No.Such.Key", "Not translated"));
-        }
-        finally
-        {
-            MavLocalization.Current = previous;
-            Reset();
-        }
+        GalleryLanguage.Select(GalleryLanguage.English);
+        Assert.Equal("Overview", MavLocalization.Get("Nav.Overview.Label", "Overview"));
+        Assert.Null(GalleryStrings.Instance.GetString("Nav.Overview.Label", GalleryLanguage.English.Culture));
+        Assert.Equal("Missing key", MavLocalization.Get("No.Such.Key", "Missing key"));
     }
 
     [AvaloniaFact]
-    public void Every_language_covers_the_same_keys_and_no_key_is_empty()
+    public void Every_translation_table_has_the_same_keys_and_matching_format_placeholders()
     {
-        var tables = GalleryLanguage.All
-            .Where(language => language.Strings is not null)
-            .Select(language => (language.Code, Keys: language.Strings!.Select(entry => entry.Key).ToArray()))
+        var translations = GalleryLanguage.All.Where(language => language != GalleryLanguage.English).ToArray();
+        Assert.Equal(5, translations.Length);
+        var reference = GalleryLanguage.Ukrainian.Strings!.ToDictionary(entry => entry.Key, entry => entry.Value);
+        Assert.True(reference.Count > 400, "Translation tables must cover the whole demo, not just the navigation.");
+
+        var failures = new List<string>();
+        foreach (var language in translations)
+        {
+            var entries = language.Strings;
+            if (entries is null)
+            {
+                failures.Add($"{language.Code}: no translations");
+                continue;
+            }
+
+            var keys = entries.Select(entry => entry.Key).ToArray();
+            foreach (var missing in reference.Keys.Except(keys))
+                failures.Add($"{language.Code}: missing {missing}");
+            foreach (var extra in keys.Except(reference.Keys))
+                failures.Add($"{language.Code}: unexpected {extra}");
+            if (keys.Length != keys.Distinct().Count())
+                failures.Add($"{language.Code}: duplicate keys");
+
+            foreach (var (key, value) in entries)
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    failures.Add($"{language.Code}: empty {key}");
+
+                try
+                {
+                    // Parse before we try formatting. A missing brace would otherwise crash a page.
+                    CompositeFormat.Parse(value);
+                    if (reference.TryGetValue(key, out var expected) &&
+                        !Placeholders(value).SequenceEqual(Placeholders(expected)))
+                        failures.Add($"{language.Code}: incorrect placeholders in {key}");
+                }
+                catch (FormatException error)
+                {
+                    failures.Add($"{language.Code}: invalid format in {key}: {error.Message}");
+                }
+            }
+        }
+
+        Assert.True(failures.Count == 0, string.Join(Environment.NewLine, failures.Take(30)));
+    }
+
+    private static int[] Placeholders(string value) =>
+        Regex.Matches(value, @"(?<!\{)\{(\d+)(?:[:,}])")
+            .Select(match => int.Parse(match.Groups[1].Value, CultureInfo.InvariantCulture))
+            .OrderBy(index => index)
             .ToArray();
 
-        Assert.NotEmpty(tables);
-
-        var reference = tables[0];
-        var failures = new List<string>();
-        foreach (var (code, keys) in tables)
-        {
-            var missing = reference.Keys.Except(keys).ToArray();
-            if (missing.Length > 0)
-                failures.Add($"{code} is missing {missing.Length} key(s): {string.Join(", ", missing.Take(5))}");
-
-            var extra = keys.Except(reference.Keys).ToArray();
-            if (extra.Length > 0)
-                failures.Add($"{code} has {extra.Length} unknown key(s): {string.Join(", ", extra.Take(5))}");
-
-            if (keys.Length != keys.Distinct().Count())
-                failures.Add($"{code} repeats keys");
-
-            var empty = GalleryLanguage.All.Single(l => l.Code == code).Strings!
-                .Where(entry => string.IsNullOrWhiteSpace(entry.Value)).ToArray();
-            if (empty.Length > 0)
-                failures.Add($"{code} has {empty.Length} empty value(s): {string.Join(", ", empty.Take(5).Select(e => e.Key))}");
-        }
-
-        Assert.True(failures.Count == 0, string.Join(Environment.NewLine, failures));
-    }
-
     [AvaloniaFact]
-    public void A_browser_and_a_phone_start_with_the_reduced_motion_profile()
+    public void Browser_and_mobile_start_with_reduced_motion_desktop_stays_expressive()
     {
-        // The desktop keeps the expressive profile; every other host starts reduced, because a
-        // browser tab and a phone animate on a software or battery-powered path.
         Assert.Equal(MavMotionScheme.Expressive, GalleryStartup.MotionFor(isDesktop: true));
         Assert.Equal(MavMotionScheme.Reduced, GalleryStartup.MotionFor(isDesktop: false));
         Assert.Equal(GalleryStartup.MotionFor(GalleryStartup.IsDesktop), GalleryStartup.DefaultMotion());
     }
 
     [AvaloniaFact]
-    public void Startup_keeps_the_culture_the_machine_was_set_to()
+    public void Startup_uses_the_current_system_culture_not_a_previous_manual_choice()
     {
-        var previous = MavLocalization.Current;
-        var previousCulture = MavLocalization.Culture;
-        var previousSelection = GalleryLanguage.Selected;
-        var previousMotion = MavTheme.Motion;
-        try
-        {
-            MavLocalization.SetCulture(new CultureInfo("fr-FR"));
-            GalleryStartup.Apply();
+        using var _ = new GalleryState();
+        GalleryLanguage.Select(GalleryLanguage.Spanish);
+        MavLocalization.SetCulture(new CultureInfo("fr-FR"));
+        GalleryStartup.Apply();
 
-            // Nothing was picked, so the machine's French is what the gallery speaks.
-            Assert.Same(GalleryLanguage.French, GalleryLanguage.Resolve());
-            Assert.Equal("fr", CultureInfo.CurrentUICulture.TwoLetterISOLanguageName);
-            Assert.Equal("fr-FR", GalleryLanguage.SystemCulture.Name);
-            Assert.Same(GalleryStrings.Instance, MavLocalization.Current);
-
-            // Picking a language by hand and going back to "System" returns to French.
-            GalleryLanguage.Select(GalleryLanguage.Spanish);
-            Assert.Same(GalleryLanguage.Spanish, GalleryLanguage.Resolve());
-            GalleryLanguage.Select(null);
-            Assert.Same(GalleryLanguage.French, GalleryLanguage.Resolve());
-        }
-        finally
-        {
-            GalleryLanguage.Select(previousSelection);
-            MavLocalization.Current = previous;
-            MavLocalization.SetCulture(previousCulture);
-            MavTheme.Configure(motion: previousMotion);
-        }
+        Assert.Null(GalleryLanguage.Selected);
+        Assert.Same(GalleryLanguage.French, GalleryLanguage.Resolve());
+        Assert.Equal("fr-FR", GalleryLanguage.SystemCulture.Name);
+        Assert.Equal("Vue d’ensemble", MavLocalization.Get("Nav.Overview.Label", "Overview"));
+        Assert.Same(GalleryStrings.Instance, MavLocalization.Current);
+        Assert.Equal(GalleryStartup.DefaultMotion(), MavTheme.Motion);
     }
 }

@@ -12,7 +12,7 @@ using Xunit;
 namespace Mav.Tests;
 
 /// <summary>
-/// Builds every ControlsGallery page in English and Russian, shows it in a window and runs layout.
+/// Builds every ControlsGallery page in each supported language, shows it in a window and runs layout.
 /// Any exception from AXAML loading, a missing binding target or a broken localization key fails the test.
 /// </summary>
 public class ControlsGalleryPagesTests

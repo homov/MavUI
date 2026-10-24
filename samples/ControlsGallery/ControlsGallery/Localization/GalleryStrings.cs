@@ -4,8 +4,8 @@ using Mav;
 namespace Mav.ControlsGallery.Localization;
 
 /// <summary>
-/// Localization provider for both galleries: it answers with the table of the language the user
-/// picked, or of the culture the app started with when nobody picked one. English carries no table
+/// Localization provider for the gallery: it answers with the table for the requested UI culture.
+/// At startup the culture follows the device; the picker may change it for this session. English carries no table
 /// on purpose — every key has its English text as a fallback in AXAML or in code, so returning
 /// nothing lets that text show through.
 /// </summary>

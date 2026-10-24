@@ -167,7 +167,7 @@ public partial class MainView : UserControl
 
         menu.AddItem(
             MavLocalization.Get("Language.System", "System"),
-            trailingText: active.EnglishName,
+            trailingText: active.Name,
             onSelected: () => UseLanguage(null),
             isSelected: GalleryLanguage.Selected is null);
 
@@ -177,7 +177,7 @@ public partial class MainView : UserControl
                 language.Name,
                 trailingText: language.EnglishName,
                 onSelected: () => UseLanguage(language),
-                isSelected: ReferenceEquals(language, active));
+                isSelected: ReferenceEquals(language, GalleryLanguage.Selected));
         }
 
         // Anchor to the globe action in the app bar rather than to the full page: otherwise

@@ -5,7 +5,7 @@ using Mav.Theming;
 namespace Mav.ControlsGallery.Localization;
 
 /// <summary>
-/// What both galleries do before their first page is built: the language follows the one the
+/// What the gallery does before its first page is built: the language follows the one the
 /// machine is set to, and hosts that animate on a slow path start with the smallest motion profile.
 /// </summary>
 public static class GalleryStartup

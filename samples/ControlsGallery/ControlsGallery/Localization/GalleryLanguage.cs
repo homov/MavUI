@@ -4,7 +4,7 @@ using Mav;
 namespace Mav.ControlsGallery.Localization;
 
 /// <summary>
-/// A language the galleries can show. <see cref="English"/> carries no table: the AXAML fallbacks
+/// A language the gallery can show. <see cref="English"/> carries no table: the AXAML fallbacks
 /// and the library's own defaults already are English, so the provider returns nothing for it and
 /// every text falls through to the English it was written with.
 /// </summary>
@@ -16,10 +16,10 @@ public sealed class GalleryLanguage(
 {
     public static readonly GalleryLanguage English = new("en", "English", "English", null);
     public static readonly GalleryLanguage Ukrainian = new("uk", "Українська", "Ukrainian", UkrainianStrings.Items);
-    public static readonly GalleryLanguage German = new("de", "Deutsch", "German", null);
-    public static readonly GalleryLanguage French = new("fr", "Français", "French", null);
-    public static readonly GalleryLanguage Italian = new("it", "Italiano", "Italian", null);
-    public static readonly GalleryLanguage Spanish = new("es", "Español", "Spanish", null);
+    public static readonly GalleryLanguage German = new("de", "Deutsch", "German", GermanStrings.Items);
+    public static readonly GalleryLanguage French = new("fr", "Français", "French", FrenchStrings.Items);
+    public static readonly GalleryLanguage Italian = new("it", "Italiano", "Italian", ItalianStrings.Items);
+    public static readonly GalleryLanguage Spanish = new("es", "Español", "Spanish", SpanishStrings.Items);
 
     /// <summary>The languages the picker offers, English first: it is the fallback.</summary>
     public static IReadOnlyList<GalleryLanguage> All { get; } =
