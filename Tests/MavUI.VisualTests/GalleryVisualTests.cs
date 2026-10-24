@@ -133,6 +133,46 @@ public class GalleryVisualTests
         Assert.True(failures.Count == 0, string.Join(Environment.NewLine, failures));
     }
 
+    /// <summary>
+    /// The FAB menu opens above its FAB: the pills float in the overlay, so the button keeps its
+    /// place. A frame of the open menu is captured for the record.
+    /// </summary>
+    [AvaloniaFact]
+    public void Fab_menu_opens_above_the_fab_without_moving_it()
+    {
+        using var shell = OpenShell(ViewportWidth, ViewportHeight, "Actions");
+        var page = PageControl(shell.View);
+        var scroller = page.GetVisualDescendants().OfType<ScrollViewer>().FirstOrDefault()
+                       ?? throw new InvalidOperationException("the page has no scroll viewer.");
+        var menu = page.GetVisualDescendants().OfType<MavFabMenu>().FirstOrDefault()
+                   ?? throw new InvalidOperationException("the page has no FAB menu.");
+
+        // Bring the FAB into view: it sits near the bottom of the Actions page.
+        scroller.Offset = new Vector(0, Math.Max(0, scroller.Extent.Height - scroller.Viewport.Height));
+        Shots.Settle(3);
+
+        var before = menu.Bounds;
+        menu.Open();
+        Shots.Settle(3);
+
+        var size = Shots.Capture(shell.Window, "fab-menu-open");
+
+        var pills = menu.GetVisualDescendants().OfType<MavInkSurface>()
+            .Where(surface => surface.MinHeight > 0 && surface.CornerRadius > 20)
+            .ToList();
+        var failures = new List<string>();
+        if (menu.Bounds != before)
+            failures.Add($"the FAB moved: {before} -> {menu.Bounds}.");
+        if (pills.Count == 0)
+            failures.Add("no action pill is drawn.");
+
+        Shots.Note($"fab-menu-open.png  {ViewportWidth:0}x{ViewportHeight:0}  {size / 1024.0:0.0} KB  " +
+                   $"open={menu.IsOpen}  fab={menu.Bounds.Width:0}x{menu.Bounds.Height:0} at " +
+                   $"{menu.Bounds.X:0},{menu.Bounds.Y:0}  pills={pills.Count}");
+
+        Assert.True(failures.Count == 0, string.Join(Environment.NewLine, failures));
+    }
+
     /// <summary>The shell picks the drawer, the rail or the modal-drawer layout from the window width.</summary>
     [AvaloniaFact]
     public void Shell_adapts_to_width()
