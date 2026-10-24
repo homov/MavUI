@@ -5,7 +5,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
 using Mav;
-using Mav.ControlsGallery.Shared;
+using Mav.ControlsGallery.Localization;
 using Mav.ControlsGallery.Pages;
 using Xunit;
 

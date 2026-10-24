@@ -4,7 +4,7 @@ using Avalonia.Controls.Primitives;
 using Avalonia.VisualTree;
 using Mav;
 using Mav.Controls;
-using Mav.ControlsGallery.Shared;
+using Mav.ControlsGallery.Localization;
 using Mav.Platform;
 using Mav.Theming;
 
@@ -184,7 +184,7 @@ public partial class MainView : UserControl
         // the popup would open at the bottom of the screen, away from the button just tapped.
         var globe = Nav.GetVisualDescendants().OfType<MavTopAppBar>().FirstOrDefault()?
             .Actions.OfType<MavIconButton>().FirstOrDefault(button => button.Icon == MavIcons.Globe);
-        menu.Show(globe ?? Page);
+        menu.Show(globe ?? (Control)Page);
     }
 
     /// <summary>Switches the gallery to <paramref name="language"/>; <c>null</c> follows the system again.</summary>

@@ -2,7 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using Mav.ControlsGallery.Shared;
+using Mav.ControlsGallery.Localization;
 using Mav.ControlsGallery.Shell;
 
 namespace Mav.ControlsGallery;

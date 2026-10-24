@@ -6,7 +6,7 @@ using Avalonia.Layout;
 using Avalonia.Media;
 using Mav;
 using Mav.Controls;
-using Mav.ControlsGallery.Shared;
+using Mav.ControlsGallery.Localization;
 using Mav.Primitives;
 using Mav.Theming;
 

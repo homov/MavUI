@@ -22,12 +22,4 @@
     <ProjectReference Include="..\..\..\MavUI\MavUI.csproj" />
   </ItemGroup>
 
-  <!--
-    One set of languages for both galleries (this one and the markup one): the tables, the
-    language catalog and the shared startup live outside both projects.
-  -->
-  <ItemGroup>
-    <Compile Include="..\Shared\*.cs" Link="Shared\%(Filename)%(Extension)" />
-  </ItemGroup>
-
 </Project>

@@ -21,7 +21,6 @@
 - `MavUI/MavUI.csproj`
 - `Tests/MavUI.Tests.csproj`
 - `samples/ControlsGallery/ControlsGallery.Desktop`
-- `samples/ControlsGalleryMarkup/ControlsGalleryMarkup.Desktop`
 - `MavUI.Essentials/MavUI.Essentials.csproj`
 - `migrated/HC/HC/HC.csproj` для `net10.0` и `net10.0-windows`
 - `migrated/HC/HC.Tests`

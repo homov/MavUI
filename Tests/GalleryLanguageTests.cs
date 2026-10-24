@@ -2,7 +2,7 @@ using System.Globalization;
 using System.Linq;
 using Avalonia.Headless.XUnit;
 using Mav;
-using Mav.ControlsGallery.Shared;
+using Mav.ControlsGallery.Localization;
 using Mav.Theming;
 using Xunit;
 
