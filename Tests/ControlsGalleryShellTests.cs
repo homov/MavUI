@@ -10,6 +10,7 @@ using Mav.ControlsGallery.Localization;
 using Mav.ControlsGallery.Pages;
 using Mav.ControlsGallery.Shell;
 using Mav.Controls;
+using Mav.Theming;
 using Xunit;
 
 namespace Mav.Tests;
@@ -105,6 +106,39 @@ public class ControlsGalleryShellTests
         finally
         {
             window.Close();
+        }
+    }
+
+    [AvaloniaFact]
+    public void Overview_marks_the_seed_the_theme_uses_and_follows_a_change()
+    {
+        var previous = MavTheme.SeedColor;
+        MavTheme.Configure(seed: MavColors.Indigo);
+        var page = new OverviewPage();
+        var window = new Window { Width = 1200, Height = 900, Content = page };
+        window.Show();
+
+        try
+        {
+            var options = page.GetVisualDescendants().OfType<MavRadioButton>().ToList();
+            Assert.Equal(7, options.Count);
+            var marked = Assert.Single(options.Where(rb => rb.IsChecked));
+            Assert.Equal(MavColors.Indigo, marked.CommandParameter);
+
+            // Clicking another seed is a theme change: the tick must move to the new seed.
+            var blue = options.First(rb => rb.CommandParameter is { } p && p.Equals(MavColors.Blue));
+            blue.IsChecked = true;
+
+            Assert.Equal(MavColors.Blue, MavTheme.SeedColor);
+            var rebuilt = page.GetVisualDescendants().OfType<MavRadioButton>().ToList();
+            Assert.Equal(7, rebuilt.Count);
+            var nowMarked = Assert.Single(rebuilt.Where(rb => rb.IsChecked));
+            Assert.Equal(MavColors.Blue, nowMarked.CommandParameter);
+        }
+        finally
+        {
+            window.Close();
+            MavTheme.Configure(seed: previous);
         }
     }
 

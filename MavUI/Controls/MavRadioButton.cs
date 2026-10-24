@@ -45,6 +45,13 @@ public class MavRadioButton : MavContentView
 
     public event EventHandler<bool>? CheckedChanged;
 
+    /// <summary>
+    /// How much of the dot is drawn: 0 unchecked, 1 checked. A radio that gets its state before it
+    /// is on screen jumps straight to the target (nothing is visible to animate), a radio the user
+    /// can see animates between the two states. Exposed for tests.
+    /// </summary>
+    internal double DotProgress => _dotProgress;
+
     static MavRadioButton()
     {
         IsCheckedProperty.Changed.AddClassHandler<MavRadioButton>((rb, e) => rb.OnCheckedChanged(e.GetNewValue<bool>()));
@@ -223,11 +230,24 @@ public class MavRadioButton : MavContentView
             }
         }
 
-        MavMotion.Animate(this, "rb_dot", _dotProgress, on ? 1.0 : 0.0, MavMotion.Short3, MavMotion.CubicOut, v =>
+        var target = on ? 1.0 : 0.0;
+        if (TopLevel.GetTopLevel(this) is null)
         {
-            _dotProgress = v;
+            // Nothing on screen yet (built by an items host, restored from a binding, created in
+            // code before Show). Animating from 0 here left the dot empty until a frame ran, which
+            // read as "the current choice is not marked"; snap to the state instead.
+            MavMotion.Cancel(this, "rb_dot");
+            _dotProgress = target;
             _glyph.InvalidateVisual();
-        });
+        }
+        else
+        {
+            MavMotion.Animate(this, "rb_dot", _dotProgress, target, MavMotion.Short3, MavMotion.CubicOut, v =>
+            {
+                _dotProgress = v;
+                _glyph.InvalidateVisual();
+            });
+        }
         CheckedChanged?.Invoke(this, on);
         if (on)
         {

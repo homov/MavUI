@@ -10,6 +10,8 @@ namespace Mav.ControlsGallery.Pages;
 
 public partial class OverviewPage : UserControl
 {
+    private readonly IReadOnlyList<SeedChoice> _seeds = BuildSeeds();
+
     public OverviewPage()
     {
         InitializeComponent();
@@ -28,10 +30,18 @@ public partial class OverviewPage : UserControl
 
     private void RefreshThemed()
     {
-        SeedItems.ItemsSource = BuildSeeds();
+        SeedItems.ItemsSource = _seeds;
+        MarkSeed();
         SwatchItems.ItemsSource = BuildSwatches();
         ShapeItems.ItemsSource = BuildShapeSamples();
         HighlightChoices();
+    }
+
+    /// <summary>Marks the seed the theme uses. The radio row is updated in place, not rebuilt.</summary>
+    private void MarkSeed()
+    {
+        foreach (var seed in _seeds)
+            seed.IsSelected = MavTheme.SeedColor == seed.Color;
     }
 
     private void HighlightChoices()
@@ -63,7 +73,7 @@ public partial class OverviewPage : UserControl
             ("Rose", MavColors.Rose),
         };
         return seeds
-            .Select(s => new SeedChoice(MavLocalization.Get("Overview.Seed." + s.Name, s.Name), s.Color, MavTheme.SeedColor == s.Color))
+            .Select(s => new SeedChoice(MavLocalization.Get("Overview.Seed." + s.Name, s.Name), s.Color))
             .ToList();
     }
 

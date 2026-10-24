@@ -9,6 +9,20 @@ namespace Mav.Tests;
 public class ComponentBehaviorTests
 {
     [AvaloniaFact]
+    public void A_radio_checked_before_it_is_shown_paints_checked_at_once()
+    {
+        // An items host or a binding sets IsChecked while the radio has no top level yet. Animating
+        // the dot from 0 there left the current choice looking unselected until a frame ran.
+        var radio = new MavRadioButton("Admin");
+
+        radio.IsChecked = true;
+        Assert.Equal(1.0, radio.DotProgress, 3);
+
+        radio.IsChecked = false;
+        Assert.Equal(0.0, radio.DotProgress, 3);
+    }
+
+    [AvaloniaFact]
     public void Banner_shows_the_message_it_was_given()
     {
         var banner = new MavBanner { Message = "Saved" };
