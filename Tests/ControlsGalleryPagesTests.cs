@@ -44,8 +44,7 @@ public class ControlsGalleryPagesTests
         {
             foreach (var language in GalleryLanguage.All)
             {
-                GalleryLanguage.Selected = language;
-                MavLocalization.SetCulture(language.Culture);
+                GalleryLanguage.Select(language);
                 foreach (var (name, create) in Pages())
                 {
                     try
@@ -66,7 +65,7 @@ public class ControlsGalleryPagesTests
         }
         finally
         {
-            GalleryLanguage.Selected = previousSelection;
+            GalleryLanguage.Select(previousSelection);
             MavLocalization.SetCulture(new CultureInfo("en-US"));
             MavLocalization.Current = previous;
         }

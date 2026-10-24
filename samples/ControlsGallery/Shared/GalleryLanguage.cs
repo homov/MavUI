@@ -1,4 +1,5 @@
 using System.Globalization;
+using Mav;
 
 namespace Mav.ControlsGallery.Shared;
 
@@ -42,26 +43,20 @@ public sealed class GalleryLanguage(
     /// </summary>
     public static CultureInfo SystemCulture { get; set; } = CultureInfo.CurrentUICulture;
 
-    private static GalleryLanguage? _selected;
-
-    /// <summary>Raised when the user picks a language.</summary>
-    public static event EventHandler? Changed;
+    /// <summary>The user's choice, or <c>null</c> to follow the startup system culture.</summary>
+    public static GalleryLanguage? Selected { get; private set; }
 
     /// <summary>
-    /// The language the user picked, or <c>null</c> to follow the culture the app started with
-    /// (the system language). Setting it raises <see cref="Changed"/>.
+    /// Switches the whole gallery to a language, or returns to the system's original culture.
+    /// This is deliberately a session preference: reopening the demo starts from the device again.
     /// </summary>
-    public static GalleryLanguage? Selected
+    public static void Select(GalleryLanguage? language)
     {
-        get => _selected;
-        set
-        {
-            if (ReferenceEquals(_selected, value))
-                return;
+        if (language is not null && !All.Contains(language))
+            throw new ArgumentException("The gallery does not offer that language.", nameof(language));
 
-            _selected = value;
-            Changed?.Invoke(null, EventArgs.Empty);
-        }
+        Selected = language;
+        MavLocalization.SetCulture(language?.Culture ?? SystemCulture);
     }
 
     /// <summary>

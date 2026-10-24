@@ -180,14 +180,17 @@ public partial class MainView : UserControl
                 isSelected: ReferenceEquals(language, active));
         }
 
-        menu.Show(Page);
+        // Anchor to the globe action in the app bar rather than to the full page: otherwise
+        // the popup would open at the bottom of the screen, away from the button just tapped.
+        var globe = Nav.GetVisualDescendants().OfType<MavTopAppBar>().FirstOrDefault()?
+            .Actions.OfType<MavIconButton>().FirstOrDefault(button => button.Icon == MavIcons.Globe);
+        menu.Show(globe ?? Page);
     }
 
     /// <summary>Switches the gallery to <paramref name="language"/>; <c>null</c> follows the system again.</summary>
     private void UseLanguage(GalleryLanguage? language)
     {
-        GalleryLanguage.Selected = language;
-        MavLocalization.SetCulture(GalleryLanguage.Resolve().Culture);
+        GalleryLanguage.Select(language);
 
         // Say what happened in the new language: the snackbar is built after the switch.
         MavSnackbar.Show(

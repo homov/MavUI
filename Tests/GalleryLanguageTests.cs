@@ -17,7 +17,7 @@ public class GalleryLanguageTests
 {
     private static void Reset()
     {
-        GalleryLanguage.Selected = null;
+        GalleryLanguage.Select(null);
         GalleryLanguage.SystemCulture = new CultureInfo("en-US");
         MavLocalization.Current = GalleryStrings.Instance;
         MavLocalization.SetCulture(new CultureInfo("en-US"));
@@ -56,13 +56,13 @@ public class GalleryLanguageTests
         try
         {
             Reset();
-            GalleryLanguage.Selected = GalleryLanguage.Italian;
+            GalleryLanguage.Select(GalleryLanguage.Italian);
 
             Assert.Same(GalleryLanguage.Italian, GalleryLanguage.Resolve());
             Assert.Same(GalleryLanguage.Italian, GalleryLanguage.Resolve(new CultureInfo("de-DE")));
 
             // "System" gives the culture back its say.
-            GalleryLanguage.Selected = null;
+            GalleryLanguage.Select(null);
             Assert.Same(GalleryLanguage.German, GalleryLanguage.Resolve(new CultureInfo("de-AT")));
         }
         finally
@@ -79,18 +79,18 @@ public class GalleryLanguageTests
         try
         {
             Reset();
-            GalleryLanguage.Selected = GalleryLanguage.Ukrainian;
+            GalleryLanguage.Select(GalleryLanguage.Ukrainian);
 
             Assert.Equal("Огляд", MavLocalization.Get("Nav.Overview.Label", "Overview"));
             Assert.Equal("Скасувати", MavLocalization.Get(MavLocalization.Keys.Cancel, "Cancel"));
 
             // English has no table: the fallback the AXAML was written with shows through.
-            GalleryLanguage.Selected = GalleryLanguage.English;
+            GalleryLanguage.Select(GalleryLanguage.English);
             Assert.Equal("Overview", MavLocalization.Get("Nav.Overview.Label", "Overview"));
             Assert.Equal("Cancel", MavLocalization.Get(MavLocalization.Keys.Cancel, "Cancel"));
 
             // A key no language knows keeps its fallback too.
-            GalleryLanguage.Selected = GalleryLanguage.Ukrainian;
+            GalleryLanguage.Select(GalleryLanguage.Ukrainian);
             Assert.Equal("Not translated", MavLocalization.Get("No.Such.Key", "Not translated"));
         }
         finally
@@ -163,14 +163,14 @@ public class GalleryLanguageTests
             Assert.Same(GalleryStrings.Instance, MavLocalization.Current);
 
             // Picking a language by hand and going back to "System" returns to French.
-            GalleryLanguage.Selected = GalleryLanguage.Spanish;
+            GalleryLanguage.Select(GalleryLanguage.Spanish);
             Assert.Same(GalleryLanguage.Spanish, GalleryLanguage.Resolve());
-            GalleryLanguage.Selected = null;
+            GalleryLanguage.Select(null);
             Assert.Same(GalleryLanguage.French, GalleryLanguage.Resolve());
         }
         finally
         {
-            GalleryLanguage.Selected = previousSelection;
+            GalleryLanguage.Select(previousSelection);
             MavLocalization.Current = previous;
             MavLocalization.SetCulture(previousCulture);
             MavTheme.Configure(motion: previousMotion);

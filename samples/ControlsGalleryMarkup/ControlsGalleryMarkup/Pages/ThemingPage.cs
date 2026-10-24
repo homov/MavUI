@@ -7,6 +7,7 @@ using Avalonia.Controls;
 using Avalonia.Media;
 using Mav;
 using Mav.Controls;
+using Mav.ControlsGallery.Shared;
 using Mav.Primitives;
 using Mav.Theming;
 using static Mav.ControlsGalleryMarkup.Pages.PageParts;
@@ -76,19 +77,31 @@ public static class ThemingPage
             "Theming.Localization.Body", "Switch language with one call; no event subscriptions and no manual text reassignment.",
             Card(
                 L("Theming.Language.Title", "Language switch"),
-                "Theming.Language.CardBody", "The greeting and dialog labels use the same provider. The language buttons call SetCulture; attached texts update automatically, without event handlers.",
-                "MavLocalization.SetCulture(new CultureInfo(\"ru-RU\")) · {mav:Loc Key, Fallback=...}",
+                "Theming.Language.CardBody", "The device language is selected automatically. Choose another language here; the whole gallery and its dialogs update at once.",
+                L("Theming.Language.Hint", "System follows your device language; tap a language to switch the whole gallery."),
                 Stack(8,
                     new MavLabel(L("Theming.Greeting", "Hello"), MavTypeRole.HeadlineSmall),
-                    Row(
-                        Button(null, "English", MavButtonVariant.Outlined, null, () => MavLocalization.SetCulture(new CultureInfo("en-US"))),
-                        Button(null, "Русский", MavButtonVariant.Outlined, null, () => MavLocalization.SetCulture(new CultureInfo("ru-RU"))),
+                    Row(LanguageButtons().Append(
                         WithDialog(
                             new MavButton(L("Theming.Lang.OpenDialog", "Open dialog"), MavButtonVariant.Filled, null),
                             new MavDialog()
                                 .Title(L("Theming.Dialog.Title", "Delete project?"))
                                 .Message(L("Theming.Dialog.Message", "This action cannot be undone."))
-                                .DismissText(MavLocalization.Cancel)))))));
+                                .DismissText(MavLocalization.Cancel))).ToArray())))));
+
+    /// <summary>The system button and a button for each available language; only the user's choice is filled.</summary>
+    private static IEnumerable<Control> LanguageButtons()
+    {
+        yield return Button(null, L("Language.System", "System"),
+            GalleryLanguage.Selected is null ? MavButtonVariant.Filled : MavButtonVariant.Outlined,
+            null, () => GalleryLanguage.Select(null));
+        foreach (var language in GalleryLanguage.All)
+        {
+            yield return Button(null, language.Name,
+                ReferenceEquals(language, GalleryLanguage.Selected) ? MavButtonVariant.Filled : MavButtonVariant.Outlined,
+                null, () => GalleryLanguage.Select(language));
+        }
+    }
 
     private static Control Button(string? key, string english, MavButtonVariant variant, string? icon, Action onClick) =>
         new MavButton(key is null ? english : L(key, english), variant, icon).OnClicked(onClick);

@@ -17,7 +17,9 @@ public sealed class GalleryStrings : IMavLocalizationProvider
 
     public string? GetString(string key, CultureInfo? culture = null)
     {
-        var language = GalleryLanguage.Resolve(culture);
+        // Honor the requested culture (the library supplies CurrentUICulture). Select() keeps it
+        // in sync with the user's choice; an explicit culture must not be masked by the picker.
+        var language = GalleryLanguage.FromCulture(culture ?? CultureInfo.CurrentUICulture);
         if (language.Strings is null || !Tables.TryGetValue(language.Code, out var table))
             return null;
 

@@ -144,21 +144,19 @@ public partial class ThemingPage : UserControl
             LanguageRow.Children.Add(button);
         }
 
-        var current = GalleryLanguage.Resolve();
         Add(
             MavLocalization.Get("Language.System", "System"),
             GalleryLanguage.Selected is null,
             () => UseLanguage(null));
 
         foreach (var language in GalleryLanguage.All)
-            Add(language.Name, ReferenceEquals(language, current), () => UseLanguage(language));
+            Add(language.Name, ReferenceEquals(language, GalleryLanguage.Selected), () => UseLanguage(language));
     }
 
     /// <summary>Switches the gallery to <paramref name="language"/>; <c>null</c> follows the system again.</summary>
     private static void UseLanguage(GalleryLanguage? language)
     {
-        GalleryLanguage.Selected = language;
-        MavLocalization.SetCulture(GalleryLanguage.Resolve().Culture);
+        GalleryLanguage.Select(language);
     }
 
     private void RefreshThemed()

@@ -32,7 +32,9 @@ public static class GalleryStartup
         GalleryLanguage.SystemCulture = CultureInfo.CurrentUICulture;
 
         MavLocalization.Current = GalleryStrings.Instance;
-        MavLocalization.SetCulture(GalleryLanguage.Resolve().Culture);
+        // Keep the region for formatting too (fr-CA is not fr-FR). Unsupported languages retain
+        // their regional formatting, while the UI uses its English fallback.
+        GalleryLanguage.Select(null);
         MavTheme.Configure(motion: DefaultMotion());
     }
 }

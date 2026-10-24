@@ -173,7 +173,7 @@
           <mav:MavCard Variant="Outlined" CardPadding="16">
             <StackPanel Spacing="10">
               <mav:MavLabel Role="TitleMedium" Text="{mav:Loc Theming.Language.Title, Fallback=Language switch}" />
-              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Language.CardBody, Fallback=The greeting and dialog labels use the same provider. The language buttons call SetCulture; attached texts update automatically\, without event handlers.}" />
+              <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Language.CardBody, Fallback=The device language is selected automatically. Choose another language here; the whole gallery and its dialogs update at once.}" />
               <StackPanel Spacing="8">
                 <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Theming.Greeting, Fallback=Hello}" />
                 <WrapPanel>
@@ -188,7 +188,7 @@
                   </mav:MavButton>
                 </WrapPanel>
               </StackPanel>
-              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Language.Hint, Fallback=GalleryLanguage.Selected = language · MavLocalization.SetCulture(language.Culture) · {mav:Loc Key\, Fallback=…}}" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Language.Hint, Fallback=System follows your device language; tap a language to switch the whole gallery.}" />
             </StackPanel>
           </mav:MavCard>
         </StackPanel>

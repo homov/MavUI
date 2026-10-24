@@ -173,8 +173,7 @@ public class ControlsGalleryShellTests
         try
         {
             MavLocalization.Current = GalleryStrings.Instance;
-            GalleryLanguage.Selected = GalleryLanguage.Ukrainian;
-            MavLocalization.SetCulture(GalleryLanguage.Ukrainian.Culture);
+            GalleryLanguage.Select(GalleryLanguage.Ukrainian);
 
             Assert.Equal("Скасувати", MavLocalization.Cancel);
             Assert.Equal("OK", MavLocalization.Ok);
@@ -186,14 +185,13 @@ public class ControlsGalleryShellTests
             Assert.Equal("yyyy-mm-dd", MavLocalization.DateFieldHint);
 
             // English carries no table of its own: the fallback the library was written with shows through.
-            GalleryLanguage.Selected = GalleryLanguage.English;
-            MavLocalization.SetCulture(GalleryLanguage.English.Culture);
+            GalleryLanguage.Select(GalleryLanguage.English);
             Assert.Equal("Cancel", MavLocalization.Cancel);
             Assert.Equal("Language switch", MavLocalization.Get("Theming.Language.Title", "Language switch"));
         }
         finally
         {
-            GalleryLanguage.Selected = previousSelection;
+            GalleryLanguage.Select(previousSelection);
             MavLocalization.Current = previousProvider;
             MavLocalization.SetCulture(previousCulture);
         }

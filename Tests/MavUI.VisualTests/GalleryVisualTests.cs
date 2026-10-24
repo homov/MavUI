@@ -5,7 +5,7 @@ using Avalonia.Headless.XUnit;
 using Avalonia.VisualTree;
 using Xunit;
 using global::Mav.Controls;
-using global::Mav.ControlsGallery.Localization;
+using global::Mav.ControlsGallery.Shared;
 using global::Mav.ControlsGallery.Shell;
 using global::Mav.Primitives;
 using global::Mav.Theming;

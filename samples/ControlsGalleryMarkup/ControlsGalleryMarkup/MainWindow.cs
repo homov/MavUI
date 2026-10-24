@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Layout;
+using Avalonia.VisualTree;
 using Mav;
 using Mav.Controls;
 using Mav.ControlsGallery.Shared;
@@ -190,14 +191,16 @@ public sealed class MainWindow : MavWindow
                 isSelected: ReferenceEquals(language, active));
         }
 
-        menu.Show(_page);
+        // Anchor to the globe icon, not to the page rectangle.
+        var globe = _nav?.GetVisualDescendants().OfType<MavTopAppBar>().FirstOrDefault()?
+            .Actions.OfType<MavIconButton>().FirstOrDefault(button => button.Icon == MavIcons.Globe);
+        menu.Show(globe ?? _page);
     }
 
     /// <summary>Switches the gallery to <paramref name="language"/>; <c>null</c> follows the system again.</summary>
     private static void UseLanguage(GalleryLanguage? language)
     {
-        GalleryLanguage.Selected = language;
-        MavLocalization.SetCulture(GalleryLanguage.Resolve().Culture);
+        GalleryLanguage.Select(language);
     }
 
     private void ShowAbout()
