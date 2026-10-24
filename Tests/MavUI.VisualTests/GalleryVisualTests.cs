@@ -168,9 +168,10 @@ public class GalleryVisualTests
         if (pills.Count == 0)
             failures.Add("no action pill is drawn.");
 
+        var origin = menu.TranslatePoint(default, shell.Window) ?? default;
         Shots.Note($"fab-menu-open.png  {ViewportWidth:0}x{ViewportHeight:0}  {size / 1024.0:0.0} KB  " +
                    $"open={menu.IsOpen}  fab={menu.Bounds.Width:0}x{menu.Bounds.Height:0} at " +
-                   $"{menu.Bounds.X:0},{menu.Bounds.Y:0}  pills={pills.Count}");
+                   $"{origin.X:0},{origin.Y:0} in the window  pillShaped={pills.Count}");
 
         Assert.True(failures.Count == 0, string.Join(Environment.NewLine, failures));
     }
