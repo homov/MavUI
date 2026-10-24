@@ -7,6 +7,7 @@ using Xunit;
 using global::Mav.Controls;
 using global::Mav.ControlsGallery.Localization;
 using global::Mav.ControlsGallery.Shell;
+using global::Mav.Primitives;
 using global::Mav.Theming;
 
 namespace Mav.VisualTests;
@@ -157,7 +158,8 @@ public class GalleryVisualTests
 
         var size = Shots.Capture(shell.Window, "fab-menu-open");
 
-        var pills = menu.GetVisualDescendants().OfType<MavInkSurface>()
+        // The pills live in the overlay, so they are found from the window, not from the page.
+        var pills = shell.Window.GetVisualDescendants().OfType<MavInkSurface>()
             .Where(surface => surface.MinHeight > 0 && surface.CornerRadius > 20)
             .ToList();
         var failures = new List<string>();
