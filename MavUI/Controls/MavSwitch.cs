@@ -41,6 +41,9 @@ public class MavSwitch : Control
         AvaloniaProperty.Register<MavSwitch, object?>(nameof(CommandParameter));
 
     private double _progress;
+
+    /// <summary>Thumb position: 0 off, 1 on. Exposed for tests.</summary>
+    internal double ToggleProgress => _progress;
     private double _pressProgress;
     private bool _hovered;
     private bool _pressed;
@@ -207,7 +210,7 @@ public class MavSwitch : Control
     private void OnToggledChanged(bool on)
     {
         var target = on ? 1.0 : 0.0;
-        MavMotion.Animate(this, "sw_toggle", _progress, target, MavMotion.Short4, MavMotion.CubicOut, v =>
+        MavMotion.AnimateState(this, "sw_toggle", _progress, target, MavMotion.Short4, MavMotion.CubicOut, v =>
         {
             _progress = v;
             InvalidateVisual();

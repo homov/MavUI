@@ -230,24 +230,12 @@ public class MavRadioButton : MavContentView
             }
         }
 
-        var target = on ? 1.0 : 0.0;
-        if (TopLevel.GetTopLevel(this) is null)
-        {
-            // Nothing on screen yet (built by an items host, restored from a binding, created in
-            // code before Show). Animating from 0 here left the dot empty until a frame ran, which
-            // read as "the current choice is not marked"; snap to the state instead.
-            MavMotion.Cancel(this, "rb_dot");
-            _dotProgress = target;
-            _glyph.InvalidateVisual();
-        }
-        else
-        {
-            MavMotion.Animate(this, "rb_dot", _dotProgress, target, MavMotion.Short3, MavMotion.CubicOut, v =>
+        MavMotion.AnimateState(this, "rb_dot", _dotProgress, on ? 1.0 : 0.0, MavMotion.Short3, MavMotion.CubicOut,
+            v =>
             {
                 _dotProgress = v;
                 _glyph.InvalidateVisual();
             });
-        }
         CheckedChanged?.Invoke(this, on);
         if (on)
         {

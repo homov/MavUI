@@ -93,6 +93,13 @@ sandbox (their signed link points at Azure blob storage, which is outside the al
 - Closing snackbar/tooltip/search/dialog/popover overlays externally (top-level close,
   page teardown or direct handle disposal) now clears their active handles, timers and
   open state instead of leaving stale static/instance references.
+- A radio, check box or switch whose state is set before it is on screen (a binding, an items
+  host, `new MavRadioButton(...) { IsChecked = true }`) now draws that state at once instead of
+  animating from the unchecked state. Waiting for the first frame left the current choice looking
+  unselected: the gallery's Overview page marked the active seed color only in its state, not on
+  screen. The switch/check/radio share `MavMotion.AnimateState`, which snaps while the control has
+  no top level and animates once it is visible. The Overview seed row also keeps its radio controls
+  and updates the mark in place instead of rebuilding the row on every theme change.
 - The gallery's Layout page no longer throws on the web. Its `MavWindow` demo used to sit in
   `UserControl.Resources`, so every load of the page built a `Window`; a browser build has no
   windowing platform and throws "Browser doesn't support windowing platform" for that. The

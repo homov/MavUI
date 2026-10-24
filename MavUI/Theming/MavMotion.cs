@@ -165,6 +165,31 @@ public static class MavMotion
         }
     }
 
+    /// <summary>
+    /// Applies a checked/toggled state: animates it when the owner is on screen, snaps to the target
+    /// when it is not. Items hosts and bindings set state before a control is attached; animating
+    /// from 0 there left the control drawn in the old state until a frame ran, which read as
+    /// "the current choice is not marked" (and never showed up in a screenshot).
+    /// </summary>
+    public static void AnimateState(
+        Visual owner,
+        string name,
+        double from,
+        double to,
+        uint length,
+        Func<double, double>? easing,
+        Action<double> callback)
+    {
+        if (TopLevel.GetTopLevel(owner) is null)
+        {
+            Cancel(owner, name);
+            callback(to);
+            return;
+        }
+
+        Animate(owner, name, from, to, length, easing, callback);
+    }
+
     /// <summary>Stops the animation with the given <paramref name="name"/> on <paramref name="owner"/>.</summary>
     public static void Cancel(Visual owner, string name)
     {

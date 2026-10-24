@@ -43,6 +43,9 @@ public class MavCheckBox : MavContentView
     private readonly CheckBoxGlyph _box;
     private readonly TextBlock _label;
     private double _animProgress;
+
+    /// <summary>How much of the mark is drawn: 0 off, 1 on. Exposed for tests.</summary>
+    internal double AnimationProgress => _animProgress;
     private bool _hovered;
     private bool _pressed;
 
@@ -286,7 +289,7 @@ public class MavCheckBox : MavContentView
     {
         var active = IsChecked || IsIndeterminate;
         var target = active ? 1.0 : 0.0;
-        MavMotion.Animate(this, "cb_anim", _animProgress, target, MavMotion.Short3, MavMotion.CubicOut, v =>
+        MavMotion.AnimateState(this, "cb_anim", _animProgress, target, MavMotion.Short3, MavMotion.CubicOut, v =>
         {
             _animProgress = v;
             _box.InvalidateVisual();

@@ -23,6 +23,16 @@ public class ComponentBehaviorTests
     }
 
     [AvaloniaFact]
+    public void A_check_box_and_a_switch_set_off_screen_paint_their_state_at_once()
+    {
+        var checkBox = new MavCheckBox { IsChecked = true };
+        Assert.Equal(1.0, checkBox.AnimationProgress, 3);
+
+        var toggle = new MavSwitch { IsToggled = true };
+        Assert.Equal(1.0, toggle.ToggleProgress, 3);
+    }
+
+    [AvaloniaFact]
     public void Banner_shows_the_message_it_was_given()
     {
         var banner = new MavBanner { Message = "Saved" };
