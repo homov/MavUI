@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
 using System.Linq;
 using Avalonia.Controls.Primitives;
+using Avalonia.Threading;
 using Avalonia.VisualTree;
 using System.Globalization;
 using Mav;
@@ -184,14 +185,18 @@ public class ControlsGalleryShellTests
             Assert.Equal("Overview", nav.CurrentPage!.Title);
 
             GalleryLanguage.Select(GalleryLanguage.Ukrainian);
+            Dispatcher.UIThread.RunJobs(); // Let ContentControl attach the rebuilt Overview page.
             Assert.Equal("Огляд", nav.CurrentPage.Title);
-            Assert.Contains(view.GetVisualDescendants().OfType<TextBlock>(),
-                label => label.Text == "Material Design 3 для Avalonia");
+            Assert.Equal("Material Design 3 для Avalonia",
+                view.GetVisualDescendants().OfType<TextBlock>()
+                    .First(label => label.Text?.StartsWith("Material Design 3") == true).Text);
 
             GalleryLanguage.Select(GalleryLanguage.German);
+            Dispatcher.UIThread.RunJobs();
             Assert.Equal("Übersicht", nav.CurrentPage.Title);
-            Assert.Contains(view.GetVisualDescendants().OfType<TextBlock>(),
-                label => label.Text == "Material Design 3 für Avalonia");
+            Assert.Equal("Material Design 3 für Avalonia",
+                view.GetVisualDescendants().OfType<TextBlock>()
+                    .First(label => label.Text?.StartsWith("Material Design 3") == true).Text);
 
             GalleryLanguage.Select(null);
             Assert.Equal("Overview", nav.CurrentPage.Title);
