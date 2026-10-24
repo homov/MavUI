@@ -6,6 +6,7 @@ using Avalonia.Layout;
 using Avalonia.Media;
 using Mav;
 using Mav.Controls;
+using Mav.ControlsGallery.Shared;
 using Mav.Primitives;
 using Mav.Theming;
 
@@ -38,11 +39,6 @@ public partial class ThemingPage : UserControl
     public static readonly GalleryCommand SetShape =
         new(p => MavTheme.Configure(shapeScale: (MavShapeScale)p!));
 
-    public static readonly GalleryCommand SetEnglish =
-        new(_ => MavLocalization.SetCulture(new CultureInfo("en-US")));
-
-    public static readonly GalleryCommand SetRussian =
-        new(_ => MavLocalization.SetCulture(new CultureInfo("ru-RU")));
 
     /// <summary>Colour swatches for every colour role; the text colour is chosen for contrast.</summary>
     public static IReadOnlyList<ThemeSample> ColorSwatches =>
@@ -121,9 +117,49 @@ public partial class ThemingPage : UserControl
             RefreshThemed();
         };
         DetachedFromVisualTree += (_, _) => MavTheme.Changed -= OnThemeChanged;
+
+        // The row shows one button per language and marks the active one.
+        MavLocalization.Observe(this, _ => RefreshLanguageRow());
     }
 
     private void OnThemeChanged(object? sender, MavTheme theme) => RefreshThemed();
+
+    /// <summary>
+    /// One button per language plus a "System" button that follows the culture the app started with.
+    /// The active language is filled; the others stay outlined.
+    /// </summary>
+    private void RefreshLanguageRow()
+    {
+        LanguageRow.Children.Clear();
+
+        void Add(string text, bool isActive, Action onClick)
+        {
+            var button = new MavButton
+            {
+                Text = text,
+                Variant = isActive ? MavButtonVariant.Filled : MavButtonVariant.Outlined,
+                Margin = new Thickness(0, 0, 8, 8),
+            };
+            button.Clicked += (_, _) => onClick();
+            LanguageRow.Children.Add(button);
+        }
+
+        var current = GalleryLanguage.Resolve();
+        Add(
+            MavLocalization.Get("Language.System", "System"),
+            GalleryLanguage.Selected is null,
+            () => UseLanguage(null));
+
+        foreach (var language in GalleryLanguage.All)
+            Add(language.Name, ReferenceEquals(language, current), () => UseLanguage(language));
+    }
+
+    /// <summary>Switches the gallery to <paramref name="language"/>; <c>null</c> follows the system again.</summary>
+    private static void UseLanguage(GalleryLanguage? language)
+    {
+        GalleryLanguage.Selected = language;
+        MavLocalization.SetCulture(GalleryLanguage.Resolve().Culture);
+    }
 
     private void RefreshThemed()
     {

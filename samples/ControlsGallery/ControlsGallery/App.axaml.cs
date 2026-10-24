@@ -2,7 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using Mav.ControlsGallery.Localization;
+using Mav.ControlsGallery.Shared;
 using Mav.ControlsGallery.Shell;
 
 namespace Mav.ControlsGallery;
@@ -17,8 +17,9 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        // Strings come from GalleryStrings; English is the AXAML fallback.
-        MavLocalization.Current = GalleryStrings.Instance;
+        // Strings come from GalleryStrings; English is the AXAML fallback. The language is the one
+        // the machine is set to, and browsers and phones start with the reduced motion profile.
+        GalleryStartup.Apply();
 
         switch (ApplicationLifetime)
         {

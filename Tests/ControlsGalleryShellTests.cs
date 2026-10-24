@@ -6,7 +6,7 @@ using Avalonia.Controls.Primitives;
 using Avalonia.VisualTree;
 using System.Globalization;
 using Mav;
-using Mav.ControlsGallery.Localization;
+using Mav.ControlsGallery.Shared;
 using Mav.ControlsGallery.Pages;
 using Mav.ControlsGallery.Shell;
 using Mav.Controls;
@@ -165,25 +165,35 @@ public class ControlsGalleryShellTests
     }
 
     [AvaloniaFact]
-    public void Library_controls_strings_are_translated_to_russian()
+    public void Library_controls_strings_follow_the_picked_language()
     {
         var previousProvider = MavLocalization.Current;
         var previousCulture = MavLocalization.Culture;
+        var previousSelection = GalleryLanguage.Selected;
         try
         {
             MavLocalization.Current = GalleryStrings.Instance;
-            MavLocalization.SetCulture(new CultureInfo("ru-RU"));
+            GalleryLanguage.Selected = GalleryLanguage.Ukrainian;
+            MavLocalization.SetCulture(GalleryLanguage.Ukrainian.Culture);
 
-            Assert.Equal("Отмена", MavLocalization.Cancel);
-            Assert.Equal("ОК", MavLocalization.Ok);
-            Assert.Equal("Выберите дату", MavLocalization.SelectDate);
-            Assert.Equal("Недавние запросы", MavLocalization.Get("SearchView.RecentSearches", "Recent searches"));
-            Assert.Equal("Смена языка", MavLocalization.Get("Theming.Language.Title", "Language switch"));
+            Assert.Equal("Скасувати", MavLocalization.Cancel);
+            Assert.Equal("OK", MavLocalization.Ok);
+            Assert.Equal("Виберіть дату", MavLocalization.SelectDate);
+            Assert.Equal("Останні запити", MavLocalization.Get("SearchView.RecentSearches", "Recent searches"));
+            Assert.Equal("Перемикання мови", MavLocalization.Get("Theming.Language.Title", "Language switch"));
+
             // The hint is parsed as ISO, so it must not be translated.
             Assert.Equal("yyyy-mm-dd", MavLocalization.DateFieldHint);
+
+            // English carries no table of its own: the fallback the library was written with shows through.
+            GalleryLanguage.Selected = GalleryLanguage.English;
+            MavLocalization.SetCulture(GalleryLanguage.English.Culture);
+            Assert.Equal("Cancel", MavLocalization.Cancel);
+            Assert.Equal("Language switch", MavLocalization.Get("Theming.Language.Title", "Language switch"));
         }
         finally
         {
+            GalleryLanguage.Selected = previousSelection;
             MavLocalization.Current = previousProvider;
             MavLocalization.SetCulture(previousCulture);
         }

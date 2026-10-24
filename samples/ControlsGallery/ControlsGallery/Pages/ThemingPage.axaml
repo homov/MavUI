@@ -177,8 +177,8 @@
               <StackPanel Spacing="8">
                 <mav:MavLabel Role="HeadlineSmall" Text="{mav:Loc Theming.Greeting, Fallback=Hello}" />
                 <WrapPanel>
-                  <mav:MavButton Variant="Outlined" Text="English" Command="{x:Static pages:ThemingPage.SetEnglish}" Margin="0,0,8,8" />
-                  <mav:MavButton Variant="Outlined" Text="Русский" Command="{x:Static pages:ThemingPage.SetRussian}" Margin="0,0,8,8" />
+                  <!-- One button per language of GalleryLanguage.All, plus "System"; built in code. -->
+                  <WrapPanel x:Name="LanguageRow" Margin="0,0,8,8" />
                   <mav:MavButton Variant="Filled" Text="{mav:Loc Theming.Lang.OpenDialog, Fallback=Open dialog}" Margin="0,0,8,8">
                     <mav:MavFlyout.Dialog>
                       <mav:MavDialog Title="{mav:Loc Theming.Dialog.Title, Fallback=Delete project?}"
@@ -188,7 +188,7 @@
                   </mav:MavButton>
                 </WrapPanel>
               </StackPanel>
-              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="MavLocalization.SetCulture(new CultureInfo(&quot;ru-RU&quot;)) · {mav:Loc Key, Fallback=...}" />
+              <mav:MavLabel Role="LabelSmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Theming.Language.Hint, Fallback=GalleryLanguage.Selected = language · MavLocalization.SetCulture(language.Culture) · {mav:Loc Key\, Fallback=…}}" />
             </StackPanel>
           </mav:MavCard>
         </StackPanel>

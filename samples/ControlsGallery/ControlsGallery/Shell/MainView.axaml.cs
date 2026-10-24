@@ -1,10 +1,10 @@
-using System.Globalization;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.VisualTree;
 using Mav;
 using Mav.Controls;
+using Mav.ControlsGallery.Shared;
 using Mav.Platform;
 using Mav.Theming;
 
@@ -36,7 +36,7 @@ public partial class MainView : UserControl
         MavOverlay.RegisterHost(this, OverlayHost);
 
         Page.AddAction(MavIcons.DarkMode, () => MavTheme.ToggleDark(), "Toggle dark mode");
-        Page.AddAction(MavIcons.Globe, ToggleLanguage, "Change language");
+        Page.AddAction(MavIcons.Globe, ShowLanguageMenu, MavLocalization.Get("Language.Title", "Language"));
         Page.AddAction(MavIcons.Info, ShowAbout, "About this gallery");
         Page.NavigationAction = OpenDrawer;
 
@@ -159,10 +159,40 @@ public partial class MainView : UserControl
         _modal.Show(Page);
     }
 
-    private void ToggleLanguage()
+    /// <summary>Opens the language menu: every language of <see cref="GalleryLanguage.All"/>, plus the system one.</summary>
+    private void ShowLanguageMenu()
     {
-        var isRussian = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ru";
-        MavLocalization.SetCulture(new CultureInfo(isRussian ? "en-US" : "ru-RU"));
+        var menu = new MavMenu();
+        var active = GalleryLanguage.Resolve();
+
+        menu.AddItem(
+            MavLocalization.Get("Language.System", "System"),
+            trailingText: active.EnglishName,
+            onSelected: () => UseLanguage(null),
+            isSelected: GalleryLanguage.Selected is null);
+
+        foreach (var language in GalleryLanguage.All)
+        {
+            menu.AddItem(
+                language.Name,
+                trailingText: language.EnglishName,
+                onSelected: () => UseLanguage(language),
+                isSelected: ReferenceEquals(language, active));
+        }
+
+        menu.Show(Page);
+    }
+
+    /// <summary>Switches the gallery to <paramref name="language"/>; <c>null</c> follows the system again.</summary>
+    private void UseLanguage(GalleryLanguage? language)
+    {
+        GalleryLanguage.Selected = language;
+        MavLocalization.SetCulture(GalleryLanguage.Resolve().Culture);
+
+        // Say what happened in the new language: the snackbar is built after the switch.
+        MavSnackbar.Show(
+            MavLocalization.Format("Language.Current", "Language: {0}", GalleryLanguage.Resolve().Name),
+            anchor: Page);
     }
 
     private void ShowAbout()

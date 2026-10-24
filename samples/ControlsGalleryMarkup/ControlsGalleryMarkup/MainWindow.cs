@@ -3,6 +3,7 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Layout;
 using Mav;
 using Mav.Controls;
+using Mav.ControlsGallery.Shared;
 using Mav.ControlsGalleryMarkup.Pages;
 using Mav.Theming;
 
@@ -77,7 +78,7 @@ public sealed class MainWindow : MavWindow
 
         _page = new MavContentPage();
         _page.AddAction(MavIcons.DarkMode, () => MavTheme.ToggleDark(), "Toggle dark mode");
-        _page.AddAction(MavIcons.Globe, ToggleLanguage, "Change language");
+        _page.AddAction(MavIcons.Globe, ShowLanguageMenu, MavLocalization.Get("Language.Title", "Language"));
         _page.AddAction(MavIcons.Info, ShowAbout, "About this gallery");
         _page.NavigationAction = OpenDrawer;
 
@@ -165,10 +166,38 @@ public sealed class MainWindow : MavWindow
     private static string Label((string Key, string English, string Subtitle, string Icon, Func<Control> Build) destination) =>
         MavLocalization.Get($"Nav.{destination.Key}.Label", destination.English);
 
-    private static void ToggleLanguage()
+    /// <summary>Opens the language menu: every language of <see cref="GalleryLanguage.All"/>, plus the system one.</summary>
+    private void ShowLanguageMenu()
     {
-        var isRussian = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ru";
-        MavLocalization.SetCulture(new System.Globalization.CultureInfo(isRussian ? "en-US" : "ru-RU"));
+        if (_page is null)
+            return;
+
+        var menu = new MavMenu();
+        var active = GalleryLanguage.Resolve();
+
+        menu.AddItem(
+            MavLocalization.Get("Language.System", "System"),
+            trailingText: active.EnglishName,
+            onSelected: () => UseLanguage(null),
+            isSelected: GalleryLanguage.Selected is null);
+
+        foreach (var language in GalleryLanguage.All)
+        {
+            menu.AddItem(
+                language.Name,
+                trailingText: language.EnglishName,
+                onSelected: () => UseLanguage(language),
+                isSelected: ReferenceEquals(language, active));
+        }
+
+        menu.Show(_page);
+    }
+
+    /// <summary>Switches the gallery to <paramref name="language"/>; <c>null</c> follows the system again.</summary>
+    private static void UseLanguage(GalleryLanguage? language)
+    {
+        GalleryLanguage.Selected = language;
+        MavLocalization.SetCulture(GalleryLanguage.Resolve().Culture);
     }
 
     private void ShowAbout()

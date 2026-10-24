@@ -5,7 +5,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
 using Mav;
-using Mav.ControlsGallery.Localization;
+using Mav.ControlsGallery.Shared;
 using Mav.ControlsGallery.Pages;
 using Xunit;
 
@@ -33,17 +33,19 @@ public class ControlsGalleryPagesTests
     }
 
     [AvaloniaFact]
-    public void Every_page_builds_and_lays_out_in_english_and_russian()
+    public void Every_page_builds_and_lays_out_in_every_language()
     {
         var previous = MavLocalization.Current;
         MavLocalization.Current = GalleryStrings.Instance;
+        var previousSelection = GalleryLanguage.Selected;
 
         var failures = new List<string>();
         try
         {
-            foreach (var culture in new[] { "en-US", "ru-RU" })
+            foreach (var language in GalleryLanguage.All)
             {
-                MavLocalization.SetCulture(new CultureInfo(culture));
+                GalleryLanguage.Selected = language;
+                MavLocalization.SetCulture(language.Culture);
                 foreach (var (name, create) in Pages())
                 {
                     try
@@ -57,13 +59,14 @@ public class ControlsGalleryPagesTests
                     }
                     catch (Exception ex)
                     {
-                        failures.Add($"{culture} {name}: {ex.GetType().Name}: {ex.Message}");
+                        failures.Add($"{language.Code} {name}: {ex.GetType().Name}: {ex.Message}");
                     }
                 }
             }
         }
         finally
         {
+            GalleryLanguage.Selected = previousSelection;
             MavLocalization.SetCulture(new CultureInfo("en-US"));
             MavLocalization.Current = previous;
         }

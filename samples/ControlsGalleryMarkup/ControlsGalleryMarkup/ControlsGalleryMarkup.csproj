@@ -28,4 +28,9 @@
                       ReferenceOutputAssembly="false" />
   </ItemGroup>
 
+  <!-- One set of languages for both galleries: shared with the AXAML gallery. -->
+  <ItemGroup>
+    <Compile Include="..\..\ControlsGallery\Shared\*.cs" Link="Shared\%(Filename)%(Extension)" />
+  </ItemGroup>
+
 </Project>
