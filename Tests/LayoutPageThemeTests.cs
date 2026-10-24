@@ -7,6 +7,7 @@ using Avalonia.VisualTree;
 using Mav;
 using Mav.Controls;
 using Mav.ControlsGallery.Pages;
+using Mav.Primitives;
 using Mav.Theming;
 using Xunit;
 
