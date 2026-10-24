@@ -4,6 +4,7 @@
 |---|---|
 | [AGENTS.md](AGENTS.md) | Справочник по библиотеке (на английском): правила, платформы, оверлеи, локализация, каталог контролов, рецепты, тестирование |
 | [FLUTTER_MATERIAL_COVERAGE.md](FLUTTER_MATERIAL_COVERAGE.md) | Сравнение покрытия Flutter Material 3: матрица 28 компонентов, отличия API и сценариев, предложения по развитию |
+| [FLUTTER_TEST_SCREENSHOTS_GUIDE.md](FLUTTER_TEST_SCREENSHOTS_GUIDE.md) | Переносимая инструкция для Flutter: тесты, снимки длинных экранов и получение отчётов из CI |
 | [NOTES.md](NOTES.md) | Рабочие заметки и отложенные решения |
 | [CI.md](CI.md) | Сборка, проверка и отчёты CI |
 | [gallery/README.md](gallery/README.md) | Галерея контролов: группы, адаптивная оболочка, запуск на разных платформах |
