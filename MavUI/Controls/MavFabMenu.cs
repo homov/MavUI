@@ -215,6 +215,9 @@ public class MavFabMenu : MavContentView, IEnumerable<MavFabMenuItem>
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
+    /// <summary>The pill container while the menu is open. Exposed for tests.</summary>
+    internal StackPanel ItemsHost => _itemsHost;
+
     /// <summary>
     /// Opens the menu if it is closed, or closes it if it is open.
     /// </summary>
