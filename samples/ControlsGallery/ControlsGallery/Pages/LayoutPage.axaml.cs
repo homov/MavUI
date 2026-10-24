@@ -9,13 +9,6 @@ namespace Mav.ControlsGallery.Pages;
 
 public partial class LayoutPage : UserControl
 {
-    /// <summary>Surface colour for the demo tiles, resolved from the current theme.</summary>
-    public static Color SurfaceContainerHigh => MavTheme.ColorOf(MavColorRole.SurfaceContainerHigh);
-
-    /// <summary>Low-emphasis brush for the inset demos, resolved from the current theme.</summary>
-    public static IBrush SurfaceContainerLowBrush =>
-        MavTheme.BrushOf(MavTheme.ColorOf(MavColorRole.SurfaceContainerLow));
-
     public static bool IsDarkMode => MavTheme.Current.IsDark;
 
     public static bool IsDesktop => !(OperatingSystem.IsBrowser() || OperatingSystem.IsAndroid());

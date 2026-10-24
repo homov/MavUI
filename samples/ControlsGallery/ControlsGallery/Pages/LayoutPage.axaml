@@ -18,7 +18,7 @@
                 <mav:MavCard Variant="Elevated" Margin="0,0,8,8"><mav:MavLabel Text="Elevated card" /></mav:MavCard>
                 <mav:MavCard Variant="Filled" Margin="0,0,8,8"><mav:MavLabel Text="Filled card" /></mav:MavCard>
                 <mav:MavCard Variant="Outlined" Margin="0,0,8,8"><mav:MavLabel Text="Outlined card" /></mav:MavCard>
-                <mav:MavSurface Width="200" Height="88" Radius="16" Elevation="2" FillColor="{x:Static pages:LayoutPage.SurfaceContainerHigh}" Margin="0,0,8,8">
+                <mav:MavSurface x:Name="DemoSurface" Width="200" Height="88" Radius="16" Elevation="2" FillColor="{DynamicResource Md.Color.SurfaceContainerHigh}" Margin="0,0,8,8">
                   <mav:MavLabel Text="MavSurface" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </mav:MavSurface>
               </WrapPanel>
@@ -185,14 +185,14 @@
               <mav:MavLabel Role="BodySmall" Secondary="True" TextWrapping="Wrap" Text="{mav:Loc Layout.Insets.CardBody, Fallback=Insets and IME handling used by MavNavigationPage on mobile; SimulatedInset/SimulatedKeyboardHeight preview them on desktop.}" />
               <pages:AdaptiveWrap MinItemWidth="300">
                 <Border>
-                  <mav:MavSafeArea Edges="All" SimulatedInset="16,24,16,24" BasePadding="8" Height="140"
-                                   Background="{x:Static pages:LayoutPage.SurfaceContainerLowBrush}">
+                  <mav:MavSafeArea x:Name="DemoSafeArea" Edges="All" SimulatedInset="16,24,16,24" BasePadding="8" Height="140"
+                                   Background="{DynamicResource Md.Brush.SurfaceContainerLow}">
                     <mav:MavLabel Text="Content inside simulated safe-area insets" HorizontalAlignment="Center" VerticalAlignment="Center" />
                   </mav:MavSafeArea>
                 </Border>
                 <Border>
-                  <mav:MavKeyboardAvoidingHost SimulatedKeyboardHeight="120" Height="220"
-                                               Background="{x:Static pages:LayoutPage.SurfaceContainerLowBrush}">
+                  <mav:MavKeyboardAvoidingHost x:Name="DemoKeyboardHost" SimulatedKeyboardHeight="120" Height="220"
+                                               Background="{DynamicResource Md.Brush.SurfaceContainerLow}">
                     <mav:MavLabel Text="Content lifted above a simulated 120 dp keyboard" HorizontalAlignment="Center" VerticalAlignment="Center" />
                   </mav:MavKeyboardAvoidingHost>
                 </Border>
