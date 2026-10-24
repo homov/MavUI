@@ -389,8 +389,10 @@ public class MavFabMenu : MavContentView, IEnumerable<MavFabMenuItem>
     }
 
     /// <summary>
-    /// Puts the pill stack just above the trigger, right edges aligned, clamped to the safe area.
-    /// Re-run when the viewport changes (rotation, keyboard) so an open menu stays on screen.
+    /// Puts the pill stack above the trigger, right edges aligned, clamped to the safe area. The
+    /// stack drops below the trigger when there is not enough room above it (a FAB near the top of
+    /// the screen, a long list of actions). Re-run when the viewport changes (rotation, keyboard)
+    /// so an open menu stays on screen.
     /// </summary>
     private void PlaceItems()
     {
@@ -403,10 +405,20 @@ public class MavFabMenu : MavContentView, IEnumerable<MavFabMenuItem>
 
         var availableWidth = Math.Max(80, overlaySize.Width - insets.Left - insets.Right - 16);
         _itemsHost.Measure(new Size(availableWidth, double.PositiveInfinity));
-        var desired = _itemsHost.DesiredSize;
+        var stack = _itemsHost.DesiredSize;
 
-        var left = Math.Max(insets.Left + 8, bounds.Right - desired.Width);
-        var top = Math.Max(insets.Top + 8, bounds.Y - desired.Height - FabGap);
+        var spaceAbove = bounds.Y - insets.Top - FabGap - 8;
+        var spaceBelow = overlaySize.Height - insets.Bottom - bounds.Bottom - FabGap - 8;
+        var above = spaceAbove >= stack.Height || spaceAbove >= spaceBelow;
+        var top = above
+            ? bounds.Y - FabGap - stack.Height
+            : bounds.Bottom + FabGap;
+
+        var left = Math.Max(insets.Left + 8, bounds.Right - stack.Width);
+        top = Math.Clamp(
+            top,
+            insets.Top + 8,
+            Math.Max(insets.Top + 8, overlaySize.Height - insets.Bottom - stack.Height - 8));
         _itemsHost.Margin = new Thickness(left, top, 0, 0);
     }
 

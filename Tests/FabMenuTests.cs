@@ -21,7 +21,8 @@ public class FabMenuTests
 {
     private const double FabGap = 12;
 
-    private const double WindowSize = 420;
+    private const double WindowWidth = 420;
+    private const double WindowHeight = 600;
 
     /// <summary>
     /// The pills float in the overlay, whose host belongs to <see cref="MavNavigationPage"/>: the
@@ -29,7 +30,7 @@ public class FabMenuTests
     /// stacks its children from the top, like the gallery's wrap panel: with the pills in the
     /// menu's own layout, opening moved the FAB down and left the pills where it used to be.
     /// </summary>
-    private static (Window Window, MavFabMenu Menu) ShowMenu()
+    private static (Window Window, MavFabMenu Menu) ShowMenu(double spacerHeight = 320)
     {
         var menu = new MavFabMenu()
             .AddItem("New document", MavIcons.NoteAdd)
@@ -37,10 +38,11 @@ public class FabMenuTests
 
         var column = new StackPanel { Orientation = Orientation.Vertical, Spacing = 8 };
         column.Children.Add(new TextBlock { Text = "Actions" });
+        column.Children.Add(new Border { Height = spacerHeight });
         column.Children.Add(menu);
 
         var navigation = new MavNavigationPage(new MavContentPage("Root", column));
-        var window = new Window { Width = WindowSize, Height = WindowSize, Content = navigation };
+        var window = new Window { Width = WindowWidth, Height = WindowHeight, Content = navigation };
         window.Show();
         LayOut(window);
         return (window, menu);
@@ -49,8 +51,8 @@ public class FabMenuTests
     private static void LayOut(Window window)
     {
         Dispatcher.UIThread.RunJobs();
-        window.Measure(new Size(WindowSize, WindowSize));
-        window.Arrange(new Rect(0, 0, WindowSize, WindowSize));
+        window.Measure(new Size(WindowWidth, WindowHeight));
+        window.Arrange(new Rect(0, 0, WindowWidth, WindowHeight));
     }
 
     private static Point Origin(Visual visual, Visual relativeTo) =>
@@ -145,6 +147,32 @@ public class FabMenuTests
     }
 
     [AvaloniaFact]
+    public void With_no_room_above_the_fab_the_pills_open_below_it()
+    {
+        var previousMotion = MavTheme.Motion;
+        MavTheme.Configure(motion: MavMotionScheme.None);
+        // A FAB near the top of the screen: the pills would not fit above it.
+        var (window, menu) = ShowMenu(spacerHeight: 0);
+        try
+        {
+            menu.Open();
+            LayOut(window);
+
+            var fab = Origin(menu, window);
+            var stack = Origin(menu.ItemsHost, window);
+
+            Assert.True(stack.Y >= fab.Y + menu.Bounds.Height - 0.5);
+            Assert.Equal(fab.X + menu.Bounds.Width, stack.X + menu.ItemsHost.Bounds.Width, 1);
+        }
+        finally
+        {
+            while (MavOverlay.TryDismissTop()) { }
+            window.Close();
+            MavTheme.Configure(motion: previousMotion);
+        }
+    }
+
+    [AvaloniaFact]
     public void IsOpen_set_before_the_menu_is_on_screen_opens_it_when_it_attaches()
     {
         var previousMotion = MavTheme.Motion;
@@ -157,8 +185,8 @@ public class FabMenuTests
 
             window = new Window
             {
-                Width = WindowSize,
-                Height = WindowSize,
+                Width = WindowWidth,
+                Height = WindowHeight,
                 Content = new MavNavigationPage(new MavContentPage("Root", menu)),
             };
             window.Show();
