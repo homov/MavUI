@@ -7,6 +7,7 @@ using Avalonia.Data;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Metadata;
+using Mav.Platform;
 using Mav.Primitives;
 using Mav.Theming;
 
@@ -17,6 +18,9 @@ namespace Mav.Controls;
 /// </summary>
 public class MavFabMenu : MavContentView, IEnumerable<MavFabMenuItem>
 {
+    /// <summary>Distance between the FAB and the bottom pill of the open menu.</summary>
+    private const double FabGap = 12;
+
     public static readonly StyledProperty<bool> IsOpenProperty =
         AvaloniaProperty.Register<MavFabMenu, bool>(nameof(IsOpen), defaultBindingMode: BindingMode.TwoWay);
 
@@ -40,9 +44,11 @@ public class MavFabMenu : MavContentView, IEnumerable<MavFabMenuItem>
     private readonly StackPanel _itemsHost;
     private readonly MavInkSurface _trigger;
     private readonly MavIcon _triggerIcon;
+    private IDisposable? _overlay;
     private string _closedIcon = MavIcons.Add;
     private string _openIcon = MavIcons.Close;
     private bool _isOpen;
+    private bool _pendingOpen;
 
     public event EventHandler<int>? ItemClicked;
     public event EventHandler<bool>? OpenChanged;
@@ -95,13 +101,15 @@ public class MavFabMenu : MavContentView, IEnumerable<MavFabMenuItem>
             RebuildItems();
         };
 
+        // The pills live in the overlay while the menu is open (see ShowItems), so they never
+        // take part in this control's layout: opening the menu must not move the FAB.
         _itemsHost = new StackPanel
         {
             Orientation = Orientation.Vertical,
             Spacing = 10,
             HorizontalAlignment = HorizontalAlignment.Right,
+            VerticalAlignment = VerticalAlignment.Bottom,
             IsVisible = false,
-            Margin = new Thickness(0, 0, 0, 12),
         };
 
         _triggerIcon = new MavIcon(_closedIcon, 24) { UseThemeDefaultColor = false };
@@ -116,15 +124,17 @@ public class MavFabMenu : MavContentView, IEnumerable<MavFabMenuItem>
         };
         _trigger.Clicked += (_, _) => Toggle();
 
-        var root = new StackPanel
-        {
-            Orientation = Orientation.Vertical,
-            HorizontalAlignment = HorizontalAlignment.Right,
-        };
-        root.Children.Add(_itemsHost);
-        root.Children.Add(_trigger);
+        Child = _trigger;
 
-        Child = root;
+        // IsOpen can be set before the menu is on screen (a binding, a restored view); the overlay
+        // needs a top level, so opening waits for attach.
+        AttachedToVisualTree += (_, _) =>
+        {
+            if (_isOpen && _overlay is null)
+                ShowItems();
+        };
+        DetachedFromVisualTree += (_, _) => DisposeOverlay();
+
         MavTheme.Observe(this, (self, theme) => self.ApplyTheme(theme));
     }
 
@@ -281,24 +291,120 @@ public class MavFabMenu : MavContentView, IEnumerable<MavFabMenuItem>
         ApplyTheme(MavTheme.Current);
 
         if (open)
-        {
-            _itemsHost.IsVisible = true;
-            _itemsHost.Opacity = 0;
-            _itemsHost.SetTranslationY(12);
-            MavMotion.Animate(this, "fab_items", 0, 1, MavMotion.Medium1, MavMotion.CubicOut, v =>
-            {
-                _itemsHost.Opacity = v;
-                _itemsHost.SetTranslationY(12 * (1 - v));
-            });
-        }
+            ShowItems();
         else
+            HideItems();
+    }
+
+    /// <summary>
+    /// Shows the action pills above the FAB in the overlay. They are not part of the menu's own
+    /// layout: with them in a vertical stack above the trigger, opening the menu made the control
+    /// taller, and a parent that lays children from the top (a wrap panel, a grid cell) pushed the
+    /// FAB down while the pills appeared over where it used to be.
+    /// </summary>
+    private void ShowItems()
+    {
+        if (_overlay is not null) return;
+
+        if (MavOverlay.EnsureOverlayRoot(_trigger) is null)
         {
-            MavMotion.Animate(this, "fab_items", 1, 0, MavMotion.Short3, MavMotion.CubicIn, v =>
-            {
-                _itemsHost.Opacity = v;
-                _itemsHost.SetTranslationY(8 * (1 - v));
-            }, () => _itemsHost.IsVisible = false);
+            _pendingOpen = true;
+            return;
         }
+
+        _pendingOpen = false;
+        RebuildItems();
+
+        _itemsHost.IsVisible = true;
+        _itemsHost.Opacity = 0;
+        _itemsHost.HorizontalAlignment = HorizontalAlignment.Left;
+        _itemsHost.VerticalAlignment = VerticalAlignment.Top;
+        _itemsHost.SetTranslationY(12);
+        PlaceItems();
+
+        IDisposable? handle = null;
+        handle = MavOverlay.Show(
+            _trigger,
+            _itemsHost,
+            scrimColor: Colors.Transparent,
+            onScrimTap: () => IsOpen = false,
+            onViewportChanged: PlaceItems,
+            // The overlay can also close on its own (its page is removed, the top level closes).
+            // Reset the fields the next Open relies on, but only for this handle.
+            onClosed: () =>
+            {
+                if (!ReferenceEquals(_overlay, handle))
+                    return;
+
+                _overlay = null;
+                _itemsHost.IsVisible = false;
+                _itemsHost.Opacity = 1;
+                _itemsHost.SetTranslationY(0);
+            });
+        _overlay = handle;
+
+        MavMotion.Animate(this, "fab_items", 0, 1, MavMotion.Medium1, MavMotion.CubicOut, v =>
+        {
+            _itemsHost.Opacity = v;
+            _itemsHost.SetTranslationY(12 * (1 - v));
+        });
+    }
+
+    /// <summary>Fades the pills out and releases the overlay.</summary>
+    private void HideItems()
+    {
+        if (_overlay is null)
+        {
+            _pendingOpen = false;
+            return;
+        }
+
+        var handle = _overlay;
+        _overlay = null;
+        MavMotion.Animate(this, "fab_items", _itemsHost.Opacity, 0, MavMotion.Short3, MavMotion.CubicIn, v =>
+        {
+            _itemsHost.Opacity = v;
+            _itemsHost.SetTranslationY(8 * (1 - v));
+        }, () =>
+        {
+            handle.Dispose();
+            _itemsHost.IsVisible = false;
+            _itemsHost.Opacity = 1;
+            _itemsHost.SetTranslationY(0);
+        });
+    }
+
+    /// <summary>Closes the overlay without waiting for the fade (page teardown).</summary>
+    private void DisposeOverlay()
+    {
+        _overlay?.Dispose();
+        _overlay = null;
+        _pendingOpen = false;
+        _itemsHost.IsVisible = false;
+        _itemsHost.Opacity = 1;
+        _itemsHost.SetTranslationY(0);
+    }
+
+    /// <summary>
+    /// Puts the pill stack just above the trigger, right edges aligned, clamped to the safe area.
+    /// Re-run when the viewport changes (rotation, keyboard) so an open menu stays on screen.
+    /// </summary>
+    private void PlaceItems()
+    {
+        var overlayRoot = MavOverlay.EnsureOverlayRoot(_trigger);
+        if (overlayRoot is null) return;
+
+        var bounds = MavOverlay.BoundsInOverlay(_trigger, overlayRoot);
+        var overlaySize = MavOverlay.GetOverlaySize(_trigger);
+        var insets = MavOverlay.SafeAreaOf(_trigger);
+
+        var availableWidth = Math.Max(80, overlaySize.Width - insets.Left - insets.Right - 16);
+        _itemsHost.Measure(new Size(availableWidth, double.PositiveInfinity));
+        var desired = _itemsHost.DesiredSize;
+
+        var left = Math.Max(insets.Left + 8, bounds.Right - desired.Width);
+        var top = Math.Max(insets.Top + 8, bounds.Y - desired.Height - FabGap);
+        _itemsHost.Margin = new Thickness(left, top, 0, 0);
     }
 
     private void ApplyTheme(MavTheme t)
