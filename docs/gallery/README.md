@@ -1,49 +1,70 @@
-# Mav Control Gallery
+# Демо-галерея Mav
 
-A full-featured showcase for every control in `Mav`, grouped by purpose and
-adaptive across desktop, web (WebAssembly), Android phones and tablets.
+Галерея компонентов `Mav`, сгруппированных по назначению. Одна и та же AXAML-галерея работает на
+десктопе, в браузере (WebAssembly), на телефонах и планшетах Android. Вариант на AMarkup удалён;
+`ControlsGalleryMarkup` и корневая папка `markup/` больше не нужны для сборки.
 
-## Groups
+## Разделы
 
-| Group | Contents |
+| Раздел | Компоненты |
 |---|---|
-| Overview | Theme controls, 15 type roles, color roles, shape/elevation, motion |
-| Actions | MavButton, MavIconButton, MavFab, MavExtendedFab, MavButtonGroup, MavSplitButton, MavFabMenu |
-| Inputs | MavTextField, MavTextArea, MavPinInput, MavNumberBox, MavTagInput, MavSearchBar, MavFormValidator |
-| Selection | MavSwitch, MavCheckBox, MavRadioButton/Group, MavSlider, MavRangeSlider, MavSegmentedButton, MavChip/Group, MavSelect, MavComboBox, MavRatingBar |
-| Pickers | Date/time/range fields, calendar grid, clock dial, color picker and modal helpers |
-| Navigation | App bars, navigation bar/rail/drawer, modal drawer, tabs, breadcrumbs, pagination, stepper, toolbar, contextual bar, adaptive scaffold, nested page stack |
-| Layout | Cards, surfaces, labels, dividers, badges, expansion panels, settings, split view, carousel, scroll viewer, avatars, file drop, chat bubbles, safe area, keyboard host, MavWindow |
-| Collections | MavList/ListItem/SwipeAction, MavDataTable (table and card modes), MavTreeView, MavTimeline |
-| Feedback | Dialogs, sheets, snackbar, banner, info bars, empty state, progress variants, skeleton, refresh, radial gauge, sparkline |
-| Overlays | Menu, popover, tooltips, search view, declarative flyouts |
-| Theming | Seed/mode/contrast/density/motion/shape, color roles, type scale, elevation, WCAG ratios, live EN/RU localization |
+| Overview | Настройки темы, 15 ролей типографики, цвета, формы/тени и анимации |
+| Actions | Кнопки, иконки, FAB, связанные группы и FAB-меню |
+| Inputs | Текстовые поля, PIN, числовой ввод, теги, поиск и проверка форм |
+| Selection | Переключатели, чекбоксы, радиокнопки, слайдеры, чипы, списки и рейтинг |
+| Pickers | Поля даты/времени/периода, календарь, часы, палитра и модальные помощники |
+| Navigation | Верхняя/нижняя панель, rail, drawer, вкладки, пагинация и стек страниц |
+| Layout | Карточки, поверхности, адаптивные контейнеры, аватары, safe area и клавиатура |
+| Collections | Списки, таблицы (таблица и карточки), дерево и временная шкала |
+| Feedback | Диалоги, шторки, snackbar, баннеры, индикаторы, скелетоны и графики |
+| Overlays | Меню, popover, подсказки, поиск и декларативные flyout |
+| Theming | Палитра, контраст, плотность, движение, форма и переключатель языка |
 
-## Adaptive shell
+## Язык и анимация
 
-* **≥ 1000 dp** — permanent `MavNavigationDrawer` (desktop/web/tablet landscape).
-* **700–999 dp** — `MavNavigationRail` with icons and labels (tablet portrait).
-* **< 700 dp** — content only; the app-bar menu opens `MavModalNavigationDrawer` (phone).
+При старте используется язык устройства. На десктопе и Android берётся системная культура;
+браузерный хост перед запуском читает `navigator.language`. Если язык не поддерживается, текст
+остаётся английским, но региональные форматы дат и чисел сохраняются. Доступны: английский
+(резервный), украинский, немецкий, французский, итальянский и испанский. Русской локализации в демо
+нет. Переводы находятся в `samples/ControlsGallery/ControlsGallery/Localization/`; пустые ключи не
+подменяют английские fallback из AXAML. Демо также переводит подписи библиотечных календарей и
+диалогов через свой `MavLocalization`-провайдер, **не меняя** встроенный провайдер библиотеки.
 
-The gallery itself uses `MavNavigationPage` + `MavContentPage`, so safe area, system Back,
-Escape and overlay ownership work exactly as in a real app.
+Выбор языка — иконка глобуса в верхней панели или ряд кнопок на странице **Theming → Localization**.
+Выбранный язык отмечается; пункт «Системный язык» возвращает язык устройства. Все разделы и диалоги
+обновляются сразу. Выбор действует в текущем сеансе: при новом запуске снова выбирается язык
+устройства. Так блок на странице показывает действие переключателя, а не только содержит код.
 
-## Run
+На десктопе исходный профиль анимации `Expressive`; в браузере и на Android — `Reduced` (короткие
+переходы). Профиль можно поменять в демо через блок **Motion**. Это настройка галереи при запуске,
+а не изменение умолчания самой библиотеки.
 
-### Desktop
+## Адаптивная оболочка
+
+- **Ширина ≥ 1000 dp** — постоянное боковое меню (`MavNavigationDrawer`).
+- **700–999 dp** — навигационный rail (`MavNavigationRail`).
+- **< 700 dp** — содержимое и модальное боковое меню через кнопку верхней панели.
+
+Галерея использует `MavNavigationPage` + `MavContentPage`; safe area, системная кнопка «Назад»,
+Escape и оверлеи работают так же, как в обычном приложении.
+
+## Запуск
+
+### Десктоп
 
 ```bash
 dotnet run --project samples/ControlsGallery/ControlsGallery.Desktop/ControlsGallery.Desktop.csproj
 ```
 
-### WebAssembly
+### Браузер
 
 ```bash
+dotnet workload install wasm-tools
 dotnet run --project samples/ControlsGallery/ControlsGallery.Browser/ControlsGallery.Browser.csproj
-# open the printed http://127.0.0.1:<port>/ url
+# откройте адрес, который напечатан в терминале
 ```
 
-Prerequisite: `dotnet workload install wasm-tools` and the `Avalonia.Browser` package.
+Также нужен пакет `Avalonia.Browser` (подключён в проекте браузерного хоста).
 
 ### Android
 
@@ -53,5 +74,5 @@ adb install -r samples/ControlsGallery/ControlsGallery.Android/bin/Debug/net10.0
 adb shell monkey -p com.mav.controlsgallery -c android.intent.category.LAUNCHER 1
 ```
 
-Building needs the Android workload and SDK platform 36. Edge-to-edge is
-enabled on Android 15+; older releases use the theme surface color for system bars.
+Для сборки нужны Android workload и SDK platform 36. На Android 15+ включён edge-to-edge;
+старые версии окрашивают системные панели цветом поверхности темы.

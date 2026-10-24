@@ -176,6 +176,62 @@ public class GalleryVisualTests
         Assert.True(failures.Count == 0, string.Join(Environment.NewLine, failures));
     }
 
+    /// <summary>
+    /// Capture the full Theming page in each translated language at phone width: translations grow
+    /// vertically, not sideways, and the language picker shows exactly one selected language.
+    /// </summary>
+    [AvaloniaFact]
+    public void All_languages_fit_on_a_narrow_screen()
+    {
+        var previousCulture = global::Mav.MavLocalization.Culture;
+        var previousSystem = GalleryLanguage.SystemCulture;
+        var previousSelection = GalleryLanguage.Selected;
+        var failures = new List<string>();
+        try
+        {
+            foreach (var language in GalleryLanguage.All.Where(l => l != GalleryLanguage.English))
+            {
+                GalleryLanguage.Select(language);
+                using var shell = OpenShell(420, 820, "Theming");
+                var page = PageControl(shell.View);
+                var scroller = page.GetVisualDescendants().OfType<ScrollViewer>().First();
+                var row = page.GetVisualDescendants().OfType<WrapPanel>()
+                    .FirstOrDefault(p => p.Name == "LanguageRow")
+                    ?? throw new InvalidOperationException("the Theming page has no language picker.");
+                var buttons = row.Children.OfType<MavButton>().ToArray();
+                var selected = buttons.Where(button => button.Variant == MavButtonVariant.Filled).ToArray();
+                if (buttons.Length != GalleryLanguage.All.Count + 1 ||
+                    selected.Length != 1 || selected[0].Text != language.Name)
+                    failures.Add($"{language.Code}: language picker has {buttons.Length} buttons, " +
+                                 $"{selected.Length} selected; expected {language.Name}.");
+                if (scroller.Extent.Width > scroller.Viewport.Width + 1)
+                    failures.Add($"{language.Code}: horizontal scrolling " +
+                                 $"({scroller.Extent.Width:0} > {scroller.Viewport.Width:0}).");
+
+                // Capture all the way to the bottom — the chooser sits near the end of this page.
+                var chrome = shell.Window.Height - scroller.Bounds.Height;
+                shell.Window.Height = Math.Min(MaxFullHeight, chrome + scroller.Extent.Height);
+                Shots.Settle(3);
+                var fits = scroller.Extent.Height <= scroller.Viewport.Height + 1.5;
+                if (!fits)
+                    failures.Add($"{language.Code}: the whole page did not fit in the screenshot.");
+
+                var size = Shots.Capture(shell.Window, $"language-{language.Code}-theming-full");
+                Shots.Note($"language-{language.Code}-theming-full.png  420x{shell.Window.Height:0}px  " +
+                           $"{size / 1024.0:0.0} KB  fits={fits}  " +
+                           $"picker={buttons.Length} buttons / {selected.Length} selected");
+            }
+        }
+        finally
+        {
+            GalleryLanguage.SystemCulture = previousSystem;
+            GalleryLanguage.Select(previousSelection);
+            global::Mav.MavLocalization.SetCulture(previousCulture);
+        }
+
+        Assert.True(failures.Count == 0, string.Join(Environment.NewLine, failures));
+    }
+
     /// <summary>The shell picks the drawer, the rail or the modal-drawer layout from the window width.</summary>
     [AvaloniaFact]
     public void Shell_adapts_to_width()

@@ -17,6 +17,12 @@ All notable changes to **Mav**.
 
 ### Added
 
+- В демо-галерею добавлены украинский, немецкий, французский, итальянский и испанский переводы
+  (442 ключа в каждом, включая подписи диалогов и календарей). Английский остаётся резервным;
+  неподдерживаемые языки, в том числе русский, используют его без подстановки неверного перевода.
+  Язык выбирается по культуре устройства, в браузере — по `navigator.language`. Глобус в верхней
+  панели и кнопки на странице Theming позволяют выбрать язык или вернуть «Системный»; переключение
+  обновляет видимый интерфейс сразу и действует до перезапуска демо.
 - `MavItems`: a theme-free items host. The library ships no Avalonia theme, so a plain
   `ItemsControl` (a templated control) builds no `ItemsPresenter` and draws nothing; `MavItems`
   is a `Panel` that builds one control per item from `ItemTemplate`, follows
@@ -32,6 +38,10 @@ sandbox (their signed link points at Azure blob storage, which is outside the al
 
 ### Changed
 
+- Удалены больше не используемые `samples/ControlsGalleryMarkup/` и корневая папка `markup/`;
+  сборка и CI проверяют единственную AXAML-галерею. В браузере и на мобильных устройствах демо
+  запускается с короткими анимациями `MavMotionScheme.Reduced`; на десктопе — `Expressive`.
+  Умолчание самой библиотеки не менялось.
 - `MavCard` follows the shape scale. `CardRadius` now defaults to `double.NaN`, meaning
   "the theme's `Shape.Medium`"; set a number to pin the radius on that card. Before, the card
   hard-coded 12 px, so `MavShapeScale.Compact`/`Expressive` had no visible effect on it.

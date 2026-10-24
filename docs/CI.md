@@ -9,7 +9,7 @@
   - `push` в ветки `arena/**`, кроме изменений только в `docs/**` и `**/*.md`;
   - `workflow_dispatch` (ручной запуск из вкладки Actions или `gh workflow run`).
 - Раннер: собственная Linux-машина пользователя, метки `[self-hosted, linux]`. Пока раннер не онлайн, прогоны остаются в очереди.
-- Права токена: `contents: read`. Лог сборки в ветку не публикуется (коммит `035a9c7`).
+- Права токена в workflow: `contents: write` (для публикации PNG и `build.log` в `ci/reports`).
 - Таймаут задания: 45 минут.
 
 Локальный «эмулятор» GitHub Actions (act и т. п.) не используется. Всё выполняется на раннере.
@@ -24,8 +24,11 @@
 - `MavUI.Essentials/MavUI.Essentials.csproj`
 - `migrated/HC/HC/HC.csproj` для `net10.0` и `net10.0-windows`
 - `migrated/HC/HC.Tests`
+- `Tests/MavUI.VisualTests/MavUI.VisualTests.csproj`
 
-Затем «Run tests»: `Tests/MavUI.Tests.csproj` и `migrated/HC/HC.Tests` через `dotnet test --no-build`.
+Затем «Run tests»: модульные, HC и визуальные тесты галереи через `dotnet test --no-build`.
+Исходник галереи теперь один — `samples/ControlsGallery/ControlsGallery` (AXAML); проекты
+`ControlsGalleryMarkup` и корневой `markup/` удалены и в сборку не входят.
 
 Android и Browser собираются только при `workflow_dispatch` или если сообщение коммита содержит `[heads]`. Android для HC в CI не собирается.
 
@@ -49,6 +52,10 @@ gh run list --branch <ветка> --limit 3   # сводка
 gh workflow run build.yml --ref <ветка>
 ```
 
+Если интеграции недоступно действие `workflow_dispatch` (HTTP 403, `Resource not accessible by
+integration`), отправьте обычный коммит с `[heads]` в сообщении: при push он запустит ту же
+дополнительную сборку Android/Browser без ручного запуска.
+
 Проверить, что прогон относится к нужному коммиту:
 
 ```bash
@@ -64,7 +71,8 @@ gh run view "$RUN" --json jobs --jq '.jobs[] | .name, (.steps[] | "  \(.conclusi
 
 ## 4. Как читать ошибки компилятора
 
-Полный лог недоступен, но шаг «Annotate compiler errors» превращает ошибки `dotnet build` в аннотации проверки (Checks API). Их читают так:
+Если публикация `ci/reports` ещё не произошла, шаг аннотаций извлекает ошибки `dotnet build`
+в Checks API. В обычном случае скачайте полный `build.log` по разделу 7. Аннотации читают так:
 
 ```bash
 JOB=$(gh api repos/<owner>/<repo>/actions/runs/$RUN/jobs --jq '.jobs[0].id')
@@ -83,8 +91,9 @@ gh api "repos/<owner>/<repo>/check-runs/$JOB/annotations?per_page=100" \
 
 ## 5. Ограничения
 
-- Логи сборки не сохраняются в репозитории и не выгружаются. Единственный источник диагностики — аннотации и статусы шагов.
-- Артефакты (`build.log`, будущие скриншоты) из песочницы агента **не скачиваются**: `gh run download` редиректит на `productionresultssa*.blob.core.windows.net`, а этот хост закрыт. Поэтому картинки передаются аннотациями (раздел 7).
+- `gh run download` из песочницы агента не работает: редирект на
+  `productionresultssa*.blob.core.windows.net` закрыт. Вместо артефактов картинки и полный
+  `build.log` доступны через ветку `ci/reports` и `tools/read_screenshots.py` (раздел 7).
 - В песочнице агента нет `dotnet`, поэтому локальная сборка невозможна. Проверка выполняется только в CI.
 - Предупреждения GitHub про Node.js 20 у `actions/checkout@v4` и `actions/upload-artifact@v4` не связаны с кодом; обновление действий не делалось.
 
@@ -110,7 +119,7 @@ gh api "repos/<owner>/<repo>/check-runs/$JOB/annotations?per_page=100" \
   `registry.npmjs.org`, `pypi.org`, `files.pythonhosted.org`. Видно только метаданные артефакта
   (`id`, имя, размер, `expired`).
 - **Аннотации вмещают мало.** Текст одной аннотации обрезается до 4096 символов, шаг держит
-  10 нотисов, а весь job — около 300 КБ текста. Галерея делает 18 PNG на 1.7 МБ, то есть
+  10 нотисов, а весь job — около 300 КБ текста. Галерея делает десятки PNG, то есть
   аннотациями она не передаётся (проверено: 16 файлов ушли в `SKIPPED over budget`).
 
 Поэтому CI **force-push’ит отчёты в единственную ветку `ci/reports`** — один коммит без истории,
