@@ -10,9 +10,10 @@
 
     <!-- Page: the adaptive layout (permanent drawer when wide, rail when medium,
          modal drawer from the app bar when narrow). Moved into Nav in code-behind. -->
-    <mav:MavContentPage x:Name="Page"
-                        Title="{mav:Loc Shell.Title, Fallback=Control Gallery}"
-                        Subtitle="{mav:Loc Shell.Subtitle, Fallback=Every Mav control\, grouped by purpose}">
+    <!-- Code-behind owns Title/Subtitle: Select() sets the current destination and refreshes
+         them on a language change. Binding Shell.Title here would overwrite the translated
+         destination name after Select() had already set it. -->
+    <mav:MavContentPage x:Name="Page">
       <Grid ColumnDefinitions="Auto,*">
         <ContentControl x:Name="DrawerHost" Grid.Column="0" />
         <mav:MavScrollViewer x:Name="RailScroll"
